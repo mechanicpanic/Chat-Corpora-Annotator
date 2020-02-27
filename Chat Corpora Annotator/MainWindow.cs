@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
@@ -12,8 +13,12 @@ namespace Chat_Corpora_Annotator
     {
         public string csvPath;
         public TextFieldParser parser;
+        public string[] fields;
         private int lineCount;
-        
+
+        private List<string[]> messages = new List<string[]>();
+    
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,9 +26,6 @@ namespace Chat_Corpora_Annotator
         private void MainWindow_Load(object sender, EventArgs e)
         {
             
-            
-
-
         }
 
         private void csvLoadButton_Click(object sender, EventArgs e)
@@ -43,57 +45,62 @@ namespace Chat_Corpora_Annotator
         private void csvDialog_FileOk(object sender, CancelEventArgs e)
         {
             csvPath = csvDialog.FileName;
-            openParser();           
-            updateListView();
-            listView1.EndUpdate();
-
+            openParser();
+            LoadDataHeader();
+            LoadData();
+            //SetListView();
            
         }
         private void openParser()
         {
             parser = new TextFieldParser(csvPath);
             parser.SetDelimiters(",");
-            
         }
-        private void countLines()
-        {
-            StreamReader sr = new StreamReader(csvPath);
-            {
-                
-                while ((sr.ReadLine()) != null)
-                {
-                    lineCount++;
-                }
+        public void LoadDataHeader()
+        {          
+            fields = parser.ReadFields();
+
+            foreach (var field in fields) {
+                listView1.Columns.Add(field);
             }
-            sr.Close();
+ 
         }
-        private void updateListView()
+        
+        public void SetListView()
         {
-            listView1.BeginUpdate();
-            countLines();
-
             listView1.View = View.Details;
-            listView1.VirtualMode = true; 		
-            listView1.VirtualListSize = lineCount;
-            listView1.RetrieveVirtualItem += new RetrieveVirtualItemEventHandler(listView1_RetrieveVirtualItem);
+            listView1.VirtualMode = true;
 
+            listView1.VirtualListSize = messages.Count;
+            RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.listView1_RetrieveVirtualItem);
+            listView1.RetrieveVirtualItem += handler;
         }
+
+        private void LoadData()
+        {
+            while(!parser.EndOfData)
+            {
+                string[] row = parser.ReadFields();
+                messages.Add(row);
+            }
+            if(parser.EndOfData)
+            {
+                MessageBox.Show("done");
+            }
+        }
+
+
 
         private void listView1_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-            if (!parser.EndOfData)
+            foreach (var row in messages)
             {
-                string[] row = parser.ReadFields();
-                Console.WriteLine(String.Join(" ", row));
                 ListViewItem rowitem = new ListViewItem(row);
                 e.Item = rowitem;
             }
-
+                
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -31,6 +31,7 @@
             this.csvLoadButton = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // csvLoadButton
@@ -53,16 +54,23 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(156, 13);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(398, 439);
+            this.listView1.Size = new System.Drawing.Size(995, 415);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(156, 488);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(995, 23);
+            this.progressBar1.TabIndex = 2;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 464);
+            this.ClientSize = new System.Drawing.Size(1163, 643);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.csvLoadButton);
             this.Name = "MainWindow";
@@ -76,6 +84,7 @@
         private System.Windows.Forms.Button csvLoadButton;
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
