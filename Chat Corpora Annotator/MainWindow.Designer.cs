@@ -57,6 +57,7 @@
             this.listView1.Size = new System.Drawing.Size(995, 415);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
+
             // 
             // progressBar1
             // 

@@ -15,6 +15,7 @@ namespace Chat_Corpora_Annotator
         public TextFieldParser parser;
         public string[] fields;
         private int lineCount;
+        
 
         private List<string[]> messages = new List<string[]>();
     
@@ -48,9 +49,11 @@ namespace Chat_Corpora_Annotator
             openParser();
             LoadDataHeader();
             LoadData();
-            //SetListView();
+            SetListView();
            
         }
+
+
         private void openParser()
         {
             parser = new TextFieldParser(csvPath);
@@ -70,10 +73,11 @@ namespace Chat_Corpora_Annotator
         {
             listView1.View = View.Details;
             listView1.VirtualMode = true;
-
             listView1.VirtualListSize = messages.Count;
             RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.listView1_RetrieveVirtualItem);
             listView1.RetrieveVirtualItem += handler;
+            
+            
         }
 
         private void LoadData()
@@ -81,6 +85,7 @@ namespace Chat_Corpora_Annotator
             while(!parser.EndOfData)
             {
                 string[] row = parser.ReadFields();
+                //Console.WriteLine(String.Join(" ", row));
                 messages.Add(row);
             }
             if(parser.EndOfData)
@@ -90,16 +95,16 @@ namespace Chat_Corpora_Annotator
         }
 
 
-
+        
         private void listView1_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-            foreach (var row in messages)
-            {
-                ListViewItem rowitem = new ListViewItem(row);
-                e.Item = rowitem;
-            }
+              
+                    e.Item = new ListViewItem(messages[e.ItemIndex]);
+                        
+            } 
+            
                 
-        }
+        
 
         
     }
