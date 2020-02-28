@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataHandler.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="HeaderForm.cs">
       <SubType>Form</SubType>

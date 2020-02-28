@@ -18,7 +18,8 @@ namespace Chat_Corpora_Annotator
         private List<string> selectedFields;
         private List<Message> messages = new List<Message>();
 
-
+        private readonly string[] allowedColumns = new string[] { "date", "from", "to", "body" }; 
+        private Dictionary<string, string> columnMetadata = new Dictionary<string, string>();
 
         public MainWindow()
         {
@@ -31,7 +32,6 @@ namespace Chat_Corpora_Annotator
 
         private void csvLoadButton_Click(object sender, EventArgs e)
         {
-
             openCsvDialog();
             csvDialog.ShowDialog();
         }
@@ -47,6 +47,7 @@ namespace Chat_Corpora_Annotator
         {
             csvPath = csvDialog.FileName;
             openParser();
+
             LaunchDataHeaderSelection();
             LoadData();
             UpdateListView();
@@ -75,15 +76,17 @@ namespace Chat_Corpora_Annotator
         {
             if (selectedFields != null)
             {
-                
+                foreach (var field in selectedFields)
+                {
                     OLVColumn columnHeader = new OLVColumn();
-                    columnHeader.Text = selectedFields[selectedFields.Count -1];
+                    columnHeader.Text = field;
                     fastObjectListView1.AllColumns.Add(columnHeader);
                     fastObjectListView1.RebuildColumns();
+                }
                 
+
             }
         }
-
         private void FieldButtonHandler(object sender, EventArgs e)
         {
             HeaderForm hf = sender as HeaderForm;
@@ -92,12 +95,17 @@ namespace Chat_Corpora_Annotator
                 selectedFields = hf.SelectedFields;
                 LoadDataHeader();
             }
+            
         }
         private void HeaderForm_FormClosed(Object sender, FormClosedEventArgs e)
         {
-
+            GenerateMetadata();
         }
 
+        private void GenerateMetadata()
+        {
+            
+        }
         private void LoadData()
         {
             while(!parser.EndOfData)

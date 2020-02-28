@@ -20,17 +20,29 @@ namespace Chat_Corpora_Annotator
         }
         public void ShowFields(string[] fields)
         {
-            listBox1.Items.AddRange(fields);
+            checkedListBox1.Items.AddRange(fields);
         }
         private void SelectColumns()
         {
             
-            foreach(var item in listBox1.SelectedItems)
+            foreach(var item in checkedListBox1.CheckedItems)
             {
                 SelectedFields.Add(item.ToString());
             }
+            UncheckAllItems();
+            
             
         }
+        private void UncheckAllItems()
+        {
+            while (checkedListBox1.CheckedIndices.Count > 0)
+                checkedListBox1.SetItemChecked(checkedListBox1.CheckedIndices[0], false);
+            
+        }
+        //private void ClearSelectedFields()
+        //{
+        //    SelectedFields.Clear();
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -46,8 +58,10 @@ namespace Chat_Corpora_Annotator
 
         protected virtual void OnFieldButtonClicked(EventArgs e)
         {
+            
             EventHandler eh = FieldButtonClicked;
             eh?.Invoke(this, e);
+
         }
 
     }
