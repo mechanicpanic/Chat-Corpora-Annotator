@@ -15,11 +15,12 @@ namespace Chat_Corpora_Annotator
         public string csvPath;
         public TextFieldParser parser;
         public string[] fields;
-        private int lineCount;
-        
 
-        private List<string[]> messages = new List<string[]>();
-    
+
+        private List<string> selectedFields;
+        private List<Message> messages = new List<Message>();
+
+
 
         public MainWindow()
         {
@@ -27,7 +28,7 @@ namespace Chat_Corpora_Annotator
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void csvLoadButton_Click(object sender, EventArgs e)
@@ -48,10 +49,11 @@ namespace Chat_Corpora_Annotator
         {
             csvPath = csvDialog.FileName;
             openParser();
-            LoadDataHeader();
+            LaunchDataHeaderSelection();
             LoadData();
-            
-           
+            UpdateListView();
+
+
         }
 
 
@@ -60,24 +62,43 @@ namespace Chat_Corpora_Annotator
             parser = new TextFieldParser(csvPath);
             parser.SetDelimiters(",");
         }
-        public void LoadDataHeader()
-        {          
+        public void LaunchDataHeaderSelection()
+        {
             fields = parser.ReadFields();
 
-            foreach (var field in fields)
-            {
-                OLVColumn columnHeader = new OLVColumn();
-                
-                columnHeader.Text = field;
-                
-                fastObjectListView1.AllColumns.Add(columnHeader);
-                fastObjectListView1.RebuildColumns();
-            }
+            HeaderForm hf = new HeaderForm();
+            this.AddOwnedForm(hf);
+            hf.Show();
+            hf.ShowFields(fields);
+            hf.FieldButtonClicked += new EventHandler(FieldButtonHandler);
             
+       }
+        private void LoadDataHeader()
+        {
+            if (selectedFields != null)
+            {
+                
+                    OLVColumn columnHeader = new OLVColumn();
+                    columnHeader.Text = selectedFields[selectedFields.Count -1];
+                    fastObjectListView1.AllColumns.Add(columnHeader);
+                    fastObjectListView1.RebuildColumns();
+                
+            }
+        }
+
+        private void FieldButtonHandler(object sender, EventArgs e)
+        {
+            HeaderForm hf = sender as HeaderForm;
+            if (hf != null)
+            {
+                selectedFields = hf.SelectedFields;
+                LoadDataHeader();
+            }
+        }
+        private void HeaderForm_FormClosed(Object sender, FormClosedEventArgs e)
+        {
 
         }
-        
-
 
         private void LoadData()
         {
@@ -85,12 +106,15 @@ namespace Chat_Corpora_Annotator
             {
                 string[] row = parser.ReadFields();
                 //Console.WriteLine(String.Join(" ", row));
-                messages.Add(row);
+                //messages.Add(row);
             }
             
         }
 
-
-       
+        private void UpdateListView()
+        {
+            fastObjectListView1.SetObjects(messages);
+            fastObjectListView1.Refresh();
+        }  
     }
 }
