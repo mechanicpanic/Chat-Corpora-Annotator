@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using BrightIdeasSoftware;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,7 +50,7 @@ namespace Chat_Corpora_Annotator
             openParser();
             LoadDataHeader();
             LoadData();
-            SetListView();
+            
            
         }
 
@@ -63,22 +64,20 @@ namespace Chat_Corpora_Annotator
         {          
             fields = parser.ReadFields();
 
-            foreach (var field in fields) {
-                listView1.Columns.Add(field);
+            foreach (var field in fields)
+            {
+                OLVColumn columnHeader = new OLVColumn();
+                
+                columnHeader.Text = field;
+                
+                fastObjectListView1.AllColumns.Add(columnHeader);
+                fastObjectListView1.RebuildColumns();
             }
- 
+            
+
         }
         
-        public void SetListView()
-        {
-            listView1.View = View.Details;
-            listView1.VirtualMode = true;
-            listView1.VirtualListSize = messages.Count;
-            RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.listView1_RetrieveVirtualItem);
-            listView1.RetrieveVirtualItem += handler;
-            
-            
-        }
+
 
         private void LoadData()
         {
@@ -92,17 +91,6 @@ namespace Chat_Corpora_Annotator
         }
 
 
-        
-        private void listView1_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
-        {
-            
-            e.Item = new ListViewItem(messages[e.ItemIndex]);
-                                    
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
