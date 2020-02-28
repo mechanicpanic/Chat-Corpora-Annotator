@@ -15,8 +15,6 @@ namespace Chat_Corpora_Annotator
         public string csvPath;
         public TextFieldParser parser;
         public string[] fields;
-
-
         private List<string> selectedFields;
         private List<Message> messages = new List<Message>();
 
