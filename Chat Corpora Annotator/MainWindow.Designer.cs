@@ -31,7 +31,6 @@
             this.csvLoadButton = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // csvLoadButton
@@ -51,27 +50,23 @@
             // 
             // listView1
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(156, 13);
+            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.Location = new System.Drawing.Point(159, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(995, 415);
+            this.listView1.Size = new System.Drawing.Size(983, 599);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
-
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(156, 488);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(995, 23);
-            this.progressBar1.TabIndex = 2;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 643);
-            this.Controls.Add(this.progressBar1);
+            this.ClientSize = new System.Drawing.Size(1142, 599);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.csvLoadButton);
             this.Name = "MainWindow";
@@ -85,7 +80,6 @@
         private System.Windows.Forms.Button csvLoadButton;
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

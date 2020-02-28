@@ -88,24 +88,21 @@ namespace Chat_Corpora_Annotator
                 //Console.WriteLine(String.Join(" ", row));
                 messages.Add(row);
             }
-            if(parser.EndOfData)
-            {
-                MessageBox.Show("done");
-            }
+            
         }
 
 
         
         private void listView1_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-              
-                    e.Item = new ListViewItem(messages[e.ItemIndex]);
-                        
-            } 
             
-                
-        
+            e.Item = new ListViewItem(messages[e.ItemIndex]);
+                                    
+        }
 
-        
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
