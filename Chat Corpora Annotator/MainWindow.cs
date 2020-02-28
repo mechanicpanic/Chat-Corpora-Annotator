@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -23,6 +24,7 @@ namespace Chat_Corpora_Annotator
         public MainWindow()
         {
             InitializeComponent();
+            listView1.DoubleBuffering(true);
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -103,6 +105,15 @@ namespace Chat_Corpora_Annotator
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+    }
+    public static class ControlExtensions
+    {
+        public static void DoubleBuffering(this Control control, bool enable)
+        {
+            var method = typeof(Control).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+            method.Invoke(control, new object[] { ControlStyles.OptimizedDoubleBuffer, enable });
         }
     }
 }
