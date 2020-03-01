@@ -6,25 +6,33 @@ using System.Threading.Tasks;
 
 namespace Chat_Corpora_Annotator
 {
-    class Message
+    public class DynamicMessage
     {
         private Guid id { get; set; }
-        private string from { get; set; }
-        private string to { get; set; }
-        private string body { get; set; }
-        private DateTime date { get; set; }
+        public Dictionary<string, object> properties;
+        
+        public DynamicMessage(string[] fields, object[] data)
+        {
+            this.id = new Guid();
+            properties = new Dictionary<string, object>();
+            for (int i = 0; i < fields.Length; i++)
+            {
+                properties.Add(fields[i], data[i]);
+            }
 
-        public Message(string from, string to, string body, DateTime date)
-        {
-            this.id = new Guid();
-            this.from = from;
-            this.to = to;
-            this.date = date;
         }
-        public Message(Dictionary<string,string> metaparsed)
+        private List<string> DisplayDynamicMessage()
         {
-            this.id = new Guid();
-            
+
+            List<string> data = new List<string>();
+            foreach (KeyValuePair<string, object> kvp in properties)
+            {
+                data.Add(kvp.Value.ToString());
+
+            }
+            return data;
         }
+        
     }
+        
 }

@@ -30,8 +30,8 @@
         {
             this.csvLoadButton = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
-            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
+            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // csvLoadButton
@@ -49,29 +49,27 @@
             this.csvDialog.FileName = "csvDialog";
             this.csvDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.csvDialog_FileOk);
             // 
-            // fastObjectListView1
+            // objectListView1
             // 
-            this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(156, 13);
-            this.fastObjectListView1.Name = "fastObjectListView1";
-            this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(974, 574);
-            this.fastObjectListView1.TabIndex = 1;
-            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView1.VirtualMode = true;
+            this.objectListView1.HideSelection = false;
+            this.objectListView1.Location = new System.Drawing.Point(156, 13);
+            this.objectListView1.Name = "objectListView1";
+            this.objectListView1.Size = new System.Drawing.Size(660, 352);
+            this.objectListView1.TabIndex = 1;
+            this.objectListView1.UseCompatibleStateImageBehavior = false;
+            this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 599);
-            this.Controls.Add(this.fastObjectListView1);
+            this.ClientSize = new System.Drawing.Size(850, 410);
+            this.Controls.Add(this.objectListView1);
             this.Controls.Add(this.csvLoadButton);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -79,7 +77,7 @@
         #endregion
         private System.Windows.Forms.Button csvLoadButton;
         private System.Windows.Forms.OpenFileDialog csvDialog;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
+        private BrightIdeasSoftware.ObjectListView objectListView1;
     }
 }
 
