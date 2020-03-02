@@ -59,8 +59,6 @@ namespace Chat_Corpora_Annotator
             openParser();
             SelectData();
 
-            
-
         }  
         private void openParser()
         {
@@ -115,8 +113,8 @@ namespace Chat_Corpora_Annotator
         private void SelectDateField()
         {
             ColumnMetadata cm = new ColumnMetadata();
-                            cm.PopulateDataBox(selectedFields.ToArray());
-            
+            cm.PopulateDataBox(selectedFields.ToArray());
+
             cm.Show();
             cm.ColumnButtonClicked += new EventHandler(ColumnButtonHandler);
         }
@@ -146,6 +144,7 @@ namespace Chat_Corpora_Annotator
             if (hf != null)
             {
                 selectedFields = hf.SelectedFields;
+                
                 SelectDateField();
                 hf.Close();
             }

@@ -39,60 +39,44 @@ namespace Chat_Corpora_Annotator
         {
             this.Id = new Guid();
             contents = new Dictionary<string, object>();
-            Dictionary<string, object> tempContents = new Dictionary<string, object>();
+
 
             for (int i = 0; i < fields.Length; i++)
             {
-                
-                tempContents.Add(fields[i], data[i]);
+                if (selectedFields.Contains(fields[i]))
+                {
+                    contents.Add(fields[i], data[i]);
+                }
+                else
+                {
+                    continue;
+
+                }
             }
-            var pf = fields.ToList().Intersect(selectedFields);
-            List<string> projectedFields = pf.ToList<string>();
-
-
-
-            for (int i = 0; i < projectedFields.Count(); i++)
-            {
-                string tempkey = projectedFields[i];
-                object tempval = tempContents[tempkey];
-                contents.Add(tempkey,tempval);
-            }
-            tempContents.Clear();
-            //TODO: Read about disposing of CLR objects.
-
         }
 
         public DynamicMessage(string[] fields, string[] data, List<string> selectedFields,string dateFieldKey)
         {
             this.Id = new Guid();
             contents = new Dictionary<string, object>();
-            Dictionary<string, object> tempContents = new Dictionary<string, object>();
+            
 
             for (int i = 0; i < fields.Length; i++)
             {
-                if (fields[i] == dateFieldKey)
+                if (fields[i] == dateFieldKey && selectedFields.Contains(fields[i]))
                 {
-                    tempContents.Add(fields[i], DateTime.Parse(data[i].ToString()));
+                    contents.Add(fields[i], DateTime.Parse(data[i].ToString()));
+                }
+                else if (selectedFields.Contains(fields[i]))
+                {
+                    contents.Add(fields[i], data[i]);
                 }
                 else
                 {
-                    tempContents.Add(fields[i], data[i]);
+                    continue;
                 }
             }
-            var pf = fields.ToList().Intersect(selectedFields);
-            List<string> projectedFields = pf.ToList<string>();
-
-
-
-            for (int i = 0; i < projectedFields.Count(); i++)
-            {
-                string tempkey = projectedFields[i];
-                object tempval = tempContents[tempkey];
-                contents.Add(tempkey, tempval);
-            }
-            tempContents.Clear();
-            //TODO: Read about disposing of CLR objects.
-
+            
         }
 
     }
