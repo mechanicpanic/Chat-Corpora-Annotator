@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 
 
@@ -15,36 +16,52 @@ namespace Chat_Corpora_Annotator
         public string csvPath;
         public TextFieldParser parser;
         public string[] fields;
-        private List<string> selectedFields;
 
-        public List<string[]> messages = new List<string[]>();
-        
 
-        
+        public List<DynamicMessage> messages = new List<DynamicMessage>();
+        //public List<Dictionary<string,string>> messages = new List<Dictionary<string,string>>();
+
+
+
         public MainWindow()
         {
-            DateTime dt = DateTime.Now;
-            string[] aaa = new string[] { "aa", "ab", "aaa", "ac" };
-            string[] bbb = new string[] { "aaa", "succ", "succ", "dt" };
+                       
             InitializeComponent();
-
             
-            messages.Add(aaa);
-            messages.Add(aaa);
-            objectListView1.SetObjects(messages, true);
-            objectListView1.Refresh();
+            string[] fields = new string[] { "a", "b", "c", "d" };
+            string[] data = new string[] { "a", "b", "c", "d" };
+            DynamicMessage message = new DynamicMessage(fields, data);
+            
+            messages.Add(message);
+
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 4; i++)
+            //if (messages[0].properties != null)
             {
-                OLVColumn columnHeader = new OLVColumn();
-                columnHeader.Text = "succ";
-                objectListView1.AllColumns.Add(columnHeader);
-                objectListView1.RebuildColumns();
+                objectListView1.SetObjects(messages);
+                List<OLVColumn> columns = new List<OLVColumn>();
                 
+                foreach (var key in messages[0].properties.Keys)
+                {
+                    int index = columns.Count;
+                    OLVColumn cl = new OLVColumn();
+                    cl.AspectGetter = delegate (object x)
+                    {
+                        DynamicMessage message = (DynamicMessage)x;
+                        return message.properties[key];
+                    };
+                    cl.Text = key;
+                    columns.Add(cl);
+                    
+
+                }
+                objectListView1.AllColumns.AddRange(columns);
+                objectListView1.RebuildColumns();
             }
             
+            
+                
             
         }
 

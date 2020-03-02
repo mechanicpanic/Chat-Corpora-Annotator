@@ -36,9 +36,10 @@
             // 
             // csvLoadButton
             // 
-            this.csvLoadButton.Location = new System.Drawing.Point(13, 13);
+            this.csvLoadButton.Location = new System.Drawing.Point(10, 11);
+            this.csvLoadButton.Margin = new System.Windows.Forms.Padding(2);
             this.csvLoadButton.Name = "csvLoadButton";
-            this.csvLoadButton.Size = new System.Drawing.Size(136, 45);
+            this.csvLoadButton.Size = new System.Drawing.Size(102, 37);
             this.csvLoadButton.TabIndex = 0;
             this.csvLoadButton.Text = "load .csv";
             this.csvLoadButton.UseVisualStyleBackColor = true;
@@ -51,21 +52,25 @@
             // 
             // objectListView1
             // 
+            this.objectListView1.CellEditUseWholeCell = false;
+            this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(156, 13);
+            this.objectListView1.Location = new System.Drawing.Point(117, 11);
+            this.objectListView1.Margin = new System.Windows.Forms.Padding(2);
             this.objectListView1.Name = "objectListView1";
-            this.objectListView1.Size = new System.Drawing.Size(660, 352);
+            this.objectListView1.Size = new System.Drawing.Size(496, 287);
             this.objectListView1.TabIndex = 1;
             this.objectListView1.UseCompatibleStateImageBehavior = false;
             this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 410);
+            this.ClientSize = new System.Drawing.Size(638, 333);
             this.Controls.Add(this.objectListView1);
             this.Controls.Add(this.csvLoadButton);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);

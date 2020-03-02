@@ -8,29 +8,32 @@ namespace Chat_Corpora_Annotator
 {
     public class DynamicMessage
     {
-        private Guid id { get; set; }
-        public Dictionary<string, object> properties;
+        private Guid Id { get; set; }
+        public Dictionary<string, string> properties;
         
-        public DynamicMessage(string[] fields, object[] data)
+        public DynamicMessage(string[] fields, string[] data)
         {
-            this.id = new Guid();
-            properties = new Dictionary<string, object>();
+            this.Id = new Guid();
+            properties = new Dictionary<string, string>();
             for (int i = 0; i < fields.Length; i++)
             {
                 properties.Add(fields[i], data[i]);
             }
 
         }
-        private List<string> DisplayDynamicMessage()
+        private void DisplayDynamicMessage(List<DynamicMessage> msgList)
         {
 
             List<string> data = new List<string>();
-            foreach (KeyValuePair<string, object> kvp in properties)
+            foreach (var msg in msgList)
             {
-                data.Add(kvp.Value.ToString());
+                foreach (KeyValuePair<string, string> kvp in msg.properties)
+                {
+                    data.Add(kvp.Value);
 
+                }
             }
-            return data;
+            
         }
         
     }
