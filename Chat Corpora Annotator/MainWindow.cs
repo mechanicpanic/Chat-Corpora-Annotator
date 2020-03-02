@@ -31,20 +31,26 @@ namespace Chat_Corpora_Annotator
             string[] fields = new string[] { "a", "b", "c", "d" };
             string[] data = new string[] { "a", "b", "c", "d" };
             DynamicMessage message = new DynamicMessage(fields, data);
-            
+
+
             messages.Add(message);
+            messages.Add(message);
+            messages.Add(message);
+            messages.Add(message);
+            messages.Add(message);
+            
 
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
             //if (messages[0].properties != null)
             {
-                objectListView1.SetObjects(messages);
+                chatTable.SetObjects(messages);
                 List<OLVColumn> columns = new List<OLVColumn>();
                 
                 foreach (var key in messages[0].properties.Keys)
                 {
-                    int index = columns.Count;
+                    
                     OLVColumn cl = new OLVColumn();
                     cl.AspectGetter = delegate (object x)
                     {
@@ -56,8 +62,8 @@ namespace Chat_Corpora_Annotator
                     
 
                 }
-                objectListView1.AllColumns.AddRange(columns);
-                objectListView1.RebuildColumns();
+                chatTable.AllColumns.AddRange(columns);
+                chatTable.RebuildColumns();
             }
             
             
@@ -82,12 +88,8 @@ namespace Chat_Corpora_Annotator
         {
             csvPath = csvDialog.FileName;
             openParser();
-
-            //LaunchDataHeaderSelection();
+            LaunchDataHeaderSelection();
             LoadData();
-            
-
-
         }
 
 
@@ -102,7 +104,7 @@ namespace Chat_Corpora_Annotator
             fields = parser.ReadFields();
             
             HeaderForm hf = new HeaderForm();
-            this.AddOwnedForm(hf);
+            AddOwnedForm(hf);
             hf.Show();
             hf.UpdateLabel(Path.GetFileName(csvPath));
             hf.ShowFields(fields);

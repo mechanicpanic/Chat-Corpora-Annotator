@@ -21,20 +21,7 @@ namespace Chat_Corpora_Annotator
             }
 
         }
-        private void DisplayDynamicMessage(List<DynamicMessage> msgList)
-        {
 
-            List<string> data = new List<string>();
-            foreach (var msg in msgList)
-            {
-                foreach (KeyValuePair<string, string> kvp in msg.properties)
-                {
-                    data.Add(kvp.Value);
-
-                }
-            }
-            
-        }
         
     }
         
