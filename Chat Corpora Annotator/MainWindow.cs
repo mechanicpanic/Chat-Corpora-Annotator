@@ -85,11 +85,19 @@ namespace Chat_Corpora_Annotator
                     return message.contents[key];
                 };
                 cl.Text = key;
+                cl.WordWrap = true;
+                
                 columns.Add(cl);
 
             }
             chatTable.AllColumns.AddRange(columns);
+            
             chatTable.RebuildColumns();
+
+            foreach (var cl in chatTable.AllColumns)
+            {
+                cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            }
             chatTable.Refresh();
         }
 
