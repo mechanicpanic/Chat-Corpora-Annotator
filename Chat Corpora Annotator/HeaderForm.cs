@@ -29,9 +29,12 @@ namespace Chat_Corpora_Annotator
         }
 
         
-        private void button2_Click(object sender, EventArgs e)
+        private void fieldButton_Click(object sender, EventArgs e)
         {
-            
+            foreach (var item in selectedListBox.Items)
+            {
+                SelectedFields.Add(item.ToString());
+            }
             OnFieldButtonClicked(null);
             
         }
@@ -72,6 +75,7 @@ namespace Chat_Corpora_Annotator
         }
 
         
+
         //the first selection feature
         //private void SelectColumns()
         //{

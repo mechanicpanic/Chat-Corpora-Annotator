@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLoaded.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataLoaded.Designer.cs">
+      <DependentUpon>DataLoaded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Message.cs" />
     <Compile Include="HeaderForm.cs">
       <SubType>Form</SubType>
@@ -90,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DataLoaded.resx">
+      <DependentUpon>DataLoaded.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HeaderForm.resx">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </EmbeddedResource>

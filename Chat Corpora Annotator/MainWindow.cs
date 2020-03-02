@@ -15,11 +15,12 @@ namespace Chat_Corpora_Annotator
     {
         public string csvPath;
         public TextFieldParser parser;
-        public string[] fields;
+        public string[] allFields;
 
 
         public List<DynamicMessage> messages = new List<DynamicMessage>();
-        //public List<Dictionary<string,string>> messages = new List<Dictionary<string,string>>();
+        
+        private List<string> selectedFields = new List<string>();
 
 
 
@@ -28,44 +29,21 @@ namespace Chat_Corpora_Annotator
                        
             InitializeComponent();
             
-            string[] fields = new string[] { "a", "b", "c", "d" };
-            string[] data = new string[] { "a", "b", "c", "d" };
-            DynamicMessage message = new DynamicMessage(fields, data);
+            
+            //DynamicMessage message = new DynamicMessage(fields, data);
 
 
-            messages.Add(message);
-            messages.Add(message);
-            messages.Add(message);
-            messages.Add(message);
-            messages.Add(message);
+            //messages.Add(message);
+            //messages.Add(message);
+            //messages.Add(message);
+            //messages.Add(message);
+            //messages.Add(message);
             
 
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            //if (messages[0].properties != null)
-            {
-                chatTable.SetObjects(messages);
-                List<OLVColumn> columns = new List<OLVColumn>();
-                
-                foreach (var key in messages[0].properties.Keys)
-                {
-                    
-                    OLVColumn cl = new OLVColumn();
-                    cl.AspectGetter = delegate (object x)
-                    {
-                        DynamicMessage message = (DynamicMessage)x;
-                        return message.properties[key];
-                    };
-                    cl.Text = key;
-                    columns.Add(cl);
-                    
-
-                }
-                chatTable.AllColumns.AddRange(columns);
-                chatTable.RebuildColumns();
-            }
-            
+                     
             
                 
             
@@ -88,10 +66,32 @@ namespace Chat_Corpora_Annotator
         {
             csvPath = csvDialog.FileName;
             openParser();
-            LaunchDataHeaderSelection();
-            LoadData();
+            SelectData();
+
         }
 
+        private void DisplayData()
+        {
+            chatTable.SetObjects(messages);
+            List<OLVColumn> columns = new List<OLVColumn>();
+
+            foreach (var key in messages[0].contents.Keys)
+            {
+
+                OLVColumn cl = new OLVColumn();
+                cl.AspectGetter = delegate (object x)
+                {
+                    DynamicMessage message = (DynamicMessage)x;
+                    return message.contents[key];
+                };
+                cl.Text = key;
+                columns.Add(cl);
+
+            }
+            chatTable.AllColumns.AddRange(columns);
+            chatTable.RebuildColumns();
+            chatTable.Refresh();
+        }
 
         private void openParser()
         {
@@ -99,60 +99,66 @@ namespace Chat_Corpora_Annotator
             parser.SetDelimiters(",");
         }
         
-        public void LaunchDataHeaderSelection()
+        public void SelectData()
         {
-            fields = parser.ReadFields();
+            allFields = parser.ReadFields();
             
             HeaderForm hf = new HeaderForm();
             AddOwnedForm(hf);
             hf.Show();
             hf.UpdateLabel(Path.GetFileName(csvPath));
-            hf.ShowFields(fields);
+            hf.ShowFields(allFields);
             hf.FieldButtonClicked += new EventHandler(FieldButtonHandler);
             
        }
-        private void LoadDataHeader()
+        public void PopulateData()
         {
-            //if (selectedFields != null)
-            //{
-            //    foreach (var field in selectedFields)
-            //    {
-            //        OLVColumn columnHeader = new OLVColumn();
-            //        columnHeader.Text = field;
-            //        fastObjectListView1.AllColumns.Add(columnHeader);
-            //        fastObjectListView1.RebuildColumns();
-            //    }
-                
-
-            //}
+            if (selectedFields != null)
+            {
+                while (!parser.EndOfData)
+                {
+                    string[] row = parser.ReadFields();
+                    DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields);
+                    messages.Add(msg);
+                }
+                if (parser.EndOfData)
+                {
+                    DataLoaded dl = new DataLoaded();
+                    dl.Show();
+                    dl.OKButtonClicked += new EventHandler(OKButtonHandler);
+                    
+                }
+            }
         }
         private void FieldButtonHandler(object sender, EventArgs e)
         {
             HeaderForm hf = sender as HeaderForm;
             if (hf != null)
             {
-                //selectedFields = hf.SelectedFields;
-                LoadDataHeader();
+                selectedFields = hf.SelectedFields;
+                PopulateData();
+                hf.Close();
+
             }
             
+        }
+
+        private void OKButtonHandler(object sender, EventArgs e)
+        {
+            DataLoaded dl = sender as DataLoaded;
+            if (dl != null)
+            {
+                
+                DisplayData();
+                dl.Close();
+            }
+
         }
         private void HeaderForm_FormClosed(Object sender, FormClosedEventArgs e)
         {
           
         }
 
-        
-        private void LoadData()
-        {
-            //while(!parser.EndOfData)
-            //{
-            //    string[] row = parser.ReadFields();
-            //    //Console.WriteLine(String.Join(" ", row));
-            //    //messages.Add(row);
-            //}
-            
-        }
-
-        
+               
     }
 }

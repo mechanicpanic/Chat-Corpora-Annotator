@@ -32,7 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.selectedListBox = new System.Windows.Forms.ListBox();
             this.addButton = new System.Windows.Forms.Button();
-            this.uploadButton = new System.Windows.Forms.Button();
+            this.fieldButton = new System.Windows.Forms.Button();
             this.csvListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -74,14 +74,15 @@
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // uploadButton
+            // fieldButton
             // 
-            this.uploadButton.Location = new System.Drawing.Point(355, 39);
-            this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Size = new System.Drawing.Size(75, 23);
-            this.uploadButton.TabIndex = 7;
-            this.uploadButton.Text = "Upload";
-            this.uploadButton.UseVisualStyleBackColor = true;
+            this.fieldButton.Location = new System.Drawing.Point(355, 39);
+            this.fieldButton.Name = "fieldButton";
+            this.fieldButton.Size = new System.Drawing.Size(75, 23);
+            this.fieldButton.TabIndex = 7;
+            this.fieldButton.Text = "Upload";
+            this.fieldButton.UseVisualStyleBackColor = true;
+            this.fieldButton.Click += new System.EventHandler(this.fieldButton_Click);
             // 
             // csvListBox
             // 
@@ -120,7 +121,7 @@
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.csvListBox);
-            this.Controls.Add(this.uploadButton);
+            this.Controls.Add(this.fieldButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.selectedListBox);
             this.Controls.Add(this.label2);
@@ -139,7 +140,7 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.ListBox selectedListBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button uploadButton;
+        private System.Windows.Forms.Button fieldButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox csvListBox;
         private System.Windows.Forms.Button deleteButton;
