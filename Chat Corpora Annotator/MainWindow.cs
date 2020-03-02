@@ -15,12 +15,16 @@ namespace Chat_Corpora_Annotator
     {
         public string csvPath;
         public TextFieldParser parser;
-        public string[] allFields;
 
+        private bool headerInit = false;
 
-        public List<DynamicMessage> messages = new List<DynamicMessage>();
+        public string[] allFields;      
+        public List<string> selectedFields = new List<string>();
+        private string dateFieldKey;
+
+        private List<DynamicMessage> messages = new List<DynamicMessage>();
         
-        private List<string> selectedFields = new List<string>();
+        
 
 
 
@@ -28,24 +32,11 @@ namespace Chat_Corpora_Annotator
         {
                        
             InitializeComponent();
-            
-            
-            //DynamicMessage message = new DynamicMessage(fields, data);
-
-
-            //messages.Add(message);
-            //messages.Add(message);
-            //messages.Add(message);
-            //messages.Add(message);
-            //messages.Add(message);
-            
 
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
-                     
-            
-                
+
             
         }
 
@@ -68,6 +59,13 @@ namespace Chat_Corpora_Annotator
             openParser();
             SelectData();
 
+            
+
+        }  
+        private void openParser()
+        {
+            parser = new TextFieldParser(csvPath);
+            parser.SetDelimiters(",");
         }
 
         private void DisplayData()
@@ -90,8 +88,7 @@ namespace Chat_Corpora_Annotator
                 columns.Add(cl);
 
             }
-            chatTable.AllColumns.AddRange(columns);
-            
+            chatTable.AllColumns.AddRange(columns);          
             chatTable.RebuildColumns();
 
             foreach (var cl in chatTable.AllColumns)
@@ -101,13 +98,9 @@ namespace Chat_Corpora_Annotator
             chatTable.Refresh();
         }
 
-        private void openParser()
-        {
-            parser = new TextFieldParser(csvPath);
-            parser.SetDelimiters(",");
-        }
+
         
-        public void SelectData()
+        private void SelectData()
         {
             allFields = parser.ReadFields();
             
@@ -119,14 +112,22 @@ namespace Chat_Corpora_Annotator
             hf.FieldButtonClicked += new EventHandler(FieldButtonHandler);
             
        }
-        public void PopulateData()
+        private void SelectDateField()
+        {
+            ColumnMetadata cm = new ColumnMetadata();
+                            cm.PopulateDataBox(selectedFields.ToArray());
+            
+            cm.Show();
+            cm.ColumnButtonClicked += new EventHandler(ColumnButtonHandler);
+        }
+        private void PopulateData()
         {
             if (selectedFields != null)
             {
                 while (!parser.EndOfData)
                 {
                     string[] row = parser.ReadFields();
-                    DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields);
+                    DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
                     messages.Add(msg);
                 }
                 if (parser.EndOfData)
@@ -140,14 +141,16 @@ namespace Chat_Corpora_Annotator
         }
         private void FieldButtonHandler(object sender, EventArgs e)
         {
+            
             HeaderForm hf = sender as HeaderForm;
             if (hf != null)
             {
                 selectedFields = hf.SelectedFields;
-                PopulateData();
+                SelectDateField();
                 hf.Close();
-
             }
+
+            
             
         }
 
@@ -156,14 +159,27 @@ namespace Chat_Corpora_Annotator
             DataLoaded dl = sender as DataLoaded;
             if (dl != null)
             {
-                
                 DisplayData();
                 dl.Close();
             }
 
         }
+
+        private void ColumnButtonHandler(object sender, EventArgs e)
+        {
+            ColumnMetadata cm = sender as ColumnMetadata;
+            if (cm != null)
+            {
+                dateFieldKey = cm.dateFieldKey;
+                PopulateData();
+                cm.Close();
+
+            }
+
+        }
         private void HeaderForm_FormClosed(Object sender, FormClosedEventArgs e)
         {
+
           
         }
 

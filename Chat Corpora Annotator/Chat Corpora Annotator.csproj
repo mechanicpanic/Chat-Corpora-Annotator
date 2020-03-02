@@ -102,6 +102,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ColumnMetadata.resx">
+      <DependentUpon>ColumnMetadata.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataLoaded.resx">
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </EmbeddedResource>

@@ -68,38 +68,20 @@ namespace Chat_Corpora_Annotator
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            
+            selectedListBox.Items.Remove(selectedListBox.SelectedItem);
+        }
+
+        private void clearAllButton_Click(object sender, EventArgs e)
+        {
             for (int i = 0; i < selectedListBox.SelectedItems.Count; i++)
             {
                 selectedListBox.Items.RemoveAt(i);
             }
+        
         }
 
-        
 
-        //the first selection feature
-        //private void SelectColumns()
-        //{
-
-        //    foreach(var item in checkedListBox1.CheckedItems)
-        //    {
-        //        SelectedFields.Add(item.ToString());
-        //    }
-        //    UncheckAllItems();
-
-
-    }
-    //private void UncheckAllItems()
-    //{
-    //    while (checkedListBox1.CheckedIndices.Count > 0)
-    //        checkedListBox1.SetItemChecked(checkedListBox1.CheckedIndices[0], false);
-
-    //}
-    //private void ClearSelectedFields()
-    //{
-    //    SelectedFields.Clear();
-    //}
-
-
-
+   }
 
 }

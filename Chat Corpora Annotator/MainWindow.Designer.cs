@@ -57,6 +57,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.CellEditUseWholeCell = false;
+            this.chatTable.FullRowSelect = true;
+            this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HideSelection = false;
             this.chatTable.Location = new System.Drawing.Point(117, 12);
             this.chatTable.Name = "chatTable";
