@@ -37,10 +37,10 @@
             // 
             // csvLoadButton
             // 
-            this.csvLoadButton.Location = new System.Drawing.Point(10, 11);
-            this.csvLoadButton.Margin = new System.Windows.Forms.Padding(2);
+            this.csvLoadButton.Location = new System.Drawing.Point(13, 14);
+            this.csvLoadButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.csvLoadButton.Name = "csvLoadButton";
-            this.csvLoadButton.Size = new System.Drawing.Size(102, 37);
+            this.csvLoadButton.Size = new System.Drawing.Size(136, 46);
             this.csvLoadButton.TabIndex = 0;
             this.csvLoadButton.Text = "load .csv";
             this.csvLoadButton.UseVisualStyleBackColor = true;
@@ -60,36 +60,38 @@
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(117, 12);
+            this.chatTable.Location = new System.Drawing.Point(156, 15);
+            this.chatTable.Margin = new System.Windows.Forms.Padding(4);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 32;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(509, 309);
+            this.chatTable.Size = new System.Drawing.Size(677, 379);
             this.chatTable.TabIndex = 1;
             this.chatTable.TintSortColumn = true;
+            this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(10, 64);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(13, 79);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 37);
+            this.button1.Size = new System.Drawing.Size(136, 46);
             this.button1.TabIndex = 2;
             this.button1.Text = "load .txt";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 333);
+            this.ClientSize = new System.Drawing.Size(851, 410);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chatTable);
             this.Controls.Add(this.csvLoadButton);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);

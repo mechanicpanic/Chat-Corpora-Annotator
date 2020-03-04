@@ -13,22 +13,29 @@ namespace Chat_Corpora_Annotator
     public partial class ColumnMetadata : Form
     {
         public string dateFieldKey;
+        public string senderFieldKey;
         public event EventHandler ColumnButtonClicked;
         public ColumnMetadata()
         {
             InitializeComponent();
         }
 
-        public void PopulateDataBox(string[] fields)
+        public void PopulateDateBox(string[] fields)
         {
-            comboBox1.Items.AddRange(fields);
+            dateComboBox.Items.AddRange(fields);
+        }
+
+        public void PopulateSenderBox(string[] fields)
+        {
+            senderComboBox.Items.AddRange(fields);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedItem != null)
+            if(dateComboBox.SelectedItem != null && senderComboBox.SelectedItem != null)
             {
-                dateFieldKey = comboBox1.SelectedItem.ToString();
+                dateFieldKey = dateComboBox.SelectedItem.ToString();
+                senderFieldKey = senderComboBox.SelectedItem.ToString();
             }
             OnColumnButtonClicked(null);
         }

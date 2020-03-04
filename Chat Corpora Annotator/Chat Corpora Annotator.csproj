@@ -81,7 +81,7 @@
     <Compile Include="DataLoaded.Designer.cs">
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Message.cs" />
+    <Compile Include="DynamicMessage.cs" />
     <Compile Include="HeaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
