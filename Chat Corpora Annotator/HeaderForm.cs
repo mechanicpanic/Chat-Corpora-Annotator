@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chat_Corpora_Annotator
@@ -14,7 +8,7 @@ namespace Chat_Corpora_Annotator
     {
         public event EventHandler FieldButtonClicked;
         public List<string> SelectedFields = new List<string>();
-        
+
         public HeaderForm()
         {
             InitializeComponent();
@@ -28,7 +22,7 @@ namespace Chat_Corpora_Annotator
             label1.Text = filename + " columns:";
         }
 
-        
+
         private void fieldButton_Click(object sender, EventArgs e)
         {
             foreach (var item in selectedListBox.Items)
@@ -36,12 +30,12 @@ namespace Chat_Corpora_Annotator
                 SelectedFields.Add(item.ToString());
             }
             OnFieldButtonClicked(null);
-            
+
         }
 
         protected virtual void OnFieldButtonClicked(EventArgs e)
         {
-            
+
             EventHandler eh = FieldButtonClicked;
             eh?.Invoke(this, e);
 
@@ -63,12 +57,12 @@ namespace Chat_Corpora_Annotator
                     MessageBox.Show("Column " + item.ToString() + " is already added");
                 }
             }
-            
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            
+
             selectedListBox.Items.Remove(selectedListBox.SelectedItem);
         }
 
@@ -78,10 +72,10 @@ namespace Chat_Corpora_Annotator
             {
                 selectedListBox.Items.RemoveAt(i);
             }
-        
+
         }
 
 
-   }
+    }
 
 }

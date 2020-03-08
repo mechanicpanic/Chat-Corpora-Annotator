@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat_Corpora_Annotator
 {
@@ -10,7 +7,7 @@ namespace Chat_Corpora_Annotator
     {
         private Guid Id { get; set; }
         public Dictionary<string, object> contents;
-        
+
         public DynamicMessage(string[] fields, string[] data)
         {
             this.Id = new Guid();
@@ -55,11 +52,11 @@ namespace Chat_Corpora_Annotator
             }
         }
 
-        public DynamicMessage(string[] fields, string[] data, List<string> selectedFields,string dateFieldKey)
+        public DynamicMessage(string[] fields, string[] data, List<string> selectedFields, string dateFieldKey)
         {
             this.Id = new Guid();
             contents = new Dictionary<string, object>();
-            
+
 
             for (int i = 0; i < fields.Length; i++)
             {
@@ -76,9 +73,9 @@ namespace Chat_Corpora_Annotator
                     continue;
                 }
             }
-            
+
         }
 
     }
-        
+
 }

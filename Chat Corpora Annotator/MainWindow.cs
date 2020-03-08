@@ -3,12 +3,11 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-
-
+using System.Windows.Forms;
+using Wintellect.PowerCollections;
 
 namespace Chat_Corpora_Annotator
 {
@@ -35,7 +34,7 @@ namespace Chat_Corpora_Annotator
         private HashSet<DateTime> dayKeys = new HashSet<DateTime>();
         List<int> countValues = new List<int>();
         //private Dictionary<DateTime,int> dayCounts = new Dictionary<DateTime,int>();
-
+        
         public MainWindow()
         {
             InitializeComponent();
