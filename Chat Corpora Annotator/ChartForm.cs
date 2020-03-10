@@ -12,6 +12,7 @@ namespace Chat_Corpora_Annotator
         List<string> chartLabels;
         public ChartForm()
         {
+
             InitializeComponent();
         }
 

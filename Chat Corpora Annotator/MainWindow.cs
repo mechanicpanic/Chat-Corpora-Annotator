@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Wintellect.PowerCollections;
 
+
 namespace Chat_Corpora_Annotator
 {
     public partial class MainWindow : Form
@@ -26,15 +27,15 @@ namespace Chat_Corpora_Annotator
 
         private Random rnd = new Random();
 
-        private HashSet<string> userKeys = new HashSet<string>();
+        private Set<string> userKeys = new Set<string>();
         private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
 
-        private List<DynamicMessage> messages = new List<DynamicMessage>();
-        private HashSet<DateTime> dayKeys = new HashSet<DateTime>();
+        private BigList<DynamicMessage> messages = new BigList<DynamicMessage>();
+        private OrderedSet<DateTime> dayKeys = new OrderedSet<DateTime>();
         List<int> countValues = new List<int>();
         //private Dictionary<DateTime,int> dayCounts = new Dictionary<DateTime,int>();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,8 +50,6 @@ namespace Chat_Corpora_Annotator
         {
             if (e.Column.Text == senderFieldKey)
             {
-
-
                 e.SubItem.ForeColor = userColors[e.SubItem.Text];
             }
         }
@@ -110,7 +109,6 @@ namespace Chat_Corpora_Annotator
                 cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
             chatTable.FormatCell += ChatTable_FormatCell;
-
             chatTable.Refresh();
 
         }
@@ -121,7 +119,6 @@ namespace Chat_Corpora_Annotator
         {
             allFields = parser.ReadFields();
             HeaderForm hf = new HeaderForm();
-            AddOwnedForm(hf);
             hf.Show();
             hf.UpdateLabel(Path.GetFileName(csvPath));
             hf.ShowFields(allFields);
@@ -151,10 +148,12 @@ namespace Chat_Corpora_Annotator
                 {
                     string[] row = parser.ReadFields();
                     DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
+
                     messages.Add(msg);
-                    userKeys.Add(msg.contents[senderFieldKey].ToString());
 
                     date = (DateTime)msg.contents[dateFieldKey];
+
+                    userKeys.Add(msg.contents[senderFieldKey].ToString());
                     dayKeys.Add(date.Date);
 
                     if (setCountPrev == dayKeys.Count)
@@ -174,14 +173,19 @@ namespace Chat_Corpora_Annotator
                 if (parser.EndOfData)
                 {
                     PopulateSenderColors();
-                    DataLoaded dl = new DataLoaded();
-                    dl.Show();
-                    dl.OKButtonClicked += new EventHandler(OKButtonHandler);
+                    DataLoaded();
                     //      dayCounts = dayKeys.Zip(counts, (k, v) => new { k, v })
                     //.ToDictionary(x => x.k, x => x.v);
 
                 }
             }
+        }
+
+        private void DataLoaded()
+        {
+            DataLoaded dl = new DataLoaded();
+            dl.Show();
+            dl.OKButtonClicked += new EventHandler(OKButtonHandler);
         }
         private void PopulateSenderColors()
         {
@@ -212,6 +216,7 @@ namespace Chat_Corpora_Annotator
             DataLoaded dl = sender as DataLoaded;
             if (dl != null)
             {
+                PopulateDates();
                 DisplayData();
                 dl.Close();
             }
@@ -244,6 +249,23 @@ namespace Chat_Corpora_Annotator
             ChartForm cf = new ChartForm();
             cf.InitializeChart(dayKeys.ToList(), countValues);
             cf.Show();
+        }
+        private void PopulateDates()
+        {
+            foreach (var date in dayKeys)
+            {
+                listBox1.Items.Add(date.ToShortDateString());
+            }
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -31,14 +31,15 @@
             this.csvLoadButton = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.SuspendLayout();
             // 
             // csvLoadButton
             // 
-            this.csvLoadButton.Location = new System.Drawing.Point(13, 14);
+            this.csvLoadButton.Location = new System.Drawing.Point(34, 14);
             this.csvLoadButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.csvLoadButton.Name = "csvLoadButton";
             this.csvLoadButton.Size = new System.Drawing.Size(136, 46);
@@ -61,12 +62,12 @@
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(156, 15);
+            this.chatTable.Location = new System.Drawing.Point(222, 15);
             this.chatTable.Margin = new System.Windows.Forms.Padding(4);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 32;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(677, 379);
+            this.chatTable.Size = new System.Drawing.Size(1012, 599);
             this.chatTable.TabIndex = 1;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -74,19 +75,9 @@
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(13, 79);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 46);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "load .txt";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 139);
+            this.button2.Location = new System.Drawing.Point(33, 75);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 46);
@@ -95,13 +86,35 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(21, 206);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(172, 404);
+            this.listBox1.TabIndex = 4;
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(34, 135);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(136, 46);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Build heatmap";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 410);
+            this.ClientSize = new System.Drawing.Size(1252, 630);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.chatTable);
             this.Controls.Add(this.csvLoadButton);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -117,8 +130,9 @@
         private System.Windows.Forms.Button csvLoadButton;
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private BrightIdeasSoftware.FastObjectListView chatTable;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
 
