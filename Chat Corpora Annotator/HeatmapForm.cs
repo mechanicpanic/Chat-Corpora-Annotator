@@ -15,7 +15,7 @@ namespace Chat_Corpora_Annotator
         int[,] counts;
 
         ChartValues<HeatPoint> values;
-        
+
         public HeatmapForm(List<DateTime> dates, List<string> users)
         {
             this.dates = dates;
@@ -27,7 +27,7 @@ namespace Chat_Corpora_Annotator
             //X for user, Y for day
             for (int i = 0; i < counts.GetLength(0); i++)
             {
-                for(int j = 0; j < counts.GetLength(1); j++)
+                for (int j = 0; j < counts.GetLength(1); j++)
                 {
                     values.Add(new HeatPoint((double)i, (double)j, (double)counts[i, j]));
                 }

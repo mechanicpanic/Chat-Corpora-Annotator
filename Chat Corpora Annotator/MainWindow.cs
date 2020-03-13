@@ -8,6 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Wintellect.PowerCollections;
+using CSharpTest.Net.Collections;
+using SoftCircuits.CsvParser;
+
 
 
 namespace Chat_Corpora_Annotator
@@ -15,7 +18,7 @@ namespace Chat_Corpora_Annotator
     public partial class MainWindow : Form
     {
         public string csvPath;
-        public TextFieldParser parser;
+        //public TextFieldParser parser;
 
         //private bool headerInit = false;
 
@@ -30,15 +33,18 @@ namespace Chat_Corpora_Annotator
         private Set<string> userKeys = new Set<string>();
         private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
-
-        private BigList<DynamicMessage> messages = new BigList<DynamicMessage>();
+        private List<string[]> succ = new List<string[]>();
+        private List<DynamicMessage> messages = new List<DynamicMessage>();
+        private BTreeList<DynamicMessageBlock> messageTree = new BTreeList<DynamicMessageBlock>();
         private OrderedSet<DateTime> dayKeys = new OrderedSet<DateTime>();
         List<int> countValues = new List<int>();
-        //private Dictionary<DateTime,int> dayCounts = new Dictionary<DateTime,int>();
 
+        
         public MainWindow()
         {
             InitializeComponent();
+            
+
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -71,22 +77,24 @@ namespace Chat_Corpora_Annotator
         private void csvDialog_FileOk(object sender, CancelEventArgs e)
         {
             csvPath = csvDialog.FileName;
-            openParser();
+            //openParser();
             SelectFields();
 
         }
-        private void openParser()
-        {
-            parser = new TextFieldParser(csvPath);
-            parser.SetDelimiters(",");
-        }
+        //private void openParser()
+        //{
+        //    parser = new TextFieldParser(csvPath);
+        //    parser.SetDelimiters(",");
+        //}
 
         private void DisplayData()
         {
             chatTable.SetObjects(messages);
+            
             List<OLVColumn> columns = new List<OLVColumn>();
-
+            
             foreach (var key in messages[0].contents.Keys)
+
             {
 
                 OLVColumn cl = new OLVColumn();
@@ -115,14 +123,23 @@ namespace Chat_Corpora_Annotator
 
 
 
+
         private void SelectFields()
         {
-            allFields = parser.ReadFields();
+               using (var parser = new TextFieldParser(csvPath))
+                {
+                parser.SetDelimiters(",");
+
+                allFields = parser.ReadFields();
+                }
+            
+            
             HeaderForm hf = new HeaderForm();
             hf.Show();
             hf.UpdateLabel(Path.GetFileName(csvPath));
             hf.ShowFields(allFields);
             hf.FieldButtonClicked += new EventHandler(FieldButtonHandler);
+
 
         }
         private void SelectFieldMetadata()
@@ -139,48 +156,58 @@ namespace Chat_Corpora_Annotator
             if (selectedFields != null)
             {
                 int count = 0;
-                int setCountPrev = 1;
-
+                DateTime? previousDate = null;
                 DateTime date = new DateTime();
-
-
-                while (!parser.EndOfData)
+                List<DynamicMessage> blockList = new List<DynamicMessage>();
+                string[] row = null;
+                using (var csv = new CsvReader(csvPath))
                 {
-                    string[] row = parser.ReadFields();
-                    DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
-
-                    messages.Add(msg);
-
-                    date = (DateTime)msg.contents[dateFieldKey];
-
-                    userKeys.Add(msg.contents[senderFieldKey].ToString());
-                    dayKeys.Add(date.Date);
-
-                    if (setCountPrev == dayKeys.Count)
+                    var temp = csv.ReadRow(ref row);
+                    while (csv.ReadRow(ref row))
                     {
-                        count++;
-                        setCountPrev = dayKeys.Count;
-                    }
-                    else
-                    {
-                        countValues.Add(count);
-                        count = 1;
-                        setCountPrev = dayKeys.Count;
+                       
+
+                        DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
+                        messages.Add(msg);
+
+                        date = (DateTime)msg.contents[dateFieldKey];
+                        date = date.Date;
+
+                        userKeys.Add(msg.contents[senderFieldKey].ToString());
+                        dayKeys.Add(date);
+
+                        //if (previousDate == null || previousDate == date)
+                        //{
+
+                        //    count++;
+                        //    blockList.Add(msg);
+
+                        //}
+
+                        //else
+                        //{
+                        //    countValues.Add(count);
+                        //    count = 0;
+                        //    DynamicMessageBlock block = new DynamicMessageBlock(blockList);
+                        //    messageTree.Add(block);
+                        //    blockList.Clear();
+                        //    blockList.Add(msg);
+                        //}
+                        //previousDate = date;
+
 
                     }
 
-                }
-                if (parser.EndOfData)
-                {
+
                     PopulateSenderColors();
                     DataLoaded();
-                    //      dayCounts = dayKeys.Zip(counts, (k, v) => new { k, v })
-                    //.ToDictionary(x => x.k, x => x.v);
-
+                    
                 }
+                
             }
         }
 
+        
         private void DataLoaded()
         {
             DataLoaded dl = new DataLoaded();
@@ -204,12 +231,14 @@ namespace Chat_Corpora_Annotator
                 selectedFields = hf.SelectedFields;
                 SelectFieldMetadata();
                 hf.Close();
+                
             }
 
 
 
         }
 
+     
 
         private void OKButtonHandler(object sender, EventArgs e)
         {
@@ -218,6 +247,7 @@ namespace Chat_Corpora_Annotator
             {
                 PopulateDates();
                 DisplayData();
+
                 dl.Close();
             }
 
@@ -260,7 +290,7 @@ namespace Chat_Corpora_Annotator
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)
