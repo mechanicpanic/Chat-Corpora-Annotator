@@ -33,9 +33,11 @@ namespace Chat_Corpora_Annotator
         private Set<string> userKeys = new Set<string>();
         private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
-        private List<string[]> succ = new List<string[]>();
-        private List<DynamicMessage> messages = new List<DynamicMessage>();
-        private BTreeList<DynamicMessageBlock> messageTree = new BTreeList<DynamicMessageBlock>();
+        
+        private List<DynamicMessageExp> messages = new List<DynamicMessageExp>();
+        private BTreeDictionary<DateTime, DynamicMessageBlock> messageTree = new BTreeDictionary<DateTime,DynamicMessageBlock>();
+        //private List<DynamicMessageBlock> messageBlocks = new List<DynamicMessageBlock>();
+
         private OrderedSet<DateTime> dayKeys = new OrderedSet<DateTime>();
         List<int> countValues = new List<int>();
 
@@ -77,45 +79,41 @@ namespace Chat_Corpora_Annotator
         private void csvDialog_FileOk(object sender, CancelEventArgs e)
         {
             csvPath = csvDialog.FileName;
-            //openParser();
             SelectFields();
 
         }
-        //private void openParser()
-        //{
-        //    parser = new TextFieldParser(csvPath);
-        //    parser.SetDelimiters(",");
-        //}
 
         private void DisplayData()
         {
-            chatTable.SetObjects(messages);
-            
+            var tempcollect = messageTree.First().Value.blockexp;
+            chatTable.SetObjects(tempcollect);
             List<OLVColumn> columns = new List<OLVColumn>();
-            
-            foreach (var key in messages[0].contents.Keys)
-
+            foreach (var item in tempcollect[0].contents)
             {
 
-                OLVColumn cl = new OLVColumn();
+                OLVColumn cl = new OLVColumn();                
                 cl.AspectGetter = delegate (object x)
                 {
-                    DynamicMessage message = (DynamicMessage)x;
-                    return message.contents[key];
+                    DynamicMessageExp message = (DynamicMessageExp)x;
+                    int temp = tempcollect[0].contents.IndexOf(item);
+                    return message.contents[temp];
                 };
-                cl.Text = key;
+                cl.Text = selectedFields[tempcollect[0].contents.IndexOf(item)];
                 cl.WordWrap = true;
 
                 columns.Add(cl);
 
             }
-            chatTable.AllColumns.AddRange(columns);
-            chatTable.RebuildColumns();
+                chatTable.AllColumns.AddRange(columns);
+                chatTable.RebuildColumns();
+            
+            
 
             foreach (var cl in chatTable.AllColumns)
             {
                 cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
+            
             chatTable.FormatCell += ChatTable_FormatCell;
             chatTable.Refresh();
 
@@ -158,29 +156,51 @@ namespace Chat_Corpora_Annotator
                 int count = 0;
                 DateTime? previousDate = null;
                 DateTime date = new DateTime();
-                List<DynamicMessage> blockList = new List<DynamicMessage>();
+
+                var dateindex = Array.IndexOf(allFields, dateFieldKey);
+                var senderindex = Array.IndexOf(allFields, senderFieldKey);
+
+                var selecteddateindex = Array.IndexOf(selectedFields.ToArray(), dateFieldKey);
+                var selectedsenderindex = Array.IndexOf(selectedFields.ToArray(), senderFieldKey);
+
+                List<DynamicMessageExp> blockList = new List<DynamicMessageExp>();
                 string[] row = null;
+                
                 using (var csv = new CsvReader(csvPath))
                 {
-                    var temp = csv.ReadRow(ref row);
+                    csv.ReadRow(ref row);
                     while (csv.ReadRow(ref row))
                     {
-                       
 
-                        DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
-                        messages.Add(msg);
+                        
+                        DynamicMessageExp msg2 = new DynamicMessageExp(row, allFields, selectedFields, dateFieldKey);
 
-                        date = (DateTime)msg.contents[dateFieldKey];
-                        date = date.Date;
+                        date = DateTime.Parse(row[dateindex]).Date;
 
-                        userKeys.Add(msg.contents[senderFieldKey].ToString());
+                        userKeys.Add(row[senderindex]);
                         dayKeys.Add(date);
 
+                        if (!messageTree.Keys.Contains(date))
+                        {
+                            messageTree.Add(date, new DynamicMessageBlock(date));
+                        }
+                        else
+                        {
+                            messageTree[date].AddMessageExp(msg2, selecteddateindex);
+                        }
+
+                        //DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
+                        //messages.Add(msg);
+
+                        //date = (DateTime)msg.contents[dateFieldKey];
+                        //date = date.Date;
+
+                        //userKeys.Add(msg.contents[senderFieldKey].ToString());
                         //if (previousDate == null || previousDate == date)
                         //{
 
                         //    count++;
-                        //    blockList.Add(msg);
+                        //    blockList.Add(msg2);
 
                         //}
 
@@ -188,10 +208,11 @@ namespace Chat_Corpora_Annotator
                         //{
                         //    countValues.Add(count);
                         //    count = 0;
-                        //    DynamicMessageBlock block = new DynamicMessageBlock(blockList);
-                        //    messageTree.Add(block);
+                        //    DynamicMessageBlock block = new DynamicMessageBlock(blockList, date);
+                        //    //messageTree.Add(block);
+                        //    //messageBlocks.Add(block);
                         //    blockList.Clear();
-                        //    blockList.Add(msg);
+                        //    blockList.Add(msg2);
                         //}
                         //previousDate = date;
 
@@ -201,6 +222,7 @@ namespace Chat_Corpora_Annotator
 
                     PopulateSenderColors();
                     DataLoaded();
+                    
                     
                 }
                 
@@ -296,6 +318,12 @@ namespace Chat_Corpora_Annotator
         private void button3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chatTable_Scroll(object sender, ScrollEventArgs e)
+        {
+
+            
         }
     }
 }

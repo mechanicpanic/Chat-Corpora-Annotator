@@ -74,6 +74,7 @@
             this.chatTable.UseCompatibleStateImageBehavior = false;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
+            this.chatTable.Scroll += new System.EventHandler<System.Windows.Forms.ScrollEventArgs>(this.chatTable_Scroll);
             // 
             // button2
             // 
