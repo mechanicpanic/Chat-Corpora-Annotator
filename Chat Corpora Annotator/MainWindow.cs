@@ -40,7 +40,7 @@ namespace Chat_Corpora_Annotator
 
         
         OrderedDictionary<DateTime,int> messagesPerDay = new OrderedDictionary<DateTime, int>();
-
+        Dictionary<DateTime, Color> heatMapColors = new Dictionary<DateTime, Color>();
         
         public MainWindow()
         {
@@ -59,6 +59,10 @@ namespace Chat_Corpora_Annotator
             if (e.Column.Text == senderFieldKey)
             {
                 e.SubItem.ForeColor = userColors[e.SubItem.Text];
+            }
+            if (e.Column.Text == dateFieldKey)
+            {
+                e.SubItem.BackColor = heatMapColors[DateTime.Parse(e.SubItem.Text).Date];
             }
         }
 
@@ -198,6 +202,7 @@ namespace Chat_Corpora_Annotator
                 }
                 CountMessagesPerDay();
                 PopulateSenderColors();
+                PopulateHeatmap();
                 DataLoaded();
 
             }
@@ -213,6 +218,7 @@ namespace Chat_Corpora_Annotator
             {
                 messagesPerDay.Add(kvp.Key,kvp.Value.Block.Count());
             }
+            
         }
         private void DataLoaded()
         {
@@ -226,6 +232,33 @@ namespace Chat_Corpora_Annotator
             {
                 Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
                 userColors.Add(user, tempColor);
+            }
+        }
+        public Color HeatMapColor(double value, double min, double max)
+        {
+            double val = (value - min) / (max - min);
+            int r = Convert.ToByte(255 * val);
+            int g = Convert.ToByte(255 * (1 - val));
+            int b = 0;
+
+            return Color.FromArgb(255, r, g, b);
+        }
+        private void PopulateHeatmap()
+        {
+            List<int> values = new List<int>();
+           
+            foreach (var val in messageTree.Values)
+            {
+                values.Add(val.Block.Count());
+            }
+
+            double max = values.Max();
+            double min = values.Min();
+            values.Clear();
+            foreach(var date in messageTree.Keys)
+            {
+                double x = messageTree[date].Block.Count;
+                heatMapColors.Add(date,HeatMapColor(x,min,max));
             }
         }
         private void FieldButtonHandler(object sender, EventArgs e)
