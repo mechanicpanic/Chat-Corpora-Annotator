@@ -139,7 +139,6 @@ namespace Chat_Corpora_Annotator
         public DateTime day;
 
         public List<DynamicMessage> block;
-        public List<DynamicMessageExp> blockexp;
 
         public List<string> fields;
         
@@ -147,7 +146,7 @@ namespace Chat_Corpora_Annotator
         public DynamicMessageBlock(DateTime day) {
             this.day = day;
             block = new List<DynamicMessage>();
-            blockexp = new List<DynamicMessageExp>();
+           
         }
         public DynamicMessageBlock(List<DynamicMessage> messages)
         {
@@ -166,18 +165,7 @@ namespace Chat_Corpora_Annotator
             }
         }
 
-        public DynamicMessageBlock(List<DynamicMessageExp> messages,  DateTime date)
-        {
 
-            this.day = date.Date;
-            blockexp = new List<DynamicMessageExp>();
-            foreach(var msg in messages)
-            {
-                blockexp.Add(msg);
-            }
-
-
-        }
 
         public void AddMessage(DynamicMessage message)
         {
@@ -192,18 +180,7 @@ namespace Chat_Corpora_Annotator
             }
         }
 
-        public void AddMessageExp(DynamicMessageExp message, int index)
-        {
-            DateTime temp = (DateTime)message.contents[index];
-            if (temp.Date == day)
-            {
-                this.blockexp.Add(message);
-            }
-            else
-            {
-                throw new ArgumentException("Wrong date");
-            }
-        }
+       
         public int CompareTo(object obj)
         {
             if (obj == null) return 1;

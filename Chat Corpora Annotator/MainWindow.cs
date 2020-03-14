@@ -34,12 +34,12 @@ namespace Chat_Corpora_Annotator
         private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
         
-        private List<DynamicMessageExp> messages = new List<DynamicMessageExp>();
-        private BTreeDictionary<DateTime, DynamicMessageBlock> messageTree = new BTreeDictionary<DateTime,DynamicMessageBlock>();
+        private List<ChatMessage> messages = new List<ChatMessage>();
+        private BTreeDictionary<DateTime, ChatMessageBlock> messageTree = new BTreeDictionary<DateTime,ChatMessageBlock>();
         //private List<DynamicMessageBlock> messageBlocks = new List<DynamicMessageBlock>();
 
-        private OrderedSet<DateTime> dayKeys = new OrderedSet<DateTime>();
-        List<int> countValues = new List<int>();
+        
+        OrderedDictionary<DateTime,int> messagesPerDay = new OrderedDictionary<DateTime, int>();
 
         
         public MainWindow()
@@ -85,20 +85,22 @@ namespace Chat_Corpora_Annotator
 
         private void DisplayData()
         {
-            var tempcollect = messageTree.First().Value.blockexp;
-            chatTable.SetObjects(tempcollect);
+            var tempcollect = messageTree.First().Value.Block;
+            //chatTable.SetObjects(tempcollect);
+
+            
             List<OLVColumn> columns = new List<OLVColumn>();
-            foreach (var item in tempcollect[0].contents)
+            foreach (var item in tempcollect[0].Contents)
             {
 
                 OLVColumn cl = new OLVColumn();                
                 cl.AspectGetter = delegate (object x)
                 {
-                    DynamicMessageExp message = (DynamicMessageExp)x;
-                    int temp = tempcollect[0].contents.IndexOf(item);
-                    return message.contents[temp];
+                    ChatMessage message = (ChatMessage)x;
+                    int temp = tempcollect[0].Contents.IndexOf(item);
+                    return message.Contents[temp];
                 };
-                cl.Text = selectedFields[tempcollect[0].contents.IndexOf(item)];
+                cl.Text = selectedFields[tempcollect[0].Contents.IndexOf(item)];
                 cl.WordWrap = true;
 
                 columns.Add(cl);
@@ -107,13 +109,23 @@ namespace Chat_Corpora_Annotator
                 chatTable.AllColumns.AddRange(columns);
                 chatTable.RebuildColumns();
             
-            
+            AddDataToDisplay();
 
+        }
+
+        private void AddDataToDisplay()
+        {
+            //TODO: Create data loader out of this method.
+            //So far this is just a normal addition of elements to chatTable.
+
+            //Currently fairly slow. 
+            foreach (var kvp in messageTree) {
+                chatTable.AddObjects(kvp.Value.Block);
+                    }
             foreach (var cl in chatTable.AllColumns)
             {
                 cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
-            
             chatTable.FormatCell += ChatTable_FormatCell;
             chatTable.Refresh();
 
@@ -133,6 +145,7 @@ namespace Chat_Corpora_Annotator
             
             
             HeaderForm hf = new HeaderForm();
+            AddOwnedForm(hf);
             hf.Show();
             hf.UpdateLabel(Path.GetFileName(csvPath));
             hf.ShowFields(allFields);
@@ -153,83 +166,54 @@ namespace Chat_Corpora_Annotator
         {
             if (selectedFields != null)
             {
-                int count = 0;
-                DateTime? previousDate = null;
                 DateTime date = new DateTime();
 
-                var dateindex = Array.IndexOf(allFields, dateFieldKey);
-                var senderindex = Array.IndexOf(allFields, senderFieldKey);
+                var dateIndex = Array.IndexOf(allFields, dateFieldKey);
+                var senderIndex = Array.IndexOf(allFields, senderFieldKey);
 
-                var selecteddateindex = Array.IndexOf(selectedFields.ToArray(), dateFieldKey);
-                var selectedsenderindex = Array.IndexOf(selectedFields.ToArray(), senderFieldKey);
-
-                List<DynamicMessageExp> blockList = new List<DynamicMessageExp>();
                 string[] row = null;
-                
+
                 using (var csv = new CsvReader(csvPath))
                 {
                     csv.ReadRow(ref row);
                     while (csv.ReadRow(ref row))
                     {
+                        ChatMessage message = new ChatMessage(row, allFields, selectedFields, dateFieldKey);
 
-                        
-                        DynamicMessageExp msg2 = new DynamicMessageExp(row, allFields, selectedFields, dateFieldKey);
+                        date = DateTime.Parse(row[dateIndex]).Date;
 
-                        date = DateTime.Parse(row[dateindex]).Date;
-
-                        userKeys.Add(row[senderindex]);
-                        dayKeys.Add(date);
+                        userKeys.Add(row[senderIndex]);
 
                         if (!messageTree.Keys.Contains(date))
                         {
-                            messageTree.Add(date, new DynamicMessageBlock(date));
+                            messageTree.Add(date, new ChatMessageBlock(date, selectedFields));
                         }
                         else
                         {
-                            messageTree[date].AddMessageExp(msg2, selecteddateindex);
+                            messageTree[date].AddMessage(message);
                         }
-
-                        //DynamicMessage msg = new DynamicMessage(allFields, row, selectedFields, dateFieldKey);
-                        //messages.Add(msg);
-
-                        //date = (DateTime)msg.contents[dateFieldKey];
-                        //date = date.Date;
-
-                        //userKeys.Add(msg.contents[senderFieldKey].ToString());
-                        //if (previousDate == null || previousDate == date)
-                        //{
-
-                        //    count++;
-                        //    blockList.Add(msg2);
-
-                        //}
-
-                        //else
-                        //{
-                        //    countValues.Add(count);
-                        //    count = 0;
-                        //    DynamicMessageBlock block = new DynamicMessageBlock(blockList, date);
-                        //    //messageTree.Add(block);
-                        //    //messageBlocks.Add(block);
-                        //    blockList.Clear();
-                        //    blockList.Add(msg2);
-                        //}
-                        //previousDate = date;
 
 
                     }
-
-
-                    PopulateSenderColors();
-                    DataLoaded();
-                    
-                    
                 }
-                
+                CountMessagesPerDay();
+                PopulateSenderColors();
+                DataLoaded();
+
+            }
+            else
+            {
+                throw new ArgumentNullException("No data to populate collection with");
             }
         }
 
-        
+        private void CountMessagesPerDay()
+        {
+            foreach(var kvp in messageTree)
+            {
+                messagesPerDay.Add(kvp.Key,kvp.Value.Block.Count());
+            }
+        }
         private void DataLoaded()
         {
             DataLoaded dl = new DataLoaded();
@@ -261,7 +245,7 @@ namespace Chat_Corpora_Annotator
         }
 
      
-
+        
         private void OKButtonHandler(object sender, EventArgs e)
         {
             DataLoaded dl = sender as DataLoaded;
@@ -299,12 +283,12 @@ namespace Chat_Corpora_Annotator
         private void button2_Click(object sender, EventArgs e)
         {
             ChartForm cf = new ChartForm();
-            cf.InitializeChart(dayKeys.ToList(), countValues);
+            cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
             cf.Show();
         }
         private void PopulateDates()
         {
-            foreach (var date in dayKeys)
+            foreach (var date in messageTree.Keys)
             {
                 listBox1.Items.Add(date.ToShortDateString());
             }

@@ -59,15 +59,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.CellEditUseWholeCell = false;
+            this.chatTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HideSelection = false;
             this.chatTable.Location = new System.Drawing.Point(222, 15);
             this.chatTable.Margin = new System.Windows.Forms.Padding(4);
             this.chatTable.Name = "chatTable";
-            this.chatTable.RowHeight = 32;
+            this.chatTable.RowHeight = 40;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1012, 599);
+            this.chatTable.Size = new System.Drawing.Size(995, 600);
             this.chatTable.TabIndex = 1;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -112,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1252, 630);
+            this.ClientSize = new System.Drawing.Size(1247, 630);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
