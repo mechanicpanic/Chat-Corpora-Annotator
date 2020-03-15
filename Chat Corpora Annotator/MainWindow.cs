@@ -191,6 +191,7 @@ namespace Chat_Corpora_Annotator
                         if (!messageTree.Keys.Contains(date))
                         {
                             messageTree.Add(date, new ChatMessageBlock(date, selectedFields));
+                            messageTree[date].AddMessage(message);
                         }
                         else
                         {
@@ -329,12 +330,19 @@ namespace Chat_Corpora_Annotator
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            ListBox lb = sender as ListBox;
+            DateTime index = DateTime.Parse(lb.SelectedItem.ToString());
+           int i = chatTable.IndexOf(messageTree[index].Block[0]);
+            var item = chatTable.GetItem(i);
+            chatTable.SelectedItem = item;
+            chatTable.EnsureVisible(i);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            SelectWeekForm swf = new SelectWeekForm();
+            
+            LinearHeatmapForm swf = new LinearHeatmapForm();
             swf.InitializeHeatMap(heatMapColors);
             swf.Show();
             swf.DrawHeatMap();

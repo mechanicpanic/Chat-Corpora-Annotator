@@ -6,7 +6,7 @@ using Wintellect.PowerCollections;
 
 namespace Chat_Corpora_Annotator
 {
-    public partial class SelectWeekForm : Form
+    public partial class LinearHeatmapForm : Form
     {
 
         float width;
@@ -17,7 +17,7 @@ namespace Chat_Corpora_Annotator
         List<RectangleF> rectangles = new List<RectangleF>();
 
         
-        public SelectWeekForm()
+        public LinearHeatmapForm()
         {
             InitializeComponent();
             panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);

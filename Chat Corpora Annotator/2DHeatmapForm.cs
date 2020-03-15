@@ -35,7 +35,7 @@ namespace Chat_Corpora_Annotator
         }
         private void SelectWeek()
         {
-            SelectWeekForm sw = new SelectWeekForm();
+            LinearHeatmapForm sw = new LinearHeatmapForm();
             sw.Show();
         }
         private void FindUsersByWeek(List<DynamicMessage> messages)

@@ -100,40 +100,7 @@ namespace Chat_Corpora_Annotator
         }
     }
 
-    public class DynamicMessageExp
-    {
-        public List<object> contents;
 
-        public DynamicMessageExp()
-        {
-            contents = new List<object>();
-        }
-        public DynamicMessageExp(List<object> init)
-        {
-            contents = init;
-        }
-        public DynamicMessageExp(string[] data, string[] fields, List<string> selectedFields, string dateFieldKey)
-        {
-            contents = new List<object>();
-            for (int i = 0; i < fields.Length; i++)
-            {
-                if (fields[i] == dateFieldKey && selectedFields.Contains(fields[i]))
-                {
-
-                    contents.Add(DateTime.Parse(data[i].ToString()));
-                }
-                else if (selectedFields.Contains(fields[i]))
-                {
-                    contents.Add(data[i]);
-                }
-                else
-                {
-                    continue;
-                }
-            }
-
-        }
-    }
     public class DynamicMessageBlock: IComparable
     {
         public DateTime day;

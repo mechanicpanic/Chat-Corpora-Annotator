@@ -1,6 +1,6 @@
 ﻿namespace Chat_Corpora_Annotator
 {
-    partial class SelectWeekForm
+    partial class LinearHeatmapForm
     {
         /// <summary>
         /// Required designer variable.
@@ -38,14 +38,14 @@
             this.panel1.Size = new System.Drawing.Size(1198, 129);
             this.panel1.TabIndex = 0;
             // 
-            // SelectWeekForm
+            // LinearHeatmapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1223, 182);
             this.Controls.Add(this.panel1);
-            this.Name = "SelectWeekForm";
-            this.Text = "SelectWeekForm";
+            this.Name = "LinearHeatmapForm";
+            this.Text = "Heatmap";
             this.ResumeLayout(false);
 
         }
