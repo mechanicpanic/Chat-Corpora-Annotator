@@ -40,7 +40,7 @@ namespace Chat_Corpora_Annotator
 
         
         OrderedDictionary<DateTime,int> messagesPerDay = new OrderedDictionary<DateTime, int>();
-        Dictionary<DateTime, Color> heatMapColors = new Dictionary<DateTime, Color>();
+        List<Color> heatMapColors = new List<Color>();
         
         public MainWindow()
         {
@@ -60,10 +60,10 @@ namespace Chat_Corpora_Annotator
             {
                 e.SubItem.ForeColor = userColors[e.SubItem.Text];
             }
-            if (e.Column.Text == dateFieldKey)
-            {
-                e.SubItem.BackColor = heatMapColors[DateTime.Parse(e.SubItem.Text).Date];
-            }
+            //if (e.Column.Text == dateFieldKey)
+            //{
+            //    e.SubItem.BackColor = heatMapColors[DateTime.Parse(e.SubItem.Text).Date];
+            //}
         }
 
         private void csvLoadButton_Click(object sender, EventArgs e)
@@ -258,7 +258,7 @@ namespace Chat_Corpora_Annotator
             foreach(var date in messageTree.Keys)
             {
                 double x = messageTree[date].Block.Count;
-                heatMapColors.Add(date,HeatMapColor(x,min,max));
+                heatMapColors.Add(HeatMapColor(x,min,max));
             }
         }
         private void FieldButtonHandler(object sender, EventArgs e)
@@ -316,8 +316,8 @@ namespace Chat_Corpora_Annotator
         private void button2_Click(object sender, EventArgs e)
         {
             ChartForm cf = new ChartForm();
-            cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
-            cf.Show();
+            //cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+
         }
         private void PopulateDates()
         {
@@ -334,7 +334,11 @@ namespace Chat_Corpora_Annotator
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            SelectWeekForm swf = new SelectWeekForm();
+            swf.InitializeHeatMap(heatMapColors);
+            swf.Show();
+            swf.DrawHeatMap();
+            swf.Draw();
         }
 
         private void chatTable_Scroll(object sender, ScrollEventArgs e)
