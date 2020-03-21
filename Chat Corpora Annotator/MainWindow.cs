@@ -10,7 +10,12 @@ using System.Windows.Forms;
 using Wintellect.PowerCollections;
 using CSharpTest.Net.Collections;
 using SoftCircuits.CsvParser;
-
+using Lucene.Net;
+using Lucene.Net.Util;
+using Lucene.Net.Store;
+using Lucene.Net.Index;
+using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Documents;
 
 
 namespace Chat_Corpora_Annotator
@@ -18,15 +23,14 @@ namespace Chat_Corpora_Annotator
     public partial class MainWindow : Form
     {
         public string csvPath;
-        //public TextFieldParser parser;
-
-        //private bool headerInit = false;
+     
 
         public string[] allFields;
         public List<string> selectedFields = new List<string>();
 
         private string dateFieldKey;
         private string senderFieldKey;
+        private string textFieldKey;
 
         private Random rnd = new Random();
 
@@ -36,16 +40,23 @@ namespace Chat_Corpora_Annotator
         
         private List<ChatMessage> messages = new List<ChatMessage>();
         private BTreeDictionary<DateTime, ChatMessageBlock> messageTree = new BTreeDictionary<DateTime,ChatMessageBlock>();
-        //private List<DynamicMessageBlock> messageBlocks = new List<DynamicMessageBlock>();
+        private VirtualBLockTreeDataSource blockTree;
 
         
         OrderedDictionary<DateTime,int> messagesPerDay = new OrderedDictionary<DateTime, int>();
         List<Color> heatMapColors = new List<Color>();
-        
+        private Dictionary<int,DateTime> indexMessageMap = new Dictionary<int, DateTime>();
+
+        string indexLocation;
+        FSDirectory dir;
+        IndexWriterConfig indexConfig;
+        IndexWriter writer;
+
+        StandardAnalyzer analyzer;
+
         public MainWindow()
         {
-            InitializeComponent();
-            
+            InitializeComponent();  
 
         }
         private void MainWindow_Load(object sender, EventArgs e)
@@ -60,10 +71,7 @@ namespace Chat_Corpora_Annotator
             {
                 e.SubItem.ForeColor = userColors[e.SubItem.Text];
             }
-            //if (e.Column.Text == dateFieldKey)
-            //{
-            //    e.SubItem.BackColor = heatMapColors[DateTime.Parse(e.SubItem.Text).Date];
-            //}
+            
         }
 
         private void csvLoadButton_Click(object sender, EventArgs e)
@@ -87,55 +95,71 @@ namespace Chat_Corpora_Annotator
 
         }
 
-        private void DisplayData()
-        {
-            var tempcollect = messageTree.First().Value.Block;
-            //chatTable.SetObjects(tempcollect);
+        //private void DisplayData()
+        //{
+        //    chatTable.SetObjects(messageTree);
 
-            
-            List<OLVColumn> columns = new List<OLVColumn>();
-            foreach (var item in tempcollect[0].Contents)
-            {
 
-                OLVColumn cl = new OLVColumn();                
-                cl.AspectGetter = delegate (object x)
-                {
-                    ChatMessage message = (ChatMessage)x;
-                    int temp = tempcollect[0].Contents.IndexOf(item);
-                    return message.Contents[temp];
-                };
-                cl.Text = selectedFields[tempcollect[0].Contents.IndexOf(item)];
-                cl.WordWrap = true;
 
-                columns.Add(cl);
+        //    List<OLVColumn> columns = new List<OLVColumn>();
+        //    for(int i = 0; i < selectedFields.Count; i++)
+        //    {
 
-            }
-                chatTable.AllColumns.AddRange(columns);
-                chatTable.RebuildColumns();
-            
-            AddDataToDisplay();
+        //        OLVColumn cl = new OLVColumn();
+        //        cl.AspectGetter = delegate (object x)
+        //        {
+        //            ChatMessageBlock block = (ChatMessageBlock)x;
+        //            return block.Block[0].Contents[i].ToString();
+        //        };
+        //        cl.Text = selectedFields[i];
+        //        cl.WordWrap = true;
+
+        //        columns.Add(cl);
+
+        //    }
+        //    chatTable.AllColumns.AddRange(columns);
+        //    chatTable.RebuildColumns();
+        //}
+
+            //    AddDataToDisplay();
+
+            //}
+
+            //private void AddDataToDisplay()
+            //{
+            //    //TODO: Create data loader out of this method.
+            //    //So far this is just a normal addition of elements to chatTable.
+
+            //    //Currently extremely slow.
+            //    foreach (var kvp in messageTree) {
+            //        chatTable.AddObjects(kvp.Value.Block);
+            //            }
+            //    foreach (var cl in chatTable.AllColumns)
+            //    {
+            //        cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            //    }
+            //    chatTable.FormatCell += ChatTable_FormatCell;
+            //    chatTable.Refresh();
+
+            //}
+
+
+
+
+            private void SetUpIndex() {
+            var AppLuceneVersion = LuceneVersion.LUCENE_48;
+
+            indexLocation = @"C:\Index";
+            dir = FSDirectory.Open(indexLocation);
+
+            //create an analyzer to process the text
+            analyzer = new StandardAnalyzer(AppLuceneVersion);
+
+            //create an index writer
+            indexConfig = new IndexWriterConfig(AppLuceneVersion, analyzer);
+            writer = new IndexWriter(dir, indexConfig);
 
         }
-
-        private void AddDataToDisplay()
-        {
-            //TODO: Create data loader out of this method.
-            //So far this is just a normal addition of elements to chatTable.
-
-            //Currently fairly slow. 
-            foreach (var kvp in messageTree) {
-                chatTable.AddObjects(kvp.Value.Block);
-                    }
-            foreach (var cl in chatTable.AllColumns)
-            {
-                cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            }
-            chatTable.FormatCell += ChatTable_FormatCell;
-            chatTable.Refresh();
-
-        }
-
-
 
 
         private void SelectFields()
@@ -162,6 +186,7 @@ namespace Chat_Corpora_Annotator
             ColumnMetadata cm = new ColumnMetadata();
             cm.PopulateDateBox(selectedFields.ToArray());
             cm.PopulateSenderBox(selectedFields.ToArray());
+            cm.PopulateTextBox(selectedFields.ToArray());
 
             cm.Show();
             cm.ColumnButtonClicked += new EventHandler(ColumnButtonHandler);
@@ -169,57 +194,84 @@ namespace Chat_Corpora_Annotator
         private void PopulateData()
         {
             if (selectedFields != null)
+                SetUpIndex();
             {
                 DateTime date = new DateTime();
 
                 var dateIndex = Array.IndexOf(allFields, dateFieldKey);
                 var senderIndex = Array.IndexOf(allFields, senderFieldKey);
+                var textIndex = Array.IndexOf(allFields, textFieldKey);
 
                 string[] row = null;
 
+                int index = 0;
                 using (var csv = new CsvReader(csvPath))
                 {
                     csv.ReadRow(ref row);
                     while (csv.ReadRow(ref row))
                     {
-                        ChatMessage message = new ChatMessage(row, allFields, selectedFields, dateFieldKey);
+                        //ChatMessage message = new ChatMessage(row, allFields, selectedFields, dateFieldKey);
 
-                        date = DateTime.Parse(row[dateIndex]).Date;
+
+                        date = DateTime.Parse(row[dateIndex]);
+                        var day = date.Date;
 
                         userKeys.Add(row[senderIndex]);
 
-                        if (!messageTree.Keys.Contains(date))
+                        //if (!messageTree.Keys.Contains(day))
+                        //{
+                        //   messageTree.Add(day, new ChatMessageBlock(day, selectedFields));
+                        //    messageTree[day].AddMessage(message);
+                        //    indexMessageMap.Add(index, date);
+                        //    index++;
+                        //}
+                        //else
+                        //{
+                        //    messageTree[day].AddMessage(message);
+                        //    indexMessageMap.Add(index, date);
+                        //    index++;
+                        //}
+                        Document document = new Document
                         {
-                            messageTree.Add(date, new ChatMessageBlock(date, selectedFields));
-                            messageTree[date].AddMessage(message);
-                        }
-                        else
-                        {
-                            messageTree[date].AddMessage(message);
-                        }
+                            new StringField(dateFieldKey,DateTools.DateToString(date, DateTools.Resolution.DAY),Field.Store.YES),
+                            new StringField(senderFieldKey,row[senderIndex],Field.Store.YES),
+                            new TextField(textFieldKey,row[textIndex],Field.Store.YES)
+                        };
+
+
+                        writer.AddDocument(document);
+                        
 
 
                     }
+                    writer.Flush(triggerMerge: false, applyAllDeletes: false);
+                    writer.Dispose();
                 }
-                CountMessagesPerDay();
-                PopulateSenderColors();
-                PopulateHeatmap();
+                //CountMessagesPerDay();
+                //PopulateSenderColors();
+                //PopulateHeatmap();
                 DataLoaded();
 
-            }
-            else
-            {
-                throw new ArgumentNullException("No data to populate collection with");
+
+            
             }
         }
-
+        private void LoadSomeDocuments()
+        {
+            var reader = DirectoryReader.Open(dir);
+            for (int i = 0; i < 200; i++)
+            {
+                Document d = reader.Document(i);
+                var a = d.GetValues("text");
+                Console.WriteLine(a[0]);
+            }
+        }
         private void CountMessagesPerDay()
         {
             foreach(var kvp in messageTree)
             {
                 messagesPerDay.Add(kvp.Key,kvp.Value.Block.Count());
-            }
-            
+            }            
         }
         private void DataLoaded()
         {
@@ -262,6 +314,7 @@ namespace Chat_Corpora_Annotator
                 heatMapColors.Add(HeatMapColor(x,min,max));
             }
         }
+        
         private void FieldButtonHandler(object sender, EventArgs e)
         {
 
@@ -270,11 +323,8 @@ namespace Chat_Corpora_Annotator
             {
                 selectedFields = hf.SelectedFields;
                 SelectFieldMetadata();
-                hf.Close();
-                
+                hf.Close();               
             }
-
-
 
         }
 
@@ -285,9 +335,10 @@ namespace Chat_Corpora_Annotator
             DataLoaded dl = sender as DataLoaded;
             if (dl != null)
             {
-                PopulateDates();
-                DisplayData();
-
+                SetDateView();
+                //DisplayData();
+                //SetChatTable();
+                LoadSomeDocuments();
                 dl.Close();
             }
 
@@ -300,6 +351,7 @@ namespace Chat_Corpora_Annotator
             {
                 dateFieldKey = cm.dateFieldKey;
                 senderFieldKey = cm.senderFieldKey;
+                textFieldKey = cm.textFieldKey;
                 PopulateData();
                 cm.Close();
 
@@ -320,21 +372,45 @@ namespace Chat_Corpora_Annotator
             //cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
 
         }
-        private void PopulateDates()
+
+
+        public void SetDateView()
         {
-            foreach (var date in messageTree.Keys)
-            {
-                listBox1.Items.Add(date.ToShortDateString());
-            }
+            listView1.View = View.Details;
+            listView1.VirtualMode = true;
+            listView1.VirtualListSize = messageTree.Keys.Count;
+            RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.listView1_RetrieveVirtualItem);
+            listView1.RetrieveVirtualItem += handler;
+
+
         }
 
-        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void listView1_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-            ListBox lb = sender as ListBox;
-            DateTime index = DateTime.Parse(lb.SelectedItem.ToString());
-           int i = chatTable.IndexOf(messageTree[index].Block[0]);
+            int index = e.ItemIndex;
+            string date = messageTree.Keys.ElementAt<DateTime>(index).ToShortDateString();
+            e.Item = new ListViewItem(date);
+
+        }
+
+
+
+
+
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListView lw = sender as ListView;
+
+            ListView.SelectedIndexCollection index = listView1.SelectedIndices;
+            string date = listView1.Items[index[0]].SubItems[0].Text;
+            DateTime key = DateTime.Parse(date);
+
+            int i = chatTable.IndexOf(messageTree[key].Block[0]);
             var item = chatTable.GetItem(i);
+
             chatTable.SelectedItem = item;
+            chatTable.EnsureVisible(chatTable.GetItemCount() - 1);
             chatTable.EnsureVisible(i);
 
         }
@@ -353,6 +429,11 @@ namespace Chat_Corpora_Annotator
         {
 
             
+        }
+
+        private void chatTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

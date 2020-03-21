@@ -9,10 +9,12 @@ namespace Chat_Corpora_Annotator
     public class ChatMessage
     {
         private List<object> contents;
-
+        
         public List<object> Contents { get { return contents; } set { contents = value; } }
 
-        private string date;
+        private DateTime date;
+
+        public DateTime Date { get { return date; } }
 
         public ChatMessage()
         {
@@ -31,8 +33,9 @@ namespace Chat_Corpora_Annotator
             {
                 if (fields[i] == dateFieldKey && selectedFields.Contains(fields[i]))
                 {
-
-                    contents.Add(DateTime.Parse(data[i].ToString()));
+                    var temp = DateTime.Parse(data[i].ToString());
+                    contents.Add(temp);
+                    date = temp;
                 }
                 else if (selectedFields.Contains(fields[i]))
                 {
