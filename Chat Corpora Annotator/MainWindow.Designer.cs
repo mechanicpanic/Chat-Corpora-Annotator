@@ -31,11 +31,12 @@
             this.csvLoadButton = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.heatMapButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.dateView = new System.Windows.Forms.ListView();
             this.Day = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
+            this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,43 +65,44 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Plot";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.chartButton_Click);
             // 
-            // button3
+            // heatMapButton
             // 
-            this.button3.Location = new System.Drawing.Point(34, 135);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(136, 46);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Heatmap";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.heatMapButton.Location = new System.Drawing.Point(34, 135);
+            this.heatMapButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.heatMapButton.Name = "heatMapButton";
+            this.heatMapButton.Size = new System.Drawing.Size(136, 46);
+            this.heatMapButton.TabIndex = 5;
+            this.heatMapButton.Text = "Heatmap";
+            this.heatMapButton.UseVisualStyleBackColor = true;
+            this.heatMapButton.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button1
+            // searchButton
             // 
-            this.button1.Location = new System.Drawing.Point(33, 199);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 46);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.searchButton.Location = new System.Drawing.Point(33, 199);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(136, 46);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listView1
+            // dateView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Day});
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 263);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(188, 352);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            this.dateView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.dateView.HideSelection = false;
+            this.dateView.Location = new System.Drawing.Point(12, 275);
+            this.dateView.MultiSelect = false;
+            this.dateView.Name = "dateView";
+            this.dateView.Size = new System.Drawing.Size(188, 340);
+            this.dateView.TabIndex = 8;
+            this.dateView.UseCompatibleStateImageBehavior = false;
+            this.dateView.View = System.Windows.Forms.View.Details;
+            this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // Day
             // 
@@ -135,9 +137,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1235, 630);
             this.Controls.Add(this.chatTable);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.dateView);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.heatMapButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.csvLoadButton);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -153,11 +155,12 @@
         private System.Windows.Forms.Button csvLoadButton;
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button heatMapButton;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Day;
         private BrightIdeasSoftware.FastObjectListView chatTable;
+        private System.Windows.Forms.FolderBrowserDialog indexDialog;
     }
 }
 

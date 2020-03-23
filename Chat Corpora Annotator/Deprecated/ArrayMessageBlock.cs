@@ -7,7 +7,7 @@ using BrightIdeasSoftware;
 
 namespace Chat_Corpora_Annotator
 {
-    public class ChatMessageBlock: IComparable
+    public class ArrayMessageBlock: IComparable
     {
 
         private DateTime day;
@@ -25,7 +25,7 @@ namespace Chat_Corpora_Annotator
         public int SenderIndex { get { return senderIndex; } }
 
         
-        public ChatMessageBlock(DateTime day, List<string> fields)
+        public ArrayMessageBlock(DateTime day, List<string> fields)
         {
             this.day = day;
             this.fields = fields;
@@ -34,7 +34,7 @@ namespace Chat_Corpora_Annotator
         }
 
 
-        public ChatMessageBlock(List<ArrayMessage> messages, DateTime date)
+        public ArrayMessageBlock(List<ArrayMessage> messages, DateTime date)
         {
 
             this.day = date.Date;
@@ -65,7 +65,7 @@ namespace Chat_Corpora_Annotator
         {
             if (obj == null) return 1;
 
-            ChatMessageBlock otherMessageBlock = obj as ChatMessageBlock;
+            ArrayMessageBlock otherMessageBlock = obj as ArrayMessageBlock;
             if (otherMessageBlock != null)
             {
 

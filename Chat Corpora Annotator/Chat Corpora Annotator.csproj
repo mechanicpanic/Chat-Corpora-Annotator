@@ -66,6 +66,15 @@
     <Reference Include="Lucene.Net.Memory, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.Memory.4.8.0-beta00007\lib\net45\Lucene.Net.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net.Queries, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Queries.4.8.0-beta00007\lib\net45\Lucene.Net.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.QueryParser, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.QueryParser.4.8.0-beta00007\lib\net45\Lucene.Net.QueryParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Sandbox, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Sandbox.4.8.0-beta00007\lib\net45\Lucene.Net.Sandbox.dll</HintPath>
+    </Reference>
     <Reference Include="LumenWorks.Framework.IO, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
       <HintPath>..\packages\LumenWorksCsvReader.4.0.0\lib\net461\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
@@ -196,8 +205,8 @@
     <Compile Include="ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ArrayMessage.cs" />
-    <Compile Include="ChatMessageBlock.cs" />
+    <Compile Include="Deprecated\ArrayMessage.cs" />
+    <Compile Include="Deprecated\ArrayMessageBlock.cs" />
     <Compile Include="ColumnMetadata.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +218,13 @@
     </Compile>
     <Compile Include="DataLoaded.Designer.cs">
       <DependentUpon>DataLoaded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deprecated\DynamicMessageBlock.cs" />
+    <Compile Include="IndexLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IndexLoading.Designer.cs">
+      <DependentUpon>IndexLoading.cs</DependentUpon>
     </Compile>
     <Compile Include="MVPInterfaces.cs" />
     <Compile Include="DynamicMessage.cs" />
@@ -244,7 +260,7 @@
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VirtualBTree.cs" />
+    <Compile Include="Deprecated\VirtualBTree.cs" />
     <EmbeddedResource Include="ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="2DHeatmapForm.resx">
       <DependentUpon>2DHeatmapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IndexLoading.resx">
+      <DependentUpon>IndexLoading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

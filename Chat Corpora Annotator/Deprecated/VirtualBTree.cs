@@ -13,7 +13,7 @@ namespace Chat_Corpora_Annotator
 {
 	public class VirtualBLockTreeDataSource : AbstractVirtualListDataSource
 	{
-		public BTreeDictionary<DateTime,ChatMessageBlock> blockTree = new BTreeDictionary<DateTime, ChatMessageBlock>();
+		public BTreeDictionary<DateTime,ArrayMessageBlock> blockTree = new BTreeDictionary<DateTime, ArrayMessageBlock>();
 		
 		public Dictionary<ArrayMessage,int> messageIndexMap = new Dictionary<ArrayMessage,int>();
 		public Dictionary<int, ArrayMessage> indexMessageMap = new Dictionary<int,ArrayMessage>();
@@ -30,7 +30,7 @@ namespace Chat_Corpora_Annotator
 			
 			foreach (object modelObject in modelObjects)
 			{
-				ChatMessageBlock block = modelObject as ChatMessageBlock;
+				ArrayMessageBlock block = modelObject as ArrayMessageBlock;
 				if (block != null)
 					blockTree.Add(block.Day, block);
   
@@ -99,10 +99,10 @@ namespace Chat_Corpora_Annotator
 
 		public override void SetObjects(IEnumerable collection)
 		{
-			if (collection is BTreeDictionary<DateTime, ChatMessageBlock>)
+			if (collection is BTreeDictionary<DateTime, ArrayMessageBlock>)
 			{
 
-				this.blockTree = collection as BTreeDictionary<DateTime, ChatMessageBlock>;
+				this.blockTree = collection as BTreeDictionary<DateTime, ArrayMessageBlock>;
 
 				this.RebuildIndexMap();
 			}

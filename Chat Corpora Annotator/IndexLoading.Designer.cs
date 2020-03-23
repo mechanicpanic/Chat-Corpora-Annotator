@@ -1,6 +1,6 @@
 ﻿namespace Chat_Corpora_Annotator
 {
-    partial class LinearHeatmapForm
+    partial class IndexLoading
     {
         /// <summary>
         /// Required designer variable.
@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
-            // panel1
+            // progressBar1
             // 
-            this.panel1.Location = new System.Drawing.Point(13, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1198, 129);
-            this.panel1.TabIndex = 0;
+            this.progressBar1.Location = new System.Drawing.Point(13, 37);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(775, 23);
+            this.progressBar1.TabIndex = 0;
             // 
-            // LinearHeatmapForm
+            // IndexLoading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1223, 163);
-            this.Controls.Add(this.panel1);
-            this.Name = "LinearHeatmapForm";
-            this.Text = "Heatmap";
+            this.ClientSize = new System.Drawing.Size(800, 100);
+            this.Controls.Add(this.progressBar1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "IndexLoading";
+            this.Text = "Indexing dataset...";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Chat_Corpora_Annotator
 {
-    partial class Search
+    partial class SearchForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,43 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.searchTable = new BrightIdeasSoftware.FastObjectListView();
+            this.searchBox = new System.Windows.Forms.RichTextBox();
+            this.findButton = new System.Windows.Forms.Button();
             this.fastObjectListView2 = new BrightIdeasSoftware.FastObjectListView();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView2)).BeginInit();
             this.SuspendLayout();
             // 
-            // fastObjectListView1
+            // searchTable
             // 
-            this.fastObjectListView1.CellEditUseWholeCell = false;
-            this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(256, 12);
-            this.fastObjectListView1.Name = "fastObjectListView1";
-            this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(642, 390);
-            this.fastObjectListView1.TabIndex = 1;
-            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView1.VirtualMode = true;
+            this.searchTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchTable.CellEditUseWholeCell = false;
+            this.searchTable.HideSelection = false;
+            this.searchTable.Location = new System.Drawing.Point(256, 12);
+            this.searchTable.Name = "searchTable";
+            this.searchTable.RowHeight = 48;
+            this.searchTable.ShowGroups = false;
+            this.searchTable.Size = new System.Drawing.Size(642, 390);
+            this.searchTable.TabIndex = 1;
+            this.searchTable.UseCompatibleStateImageBehavior = false;
+            this.searchTable.View = System.Windows.Forms.View.Details;
+            this.searchTable.VirtualMode = true;
             // 
-            // richTextBox1
+            // searchBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(237, 75);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.searchBox.Location = new System.Drawing.Point(12, 12);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(237, 75);
+            this.searchBox.TabIndex = 2;
+            this.searchBox.Text = "";
             // 
-            // button1
+            // findButton
             // 
-            this.button1.Location = new System.Drawing.Point(13, 94);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(237, 42);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.findButton.Location = new System.Drawing.Point(13, 94);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(237, 42);
+            this.findButton.TabIndex = 3;
+            this.findButton.Text = "Find";
+            this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // fastObjectListView2
             // 
@@ -81,18 +86,19 @@
             this.fastObjectListView2.View = System.Windows.Forms.View.Details;
             this.fastObjectListView2.VirtualMode = true;
             // 
-            // Search
+            // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 414);
             this.Controls.Add(this.fastObjectListView2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.fastObjectListView1);
-            this.Name = "Search";
+            this.Controls.Add(this.findButton);
+            this.Controls.Add(this.searchBox);
+            this.Controls.Add(this.searchTable);
+            this.Name = "SearchForm";
             this.Text = "SearchForm";
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SearchForm_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView2)).EndInit();
             this.ResumeLayout(false);
 
@@ -100,9 +106,9 @@
 
         #endregion
 
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private BrightIdeasSoftware.FastObjectListView searchTable;
+        private System.Windows.Forms.RichTextBox searchBox;
+        private System.Windows.Forms.Button findButton;
         private BrightIdeasSoftware.FastObjectListView fastObjectListView2;
     }
 }
