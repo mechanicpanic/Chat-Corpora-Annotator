@@ -196,7 +196,7 @@
     <Compile Include="ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChatMessage.cs" />
+    <Compile Include="ArrayMessage.cs" />
     <Compile Include="ChatMessageBlock.cs" />
     <Compile Include="ColumnMetadata.cs">
       <SubType>Form</SubType>

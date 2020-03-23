@@ -109,16 +109,25 @@
             // 
             // chatTable
             // 
+            this.chatTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.CellEditUseWholeCell = false;
+            this.chatTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chatTable.FullRowSelect = true;
+            this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(229, 14);
+            this.chatTable.Location = new System.Drawing.Point(221, 11);
             this.chatTable.Name = "chatTable";
+            this.chatTable.RowHeight = 48;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(994, 604);
+            this.chatTable.Size = new System.Drawing.Size(1000, 600);
             this.chatTable.TabIndex = 9;
+            this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
+            this.chatTable.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.ChatTable_FormatCell);
             // 
             // MainWindow
             // 

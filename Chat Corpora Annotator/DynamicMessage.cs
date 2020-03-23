@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Wintellect.PowerCollections;
 using BrightIdeasSoftware;
+using Lucene.Net.Documents;
 
 namespace Chat_Corpora_Annotator
 {
@@ -79,6 +80,31 @@ namespace Chat_Corpora_Annotator
                 }
             }
 
+        }
+
+        public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey)
+        {
+            if(data.Count != selectedFields.Count)
+            {
+                throw new Exception("Wrong array size");
+
+            }
+            else
+            {
+                this.contents = new Dictionary<string, object>();
+                for(int i = 0; i < data.Count;i++)
+                {
+                    if(selectedFields[i] == dateFieldKey)
+                    {
+                        contents.Add(selectedFields[i], DateTools.StringToDate(data[i]));
+                        
+                    }
+                    else
+                    {
+                        contents.Add(selectedFields[i], data[i]);
+                    }
+                }
+            }
         }
 
         public int CompareTo(object obj)

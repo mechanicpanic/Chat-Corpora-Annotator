@@ -15,8 +15,8 @@ namespace Chat_Corpora_Annotator
 	{
 		public BTreeDictionary<DateTime,ChatMessageBlock> blockTree = new BTreeDictionary<DateTime, ChatMessageBlock>();
 		
-		public Dictionary<ChatMessage,int> messageIndexMap = new Dictionary<ChatMessage,int>();
-		public Dictionary<int, ChatMessage> indexMessageMap = new Dictionary<int,ChatMessage>();
+		public Dictionary<ArrayMessage,int> messageIndexMap = new Dictionary<ArrayMessage,int>();
+		public Dictionary<int, ArrayMessage> indexMessageMap = new Dictionary<int,ArrayMessage>();
 		public Dictionary<int,List<int>> messageCounts = new Dictionary<int,List<int>>();
 		public VirtualBLockTreeDataSource(VirtualObjectListView listView)
 			: base(listView)
@@ -73,7 +73,7 @@ namespace Chat_Corpora_Annotator
 
 		public int GetObjectIndex(object model)
 		{
-			ChatMessage message = model as ChatMessage;
+			ArrayMessage message = model as ArrayMessage;
 			return messageIndexMap[message];
 		}
 

@@ -13,8 +13,8 @@ namespace Chat_Corpora_Annotator
         private DateTime day;
         public DateTime Day { get { return day; } }
 
-        private List<ChatMessage> block;
-        public List<ChatMessage> Block { get { return block; } }
+        private List<ArrayMessage> block;
+        public List<ArrayMessage> Block { get { return block; } }
 
         private List<string> fields;
 
@@ -29,16 +29,16 @@ namespace Chat_Corpora_Annotator
         {
             this.day = day;
             this.fields = fields;
-            block = new List<ChatMessage>();
+            block = new List<ArrayMessage>();
             
         }
 
 
-        public ChatMessageBlock(List<ChatMessage> messages, DateTime date)
+        public ChatMessageBlock(List<ArrayMessage> messages, DateTime date)
         {
 
             this.day = date.Date;
-            block = new List<ChatMessage>();
+            block = new List<ArrayMessage>();
             foreach (var msg in messages)
             {
                 block.Add(msg);
@@ -49,9 +49,9 @@ namespace Chat_Corpora_Annotator
 
 
 
-        public void AddMessage(ChatMessage message)
+        public void AddMessage(ArrayMessage message)
         {
-            DateTime temp = (DateTime)message.Contents[dateIndex];
+            DateTime temp = DateTime.Parse(message.Contents[dateIndex]);
             if (temp.Date == day)
             {
                 this.block.Add(message);

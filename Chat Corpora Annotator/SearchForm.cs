@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Chat_Corpora_Annotator
 {
-    public partial class SearchForm : Form
+    public partial class Search : Form
     {
-        public SearchForm()
+        public Search()
         {
             InitializeComponent();
         }
