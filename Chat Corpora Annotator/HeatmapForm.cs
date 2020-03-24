@@ -16,7 +16,7 @@ namespace Chat_Corpora_Annotator
         List<Color> colors;
         List<RectangleF> rectangles = new List<RectangleF>();
 
-        
+
         public LinearHeatmapForm()
         {
             InitializeComponent();
@@ -29,13 +29,18 @@ namespace Chat_Corpora_Annotator
 
             width = panel1.Width / colors.Count;
             height = panel1.Height;
+
+
             rectangleSize = new SizeF(width, height);
-            rectangleLocation = new Point(13, 13);
+            rectangleLocation = new Point(0, 0);
             this.colors = colors;
 
-
-
         }
+    
+
+
+
+        
         public void DrawHeatMap()
         {
             for (int i = 0; i < colors.Count; i++)

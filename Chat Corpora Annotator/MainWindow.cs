@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+
 using Wintellect.PowerCollections;
 using CSharpTest.Net.Collections;
 using SoftCircuits.CsvParser;
@@ -36,7 +37,7 @@ namespace Chat_Corpora_Annotator
 
 		private Random rnd = new Random();
 
-		private Set<string> userKeys = new Set<string>();
+		private HashSet<string> userKeys = new HashSet<string>();
 		private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
 	   
@@ -273,7 +274,8 @@ namespace Chat_Corpora_Annotator
 						else
 						{
 							int temp = messagesPerDay[day];
-							messagesPerDay.TryUpdate(day, temp++);
+							temp++;
+							messagesPerDay.TryUpdate(day, temp);
 						}
 						
 						Document document = new Document();
@@ -333,7 +335,7 @@ namespace Chat_Corpora_Annotator
 			double val = (value - min) / (max - min);
 			int r = Convert.ToByte(255 * val);
 			int g = Convert.ToByte(255 * (1 - val));
-			int b = 0;
+			int b = 10;
 
 			return Color.FromArgb(255, r, g, b);
 		}
@@ -344,10 +346,43 @@ namespace Chat_Corpora_Annotator
 			double max = messagesPerDay.Values.Max();
 			double min = messagesPerDay.Values.Min();
 
-			foreach (var date in messagesPerDay.Keys)
+			double temp = 998 / messagesPerDay.Keys.Count;
+			if (temp >= 10.0)
 			{
-				double x = messagesPerDay[date];
-				heatMapColors.Add(HeatMapColor(x, min, max));
+				foreach (var date in messagesPerDay.Keys)
+				{
+					double x = messagesPerDay[date];
+					heatMapColors.Add(HeatMapColor(x, min, max));
+				}
+			}
+			else
+			{
+				DateTime[] days = new DateTime[messagesPerDay.Keys.Count];
+				messagesPerDay.Keys.CopyTo(days, 0);
+
+				double block =  (messagesPerDay.Keys.Count * 10.0) / 998.0;
+
+				int blockDayCount = (int) Math.Floor(block);
+				List<double> newCounts = new List<double>();
+
+				for(int i = 0; i < days.Length; i++)
+				{
+					double x = 0;
+					for(int j = 0; j < blockDayCount; j++)
+					{
+						x += messagesPerDay[days[i]];
+					}
+					newCounts.Add(x);
+				}
+
+				var newmax = newCounts.Max();
+				var newmin = newCounts.Min();
+
+				foreach (var count in newCounts)
+				{
+					heatMapColors.Add(HeatMapColor(count, newmin, newmax));
+				}
+
 			}
 		}
 
@@ -443,7 +478,7 @@ namespace Chat_Corpora_Annotator
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Broken!");
+			//MessageBox.Show("Broken!");
 			PopulateHeatmap();
 			LinearHeatmapForm swf = new LinearHeatmapForm();
 			swf.InitializeHeatMap(heatMapColors);

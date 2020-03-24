@@ -33,18 +33,22 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(13, 13);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1198, 129);
+            this.panel1.Size = new System.Drawing.Size(1330, 163);
             this.panel1.TabIndex = 0;
             // 
             // LinearHeatmapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1223, 163);
+            this.ClientSize = new System.Drawing.Size(1330, 163);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LinearHeatmapForm";
+            this.ShowIcon = false;
             this.Text = "Heatmap";
             this.ResumeLayout(false);
 
