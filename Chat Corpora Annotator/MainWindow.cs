@@ -130,14 +130,36 @@ namespace Chat_Corpora_Annotator
 			}
 			chatTable.AllColumns.AddRange(columns);
 			chatTable.RebuildColumns();
-			
 
+
+			FormatColumns();
+			
+		}
+
+		private void FormatColumns()
+		{
 			foreach (var cl in chatTable.AllColumns)
 			{
-				cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+				if (cl.Text != textFieldKey)
+				{
+					cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+				}
+				else
+				{
+					cl.FillsFreeSpace = true;
+				}
 			}
 			chatTable.FormatCell += ChatTable_FormatCell;
 			chatTable.Refresh();
+
+		}
+		private void PopulateSenderColors()
+		{
+			foreach (var user in userKeys)
+			{
+				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+				userColors.Add(user, tempColor);
+			}
 		}
 		private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
 		{
@@ -314,22 +336,87 @@ namespace Chat_Corpora_Annotator
 
 			}
 		}
-
-		#endregion
 		private void DataLoaded()
 		{
 			DataLoaded dl = new DataLoaded();
 			dl.Show();
-			dl.OKButtonClicked += new EventHandler(OKButtonHandler);
+			dl.OKButtonClicked += new EventHandler(DataLoadedButtonHandler);
 		}
-		private void PopulateSenderColors()
+
+		#endregion
+
+		#region dialogue buttons
+		private void FieldButtonHandler(object sender, EventArgs e)
 		{
-			foreach (var user in userKeys)
+
+			HeaderForm hf = sender as HeaderForm;
+			if (hf != null)
 			{
-				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-				userColors.Add(user, tempColor);
+				selectedFields = hf.SelectedFields;
+				SelectFieldMetadata();
+				hf.Close();
 			}
+
 		}
+
+		private void DataLoadedButtonHandler(object sender, EventArgs e)
+		{
+			DataLoaded dl = sender as DataLoaded;
+			if (dl != null)
+			{
+				SetDateView();
+				LoadSomeDocuments(50);
+				DisplayData();
+				dl.Close();
+			}
+
+		}
+
+		private void ColumnButtonHandler(object sender, EventArgs e)
+		{
+			ColumnMetadata cm = sender as ColumnMetadata;
+			if (cm != null)
+			{
+				dateFieldKey = cm.dateFieldKey;
+				senderFieldKey = cm.senderFieldKey;
+				textFieldKey = cm.textFieldKey;
+				PopulateIndex();
+				cm.Close();
+
+			}
+
+		}
+
+		#endregion
+
+		#region main window buttons
+
+		private void chartButton_Click(object sender, EventArgs e)
+		{
+			ChartForm cf = new ChartForm();
+			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+
+		}
+
+		private void heatMapButton_Click(object sender, EventArgs e)
+		{
+			//MessageBox.Show("Broken!");
+			PopulateHeatmap();
+			LinearHeatmapForm swf = new LinearHeatmapForm();
+			swf.InitializeHeatMap(heatMapColors);
+			swf.Show();
+			swf.DrawHeatMap();
+			swf.Draw();
+		}
+
+		private void searchButton_Click(object sender, EventArgs e)
+		{
+			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath);
+			sf.Show();
+		}
+		#endregion
+
+		#region heatmap
 		public Color HeatMapColor(double value, double min, double max)
 		{
 			double val = (value - min) / (max - min);
@@ -360,15 +447,15 @@ namespace Chat_Corpora_Annotator
 				DateTime[] days = new DateTime[messagesPerDay.Keys.Count];
 				messagesPerDay.Keys.CopyTo(days, 0);
 
-				double block =  (messagesPerDay.Keys.Count * 10.0) / 998.0;
+				double block = (messagesPerDay.Keys.Count * 10.0) / 998.0;
 
-				int blockDayCount = (int) Math.Floor(block);
+				int blockDayCount = (int)Math.Floor(block);
 				List<double> newCounts = new List<double>();
 
-				for(int i = 0; i < days.Length; i++)
+				for (int i = 0; i < days.Length; i++)
 				{
 					double x = 0;
-					for(int j = 0; j < blockDayCount; j++)
+					for (int j = 0; j < blockDayCount; j++)
 					{
 						x += messagesPerDay[days[i]];
 					}
@@ -385,60 +472,9 @@ namespace Chat_Corpora_Annotator
 
 			}
 		}
+		#endregion
 
-		private void FieldButtonHandler(object sender, EventArgs e)
-		{
-
-			HeaderForm hf = sender as HeaderForm;
-			if (hf != null)
-			{
-				selectedFields = hf.SelectedFields;
-				SelectFieldMetadata();
-				hf.Close();
-			}
-
-		}
-
-
-
-		private void OKButtonHandler(object sender, EventArgs e)
-		{
-			DataLoaded dl = sender as DataLoaded;
-			if (dl != null)
-			{
-				SetDateView();
-				LoadSomeDocuments(50);
-				DisplayData();
-				dl.Close();
-			}
-
-		}
-
-		private void ColumnButtonHandler(object sender, EventArgs e)
-		{
-			ColumnMetadata cm = sender as ColumnMetadata;
-			if (cm != null)
-			{
-				dateFieldKey = cm.dateFieldKey;
-				senderFieldKey = cm.senderFieldKey;
-				textFieldKey = cm.textFieldKey;
-				PopulateIndex();
-				cm.Close();
-
-			}
-
-		}
-
-
-
-		private void chartButton_Click(object sender, EventArgs e)
-		{
-			ChartForm cf = new ChartForm();
-			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
-
-		}
-
-
+		#region date view
 		public void SetDateView()
 		{
 			dateView.View = View.Details;
@@ -459,7 +495,7 @@ namespace Chat_Corpora_Annotator
 		}
 
 
-		private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+		private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			//ListView lw = sender as ListView;
 
@@ -476,23 +512,11 @@ namespace Chat_Corpora_Annotator
 
 		}
 
-		private void button3_Click(object sender, EventArgs e)
-		{
-			//MessageBox.Show("Broken!");
-			PopulateHeatmap();
-			LinearHeatmapForm swf = new LinearHeatmapForm();
-			swf.InitializeHeatMap(heatMapColors);
-			swf.Show();
-			swf.DrawHeatMap();
-			swf.Draw();
-		}
+		#endregion
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			
-			
-			SearchForm sf = new SearchForm(selectedFields,textFieldKey,dateFieldKey,indexPath);
-			sf.Show();
+
 		}
 	}
 }

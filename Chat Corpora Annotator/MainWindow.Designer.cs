@@ -37,17 +37,24 @@
             this.Day = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // csvLoadButton
             // 
-            this.csvLoadButton.Location = new System.Drawing.Point(34, 14);
+            this.csvLoadButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.csvLoadButton.FlatAppearance.BorderSize = 0;
+            this.csvLoadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.csvLoadButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.csvLoadButton.Location = new System.Drawing.Point(0, 114);
             this.csvLoadButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.csvLoadButton.Name = "csvLoadButton";
-            this.csvLoadButton.Size = new System.Drawing.Size(136, 46);
+            this.csvLoadButton.Size = new System.Drawing.Size(200, 46);
             this.csvLoadButton.TabIndex = 0;
             this.csvLoadButton.Text = "load .csv";
+            this.csvLoadButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.csvLoadButton.UseVisualStyleBackColor = true;
             this.csvLoadButton.Click += new System.EventHandler(this.csvLoadButton_Click);
             // 
@@ -58,72 +65,97 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(33, 75);
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(0, 212);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 46);
+            this.button2.Size = new System.Drawing.Size(200, 46);
             this.button2.TabIndex = 3;
             this.button2.Text = "Plot";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.chartButton_Click);
             // 
             // heatMapButton
             // 
-            this.heatMapButton.Location = new System.Drawing.Point(34, 135);
+            this.heatMapButton.FlatAppearance.BorderSize = 0;
+            this.heatMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.heatMapButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.heatMapButton.Location = new System.Drawing.Point(0, 162);
             this.heatMapButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.heatMapButton.Name = "heatMapButton";
-            this.heatMapButton.Size = new System.Drawing.Size(136, 46);
+            this.heatMapButton.Size = new System.Drawing.Size(200, 46);
             this.heatMapButton.TabIndex = 5;
             this.heatMapButton.Text = "Heatmap";
+            this.heatMapButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.heatMapButton.UseVisualStyleBackColor = true;
-            this.heatMapButton.Click += new System.EventHandler(this.button3_Click);
+            this.heatMapButton.Click += new System.EventHandler(this.heatMapButton_Click);
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(33, 199);
+            this.searchButton.FlatAppearance.BorderSize = 0;
+            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.searchButton.Location = new System.Drawing.Point(0, 262);
             this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(136, 46);
+            this.searchButton.Size = new System.Drawing.Size(200, 46);
             this.searchButton.TabIndex = 7;
             this.searchButton.Text = "Search";
+            this.searchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.button1_Click);
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // dateView
             // 
+            this.dateView.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.dateView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateView.BackColor = System.Drawing.Color.White;
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Day});
-            this.dateView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(12, 275);
+            this.dateView.Location = new System.Drawing.Point(1225, 11);
+            this.dateView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateView.MultiSelect = false;
             this.dateView.Name = "dateView";
-            this.dateView.Size = new System.Drawing.Size(188, 340);
+            this.dateView.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dateView.RightToLeftLayout = true;
+            this.dateView.Size = new System.Drawing.Size(157, 588);
             this.dateView.TabIndex = 8;
+            this.dateView.TabStop = false;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
-            this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
             // 
             // Day
             // 
             this.Day.Text = "Days";
-            this.Day.Width = 184;
+            this.Day.Width = 80;
             // 
             // chatTable
             // 
             this.chatTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.chatTable.BackColor = System.Drawing.Color.White;
             this.chatTable.CellEditUseWholeCell = false;
-            this.chatTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chatTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(221, 11);
+            this.chatTable.Location = new System.Drawing.Point(200, 11);
+            this.chatTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chatTable.Name = "chatTable";
-            this.chatTable.RowHeight = 48;
+            this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1000, 600);
+            this.chatTable.Size = new System.Drawing.Size(1028, 588);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -131,22 +163,37 @@
             this.chatTable.VirtualMode = true;
             this.chatTable.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.ChatTable_FormatCell);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.Lavender;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.searchButton);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.heatMapButton);
+            this.panel1.Controls.Add(this.csvLoadButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 610);
+            this.panel1.TabIndex = 10;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 630);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(1405, 610);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.chatTable);
             this.Controls.Add(this.dateView);
-            this.Controls.Add(this.searchButton);
-            this.Controls.Add(this.heatMapButton);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.csvLoadButton);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -161,6 +208,7 @@
         private System.Windows.Forms.ColumnHeader Day;
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.FolderBrowserDialog indexDialog;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
