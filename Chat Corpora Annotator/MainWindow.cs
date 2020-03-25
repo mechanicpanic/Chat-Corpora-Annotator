@@ -19,7 +19,7 @@ using Lucene.Net.Store;
 using Lucene.Net.Index;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
-
+using System.Reflection;
 
 namespace Chat_Corpora_Annotator
 {
@@ -515,6 +515,7 @@ namespace Chat_Corpora_Annotator
 			dateView.View = View.Details;
 			dateView.VirtualMode = true;
 			dateView.VirtualListSize = messagesPerDay.Keys.Count;
+			dateView.DoubleBuffering(true);
 			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
 			dateView.RetrieveVirtualItem += handler;
 
@@ -576,6 +577,7 @@ namespace Chat_Corpora_Annotator
 			LoadSomeDocuments(100);
 			chatTable.UpdateObjects(messages);
 		}
+
 	}
 }
 

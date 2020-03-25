@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.dateView = new System.Windows.Forms.ListView();
+            this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -177,6 +178,8 @@
             // dateView
             // 
             this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Days});
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.HideSelection = false;
             this.dateView.Location = new System.Drawing.Point(1228, 11);
@@ -186,6 +189,11 @@
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
             this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
+            // 
+            // Days
+            // 
+            this.Days.Text = "Active dates";
+            this.Days.Width = 115;
             // 
             // MainWindow
             // 
@@ -220,6 +228,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loadMoreButton;
         private System.Windows.Forms.ListView dateView;
+        private System.Windows.Forms.ColumnHeader Days;
     }
 }
 

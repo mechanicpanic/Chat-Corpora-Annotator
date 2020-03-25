@@ -220,6 +220,7 @@
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\DynamicMessageBlock.cs" />
+    <Compile Include="DoubleBuffering.cs" />
     <Compile Include="IndexLoading.cs">
       <SubType>Form</SubType>
     </Compile>
