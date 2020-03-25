@@ -7,6 +7,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 using Wintellect.PowerCollections;
 using CSharpTest.Net.Collections;
@@ -43,7 +45,7 @@ namespace Chat_Corpora_Annotator
 	   
 		private List<DynamicMessage> messages = new List<DynamicMessage>();
 		private BTreeDictionary<DateTime, int> messagesPerDay = new BTreeDictionary<DateTime, int>();
-
+		//private ConcurrentDictionary<DateTime,int> messagesPerDay = new ConcurrentDictionary<DateTime,int>();
   
 		List<Color> heatMapColors = new List<Color>();
 	   
@@ -56,9 +58,11 @@ namespace Chat_Corpora_Annotator
 		StandardAnalyzer analyzer;
 		#endregion
 
+		
 		public MainWindow()
 		{
 			InitializeComponent();
+			
 
 		}
 		private void MainWindow_Load(object sender, EventArgs e)
@@ -84,6 +88,7 @@ namespace Chat_Corpora_Annotator
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)
 		{
 			csvPath = csvDialog.FileName;
+			
 			SelectIndexFolder();
 
 		}
@@ -190,6 +195,8 @@ namespace Chat_Corpora_Annotator
 			}
 
 		}
+
+
 		#endregion
 
 		#region header 
@@ -233,8 +240,6 @@ namespace Chat_Corpora_Annotator
 			{
 				dir = FSDirectory.Open(indexPath);
 
-
-
 				//create an analyzer to process the text
 				analyzer = new StandardAnalyzer(AppLuceneVersion);
 
@@ -264,7 +269,7 @@ namespace Chat_Corpora_Annotator
 						count++;
 					}
 				}
-
+				label1.Text = count.ToString() + " messages";
 				DateTime date;
 
 				//TODO: Redesign this urgently.
@@ -277,53 +282,55 @@ namespace Chat_Corpora_Annotator
 				using (var csv = new CsvReader(csvPath))
 				{
 					csv.ReadRow(ref row); //header read;
-					
+
 
 					while (csv.ReadRow(ref row))
-					{
-						ArrayMessage message = new ArrayMessage(row, allFields, selectedFields, dateFieldKey);
+					//Parallel.For(1, count, j =>
+					 {
+						 csv.ReadRow(ref row);
+						 ArrayMessage message = new ArrayMessage(row, allFields, selectedFields, dateFieldKey);
 
 
-						date = DateTime.Parse(row[dateIndex]);
-						userKeys.Add(row[senderIndex]);
+						 date = DateTime.Parse(row[dateIndex]);
+						 userKeys.Add(row[senderIndex]);
 
 
-						var day = date.Date;
-						if (!messagesPerDay.Keys.Contains(day))
-						{
-							messagesPerDay.Add(day, 1);
-						}
-						else
-						{
-							int temp = messagesPerDay[day];
-							temp++;
-							messagesPerDay.TryUpdate(day, temp);
-						}
-						
-						Document document = new Document();
+						 var day = date.Date;
+						 if (!messagesPerDay.Keys.Contains(day))
+						 {
+							 messagesPerDay.Add(day, 1);
+						 }
+						 else
+						 {
+							 int temp = messagesPerDay[day];
+							 temp++;
+							 messagesPerDay.TryUpdate(day, temp);
+						 }
 
-						for (int i = 0; i < selectedFields.Count; i++)
-						{
-							int textindex = Array.IndexOf(selectedFields.ToArray(), textFieldKey);
-							int dateindex = Array.IndexOf(selectedFields.ToArray(), dateFieldKey);
-							if (i != textindex && i !=dateindex)
-							{
-								document.Add(new StringField(selectedFields[i], message.Contents[i], Field.Store.YES));
-							}
-							else if(i == textindex)
-							{
-								document.Add(new TextField(selectedFields[i], message.Contents[i], Field.Store.YES));
-							}
-							else
-							{
-								var temp = DateTools.DateToString(date, DateTools.Resolution.MINUTE);
-								document.Add(new StringField(selectedFields[i],temp, Field.Store.YES));
-							}
-						}
+						 Document document = new Document();
 
-						writer.AddDocument(document);
+						 for (int i = 0; i < selectedFields.Count; i++)
+						 {
+							 int textindex = Array.IndexOf(selectedFields.ToArray(), textFieldKey);
+							 int dateindex = Array.IndexOf(selectedFields.ToArray(), dateFieldKey);
+							 if (i != textindex && i != dateindex)
+							 {
+								 document.Add(new StringField(selectedFields[i], message.Contents[i], Field.Store.YES));
+							 }
+							 else if (i == textindex)
+							 {
+								 document.Add(new TextField(selectedFields[i], message.Contents[i], Field.Store.YES));
+							 }
+							 else
+							 {
+								 var temp = DateTools.DateToString(date, DateTools.Resolution.MINUTE);
+								 document.Add(new StringField(selectedFields[i], temp, Field.Store.YES));
+							 }
+						 }
 
-					}
+						 writer.AddDocument(document);
+
+					 }
 					writer.Commit();
 					writer.Flush(triggerMerge: false, applyAllDeletes: false);
 					writer.Dispose();
@@ -445,29 +452,54 @@ namespace Chat_Corpora_Annotator
 			else
 			{
 				DateTime[] days = new DateTime[messagesPerDay.Keys.Count];
+				
 				messagesPerDay.Keys.CopyTo(days, 0);
+				//Array.Sort(days);
 
-				double block = (messagesPerDay.Keys.Count * 10.0) / 998.0;
+				double block = (messagesPerDay.Keys.Count / 998.0) * 10.0;
 
 				int blockDayCount = (int)Math.Floor(block);
 				List<double> newCounts = new List<double>();
-
-				for (int i = 0; i < days.Length; i++)
+				double x = 0;
+				int count = 0;
+				int index = 0;
+				while(index < days.Length)
 				{
-					double x = 0;
-					for (int j = 0; j < blockDayCount; j++)
+					if (days.Length - index > blockDayCount)
 					{
-						x += messagesPerDay[days[i]];
+						while (count < blockDayCount)
+						{
+							x += messagesPerDay[days[index]];
+							index++;
+							count++;
+						}
+						if (count == blockDayCount)
+						{
+							x += messagesPerDay[days[index]];
+							newCounts.Add(x);
+							count = 0;
+							x = 0;
+							index++;
+						}
 					}
-					newCounts.Add(x);
+					else
+					{
+						x += messagesPerDay[days[index]];
+						index++;
+						if(index == days.Length - 1)
+						{
+							newCounts.Add(x);
+						}
+					}
+					
 				}
 
 				var newmax = newCounts.Max();
 				var newmin = newCounts.Min();
 
-				foreach (var count in newCounts)
+				foreach (var cc in newCounts)
 				{
-					heatMapColors.Add(HeatMapColor(count, newmin, newmax));
+					heatMapColors.Add(HeatMapColor(cc, newmin, newmax));
 				}
 
 			}
@@ -497,18 +529,35 @@ namespace Chat_Corpora_Annotator
 
 		private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			//ListView lw = sender as ListView;
+			ListView lw = sender as ListView;
 
-			//ListView.SelectedIndexCollection index = listView1.SelectedIndices;
-			//string date = listView1.Items[index[0]].SubItems[0].Text;
-			//DateTime key = DateTime.Parse(date);
+			ListView.SelectedIndexCollection index = dateView.SelectedIndices;
+			string date = dateView.Items[index[0]].SubItems[0].Text;
+			DateTime key = DateTime.Parse(date);
 
-			//int i = chatTable.IndexOf(message[key].Block[0]);
-			//var item = chatTable.GetItem(i);
+			int i = -1;
+			//int i = chatTable.IndexOf(messages[key].Block[0]);
+			foreach (var message in messages)
+			{
+				DateTime temp = (DateTime)message.contents[dateFieldKey];
+				if(temp.Date == key)
+				{
+					i = chatTable.IndexOf(message);
+					break;
+				}
 
-			//chatTable.SelectedItem = item;
-			//chatTable.EnsureVisible(chatTable.GetItemCount() - 1);
-			//chatTable.EnsureVisible(i);
+			}
+			if (i != -1)
+			{
+				var item = chatTable.GetItem(i);
+				chatTable.SelectedItem = item;
+				chatTable.EnsureVisible(chatTable.GetItemCount() - 1);
+				chatTable.EnsureVisible(i);
+			}
+			else
+			{
+				MessageBox.Show("Broken!");
+			}
 
 		}
 
@@ -517,6 +566,12 @@ namespace Chat_Corpora_Annotator
 		private void button1_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void loadMoreButton_Click(object sender, EventArgs e)
+		{
+			LoadSomeDocuments(100);
+			chatTable.UpdateObjects(messages);
 		}
 	}
 }

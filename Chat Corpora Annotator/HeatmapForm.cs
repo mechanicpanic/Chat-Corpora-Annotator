@@ -77,6 +77,9 @@ namespace Chat_Corpora_Annotator
 
         }
 
+        private void panel1_Paint_1(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }

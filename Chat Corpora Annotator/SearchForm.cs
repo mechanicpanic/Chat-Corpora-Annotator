@@ -95,7 +95,14 @@ namespace Chat_Corpora_Annotator
             searchTable.AllColumns.AddRange(columns);
             foreach(var cl in searchTable.AllColumns)
             {
-                cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                if (cl.Text != textFieldKey)
+                {
+                    cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
+                else
+                {
+                    cl.FillsFreeSpace = true;
+                }
             }
             searchTable.RebuildColumns();
         }
