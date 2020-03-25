@@ -515,7 +515,7 @@ namespace Chat_Corpora_Annotator
 			dateView.View = View.Details;
 			dateView.VirtualMode = true;
 			dateView.VirtualListSize = messagesPerDay.Keys.Count;
-			dateView.DoubleBuffering(true);
+			//dateView.DoubleBuffering(true);
 			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
 			dateView.RetrieveVirtualItem += handler;
 
