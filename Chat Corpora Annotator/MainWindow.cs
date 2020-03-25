@@ -54,6 +54,8 @@ namespace Chat_Corpora_Annotator
 		FSDirectory dir;
 		IndexWriterConfig indexConfig;
 		IndexWriter writer;
+		DirectoryReader reader;
+		int readerIndex = 0;
 
 		StandardAnalyzer analyzer;
 		#endregion
@@ -177,9 +179,9 @@ namespace Chat_Corpora_Annotator
 
 		private void LoadSomeDocuments(int n)
 		{
-			var reader = DirectoryReader.Open(dir);
 
-			for (int i = 0; i < n; i++)
+			
+			for (int i = readerIndex; i < n+readerIndex; i++)
 			{
 				List<string> temp = new List<string>();
 				var document = reader.Document(i);
@@ -188,9 +190,9 @@ namespace Chat_Corpora_Annotator
 
 					temp.Add(document.GetField(field).GetStringValue());
 				}
-				DynamicMessage succ = new DynamicMessage(temp, selectedFields, dateFieldKey);
-				messages.Add(succ);
-
+				DynamicMessage message = new DynamicMessage(temp, selectedFields, dateFieldKey);
+				messages.Add(message);
+				readerIndex = n;
 
 			}
 
@@ -338,6 +340,7 @@ namespace Chat_Corpora_Annotator
 
 				
 				DataLoaded();
+				reader = DirectoryReader.Open(dir);
 
 
 
