@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 
 namespace Chat_Corpora_Annotator
 {
@@ -15,21 +16,23 @@ namespace Chat_Corpora_Annotator
         }
         public void ShowFields(string[] fields)
         {
-            csvListBox.Items.AddRange(fields);
+            foreach (var field in fields)
+            {
+                var item = new ListViewItem(field);
+                //item.SubItems.Add(field);
+                listView1.Items.Add(item);
+            }
         }
-        public void UpdateLabel(string filename)
-        {
-            label1.Text = filename + " columns:";
-        }
+
 
 
         private void fieldButton_Click(object sender, EventArgs e)
         {
-            foreach (var item in selectedListBox.Items)
-            {
-                SelectedFields.Add(item.ToString());
-            }
-            OnFieldButtonClicked(null);
+            //foreach (var item in selectedListBox.Items)
+            //{
+            //    SelectedFields.Add(item.ToString());
+            //}
+            
 
         }
 
@@ -46,34 +49,50 @@ namespace Chat_Corpora_Annotator
 
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var item in csvListBox.SelectedItems)
+            if (listView1.CheckedItems.Count != 0)
             {
-                if (!selectedListBox.Items.Contains(item))
-                    selectedListBox.Items.Add(csvListBox.SelectedItem);
-                else
+                foreach (ListViewItem item in listView1.CheckedItems)
                 {
-                    MessageBox.Show("Column " + item.ToString() + " is already added");
+                    SelectedFields.Add(item.Text);
                 }
+                OnFieldButtonClicked(null);
             }
-
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-
-            selectedListBox.Items.Remove(selectedListBox.SelectedItem);
-        }
-
-        private void clearAllButton_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < selectedListBox.SelectedItems.Count; i++)
+            else
             {
-                selectedListBox.Items.RemoveAt(i);
+                MessageBox.Show("Please select at least one column");
             }
-
         }
+
+        //private void addButton_Click(object sender, EventArgs e)
+        //{
+        //    foreach (var item in csvListBox.SelectedItems)
+        //    {
+        //        if (!selectedListBox.Items.Contains(item))
+        //            selectedListBox.Items.Add(csvListBox.SelectedItem);
+        //        else
+        //        {
+        //            MessageBox.Show("Column " + item.ToString() + " is already added");
+        //        }
+        //    }
+
+        //}
+
+        //private void deleteButton_Click(object sender, EventArgs e)
+        //{
+
+        //    selectedListBox.Items.Remove(selectedListBox.SelectedItem);
+        //}
+
+        //private void clearAllButton_Click(object sender, EventArgs e)
+        //{
+        //    for (int i = 0; i < selectedListBox.SelectedItems.Count; i++)
+        //    {
+        //        selectedListBox.Items.RemoveAt(i);
+        //    }
+
+        //}
 
 
     }

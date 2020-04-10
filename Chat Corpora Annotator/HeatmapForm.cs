@@ -20,7 +20,7 @@ namespace Chat_Corpora_Annotator
         public LinearHeatmapForm()
         {
             InitializeComponent();
-            panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            panel1.Paint += panel1_Paint;
         }
 
 

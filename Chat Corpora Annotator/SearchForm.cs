@@ -25,10 +25,11 @@ namespace Chat_Corpora_Annotator
 
         private string indexDirectory;
         private IndexSearcher searcher;
-        private QueryParser parser;
+        private QueryParser textParser;
+        private QueryParser userParser;
         private StandardAnalyzer analyzer;
         private IndexReader reader;
-        public SearchForm(List<string> selectedFields, string textFieldKey, string dateFieldKey, string indexDirectory)
+        public SearchForm(List<string> selectedFields, string textFieldKey, string dateFieldKey, string indexDirectory, HashSet<string> userKeys)
         {
 
             InitializeComponent();
@@ -38,39 +39,52 @@ namespace Chat_Corpora_Annotator
 
             var AppLuceneVersion = LuceneVersion.LUCENE_48;
             analyzer = new StandardAnalyzer(AppLuceneVersion);
-            parser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
+            textParser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
+
             var directory = FSDirectory.Open(indexDirectory);
 
             reader = DirectoryReader.Open(directory);
             searcher = new IndexSearcher(reader);
 
+            
+
         }
 
+        
         private void findButton_Click(object sender, EventArgs e)
         {
             
             if (searchBox.Text != "")
             {
-                var query = searchBox.Text;
-                
-                Query searchQuery = parser.Parse(query + "*");
-                TopDocs temp = searcher.Search(searchQuery, 50);
-                for(int i = 0; i < temp.TotalHits; i++)
+                var stringQuery = searchBox.Text;
+               
+
+                if (stringQuery != "")
                 {
-                    List<string> data = new List<string>();
-                    ScoreDoc d = temp.ScoreDocs[i];
-                    float score = d.Score;
-                    Document idoc = searcher.Doc(d.Doc);
-                    foreach(var field in selectedFields)
+                    Query textQuery = textParser.Parse(stringQuery + "*");
+                    TopDocs temp = searcher.Search(textQuery, 50);
+                    for (int i = 0; i < temp.TotalHits; i++)
                     {
-                        data.Add(idoc.GetField(field).GetStringValue());
+                        List<string> data = new List<string>();
+                        ScoreDoc d = temp.ScoreDocs[i];
+                        float score = d.Score;
+                        Document idoc = searcher.Doc(d.Doc);
+                        foreach (var field in selectedFields)
+                        {
+                            data.Add(idoc.GetField(field).GetStringValue());
+                        }
+                        DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+                        searchResults.Add(message);
                     }
-                    DynamicMessage message = new DynamicMessage(data, selectedFields,  dateFieldKey);
-                    searchResults.Add(message);
+                    MessageBox.Show("Found " + temp.TotalHits + " results.");
+                    DisplayResults();
                 }
-                MessageBox.Show("Found " + temp.TotalHits + " results.");
-                DisplayResults();
             }
+        }
+
+        private void FindMsgByUser(Query userQuery)
+        {
+
         }
 
         private void DisplayResults()
@@ -110,6 +124,16 @@ namespace Chat_Corpora_Annotator
         private void SearchForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             reader.Dispose();
+        }
+
+        private void searchTable_Resize(object sender, EventArgs e)
+        {
+            searchTable.Invalidate();
+        }
+
+        private void searchBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

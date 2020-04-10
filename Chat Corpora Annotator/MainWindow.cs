@@ -215,7 +215,7 @@ namespace Chat_Corpora_Annotator
 			HeaderForm hf = new HeaderForm();
 			AddOwnedForm(hf);
 			hf.Show();
-			hf.UpdateLabel(Path.GetFileName(csvPath));
+			//hf.UpdateLabel(Path.GetFileName(csvPath));
 			hf.ShowFields(allFields);
 			hf.FieldButtonClicked += new EventHandler(FieldButtonHandler);
 
@@ -421,7 +421,7 @@ namespace Chat_Corpora_Annotator
 
 		private void searchButton_Click(object sender, EventArgs e)
 		{
-			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath);
+			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, userKeys);
 			sf.Show();
 		}
 		#endregion
