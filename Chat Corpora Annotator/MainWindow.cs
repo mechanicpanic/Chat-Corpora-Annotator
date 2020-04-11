@@ -421,7 +421,7 @@ namespace Chat_Corpora_Annotator
 
 		private void searchButton_Click(object sender, EventArgs e)
 		{
-			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, userKeys);
+			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, senderFieldKey, userKeys);
 			sf.Show();
 		}
 		#endregion

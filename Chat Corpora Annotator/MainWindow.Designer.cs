@@ -128,7 +128,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1028, 595);
+            this.chatTable.Size = new System.Drawing.Size(1000, 600);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -150,7 +150,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 655);
+            this.panel1.Size = new System.Drawing.Size(200, 653);
             this.panel1.TabIndex = 10;
             // 
             // label1
@@ -164,10 +164,13 @@
             // 
             // loadMoreButton
             // 
+            this.loadMoreButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.loadMoreButton.FlatAppearance.BorderSize = 0;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(200, 611);
+            this.loadMoreButton.Location = new System.Drawing.Point(200, 618);
             this.loadMoreButton.Name = "loadMoreButton";
             this.loadMoreButton.Size = new System.Drawing.Size(1182, 39);
             this.loadMoreButton.TabIndex = 11;
@@ -177,14 +180,17 @@
             // 
             // dateView
             // 
+            this.dateView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Days});
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(1228, 11);
+            this.dateView.Location = new System.Drawing.Point(1200, 11);
             this.dateView.Name = "dateView";
-            this.dateView.Size = new System.Drawing.Size(154, 595);
+            this.dateView.Size = new System.Drawing.Size(170, 600);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
@@ -200,7 +206,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1405, 655);
+            this.ClientSize = new System.Drawing.Size(1382, 653);
             this.Controls.Add(this.dateView);
             this.Controls.Add(this.loadMoreButton);
             this.Controls.Add(this.panel1);

@@ -21,7 +21,8 @@ namespace Chat_Corpora_Annotator
         private List<string> selectedFields;
         private string textFieldKey;
         private string dateFieldKey;
-        
+        private string senderFieldKey;
+
 
         private string indexDirectory;
         private IndexSearcher searcher;
@@ -29,13 +30,15 @@ namespace Chat_Corpora_Annotator
         private QueryParser userParser;
         private StandardAnalyzer analyzer;
         private IndexReader reader;
-        public SearchForm(List<string> selectedFields, string textFieldKey, string dateFieldKey, string indexDirectory, HashSet<string> userKeys)
+        List<OLVColumn> columns;
+        public SearchForm(List<string> selectedFields, string textFieldKey, string dateFieldKey, string indexDirectory, string senderFieldKey, HashSet<string> userKeys)
         {
 
             InitializeComponent();
             this.selectedFields = selectedFields;
             this.textFieldKey = textFieldKey;
             this.dateFieldKey = dateFieldKey;
+            this.senderFieldKey = senderFieldKey;
 
             var AppLuceneVersion = LuceneVersion.LUCENE_48;
             analyzer = new StandardAnalyzer(AppLuceneVersion);
@@ -46,51 +49,10 @@ namespace Chat_Corpora_Annotator
             reader = DirectoryReader.Open(directory);
             searcher = new IndexSearcher(reader);
 
-            
 
-        }
 
-        
-        private void findButton_Click(object sender, EventArgs e)
-        {
-            
-            if (searchBox.Text != "")
-            {
-                var stringQuery = searchBox.Text;
-               
+            columns = new List<OLVColumn>();
 
-                if (stringQuery != "")
-                {
-                    Query textQuery = textParser.Parse(stringQuery + "*");
-                    TopDocs temp = searcher.Search(textQuery, 50);
-                    for (int i = 0; i < temp.TotalHits; i++)
-                    {
-                        List<string> data = new List<string>();
-                        ScoreDoc d = temp.ScoreDocs[i];
-                        float score = d.Score;
-                        Document idoc = searcher.Doc(d.Doc);
-                        foreach (var field in selectedFields)
-                        {
-                            data.Add(idoc.GetField(field).GetStringValue());
-                        }
-                        DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-                        searchResults.Add(message);
-                    }
-                    MessageBox.Show("Found " + temp.TotalHits + " results.");
-                    DisplayResults();
-                }
-            }
-        }
-
-        private void FindMsgByUser(Query userQuery)
-        {
-
-        }
-
-        private void DisplayResults()
-        {
-            searchTable.SetObjects(searchResults);
-            List<OLVColumn> columns = new List<OLVColumn>();
             foreach (var key in selectedFields)
             {
                 OLVColumn cl = new OLVColumn();
@@ -101,24 +63,134 @@ namespace Chat_Corpora_Annotator
                 };
                 cl.Text = key;
                 cl.WordWrap = true;
-                
+
                 columns.Add(cl);
 
 
             }
             searchTable.AllColumns.AddRange(columns);
-            foreach(var cl in searchTable.AllColumns)
+
+            searchTable.RebuildColumns();
+            
+            foreach(var user in userKeys)
+            {
+                listView1.Items.Add(user);
+            }
+
+
+        }
+
+        
+        private void findButton_Click(object sender, EventArgs e)
+        {
+            searchResults.Clear();
+            if (searchBox.Text != "")
+            {
+                var stringQuery = searchBox.Text;
+               
+
+                if (stringQuery != "")
+                {
+                    if (listView1.CheckedItems.Count != 0)
+                    {
+                        List<string> users = new List<string>();
+                        foreach (ListViewItem item in listView1.CheckedItems)
+                        {
+                            users.Add(item.Text);
+                            
+                        }
+                        SearchTextWithUser(stringQuery, users);
+
+                    }
+                    else
+                    {
+                        SearchText(stringQuery);
+                    }
+                    MessageBox.Show("Found " + searchResults.Count + " results.");
+                    DisplayResults();
+
+                }
+            }
+        }
+
+        private void SearchText(string stringQuery)
+        {
+            Query textQuery = textParser.Parse(stringQuery + "*");
+            TopDocs temp = searcher.Search(textQuery, 50);
+            for (int i = 0; i < temp.TotalHits; i++)
+            {
+                List<string> data = new List<string>();
+                ScoreDoc d = temp.ScoreDocs[i];
+                //float score = d.Score;
+                Document idoc = searcher.Doc(d.Doc);
+                foreach (var field in selectedFields)
+                {
+                    data.Add(idoc.GetField(field).GetStringValue());
+                }
+                DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+                searchResults.Add(message);
+            }
+        }
+        private void SearchTextWithUser(string stringQuery, List<string> users)
+        {
+            Query textQuery = textParser.Parse(stringQuery + "*");
+            FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
+            var filter = new BooleanFilter();
+            filter.Add(new FilterClause(userFilter, Occur.MUST));
+            var hits = searcher.Search(textQuery,userFilter,200).ScoreDocs;
+            for (int i = 0; i < hits.Length; i++)
+            {
+                List<string> data = new List<string>();
+
+                //ScoreDoc d = temp.ScoreDocs[i];
+                //float score = d.Score;
+                Document idoc = searcher.Doc(hits[i].Doc);
+                
+                    foreach (var field in selectedFields)
+                    {
+                        data.Add(idoc.GetField(field).GetStringValue());
+                    }
+                    DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+                    searchResults.Add(message);
+                
+            }
+        }
+        private void DisplayResults()
+        {
+            searchTable.SetObjects(searchResults);
+            FormatColumns();
+            HighlightQuery();
+        }
+
+        private void FormatColumns()
+        {
+            foreach (var cl in searchTable.AllColumns)
             {
                 if (cl.Text != textFieldKey)
                 {
                     cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    cl.Searchable = false;
                 }
                 else
                 {
                     cl.FillsFreeSpace = true;
                 }
             }
-            searchTable.RebuildColumns();
+            
+
+        }
+        private void HighlightQuery()
+        {
+            List<string> query = new List<string>();
+            List<OLVColumn> columns = new List<OLVColumn>();
+
+            query.Add(searchBox.Text);
+            //columns.Add(searchTable.AllColumns.Find(x => x.Text == textFieldKey));
+            TextMatchFilter highlightingFilter = TextMatchFilter.Contains(searchTable, query.ToArray());
+            //highlightingFilter.Columns = columns.ToArray();
+            
+            searchTable.ModelFilter = highlightingFilter;
+            searchTable.DefaultRenderer = new HighlightTextRenderer(highlightingFilter);
         }
 
         private void SearchForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -132,6 +204,11 @@ namespace Chat_Corpora_Annotator
         }
 
         private void searchBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchBox_MouseClick(object sender, MouseEventArgs e)
         {
 
         }
