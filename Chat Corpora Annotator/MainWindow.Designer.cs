@@ -31,13 +31,20 @@
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.findButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.datesPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.datesButton = new System.Windows.Forms.Button();
+            this.userPanel = new System.Windows.Forms.Panel();
             this.userList = new System.Windows.Forms.ListView();
             this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.selectUsersButton = new System.Windows.Forms.Button();
+            this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.queryButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,10 +58,14 @@
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contentPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
-            this.panel1.SuspendLayout();
             this.searchPanel.SuspendLayout();
+            this.datesPanel.SuspendLayout();
+            this.userPanel.SuspendLayout();
+            this.queryPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // csvDialog
@@ -75,12 +86,12 @@
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(266, 11);
+            this.chatTable.Location = new System.Drawing.Point(3, 2);
             this.chatTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(939, 631);
+            this.chatTable.Size = new System.Drawing.Size(976, 605);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -88,47 +99,116 @@
             this.chatTable.VirtualMode = true;
             this.chatTable.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.ChatTable_FormatCell);
             // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.Lavender;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.searchPanel);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.menuStrip1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(259, 694);
-            this.panel1.TabIndex = 10;
-            // 
             // searchPanel
             // 
             this.searchPanel.Controls.Add(this.findButton);
-            this.searchPanel.Controls.Add(this.userList);
-            this.searchPanel.Controls.Add(this.searchBox);
-            this.searchPanel.Location = new System.Drawing.Point(0, 34);
+            this.searchPanel.Controls.Add(this.button1);
+            this.searchPanel.Controls.Add(this.datesPanel);
+            this.searchPanel.Controls.Add(this.datesButton);
+            this.searchPanel.Controls.Add(this.userPanel);
+            this.searchPanel.Controls.Add(this.selectUsersButton);
+            this.searchPanel.Controls.Add(this.queryPanel);
+            this.searchPanel.Controls.Add(this.queryButton);
+            this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.searchPanel.Location = new System.Drawing.Point(0, 31);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(258, 405);
+            this.searchPanel.Size = new System.Drawing.Size(309, 663);
             this.searchPanel.TabIndex = 16;
             this.searchPanel.Visible = false;
             // 
             // findButton
             // 
-            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.findButton.BackColor = System.Drawing.Color.PaleGreen;
+            this.findButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.findButton.FlatAppearance.BorderSize = 0;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 360);
+            this.findButton.Location = new System.Drawing.Point(0, 575);
             this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(258, 45);
+            this.findButton.Size = new System.Drawing.Size(309, 44);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.UseVisualStyleBackColor = false;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Tomato;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(0, 619);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(309, 44);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Close search";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // datesPanel
+            // 
+            this.datesPanel.ColumnCount = 2;
+            this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.91909F));
+            this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.08091F));
+            this.datesPanel.Controls.Add(this.dateTimePicker1, 1, 0);
+            this.datesPanel.Controls.Add(this.dateTimePicker2, 1, 1);
+            this.datesPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.datesPanel.Location = new System.Drawing.Point(0, 488);
+            this.datesPanel.Name = "datesPanel";
+            this.datesPanel.RowCount = 2;
+            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.datesPanel.Size = new System.Drawing.Size(309, 73);
+            this.datesPanel.TabIndex = 23;
+            this.datesPanel.Visible = false;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePicker1.Location = new System.Drawing.Point(79, 3);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(227, 30);
+            this.dateTimePicker1.TabIndex = 17;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePicker2.Location = new System.Drawing.Point(79, 39);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(227, 30);
+            this.dateTimePicker2.TabIndex = 18;
+            // 
+            // datesButton
+            // 
+            this.datesButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.datesButton.FlatAppearance.BorderSize = 0;
+            this.datesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.datesButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.datesButton.Location = new System.Drawing.Point(0, 444);
+            this.datesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.datesButton.Name = "datesButton";
+            this.datesButton.Size = new System.Drawing.Size(309, 44);
+            this.datesButton.TabIndex = 22;
+            this.datesButton.Text = "Select dates";
+            this.datesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.datesButton.UseVisualStyleBackColor = true;
+            this.datesButton.Click += new System.EventHandler(this.datesButton_Click);
+            // 
+            // userPanel
+            // 
+            this.userPanel.Controls.Add(this.userList);
+            this.userPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.userPanel.Location = new System.Drawing.Point(0, 162);
+            this.userPanel.Name = "userPanel";
+            this.userPanel.Size = new System.Drawing.Size(309, 282);
+            this.userPanel.TabIndex = 21;
+            this.userPanel.Visible = false;
             // 
             // userList
             // 
@@ -136,13 +216,14 @@
             this.userList.CheckBoxes = true;
             this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Users});
-            this.userList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userList.FullRowSelect = true;
+            this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.userList.HideSelection = false;
-            this.userList.Location = new System.Drawing.Point(0, 96);
+            this.userList.Location = new System.Drawing.Point(0, 0);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(258, 264);
+            this.userList.Size = new System.Drawing.Size(309, 282);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -150,28 +231,61 @@
             // Users
             // 
             this.Users.Text = "Users";
-            this.Users.Width = 258;
+            this.Users.Width = 213;
+            // 
+            // selectUsersButton
+            // 
+            this.selectUsersButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.selectUsersButton.FlatAppearance.BorderSize = 0;
+            this.selectUsersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.selectUsersButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.selectUsersButton.Location = new System.Drawing.Point(0, 118);
+            this.selectUsersButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.selectUsersButton.Name = "selectUsersButton";
+            this.selectUsersButton.Size = new System.Drawing.Size(309, 44);
+            this.selectUsersButton.TabIndex = 16;
+            this.selectUsersButton.Text = "Select users";
+            this.selectUsersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.selectUsersButton.UseVisualStyleBackColor = true;
+            this.selectUsersButton.Click += new System.EventHandler(this.selectUsersButton_Click);
+            // 
+            // queryPanel
+            // 
+            this.queryPanel.Controls.Add(this.searchBox);
+            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.queryPanel.Location = new System.Drawing.Point(0, 44);
+            this.queryPanel.Name = "queryPanel";
+            this.queryPanel.Size = new System.Drawing.Size(309, 74);
+            this.queryPanel.TabIndex = 20;
+            this.queryPanel.Visible = false;
             // 
             // searchBox
             // 
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(258, 96);
+            this.searchBox.Size = new System.Drawing.Size(309, 74);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
             // 
-            // label1
+            // queryButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 286);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 23);
-            this.label1.TabIndex = 8;
+            this.queryButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.queryButton.FlatAppearance.BorderSize = 0;
+            this.queryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.queryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.queryButton.Location = new System.Drawing.Point(0, 0);
+            this.queryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.queryButton.Name = "queryButton";
+            this.queryButton.Size = new System.Drawing.Size(309, 44);
+            this.queryButton.TabIndex = 19;
+            this.queryButton.Text = "Query";
+            this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.queryButton.UseVisualStyleBackColor = true;
+            this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
             // 
             // menuStrip1
             // 
@@ -184,7 +298,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(259, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 31);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -247,6 +361,7 @@
             this.simpleSearchToolStripMenuItem.Name = "simpleSearchToolStripMenuItem";
             this.simpleSearchToolStripMenuItem.Size = new System.Drawing.Size(219, 28);
             this.simpleSearchToolStripMenuItem.Text = "Simple search";
+            this.simpleSearchToolStripMenuItem.Click += new System.EventHandler(this.simpleSearchToolStripMenuItem_Click);
             // 
             // extendedSearchToolStripMenuItem
             // 
@@ -263,9 +378,9 @@
             this.loadMoreButton.FlatAppearance.BorderSize = 0;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(266, 647);
+            this.loadMoreButton.Location = new System.Drawing.Point(0, 612);
             this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(1116, 46);
+            this.loadMoreButton.Size = new System.Drawing.Size(1123, 48);
             this.loadMoreButton.TabIndex = 11;
             this.loadMoreButton.Text = "Load more...";
             this.loadMoreButton.UseVisualStyleBackColor = true;
@@ -281,9 +396,9 @@
             this.Days});
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(1200, 11);
+            this.dateView.Location = new System.Drawing.Point(979, 1);
             this.dateView.Name = "dateView";
-            this.dateView.Size = new System.Drawing.Size(170, 631);
+            this.dateView.Size = new System.Drawing.Size(172, 605);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
@@ -294,27 +409,39 @@
             this.Days.Text = "Active dates";
             this.Days.Width = 115;
             // 
+            // contentPanel
+            // 
+            this.contentPanel.Controls.Add(this.chatTable);
+            this.contentPanel.Controls.Add(this.loadMoreButton);
+            this.contentPanel.Controls.Add(this.dateView);
+            this.contentPanel.Location = new System.Drawing.Point(328, 34);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(1154, 660);
+            this.contentPanel.TabIndex = 13;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1382, 694);
-            this.Controls.Add(this.dateView);
-            this.Controls.Add(this.loadMoreButton);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.chatTable);
+            this.ClientSize = new System.Drawing.Size(1482, 694);
+            this.Controls.Add(this.searchPanel);
+            this.Controls.Add(this.contentPanel);
+            this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.searchPanel.ResumeLayout(false);
+            this.datesPanel.ResumeLayout(false);
+            this.userPanel.ResumeLayout(false);
+            this.queryPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contentPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -322,8 +449,6 @@
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.FolderBrowserDialog indexDialog;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loadMoreButton;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
@@ -342,6 +467,16 @@
         private System.Windows.Forms.ListView userList;
         private System.Windows.Forms.ColumnHeader Users;
         private System.Windows.Forms.Button findButton;
+        private System.Windows.Forms.Panel contentPanel;
+        private System.Windows.Forms.TableLayoutPanel datesPanel;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button datesButton;
+        private System.Windows.Forms.Panel userPanel;
+        private System.Windows.Forms.Button selectUsersButton;
+        private System.Windows.Forms.Panel queryPanel;
+        private System.Windows.Forms.Button queryButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -280,7 +280,7 @@ namespace Chat_Corpora_Annotator
 						count++;
 					}
 				}
-				label1.Text = count.ToString() + " messages";
+				//label1.Text = count.ToString() + " messages";
 				DateTime date;
 
 				//TODO: Redesign this urgently.
@@ -614,7 +614,7 @@ namespace Chat_Corpora_Annotator
 				searchPanel.Visible = true;
 				
 			}
-			else { }
+			
 
 		}
 
@@ -699,6 +699,50 @@ namespace Chat_Corpora_Annotator
 			chatTable.SetObjects(searchResults);
 			chatTable.Invalidate();
 			
+		}
+
+
+		private void simpleSearchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Not implemented yet!");
+		}
+
+		private void queryButton_Click(object sender, EventArgs e)
+		{
+			if (queryPanel.Visible)
+			{
+				queryPanel.Visible = false;
+			}
+			else
+			{
+				queryPanel.Visible = true;
+			}
+		}
+
+		private void selectUsersButton_Click(object sender, EventArgs e)
+		{
+			if(userPanel.Visible)
+			{
+				userPanel.Visible = false;
+			}
+			else
+			{
+				userPanel.Visible = true;
+			}
+		}
+
+
+
+		private void datesButton_Click(object sender, EventArgs e)
+		{
+			if(datesPanel.Visible)
+			{
+				datesPanel.Visible = false;
+			}
+			else
+			{
+				datesPanel.Visible = true;
+			}
 		}
 	}
 }
