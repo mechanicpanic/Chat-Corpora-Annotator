@@ -20,12 +20,17 @@ using Lucene.Net.Index;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using System.Reflection;
+using Lucene.Net.Search;
+using Lucene.Net.QueryParsers.Classic;
+using Lucene.Net.Queries;
 
 namespace Chat_Corpora_Annotator
 {
 	public partial class MainWindow : Form
 	{
 		#region fields
+
+		public bool State = false;
 		public string csvPath;
 		private string indexPath;
 
@@ -45,22 +50,29 @@ namespace Chat_Corpora_Annotator
 	   
 		private List<DynamicMessage> messages = new List<DynamicMessage>();
 		private BTreeDictionary<DateTime, int> messagesPerDay = new BTreeDictionary<DateTime, int>();
-		//private ConcurrentDictionary<DateTime,int> messagesPerDay = new ConcurrentDictionary<DateTime,int>();
+		
   
 		List<Color> heatMapColors = new List<Color>();
-	   
 
-		
+
+		LuceneVersion AppLuceneVersion = LuceneVersion.LUCENE_48;
 		FSDirectory dir;
 		IndexWriterConfig indexConfig;
 		IndexWriter writer;
 		DirectoryReader reader;
+		DirectoryReader searchReader;
 		int readerIndex = 0;
 
-		StandardAnalyzer analyzer;
+
+
+		private StandardAnalyzer analyzer;
+
+		private IndexSearcher searcher;
+		private QueryParser textParser;
+		private List<DynamicMessage> searchResults = new List<DynamicMessage>();
 		#endregion
 
-		
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -75,11 +87,8 @@ namespace Chat_Corpora_Annotator
 
 
 		#region csv loading
-		private void csvLoadButton_Click(object sender, EventArgs e)
-		{
-			openCsvDialog();
-			csvDialog.ShowDialog();
-		}
+
+		
 		private void openCsvDialog()
 		{
 			csvDialog = new OpenFileDialog();
@@ -236,7 +245,7 @@ namespace Chat_Corpora_Annotator
 		#region index init and write
 		private void SetUpIndex()
 		{
-			var AppLuceneVersion = LuceneVersion.LUCENE_48;
+			
 
 			if (indexPath != null)
 			{
@@ -340,7 +349,12 @@ namespace Chat_Corpora_Annotator
 
 				
 				DataLoaded();
+				foreach (var user in userKeys)
+				{
+					userList.Items.Add(user);
+				}
 				reader = DirectoryReader.Open(dir);
+
 
 
 
@@ -377,6 +391,7 @@ namespace Chat_Corpora_Annotator
 				SetDateView();
 				LoadSomeDocuments(50);
 				DisplayData();
+				State = true;
 				dl.Close();
 			}
 
@@ -401,28 +416,13 @@ namespace Chat_Corpora_Annotator
 
 		#region main window buttons
 
-		private void chartButton_Click(object sender, EventArgs e)
-		{
-			ChartForm cf = new ChartForm();
-			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
 
-		}
-
-		private void heatMapButton_Click(object sender, EventArgs e)
-		{
-			//MessageBox.Show("Broken!");
-			PopulateHeatmap();
-			LinearHeatmapForm swf = new LinearHeatmapForm();
-			swf.InitializeHeatMap(heatMapColors);
-			swf.Show();
-			swf.DrawHeatMap();
-			swf.Draw();
-		}
 
 		private void searchButton_Click(object sender, EventArgs e)
 		{
-			SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, senderFieldKey, userKeys);
-			sf.Show();
+			//SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, senderFieldKey, userKeys);
+			//sf.Show();
+
 		}
 		#endregion
 
@@ -567,10 +567,7 @@ namespace Chat_Corpora_Annotator
 
 		#endregion
 
-		private void button1_Click(object sender, EventArgs e)
-		{
 
-		}
 
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
@@ -578,6 +575,131 @@ namespace Chat_Corpora_Annotator
 			chatTable.UpdateObjects(messages);
 		}
 
+
+
+		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ChartForm cf = new ChartForm();
+			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+		}
+
+		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//MessageBox.Show("Broken!");
+			PopulateHeatmap();
+			LinearHeatmapForm swf = new LinearHeatmapForm();
+			swf.InitializeHeatMap(heatMapColors);
+			swf.Show();
+			swf.DrawHeatMap();
+			swf.Draw();
+
+		}
+
+		private void loadCorpusToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			openCsvDialog();
+			csvDialog.ShowDialog();
+
+		}
+
+		private void richTextBox1_MouseClick(object sender, MouseEventArgs e)
+		{
+			searchBox.Text = "";
+		}
+
+		private void extendedSearchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (!searchPanel.Visible)
+			{
+				searchPanel.Visible = true;
+				
+			}
+			else { }
+
+		}
+
+		private void findButton_Click(object sender, EventArgs e)
+		{
+			textParser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
+			searcher = new IndexSearcher(reader);
+			searchResults.Clear();
+			if (searchBox.Text != "")
+			{
+				var stringQuery = searchBox.Text;
+
+
+				if (stringQuery != "")
+				{
+					if (userList.CheckedItems.Count != 0)
+					{
+						List<string> users = new List<string>();
+						foreach (ListViewItem item in userList.CheckedItems)
+						{
+							users.Add(item.Text);
+
+						}
+						SearchTextWithUser(stringQuery, users);
+
+					}
+					else
+					{
+						SearchText(stringQuery);
+					}
+					MessageBox.Show("Found " + searchResults.Count + " results.");
+					DisplayResults();
+
+				}
+			}
+
+		}
+		private void SearchText(string stringQuery)
+		{
+			Query textQuery = textParser.Parse(stringQuery + "*");
+			TopDocs temp = searcher.Search(textQuery, 50);
+			for (int i = 0; i < temp.TotalHits; i++)
+			{
+				List<string> data = new List<string>();
+				ScoreDoc d = temp.ScoreDocs[i];
+				Document idoc = searcher.Doc(d.Doc);
+				foreach (var field in selectedFields)
+				{
+					data.Add(idoc.GetField(field).GetStringValue());
+				}
+				DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+				searchResults.Add(message);
+			}
+		}
+		private void SearchTextWithUser(string stringQuery, List<string> users)
+		{
+			Query textQuery = textParser.Parse(stringQuery + "*");
+
+			FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
+
+			var filter = new BooleanFilter();
+			filter.Add(new FilterClause(userFilter, Occur.MUST));
+
+			var hits = searcher.Search(textQuery, userFilter, 200).ScoreDocs;
+			for (int i = 0; i < hits.Length; i++)
+			{
+				List<string> data = new List<string>();
+
+				Document idoc = searcher.Doc(hits[i].Doc);
+
+				foreach (var field in selectedFields)
+				{
+					data.Add(idoc.GetField(field).GetStringValue());
+				}
+				DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+				searchResults.Add(message);
+
+			}
+		}
+		private void DisplayResults()
+		{
+			chatTable.SetObjects(searchResults);
+			chatTable.Invalidate();
+			
+		}
 	}
 }
 

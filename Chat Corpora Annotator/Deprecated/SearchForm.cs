@@ -24,10 +24,10 @@ namespace Chat_Corpora_Annotator
         private string senderFieldKey;
 
 
-        private string indexDirectory;
+
         private IndexSearcher searcher;
         private QueryParser textParser;
-        private QueryParser userParser;
+
         private StandardAnalyzer analyzer;
         private IndexReader reader;
         List<OLVColumn> columns;
@@ -77,6 +77,8 @@ namespace Chat_Corpora_Annotator
                 listView1.Items.Add(user);
             }
 
+            searchBox.AutoSize = false;
+
 
         }
 
@@ -121,7 +123,6 @@ namespace Chat_Corpora_Annotator
             {
                 List<string> data = new List<string>();
                 ScoreDoc d = temp.ScoreDocs[i];
-                //float score = d.Score;
                 Document idoc = searcher.Doc(d.Doc);
                 foreach (var field in selectedFields)
                 {
@@ -133,7 +134,7 @@ namespace Chat_Corpora_Annotator
         }
         private void SearchTextWithUser(string stringQuery, List<string> users)
         {
-            Query textQuery = textParser.Parse(stringQuery + "*");
+            PhraseQuery textQuery = (PhraseQuery)textParser.Parse(stringQuery + "*");
             FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
             var filter = new BooleanFilter();
             filter.Add(new FilterClause(userFilter, Occur.MUST));
@@ -187,6 +188,7 @@ namespace Chat_Corpora_Annotator
             query.Add(searchBox.Text);
             //columns.Add(searchTable.AllColumns.Find(x => x.Text == textFieldKey));
             TextMatchFilter highlightingFilter = TextMatchFilter.Contains(searchTable, query.ToArray());
+            
             //highlightingFilter.Columns = columns.ToArray();
             
             searchTable.ModelFilter = highlightingFilter;
