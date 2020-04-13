@@ -25,17 +25,6 @@ namespace Chat_Corpora_Annotator
         }
 
 
-
-        private void fieldButton_Click(object sender, EventArgs e)
-        {
-            //foreach (var item in selectedListBox.Items)
-            //{
-            //    SelectedFields.Add(item.ToString());
-            //}
-            
-
-        }
-
         protected virtual void OnFieldButtonClicked(EventArgs e)
         {
 

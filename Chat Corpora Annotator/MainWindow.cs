@@ -60,7 +60,6 @@ namespace Chat_Corpora_Annotator
 		IndexWriterConfig indexConfig;
 		IndexWriter writer;
 		DirectoryReader reader;
-		DirectoryReader searchReader;
 		int readerIndex = 0;
 
 
@@ -259,8 +258,46 @@ namespace Chat_Corpora_Annotator
 				writer = new IndexWriter(dir, indexConfig);
 				writer.DeleteAll();
 				writer.Commit();
+
+				textParser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
+				
+				FirstRead();
 			}
 
+		}
+		private int[] CreateLookupList()
+		{
+			int[] lookup = new int[3];
+			foreach(var field in selectedFields)
+			{
+				if (field == dateFieldKey)
+				{
+					lookup[0] = Array.IndexOf(allFields,dateFieldKey);
+				}
+				if(field == senderFieldKey)
+				{
+					lookup[1] = Array.IndexOf(allFields, senderFieldKey);
+				}
+				if(field == textFieldKey)
+				{
+					lookup[2] = Array.IndexOf(allFields, textFieldKey);
+				}
+			}
+			return lookup;
+		}
+		private void FirstRead()
+		{
+			string[] row = null;
+			int count = 0;
+			using (var csv = new CsvReader(csvPath))
+			{
+				csv.ReadRow(ref row); //header read;
+				while (csv.ReadRow(ref row))
+				{
+					count++;
+				}
+			}
+			messageLabel.Text = count.ToString() + " messages";
 		}
 		private void PopulateIndex()
 		{
@@ -268,42 +305,20 @@ namespace Chat_Corpora_Annotator
 			if (selectedFields != null)
 				SetUpIndex();
 			{
-
-				
+				int[] lookup = CreateLookupList();
 				string[] row = null;
-				int count = 0;
-				using (var csv = new CsvReader(csvPath))
-				{
-					csv.ReadRow(ref row); //header read;
-					while (csv.ReadRow(ref row))
-					{
-						count++;
-					}
-				}
-				//label1.Text = count.ToString() + " messages";
-				DateTime date;
-
-				//TODO: Redesign this urgently.
-				var dateIndex = Array.IndexOf(allFields, dateFieldKey);
-				var senderIndex = Array.IndexOf(allFields, senderFieldKey);
-				var textIndex = Array.IndexOf(allFields, textFieldKey);
-
-				row = null;
-				
+				DateTime date;		
 				using (var csv = new CsvReader(csvPath))
 				{
 					csv.ReadRow(ref row); //header read;
 
 
 					while (csv.ReadRow(ref row))
-					//Parallel.For(1, count, j =>
+					
 					 {
-						 csv.ReadRow(ref row);
-						 ArrayMessage message = new ArrayMessage(row, allFields, selectedFields, dateFieldKey);
-
-
-						 date = DateTime.Parse(row[dateIndex]);
-						 userKeys.Add(row[senderIndex]);
+						 
+						 date = DateTime.Parse(row[lookup[0]]);
+						 userKeys.Add(row[lookup[1]]);
 
 
 						 var day = date.Date;
@@ -317,43 +332,52 @@ namespace Chat_Corpora_Annotator
 							 temp++;
 							 messagesPerDay.TryUpdate(day, temp);
 						 }
-
-						 Document document = new Document();
-
-						 for (int i = 0; i < selectedFields.Count; i++)
+						Document document = new Document();
+						for(int i = 0; i < row.Length; i++)
 						 {
-							 int textindex = Array.IndexOf(selectedFields.ToArray(), textFieldKey);
-							 int dateindex = Array.IndexOf(selectedFields.ToArray(), dateFieldKey);
-							 if (i != textindex && i != dateindex)
-							 {
-								 document.Add(new StringField(selectedFields[i], message.Contents[i], Field.Store.YES));
-							 }
-							 else if (i == textindex)
-							 {
-								 document.Add(new TextField(selectedFields[i], message.Contents[i], Field.Store.YES));
-							 }
-							 else
-							 {
-								 var temp = DateTools.DateToString(date, DateTools.Resolution.MINUTE);
-								 document.Add(new StringField(selectedFields[i], temp, Field.Store.YES));
-							 }
+							if (lookup.Contains(i))
+							{
+								if (i == lookup[0])
+								{
+									var temp = DateTools.DateToString(date, DateTools.Resolution.MINUTE);
+									document.Add(new StringField(allFields[i], temp, Field.Store.YES));
+								}
+								if (i == lookup[1])
+								{
+									document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
+								}
+								if (i == lookup[2])
+								{
+
+									document.Add(new TextField(allFields[i], row[i], Field.Store.YES));
+								}
+							}
+							else
+							{
+								document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
+							}
+							//TODO: Still need to redesign this. Rework storing/indexing paradigm.
+							 
 						 }
 
 						 writer.AddDocument(document);
 
 					 }
-					writer.Commit();
-					writer.Flush(triggerMerge: false, applyAllDeletes: false);
-					writer.Dispose();
+					
 				}
 
-				
+
+				writer.Commit();
+				writer.Flush(triggerMerge: false, applyAllDeletes: false);
+				writer.Dispose();
+				reader = DirectoryReader.Open(dir);
+				searcher = new IndexSearcher(reader);
 				DataLoaded();
 				foreach (var user in userKeys)
 				{
 					userList.Items.Add(user);
 				}
-				reader = DirectoryReader.Open(dir);
+				
 
 
 
@@ -364,7 +388,7 @@ namespace Chat_Corpora_Annotator
 		{
 			DataLoaded dl = new DataLoaded();
 			dl.Show();
-			dl.OKButtonClicked += new EventHandler(DataLoadedButtonHandler);
+			dl.OKButtonClicked += DataLoadedButtonHandler;
 		}
 
 		#endregion
@@ -516,7 +540,7 @@ namespace Chat_Corpora_Annotator
 			dateView.VirtualMode = true;
 			dateView.VirtualListSize = messagesPerDay.Keys.Count;
 			//dateView.DoubleBuffering(true);
-			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(this.dateView_RetrieveVirtualItem);
+			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
 			dateView.RetrieveVirtualItem += handler;
 
 
@@ -526,6 +550,8 @@ namespace Chat_Corpora_Annotator
 		{
 			int index = e.ItemIndex;
 			string date = messagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
+
+
 			e.Item = new ListViewItem(date);
 
 		}
@@ -585,7 +611,7 @@ namespace Chat_Corpora_Annotator
 
 		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//MessageBox.Show("Broken!");
+			
 			PopulateHeatmap();
 			LinearHeatmapForm swf = new LinearHeatmapForm();
 			swf.InitializeHeatMap(heatMapColors);
@@ -607,21 +633,11 @@ namespace Chat_Corpora_Annotator
 			searchBox.Text = "";
 		}
 
-		private void extendedSearchToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (!searchPanel.Visible)
-			{
-				searchPanel.Visible = true;
-				
-			}
-			
 
-		}
 
 		private void findButton_Click(object sender, EventArgs e)
 		{
-			textParser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
-			searcher = new IndexSearcher(reader);
+			
 			searchResults.Clear();
 			if (searchBox.Text != "")
 			{
@@ -702,10 +718,7 @@ namespace Chat_Corpora_Annotator
 		}
 
 
-		private void simpleSearchToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show("Not implemented yet!");
-		}
+
 
 		private void queryButton_Click(object sender, EventArgs e)
 		{
@@ -743,6 +756,11 @@ namespace Chat_Corpora_Annotator
 			{
 				datesPanel.Visible = true;
 			}
+		}
+
+		private void toolStripContainer1_RightToolStripPanel_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
