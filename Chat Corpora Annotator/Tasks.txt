@@ -1,0 +1,3 @@
+﻿1. Split views, presenters, and services into separate files.
+2. Finish implementing the wizard:
+a) Sort out events

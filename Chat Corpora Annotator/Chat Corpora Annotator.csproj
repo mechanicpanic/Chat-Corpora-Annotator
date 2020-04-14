@@ -236,6 +236,37 @@
     <Compile Include="ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CSV Wizard\DataLoadedStep.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CSV Wizard\DataLoadedStep.Designer.cs">
+      <DependentUpon>DataLoadedStep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSV Wizard\HeaderStep.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CSV Wizard\HeaderStep.Designer.cs">
+      <DependentUpon>HeaderStep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSV Wizard\IWizardItem.cs" />
+    <Compile Include="CSV Wizard\LoadingStep.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CSV Wizard\LoadingStep.Designer.cs">
+      <DependentUpon>LoadingStep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSV Wizard\MetadataStep.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CSV Wizard\MetadataStep.Designer.cs">
+      <DependentUpon>MetadataStep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSVLoader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSVLoader.Designer.cs">
+      <DependentUpon>CSVLoader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Deprecated\ArrayMessage.cs" />
     <Compile Include="Deprecated\ArrayMessageBlock.cs" />
     <Compile Include="ColumnMetadata.cs">
@@ -251,10 +282,12 @@
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\DynamicMessageBlock.cs" />
-    <Compile Include="Framework\ApplicationController.cs" />
-    <Compile Include="Framework\Container.cs" />
-    <Compile Include="Framework\Presenters.cs" />
-    <Compile Include="Framework\Services.cs" />
+    <Compile Include="Framework\Presenters\CSVPresenter.cs" />
+    <Compile Include="Framework\Views\ICSVView.cs" />
+    <Compile Include="Framework\Presenters\MainPresenter.cs" />
+    <Compile Include="Framework\Services\Services.cs" />
+    <Compile Include="Framework\Views\IHeatmapView.cs" />
+    <Compile Include="Framework\Views\IMainView.cs" />
     <Compile Include="HeatmapPresenter.cs" />
     <Compile Include="IndexLoading.cs">
       <SubType>Form</SubType>
@@ -262,7 +295,7 @@
     <Compile Include="IndexLoading.Designer.cs">
       <DependentUpon>IndexLoading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Views.cs" />
+    <Compile Include="Framework\Views\IView.cs" />
     <Compile Include="DynamicMessage.cs" />
     <Compile Include="HeaderForm.cs">
       <SubType>Form</SubType>
@@ -302,6 +335,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ColumnMetadata.resx">
       <DependentUpon>ColumnMetadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSV Wizard\DataLoadedStep.resx">
+      <DependentUpon>DataLoadedStep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSV Wizard\HeaderStep.resx">
+      <DependentUpon>HeaderStep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSV Wizard\LoadingStep.resx">
+      <DependentUpon>LoadingStep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSV Wizard\MetadataStep.resx">
+      <DependentUpon>MetadataStep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSVLoader.resx">
+      <DependentUpon>CSVLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataLoaded.resx">
       <DependentUpon>DataLoaded.cs</DependentUpon>
@@ -347,5 +395,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tasks.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

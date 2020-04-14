@@ -3,30 +3,29 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
 
-using Wintellect.PowerCollections;
+
 using CSharpTest.Net.Collections;
 using SoftCircuits.CsvParser;
-using Lucene.Net;
 using Lucene.Net.Util;
 using Lucene.Net.Store;
 using Lucene.Net.Index;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
-using System.Reflection;
+
 using Lucene.Net.Search;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Queries;
+using System.Drawing;
+
+using Chat_Corpora_Annotator.CSV_Wizard;
+using Chat_Corpora_Annotator.Framework;
 
 namespace Chat_Corpora_Annotator
 {
-	public partial class MainWindow : Form
+	public partial class MainWindow : Form, IMainView
 	{
 		#region fields
 
@@ -69,6 +68,17 @@ namespace Chat_Corpora_Annotator
 		private IndexSearcher searcher;
 		private QueryParser textParser;
 		private List<DynamicMessage> searchResults = new List<DynamicMessage>();
+
+		public event EventHandler CSVLoad;
+		public event EventHandler OpenIndex;
+		public event EventHandler ChartClick;
+		public event EventHandler HeatmapClick;
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public bool FileLoadState { get { return FileLoadState; } set { } }
+		public string CsvPath { get { return csvPath; } set { } }
+
+		public string IndexPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		#endregion
 
 
@@ -98,7 +108,6 @@ namespace Chat_Corpora_Annotator
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)
 		{
 			csvPath = csvDialog.FileName;
-			
 			SelectIndexFolder();
 
 		}
@@ -214,7 +223,7 @@ namespace Chat_Corpora_Annotator
 		{
 			using (var parser = new TextFieldParser(csvPath))
 			{
-				parser.SetDelimiters(",");
+				parser.SetDelimiters(","); //TODO: Delimiter select
 
 				allFields = parser.ReadFields();
 			}
@@ -297,7 +306,7 @@ namespace Chat_Corpora_Annotator
 					count++;
 				}
 			}
-			messageLabel.Text = count.ToString() + " messages";
+			
 		}
 		private void PopulateIndex()
 		{
@@ -441,13 +450,74 @@ namespace Chat_Corpora_Annotator
 		#region main window buttons
 
 
-
-		private void searchButton_Click(object sender, EventArgs e)
+		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//SearchForm sf = new SearchForm(selectedFields, textFieldKey, dateFieldKey, indexPath, senderFieldKey, userKeys);
-			//sf.Show();
+			ChartForm cf = new ChartForm();
+			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+		}
+
+		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+			PopulateHeatmap();
+			LinearHeatmapForm swf = new LinearHeatmapForm();
+			swf.InitializeHeatMap(heatMapColors);
+			swf.Show();
+			swf.DrawHeatMap();
+			swf.Draw();
 
 		}
+
+		private void loadCorpusToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			openCsvDialog();
+			csvDialog.ShowDialog();
+
+		}
+
+		private void loadMoreButton_Click(object sender, EventArgs e)
+		{
+			LoadSomeDocuments(100);
+			chatTable.UpdateObjects(messages);
+		}
+		private void queryButton_Click(object sender, EventArgs e)
+		{
+			if (queryPanel.Visible)
+			{
+				queryPanel.Visible = false;
+			}
+			else
+			{
+				queryPanel.Visible = true;
+			}
+		}
+
+		private void selectUsersButton_Click(object sender, EventArgs e)
+		{
+			if (userPanel.Visible)
+			{
+				userPanel.Visible = false;
+			}
+			else
+			{
+				userPanel.Visible = true;
+			}
+		}
+
+
+
+		private void datesButton_Click(object sender, EventArgs e)
+		{
+			if (datesPanel.Visible)
+			{
+				datesPanel.Visible = false;
+			}
+			else
+			{
+				datesPanel.Visible = true;
+			}
+		}
+
 		#endregion
 
 		#region heatmap
@@ -595,38 +665,10 @@ namespace Chat_Corpora_Annotator
 
 
 
-		private void loadMoreButton_Click(object sender, EventArgs e)
-		{
-			LoadSomeDocuments(100);
-			chatTable.UpdateObjects(messages);
-		}
+		
 
 
 
-		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ChartForm cf = new ChartForm();
-			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
-		}
-
-		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			
-			PopulateHeatmap();
-			LinearHeatmapForm swf = new LinearHeatmapForm();
-			swf.InitializeHeatMap(heatMapColors);
-			swf.Show();
-			swf.DrawHeatMap();
-			swf.Draw();
-
-		}
-
-		private void loadCorpusToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			openCsvDialog();
-			csvDialog.ShowDialog();
-
-		}
 
 		private void richTextBox1_MouseClick(object sender, MouseEventArgs e)
 		{
@@ -719,49 +761,24 @@ namespace Chat_Corpora_Annotator
 
 
 
-
-		private void queryButton_Click(object sender, EventArgs e)
-		{
-			if (queryPanel.Visible)
-			{
-				queryPanel.Visible = false;
-			}
-			else
-			{
-				queryPanel.Visible = true;
-			}
-		}
-
-		private void selectUsersButton_Click(object sender, EventArgs e)
-		{
-			if(userPanel.Visible)
-			{
-				userPanel.Visible = false;
-			}
-			else
-			{
-				userPanel.Visible = true;
-			}
-		}
-
-
-
-		private void datesButton_Click(object sender, EventArgs e)
-		{
-			if(datesPanel.Visible)
-			{
-				datesPanel.Visible = false;
-			}
-			else
-			{
-				datesPanel.Visible = true;
-			}
-		}
+        
+        
 
 		private void toolStripContainer1_RightToolStripPanel_Click(object sender, EventArgs e)
 		{
 
 		}
+
+		public void SetLineCount(int count)
+		{
+			messageLabel.Text = count.ToString() + " messages";
+		}
+
+		public void DisplayDocuments()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
 
+ 
