@@ -282,13 +282,18 @@
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\DynamicMessageBlock.cs" />
+    <Compile Include="Framework\Presenters\ChartPresenter.cs" />
     <Compile Include="Framework\Presenters\CSVPresenter.cs" />
+    <Compile Include="Framework\Presenters\HeatmapPresenter.cs" />
+    <Compile Include="Framework\Services\Class1.cs" />
+    <Compile Include="Framework\Services\SearchService.cs" />
+    <Compile Include="Framework\Services\HeatmapService.cs" />
+    <Compile Include="Framework\Views\IChartView.cs" />
     <Compile Include="Framework\Views\ICSVView.cs" />
     <Compile Include="Framework\Presenters\MainPresenter.cs" />
     <Compile Include="Framework\Services\Services.cs" />
     <Compile Include="Framework\Views\IHeatmapView.cs" />
     <Compile Include="Framework\Views\IMainView.cs" />
-    <Compile Include="HeatmapPresenter.cs" />
     <Compile Include="IndexLoading.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -17,9 +17,9 @@ namespace Chat_Corpora_Annotator.CSV_Wizard
             InitializeComponent();
         }
 
-        string IWizardItem.HeaderTitle { get { return "Done."} }
+        string IWizardItem.HeaderTitle { get { return "Done."; } }
 
-        string IWizardItem.StepType { get { return "DataLoaded"} };
+        string IWizardItem.StepType { get { return "DataLoaded"; } }
 
         List<string> IWizardItem.GetValues()
         {

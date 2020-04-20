@@ -9,29 +9,38 @@ namespace Chat_Corpora_Annotator
 {
 	public partial class CSVLoader : Form, ICSVView
 	{
+
+		//private readonly ApplicationContext _context;
 		public CSVLoader()
 		{
 			InitializeComponent();
+			currentStep = 0;
 		}
 
 		private int currentStep;
 		private int totalSteps;
-		private List<IWizardItem> steps;
+		private List<IWizardItem> steps = new List<IWizardItem>();
 		public string[] AllFields { get; set; }
 		public List<string> SelectedFields { get; set; }
 		public string DateFieldKey { get; set; }
 		public string SenderFieldKey { get; set; }
 		public string TextFieldKey { get; set; }
 
+		public List<IWizardItem> Steps { get { return steps; } }
 
 		public event Action DataLoaded;
-		public event Action HeaderFinished;
+		public event Action HeaderSelected;
+		public event Action MetadataAdded;
 
 		public void ShowError(string errorMessage)
 		{
 			throw new NotImplementedException();
 		}
-
+		public void AddStep(IWizardItem step)
+		{
+			steps.Add(step);
+			totalSteps = steps.Count;
+		}
 		private void ShowStep()
 		{
 			// Update buttons.
@@ -65,14 +74,16 @@ namespace Chat_Corpora_Annotator
 				{
 					case "Header":
 						this.SelectedFields = steps[currentStep].GetValues();
+						HeaderSelected();
 						break;
 					case "Metadata":
 						this.DateFieldKey = steps[currentStep].GetValues()[0];
 						this.SenderFieldKey = steps[currentStep].GetValues()[1];
 						this.TextFieldKey = steps[currentStep].GetValues()[2];
-						HeaderFinished();
+						MetadataAdded();
 						cmdNext.Enabled = false;
-						break;		
+						break;
+					
 
 				}
 				currentStep++;
@@ -86,15 +97,16 @@ namespace Chat_Corpora_Annotator
 			//ShowStep();
 			MessageBox.Show("Broken!");
 		}
-		public CSVLoader(List<IWizardItem> steps)
-		{
-			this.steps = steps;
-			currentStep = 0;
-			totalSteps = steps.Count;
-		}
-		public void Close()
+
+		public new void Close()
 		{
 			this.Close();
+		}
+
+		public new void Show()
+		{
+
+			ShowDialog();
 		}
 	}
 		

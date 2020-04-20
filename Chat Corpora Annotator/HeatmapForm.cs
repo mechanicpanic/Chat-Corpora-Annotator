@@ -3,10 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using System;
 using Wintellect.PowerCollections;
+using Chat_Corpora_Annotator.Framework;
 
 namespace Chat_Corpora_Annotator
 {
-    public partial class LinearHeatmapForm : Form
+    public partial class LinearHeatmapForm : Form, IHeatmapView
     {
 
         float width;

@@ -12,22 +12,19 @@ using Lucene.Net.Analysis.Standard;
 
 namespace Chat_Corpora_Annotator.Framework
 {
-    public interface IHeatmapService
-    {
-        void DrawHeatmap();
-        void CalculateData();
 
-    }
     public interface ICSVReadService
     {
         string[] GetFields(string path);
         int GetLineCount(string path);
+
 
         
     }
 
     public interface IIndexService
     {
+        Dictionary<string,int> MessagesPerDay { get; set; }
         LuceneVersion AppLuceneVersion { get; }
         FSDirectory Dir { get; set; }
         IndexWriterConfig IndexConfig { get; set; }
@@ -41,38 +38,7 @@ namespace Chat_Corpora_Annotator.Framework
         void LoadSomeDocuments(string indexPath, int count);
         
     }
-    public interface ISearchService
-    {
-        
-        List<DynamicMessage> SearchText(string query, QueryParser parser, IndexSearcher searcher);
-        List<DynamicMessage> SearchText_UserFilter(string query, string[] users);
-        List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish);
-    }
 
-    public class HeatmapService: IHeatmapService
-    {
-        public void DrawHeatmap() { }
-        public void CalculateData() { }
-    }
-
-    public class SearchService : ISearchService
-    {
-
-        public List<DynamicMessage> SearchText(string query, QueryParser parser, IndexSearcher searcher)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<DynamicMessage> SearchText_UserFilter(string query, string[] users)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     public class CSVReadService : ICSVReadService
     {

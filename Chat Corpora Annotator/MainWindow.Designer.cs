@@ -488,7 +488,6 @@
             this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.RightToolStripPanel.Size = new System.Drawing.Size(0, 0);
-            this.RightToolStripPanel.Click += new System.EventHandler(this.toolStripContainer1_RightToolStripPanel_Click);
             // 
             // LeftToolStripPanel
             // 

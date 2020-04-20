@@ -29,7 +29,7 @@ namespace Chat_Corpora_Annotator
 	{
 		#region fields
 
-		public bool State = false;
+		
 		public string csvPath;
 		private string indexPath;
 
@@ -68,26 +68,49 @@ namespace Chat_Corpora_Annotator
 		private IndexSearcher searcher;
 		private QueryParser textParser;
 		private List<DynamicMessage> searchResults = new List<DynamicMessage>();
-
-		public event EventHandler CSVLoad;
-		public event EventHandler OpenIndex;
-		public event EventHandler ChartClick;
-		public event EventHandler HeatmapClick;
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		public bool FileLoadState { get { return FileLoadState; } set { } }
-		public string CsvPath { get { return csvPath; } set { } }
-
-		public string IndexPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		#endregion
 
+		#region IMainView
+		public event EventHandler LoadCSVFileInfo;
+		public event EventHandler OpenIndexedCorpus;
+		public event EventHandler ChartClick;
+		public event EventHandler HeatmapClick;
+		public event EventHandler FileAndIndexSelected;
+
+		//public event PropertyChangedEventHandler OnPropertyChanged;
+		//public bool FileLoadState { get { return FileLoadState; } set { FileLoadState = value; } }
+		public string CurrentPath { get { return csvPath; } set { } }
+
+		public string CurrentIndexPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		List<DynamicMessage> IMainView.messages { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		public void SetLineCount(int count)
+		{
+			messageLabel.Text = count.ToString() + " messages";
+		}
+
+		public void DisplayDocuments()
+		{
+			throw new NotImplementedException();
+		}
+
+		public new void Show()
+		{
+			ShowDialog();
+		}
+
+		public new void Close()
+		{
+			this.Close();
+		}
+		#endregion
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			
-
 		}
+
 		private void MainWindow_Load(object sender, EventArgs e)
 		{
 
@@ -121,7 +144,9 @@ namespace Chat_Corpora_Annotator
 			if (result == DialogResult.OK)
 			{
 				indexPath = indexDialog.SelectedPath;
-				SelectFields();
+				//SelectFields();
+
+				if (FileAndIndexSelected != null) FileAndIndexSelected(this, EventArgs.Empty);
 			}
 
 		}
@@ -424,7 +449,7 @@ namespace Chat_Corpora_Annotator
 				SetDateView();
 				LoadSomeDocuments(50);
 				DisplayData();
-				State = true;
+				
 				dl.Close();
 			}
 
@@ -452,19 +477,23 @@ namespace Chat_Corpora_Annotator
 
 		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ChartForm cf = new ChartForm();
-			cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+			//ChartForm cf = new ChartForm();
+			//cf.InitializeChart(messagesPerDay.Keys.ToList(), messagesPerDay.Values.ToList());
+
+			ChartClick?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
-			PopulateHeatmap();
-			LinearHeatmapForm swf = new LinearHeatmapForm();
-			swf.InitializeHeatMap(heatMapColors);
-			swf.Show();
-			swf.DrawHeatMap();
-			swf.Draw();
+			//PopulateHeatmap();
+			//LinearHeatmapForm swf = new LinearHeatmapForm();
+			//swf.InitializeHeatMap(heatMapColors);
+			//swf.Show();
+			//swf.DrawHeatMap();
+			//swf.Draw();
+
+			HeatmapClick?.Invoke(this, EventArgs.Empty);
 
 		}
 
@@ -664,11 +693,7 @@ namespace Chat_Corpora_Annotator
 		#endregion
 
 
-
-		
-
-
-
+		#region search
 
 		private void richTextBox1_MouseClick(object sender, MouseEventArgs e)
 		{
@@ -759,25 +784,10 @@ namespace Chat_Corpora_Annotator
 			
 		}
 
+		#endregion search
 
 
-        
-        
 
-		private void toolStripContainer1_RightToolStripPanel_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		public void SetLineCount(int count)
-		{
-			messageLabel.Text = count.ToString() + " messages";
-		}
-
-		public void DisplayDocuments()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
 

@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat_Corpora_Annotator.Framework
 {
-    public interface IMainView
+    public interface IMainView : IView
     {
-        bool FileLoadState { get; set; }
-        event PropertyChangedEventHandler PropertyChanged;
-        string CsvPath { get; set; }
-        string IndexPath { get; set; }
+        //bool FileLoadState { get; set; }
+
+        List<DynamicMessage> messages { get; set; }
+        string CurrentPath { get; set; }
+        string CurrentIndexPath { get; set; }
 
         void SetLineCount(int count);
         void DisplayDocuments();
-        event EventHandler NewFileClick;
-        event EventHandler CSVLoad;
-        event EventHandler OpenIndex;
+
+        event EventHandler FileAndIndexSelected;
+        event EventHandler OpenIndexedCorpus;
+
         event EventHandler ChartClick;
         event EventHandler HeatmapClick;
 
+        //event PropertyChangedEventHandler OnPropertyChanged;
     }
 }

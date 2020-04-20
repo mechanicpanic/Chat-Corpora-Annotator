@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chat_Corpora_Annotator.CSV_Wizard;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace Chat_Corpora_Annotator.Framework
 {
     public interface ICSVView : IView
     {
-
+        void AddStep(IWizardItem step);
+        List<IWizardItem> Steps { get; }
         string[] AllFields { get; set; }
         List<string> SelectedFields { get; set; }
 
@@ -24,8 +26,10 @@ namespace Chat_Corpora_Annotator.Framework
 
         string TextFieldKey { get; set; }
 
-        event Action HeaderFinished;
+        
         event Action DataLoaded;
+        event Action HeaderSelected;
+        event Action MetadataAdded;
 
 
 

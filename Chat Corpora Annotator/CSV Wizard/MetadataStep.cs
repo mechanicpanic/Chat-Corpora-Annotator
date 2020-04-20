@@ -12,9 +12,14 @@ namespace Chat_Corpora_Annotator.CSV_Wizard
 {
     public partial class MetadataStep : UserControl, IWizardItem
     {
-        public MetadataStep(List<string> fields)
+        public MetadataStep()
         {
             InitializeComponent();
+            
+        }
+
+        public void PopulateComboBoxes(List<string> fields)
+        {
             dateComboBox.Items.AddRange(fields.ToArray());
             senderComboBox.Items.AddRange(fields.ToArray());
             textComboBox.Items.AddRange(fields.ToArray());
