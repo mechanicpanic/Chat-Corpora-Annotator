@@ -8,32 +8,33 @@ using System.Threading.Tasks;
 
 namespace Chat_Corpora_Annotator.Framework.Services
 {
-    public interface ISearchService
-    {
+	public interface ISearchService
+	{
+		Query UserQuery { get; set; }
+		FieldCacheTermsFilter UserFilter { get; set; }
+		List<DynamicMessage> SearchText(string query);
+		List<DynamicMessage> SearchText_UserFilter(string query, string[] users);
+		List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish);
+	}
 
-        List<DynamicMessage> SearchText(string query, QueryParser parser, IndexSearcher searcher);
-        List<DynamicMessage> SearchText_UserFilter(string query, string[] users);
-        List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish);
-    }
 
 
+	public class SearchService : ISearchService
+	{
 
-    public class SearchService : ISearchService
-    {
+		public List<DynamicMessage> SearchText(string query)
+		{
+			throw new NotImplementedException();
+		}
 
-        public List<DynamicMessage> SearchText(string query, QueryParser parser, IndexSearcher searcher)
-        {
-            throw new NotImplementedException();
-        }
+		public List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish)
+		{
+			throw new NotImplementedException();
+		}
 
-        public List<DynamicMessage> SearchText_DateFilter(string query, string start, string finish)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<DynamicMessage> SearchText_UserFilter(string query, string[] users)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public List<DynamicMessage> SearchText_UserFilter(string query, string[] users)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

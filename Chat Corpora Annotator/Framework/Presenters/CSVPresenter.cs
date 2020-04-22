@@ -56,8 +56,9 @@ namespace Chat_Corpora_Annotator.Framework
 
         private void _csv_MetadataAdded()
         {
-            _indexer.SetUpIndex(_view.CurrentIndexPath);
-            _indexer.PopulateIndex(_view.CurrentIndexPath);
+            _indexer.SetUpIndex(_view.CurrentIndexPath, _csv.TextFieldKey);
+            _indexer.InitLookup(_csv.TextFieldKey, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.SelectedFields, _csv.AllFields);
+            _indexer.PopulateIndex(_view.CurrentIndexPath,_view.CurrentPath,_csv.AllFields);
         }
 
         private void _csv_DataLoaded()

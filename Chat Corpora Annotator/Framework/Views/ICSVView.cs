@@ -25,7 +25,6 @@ namespace Chat_Corpora_Annotator.Framework
         }
 
         string TextFieldKey { get; set; }
-
         
         event Action DataLoaded;
         event Action HeaderSelected;

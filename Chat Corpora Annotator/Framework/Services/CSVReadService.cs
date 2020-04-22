@@ -15,6 +15,7 @@ namespace Chat_Corpora_Annotator.Framework
 
     public interface ICSVReadService
     {
+        //Dictionary<string, int> MessagesPerDay { get; set; }
         string[] GetFields(string path);
         int GetLineCount(string path);
 
@@ -22,22 +23,7 @@ namespace Chat_Corpora_Annotator.Framework
         
     }
 
-    public interface IIndexService
-    {
-        Dictionary<string,int> MessagesPerDay { get; set; }
-        LuceneVersion AppLuceneVersion { get; }
-        FSDirectory Dir { get; set; }
-        IndexWriterConfig IndexConfig { get; set; }
-        IndexWriter Writer { get; set; }
-        DirectoryReader DirReader { get; set; }
 
-       StandardAnalyzer Analyzer { get; set; }
-        void SetUpIndex(string indexPath);
-        void PopulateIndex(string indexPath);
-
-        void LoadSomeDocuments(string indexPath, int count);
-        
-    }
 
 
     public class CSVReadService : ICSVReadService

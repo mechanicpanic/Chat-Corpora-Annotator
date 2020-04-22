@@ -28,14 +28,13 @@ namespace Chat_Corpora_Annotator
 
 		public List<IWizardItem> Steps { get { return steps; } }
 
+		
+
 		public event Action DataLoaded;
 		public event Action HeaderSelected;
 		public event Action MetadataAdded;
 
-		public void ShowError(string errorMessage)
-		{
-			throw new NotImplementedException();
-		}
+
 		public void AddStep(IWizardItem step)
 		{
 			steps.Add(step);
