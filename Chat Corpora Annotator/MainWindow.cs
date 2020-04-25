@@ -19,7 +19,7 @@ using Lucene.Net.Search;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Queries;
 using System.Drawing;
-
+using Tagger;
 using Viewer.CSV_Wizard;
 using Viewer.Framework.Views;
 
@@ -225,8 +225,16 @@ namespace Viewer
 			
 			for (int i = readerIndex; i < n+readerIndex; i++)
 			{
+				Document document;
 				List<string> temp = new List<string>();
-				var document = reader.Document(i);
+				if (i < reader.MaxDoc)
+				{
+					document = reader.Document(i);
+				}
+				else
+				{
+					break;
+				}
 				foreach (var field in selectedFields)
 				{
 
@@ -448,7 +456,7 @@ namespace Viewer
 			if (dl != null)
 			{
 				SetDateView();
-				LoadSomeDocuments(50);
+				LoadSomeDocuments(500);
 				DisplayData();
 				
 				dl.Close();

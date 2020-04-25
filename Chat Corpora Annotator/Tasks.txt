@@ -1,3 +1,8 @@
-﻿1. Split views, presenters, and services into separate files.
-2. Finish implementing the wizard:
-a) Sort out events
+﻿1. Finish MVP:
+1.1 FInish search
+
+2. User Controls for Tabs?
+
+3. Basic corpus statistics
+
+4. Basic tagging format: XML, highlighting for one message

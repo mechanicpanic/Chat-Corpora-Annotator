@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.TabControl tabControl1;
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Chat = new System.Windows.Forms.TabPage();
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.Chart = new System.Windows.Forms.TabPage();
+            this.Heatmap = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Statistics = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -68,8 +71,9 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
+            this.Heatmap.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.datesPanel.SuspendLayout();
@@ -80,10 +84,14 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            tabControl1.Controls.Add(this.Chat);
+            tabControl1.Controls.Add(this.Chart);
+            tabControl1.Controls.Add(this.Heatmap);
+            tabControl1.Controls.Add(this.Statistics);
             tabControl1.Controls.Add(this.tabPage1);
-            tabControl1.Controls.Add(this.tabPage2);
-            tabControl1.Controls.Add(this.tabPage3);
-            tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             tabControl1.Location = new System.Drawing.Point(309, 31);
             tabControl1.Name = "tabControl1";
@@ -93,28 +101,28 @@
             tabControl1.TabIndex = 17;
             tabControl1.TabStop = false;
             // 
-            // tabPage1
+            // Chat
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.Lavender;
-            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage1.Controls.Add(this.loadMoreButton);
-            this.tabPage1.Controls.Add(this.chatTable);
-            this.tabPage1.Controls.Add(this.dateView);
-            this.tabPage1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1165, 627);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Chat";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.Chat.BackColor = System.Drawing.Color.Lavender;
+            this.Chat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Chat.Controls.Add(this.loadMoreButton);
+            this.Chat.Controls.Add(this.chatTable);
+            this.Chat.Controls.Add(this.dateView);
+            this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Chat.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Chat.Location = new System.Drawing.Point(4, 32);
+            this.Chat.Name = "Chat";
+            this.Chat.Padding = new System.Windows.Forms.Padding(3);
+            this.Chat.Size = new System.Drawing.Size(1165, 627);
+            this.Chat.TabIndex = 0;
+            this.Chat.Text = "Chat";
+            this.Chat.UseVisualStyleBackColor = true;
             // 
             // loadMoreButton
             // 
-            this.loadMoreButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.loadMoreButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
             this.loadMoreButton.FlatAppearance.BorderSize = 0;
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
@@ -160,6 +168,7 @@
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Days});
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
             this.dateView.Location = new System.Drawing.Point(995, 5);
             this.dateView.Name = "dateView";
@@ -175,25 +184,54 @@
             this.Days.Text = "Active dates";
             this.Days.Width = 115;
             // 
-            // tabPage2
+            // Chart
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1165, 627);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.Chart.Location = new System.Drawing.Point(4, 32);
+            this.Chart.Name = "Chart";
+            this.Chart.Padding = new System.Windows.Forms.Padding(3);
+            this.Chart.Size = new System.Drawing.Size(1165, 627);
+            this.Chart.TabIndex = 1;
+            this.Chart.Text = "Chart";
+            this.Chart.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // Heatmap
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 32);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1165, 627);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.Heatmap.Controls.Add(this.panel2);
+            this.Heatmap.Location = new System.Drawing.Point(4, 32);
+            this.Heatmap.Name = "Heatmap";
+            this.Heatmap.Padding = new System.Windows.Forms.Padding(3);
+            this.Heatmap.Size = new System.Drawing.Size(1165, 627);
+            this.Heatmap.TabIndex = 2;
+            this.Heatmap.Text = "Heatmap";
+            this.Heatmap.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1159, 321);
+            this.panel2.TabIndex = 1;
+            // 
+            // Statistics
+            // 
+            this.Statistics.Location = new System.Drawing.Point(4, 32);
+            this.Statistics.Name = "Statistics";
+            this.Statistics.Padding = new System.Windows.Forms.Padding(3);
+            this.Statistics.Size = new System.Drawing.Size(1165, 627);
+            this.Statistics.TabIndex = 3;
+            this.Statistics.Text = "Statistics";
+            this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1165, 627);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // csvDialog
             // 
@@ -515,8 +553,9 @@
             this.Text = "Chat Corpora Annotator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
+            this.Heatmap.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -553,13 +592,13 @@
         private System.Windows.Forms.Panel queryPanel;
         private System.Windows.Forms.Button queryButton;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage Chat;
         private System.Windows.Forms.Button loadMoreButton;
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage Chart;
+        private System.Windows.Forms.TabPage Heatmap;
         private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
         private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
@@ -568,6 +607,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label messageLabel;
         public System.Windows.Forms.Button selectUsersButton;
+        private System.Windows.Forms.TabPage Statistics;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
