@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator.CSV_Wizard
+namespace Viewer.CSV_Wizard
 {
     public partial class DataLoadedStep : UserControl, IWizardItem
     {

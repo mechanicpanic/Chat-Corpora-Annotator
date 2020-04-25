@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Viewer.Properties {
+namespace Tagger.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

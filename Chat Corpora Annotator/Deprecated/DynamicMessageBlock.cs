@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chat_Corpora_Annotator.Deprecated
+namespace Viewer.Deprecated
 {
     public class DynamicMessageBlock : IComparable
     {

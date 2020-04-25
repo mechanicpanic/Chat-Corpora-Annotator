@@ -11,23 +11,23 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Services
 {
-    public interface IIndexService
-    {
-        BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
+	public interface IIndexService
+	{
+		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
-        void SetUpIndex(string indexPath, string textFieldKey);
-        void PopulateIndex(string indexPath, string filePath, string[] allFields);
+		void SetUpIndex(string indexPath, string textFieldKey);
+		void PopulateIndex(string indexPath, string filePath, string[] allFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
-        List<DynamicMessage> LoadSomeDocuments(string indexPath, int count);
+		List<DynamicMessage> LoadSomeDocuments(string indexPath, int count);
 
 
-    }
+	}
 
-    public class IndexService : IIndexService 
-    {
+	public class IndexService : IIndexService 
+	{
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get { return MessagesPerDay; } set { } }
 
 		private int[] lookup = new int[3];
@@ -53,10 +53,10 @@ namespace Chat_Corpora_Annotator.Framework
 			}
 		}
 		public List<DynamicMessage> LoadSomeDocuments(string indexPath, int count)
-        {
-            List<DynamicMessage> messages = new List<DynamicMessage>();
-            return messages;
-        }
+		{
+			List<DynamicMessage> messages = new List<DynamicMessage>();
+			return messages;
+		}
 
 		public void PopulateIndex(string indexPath, string filePath, string[] allFields)
 		{
@@ -122,19 +122,19 @@ namespace Chat_Corpora_Annotator.Framework
 			}
 		}
 
-        public void SetUpIndex(string indexPath, string textFieldKey)
-        {
-            LuceneService.Dir = FSDirectory.Open(indexPath);
-            LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
-            LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
-            LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-            LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
-            LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
-            LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+		public void SetUpIndex(string indexPath, string textFieldKey)
+		{
+			LuceneService.Dir = FSDirectory.Open(indexPath);
+			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
+			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
+			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
+			LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
+			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
+			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
 
-            LuceneService.Writer.DeleteAll();
-            LuceneService.Writer.Commit();
+			LuceneService.Writer.DeleteAll();
+			LuceneService.Writer.Commit();
 
-        }
-    }
+		}
+	}
 }

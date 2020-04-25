@@ -9,7 +9,7 @@ using System.Collections;
 using System.Windows.Forms;
 using Wintellect.PowerCollections;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
 	public class VirtualBLockTreeDataSource : AbstractVirtualListDataSource
 	{

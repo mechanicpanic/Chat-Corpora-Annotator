@@ -1,6 +1,6 @@
 ﻿
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Views
 {
     public interface IView
     {

@@ -2,11 +2,10 @@
 using Lucene.Net.Store;
 using Lucene.Net.Util;
 using Lucene.Net.Index;
-using System;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Services
 {
 	public static class LuceneService
 	{

@@ -10,7 +10,7 @@ using Lucene.Net.Store;
 using Lucene.Net.Index;
 using Lucene.Net.Analysis.Standard;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Services
 {
 
     public interface ICSVReadService

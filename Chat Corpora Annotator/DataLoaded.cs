@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     //VERY temporary solution. Will be redone soon
     public partial class DataLoaded : Form

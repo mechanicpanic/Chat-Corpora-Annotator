@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Views
 {
     public interface IHeatmapView
     {

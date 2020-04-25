@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class HeaderForm : Form
     {

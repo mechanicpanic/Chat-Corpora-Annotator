@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Viewer
+namespace Annotation_Framework
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace Viewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new Form1());
         }
     }
 }

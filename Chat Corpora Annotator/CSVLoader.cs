@@ -1,11 +1,11 @@
-﻿using Chat_Corpora_Annotator.CSV_Wizard;
-using Chat_Corpora_Annotator.Framework;
-
+﻿using Viewer.CSV_Wizard;
+using Viewer.Framework;
+using Viewer.Framework.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
 	public partial class CSVLoader : Form, ICSVView
 	{

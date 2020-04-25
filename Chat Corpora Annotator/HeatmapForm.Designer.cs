@@ -1,4 +1,4 @@
-﻿namespace Chat_Corpora_Annotator
+﻿namespace Viewer
 {
     partial class LinearHeatmapForm
     {

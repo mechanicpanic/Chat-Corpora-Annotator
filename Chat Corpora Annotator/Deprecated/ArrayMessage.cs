@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public class ArrayMessage
     {

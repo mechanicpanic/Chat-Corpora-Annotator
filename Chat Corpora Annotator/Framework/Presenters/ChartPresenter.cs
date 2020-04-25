@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chat_Corpora_Annotator.Framework
+using Viewer.Framework.Services;
+using Viewer.Framework.Views;
+
+namespace Viewer.Framework.Presenters
 {
     public class ChartPresenter
     {

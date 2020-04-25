@@ -4,7 +4,7 @@ using Wintellect.PowerCollections;
 using BrightIdeasSoftware;
 using Lucene.Net.Documents;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public class DynamicMessage : IComparable
     {

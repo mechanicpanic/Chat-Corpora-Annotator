@@ -1,4 +1,4 @@
-﻿using Chat_Corpora_Annotator.Framework;
+﻿using Viewer.Framework;
 using CSharpTest.Net.Collections;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class ChartForm : Form, IChartView
     {

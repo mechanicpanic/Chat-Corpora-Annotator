@@ -20,10 +20,10 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Queries;
 using System.Drawing;
 
-using Chat_Corpora_Annotator.CSV_Wizard;
-using Chat_Corpora_Annotator.Framework;
+using Viewer.CSV_Wizard;
+using Viewer.Framework.Views;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
 	public partial class MainWindow : Form, IMainView
 	{
@@ -41,9 +41,11 @@ namespace Chat_Corpora_Annotator
 		private string textFieldKey;
 
 
-		private Random rnd = new Random();
+		
 
 		private HashSet<string> userKeys = new HashSet<string>();
+
+		private Random rnd = new Random();
 		private Dictionary<string, Color> userColors = new Dictionary<string, Color>();
 
 	   
@@ -77,12 +79,10 @@ namespace Chat_Corpora_Annotator
 		public event EventHandler HeatmapClick;
 		public event EventHandler FileAndIndexSelected;
 
-		//public event PropertyChangedEventHandler OnPropertyChanged;
-		//public bool FileLoadState { get { return FileLoadState; } set { FileLoadState = value; } }
-		public string CurrentPath { get { return csvPath; } set { } }
-
-		public string CurrentIndexPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		List<DynamicMessage> IMainView.messages { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		List<string> IMainView.Users { get; set; }
+		public string CurrentPath { get; set; }
+		public string CurrentIndexPath { get; set; }
+		List<DynamicMessage> IMainView.messages { get; set; }
 
 		public void SetLineCount(int count)
 		{

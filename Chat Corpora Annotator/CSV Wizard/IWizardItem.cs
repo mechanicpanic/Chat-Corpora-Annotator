@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chat_Corpora_Annotator.CSV_Wizard
+namespace Viewer.CSV_Wizard
 {
     public interface IWizardItem
     {

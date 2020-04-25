@@ -3,20 +3,19 @@ using System.Drawing;
 using System.Windows.Forms;
 using System;
 using Wintellect.PowerCollections;
-using Chat_Corpora_Annotator.Framework;
+using Viewer.Framework;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class LinearHeatmapForm : Form, IHeatmapView
     {
 
-        float width;
-        float height;
-        SizeF rectangleSize;
-        Point rectangleLocation;
-        List<Color> colors;
-        List<RectangleF> rectangles = new List<RectangleF>();
-
+        float IHeatmapView.Width { get; set; }
+        float IHeatmapView.Height { get; set; }
+        public SizeF RectangleSize { get; set; }
+        public Point RectangleLocation { get; set; }
+        public List<Color> Colors { get; set; }
+        public List<RectangleF> Rectangles { get; set; }
 
         public LinearHeatmapForm()
         {
@@ -28,13 +27,13 @@ namespace Chat_Corpora_Annotator
         public void InitializeHeatMap(List<Color> colors)
         {
 
-            width = panel1.Width / colors.Count;
-            height = panel1.Height;
+            Width = panel1.Width / colors.Count;
+            Height = panel1.Height;
 
 
-            rectangleSize = new SizeF(width, height);
-            rectangleLocation = new Point(0, 0);
-            this.colors = colors;
+            RectangleSize = new SizeF(Width, Height);
+            RectangleLocation = new Point(0, 0);
+            this.Colors = colors;
 
         }
     
@@ -44,11 +43,11 @@ namespace Chat_Corpora_Annotator
         
         public void DrawHeatMap()
         {
-            for (int i = 0; i < colors.Count; i++)
+            for (int i = 0; i < Colors.Count; i++)
             {
-                RectangleF rectangle = new RectangleF(rectangleLocation, rectangleSize);
-                rectangles.Add(rectangle);
-                rectangleLocation += new Size((int)width, 0);
+                RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
+                Rectangles.Add(rectangle);
+                RectangleLocation += new Size((int)Width, 0);
 
             }
         }
@@ -57,11 +56,11 @@ namespace Chat_Corpora_Annotator
             // Create a local version of the graphics object for the PictureBox.
             Graphics g = e.Graphics;
             
-            for(int i = 0; i < rectangles.Count; i++)
+            for(int i = 0; i < Rectangles.Count; i++)
             {
-                using (SolidBrush heatBrush = new SolidBrush(colors[i]))
+                using (SolidBrush heatBrush = new SolidBrush(Colors[i]))
                 {
-                    g.FillRectangle(heatBrush, rectangles[i]);
+                    g.FillRectangle(heatBrush, Rectangles[i]);
                 }
                 
                 

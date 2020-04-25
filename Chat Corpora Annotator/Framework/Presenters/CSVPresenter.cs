@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Chat_Corpora_Annotator.CSV_Wizard;
+using Viewer.CSV_Wizard;
+using Viewer.Framework.Services;
+using Viewer.Framework.Views;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Presenters
 {
     public class CSVPresenter
     {
@@ -64,10 +66,14 @@ namespace Chat_Corpora_Annotator.Framework
         private void _csv_DataLoaded()
         {
             //_view.FileLoadState = true;
-            
+            _view.Users = _indexer.UserKeys.ToList();
             _csv.Close();
         }
 
+        private void SetUsers()
+        {
+            
+        }
 
 
     }

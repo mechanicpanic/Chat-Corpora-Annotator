@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class IndexLoading : Form
     {

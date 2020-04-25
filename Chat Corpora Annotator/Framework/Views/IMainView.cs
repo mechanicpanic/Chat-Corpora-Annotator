@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Views
 {
     public interface IMainView : IView
     {
         //bool FileLoadState { get; set; }
+        List<string> Users { get; set; }
 
         List<DynamicMessage> messages { get; set; }
         string CurrentPath { get; set; }

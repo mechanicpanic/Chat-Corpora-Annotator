@@ -1,4 +1,4 @@
-﻿namespace Chat_Corpora_Annotator.CSV_Wizard
+﻿namespace Viewer.CSV_Wizard
 {
     partial class MetadataStep
     {

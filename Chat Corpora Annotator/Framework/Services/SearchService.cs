@@ -2,14 +2,12 @@
 using Lucene.Net.Search;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chat_Corpora_Annotator.Framework.Services
+namespace Viewer.Framework.Services
 {
 	public interface ISearchService
 	{
+		
 		Query UserQuery { get; set; }
 		FieldCacheTermsFilter UserFilter { get; set; }
 		List<DynamicMessage> SearchText(string query);
@@ -20,8 +18,10 @@ namespace Chat_Corpora_Annotator.Framework.Services
 
 
 	public class SearchService : ISearchService
-	{
 
+	{
+		public Query UserQuery { get; set; }
+		public FieldCacheTermsFilter UserFilter { get; set; }
 		public List<DynamicMessage> SearchText(string query)
 		{
 			throw new NotImplementedException();

@@ -12,7 +12,7 @@ using Lucene.Net.Store;
 using Lucene.Net.Index;
 using Lucene.Net.Documents;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class SearchForm : Form
     {

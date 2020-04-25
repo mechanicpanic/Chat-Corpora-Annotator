@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BrightIdeasSoftware;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public class ArrayMessageBlock: IComparable
     {

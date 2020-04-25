@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Chat_Corpora_Annotator
+namespace Viewer
 {
     public partial class ColumnMetadata : Form
     {

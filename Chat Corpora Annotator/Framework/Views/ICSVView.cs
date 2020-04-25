@@ -1,11 +1,11 @@
-﻿using Chat_Corpora_Annotator.CSV_Wizard;
+﻿using Viewer.CSV_Wizard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chat_Corpora_Annotator.Framework
+namespace Viewer.Framework.Views
 {
     public interface ICSVView : IView
     {
