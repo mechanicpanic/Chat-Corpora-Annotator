@@ -53,6 +53,7 @@ namespace Viewer.Framework.Presenters
             _csv.AddStep(new LoadingStep());
             _csv.AddStep(new DataLoadedStep());
             _csv.Show();
+            
         }
 
 

@@ -21,6 +21,7 @@ namespace Viewer.CSV_Wizard
             {
                 listView1.Items.Add(new ListViewItem(field));
             }
+            listView1.Invalidate();
         }
 
         public string HeaderTitle { get { return "Select the columns to be uploaded."; } }

@@ -19,12 +19,12 @@ namespace Viewer.Framework.Presenters
 
 
 
-        public MainPresenter(IMainView view,ICSVView csv, IChartView chart, IHeatmapView heatmap, IIndexService reader,ISearchService searcher)
+        public MainPresenter(IMainView view,ICSVView csv,IIndexService reader,ISearchService searcher)
         {
             this._view = view;
             this._csv = csv;
-            this._chart = chart;
-            this._heatmap = heatmap;
+            //this._chart = chart;
+            //this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
 

@@ -16,19 +16,18 @@ namespace Viewer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //MainWindow main = new MainWindow();
-            //CSVLoader loader = new CSVLoader();
+            MainWindow main = new MainWindow();
+            CSVLoader loader = new CSVLoader();
 
-            //CSVReadService fileReader = new CSVReadService();
-            //SearchService searcher = new SearchService();
-            //IndexService indexer = new IndexService();
+            CSVReadService fileReader = new CSVReadService();
+            SearchService searcher = new SearchService();
+            IndexService indexer = new IndexService();
+            
 
-            //MainPresenter presenter = new MainPresenter(main, loader, indexer, searcher);
-            //CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
-            //HeatmapPresenter heatmap = new HeatmapPresenter(main,)
-            //ChartPresenter chart = new ChartPresenter()
-            //Application.Run(main);
-            Application.Run(new MainWindow());
+            MainPresenter presenter = new MainPresenter(main, loader, indexer, searcher);
+            CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
+            Application.Run(main);
+            //Application.Run(new MainWindow());
            
         }
     }

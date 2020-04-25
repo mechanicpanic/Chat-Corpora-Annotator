@@ -84,7 +84,7 @@ namespace Viewer
 		List<string> IMainView.Users { get; set; }
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
-		List<DynamicMessage> Messages { get; set; }
+		public List<DynamicMessage> Messages { get; set; }
 
 
 		public void SetLineCount(int count)
@@ -135,7 +135,8 @@ namespace Viewer
 		}
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)
 		{
-			csvPath = csvDialog.FileName;
+			//csvPath = csvDialog.FileName;
+			this.CurrentPath = csvDialog.FileName;
 			SelectIndexFolder();
 
 		}
@@ -148,7 +149,8 @@ namespace Viewer
 			DialogResult result = indexDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				indexPath = indexDialog.SelectedPath;
+				//indexPath = indexDialog.SelectedPath;
+				this.CurrentIndexPath = indexDialog.SelectedPath;
 				//SelectFields();
 
 				FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
@@ -286,6 +288,48 @@ namespace Viewer
 
 			cm.Show();
 			cm.ColumnButtonClicked += new EventHandler(ColumnButtonHandler);
+		}
+
+		private void FieldButtonHandler(object sender, EventArgs e)
+		{
+
+			HeaderForm hf = sender as HeaderForm;
+			if (hf != null)
+			{
+				selectedFields = hf.SelectedFields;
+				SelectFieldMetadata();
+				hf.Close();
+			}
+
+		}
+
+		private void DataLoadedButtonHandler(object sender, EventArgs e)
+		{
+			DataLoaded dl = sender as DataLoaded;
+			if (dl != null)
+			{
+				SetDateView();
+				LoadSomeDocuments(500);
+				DisplayData();
+
+				dl.Close();
+			}
+
+		}
+
+		private void ColumnButtonHandler(object sender, EventArgs e)
+		{
+			ColumnMetadata cm = sender as ColumnMetadata;
+			if (cm != null)
+			{
+				dateFieldKey = cm.dateFieldKey;
+				senderFieldKey = cm.senderFieldKey;
+				textFieldKey = cm.textFieldKey;
+				PopulateIndex();
+				cm.Close();
+
+			}
+
 		}
 		#endregion
 
@@ -441,50 +485,6 @@ namespace Viewer
 
 		#endregion
 
-		#region dialogue buttons
-		private void FieldButtonHandler(object sender, EventArgs e)
-		{
-
-			HeaderForm hf = sender as HeaderForm;
-			if (hf != null)
-			{
-				selectedFields = hf.SelectedFields;
-				SelectFieldMetadata();
-				hf.Close();
-			}
-
-		}
-
-		private void DataLoadedButtonHandler(object sender, EventArgs e)
-		{
-			DataLoaded dl = sender as DataLoaded;
-			if (dl != null)
-			{
-				SetDateView();
-				LoadSomeDocuments(500);
-				DisplayData();
-				
-				dl.Close();
-			}
-
-		}
-
-		private void ColumnButtonHandler(object sender, EventArgs e)
-		{
-			ColumnMetadata cm = sender as ColumnMetadata;
-			if (cm != null)
-			{
-				dateFieldKey = cm.dateFieldKey;
-				senderFieldKey = cm.senderFieldKey;
-				textFieldKey = cm.textFieldKey;
-				PopulateIndex();
-				cm.Close();
-
-			}
-
-		}
-
-		#endregion
 
 		#region main window buttons
 

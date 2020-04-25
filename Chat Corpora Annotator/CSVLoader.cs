@@ -104,7 +104,7 @@ namespace Viewer
 
 		public new void Show()
 		{
-
+			ShowStep();
 			ShowDialog();
 		}
 	}
