@@ -235,6 +235,12 @@
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
+    <Reference Include="opennlp-tools-1.9.1, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.1\lib\opennlp-tools-1.9.1.dll</HintPath>
+    </Reference>
+    <Reference Include="opennlp-uima-1.9.1, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.1\lib\opennlp-uima-1.9.1.dll</HintPath>
+    </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -341,10 +347,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartForm.cs">
+    <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChartForm.Designer.cs">
+    <Compile Include="UI\ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CSV Wizard\DataLoadedStep.cs">
@@ -420,10 +426,10 @@
     <Compile Include="HeaderForm.Designer.cs">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="2DHeatmapForm.cs">
+    <Compile Include="UI\2DHeatmapForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="2DHeatmapForm.Designer.cs">
+    <Compile Include="UI\2DHeatmapForm.Designer.cs">
       <DependentUpon>2DHeatmapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
@@ -447,7 +453,7 @@
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\VirtualBTree.cs" />
-    <EmbeddedResource Include="ChartForm.resx">
+    <EmbeddedResource Include="UI\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ColumnMetadata.resx">
@@ -474,7 +480,7 @@
     <EmbeddedResource Include="HeaderForm.resx">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="2DHeatmapForm.resx">
+    <EmbeddedResource Include="UI\2DHeatmapForm.resx">
       <DependentUpon>2DHeatmapForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IndexLoading.resx">

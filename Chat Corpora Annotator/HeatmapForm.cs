@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System;
 using Wintellect.PowerCollections;
-using Viewer.Framework;
+using Viewer.Framework.Views;
 
 namespace Viewer
 {

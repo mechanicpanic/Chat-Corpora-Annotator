@@ -61,7 +61,7 @@ namespace Viewer
 		IndexWriterConfig indexConfig;
 		IndexWriter writer;
 		DirectoryReader reader;
-		int readerIndex = 0;
+		int readerIndex;
 
 
 
@@ -144,9 +144,9 @@ namespace Viewer
 			if (result == DialogResult.OK)
 			{
 				indexPath = indexDialog.SelectedPath;
-				//SelectFields();
+				SelectFields();
 
-				if (FileAndIndexSelected != null) FileAndIndexSelected(this, EventArgs.Empty);
+				//if (FileAndIndexSelected != null) FileAndIndexSelected(this, EventArgs.Empty);
 			}
 
 		}
@@ -234,9 +234,10 @@ namespace Viewer
 				}
 				DynamicMessage message = new DynamicMessage(temp, selectedFields, dateFieldKey);
 				messages.Add(message);
-				readerIndex = n;
+				
 
 			}
+			readerIndex = n + readerIndex;
 
 		}
 
@@ -294,7 +295,7 @@ namespace Viewer
 				writer.Commit();
 
 				textParser = new QueryParser(AppLuceneVersion, textFieldKey, analyzer);
-				
+				readerIndex = 0;
 				FirstRead();
 			}
 

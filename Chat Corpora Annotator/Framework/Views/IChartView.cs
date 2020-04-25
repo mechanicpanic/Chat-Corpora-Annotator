@@ -10,7 +10,7 @@ namespace Viewer.Framework.Views
 {
     public interface IChartView
     {
-        ChartValues<int> chartValues { get; set; }
-        List<string> chartLabels { get; set; }
+        ChartValues<int> ChartValues { get; set; }
+        List<string> ChartLabels { get; set; }
     }
 }
