@@ -25,12 +25,19 @@ namespace Viewer.Framework.Presenters
 
             _csv.HeaderSelected += _csv_HeaderSelected;
             _csv.MetadataAdded += _csv_MetadataAdded;
-            _csv.DataLoaded += _csv_DataLoaded;
+
 
             
             _view.FileAndIndexSelected += _view_FileAndIndexSelected;
-            
 
+            _indexer.FileIndexed += _indexer_FileIndexed;
+
+        }
+
+        private void _indexer_FileIndexed(object sender, EventArgs e)
+        {
+            _csv.FileLoadState = true;
+            
         }
 
         private void _csv_HeaderSelected()

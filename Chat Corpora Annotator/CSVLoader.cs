@@ -1,20 +1,27 @@
 ﻿using Viewer.CSV_Wizard;
-using Viewer.Framework;
 using Viewer.Framework.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Viewer
 {
 	public partial class CSVLoader : Form, ICSVView
-	{
-
+	{ 
 		//private readonly ApplicationContext _context;
 		public CSVLoader()
 		{
 			InitializeComponent();
 			currentStep = 0;
+			this.PropertyChanged += CSVLoader_PropertyChanged;
+		}
+
+		private void CSVLoader_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			cmdNext.Enabled = true;
+			//cmdNext_Click(this, EventArgs.Empty);
+			this.Invalidate();
 		}
 
 		private int currentStep;
@@ -28,12 +35,12 @@ namespace Viewer
 
 		public List<IWizardItem> Steps { get { return steps; } }
 
-		
+		private bool _fileLoadState = false;
+		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
 
-		public event Action DataLoaded;
 		public event Action HeaderSelected;
 		public event Action MetadataAdded;
-
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		public void AddStep(IWizardItem step)
 		{
@@ -56,18 +63,16 @@ namespace Viewer
 			panelStep.Controls.Clear();
 			UserControl ctrl = (UserControl)steps[currentStep];
 			panelStep.Controls.Add(ctrl);
+			panelStep.Invalidate();
 		}
 
 
 
 		private void cmdNext_Click(object sender, EventArgs e)
 		{
-			if (currentStep == totalSteps)
-			{
-				DataLoaded();
-
-			}
-			else
+			if (currentStep != totalSteps)
+		
+				
 			{
 				switch (steps[currentStep].StepType)
 				{
@@ -82,11 +87,16 @@ namespace Viewer
 						MetadataAdded();
 						cmdNext.Enabled = false;
 						break;
+
 					
 
 				}
 				currentStep++;
 				ShowStep();
+			}
+			else
+			{
+				Close();
 			}
 
 		}
@@ -105,6 +115,7 @@ namespace Viewer
 		public new void Show()
 		{
 			ShowStep();
+			panelStep.Invalidate();
 			ShowDialog();
 		}
 	}

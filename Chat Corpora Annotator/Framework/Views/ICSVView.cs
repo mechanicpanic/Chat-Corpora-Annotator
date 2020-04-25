@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Viewer.Framework.Views
 {
-    public interface ICSVView : IView
+    public interface ICSVView : IView, INotifyPropertyChanged
     {
         void AddStep(IWizardItem step);
         List<IWizardItem> Steps { get; }
@@ -26,7 +27,6 @@ namespace Viewer.Framework.Views
 
         string TextFieldKey { get; set; }
         
-        event Action DataLoaded;
         event Action HeaderSelected;
         event Action MetadataAdded;
 

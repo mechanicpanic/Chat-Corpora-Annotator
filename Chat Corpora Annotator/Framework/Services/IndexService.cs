@@ -23,16 +23,23 @@ namespace Viewer.Framework.Services
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
 
+		event EventHandler FileIndexed;
+
 
 	}
 
 	public class IndexService : IIndexService 
 	{
 		private int readerIndex = 0;
-		public BTreeDictionary<DateTime, int> MessagesPerDay { get { return MessagesPerDay; } set { } }
+		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
 		private int[] lookup = new int[3];
-		public HashSet<string> UserKeys { get { return UserKeys; } set { } }
+
+		public event EventHandler FileIndexed;
+
+		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
+
+
 
 		public void InitLookup(string textFieldKey,string dateFieldKey, string senderFieldKey, List<string> selectedFields,string[] allFields)
 		{
@@ -143,6 +150,8 @@ namespace Viewer.Framework.Services
 
 						LuceneService.Writer.AddDocument(document);
 					}
+					FileIndexed?.Invoke(this, EventArgs.Empty);
+
 				}
 			}
 		}

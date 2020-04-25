@@ -6,6 +6,8 @@ namespace Viewer.Framework.Views
     {
         void Show();
         void Close();
+
+        bool FileLoadState { get; set; }
     }
 
 

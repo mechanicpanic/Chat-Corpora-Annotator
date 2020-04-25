@@ -85,7 +85,7 @@ namespace Viewer
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 		public List<DynamicMessage> Messages { get; set; }
-
+		public bool FileLoadState { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 		public void SetLineCount(int count)
 		{
