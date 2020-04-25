@@ -73,16 +73,19 @@ namespace Viewer
 		#endregion
 
 		#region IMainView
-		public event EventHandler LoadCSVFileInfo;
+
 		public event EventHandler OpenIndexedCorpus;
 		public event EventHandler ChartClick;
 		public event EventHandler HeatmapClick;
 		public event EventHandler FileAndIndexSelected;
+		public event EventHandler FindClick;
+		public event EventHandler LoadMoreClick;
 
 		List<string> IMainView.Users { get; set; }
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
-		List<DynamicMessage> IMainView.messages { get; set; }
+		List<DynamicMessage> Messages { get; set; }
+
 
 		public void SetLineCount(int count)
 		{
@@ -91,7 +94,8 @@ namespace Viewer
 
 		public void DisplayDocuments()
 		{
-			throw new NotImplementedException();
+			chatTable.UpdateObjects(this.Messages);
+			chatTable.Invalidate();
 		}
 
 		public new void Show()
@@ -108,6 +112,7 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
+			
 			
 		}
 
@@ -144,9 +149,9 @@ namespace Viewer
 			if (result == DialogResult.OK)
 			{
 				indexPath = indexDialog.SelectedPath;
-				SelectFields();
+				//SelectFields();
 
-				//if (FileAndIndexSelected != null) FileAndIndexSelected(this, EventArgs.Empty);
+				FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
 			}
 
 		}
@@ -515,6 +520,7 @@ namespace Viewer
 
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
+			LoadMoreClick?.Invoke(this, EventArgs.Empty);
 			LoadSomeDocuments(100);
 			chatTable.UpdateObjects(messages);
 		}
@@ -529,7 +535,6 @@ namespace Viewer
 				queryPanel.Visible = true;
 			}
 		}
-
 		private void selectUsersButton_Click(object sender, EventArgs e)
 		{
 			if (userPanel.Visible)
@@ -541,8 +546,6 @@ namespace Viewer
 				userPanel.Visible = true;
 			}
 		}
-
-
 
 		private void datesButton_Click(object sender, EventArgs e)
 		{
@@ -713,7 +716,7 @@ namespace Viewer
 
 		private void findButton_Click(object sender, EventArgs e)
 		{
-			
+			FindClick?.Invoke(this, EventArgs.Empty);
 			searchResults.Clear();
 			if (searchBox.Text != "")
 			{
@@ -793,10 +796,19 @@ namespace Viewer
 			
 		}
 
+
+
 		#endregion search
 
+		private void generateNewToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 
+		}
 
+		private void editToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
 

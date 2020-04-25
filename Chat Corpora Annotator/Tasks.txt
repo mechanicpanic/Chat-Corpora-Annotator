@@ -1,7 +1,7 @@
 ﻿1. Finish MVP:
 1.1 FInish search
 
-2. User Controls for Tabs?
+2. Figure out DockPanel
 
 3. Basic corpus statistics
 

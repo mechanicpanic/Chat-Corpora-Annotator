@@ -23,7 +23,7 @@ namespace Viewer
             //SearchService searcher = new SearchService();
             //IndexService indexer = new IndexService();
 
-            //MainPresenter presenter = new MainPresenter(main, indexer, searcher);
+            //MainPresenter presenter = new MainPresenter(main, loader, indexer, searcher);
             //CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
             //HeatmapPresenter heatmap = new HeatmapPresenter(main,)
             //ChartPresenter chart = new ChartPresenter()

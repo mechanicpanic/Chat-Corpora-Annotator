@@ -21,13 +21,14 @@ namespace Viewer.Framework.Services
 		void PopulateIndex(string indexPath, string filePath, string[] allFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
-		List<DynamicMessage> LoadSomeDocuments(string indexPath, int count);
+		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
 
 
 	}
 
 	public class IndexService : IIndexService 
 	{
+		private int readerIndex = 0;
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get { return MessagesPerDay; } set { } }
 
 		private int[] lookup = new int[3];
@@ -52,9 +53,33 @@ namespace Viewer.Framework.Services
 				}
 			}
 		}
-		public List<DynamicMessage> LoadSomeDocuments(string indexPath, int count)
+		public List<DynamicMessage> LoadSomeDocuments(string indexPath, string dateFieldKey, List<string> selectedFields, int count)
 		{
 			List<DynamicMessage> messages = new List<DynamicMessage>();
+			
+			for (int i = readerIndex; i < count + readerIndex; i++)
+			{
+				Document document;
+				List<string> temp = new List<string>();
+				if (i < LuceneService.DirReader.MaxDoc)
+				{
+					document = LuceneService.DirReader.Document(i);
+				}
+				else
+				{
+					break;
+				}
+				foreach (var field in selectedFields)
+				{
+
+					temp.Add(document.GetField(field).GetStringValue());
+				}
+				DynamicMessage message = new DynamicMessage(temp, selectedFields, dateFieldKey);
+				messages.Add(message);
+
+
+			}
+			readerIndex = count + readerIndex;
 			return messages;
 		}
 

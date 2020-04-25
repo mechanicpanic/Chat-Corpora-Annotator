@@ -8,8 +8,9 @@ namespace Viewer.Framework.Views
     {
         //bool FileLoadState { get; set; }
         List<string> Users { get; set; }
+        List<DynamicMessage> Messages { get; set; }
 
-        List<DynamicMessage> messages { get; set; }
+        //List<DynamicMessage> searchResults { get; set; }
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
 
@@ -21,7 +22,8 @@ namespace Viewer.Framework.Views
 
         event EventHandler ChartClick;
         event EventHandler HeatmapClick;
+        event EventHandler FindClick;
 
-        //event PropertyChangedEventHandler OnPropertyChanged;
+        event EventHandler LoadMoreClick;
     }
 }

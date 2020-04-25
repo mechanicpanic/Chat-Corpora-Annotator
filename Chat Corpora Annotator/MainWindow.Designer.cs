@@ -34,9 +34,6 @@
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Chart = new System.Windows.Forms.TabPage();
-            this.Heatmap = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.Statistics = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
@@ -46,8 +43,10 @@
             this.messageLabel = new System.Windows.Forms.Label();
             this.findButton = new System.Windows.Forms.Button();
             this.datesPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.datesButton = new System.Windows.Forms.Button();
             this.userPanel = new System.Windows.Forms.Panel();
             this.userList = new System.Windows.Forms.ListView();
@@ -61,6 +60,10 @@
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.heatmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +76,6 @@
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
-            this.Heatmap.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.datesPanel.SuspendLayout();
@@ -88,8 +90,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             tabControl1.Controls.Add(this.Chat);
-            tabControl1.Controls.Add(this.Chart);
-            tabControl1.Controls.Add(this.Heatmap);
             tabControl1.Controls.Add(this.Statistics);
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -184,35 +184,6 @@
             this.Days.Text = "Active dates";
             this.Days.Width = 115;
             // 
-            // Chart
-            // 
-            this.Chart.Location = new System.Drawing.Point(4, 32);
-            this.Chart.Name = "Chart";
-            this.Chart.Padding = new System.Windows.Forms.Padding(3);
-            this.Chart.Size = new System.Drawing.Size(1165, 627);
-            this.Chart.TabIndex = 1;
-            this.Chart.Text = "Chart";
-            this.Chart.UseVisualStyleBackColor = true;
-            // 
-            // Heatmap
-            // 
-            this.Heatmap.Controls.Add(this.panel2);
-            this.Heatmap.Location = new System.Drawing.Point(4, 32);
-            this.Heatmap.Name = "Heatmap";
-            this.Heatmap.Padding = new System.Windows.Forms.Padding(3);
-            this.Heatmap.Size = new System.Drawing.Size(1165, 627);
-            this.Heatmap.TabIndex = 2;
-            this.Heatmap.Text = "Heatmap";
-            this.Heatmap.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1159, 321);
-            this.panel2.TabIndex = 1;
-            // 
             // Statistics
             // 
             this.Statistics.Location = new System.Drawing.Point(4, 32);
@@ -230,7 +201,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1165, 627);
             this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Analysis";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // csvDialog
@@ -299,8 +270,10 @@
             this.datesPanel.ColumnCount = 2;
             this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.91909F));
             this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.08091F));
+            this.datesPanel.Controls.Add(this.label2);
             this.datesPanel.Controls.Add(this.dateTimePicker1, 1, 0);
             this.datesPanel.Controls.Add(this.dateTimePicker2, 1, 1);
+            this.datesPanel.Controls.Add(this.label1);
             this.datesPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.datesPanel.Location = new System.Drawing.Point(0, 461);
             this.datesPanel.Name = "datesPanel";
@@ -310,6 +283,17 @@
             this.datesPanel.Size = new System.Drawing.Size(309, 73);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 36);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "from";
             // 
             // dateTimePicker1
             // 
@@ -330,6 +314,17 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(227, 30);
             this.dateTimePicker2.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(3, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 37);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "to";
             // 
             // datesButton
             // 
@@ -476,9 +471,42 @@
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userColorsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(60, 27);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // userColorsToolStripMenuItem
+            // 
+            this.userColorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generateNewToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.userColorsToolStripMenuItem.Name = "userColorsToolStripMenuItem";
+            this.userColorsToolStripMenuItem.Size = new System.Drawing.Size(178, 28);
+            this.userColorsToolStripMenuItem.Text = "User colors";
+            // 
+            // generateNewToolStripMenuItem
+            // 
+            this.generateNewToolStripMenuItem.Name = "generateNewToolStripMenuItem";
+            this.generateNewToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
+            this.generateNewToolStripMenuItem.Text = "New random colors";
+            this.generateNewToolStripMenuItem.Click += new System.EventHandler(this.generateNewToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
+            this.editToolStripMenuItem.Text = "Color scheme";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(128, 28);
+            this.newToolStripMenuItem.Text = "New";
             // 
             // vizToolStripMenuItem
             // 
@@ -555,11 +583,11 @@
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
-            this.Heatmap.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.datesPanel.ResumeLayout(false);
+            this.datesPanel.PerformLayout();
             this.userPanel.ResumeLayout(false);
             this.queryPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -597,8 +625,6 @@
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
-        private System.Windows.Forms.TabPage Chart;
-        private System.Windows.Forms.TabPage Heatmap;
         private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
         private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
@@ -609,7 +635,12 @@
         public System.Windows.Forms.Button selectUsersButton;
         private System.Windows.Forms.TabPage Statistics;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem userColorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
     }
 }
 
