@@ -162,6 +162,7 @@ namespace Viewer
 
 
 			}
+			chatTable.AllColumns.Clear();
 			chatTable.AllColumns.AddRange(columns);
 			chatTable.RebuildColumns();
 
@@ -407,7 +408,7 @@ namespace Viewer
 
 		#endregion
 
-		#region search
+
 
 		private void richTextBox1_MouseClick(object sender, MouseEventArgs e)
 		{
@@ -418,121 +419,71 @@ namespace Viewer
 
 		private void findButton_Click(object sender, EventArgs e)
 		{
-			List<string> users = new List<string>();
-			List<string> dates = new List<string>();
+			
 			//searchResults.Clear();
-			if (searchBox.Text != "")
+			if (searchBox.Text == "")
 			{
-				var stringQuery = searchBox.Text;
-				if (!checkBox1.Checked && !checkBox2.Checked)
+				var result = MessageBox.Show("Do you want to send an empty query?");
+				if (result == DialogResult.OK)
 				{
-					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, false));
+					LaunchSearch();
 				}
-				else if (checkBox1.Checked && !checkBox2.Checked) {
-					if (userList.CheckedItems.Count != 0)
-					{
-						users.Clear();
-						foreach (ListViewItem item in userList.CheckedItems)
-						{
-							users.Add(item.Text);
-
-						}
-						FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), false));
-					}
-				}
-				else if (!checkBox1.Checked && checkBox2.Checked) {
-
-					if(startDate.Checked && finishDate.Checked)
-					{
-						DateTime[] date = new DateTime[2];
-						date[0] = startDate.Value;
-						date[1] = finishDate.Value;
-						FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, date, false));
-					}
-										
-				}
-				else if (checkBox1.Checked && checkBox2.Checked) {
-					MessageBox.Show("Not implemented yet");
-
-				}
-				//if (userList.CheckedItems.Count != 0)
-				//{
-				//	List<string> users = new List<string>();
-				//	foreach (ListViewItem item in userList.CheckedItems)
-				//	{
-				//		users.Add(item.Text);
-
-				//	}
-				//	SearchTextWithUser(stringQuery, users);
-
-				//}
-				//else
-				//{
-				//	SearchText(stringQuery);
-				//}
-				//MessageBox.Show("Found " + searchResults.Count + " results.");
-				//DisplayResults();
-
-
 			}
-
-			//}
-			//private void SearchText(string stringQuery)
-			//{
-			//	Query textQuery = textParser.Parse(stringQuery + "*");
-			//	TopDocs temp = searcher.Search(textQuery, 50);
-			//	for (int i = 0; i < temp.TotalHits; i++)
-			//	{
-			//		List<string> data = new List<string>();
-			//		ScoreDoc d = temp.ScoreDocs[i];
-			//		Document idoc = searcher.Doc(d.Doc);
-			//		foreach (var field in selectedFields)
-			//		{
-			//			data.Add(idoc.GetField(field).GetStringValue());
-			//		}
-			//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-			//		searchResults.Add(message);
-			//	}
-			//}
-			//private void SearchTextWithUser(string stringQuery, List<string> users)
-			//{
-			//	Query textQuery = textParser.Parse(stringQuery + "*");
-
-			//	FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
-
-			//	var filter = new BooleanFilter();
-			//	filter.Add(new FilterClause(userFilter, Occur.MUST));
-
-			//	var hits = searcher.Search(textQuery, userFilter, 200).ScoreDocs;
-			//	for (int i = 0; i < hits.Length; i++)
-			//	{
-			//		List<string> data = new List<string>();
-
-			//		Document idoc = searcher.Doc(hits[i].Doc);
-
-			//		foreach (var field in selectedFields)
-			//		{
-			//			data.Add(idoc.GetField(field).GetStringValue());
-			//		}
-			//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-			//		searchResults.Add(message);
-
-			//	}
-			//}
-			//private void DisplayResults()
-			//{
-			//	chatTable.SetObjects(searchResults);
-			//	chatTable.Invalidate();
-
-			//}
-
-
-
-			#endregion search
+			else
+			{
+				LaunchSearch();
+			}
 
 
 		}
 
+		private void LaunchSearch()
+		{
+			List<string> users = new List<string>();
+			List<string> dates = new List<string>();
+			var stringQuery = searchBox.Text;
+			if (!checkBox1.Checked && !checkBox2.Checked)
+			{
+				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, false));
+			}
+			else if (checkBox1.Checked && !checkBox2.Checked)
+			{
+				if (userList.CheckedItems.Count != 0)
+				{
+					users.Clear();
+					foreach (ListViewItem item in userList.CheckedItems)
+					{
+						users.Add(item.Text);
+
+					}
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), false));
+				}
+			}
+			else if (!checkBox1.Checked && checkBox2.Checked)
+			{
+
+				if (startDate.Checked && finishDate.Checked)
+				{
+					DateTime[] date = new DateTime[2];
+					date[0] = startDate.Value;
+					date[1] = finishDate.Value;
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, date, false));
+				}
+
+			}
+			else if (checkBox1.Checked && checkBox2.Checked)
+			{
+				MessageBox.Show("Not implemented yet");
+
+			}
+		}
+
+		
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			chatTable.SetObjects(_messages);
+		}
 	}
 }
 
