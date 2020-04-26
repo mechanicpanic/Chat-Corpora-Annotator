@@ -19,49 +19,54 @@ namespace Viewer
 
 		private void CSVLoader_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			cmdNext.Enabled = true;
+			//cmdNext.Enabled = true;
 			//cmdNext_Click(this, EventArgs.Empty);
+			currentStep++;
+			ShowStep();
+			cmdNext.Visible = true;
+			cmdNext.Text = "Finish";
 			this.Invalidate();
 		}
 
 		private int currentStep;
 		private int totalSteps;
-		private List<IWizardItem> steps = new List<IWizardItem>();
+		
 		public string[] AllFields { get; set; }
 		public List<string> SelectedFields { get; set; }
 		public string DateFieldKey { get; set; }
 		public string SenderFieldKey { get; set; }
 		public string TextFieldKey { get; set; }
 
-		public List<IWizardItem> Steps { get { return steps; } }
+		private List<IWizardItem> _steps = new List<IWizardItem>();
+		public List<IWizardItem> Steps { get { return _steps; } } 
 
 		private bool _fileLoadState = false;
 		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
 
-		public event Action HeaderSelected;
-		public event Action MetadataAdded;
+		public event EventHandler HeaderSelected;
+		public event EventHandler MetadataAdded;
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public void AddStep(IWizardItem step)
 		{
-			steps.Add(step);
-			totalSteps = steps.Count;
+			_steps.Add(step);
+			totalSteps = _steps.Count;
 		}
 		private void ShowStep()
 		{
 			// Update buttons.
-			cmdPrev.Visible = (currentStep != 0);
+			
 			if (currentStep == totalSteps)
 				cmdNext.Text = "Finish";
 			else
 				cmdNext.Text = "Next >";
 
 
-			stepLabel.Text = steps[currentStep].HeaderTitle;
+			stepLabel.Text = Steps[currentStep].HeaderTitle;
 			Text = "Step " + (currentStep + 1).ToString() + " of " + totalSteps.ToString();
 
 			panelStep.Controls.Clear();
-			UserControl ctrl = (UserControl)steps[currentStep];
+			UserControl ctrl = (UserControl)Steps[currentStep];
 			panelStep.Controls.Add(ctrl);
 			panelStep.Invalidate();
 		}
@@ -74,18 +79,19 @@ namespace Viewer
 		
 				
 			{
-				switch (steps[currentStep].StepType)
+				switch (_steps[currentStep].StepType)
 				{
 					case "Header":
-						this.SelectedFields = steps[currentStep].GetValues();
-						HeaderSelected();
+						this.SelectedFields = _steps[currentStep].GetValues();
+						HeaderSelected?.Invoke(this, EventArgs.Empty); 
 						break;
 					case "Metadata":
-						this.DateFieldKey = steps[currentStep].GetValues()[0];
-						this.SenderFieldKey = steps[currentStep].GetValues()[1];
-						this.TextFieldKey = steps[currentStep].GetValues()[2];
-						MetadataAdded();
-						cmdNext.Enabled = false;
+						this.DateFieldKey = _steps[currentStep].GetValues()[0];
+						this.SenderFieldKey = _steps[currentStep].GetValues()[1];
+						this.TextFieldKey = _steps[currentStep].GetValues()[2];
+						//currentStep++;
+						MetadataAdded?.Invoke(this,EventArgs.Empty);
+						cmdNext.Visible = false;
 						break;
 
 					
@@ -100,15 +106,9 @@ namespace Viewer
 			}
 
 		}
-		private void cmdPrev_Click(object sender, EventArgs e)
-		{
-			//currentStep--;
-			//ShowStep();
-			MessageBox.Show("Broken!");
-		}
-
 		public new void Close()
 		{
+			
 			this.Close();
 		}
 
@@ -116,7 +116,7 @@ namespace Viewer
 		{
 			ShowStep();
 			panelStep.Invalidate();
-			ShowDialog();
+			this.ShowDialog();
 		}
 	}
 		

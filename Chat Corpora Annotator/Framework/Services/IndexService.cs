@@ -17,7 +17,7 @@ namespace Viewer.Framework.Services
 	{
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
-		void SetUpIndex(string indexPath, string textFieldKey);
+		void OpenWriter(string indexPath, string textFieldKey);
 		void PopulateIndex(string indexPath, string filePath, string[] allFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
@@ -68,7 +68,7 @@ namespace Viewer.Framework.Services
 			{
 				Document document;
 				List<string> temp = new List<string>();
-				if (i < LuceneService.DirReader.MaxDoc)
+				if (i < LuceneService.Writer.MaxDoc)
 				{
 					document = LuceneService.DirReader.Document(i);
 				}
@@ -150,25 +150,35 @@ namespace Viewer.Framework.Services
 
 						LuceneService.Writer.AddDocument(document);
 					}
+					LuceneService.Writer.Commit();
+					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
+					OpenReader();
 					FileIndexed?.Invoke(this, EventArgs.Empty);
 
 				}
 			}
 		}
 
-		public void SetUpIndex(string indexPath, string textFieldKey)
+		public void OpenWriter(string indexPath, string textFieldKey)
 		{
 			LuceneService.Dir = FSDirectory.Open(indexPath);
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-			LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
-			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
+			
+			
 			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
 
 			LuceneService.Writer.DeleteAll();
 			LuceneService.Writer.Commit();
+			
 
+		}
+
+		private void OpenReader()
+		{
+			LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
+			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
 		}
 	}
 }

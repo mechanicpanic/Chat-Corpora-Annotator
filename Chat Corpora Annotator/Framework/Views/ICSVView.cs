@@ -27,8 +27,8 @@ namespace Viewer.Framework.Views
 
         string TextFieldKey { get; set; }
         
-        event Action HeaderSelected;
-        event Action MetadataAdded;
+        event EventHandler HeaderSelected;
+        event EventHandler MetadataAdded;
 
 
 

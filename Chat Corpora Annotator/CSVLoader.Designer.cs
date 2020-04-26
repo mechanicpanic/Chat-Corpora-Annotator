@@ -32,7 +32,6 @@
             this.stepLabel = new System.Windows.Forms.Label();
             this.panelStep = new System.Windows.Forms.Panel();
             this.cmdNext = new System.Windows.Forms.Button();
-            this.cmdPrev = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +43,7 @@
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 534);
+            this.panel1.Size = new System.Drawing.Size(190, 534);
             this.panel1.TabIndex = 0;
             // 
             // stepLabel
@@ -63,16 +62,16 @@
             this.panelStep.BackColor = System.Drawing.Color.Lavender;
             this.panelStep.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelStep.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelStep.Location = new System.Drawing.Point(100, 0);
+            this.panelStep.Location = new System.Drawing.Point(196, 0);
             this.panelStep.Name = "panelStep";
-            this.panelStep.Size = new System.Drawing.Size(751, 341);
+            this.panelStep.Size = new System.Drawing.Size(655, 461);
             this.panelStep.TabIndex = 0;
             // 
             // cmdNext
             // 
             this.cmdNext.BackColor = System.Drawing.Color.Lavender;
             this.cmdNext.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdNext.Location = new System.Drawing.Point(712, 467);
+            this.cmdNext.Location = new System.Drawing.Point(712, 481);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(125, 30);
             this.cmdNext.TabIndex = 1;
@@ -80,24 +79,11 @@
             this.cmdNext.UseVisualStyleBackColor = false;
             this.cmdNext.Click += new System.EventHandler(this.cmdNext_Click);
             // 
-            // cmdPrev
-            // 
-            this.cmdPrev.BackColor = System.Drawing.Color.Lavender;
-            this.cmdPrev.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdPrev.Location = new System.Drawing.Point(550, 467);
-            this.cmdPrev.Name = "cmdPrev";
-            this.cmdPrev.Size = new System.Drawing.Size(125, 30);
-            this.cmdPrev.TabIndex = 0;
-            this.cmdPrev.Text = "< Prev";
-            this.cmdPrev.UseVisualStyleBackColor = false;
-            this.cmdPrev.Click += new System.EventHandler(this.cmdPrev_Click);
-            // 
             // CSVLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 534);
-            this.Controls.Add(this.cmdPrev);
             this.Controls.Add(this.cmdNext);
             this.Controls.Add(this.panelStep);
             this.Controls.Add(this.panel1);
@@ -115,7 +101,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelStep;
         private System.Windows.Forms.Button cmdNext;
-        private System.Windows.Forms.Button cmdPrev;
         private System.Windows.Forms.Label stepLabel;
     }
 }

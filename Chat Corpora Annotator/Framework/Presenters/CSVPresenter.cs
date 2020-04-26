@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,16 +32,28 @@ namespace Viewer.Framework.Presenters
             _view.FileAndIndexSelected += _view_FileAndIndexSelected;
 
             _indexer.FileIndexed += _indexer_FileIndexed;
-
-        }
-
-        private void _indexer_FileIndexed(object sender, EventArgs e)
-        {
-            _csv.FileLoadState = true;
+            _csv.PropertyChanged += _csv_PropertyChanged;
             
         }
 
-        private void _csv_HeaderSelected()
+
+
+        private void _csv_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+            _view.Users = _indexer.UserKeys.ToList();
+            int temp = (LuceneService.Writer.MaxDoc) / 5;
+            var list = _indexer.LoadSomeDocuments(_view.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
+            _view.Messages = list;
+            _view.FileLoadState = true;
+    }
+
+    private void _indexer_FileIndexed(object sender, EventArgs e)
+        {
+            _csv.FileLoadState = true;
+
+        }
+
+        private void _csv_HeaderSelected(object sender, EventArgs e)
         {
             
             _csv.Steps.OfType<MetadataStep>().First().PopulateComboBoxes(_csv.SelectedFields);
@@ -64,24 +77,13 @@ namespace Viewer.Framework.Presenters
         }
 
 
-        private void _csv_MetadataAdded()
+        private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            _indexer.SetUpIndex(_view.CurrentIndexPath, _csv.TextFieldKey);
+            _indexer.OpenWriter(_view.CurrentIndexPath, _csv.TextFieldKey);
             _indexer.InitLookup(_csv.TextFieldKey, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.SelectedFields, _csv.AllFields);
             _indexer.PopulateIndex(_view.CurrentIndexPath,_view.CurrentPath,_csv.AllFields);
         }
 
-        private void _csv_DataLoaded()
-        {
-            //_view.FileLoadState = true;
-            _view.Users = _indexer.UserKeys.ToList();
-            _csv.Close();
-        }
-
-        private void SetUsers()
-        {
-            
-        }
 
 
     }

@@ -34,10 +34,19 @@ namespace Viewer.Framework.Presenters
             _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _view.FindClick += _view_FindClick;
             _view.LoadMoreClick += _view_LoadMoreClick;
-
+            _view.PropertyChanged += _view_PropertyChanged;
 
         }
 
+
+
+        private void _view_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "FileLoadState")
+            {
+                _view.DisplayDocuments();
+            }
+        }
         private void _view_LoadMoreClick(object sender, EventArgs e)
         {
             AddDocumentsToDisplay(200);
@@ -65,7 +74,6 @@ namespace Viewer.Framework.Presenters
         {
             var list = _reader.LoadSomeDocuments(_view.CurrentIndexPath,_csv.DateFieldKey, _csv.SelectedFields, count);
             _view.Messages.AddRange(list);
-            _view.DisplayDocuments();
         }
 
 
