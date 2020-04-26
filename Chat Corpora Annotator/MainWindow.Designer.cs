@@ -35,10 +35,14 @@
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Statistics = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.messageLabel = new System.Windows.Forms.Label();
             this.findButton = new System.Windows.Forms.Button();
@@ -76,6 +80,7 @@
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
+            this.Statistics.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.datesPanel.SuspendLayout();
@@ -183,6 +188,7 @@
             // 
             // Statistics
             // 
+            this.Statistics.Controls.Add(this.comboBox1);
             this.Statistics.Location = new System.Drawing.Point(4, 32);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(3);
@@ -190,6 +196,14 @@
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(0, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 31);
+            this.comboBox1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -208,8 +222,11 @@
             // 
             // searchPanel
             // 
-            this.searchPanel.Controls.Add(this.panel1);
             this.searchPanel.Controls.Add(this.findButton);
+            this.searchPanel.Controls.Add(this.button1);
+            this.searchPanel.Controls.Add(this.checkBox2);
+            this.searchPanel.Controls.Add(this.checkBox1);
+            this.searchPanel.Controls.Add(this.panel1);
             this.searchPanel.Controls.Add(this.datesPanel);
             this.searchPanel.Controls.Add(this.datesButton);
             this.searchPanel.Controls.Add(this.userPanel);
@@ -221,6 +238,41 @@
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(309, 663);
             this.searchPanel.TabIndex = 16;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(105, 436);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(18, 17);
+            this.checkBox2.TabIndex = 28;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(104, 120);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(18, 17);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Lavender;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(0, 534);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(309, 42);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Clear";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -252,10 +304,10 @@
             this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 534);
+            this.findButton.Location = new System.Drawing.Point(0, 576);
             this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(309, 35);
+            this.findButton.Size = new System.Drawing.Size(309, 43);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -487,7 +539,6 @@
             this.generateNewToolStripMenuItem.Name = "generateNewToolStripMenuItem";
             this.generateNewToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
             this.generateNewToolStripMenuItem.Text = "New random colors";
-            this.generateNewToolStripMenuItem.Click += new System.EventHandler(this.generateNewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -496,7 +547,6 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
             this.editToolStripMenuItem.Text = "Color scheme";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // newToolStripMenuItem
             // 
@@ -579,7 +629,9 @@
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
+            this.Statistics.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
+            this.searchPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -637,6 +689,10 @@
         private System.Windows.Forms.ToolStripMenuItem generateNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

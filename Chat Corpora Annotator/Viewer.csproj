@@ -353,6 +353,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LuceneQueryEventArgs.cs" />
     <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>

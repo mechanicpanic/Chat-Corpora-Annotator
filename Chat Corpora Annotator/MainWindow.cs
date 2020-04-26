@@ -25,6 +25,7 @@ using Viewer.Framework.Views;
 
 namespace Viewer
 {
+
 	public partial class MainWindow : Form, IMainView
 	{
 		Random rnd = new Random();
@@ -36,7 +37,7 @@ namespace Viewer
 		public event EventHandler FileAndIndexSelected;
 		public event EventHandler FindClick;
 		public event EventHandler LoadMoreClick;
-		public event PropertyChangedEventHandler PropertyChanged;
+		
 
 		List<string> IMainView.Users { get; set; }
 		public string CurrentPath { get; set; }
@@ -74,14 +75,10 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			this.PropertyChanged += MainWindow_PropertyChanged;
+			
 			
 		}
 
-		private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			DisplayDocuments();
-		}
 
 		private void MainWindow_Load(object sender, EventArgs e)
 		{
@@ -410,93 +407,93 @@ namespace Viewer
 
 
 
-		//private void findButton_Click(object sender, EventArgs e)
-		//{
-		//	FindClick?.Invoke(this, EventArgs.Empty);
-		//	searchResults.Clear();
-		//	if (searchBox.Text != "")
-		//	{
-		//		var stringQuery = searchBox.Text;
-
-
-		//		if (stringQuery != "")
-		//		{
-		//			if (userList.CheckedItems.Count != 0)
-		//			{
-		//				List<string> users = new List<string>();
-		//				foreach (ListViewItem item in userList.CheckedItems)
-		//				{
-		//					users.Add(item.Text);
-
-		//				}
-		//				SearchTextWithUser(stringQuery, users);
-
-		//			}
-		//			else
-		//			{
-		//				SearchText(stringQuery);
-		//			}
-		//			MessageBox.Show("Found " + searchResults.Count + " results.");
-		//			DisplayResults();
-
-		//		}
-		//	}
-
-		//}
-		//private void SearchText(string stringQuery)
-		//{
-		//	Query textQuery = textParser.Parse(stringQuery + "*");
-		//	TopDocs temp = searcher.Search(textQuery, 50);
-		//	for (int i = 0; i < temp.TotalHits; i++)
-		//	{
-		//		List<string> data = new List<string>();
-		//		ScoreDoc d = temp.ScoreDocs[i];
-		//		Document idoc = searcher.Doc(d.Doc);
-		//		foreach (var field in selectedFields)
-		//		{
-		//			data.Add(idoc.GetField(field).GetStringValue());
-		//		}
-		//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-		//		searchResults.Add(message);
-		//	}
-		//}
-		//private void SearchTextWithUser(string stringQuery, List<string> users)
-		//{
-		//	Query textQuery = textParser.Parse(stringQuery + "*");
-
-		//	FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
-
-		//	var filter = new BooleanFilter();
-		//	filter.Add(new FilterClause(userFilter, Occur.MUST));
-
-		//	var hits = searcher.Search(textQuery, userFilter, 200).ScoreDocs;
-		//	for (int i = 0; i < hits.Length; i++)
-		//	{
-		//		List<string> data = new List<string>();
-
-		//		Document idoc = searcher.Doc(hits[i].Doc);
-
-		//		foreach (var field in selectedFields)
-		//		{
-		//			data.Add(idoc.GetField(field).GetStringValue());
-		//		}
-		//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-		//		searchResults.Add(message);
-
-		//	}
-		//}
-		//private void DisplayResults()
-		//{
-		//	chatTable.SetObjects(searchResults);
-		//	chatTable.Invalidate();
+		private void findButton_Click(object sender, EventArgs e)
+		{
 			
-		//}
+			//searchResults.Clear();
+			if (searchBox.Text != "")
+			{
+				var stringQuery = searchBox.Text;
+				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery,50));
+
+				
+				
+					//if (userList.CheckedItems.Count != 0)
+					//{
+					//	List<string> users = new List<string>();
+					//	foreach (ListViewItem item in userList.CheckedItems)
+					//	{
+					//		users.Add(item.Text);
+
+					//	}
+					//	SearchTextWithUser(stringQuery, users);
+
+					//}
+					//else
+					//{
+					//	SearchText(stringQuery);
+					//}
+					//MessageBox.Show("Found " + searchResults.Count + " results.");
+					//DisplayResults();
+
+				
+			}
+
+			//}
+			//private void SearchText(string stringQuery)
+			//{
+			//	Query textQuery = textParser.Parse(stringQuery + "*");
+			//	TopDocs temp = searcher.Search(textQuery, 50);
+			//	for (int i = 0; i < temp.TotalHits; i++)
+			//	{
+			//		List<string> data = new List<string>();
+			//		ScoreDoc d = temp.ScoreDocs[i];
+			//		Document idoc = searcher.Doc(d.Doc);
+			//		foreach (var field in selectedFields)
+			//		{
+			//			data.Add(idoc.GetField(field).GetStringValue());
+			//		}
+			//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+			//		searchResults.Add(message);
+			//	}
+			//}
+			//private void SearchTextWithUser(string stringQuery, List<string> users)
+			//{
+			//	Query textQuery = textParser.Parse(stringQuery + "*");
+
+			//	FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
+
+			//	var filter = new BooleanFilter();
+			//	filter.Add(new FilterClause(userFilter, Occur.MUST));
+
+			//	var hits = searcher.Search(textQuery, userFilter, 200).ScoreDocs;
+			//	for (int i = 0; i < hits.Length; i++)
+			//	{
+			//		List<string> data = new List<string>();
+
+			//		Document idoc = searcher.Doc(hits[i].Doc);
+
+			//		foreach (var field in selectedFields)
+			//		{
+			//			data.Add(idoc.GetField(field).GetStringValue());
+			//		}
+			//		DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+			//		searchResults.Add(message);
+
+			//	}
+			//}
+			//private void DisplayResults()
+			//{
+			//	chatTable.SetObjects(searchResults);
+			//	chatTable.Invalidate();
+
+			//}
 
 
 
-		#endregion search
+			#endregion search
 
-		private void generateNewToolStripMenuItem_Click(object sender, EventArgs e)
+			private void generateNewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}
