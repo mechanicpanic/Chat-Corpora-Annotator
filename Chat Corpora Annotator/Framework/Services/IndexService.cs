@@ -18,12 +18,12 @@ namespace Viewer.Framework.Services
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
 		void OpenWriter(string indexPath, string textFieldKey);
-		void PopulateIndex(string indexPath, string filePath, string[] allFields);
+		int PopulateIndex(string indexPath, string filePath, string[] allFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
 
-		event EventHandler FileIndexed;
+		//event EventHandler FileIndexed;
 
 
 	}
@@ -34,6 +34,7 @@ namespace Viewer.Framework.Services
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
 		private int[] lookup = new int[3];
+
 
 		public event EventHandler FileIndexed;
 
@@ -90,8 +91,9 @@ namespace Viewer.Framework.Services
 			return messages;
 		}
 
-		public void PopulateIndex(string indexPath, string filePath, string[] allFields)
+		public int PopulateIndex(string indexPath, string filePath, string[] allFields)
 		{
+			int result = 0;
 			if (lookup != null)
 			{
 				string[] row = null;
@@ -153,10 +155,13 @@ namespace Viewer.Framework.Services
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
 					OpenReader();
-					FileIndexed?.Invoke(this, EventArgs.Empty);
+					result = 1;
+					//FileIndexed?.Invoke(this, EventArgs.Empty);
+					return result;
 
 				}
 			}
+			return result;
 		}
 
 		public void OpenWriter(string indexPath, string textFieldKey)

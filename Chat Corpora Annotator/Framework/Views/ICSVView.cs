@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Viewer.Framework.Views
 {
-    public interface ICSVView : IView, INotifyPropertyChanged
+    public interface ICSVView : IView
     {
         void AddStep(IWizardItem step);
         List<IWizardItem> Steps { get; }
@@ -29,8 +29,9 @@ namespace Viewer.Framework.Views
         
         event EventHandler HeaderSelected;
         event EventHandler MetadataAdded;
-
-
+        event EventHandler ReadyToShow;
+        void CorpusIndexed();
+        //int FileLoadState { get; set; }
 
     }
 }

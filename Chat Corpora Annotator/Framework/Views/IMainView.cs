@@ -25,6 +25,7 @@ namespace Viewer.Framework.Views
         event EventHandler FindClick;
 
         event EventHandler LoadMoreClick;
-        event PropertyChangedEventHandler PropertyChanged;
+        //event PropertyChangedEventHandler PropertyChanged;
+        //bool FileLoadState { get; set; }
     }
 }

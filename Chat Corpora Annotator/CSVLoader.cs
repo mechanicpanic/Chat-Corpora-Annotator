@@ -9,24 +9,23 @@ namespace Viewer
 {
 	public partial class CSVLoader : Form, ICSVView
 	{ 
-		//private readonly ApplicationContext _context;
+		
 		public CSVLoader()
 		{
 			InitializeComponent();
 			currentStep = 0;
-			this.PropertyChanged += CSVLoader_PropertyChanged;
+			//this.PropertyChanged += CSVLoader_PropertyChanged;
+			
 		}
 
-		private void CSVLoader_PropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			//cmdNext.Enabled = true;
-			//cmdNext_Click(this, EventArgs.Empty);
-			currentStep++;
-			ShowStep();
-			cmdNext.Visible = true;
-			cmdNext.Text = "Finish";
-			this.Invalidate();
-		}
+		//private void CSVLoader_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		//{
+		//	//currentStep++;
+		//	ShowStep();
+		//	cmdNext.Visible = true;
+		//	//cmdNext.Text = "Finish";
+		//	this.Invalidate();
+		//}
 
 		private int currentStep;
 		private int totalSteps;
@@ -38,25 +37,29 @@ namespace Viewer
 		public string TextFieldKey { get; set; }
 
 		private List<IWizardItem> _steps = new List<IWizardItem>();
-		public List<IWizardItem> Steps { get { return _steps; } } 
+		public List<IWizardItem> Steps { get { return _steps; } }
 
-		private bool _fileLoadState = false;
-		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
 
+		public void CorpusIndexed()
+		{
+			cmdNext_Click(this, EventArgs.Empty);
+		}
 		public event EventHandler HeaderSelected;
 		public event EventHandler MetadataAdded;
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event EventHandler ReadyToShow;
 
 		public void AddStep(IWizardItem step)
 		{
+			
 			_steps.Add(step);
+			
 			totalSteps = _steps.Count;
 		}
 		private void ShowStep()
 		{
-			// Update buttons.
 			
-			if (currentStep == totalSteps)
+			
+			if (currentStep == totalSteps-1)
 				cmdNext.Text = "Finish";
 			else
 				cmdNext.Text = "Next >";
@@ -68,6 +71,7 @@ namespace Viewer
 			panelStep.Controls.Clear();
 			UserControl ctrl = (UserControl)Steps[currentStep];
 			panelStep.Controls.Add(ctrl);
+			ctrl.Dock = DockStyle.Fill;
 			panelStep.Invalidate();
 		}
 
@@ -75,44 +79,46 @@ namespace Viewer
 
 		private void cmdNext_Click(object sender, EventArgs e)
 		{
-			if (currentStep != totalSteps)
-		
-				
+			switch (_steps[currentStep].StepType)
 			{
-				switch (_steps[currentStep].StepType)
-				{
-					case "Header":
-						this.SelectedFields = _steps[currentStep].GetValues();
-						HeaderSelected?.Invoke(this, EventArgs.Empty); 
-						break;
-					case "Metadata":
-						this.DateFieldKey = _steps[currentStep].GetValues()[0];
-						this.SenderFieldKey = _steps[currentStep].GetValues()[1];
-						this.TextFieldKey = _steps[currentStep].GetValues()[2];
-						//currentStep++;
-						MetadataAdded?.Invoke(this,EventArgs.Empty);
-						cmdNext.Visible = false;
-						break;
-
+				case "Header":
+					this.SelectedFields = _steps[currentStep].GetValues();
+					HeaderSelected?.Invoke(this, EventArgs.Empty);
+					currentStep++;
+					ShowStep();
+					break;
+				case "Metadata":
 					
+					
+					this.DateFieldKey = _steps[currentStep].GetValues()[0];
+					this.SenderFieldKey = _steps[currentStep].GetValues()[1];
+					this.TextFieldKey = _steps[currentStep].GetValues()[2];
 
-				}
-				currentStep++;
-				ShowStep();
+					cmdNext.Visible = false;
+					currentStep++;
+					ShowStep();
+					MetadataAdded?.Invoke(this, EventArgs.Empty);
+					break;
+				case "Loading":
+					currentStep++;
+					cmdNext.Visible = true;
+					ShowStep();
+					break;
+				case "DataLoaded":
+					ReadyToShow?.Invoke(this, EventArgs.Empty);
+					CloseView();
+					break;
 			}
-			else
-			{
-				Close();
-			}
+
 
 		}
-		public new void Close()
+		public void CloseView()
 		{
-			
+			_steps.Clear();
 			this.Close();
 		}
 
-		public new void Show()
+		public new void ShowView()
 		{
 			ShowStep();
 			panelStep.Invalidate();

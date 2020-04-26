@@ -43,7 +43,7 @@
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(190, 534);
+            this.panel1.Size = new System.Drawing.Size(250, 534);
             this.panel1.TabIndex = 0;
             // 
             // stepLabel
@@ -60,18 +60,18 @@
             // panelStep
             // 
             this.panelStep.BackColor = System.Drawing.Color.Lavender;
-            this.panelStep.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStep.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStep.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelStep.Location = new System.Drawing.Point(196, 0);
+            this.panelStep.Location = new System.Drawing.Point(250, 0);
             this.panelStep.Name = "panelStep";
-            this.panelStep.Size = new System.Drawing.Size(655, 461);
+            this.panelStep.Size = new System.Drawing.Size(599, 486);
             this.panelStep.TabIndex = 0;
             // 
             // cmdNext
             // 
             this.cmdNext.BackColor = System.Drawing.Color.Lavender;
             this.cmdNext.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdNext.Location = new System.Drawing.Point(712, 481);
+            this.cmdNext.Location = new System.Drawing.Point(712, 492);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(125, 30);
             this.cmdNext.TabIndex = 1;

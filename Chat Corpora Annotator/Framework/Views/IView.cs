@@ -4,10 +4,10 @@ namespace Viewer.Framework.Views
 {
     public interface IView
     {
-        void Show();
-        void Close();
+        void ShowView();
+        void CloseView();
 
-        bool FileLoadState { get; set; }
+        //bool FileLoadState { get; set; }
     }
 
 

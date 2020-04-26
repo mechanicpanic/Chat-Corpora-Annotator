@@ -25,7 +25,7 @@ using Viewer.Framework.Views;
 
 namespace Viewer
 {
-	public partial class MainWindow : Form, IMainView, INotifyPropertyChanged
+	public partial class MainWindow : Form, IMainView
 	{
 		Random rnd = new Random();
 		#region IMainView
@@ -43,10 +43,10 @@ namespace Viewer
 		public string CurrentIndexPath { get; set; }
 
 		private List<DynamicMessage> _messages;
-		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Messages")); } }
+		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
 
-		private bool _fileLoadState = false;
-		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
+		//private bool _fileLoadState = false;
+		//public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
 
 		public void SetLineCount(int count)
 		{
@@ -55,27 +55,32 @@ namespace Viewer
 
 		public void DisplayDocuments()
 		{
-			
+			DisplayData();
 			chatTable.UpdateObjects(this.Messages);
 			chatTable.Invalidate();
 		}
 
-		void IView.Show()
+		void IView.ShowView()
 		{
 			ShowDialog();
 		}
 
-		new public void Close()
+		new public void CloseView()
 		{
-			this.Close();
+			this.CloseView();
 		}
 		#endregion
 
 		public MainWindow()
 		{
 			InitializeComponent();
+			this.PropertyChanged += MainWindow_PropertyChanged;
 			
-			
+		}
+
+		private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			DisplayDocuments();
 		}
 
 		private void MainWindow_Load(object sender, EventArgs e)
