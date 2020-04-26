@@ -35,9 +35,9 @@ namespace Viewer
 		public event EventHandler ChartClick;
 		public event EventHandler HeatmapClick;
 		public event EventHandler FileAndIndexSelected;
-		public event EventHandler FindClick;
+		public event LuceneQueryEventHandler FindClick;
 		public event EventHandler LoadMoreClick;
-		
+
 
 		List<string> IMainView.Users { get; set; }
 		public string CurrentPath { get; set; }
@@ -46,8 +46,9 @@ namespace Viewer
 		private List<DynamicMessage> _messages;
 		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
 
-		//private bool _fileLoadState = false;
-		//public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FileLoadState")); } }
+		public List<DynamicMessage> SearchResults { get; set; }
+
+		
 
 		public void SetLineCount(int count)
 		{
@@ -56,8 +57,15 @@ namespace Viewer
 
 		public void DisplayDocuments()
 		{
-			DisplayData();
+			chatTable.SetObjects(_messages);
+			SetUpChatView();
 			chatTable.UpdateObjects(this.Messages);
+			chatTable.Invalidate();
+		}
+		public void DisplaySearchResults()
+		{
+			chatTable.SetObjects(SearchResults);
+			SetUpChatView();
 			chatTable.Invalidate();
 		}
 
@@ -75,10 +83,11 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			
-			
+
+
 		}
 
+		
 
 		private void MainWindow_Load(object sender, EventArgs e)
 		{
@@ -118,9 +127,9 @@ namespace Viewer
 			DialogResult result = indexDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				
+
 				this.CurrentIndexPath = indexDialog.SelectedPath;
-				
+
 
 				FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
 			}
@@ -131,14 +140,14 @@ namespace Viewer
 
 		#region chat table display
 
-		private void DisplayData()
+		private void SetUpChatView()
 		{
 			//PopulateSenderColors();
-			chatTable.SetObjects(_messages);
 			
+
 			List<OLVColumn> columns = new List<OLVColumn>();
-			
-			foreach(var key in _messages[0].contents.Keys)
+
+			foreach (var key in _messages[0].contents.Keys)
 			{
 				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x)
@@ -150,7 +159,7 @@ namespace Viewer
 				cl.WordWrap = true;
 
 				columns.Add(cl);
-				
+
 
 			}
 			chatTable.AllColumns.AddRange(columns);
@@ -158,7 +167,7 @@ namespace Viewer
 
 
 			//FormatColumns();
-			
+
 		}
 
 		//private void FormatColumns()
@@ -199,8 +208,8 @@ namespace Viewer
 
 
 		#endregion
-	
-		
+
+
 
 		#region event pipelining
 		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
@@ -217,7 +226,7 @@ namespace Viewer
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
 			LoadMoreClick?.Invoke(this, EventArgs.Empty);
-			
+
 		}
 		private void queryButton_Click(object sender, EventArgs e)
 		{
@@ -284,7 +293,7 @@ namespace Viewer
 		//	else
 		//	{
 		//		DateTime[] days = new DateTime[messagesPerDay.Keys.Count];
-				
+
 		//		messagesPerDay.Keys.CopyTo(days, 0);
 		//		//Array.Sort(days);
 
@@ -323,7 +332,7 @@ namespace Viewer
 		//					newCounts.Add(x);
 		//				}
 		//			}
-					
+
 		//		}
 
 		//		var newmax = newCounts.Max();
@@ -409,34 +418,62 @@ namespace Viewer
 
 		private void findButton_Click(object sender, EventArgs e)
 		{
-			
+			List<string> users = new List<string>();
+			List<string> dates = new List<string>();
 			//searchResults.Clear();
 			if (searchBox.Text != "")
 			{
 				var stringQuery = searchBox.Text;
-				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery,50));
+				if (!checkBox1.Checked && !checkBox2.Checked)
+				{
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, false));
+				}
+				else if (checkBox1.Checked && !checkBox2.Checked) {
+					if (userList.CheckedItems.Count != 0)
+					{
+						users.Clear();
+						foreach (ListViewItem item in userList.CheckedItems)
+						{
+							users.Add(item.Text);
 
-				
-				
-					//if (userList.CheckedItems.Count != 0)
-					//{
-					//	List<string> users = new List<string>();
-					//	foreach (ListViewItem item in userList.CheckedItems)
-					//	{
-					//		users.Add(item.Text);
+						}
+						FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), false));
+					}
+				}
+				else if (!checkBox1.Checked && checkBox2.Checked) {
 
-					//	}
-					//	SearchTextWithUser(stringQuery, users);
+					if(startDate.Checked && finishDate.Checked)
+					{
+						DateTime[] date = new DateTime[2];
+						date[0] = startDate.Value;
+						date[1] = finishDate.Value;
+						FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, date, false));
+					}
+										
+				}
+				else if (checkBox1.Checked && checkBox2.Checked) {
+					MessageBox.Show("Not implemented yet");
 
-					//}
-					//else
-					//{
-					//	SearchText(stringQuery);
-					//}
-					//MessageBox.Show("Found " + searchResults.Count + " results.");
-					//DisplayResults();
+				}
+				//if (userList.CheckedItems.Count != 0)
+				//{
+				//	List<string> users = new List<string>();
+				//	foreach (ListViewItem item in userList.CheckedItems)
+				//	{
+				//		users.Add(item.Text);
 
-				
+				//	}
+				//	SearchTextWithUser(stringQuery, users);
+
+				//}
+				//else
+				//{
+				//	SearchText(stringQuery);
+				//}
+				//MessageBox.Show("Found " + searchResults.Count + " results.");
+				//DisplayResults();
+
+
 			}
 
 			//}
@@ -493,15 +530,9 @@ namespace Viewer
 
 			#endregion search
 
-			private void generateNewToolStripMenuItem_Click(object sender, EventArgs e)
-		{
 
 		}
 
-		private void editToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
 	}
 }
 

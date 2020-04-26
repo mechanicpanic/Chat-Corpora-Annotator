@@ -16,7 +16,7 @@ namespace Viewer.Framework.Presenters
         private readonly IHeatmapView _heatmap;
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
-
+       
 
 
         public MainPresenter(IMainView view,ICSVView csv,IIndexService reader,ISearchService searcher)
@@ -74,7 +74,29 @@ namespace Viewer.Framework.Presenters
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)
         {
             _searcher.UserQuery = LuceneService.Parser.Parse(e.Query + "*");
-            _searcher.SearchText();
+            if (!e.FilteredByDate && !e.FilteredByUser) {
+               _searcher.SearchText(e.Count);
+                
+                
+            }
+            else if (e.FilteredByDate && !e.FilteredByUser)
+            {
+                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start,e.Finish);
+                _searcher.SearchText_DateFilter(e.Count);
+
+            }
+            else if (!e.FilteredByDate && e.FilteredByUser)
+            {
+                _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
+               _searcher.SearchText_UserFilter(e.Count);
+            }
+            else if (e.FilteredByDate && e.FilteredByUser)
+            {
+
+            }
+            var result = _searcher.MakeSearchResultsReadable(_csv.SelectedFields, _csv.DateFieldKey);
+            _view.SearchResults = result;
+            _view.DisplaySearchResults();
         }
 
        

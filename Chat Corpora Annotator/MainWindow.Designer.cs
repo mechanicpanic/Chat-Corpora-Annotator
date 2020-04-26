@@ -48,8 +48,8 @@
             this.findButton = new System.Windows.Forms.Button();
             this.datesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.startDate = new System.Windows.Forms.DateTimePicker();
+            this.finishDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.datesButton = new System.Windows.Forms.Button();
             this.userPanel = new System.Windows.Forms.Panel();
@@ -312,6 +312,7 @@
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.findButton.UseVisualStyleBackColor = false;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // datesPanel
             // 
@@ -319,8 +320,8 @@
             this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.91909F));
             this.datesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.08091F));
             this.datesPanel.Controls.Add(this.label2);
-            this.datesPanel.Controls.Add(this.dateTimePicker1, 1, 0);
-            this.datesPanel.Controls.Add(this.dateTimePicker2, 1, 1);
+            this.datesPanel.Controls.Add(this.startDate, 1, 0);
+            this.datesPanel.Controls.Add(this.finishDate, 1, 1);
             this.datesPanel.Controls.Add(this.label1);
             this.datesPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.datesPanel.Location = new System.Drawing.Point(0, 461);
@@ -343,25 +344,29 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "from";
             // 
-            // dateTimePicker1
+            // startDate
             // 
-            this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(79, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(227, 30);
-            this.dateTimePicker1.TabIndex = 17;
+            this.startDate.Checked = false;
+            this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDate.Location = new System.Drawing.Point(79, 3);
+            this.startDate.Name = "startDate";
+            this.startDate.ShowCheckBox = true;
+            this.startDate.Size = new System.Drawing.Size(227, 30);
+            this.startDate.TabIndex = 17;
             // 
-            // dateTimePicker2
+            // finishDate
             // 
-            this.dateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(79, 39);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(227, 30);
-            this.dateTimePicker2.TabIndex = 18;
+            this.finishDate.Checked = false;
+            this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.finishDate.Location = new System.Drawing.Point(79, 39);
+            this.finishDate.Name = "finishDate";
+            this.finishDate.ShowCheckBox = true;
+            this.finishDate.Size = new System.Drawing.Size(227, 30);
+            this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
@@ -661,8 +666,8 @@
         private System.Windows.Forms.ColumnHeader Users;
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.TableLayoutPanel datesPanel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker startDate;
+        private System.Windows.Forms.DateTimePicker finishDate;
         private System.Windows.Forms.Button datesButton;
         private System.Windows.Forms.Panel userPanel;
         private System.Windows.Forms.Panel queryPanel;

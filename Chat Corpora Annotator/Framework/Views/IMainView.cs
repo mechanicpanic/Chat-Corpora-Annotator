@@ -10,19 +10,21 @@ namespace Viewer.Framework.Views
         List<string> Users { get; set; }
         List<DynamicMessage> Messages { get; set; }
 
-        //List<DynamicMessage> searchResults { get; set; }
+        List<DynamicMessage> SearchResults { get; set; }
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
 
         void SetLineCount(int count);
         void DisplayDocuments();
 
+        void DisplaySearchResults();
+
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 
         event EventHandler ChartClick;
         event EventHandler HeatmapClick;
-        event EventHandler FindClick;
+        event LuceneQueryEventHandler FindClick;
 
         event EventHandler LoadMoreClick;
         //event PropertyChangedEventHandler PropertyChanged;
