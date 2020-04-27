@@ -53,8 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datesButton = new System.Windows.Forms.Button();
             this.userPanel = new System.Windows.Forms.Panel();
-            this.userList = new System.Windows.Forms.ListView();
-            this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.selectUsersButton = new System.Windows.Forms.Button();
             this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
@@ -76,6 +74,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.userList = new System.Windows.Forms.ListView();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -242,7 +242,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(105, 436);
+            this.checkBox2.Location = new System.Drawing.Point(104, 438);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(18, 17);
             this.checkBox2.TabIndex = 28;
@@ -251,7 +251,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 120);
+            this.checkBox1.Location = new System.Drawing.Point(104, 121);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(18, 17);
             this.checkBox1.TabIndex = 27;
@@ -406,29 +406,6 @@
             this.userPanel.Size = new System.Drawing.Size(309, 282);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
-            // 
-            // userList
-            // 
-            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userList.CheckBoxes = true;
-            this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Users});
-            this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userList.FullRowSelect = true;
-            this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.userList.HideSelection = false;
-            this.userList.Location = new System.Drawing.Point(0, 0);
-            this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(309, 282);
-            this.userList.TabIndex = 16;
-            this.userList.UseCompatibleStateImageBehavior = false;
-            this.userList.View = System.Windows.Forms.View.Details;
-            // 
-            // Users
-            // 
-            this.Users.Text = "Users";
-            this.Users.Width = 213;
             // 
             // selectUsersButton
             // 
@@ -619,6 +596,29 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(547, 175);
             // 
+            // Users
+            // 
+            this.Users.Text = "Users";
+            this.Users.Width = 213;
+            // 
+            // userList
+            // 
+            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.userList.CheckBoxes = true;
+            this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Users});
+            this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userList.FullRowSelect = true;
+            this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.userList.HideSelection = false;
+            this.userList.Location = new System.Drawing.Point(0, 0);
+            this.userList.Name = "userList";
+            this.userList.Size = new System.Drawing.Size(309, 282);
+            this.userList.TabIndex = 16;
+            this.userList.UseCompatibleStateImageBehavior = false;
+            this.userList.View = System.Windows.Forms.View.Details;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -631,7 +631,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
@@ -663,8 +662,6 @@
         private System.Windows.Forms.ToolStripMenuItem openCorpusToolStripMenuItem;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.RichTextBox searchBox;
-        private System.Windows.Forms.ListView userList;
-        private System.Windows.Forms.ColumnHeader Users;
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.TableLayoutPanel datesPanel;
         private System.Windows.Forms.DateTimePicker startDate;
@@ -699,6 +696,8 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListView userList;
+        private System.Windows.Forms.ColumnHeader Users;
     }
 }
 

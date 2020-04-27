@@ -7,7 +7,7 @@ namespace Viewer.Framework.Views
     public interface IMainView : IView
     {
         //bool FileLoadState { get; set; }
-        List<string> Users { get; set; }
+        List<string> Usernames { get; set; }
         List<DynamicMessage> Messages { get; set; }
 
         List<DynamicMessage> SearchResults { get; set; }

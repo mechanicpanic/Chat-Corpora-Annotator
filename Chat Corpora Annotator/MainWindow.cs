@@ -39,7 +39,7 @@ namespace Viewer
 		public event EventHandler LoadMoreClick;
 
 
-		List<string> IMainView.Users { get; set; }
+		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 
@@ -53,6 +53,7 @@ namespace Viewer
 		public void SetLineCount(int count)
 		{
 			messageLabel.Text = count.ToString() + " messages";
+
 		}
 
 		public void DisplayDocuments()
@@ -69,12 +70,12 @@ namespace Viewer
 			chatTable.Invalidate();
 		}
 
-		void IView.ShowView()
+		public void ShowView()
 		{
 			ShowDialog();
 		}
 
-		new public void CloseView()
+		public void CloseView()
 		{
 			this.CloseView();
 		}
@@ -83,15 +84,9 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-
-
-		}
-
-		
-
-		private void MainWindow_Load(object sender, EventArgs e)
-		{
-
+			//checkBox1.Parent = selectUsersButton;
+			//checkBox2.Parent = datesButton;
+			
 
 		}
 
@@ -143,8 +138,8 @@ namespace Viewer
 		private void SetUpChatView()
 		{
 			//PopulateSenderColors();
-			
 
+			ShowUsers();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
 			foreach (var key in _messages[0].contents.Keys)
@@ -168,6 +163,16 @@ namespace Viewer
 
 
 			//FormatColumns();
+
+		}
+
+		private void ShowUsers()
+		{
+			userList.CheckBoxes = true;
+			foreach(var user in Usernames)
+			{
+				userList.Items.Add(new ListViewItem(user));
+			}
 
 		}
 
@@ -415,8 +420,6 @@ namespace Viewer
 			searchBox.Text = "";
 		}
 
-
-
 		private void findButton_Click(object sender, EventArgs e)
 		{
 			
@@ -477,8 +480,6 @@ namespace Viewer
 
 			}
 		}
-
-		
 
 		private void button1_Click(object sender, EventArgs e)
 		{
