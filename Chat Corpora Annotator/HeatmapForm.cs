@@ -10,39 +10,30 @@ namespace Viewer
     public partial class LinearHeatmapForm : Form, IHeatmapView
     {
 
-        float IHeatmapView.Width { get; set; }
-        float IHeatmapView.Height { get; set; }
+        float Width { get; set; }
+        float Height { get; set; }
         public SizeF RectangleSize { get; set; }
         public Point RectangleLocation { get; set; }
         public List<Color> Colors { get; set; }
-        public List<RectangleF> Rectangles { get; set; }
+        public List<RectangleF> Rectangles { get; set; } = new List<RectangleF>();
 
         public LinearHeatmapForm()
         {
             InitializeComponent();
             panel1.Paint += panel1_Paint;
+            
         }
 
 
-        public void InitializeHeatMap(List<Color> colors)
+       
+        public void DrawHeatmap()
         {
-
-            Width = panel1.Width / colors.Count;
+            Width = panel1.Width / Colors.Count;
             Height = panel1.Height;
 
 
             RectangleSize = new SizeF(Width, Height);
             RectangleLocation = new Point(0, 0);
-            this.Colors = colors;
-
-        }
-    
-
-
-
-        
-        public void DrawHeatMap()
-        {
             for (int i = 0; i < Colors.Count; i++)
             {
                 RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
@@ -70,12 +61,6 @@ namespace Viewer
 
 
         }
-        public void Draw()
-        {
-            panel1.Invalidate();
-            panel1.Update();
-
-        }
 
         private void FillDates(List<DateTime> dates)
         {
@@ -85,6 +70,16 @@ namespace Viewer
         private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void ShowView()
+        {
+            this.Show();
+        }
+
+        public void CloseView()
+        {
+            this.Close();
         }
     }
 }

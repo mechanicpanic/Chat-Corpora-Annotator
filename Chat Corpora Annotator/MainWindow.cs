@@ -47,8 +47,7 @@ namespace Viewer
 		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
 
 		public List<DynamicMessage> SearchResults { get; set; }
-
-		
+		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
 
 		public void SetLineCount(int count)
 		{
@@ -271,86 +270,8 @@ namespace Viewer
 		#endregion
 
 		#region heatmap
-		//public Color HeatMapColor(double value, double min, double max)
-		//{
-		//	double val = (value - min) / (max - min);
-		//	int r = Convert.ToByte(255 * val);
-		//	int g = Convert.ToByte(255 * (1 - val));
-		//	int b = 10;
 
-		//	return Color.FromArgb(255, r, g, b);
-		//}
-		//private void PopulateHeatmap()
-		//{
-
-
-		//	double max = messagesPerDay.Values.Max();
-		//	double min = messagesPerDay.Values.Min();
-
-		//	double temp = 998 / messagesPerDay.Keys.Count;
-		//	if (temp >= 10.0)
-		//	{
-		//		foreach (var date in messagesPerDay.Keys)
-		//		{
-		//			double x = messagesPerDay[date];
-		//			heatMapColors.Add(HeatMapColor(x, min, max));
-		//		}
-		//	}
-		//	else
-		//	{
-		//		DateTime[] days = new DateTime[messagesPerDay.Keys.Count];
-
-		//		messagesPerDay.Keys.CopyTo(days, 0);
-		//		//Array.Sort(days);
-
-		//		double block = (messagesPerDay.Keys.Count / 998.0) * 10.0;
-
-		//		int blockDayCount = (int)Math.Floor(block);
-		//		List<double> newCounts = new List<double>();
-		//		double x = 0;
-		//		int count = 0;
-		//		int index = 0;
-		//		while(index < days.Length)
-		//		{
-		//			if (days.Length - index > blockDayCount)
-		//			{
-		//				while (count < blockDayCount)
-		//				{
-		//					x += messagesPerDay[days[index]];
-		//					index++;
-		//					count++;
-		//				}
-		//				if (count == blockDayCount)
-		//				{
-		//					x += messagesPerDay[days[index]];
-		//					newCounts.Add(x);
-		//					count = 0;
-		//					x = 0;
-		//					index++;
-		//				}
-		//			}
-		//			else
-		//			{
-		//				x += messagesPerDay[days[index]];
-		//				index++;
-		//				if(index == days.Length - 1)
-		//				{
-		//					newCounts.Add(x);
-		//				}
-		//			}
-
-		//		}
-
-		//		var newmax = newCounts.Max();
-		//		var newmin = newCounts.Min();
-
-		//		foreach (var cc in newCounts)
-		//		{
-		//			heatMapColors.Add(HeatMapColor(cc, newmin, newmax));
-		//		}
-
-		//	}
-		//}
+		
 		#endregion
 
 		#region date view

@@ -26,8 +26,9 @@
 -Since all docs will be small and similar in size, perhaps buffer by doc number instead?
 -Indexing/storing fields -- fixed!
 
-UI:
+
 6. Fix the Load More button...
 7. Implement ButtonWithCheckbox
+8. Implement opening an index
 
 

@@ -38,6 +38,7 @@ namespace Viewer.Framework.Presenters
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
             _view.Usernames = _indexer.UserKeys.ToList();
+            _view.MessagesPerDay = _indexer.MessagesPerDay;
             int temp = (LuceneService.Writer.MaxDoc) / 5;
             var list = _indexer.LoadSomeDocuments(_view.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
             _view.Messages = list;

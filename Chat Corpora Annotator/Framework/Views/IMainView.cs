@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpTest.Net.Collections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -8,6 +9,7 @@ namespace Viewer.Framework.Views
     {
         //bool FileLoadState { get; set; }
         List<string> Usernames { get; set; }
+        BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
         List<DynamicMessage> Messages { get; set; }
 
         List<DynamicMessage> SearchResults { get; set; }

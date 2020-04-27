@@ -19,17 +19,17 @@ namespace Viewer.Framework.Presenters
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv,IIndexService reader,ISearchService searcher)
+        public MainPresenter(IMainView view,ICSVView csv,IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
         {
             this._view = view;
             this._csv = csv;
             //this._chart = chart;
-            //this._heatmap = heatmap;
+            this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
 
 
-            _view.HeatmapClick += _view_HeatmapClick;
+            //_view.HeatmapClick += _view_HeatmapClick;
             _view.ChartClick += _view_ChartClick;
             _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _view.FindClick += _view_FindClick;
@@ -59,10 +59,7 @@ namespace Viewer.Framework.Presenters
             throw new NotImplementedException();
         }
 
-        private void _view_HeatmapClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void AddDocumentsToDisplay(int count)
         {

@@ -79,8 +79,11 @@ namespace Viewer.Framework.Services
 				}
 				foreach (var field in selectedFields)
 				{
-
-					temp.Add(document.GetField(field).GetStringValue());
+					
+					
+						temp.Add(document.GetField(field).GetStringValue());
+					
+					
 				}
 				DynamicMessage message = new DynamicMessage(temp, selectedFields, dateFieldKey);
 				messages.Add(message);
@@ -148,7 +151,7 @@ namespace Viewer.Framework.Services
 							{
 								if (selectedFields.Contains(allFields[i]))
 								{
-									document.Add(new StringField(allFields[i], row[i], Field.Store.NO));
+									document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
 								}
 
 							}
