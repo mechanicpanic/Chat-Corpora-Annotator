@@ -394,16 +394,16 @@
     </Compile>
     <Compile Include="Deprecated\ArrayMessage.cs" />
     <Compile Include="Deprecated\ArrayMessageBlock.cs" />
-    <Compile Include="ColumnMetadata.cs">
+    <Compile Include="Deprecated\ColumnMetadata.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColumnMetadata.Designer.cs">
+    <Compile Include="Deprecated\ColumnMetadata.Designer.cs">
       <DependentUpon>ColumnMetadata.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLoaded.cs">
+    <Compile Include="Deprecated\DataLoaded.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataLoaded.Designer.cs">
+    <Compile Include="Deprecated\DataLoaded.Designer.cs">
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\DynamicMessageBlock.cs" />
@@ -422,10 +422,10 @@
     <Compile Include="Framework\Views\IMainView.cs" />
     <Compile Include="Framework\Views\IView.cs" />
     <Compile Include="DynamicMessage.cs" />
-    <Compile Include="HeaderForm.cs">
+    <Compile Include="Deprecated\HeaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HeaderForm.Designer.cs">
+    <Compile Include="Deprecated\HeaderForm.Designer.cs">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\2DHeatmapForm.cs">
@@ -458,7 +458,7 @@
     <EmbeddedResource Include="UI\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ColumnMetadata.resx">
+    <EmbeddedResource Include="Deprecated\ColumnMetadata.resx">
       <DependentUpon>ColumnMetadata.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CSV Wizard\DataLoadedStep.resx">
@@ -476,10 +476,10 @@
     <EmbeddedResource Include="CSVLoader.resx">
       <DependentUpon>CSVLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataLoaded.resx">
+    <EmbeddedResource Include="Deprecated\DataLoaded.resx">
       <DependentUpon>DataLoaded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HeaderForm.resx">
+    <EmbeddedResource Include="Deprecated\HeaderForm.resx">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\2DHeatmapForm.resx">

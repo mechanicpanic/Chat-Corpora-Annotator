@@ -10,8 +10,8 @@ namespace Viewer
     public partial class LinearHeatmapForm : Form, IHeatmapView
     {
 
-        float Width { get; set; }
-        float Height { get; set; }
+        float RectangleWidth { get; set; }
+        float RectangleHeight { get; set; }
         public SizeF RectangleSize { get; set; }
         public Point RectangleLocation { get; set; }
         public List<Color> Colors { get; set; }
@@ -28,17 +28,17 @@ namespace Viewer
        
         public void DrawHeatmap()
         {
-            Width = panel1.Width / Colors.Count;
-            Height = panel1.Height;
+            RectangleWidth = panel1.Width / Colors.Count;
+            RectangleHeight = panel1.Height;
 
 
-            RectangleSize = new SizeF(Width, Height);
+            RectangleSize = new SizeF(RectangleWidth, RectangleHeight);
             RectangleLocation = new Point(0, 0);
             for (int i = 0; i < Colors.Count; i++)
             {
                 RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
                 Rectangles.Add(rectangle);
-                RectangleLocation += new Size((int)Width, 0);
+                RectangleLocation += new Size((int)RectangleWidth, 0);
 
             }
         }

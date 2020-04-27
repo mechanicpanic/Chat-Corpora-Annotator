@@ -23,7 +23,12 @@ namespace Viewer
         public ChartValues<int> ChartValues { get ; set ; }
         public List<string> ChartLabels { get; set; }
 
-        public void InitializeChart(List<DateTime> days, List<int> counts)
+        public void CloseView()
+        {
+            this.Close();
+        }
+
+        public void DrawChart(List<DateTime> days, List<int> counts)
         {
             ChartValues = new ChartValues<int>(counts);
             ChartLabels = new List<string>();
@@ -44,5 +49,9 @@ namespace Viewer
             });
         }
 
+        public void ShowView()
+        {
+            this.Show();
+        }
     }
 }
