@@ -44,6 +44,8 @@ namespace Viewer
 		public string CurrentIndexPath { get; set; }
 
 		private List<DynamicMessage> _messages;
+		private Dictionary<string,Color> userColors;
+
 		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
 
 		public List<DynamicMessage> SearchResults { get; set; }
@@ -107,7 +109,7 @@ namespace Viewer
 		}
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)
 		{
-			//csvPath = csvDialog.FileName;
+			
 			this.CurrentPath = csvDialog.FileName;
 			SelectIndexFolder();
 
@@ -136,7 +138,7 @@ namespace Viewer
 
 		private void SetUpChatView()
 		{
-			//PopulateSenderColors();
+			
 
 			ShowUsers();
 			List<OLVColumn> columns = new List<OLVColumn>();
@@ -192,14 +194,14 @@ namespace Viewer
 		//	chatTable.Refresh();
 
 		//}
-		//private void PopulateSenderColors()
-		//{
-		//	foreach (var user in userKeys)
-		//	{
-		//		Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-		//		userColors.Add(user, tempColor);
-		//	}
-		//}
+		private void PopulateSenderColors()
+		{
+			foreach (var user in Usernames)
+			{
+				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+				userColors.Add(user, tempColor);
+			}
+		}
 		//private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
 		//{
 		//	if (e.Column.Text == senderFieldKey)
@@ -219,7 +221,7 @@ namespace Viewer
 		#region event pipelining
 		private void plotToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ChartClick?.Invoke(this, EventArgs.Empty);
+			//ChartClick?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -267,11 +269,6 @@ namespace Viewer
 			}
 		}
 
-		#endregion
-
-		#region heatmap
-
-		
 		#endregion
 
 		#region date view
@@ -405,6 +402,7 @@ namespace Viewer
 		private void button1_Click(object sender, EventArgs e)
 		{
 			chatTable.SetObjects(_messages);
+			chatTable.Invalidate();
 		}
 	}
 }

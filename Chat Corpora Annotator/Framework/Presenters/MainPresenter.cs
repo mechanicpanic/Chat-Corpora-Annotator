@@ -65,6 +65,7 @@ namespace Viewer.Framework.Presenters
         {
             var list = _reader.LoadSomeDocuments(_view.CurrentIndexPath,_csv.DateFieldKey, _csv.SelectedFields, count);
             _view.Messages.AddRange(list);
+            _view.DisplayDocuments();
         }
 
 

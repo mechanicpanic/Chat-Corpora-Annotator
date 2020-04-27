@@ -14,8 +14,6 @@
 1.2.5 Fix date filter bounds
 1.2.6 Implement User/Date Combo
 
-1.3 Wire up Heatmap and Chart
-
 2. Basic corpus statistics
 3. Basic tagging format: XML?, highlighting for one message 
 
