@@ -84,8 +84,8 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			//checkBox1.Parent = selectUsersButton;
-			//checkBox2.Parent = datesButton;
+			checkBox1.Location = new Point(selectUsersButton.Location.X + searchPanel.Width, selectUsersButton.Location.Y * 2); ;
+			checkBox2.Location = new Point(datesButton.Location.X + searchPanel.Width, datesButton.Location.Y+30);
 			
 
 		}

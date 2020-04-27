@@ -18,7 +18,7 @@ namespace Viewer.Framework.Services
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
 		void OpenWriter(string indexPath, string textFieldKey);
-		int PopulateIndex(string indexPath, string filePath, string[] allFields);
+		int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
@@ -91,7 +91,7 @@ namespace Viewer.Framework.Services
 			return messages;
 		}
 
-		public int PopulateIndex(string indexPath, string filePath, string[] allFields)
+		public int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields)
 		{
 			List<Document> documentBlock = new List<Document>();
 			int result = 0;
@@ -146,7 +146,11 @@ namespace Viewer.Framework.Services
 							}
 							else
 							{
-								document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
+								if (selectedFields.Contains(allFields[i]))
+								{
+									document.Add(new StringField(allFields[i], row[i], Field.Store.NO));
+								}
+
 							}
 							//TODO: Still need to redesign this. Rework storing/indexing paradigm.
 

@@ -224,8 +224,6 @@
             // 
             this.searchPanel.Controls.Add(this.findButton);
             this.searchPanel.Controls.Add(this.button1);
-            this.searchPanel.Controls.Add(this.checkBox2);
-            this.searchPanel.Controls.Add(this.checkBox1);
             this.searchPanel.Controls.Add(this.panel1);
             this.searchPanel.Controls.Add(this.datesPanel);
             this.searchPanel.Controls.Add(this.datesButton);
@@ -236,7 +234,7 @@
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.searchPanel.Location = new System.Drawing.Point(0, 31);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(309, 663);
+            this.searchPanel.Size = new System.Drawing.Size(260, 663);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -250,7 +248,7 @@
             this.findButton.Location = new System.Drawing.Point(0, 576);
             this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(309, 43);
+            this.findButton.Size = new System.Drawing.Size(260, 43);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -268,7 +266,7 @@
             this.button1.Location = new System.Drawing.Point(0, 534);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(309, 42);
+            this.button1.Size = new System.Drawing.Size(260, 42);
             this.button1.TabIndex = 26;
             this.button1.Text = "Clear";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -278,7 +276,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(104, 438);
+            this.checkBox2.Location = new System.Drawing.Point(266, 469);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(18, 17);
             this.checkBox2.TabIndex = 28;
@@ -287,7 +285,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 121);
+            this.checkBox1.Location = new System.Drawing.Point(266, 152);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(18, 17);
             this.checkBox1.TabIndex = 27;
@@ -300,7 +298,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 636);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(309, 27);
+            this.panel1.Size = new System.Drawing.Size(260, 27);
             this.panel1.TabIndex = 25;
             // 
             // messageLabel
@@ -308,7 +306,7 @@
             this.messageLabel.AutoSize = true;
             this.messageLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(213, 0);
+            this.messageLabel.Location = new System.Drawing.Point(164, 0);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(96, 23);
             this.messageLabel.TabIndex = 24;
@@ -330,7 +328,7 @@
             this.datesPanel.RowCount = 2;
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.datesPanel.Size = new System.Drawing.Size(309, 73);
+            this.datesPanel.Size = new System.Drawing.Size(260, 73);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
             // 
@@ -338,10 +336,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 36);
+            this.label2.Size = new System.Drawing.Size(58, 36);
             this.label2.TabIndex = 20;
             this.label2.Text = "from";
             // 
@@ -351,10 +349,10 @@
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(79, 3);
+            this.startDate.Location = new System.Drawing.Point(67, 3);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(227, 30);
+            this.startDate.Size = new System.Drawing.Size(190, 30);
             this.startDate.TabIndex = 17;
             // 
             // finishDate
@@ -363,20 +361,20 @@
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(79, 39);
+            this.finishDate.Location = new System.Drawing.Point(67, 39);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(227, 30);
+            this.finishDate.Size = new System.Drawing.Size(190, 30);
             this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(3, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 37);
+            this.label1.Size = new System.Drawing.Size(58, 37);
             this.label1.TabIndex = 19;
             this.label1.Text = "to";
             // 
@@ -390,7 +388,7 @@
             this.datesButton.Location = new System.Drawing.Point(0, 426);
             this.datesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.datesButton.Name = "datesButton";
-            this.datesButton.Size = new System.Drawing.Size(309, 35);
+            this.datesButton.Size = new System.Drawing.Size(260, 35);
             this.datesButton.TabIndex = 22;
             this.datesButton.Text = "Select dates";
             this.datesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -403,7 +401,7 @@
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.userPanel.Location = new System.Drawing.Point(0, 144);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(309, 282);
+            this.userPanel.Size = new System.Drawing.Size(260, 282);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
             // 
@@ -420,7 +418,7 @@
             this.userList.HideSelection = false;
             this.userList.Location = new System.Drawing.Point(0, 0);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(309, 282);
+            this.userList.Size = new System.Drawing.Size(260, 282);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -440,7 +438,7 @@
             this.selectUsersButton.Location = new System.Drawing.Point(0, 109);
             this.selectUsersButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.selectUsersButton.Name = "selectUsersButton";
-            this.selectUsersButton.Size = new System.Drawing.Size(309, 35);
+            this.selectUsersButton.Size = new System.Drawing.Size(260, 35);
             this.selectUsersButton.TabIndex = 16;
             this.selectUsersButton.Text = "Select users";
             this.selectUsersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -453,7 +451,7 @@
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.queryPanel.Location = new System.Drawing.Point(0, 35);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(309, 74);
+            this.queryPanel.Size = new System.Drawing.Size(260, 74);
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
@@ -464,7 +462,7 @@
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(309, 74);
+            this.searchBox.Size = new System.Drawing.Size(260, 74);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
@@ -479,7 +477,7 @@
             this.queryButton.Location = new System.Drawing.Point(0, 0);
             this.queryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(309, 35);
+            this.queryButton.Size = new System.Drawing.Size(260, 35);
             this.queryButton.TabIndex = 19;
             this.queryButton.Text = "Query";
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -627,7 +625,9 @@
             this.ClientSize = new System.Drawing.Size(1482, 694);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.checkBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
@@ -636,7 +636,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.Statistics.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
-            this.searchPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.datesPanel.ResumeLayout(false);

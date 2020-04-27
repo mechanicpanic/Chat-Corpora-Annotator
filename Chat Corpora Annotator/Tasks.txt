@@ -4,12 +4,15 @@
 1.1.1 Fix the forms itself
 1.1.2 Fix the Loading step
 1.1.3 Put in a Stopwatch for indexing
+1.1.4 NULL CHECKS
 
 1.2 Wire up Search -- almost done!
 1.2.1 Fix the user list
 1.2.2 Fix user and date filter checkboxes
 1.2.3 Wire up highlighting
 1.2.4. Implement window search and phrase search
+1.2.5 Fix date filter bounds
+1.2.6 Implement User/Date Combo
 
 1.3 Wire up Heatmap and Chart
 
@@ -18,6 +21,13 @@
 
 4. DockPanel? 
 
-5. Experiment with index methods
+5. Experiment with indexing:
+-RAM buffer size -- 50 MB??
+-Since all docs will be small and similar in size, perhaps buffer by doc number instead?
+-Indexing/storing fields -- fixed!
+
+UI:
+6. Fix the Load More button...
+7. Implement ButtonWithCheckbox
 
 
