@@ -40,12 +40,12 @@
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.findButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.messageLabel = new System.Windows.Forms.Label();
-            this.findButton = new System.Windows.Forms.Button();
             this.datesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.startDate = new System.Windows.Forms.DateTimePicker();
@@ -53,6 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datesButton = new System.Windows.Forms.Button();
             this.userPanel = new System.Windows.Forms.Panel();
+            this.userList = new System.Windows.Forms.ListView();
+            this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.selectUsersButton = new System.Windows.Forms.Button();
             this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
@@ -74,8 +76,6 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.userList = new System.Windows.Forms.ListView();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -239,23 +239,23 @@
             this.searchPanel.Size = new System.Drawing.Size(309, 663);
             this.searchPanel.TabIndex = 16;
             // 
-            // checkBox2
+            // findButton
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(104, 438);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(18, 17);
-            this.checkBox2.TabIndex = 28;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 121);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(18, 17);
-            this.checkBox1.TabIndex = 27;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.findButton.BackColor = System.Drawing.Color.Lavender;
+            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.findButton.FlatAppearance.BorderSize = 0;
+            this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.findButton.Location = new System.Drawing.Point(0, 576);
+            this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(309, 43);
+            this.findButton.TabIndex = 15;
+            this.findButton.Text = "Find";
+            this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.findButton.UseVisualStyleBackColor = false;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // button1
             // 
@@ -274,6 +274,24 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(104, 438);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(18, 17);
+            this.checkBox2.TabIndex = 28;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(104, 121);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(18, 17);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -296,24 +314,6 @@
             this.messageLabel.TabIndex = 24;
             this.messageLabel.Text = "Not loaded";
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // findButton
-            // 
-            this.findButton.BackColor = System.Drawing.Color.Lavender;
-            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.findButton.FlatAppearance.BorderSize = 0;
-            this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 576);
-            this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(309, 43);
-            this.findButton.TabIndex = 15;
-            this.findButton.Text = "Find";
-            this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.findButton.UseVisualStyleBackColor = false;
-            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // datesPanel
             // 
@@ -406,6 +406,29 @@
             this.userPanel.Size = new System.Drawing.Size(309, 282);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
+            // 
+            // userList
+            // 
+            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.userList.CheckBoxes = true;
+            this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Users});
+            this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userList.FullRowSelect = true;
+            this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.userList.HideSelection = false;
+            this.userList.Location = new System.Drawing.Point(0, 0);
+            this.userList.Name = "userList";
+            this.userList.Size = new System.Drawing.Size(309, 282);
+            this.userList.TabIndex = 16;
+            this.userList.UseCompatibleStateImageBehavior = false;
+            this.userList.View = System.Windows.Forms.View.Details;
+            // 
+            // Users
+            // 
+            this.Users.Text = "Users";
+            this.Users.Width = 213;
             // 
             // selectUsersButton
             // 
@@ -595,29 +618,6 @@
             // ContentPanel
             // 
             this.ContentPanel.Size = new System.Drawing.Size(547, 175);
-            // 
-            // Users
-            // 
-            this.Users.Text = "Users";
-            this.Users.Width = 213;
-            // 
-            // userList
-            // 
-            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userList.CheckBoxes = true;
-            this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Users});
-            this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userList.FullRowSelect = true;
-            this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.userList.HideSelection = false;
-            this.userList.Location = new System.Drawing.Point(0, 0);
-            this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(309, 282);
-            this.userList.TabIndex = 16;
-            this.userList.UseCompatibleStateImageBehavior = false;
-            this.userList.View = System.Windows.Forms.View.Details;
             // 
             // MainWindow
             // 

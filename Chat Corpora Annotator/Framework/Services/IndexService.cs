@@ -93,6 +93,7 @@ namespace Viewer.Framework.Services
 
 		public int PopulateIndex(string indexPath, string filePath, string[] allFields)
 		{
+			List<Document> documentBlock = new List<Document>();
 			int result = 0;
 			if (lookup != null)
 			{
@@ -122,6 +123,7 @@ namespace Viewer.Framework.Services
 							temp++;
 							MessagesPerDay.TryUpdate(day, temp);
 						}
+
 						Document document = new Document();
 						for (int i = 0; i < row.Length; i++)
 						{
@@ -149,14 +151,15 @@ namespace Viewer.Framework.Services
 							//TODO: Still need to redesign this. Rework storing/indexing paradigm.
 
 						}
-
+						//documentBlock.Add(document);
 						LuceneService.Writer.AddDocument(document);
 					}
+					//LuceneService.Writer.AddDocuments(documentBlock);
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
 					OpenReader();
 					result = 1;
-					//FileIndexed?.Invoke(this, EventArgs.Empty);
+					
 					return result;
 
 				}
@@ -169,6 +172,8 @@ namespace Viewer.Framework.Services
 			LuceneService.Dir = FSDirectory.Open(indexPath);
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
+			LuceneService.IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
+			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
 			
 			
