@@ -62,9 +62,9 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(32, 348);
+            this.listView1.Location = new System.Drawing.Point(32, 373);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
+            this.listView1.Size = new System.Drawing.Size(1274, 72);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -89,7 +89,12 @@
             // 
             // scintilla1
             // 
+            this.scintilla1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.scintilla1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.scintilla1.EdgeColor = System.Drawing.Color.White;
+            this.scintilla1.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
             this.scintilla1.HScrollBar = false;
             this.scintilla1.Location = new System.Drawing.Point(12, 52);
             this.scintilla1.Name = "scintilla1";
@@ -98,6 +103,7 @@
             this.scintilla1.TabIndex = 0;
             this.scintilla1.Text = "oh no...";
             this.scintilla1.Zoom = 10;
+            this.scintilla1.Click += new System.EventHandler(this.scintilla1_Click);
             // 
             // Form1
             // 

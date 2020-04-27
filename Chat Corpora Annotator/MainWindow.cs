@@ -344,11 +344,11 @@ namespace Viewer
 			//searchResults.Clear();
 			if (searchBox.Text == "")
 			{
-				var result = MessageBox.Show("Do you want to send an empty query?");
-				if (result == DialogResult.OK)
-				{
-					LaunchSearch();
-				}
+				MessageBox.Show("Empty queries not supported just yet");
+				//if (result == DialogResult.OK)
+				//{
+				//	LaunchSearch();
+				//}
 			}
 			else
 			{
@@ -394,7 +394,16 @@ namespace Viewer
 			}
 			else if (checkBox1.Checked && checkBox2.Checked)
 			{
-				MessageBox.Show("Not implemented yet");
+				users.Clear();
+				foreach (ListViewItem item in userList.CheckedItems)
+				{
+					users.Add(item.Text);
+
+				}
+				DateTime[] date = new DateTime[2];
+				date[0] = startDate.Value;
+				date[1] = finishDate.Value;
+				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery,50,users.ToArray(),date,false));
 
 			}
 		}
@@ -403,6 +412,11 @@ namespace Viewer
 		{
 			chatTable.SetObjects(_messages);
 			chatTable.Invalidate();
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

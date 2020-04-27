@@ -84,6 +84,7 @@ namespace Viewer
 
         public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey)
         {
+            this.Id = Guid.NewGuid();
             if(data.Count != selectedFields.Count)
             {
                 throw new Exception("Wrong array size");

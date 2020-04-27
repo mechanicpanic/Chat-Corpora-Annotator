@@ -90,7 +90,9 @@ namespace Viewer.Framework.Presenters
             }
             else if (e.FilteredByDate && e.FilteredByUser)
             {
-
+                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start, e.Finish);
+                _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
+                _searcher.SearchText_UserDateFilter(e.Count);
             }
             var result = _searcher.MakeSearchResultsReadable(_csv.SelectedFields, _csv.DateFieldKey);
             _view.SearchResults = result;

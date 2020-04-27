@@ -3,6 +3,7 @@ using Lucene.Net.Search;
 using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
+using Lucene.Net.Queries;
 
 namespace Viewer.Framework.Services
 {
@@ -18,6 +19,7 @@ namespace Viewer.Framework.Services
 		void SearchText(int count);
 		void SearchText_UserFilter(int count);
 		void SearchText_DateFilter(int count);
+		void SearchText_UserDateFilter(int count);
 		void SearchText_WindowFilter();
 
 		List<DynamicMessage> MakeSearchResultsReadable(List<string> selectedFields, string dateFieldKey);
@@ -83,6 +85,24 @@ namespace Viewer.Framework.Services
 				if (DateFilter != null)
 				{
 					Hits = LuceneService.Searcher.Search(UserQuery, DateFilter, count);
+				}
+			}
+		}
+
+		public void SearchText_UserDateFilter(int count)
+		{
+			if (UserQuery != null)
+			{
+				if (DateFilter != null)
+				{
+					if (UserFilter != null)
+
+					{
+						var filter = new BooleanFilter();
+						filter.Add(new FilterClause(DateFilter, Occur.MUST));
+						filter.Add(new FilterClause(UserFilter, Occur.MUST));
+						Hits = LuceneService.Searcher.Search(UserQuery, filter, count);
+					}
 				}
 			}
 		}

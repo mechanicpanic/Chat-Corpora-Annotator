@@ -16,5 +16,10 @@ namespace Annotation_Framework
         {
 
         }
+
+        private void scintilla1_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

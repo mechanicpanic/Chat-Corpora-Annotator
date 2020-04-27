@@ -25,7 +25,7 @@
 -Indexing/storing fields -- fixed!
 
 
-6. Fix the Load More button...
+6. Fix the Load More button... -- done!
 7. Implement ButtonWithCheckbox
 8. Implement opening an index
 
