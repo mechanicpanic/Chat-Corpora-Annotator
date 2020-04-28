@@ -69,6 +69,25 @@ namespace Viewer
 			chatTable.SetObjects(SearchResults);
 			//SetUpChatView();
 			chatTable.Invalidate();
+			var filters = new List<IModelFilter>();
+			TextMatchFilter highlightingFilter = null;
+			if (!String.IsNullOrEmpty(searchBox.Text))
+			{
+				var words = searchBox.Text.Trim().Split(null);
+				highlightingFilter = TextMatchFilter.Contains(chatTable, words);
+				foreach (var word in words)
+				{
+					var filter = TextMatchFilter.Contains(chatTable, word);
+					filters.Add(filter);
+				}
+			}
+			var compositeFilter = new CompositeAllFilter(filters);
+
+			//chatTable.ModelFilter = highlightingFilter;
+			//chatTable.AdditionalFilter = compositeFilter;
+			highlightTextRenderer1.Filter = highlightingFilter;
+			highlightTextRenderer1.CornerRoundness = 0.0F;
+			chatTable.DefaultRenderer = highlightTextRenderer1;
 		}
 
 		public void ShowView()
@@ -246,46 +265,30 @@ namespace Viewer
 				queryPanel.Visible = true;
 			}
 		}
-		private void selectUsersButton_Click(object sender, EventArgs e)
-		{
-			if (userPanel.Visible)
-			{
-				userPanel.Visible = false;
-			}
-			else
-			{
-				userPanel.Visible = true;
-			}
-		}
-		private void datesButton_Click(object sender, EventArgs e)
-		{
-			
-		}
+
 
 		#endregion
 
 		#region date view
-		//public void SetDateView()
-		//{
-		//	dateView.View = View.Details;
-		//	dateView.VirtualMode = true;
-		//	dateView.VirtualListSize = messagesPerDay.Keys.Count;
-		//	//dateView.DoubleBuffering(true);
-		//	RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
-		//	dateView.RetrieveVirtualItem += handler;
+		public void SetDateView()
+		{
+			dateView.View = View.Details;
+			dateView.VirtualMode = true;
+			dateView.VirtualListSize = MessagesPerDay.Keys.Count;
+			//dateView.DoubleBuffering(true);
+			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
+			dateView.RetrieveVirtualItem += handler;
 
 
-		//}
+			}
 
-		//private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
-		//{
-		//	int index = e.ItemIndex;
-		//	string date = messagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
+		private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+		{
+			int index = e.ItemIndex;
+			string date = MessagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
+			e.Item = new ListViewItem(date);
 
-
-		//	e.Item = new ListViewItem(date);
-
-		//}
+		}
 
 
 		//private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -356,11 +359,11 @@ namespace Viewer
 			List<string> users = new List<string>();
 			List<string> dates = new List<string>();
 			var stringQuery = searchBox.Text;
-			if (!checkBox1.Checked && !checkBox2.Checked)
+			if (!userToggle.Checked && !dateToggle.Checked)
 			{
 				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, false));
 			}
-			else if (checkBox1.Checked && !checkBox2.Checked)
+			else if (userToggle.Checked && !dateToggle.Checked)
 			{
 				if (userList.CheckedItems.Count != 0)
 				{
@@ -373,7 +376,7 @@ namespace Viewer
 					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), false));
 				}
 			}
-			else if (!checkBox1.Checked && checkBox2.Checked)
+			else if (!userToggle.Checked && dateToggle.Checked)
 			{
 
 				if (startDate.Checked && finishDate.Checked)
@@ -385,7 +388,7 @@ namespace Viewer
 				}
 
 			}
-			else if (checkBox1.Checked && checkBox2.Checked)
+			else if (userToggle.Checked && dateToggle.Checked)
 			{
 				users.Clear();
 				foreach (ListViewItem item in userList.CheckedItems)
@@ -401,7 +404,7 @@ namespace Viewer
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void clearButton_Click(object sender, EventArgs e)
 		{
 			chatTable.SetObjects(_messages);
 			chatTable.Invalidate();
@@ -413,7 +416,7 @@ namespace Viewer
 		}
 
 
-		private void checkBox2_CheckedChanged(object sender, EventArgs e)
+		private void datesToggle_CheckedChanged(object sender, EventArgs e)
 		{
 			if (datesPanel.Visible)
 			{
@@ -425,7 +428,7 @@ namespace Viewer
 			}
 		}
 
-		private void checkBox1_CheckedChanged(object sender, EventArgs e)
+		private void userToggle_CheckedChanged(object sender, EventArgs e)
 		{
 			if (userPanel.Visible)
 			{
@@ -435,6 +438,21 @@ namespace Viewer
 			{
 				userPanel.Visible = true;
 			}
+		}
+
+		private void messageLabel_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label2_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

@@ -12,7 +12,7 @@
 1.2.3 Wire up highlighting
 1.2.4. Implement window search and phrase search
 1.2.5 Fix date filter bounds
-1.2.6 Implement User/Date Combo
+1.2.6 Implement User/Date Combo -- done!
 
 2. Basic corpus statistics
 3. Basic tagging format: XML?, highlighting for one message 
@@ -26,7 +26,7 @@
 
 
 6. Fix the Load More button... -- done!
-7. Implement ButtonWithCheckbox
+7. Implement ButtonWithCheckbox -- replaced with pure checkbox!
 8. Implement opening an index
 
 

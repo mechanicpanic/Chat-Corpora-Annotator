@@ -71,7 +71,7 @@ namespace Viewer.Framework.Presenters
 
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)
         {
-            _searcher.UserQuery = LuceneService.Parser.Parse(e.Query + "*");
+            _searcher.UserQuery = LuceneService.Parser.Parse(e.Query);
             if (!e.FilteredByDate && !e.FilteredByUser) {
                _searcher.SearchText(e.Count);
                 
