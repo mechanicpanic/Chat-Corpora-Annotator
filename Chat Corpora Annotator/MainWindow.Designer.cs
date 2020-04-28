@@ -48,16 +48,14 @@
             this.startDate = new System.Windows.Forms.DateTimePicker();
             this.finishDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.datesButton = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.userPanel = new System.Windows.Forms.Panel();
             this.userList = new System.Windows.Forms.ListView();
             this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.selectUsersButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
             this.queryButton = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,9 +215,9 @@
             this.searchPanel.Controls.Add(this.button1);
             this.searchPanel.Controls.Add(this.panel1);
             this.searchPanel.Controls.Add(this.datesPanel);
-            this.searchPanel.Controls.Add(this.datesButton);
+            this.searchPanel.Controls.Add(this.checkBox2);
             this.searchPanel.Controls.Add(this.userPanel);
-            this.searchPanel.Controls.Add(this.selectUsersButton);
+            this.searchPanel.Controls.Add(this.checkBox1);
             this.searchPanel.Controls.Add(this.queryPanel);
             this.searchPanel.Controls.Add(this.queryButton);
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -351,22 +349,22 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "to";
             // 
-            // datesButton
+            // checkBox2
             // 
-            this.datesButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.datesButton.FlatAppearance.BorderSize = 0;
-            this.datesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.datesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.datesButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.datesButton.Location = new System.Drawing.Point(0, 426);
-            this.datesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.datesButton.Name = "datesButton";
-            this.datesButton.Size = new System.Drawing.Size(260, 35);
-            this.datesButton.TabIndex = 22;
-            this.datesButton.Text = "Select dates";
-            this.datesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.datesButton.UseVisualStyleBackColor = true;
-            this.datesButton.Click += new System.EventHandler(this.datesButton_Click);
+            this.checkBox2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox2.FlatAppearance.BorderSize = 0;
+            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.Location = new System.Drawing.Point(0, 426);
+            this.checkBox2.MinimumSize = new System.Drawing.Size(260, 35);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(260, 35);
+            this.checkBox2.TabIndex = 28;
+            this.checkBox2.Text = "Select Dates Toggle";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // userPanel
             // 
@@ -401,22 +399,22 @@
             this.Users.Text = "Users";
             this.Users.Width = 213;
             // 
-            // selectUsersButton
+            // checkBox1
             // 
-            this.selectUsersButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.selectUsersButton.FlatAppearance.BorderSize = 0;
-            this.selectUsersButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.selectUsersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selectUsersButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.selectUsersButton.Location = new System.Drawing.Point(0, 109);
-            this.selectUsersButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.selectUsersButton.Name = "selectUsersButton";
-            this.selectUsersButton.Size = new System.Drawing.Size(260, 35);
-            this.selectUsersButton.TabIndex = 16;
-            this.selectUsersButton.Text = "Select users";
-            this.selectUsersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.selectUsersButton.UseVisualStyleBackColor = true;
-            this.selectUsersButton.Click += new System.EventHandler(this.selectUsersButton_Click);
+            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox1.FlatAppearance.BorderSize = 0;
+            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(0, 109);
+            this.checkBox1.MinimumSize = new System.Drawing.Size(260, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(260, 35);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.Text = "Select Users Toggle";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // queryPanel
             // 
@@ -456,24 +454,6 @@
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.queryButton.UseVisualStyleBackColor = true;
             this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(266, 469);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(18, 17);
-            this.checkBox2.TabIndex = 28;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(266, 152);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(18, 17);
-            this.checkBox1.TabIndex = 27;
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
             // 
@@ -616,7 +596,6 @@
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -637,9 +616,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
-            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.checkBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
@@ -647,6 +624,7 @@
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.searchPanel.ResumeLayout(false);
+            this.searchPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -676,7 +654,6 @@
         private System.Windows.Forms.TableLayoutPanel datesPanel;
         private System.Windows.Forms.DateTimePicker startDate;
         private System.Windows.Forms.DateTimePicker finishDate;
-        private System.Windows.Forms.Button datesButton;
         private System.Windows.Forms.Panel userPanel;
         private System.Windows.Forms.Panel queryPanel;
         private System.Windows.Forms.Button queryButton;
@@ -693,7 +670,6 @@
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label messageLabel;
-        public System.Windows.Forms.Button selectUsersButton;
         private System.Windows.Forms.TabPage Statistics;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label2;

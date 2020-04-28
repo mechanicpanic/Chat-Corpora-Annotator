@@ -129,6 +129,9 @@
     <Reference Include="jollyday, Version=0.4.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.2.0\lib\jollyday.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="opennlp-tools-1.9.1, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenNLP.NET.1.9.1\lib\opennlp-tools-1.9.1.dll</HintPath>
     </Reference>
@@ -169,16 +172,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OneMessageTagger.cs">
+    <Compile Include="OneMessageTagViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OneMessageTagger.Designer.cs">
-      <DependentUpon>OneMessageTagger.cs</DependentUpon>
+    <Compile Include="OneMessageTagViewer.Designer.cs">
+      <DependentUpon>OneMessageTagViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="OneMessageTagger.resx">
-      <DependentUpon>OneMessageTagger.cs</DependentUpon>
+    <Compile Include="TagsetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TagsetEditor.Designer.cs">
+      <DependentUpon>TagsetEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="OneMessageTagViewer.resx">
+      <DependentUpon>OneMessageTagViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

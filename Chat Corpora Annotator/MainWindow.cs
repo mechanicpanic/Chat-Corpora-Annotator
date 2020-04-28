@@ -67,7 +67,7 @@ namespace Viewer
 		public void DisplaySearchResults()
 		{
 			chatTable.SetObjects(SearchResults);
-			SetUpChatView();
+			//SetUpChatView();
 			chatTable.Invalidate();
 		}
 
@@ -85,8 +85,7 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			checkBox1.Location = new Point(selectUsersButton.Location.X + searchPanel.Width, selectUsersButton.Location.Y * 2); ;
-			checkBox2.Location = new Point(datesButton.Location.X + searchPanel.Width, datesButton.Location.Y+30);
+			
 			
 
 		}
@@ -135,6 +134,7 @@ namespace Viewer
 		#endregion
 
 		#region chat table display
+
 
 		private void SetUpChatView()
 		{
@@ -259,14 +259,7 @@ namespace Viewer
 		}
 		private void datesButton_Click(object sender, EventArgs e)
 		{
-			if (datesPanel.Visible)
-			{
-				datesPanel.Visible = false;
-			}
-			else
-			{
-				datesPanel.Visible = true;
-			}
+			
 		}
 
 		#endregion
@@ -412,11 +405,36 @@ namespace Viewer
 		{
 			chatTable.SetObjects(_messages);
 			chatTable.Invalidate();
+			foreach (ListViewItem check in userList.CheckedItems)
+			{
+				check.Checked = false;
+			}
+			
 		}
 
-		private void button2_Click(object sender, EventArgs e)
-		{
 
+		private void checkBox2_CheckedChanged(object sender, EventArgs e)
+		{
+			if (datesPanel.Visible)
+			{
+				datesPanel.Visible = false;
+			}
+			else
+			{
+				datesPanel.Visible = true;
+			}
+		}
+
+		private void checkBox1_CheckedChanged(object sender, EventArgs e)
+		{
+			if (userPanel.Visible)
+			{
+				userPanel.Visible = false;
+			}
+			else
+			{
+				userPanel.Visible = true;
+			}
 		}
 	}
 }
