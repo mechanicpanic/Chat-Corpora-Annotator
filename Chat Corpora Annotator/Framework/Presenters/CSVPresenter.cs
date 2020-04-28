@@ -42,6 +42,9 @@ namespace Viewer.Framework.Presenters
             int temp = (LuceneService.Writer.MaxDoc) / 5;
             var list = _indexer.LoadSomeDocuments(_view.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
             _view.Messages = list;
+            _view.DateFieldKey = _csv.DateFieldKey;
+            _view.TextFieldKey = _csv.TextFieldKey;
+            _view.SenderFieldKey = _csv.SenderFieldKey;
             _view.DisplayDocuments();
         }
 

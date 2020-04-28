@@ -7,7 +7,11 @@ namespace Viewer.Framework.Views
 {
     public interface IMainView : IView
     {
-        //bool FileLoadState { get; set; }
+        bool FileLoadState { get; set; }
+
+        string TextFieldKey { get; set; }
+        string DateFieldKey { get; set; }
+        string SenderFieldKey { get; set; }
         List<string> Usernames { get; set; }
         BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
         List<DynamicMessage> Messages { get; set; }

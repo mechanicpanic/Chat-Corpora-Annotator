@@ -30,7 +30,7 @@ namespace Viewer.Framework.Presenters
 
 
             //_view.HeatmapClick += _view_HeatmapClick;
-            _view.ChartClick += _view_ChartClick;
+            //_view.ChartClick += _view_ChartClick;
             _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _view.FindClick += _view_FindClick;
             _view.LoadMoreClick += _view_LoadMoreClick;
@@ -46,13 +46,6 @@ namespace Viewer.Framework.Presenters
             AddDocumentsToDisplay(200);
         }
 
-
-
-
-        private void _view_ChartClick(object sender, EventArgs e)
-        {
-            
-        }
 
         private void _view_OpenIndexedCorpus(object sender, EventArgs e)
         {

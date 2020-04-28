@@ -50,6 +50,10 @@ namespace Viewer
 
 		public List<DynamicMessage> SearchResults { get; set; }
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
+		public bool FileLoadState { get; set ; }
+		public string TextFieldKey { get; set; }
+		public string DateFieldKey { get; set; }
+		public string SenderFieldKey { get; set; }
 
 		public void SetLineCount(int count)
 		{
@@ -83,11 +87,11 @@ namespace Viewer
 			}
 			var compositeFilter = new CompositeAllFilter(filters);
 
-			//chatTable.ModelFilter = highlightingFilter;
-			//chatTable.AdditionalFilter = compositeFilter;
+			chatTable.ModelFilter = highlightingFilter;
+			chatTable.AdditionalFilter = compositeFilter;
 			highlightTextRenderer1.Filter = highlightingFilter;
-			highlightTextRenderer1.CornerRoundness = 0.0F;
-			chatTable.DefaultRenderer = highlightTextRenderer1;
+
+
 		}
 
 		public void ShowView()
@@ -160,6 +164,7 @@ namespace Viewer
 			
 
 			ShowUsers();
+			PopulateSenderColors();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
 			foreach (var key in _messages[0].contents.Keys)
@@ -172,6 +177,7 @@ namespace Viewer
 				};
 				cl.Text = key;
 				cl.WordWrap = true;
+				
 
 				columns.Add(cl);
 
@@ -182,7 +188,7 @@ namespace Viewer
 			chatTable.RebuildColumns();
 
 
-			//FormatColumns();
+			FormatColumns();
 
 		}
 
@@ -196,39 +202,48 @@ namespace Viewer
 
 		}
 
-		//private void FormatColumns()
-		//{
-		//	foreach (var cl in chatTable.AllColumns)
-		//	{
-		//		if (cl.Text != textFieldKey)
-		//		{
-		//			cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-		//		}
-		//		else
-		//		{
-		//			cl.FillsFreeSpace = true;
-		//		}
-		//	}
-		//	chatTable.FormatCell += ChatTable_FormatCell;
-		//	chatTable.Refresh();
+		private void FormatColumns()
+		{
+			foreach (var cl in chatTable.AllColumns)
+			{
+				if (cl.Text != TextFieldKey)
+				{
+					cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+				}
+				else
+				{
+					cl.FillsFreeSpace = true;
+					cl.Renderer = highlightTextRenderer1;
 
-		//}
+				}
+			}
+			highlightTextRenderer1.CanWrap = true;
+			highlightTextRenderer1.UseRoundedRectangle = false;
+			highlightTextRenderer1.CornerRoundness = 0.0F;
+			highlightTextRenderer1.FramePen = new Pen(Color.White);
+			highlightTextRenderer1.FillBrush = new SolidBrush(Color.Wheat);
+			chatTable.DefaultRenderer = highlightTextRenderer1;
+			chatTable.FormatCell += ChatTable_FormatCell;
+			chatTable.Refresh();
+
+		}
 		private void PopulateSenderColors()
 		{
+			userColors = new Dictionary<string, Color>();
 			foreach (var user in Usernames)
 			{
 				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 				userColors.Add(user, tempColor);
 			}
 		}
-		//private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
-		//{
-		//	if (e.Column.Text == senderFieldKey)
-		//	{
-		//		e.SubItem.ForeColor = userColors[e.SubItem.Text];
-		//	}
+		private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
+		{
+			if (e.Column.Text == SenderFieldKey)
+			{
+				e.SubItem.ForeColor = userColors[e.SubItem.Text];
+			}
 
-		//}
+		}
 
 
 
