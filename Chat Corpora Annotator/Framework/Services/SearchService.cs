@@ -39,11 +39,26 @@ namespace Viewer.Framework.Services
 
 		public void ConstructDateFilter(string dateFieldKey, DateTime start, DateTime finish)
 		{
-			var startString = DateTools.DateToString(start, DateTools.Resolution.MILLISECOND);
-			var finishString = DateTools.DateToString(finish, DateTools.Resolution.MILLISECOND);
-			DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
-				 lowerVal: startString, includeLower: true,
-				 upperVal: finishString, includeUpper: true);
+			string startString = DateTools.DateToString(start, DateTools.Resolution.MILLISECOND);
+			string finishString = DateTools.DateToString(finish, DateTools.Resolution.MILLISECOND);
+			if (!String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
+			{
+				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+					 lowerVal: startString, includeLower: true,
+					 upperVal: finishString, includeUpper: true);
+			}
+			else if (String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
+			{
+				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+					 lowerVal: startString, includeLower: true,
+					 upperVal: null, includeUpper: false);
+			}
+			else if (!String.IsNullOrEmpty(startString) && String.IsNullOrEmpty(finishString))
+			{
+				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+					 lowerVal: null, includeLower: false,
+					 upperVal: finishString, includeUpper: true);
+			}
 		}
 
 		public void ConstructUserFilter(string senderFieldKey, string[] users) { UserFilter = new FieldCacheTermsFilter(senderFieldKey, users); }

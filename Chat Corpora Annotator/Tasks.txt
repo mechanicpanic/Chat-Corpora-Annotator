@@ -6,12 +6,12 @@
 1.1.3 Put in a Stopwatch for indexing
 1.1.4 NULL CHECKS
 
-1.2 Wire up Search -- almost done!
-1.2.1 Fix the user list
-1.2.2 Fix user and date filter checkboxes
-1.2.3 Wire up highlighting
-1.2.4. Implement window search and phrase search
-1.2.5 Fix date filter bounds
+1.2 Wire up Search -- done!
+1.2.1 Fix the user list -- done !
+1.2.2 Fix user and date filter checkboxes -- done!
+1.2.3 Wire up highlighting -- done!
+1.2.4. Implement window search and phrase search -- done lol
+1.2.5 Fix date filter bounds -- done!
 1.2.6 Implement User/Date Combo -- done!
 
 2. Basic corpus statistics
@@ -28,5 +28,7 @@
 6. Fix the Load More button... -- done!
 7. Implement ButtonWithCheckbox -- replaced with pure checkbox!
 8. Implement opening an index
+9. Time pickers
+10. 
 
 

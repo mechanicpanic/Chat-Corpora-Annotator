@@ -165,6 +165,7 @@ namespace Viewer
 
 			ShowUsers();
 			PopulateSenderColors();
+			SetDateView();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
 			foreach (var key in _messages[0].contents.Keys)

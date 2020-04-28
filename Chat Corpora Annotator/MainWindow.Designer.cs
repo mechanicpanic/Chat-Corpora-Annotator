@@ -90,16 +90,18 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             tabControl1.Controls.Add(this.Chat);
             tabControl1.Controls.Add(this.Statistics);
             tabControl1.Controls.Add(this.tabPage1);
-            tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             tabControl1.Location = new System.Drawing.Point(303, 40);
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(1226, 663);
+            tabControl1.Size = new System.Drawing.Size(1226, 695);
             tabControl1.TabIndex = 17;
             tabControl1.TabStop = false;
             // 
@@ -115,7 +117,7 @@
             this.Chat.Location = new System.Drawing.Point(4, 32);
             this.Chat.Name = "Chat";
             this.Chat.Padding = new System.Windows.Forms.Padding(3);
-            this.Chat.Size = new System.Drawing.Size(1218, 627);
+            this.Chat.Size = new System.Drawing.Size(1218, 659);
             this.Chat.TabIndex = 0;
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
@@ -130,7 +132,7 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(-4, 580);
+            this.loadMoreButton.Location = new System.Drawing.Point(-4, 612);
             this.loadMoreButton.Name = "loadMoreButton";
             this.loadMoreButton.Size = new System.Drawing.Size(1224, 49);
             this.loadMoreButton.TabIndex = 11;
@@ -156,7 +158,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1045, 572);
+            this.chatTable.Size = new System.Drawing.Size(1045, 602);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -222,7 +224,7 @@
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.searchPanel.Location = new System.Drawing.Point(0, 40);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(303, 697);
+            this.searchPanel.Size = new System.Drawing.Size(303, 728);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -276,6 +278,7 @@
             this.datesPanel.RowCount = 2;
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.datesPanel.Size = new System.Drawing.Size(303, 73);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
@@ -300,10 +303,12 @@
             this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDate.Location = new System.Drawing.Point(78, 3);
+            this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
             this.startDate.Size = new System.Drawing.Size(222, 30);
             this.startDate.TabIndex = 17;
+            this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
             // finishDate
             // 
@@ -442,8 +447,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Lavender;
             this.panel1.Controls.Add(this.messageLabel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(303, 703);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(303, 734);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1226, 34);
             this.panel1.TabIndex = 25;
@@ -603,7 +608,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(1305, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(212, 30);
+            this.button2.Size = new System.Drawing.Size(212, 36);
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
@@ -627,9 +632,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1529, 737);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1529, 768);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.menuStrip1);
