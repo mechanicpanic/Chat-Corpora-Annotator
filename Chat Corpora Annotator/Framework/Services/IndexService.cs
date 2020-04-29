@@ -17,11 +17,14 @@ namespace Viewer.Framework.Services
 	{
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
-		void OpenWriter(string indexPath, string textFieldKey);
+		void OpenDirectory(string IndexPath);
+		void OpenWriter(string textFieldKey);
 		int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields);
 
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
+
+		void OpenIndex(string IndexPath);
 
 		//event EventHandler FileIndexed;
 
@@ -174,28 +177,48 @@ namespace Viewer.Framework.Services
 			return result;
 		}
 
-		public void OpenWriter(string indexPath, string textFieldKey)
+		public void OpenWriter(string textFieldKey)
 		{
-			LuceneService.Dir = FSDirectory.Open(indexPath);
+			
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
 			LuceneService.IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
 			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
+			LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
 			
 			
 			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
 
-			LuceneService.Writer.DeleteAll();
-			LuceneService.Writer.Commit();
+			
 			
 
 		}
 
 		private void OpenReader()
 		{
+			
 			LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
 			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
 		}
+
+		public void OpenDirectory(string IndexPath)
+		{
+			LuceneService.Dir = FSDirectory.Open(IndexPath);
+		}
+
+		public void OpenIndex(string IndexPath)
+		{
+			if(DirectoryReader.IndexExists(LuceneService.Dir))
+			{
+				OpenReader();
+			}
+			else
+			{
+				throw new Exception("No index here");
+			}
+		}
+
+
 	}
 }

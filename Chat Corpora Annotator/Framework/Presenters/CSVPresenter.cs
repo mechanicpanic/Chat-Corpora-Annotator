@@ -77,7 +77,8 @@ namespace Viewer.Framework.Presenters
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            _indexer.OpenWriter(_view.CurrentIndexPath, _csv.TextFieldKey);
+            _indexer.OpenDirectory(_view.CurrentIndexPath);
+            _indexer.OpenWriter(_csv.TextFieldKey);
             _indexer.InitLookup(_csv.TextFieldKey, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.SelectedFields, _csv.AllFields);
             var result =  _indexer.PopulateIndex(_view.CurrentIndexPath,_view.CurrentPath,_csv.AllFields, _csv.SelectedFields);
            if (result == 1)

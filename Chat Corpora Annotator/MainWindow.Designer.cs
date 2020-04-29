@@ -36,6 +36,8 @@
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Statistics = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.scintilla1 = new ScintillaNET.Scintilla();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -52,6 +54,7 @@
             this.Users = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.userToggle = new System.Windows.Forms.CheckBox();
             this.queryPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.searchBox = new System.Windows.Forms.RichTextBox();
             this.queryButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -74,18 +77,21 @@
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -191,20 +197,43 @@
             this.Statistics.Location = new System.Drawing.Point(4, 32);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(3);
-            this.Statistics.Size = new System.Drawing.Size(1218, 627);
+            this.Statistics.Size = new System.Drawing.Size(1218, 659);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.fastObjectListView1);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.scintilla1);
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1218, 627);
+            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Analysis";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(490, 321);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(277, 48);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // scintilla1
+            // 
+            this.scintilla1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.scintilla1.Location = new System.Drawing.Point(3, 3);
+            this.scintilla1.Name = "scintilla1";
+            this.scintilla1.Size = new System.Drawing.Size(1212, 312);
+            this.scintilla1.TabIndex = 0;
+            this.scintilla1.Text = "scintilla1";
             // 
             // csvDialog
             // 
@@ -413,6 +442,20 @@
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(0, 49);
+            this.label3.MaximumSize = new System.Drawing.Size(303, 0);
+            this.label3.MinimumSize = new System.Drawing.Size(0, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(280, 60);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Hint: \"wikipedia page\" ~2 will search for \"wikipedia\" and \"page\" two words apart " +
+    "from each other";
+            // 
             // searchBox
             // 
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -613,19 +656,25 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // fastObjectListView1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(0, 49);
-            this.label3.MaximumSize = new System.Drawing.Size(303, 0);
-            this.label3.MinimumSize = new System.Drawing.Size(0, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(280, 60);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Hint: \"wikipedia page\" ~2 will search for \"wikipedia\" and \"page\" two words apart " +
-    "from each other";
+            this.fastObjectListView1.CellEditUseWholeCell = false;
+            this.fastObjectListView1.HideSelection = false;
+            this.fastObjectListView1.Location = new System.Drawing.Point(352, 387);
+            this.fastObjectListView1.Name = "fastObjectListView1";
+            this.fastObjectListView1.ShowGroups = false;
+            this.fastObjectListView1.Size = new System.Drawing.Size(858, 254);
+            this.fastObjectListView1.TabIndex = 2;
+            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
+            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
+            this.fastObjectListView1.VirtualMode = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 387);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 30);
+            this.textBox1.TabIndex = 3;
             // 
             // MainWindow
             // 
@@ -644,6 +693,8 @@
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -655,6 +706,7 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -708,6 +760,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
+        private System.Windows.Forms.Button button1;
+        private ScintillaNET.Scintilla scintilla1;
+        private System.Windows.Forms.TextBox textBox1;
+        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
     }
 }
 

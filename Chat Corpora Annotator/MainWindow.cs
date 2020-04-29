@@ -94,6 +94,8 @@ namespace Viewer
 
 		}
 
+		NLPAnalyzer analyzer;
+
 		public void ShowView()
 		{
 			ShowDialog();
@@ -108,8 +110,9 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			
-			
+			analyzer = new NLPAnalyzer();
+			analyzer.LoadClassifier();
+
 
 		}
 
@@ -469,6 +472,15 @@ namespace Viewer
 		private void label1_Click(object sender, EventArgs e)
 		{
 
+		}
+		int index = 0;
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+
+			scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
+			index++;
+			
 		}
 	}
 }

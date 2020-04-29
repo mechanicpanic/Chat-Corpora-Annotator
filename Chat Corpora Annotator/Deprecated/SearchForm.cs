@@ -138,7 +138,7 @@ namespace Viewer
             FieldCacheTermsFilter userFilter = new FieldCacheTermsFilter(senderFieldKey, users.ToArray());
             var filter = new BooleanFilter();
             filter.Add(new FilterClause(userFilter, Occur.MUST));
-            var hits = searcher.Search(textQuery,userFilter,200).ScoreDocs;
+            var hits = searcher.Search(textQuery, userFilter, 200).ScoreDocs;
             for (int i = 0; i < hits.Length; i++)
             {
                 List<string> data = new List<string>();
@@ -146,14 +146,14 @@ namespace Viewer
                 //ScoreDoc d = temp.ScoreDocs[i];
                 //float score = d.Score;
                 Document idoc = searcher.Doc(hits[i].Doc);
-                
-                    foreach (var field in selectedFields)
-                    {
-                        data.Add(idoc.GetField(field).GetStringValue());
-                    }
-                    DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
-                    searchResults.Add(message);
-                
+
+                foreach (var field in selectedFields)
+                {
+                    data.Add(idoc.GetField(field).GetStringValue());
+                }
+                DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+                searchResults.Add(message);
+
             }
         }
         private void DisplayResults()
