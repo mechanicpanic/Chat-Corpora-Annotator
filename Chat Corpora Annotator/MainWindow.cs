@@ -1,5 +1,4 @@
 ﻿using BrightIdeasSoftware;
-using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,25 +7,13 @@ using System.Windows.Forms;
 
 
 using CSharpTest.Net.Collections;
-using SoftCircuits.CsvParser;
-using Lucene.Net.Util;
-using Lucene.Net.Store;
-using Lucene.Net.Index;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Documents;
-
-using Lucene.Net.Search;
-using Lucene.Net.QueryParsers.Classic;
-using Lucene.Net.Queries;
 using System.Drawing;
-using Tagger;
-using Viewer.CSV_Wizard;
 using Viewer.Framework.Views;
 
 namespace Viewer
 {
 
-	public partial class MainWindow : Form, IMainView
+	public partial class MainWindow : Form, IMainView, INotifyPropertyChanged
 	{
 		Random rnd = new Random();
 		#region IMainView
@@ -37,7 +24,7 @@ namespace Viewer
 		public event EventHandler FileAndIndexSelected;
 		public event LuceneQueryEventHandler FindClick;
 		public event EventHandler LoadMoreClick;
-
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
@@ -50,7 +37,8 @@ namespace Viewer
 
 		public List<DynamicMessage> SearchResults { get; set; }
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
-		public bool FileLoadState { get; set ; }
+		private bool _fileLoadState = false;
+		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
 		public string TextFieldKey { get; set; }
 		public string DateFieldKey { get; set; }
 		public string SenderFieldKey { get; set; }
@@ -113,9 +101,26 @@ namespace Viewer
 			analyzer = new NLPAnalyzer();
 			analyzer.LoadClassifier();
 
-
+			this.PropertyChanged += MainWindow_PropertyChanged;
 		}
 
+		private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if(this.FileLoadState)
+			{
+				queryButton.Enabled = true;
+				userToggle.Enabled = true;
+				dateToggle.Enabled = true;
+				findButton.Enabled = true;
+				clearButton.Enabled = true;
+				loadMoreButton.Enabled = true;
+			}
+		}
+
+		protected void OnPropertyChanged(string name = "FileLoadState")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
 		#region csv loading
 
@@ -375,12 +380,14 @@ namespace Viewer
 
 		private void LaunchSearch()
 		{
+			var temp = messageLabel.Text.Split().ElementAt(0);
+			int count = Int32.Parse(temp); //это смешно, но лучше чем просто баг
 			List<string> users = new List<string>();
 			List<string> dates = new List<string>();
 			var stringQuery = searchBox.Text;
 			if (!userToggle.Checked && !dateToggle.Checked)
 			{
-				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, false));
+				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, count, false));
 			}
 			else if (userToggle.Checked && !dateToggle.Checked)
 			{
@@ -392,7 +399,7 @@ namespace Viewer
 						users.Add(item.Text);
 
 					}
-					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), false));
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, count , users.ToArray(), false));
 				}
 			}
 			else if (!userToggle.Checked && dateToggle.Checked)
@@ -403,7 +410,7 @@ namespace Viewer
 					DateTime[] date = new DateTime[2];
 					date[0] = startDate.Value;
 					date[1] = finishDate.Value;
-					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, date, false));
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, count, date, false));
 				}
 
 			}
@@ -479,6 +486,7 @@ namespace Viewer
 
 
 			scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
+			analyzer.MakeTrees();
 			index++;
 			
 		}

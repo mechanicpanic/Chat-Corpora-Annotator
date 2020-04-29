@@ -29,6 +29,8 @@
 7. Implement ButtonWithCheckbox -- replaced with pure checkbox!
 8. Implement opening an index
 9. Time pickers
-10. 
+
+10. Implement noun phrase detection
+11. POS tagging
 
 

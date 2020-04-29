@@ -78,8 +78,6 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -91,7 +89,6 @@
             this.queryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -134,6 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
+            this.loadMoreButton.Enabled = false;
             this.loadMoreButton.FlatAppearance.BorderSize = 0;
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -204,8 +202,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.fastObjectListView1);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.scintilla1);
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
@@ -260,6 +256,7 @@
             // 
             this.findButton.BackColor = System.Drawing.Color.Lavender;
             this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.findButton.Enabled = false;
             this.findButton.FlatAppearance.BorderSize = 0;
             this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -278,6 +275,7 @@
             // 
             this.clearButton.BackColor = System.Drawing.Color.Lavender;
             this.clearButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.clearButton.Enabled = false;
             this.clearButton.FlatAppearance.BorderSize = 0;
             this.clearButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -369,6 +367,7 @@
             this.dateToggle.Appearance = System.Windows.Forms.Appearance.Button;
             this.dateToggle.AutoSize = true;
             this.dateToggle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dateToggle.Enabled = false;
             this.dateToggle.FlatAppearance.BorderSize = 0;
             this.dateToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dateToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -419,6 +418,7 @@
             this.userToggle.Appearance = System.Windows.Forms.Appearance.Button;
             this.userToggle.AutoSize = true;
             this.userToggle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.userToggle.Enabled = false;
             this.userToggle.FlatAppearance.BorderSize = 0;
             this.userToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -458,6 +458,7 @@
             // 
             // searchBox
             // 
+            this.searchBox.AutoWordSelection = true;
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -471,6 +472,7 @@
             // queryButton
             // 
             this.queryButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.queryButton.Enabled = false;
             this.queryButton.FlatAppearance.BorderSize = 0;
             this.queryButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.queryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -646,6 +648,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -655,26 +658,6 @@
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // fastObjectListView1
-            // 
-            this.fastObjectListView1.CellEditUseWholeCell = false;
-            this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(352, 387);
-            this.fastObjectListView1.Name = "fastObjectListView1";
-            this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(858, 254);
-            this.fastObjectListView1.TabIndex = 2;
-            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView1.VirtualMode = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(7, 387);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 30);
-            this.textBox1.TabIndex = 3;
             // 
             // MainWindow
             // 
@@ -694,7 +677,6 @@
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -706,7 +688,6 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -762,8 +743,6 @@
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.Button button1;
         private ScintillaNET.Scintilla scintilla1;
-        private System.Windows.Forms.TextBox textBox1;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
     }
 }
 
