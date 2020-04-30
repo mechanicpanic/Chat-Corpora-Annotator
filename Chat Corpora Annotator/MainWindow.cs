@@ -33,6 +33,7 @@ namespace Viewer
 		private List<DynamicMessage> _messages;
 		private Dictionary<string,Color> userColors;
 
+		public List<string> SelectedFields { get; set; }
 		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
 
 		public List<DynamicMessage> SearchResults { get; set; }
@@ -99,8 +100,8 @@ namespace Viewer
 		{
 			InitializeComponent();
 			analyzer = new NLPAnalyzer();
-			analyzer.LoadClassifier();
-
+			//analyzer.LoadClassifier();
+			//analyzer.MakeTrees();
 			this.PropertyChanged += MainWindow_PropertyChanged;
 		}
 
@@ -114,6 +115,15 @@ namespace Viewer
 				findButton.Enabled = true;
 				clearButton.Enabled = true;
 				loadMoreButton.Enabled = true;
+			}
+			if (!this.FileLoadState)
+			{
+				queryButton.Enabled = false;
+				userToggle.Enabled = false;
+				dateToggle.Enabled = false;
+				findButton.Enabled = false;
+				clearButton.Enabled = false;
+				loadMoreButton.Enabled = false;
 			}
 		}
 
@@ -489,6 +499,22 @@ namespace Viewer
 			analyzer.MakeTrees();
 			index++;
 			
+		}
+
+		private void openCorpusToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			indexDialog = new FolderBrowserDialog();
+
+			indexDialog.Description = "Select previously indexed corpus";
+			DialogResult result = indexDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+
+				this.CurrentIndexPath = indexDialog.SelectedPath;
+
+
+				OpenIndexedCorpus?.Invoke(this, EventArgs.Empty);
+			}
 		}
 	}
 }

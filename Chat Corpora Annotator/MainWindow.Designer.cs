@@ -540,15 +540,16 @@
             // loadCorpusToolStripMenuItem
             // 
             this.loadCorpusToolStripMenuItem.Name = "loadCorpusToolStripMenuItem";
-            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(204, 28);
+            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.loadCorpusToolStripMenuItem.Text = "Load corpus...";
             this.loadCorpusToolStripMenuItem.Click += new System.EventHandler(this.loadCorpusToolStripMenuItem_Click);
             // 
             // openCorpusToolStripMenuItem
             // 
             this.openCorpusToolStripMenuItem.Name = "openCorpusToolStripMenuItem";
-            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(204, 28);
+            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.openCorpusToolStripMenuItem.Text = "Open corpus...";
+            this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 

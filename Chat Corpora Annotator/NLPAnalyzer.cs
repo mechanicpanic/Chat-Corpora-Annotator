@@ -29,6 +29,7 @@ namespace Viewer
             // Loading 3 class classifier model
             classifier = CRFClassifier.getClassifierNoExceptions(
                 classifiersDirecrory + @"\english.all.3class.distsim.crf.ser.gz");
+            
         }
         public string ExtractNamedEntities(string message)
         {
@@ -39,9 +40,10 @@ namespace Viewer
             
         }
         //public AnnotationPipeline buildPipeline()
-        //{ 
+        //{
+        //    Annotation document = new Annotation("Barack Obama was born in Hawaii.  He is the president. Obama was elected in 2008.");
         //    AnnotationPipeline pl = new AnnotationPipeline();
-        //    pl.addAnnotator(new POSTaggerAnnotator());
+            
         //    pl.addAnnotator(new ParserAnnotator(edu.stanford.nlp.parser.common.ParserGrammar.loadModel(), true, 50));
 
         //    return pl;
@@ -62,7 +64,7 @@ namespace Viewer
             tree.pennPrint();
 
             // This option shows loading and using an explicit tokenizer
-            var sent2 = "This is another sentence.";
+            var sent2 = "We met in California.";
             var tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
             var sent2Reader = new StringReader(sent2);
             var rawWords2 = tokenizerFactory.getTokenizer(sent2Reader).tokenize();
@@ -79,6 +81,28 @@ namespace Viewer
             // Extract collapsed dependencies from parsed tree
             var tp = new TreePrint("penn,typedDependenciesCollapsed");
             tp.printTree(tree2);
+
+            List<Tree> phraseList = new List<Tree>();
+            
+            foreach (Tree subtree in tree2)
+            {
+
+                if (subtree.label().value().Equals("NP"))
+                {
+
+                    //phraseList.Add(subtree);
+                    java.util.List newtree = subtree.getChildrenAsList();
+                    int a = 5;
+
+                }
+            }
+            foreach(Tree t in phraseList)
+            {
+                tp.printTree(t);
+            }
+
         }
+
+
     }
 }

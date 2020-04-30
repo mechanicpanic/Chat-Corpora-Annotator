@@ -29,7 +29,7 @@ namespace Viewer.Framework.Presenters
 
             
             _view.FileAndIndexSelected += _view_FileAndIndexSelected;
-
+            
             //_indexer.FileIndexed += _indexer_FileIndexed;
             
             

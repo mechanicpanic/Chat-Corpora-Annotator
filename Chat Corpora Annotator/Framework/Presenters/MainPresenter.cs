@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 using Viewer.Framework.Views;
 using Viewer.Framework.Services;
+using Lucene.Net.Index;
 
 namespace Viewer.Framework.Presenters
 {
@@ -31,15 +32,32 @@ namespace Viewer.Framework.Presenters
 
             //_view.HeatmapClick += _view_HeatmapClick;
             //_view.ChartClick += _view_ChartClick;
-            _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
+            
             _view.FindClick += _view_FindClick;
             _view.LoadMoreClick += _view_LoadMoreClick;
-           
+            _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
 
         }
 
+        private void _view_OpenIndexedCorpus(object sender, EventArgs e)
+        {
+            _reader.OpenDirectory(_view.CurrentIndexPath);
+            if(DirectoryReader.IndexExists(LuceneService.Dir))
+            {
+                var info = _reader.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
-
+                _view.TextFieldKey = info["TextFieldKey"];
+                _view.SenderFieldKey = info["SenderFieldKey"];
+                _view.DateFieldKey = info["DateFieldKey"];
+                _csv.SelectedFields = _reader.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
+                _view.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
+                _view.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
+                _view.Messages = new List<DynamicMessage>();
+                _reader.OpenIndex();
+               
+                AddDocumentsToDisplay(200);
+            }
+        }
 
         private void _view_LoadMoreClick(object sender, EventArgs e)
         {
@@ -47,16 +65,10 @@ namespace Viewer.Framework.Presenters
         }
 
 
-        private void _view_OpenIndexedCorpus(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = _reader.LoadSomeDocuments(_view.CurrentIndexPath,_csv.DateFieldKey, _csv.SelectedFields, count);
+            var list = _reader.LoadSomeDocuments(_view.CurrentIndexPath,_view.DateFieldKey, _csv.SelectedFields, count);
             _view.Messages.AddRange(list);
             _view.DisplayDocuments();
         }

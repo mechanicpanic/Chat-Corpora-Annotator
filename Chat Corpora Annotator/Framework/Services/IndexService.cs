@@ -9,7 +9,7 @@ using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Wintellect.PowerCollections;
 
 namespace Viewer.Framework.Services
 {
@@ -24,11 +24,14 @@ namespace Viewer.Framework.Services
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
 
-		void OpenIndex(string IndexPath);
+		void OpenIndex();
 
 		//event EventHandler FileIndexed;
-
-
+		//void SaveInfoToDisk(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
+		OrderedDictionary<string,string> LoadInfoFromDisk(string CurrentIndexPath);
+		List<string> LoadUsersFromDisk(string CurrentIndexPath);
+		List<string> LoadFieldsFromDisk(string CurrentIndexPath);
+		BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath);
 	}
 
 	public class IndexService : IIndexService 
@@ -44,8 +47,110 @@ namespace Viewer.Framework.Services
 		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
 
 
+		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath) 
+		{
+			using (System.IO.StreamWriter file =
+			new System.IO.StreamWriter(CurrentIndexPath+@"info.txt"))
+			{
+				file.WriteLine(textFieldKey);
+				file.WriteLine(senderFieldKey);
+				file.WriteLine(dateFieldKey);
+			
+			}
+		}
 
-		public void InitLookup(string textFieldKey,string dateFieldKey, string senderFieldKey, List<string> selectedFields,string[] allFields)
+		private void SaveUsersToDisk(string CurrentIndexPath)
+		{
+			using (System.IO.StreamWriter file =
+			new System.IO.StreamWriter(CurrentIndexPath + @"users.txt"))
+			{
+				foreach (var user in UserKeys)
+				{
+					file.WriteLine(user);
+				}
+			}
+		}
+
+		private void SaveFieldsToDisk(string CurrentIndexPath, List<string> SelectedFields)
+		{
+			using (System.IO.StreamWriter file =
+			new System.IO.StreamWriter(CurrentIndexPath + @"fields.txt"))
+			{
+				foreach (var field in SelectedFields)
+				{
+					file.WriteLine(field);
+				}
+			}
+		}
+		private void SaveStatsToDisk(string CurrentIndexPath)
+		{
+			using (System.IO.StreamWriter file =
+			new System.IO.StreamWriter(CurrentIndexPath + @"stats.txt"))
+			{
+				foreach (var kvp in MessagesPerDay)
+				{
+					file.WriteLine(kvp.Key.ToString() + "#" + kvp.Value);
+				}
+			}
+		}
+		public OrderedDictionary<string,string> LoadInfoFromDisk(string CurrentIndexPath)
+		{
+
+			OrderedDictionary<string,string> info = new OrderedDictionary<string,string>();
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"info.txt"))
+			{
+				info.Add("TextFieldKey", reader.ReadLine());
+				info.Add("SenderFieldKey", reader.ReadLine());
+				info.Add("DateFieldKey", reader.ReadLine());
+				
+			}
+			return info;
+		}
+
+		public List<string> LoadFieldsFromDisk(string CurrentIndexPath)
+		{
+			List<string> fields = new List<string>();
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"fields.txt"))
+			{
+
+				while (!reader.EndOfStream)
+				{
+					fields.Add(reader.ReadLine());
+					
+				}
+
+			}
+			return fields;
+		}
+
+		public List<string> LoadUsersFromDisk(string CurrentIndexPath)
+		{
+			List<string> users = new List<string>();
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"users.txt"))
+			{
+				while (!reader.EndOfStream)
+				{
+					users.Add(reader.ReadLine());
+				}
+			}
+			return users;
+		}
+
+		public BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath)
+		{
+			BTreeDictionary<DateTime, int> stats = new BTreeDictionary<DateTime, int>();
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"stats.txt"))
+			{
+				while (!reader.EndOfStream)
+				{
+					var line = reader.ReadLine();
+					string[] kvp = line.Split('#');
+					stats.Add(DateTime.Parse(kvp[0]),Int32.Parse(kvp[1]));
+				}
+			}
+			return stats;
+		}
+		public void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields,string[] allFields)
 		{
 			lookup = new int[3];
 			foreach (var field in selectedFields)
@@ -72,7 +177,7 @@ namespace Viewer.Framework.Services
 			{
 				Document document;
 				List<string> temp = new List<string>();
-				if (i < LuceneService.Writer.MaxDoc)
+				if (i < LuceneService.DirReader.MaxDoc)
 				{
 					document = LuceneService.DirReader.Document(i);
 				}
@@ -167,6 +272,10 @@ namespace Viewer.Framework.Services
 					//LuceneService.Writer.AddDocuments(documentBlock);
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
+					SaveInfoToDisk(allFields[lookup[2]],allFields[lookup[1]],allFields[lookup[0]], indexPath);
+					SaveFieldsToDisk(indexPath, selectedFields);
+					SaveUsersToDisk(indexPath);
+					SaveStatsToDisk(indexPath);
 					OpenReader();
 					result = 1;
 					
@@ -207,15 +316,20 @@ namespace Viewer.Framework.Services
 			LuceneService.Dir = FSDirectory.Open(IndexPath);
 		}
 
-		public void OpenIndex(string IndexPath)
+		public void OpenIndex()
 		{
-			if(DirectoryReader.IndexExists(LuceneService.Dir))
+			if (LuceneService.Dir != null)
 			{
-				OpenReader();
-			}
-			else
-			{
-				throw new Exception("No index here");
+				if (DirectoryReader.IndexExists(LuceneService.Dir))
+				{
+					OpenReader();
+					//LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
+					
+				}
+				else
+				{
+					throw new Exception("No index here");
+				}
 			}
 		}
 
