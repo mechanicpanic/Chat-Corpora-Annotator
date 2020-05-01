@@ -11,20 +11,20 @@ namespace Viewer.Framework.Services
 {
     public interface IConcordanceService
     {
-        Query Query { get; set; }
+        Query ConQuery { get; set; }
         List<string> Concordance { get; set; }
         void FlushConcordanceToDisk();
-        void FindConcordance(string query, string TextFieldKey, int count, int offset);
+        void FindConcordance(string query, string TextFieldKey, int count);
     }
     public class ConcordanceService : IConcordanceService
     {
-        public Query Query { get; set; }
+        public Query ConQuery { get; set; }
         public List<string> Concordance { get; set; }
 
-        public void FindConcordance(string query, string TextFieldKey, int count, int offset)
+        public void FindConcordance(string query, string TextFieldKey, int count)
         {
-            this.Query = LuceneService.Parser.Parse(query);
-            TopDocs Hits = LuceneService.Searcher.Search(Query, count);
+            Concordance = new List<string>();
+            TopDocs Hits = LuceneService.Searcher.Search(ConQuery, count);
             for (int i = 0; i < Hits.TotalHits; i++)
             {
                 

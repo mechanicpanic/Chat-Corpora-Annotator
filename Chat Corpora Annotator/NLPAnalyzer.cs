@@ -61,10 +61,11 @@ namespace Viewer
             var sent = new[] { "This", "is", "an", "easy", "sentence", "." };
             var rawWords = SentenceUtils.toCoreLabelList(sent);
             var tree = lp.apply(rawWords);
-            tree.pennPrint();
+            //tree.pennPrint();
 
             // This option shows loading and using an explicit tokenizer
-            var sent2 = "We met in California.";
+            //var sent2 = "Did we meet in California, the place where we had the best time of out spindly lives?";
+            var sent2 = "Where did we meet, in California?";
             var tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
             var sent2Reader = new StringReader(sent2);
             var rawWords2 = tokenizerFactory.getTokenizer(sent2Reader).tokenize();
@@ -90,16 +91,16 @@ namespace Viewer
                 if (subtree.label().value().Equals("NP"))
                 {
 
-                    //phraseList.Add(subtree);
-                    java.util.List newtree = subtree.getChildrenAsList();
+                    phraseList.Add(subtree);
+                    //java.util.List newtree = subtree.getChildrenAsList();
                     int a = 5;
 
                 }
             }
-            foreach(Tree t in phraseList)
-            {
-                tp.printTree(t);
-            }
+            //foreach(Tree t in phraseList)
+            //{
+            //    tp.printTree(t);
+            //}
 
         }
 

@@ -24,7 +24,7 @@ namespace Viewer.Framework.Services
 		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
 		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
 
-		void OpenIndex();
+		void OpenIndex(string textFieldKey);
 
 		//event EventHandler FileIndexed;
 		//void SaveInfoToDisk(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
@@ -286,6 +286,10 @@ namespace Viewer.Framework.Services
 			return result;
 		}
 
+		private void OpenParser(string textFieldKey)
+		{
+			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+		}
 		public void OpenWriter(string textFieldKey)
 		{
 			
@@ -295,9 +299,9 @@ namespace Viewer.Framework.Services
 			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
 			LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-			
-			
-			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+
+
+			OpenParser(textFieldKey);
 
 			
 			
@@ -316,15 +320,16 @@ namespace Viewer.Framework.Services
 			LuceneService.Dir = FSDirectory.Open(IndexPath);
 		}
 
-		public void OpenIndex()
+		public void OpenIndex(string textFieldKey)
 		{
 			if (LuceneService.Dir != null)
 			{
 				if (DirectoryReader.IndexExists(LuceneService.Dir))
 				{
 					OpenReader();
+					OpenParser(textFieldKey);
 					//LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
-					
+
 				}
 				else
 				{

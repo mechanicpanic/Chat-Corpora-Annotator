@@ -21,6 +21,22 @@ namespace Viewer.Framework.Presenters
             this._conview = conview;
             this._indexer = indexer;
             this._concordancer = concordancer;
+
+            _conview.ConcordanceClick += Conview_ConcordanceClick;
+            _main.ConcordanceClick += _main_ConcordanceClick;
+        }
+
+        private void _main_ConcordanceClick(object sender, EventArgs e)
+        {
+            _conview.ShowView();
+        }
+
+        private void Conview_ConcordanceClick(object sender, EventArgs e)
+        {
+            _concordancer.ConQuery = LuceneService.Parser.Parse(_conview.Term);
+            _concordancer.FindConcordance(_conview.Term, _main.TextFieldKey, 20);
+            
+            _conview.DisplayConcordance(_concordancer.Concordance.ToArray());
         }
     }
 }

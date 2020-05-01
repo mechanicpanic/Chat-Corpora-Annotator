@@ -30,10 +30,10 @@
         {
             System.Windows.Forms.TabControl tabControl1;
             this.Chat = new System.Windows.Forms.TabPage();
-            this.loadMoreButton = new System.Windows.Forms.Button();
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
@@ -78,6 +78,7 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.button3 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -111,10 +112,9 @@
             // Chat
             // 
             this.Chat.BackColor = System.Drawing.Color.Lavender;
-            this.Chat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Chat.Controls.Add(this.loadMoreButton);
             this.Chat.Controls.Add(this.chatTable);
             this.Chat.Controls.Add(this.dateView);
+            this.Chat.Controls.Add(this.loadMoreButton);
             this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.Chat.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Chat.Location = new System.Drawing.Point(4, 32);
@@ -125,44 +125,23 @@
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
             // 
-            // loadMoreButton
-            // 
-            this.loadMoreButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
-            this.loadMoreButton.Enabled = false;
-            this.loadMoreButton.FlatAppearance.BorderSize = 0;
-            this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(-4, 612);
-            this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(1224, 49);
-            this.loadMoreButton.TabIndex = 11;
-            this.loadMoreButton.Text = "Load more...";
-            this.loadMoreButton.UseVisualStyleBackColor = false;
-            this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
-            // 
             // chatTable
             // 
-            this.chatTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.BackColor = System.Drawing.Color.White;
             this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatTable.CellEditUseWholeCell = false;
+            this.chatTable.Dock = System.Windows.Forms.DockStyle.Left;
             this.chatTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(6, 5);
+            this.chatTable.Location = new System.Drawing.Point(3, 3);
             this.chatTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1045, 602);
+            this.chatTable.Size = new System.Drawing.Size(1017, 604);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -175,13 +154,14 @@
             this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Days});
+            this.dateView.Dock = System.Windows.Forms.DockStyle.Right;
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(1054, -1);
+            this.dateView.Location = new System.Drawing.Point(1026, 3);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(167, 574);
+            this.dateView.Size = new System.Drawing.Size(189, 604);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             // 
@@ -189,6 +169,24 @@
             // 
             this.Days.Text = "Active dates";
             this.Days.Width = 115;
+            // 
+            // loadMoreButton
+            // 
+            this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
+            this.loadMoreButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.loadMoreButton.FlatAppearance.BorderSize = 0;
+            this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loadMoreButton.Location = new System.Drawing.Point(3, 607);
+            this.loadMoreButton.Name = "loadMoreButton";
+            this.loadMoreButton.Size = new System.Drawing.Size(1212, 49);
+            this.loadMoreButton.TabIndex = 11;
+            this.loadMoreButton.Text = "Load more...";
+            this.loadMoreButton.UseVisualStyleBackColor = false;
+            this.loadMoreButton.Visible = false;
+            this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
             // 
             // Statistics
             // 
@@ -202,6 +200,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.scintilla1);
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
@@ -214,7 +213,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(490, 321);
+            this.button1.Location = new System.Drawing.Point(449, 172);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(277, 48);
             this.button1.TabIndex = 1;
@@ -227,7 +226,7 @@
             this.scintilla1.Dock = System.Windows.Forms.DockStyle.Top;
             this.scintilla1.Location = new System.Drawing.Point(3, 3);
             this.scintilla1.Name = "scintilla1";
-            this.scintilla1.Size = new System.Drawing.Size(1212, 312);
+            this.scintilla1.Size = new System.Drawing.Size(1212, 163);
             this.scintilla1.TabIndex = 0;
             this.scintilla1.Text = "scintilla1";
             // 
@@ -540,15 +539,15 @@
             // loadCorpusToolStripMenuItem
             // 
             this.loadCorpusToolStripMenuItem.Name = "loadCorpusToolStripMenuItem";
-            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.loadCorpusToolStripMenuItem.Text = "Load corpus...";
+            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
+            this.loadCorpusToolStripMenuItem.Text = "Index new file";
             this.loadCorpusToolStripMenuItem.Click += new System.EventHandler(this.loadCorpusToolStripMenuItem_Click);
             // 
             // openCorpusToolStripMenuItem
             // 
             this.openCorpusToolStripMenuItem.Name = "openCorpusToolStripMenuItem";
-            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.openCorpusToolStripMenuItem.Text = "Open corpus...";
+            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
+            this.openCorpusToolStripMenuItem.Text = "Open corpus";
             this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
@@ -660,6 +659,16 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(132, 345);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(329, 103);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -744,6 +753,7 @@
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.Button button1;
         private ScintillaNET.Scintilla scintilla1;
+        private System.Windows.Forms.Button button3;
     }
 }
 

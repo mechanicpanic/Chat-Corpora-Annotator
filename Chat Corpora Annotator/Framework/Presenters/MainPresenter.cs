@@ -17,10 +17,11 @@ namespace Viewer.Framework.Presenters
         private readonly IHeatmapView _heatmap;
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
+        private readonly IConcordanceView _concordance;
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv,IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view,ICSVView csv, IConcordanceView concordance,IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
         {
             this._view = view;
             this._csv = csv;
@@ -28,7 +29,9 @@ namespace Viewer.Framework.Presenters
             this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
+            this._concordance = concordance;
 
+            
 
             //_view.HeatmapClick += _view_HeatmapClick;
             //_view.ChartClick += _view_ChartClick;
@@ -53,7 +56,8 @@ namespace Viewer.Framework.Presenters
                 _view.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
                 _view.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
                 _view.Messages = new List<DynamicMessage>();
-                _reader.OpenIndex();
+                _view.FileLoadState = true;
+                _reader.OpenIndex(_view.TextFieldKey);
                
                 AddDocumentsToDisplay(200);
             }

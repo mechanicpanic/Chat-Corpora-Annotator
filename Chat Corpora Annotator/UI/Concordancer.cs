@@ -11,20 +11,67 @@ using Viewer.Framework.Views;
 
 namespace Viewer.UI
 {
-    public partial class Concordancer : UserControl, IConcordanceView
+    public partial class Concordancer : Form, IConcordanceView
     {
         public Concordancer()
         {
             InitializeComponent();
 
         }
-        public void DisplayConcordance(string[] con)
-        {
-            richTextBox1.Lines = con;
-            foreach(var line in richTextBox1.Lines)
+     
+        private string PadString(string line, string term)
+         {
+            string left;
+            string center;
+            string right;
+            int index = line.ToLower().IndexOf(term);
+            if(index != -1)
             {
+                left = line.Substring(0, index);
+                center = line.Substring(index, term.Length);
+                right = line.Substring(index + term.Length);
+            }
+            else
+            {
+                left = null;
+                center = null;
+                right = null;
+
+            }
+            if (left.Length < 20)
+            {
+                left = left.PadLeft(23);
                 
             }
+            else
+            {
+                left = left.Remove(0, left.Length - 20);
+                left = "..." + left;
+            }
+            if (right.Length < 20)
+            {
+                right = right.PadRight(23);
+            }
+            else
+            {
+                var temp = right.Length - 20;
+                right = right.Remove(right.Length-temp,temp);
+                right = right + "...";
+            }
+            
+            return left + center + right;
+        }
+        public void DisplayConcordance(string[] con)
+        {
+            //richTextBox1.Lines = con;
+            List<string> newlines = new List<string>();
+            foreach(var line in con)
+            {
+                var newline = PadString(line, Term);
+                newlines.Add(newline);
+            }
+            richTextBox1.Lines = newlines.ToArray();
+            
         }
         public string Term { get; set; }
         public int OFFSET { get; set; }
@@ -44,8 +91,24 @@ namespace Viewer.UI
             }
             else
             {
+                this.Term = textBox1.Text;
                 ConcordanceClick?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        public void ShowView()
+        {
+            this.Show();
+        }
+
+        public void CloseView()
+        {
+            this.Close();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

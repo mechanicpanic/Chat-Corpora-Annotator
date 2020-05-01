@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Viewer.Framework.Views
 {
-    public interface IConcordanceView
+    public interface IConcordanceView: IView
     {
         string Term { get; set; }
         int OFFSET { get; set; }

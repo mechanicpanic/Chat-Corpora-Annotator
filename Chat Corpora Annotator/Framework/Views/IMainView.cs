@@ -36,6 +36,8 @@ namespace Viewer.Framework.Views
         event LuceneQueryEventHandler FindClick;
 
         event EventHandler LoadMoreClick;
+
+        event EventHandler ConcordanceClick;
         //event PropertyChangedEventHandler PropertyChanged;
         //bool FileLoadState { get; set; }
     }

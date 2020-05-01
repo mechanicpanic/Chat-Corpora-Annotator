@@ -25,6 +25,7 @@ namespace Viewer
 		public event LuceneQueryEventHandler FindClick;
 		public event EventHandler LoadMoreClick;
 		public event PropertyChangedEventHandler PropertyChanged;
+		public event EventHandler ConcordanceClick;
 
 		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
@@ -103,6 +104,8 @@ namespace Viewer
 			//analyzer.LoadClassifier();
 			//analyzer.MakeTrees();
 			this.PropertyChanged += MainWindow_PropertyChanged;
+
+
 		}
 
 		private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -114,7 +117,7 @@ namespace Viewer
 				dateToggle.Enabled = true;
 				findButton.Enabled = true;
 				clearButton.Enabled = true;
-				loadMoreButton.Enabled = true;
+				loadMoreButton.Visible = true;
 			}
 			if (!this.FileLoadState)
 			{
@@ -123,7 +126,7 @@ namespace Viewer
 				dateToggle.Enabled = false;
 				findButton.Enabled = false;
 				clearButton.Enabled = false;
-				loadMoreButton.Enabled = false;
+				loadMoreButton.Visible = false;
 			}
 		}
 
@@ -515,6 +518,11 @@ namespace Viewer
 
 				OpenIndexedCorpus?.Invoke(this, EventArgs.Empty);
 			}
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			ConcordanceClick?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
