@@ -33,30 +33,50 @@ namespace Viewer.UI
             }
             else
             {
-                left = null;
-                center = null;
-                right = null;
+                //left = null;
+                //center = null;
+                //right = null;
+                return null;
 
             }
-            if (left.Length < 20)
+
+            if (!String.IsNullOrEmpty(left))
             {
+                if (left.Length < 20)
+                {
+                    left = left.PadLeft(23);
+
+                }
+                else
+                {
+                    left = left.Remove(0, left.Length - 20);
+                    left = "..." + left;
+                }
+            }
+            else
+            {
+                left = " ";
                 left = left.PadLeft(23);
+            }
+
+            if (!String.IsNullOrEmpty(right))
+            {
+                if (right.Length < 20)
+                {
+                    right = right.PadRight(23);
+                }
+                else
+                {
+                    var temp = right.Length - 20;
+                    right = right.Remove(right.Length - temp, temp);
+                    right = right + "...";
+                }
+            }
+            else
+            {
+                right = " ";
                 
-            }
-            else
-            {
-                left = left.Remove(0, left.Length - 20);
-                left = "..." + left;
-            }
-            if (right.Length < 20)
-            {
                 right = right.PadRight(23);
-            }
-            else
-            {
-                var temp = right.Length - 20;
-                right = right.Remove(right.Length-temp,temp);
-                right = right + "...";
             }
             
             return left + center + right;
