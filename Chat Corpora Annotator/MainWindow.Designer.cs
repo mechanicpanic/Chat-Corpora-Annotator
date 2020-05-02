@@ -36,6 +36,7 @@
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.scintilla1 = new ScintillaNET.Scintilla();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
@@ -78,7 +79,6 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.button3 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -211,6 +211,16 @@
             this.tabPage1.Text = "Analysis";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(421, 242);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(329, 103);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Concordance test";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(449, 172);
@@ -219,6 +229,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // scintilla1
@@ -229,6 +240,7 @@
             this.scintilla1.Size = new System.Drawing.Size(1212, 163);
             this.scintilla1.TabIndex = 0;
             this.scintilla1.Text = "scintilla1";
+            this.scintilla1.Visible = false;
             // 
             // csvDialog
             // 
@@ -658,16 +670,6 @@
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(132, 345);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(329, 103);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MainWindow
             // 
