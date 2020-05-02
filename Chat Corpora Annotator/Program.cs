@@ -29,10 +29,11 @@ namespace Viewer
             HeatmapService heater = new HeatmapService();
             ConcordanceService concordancer = new ConcordanceService();
 
+            ConcordancePresenter conPresenter = new ConcordancePresenter(main, indexer, concordancer, conview);
             MainPresenter presenter = new MainPresenter(main, loader, conview, indexer, searcher,heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater, indexer);
-            ConcordancePresenter conPresenter = new ConcordancePresenter(main, indexer, concordancer, conview);
+            
             //ChartPresenter chartPresenter = new ChartPresenter(main, chart, indexer);
             Application.Run(main);
             

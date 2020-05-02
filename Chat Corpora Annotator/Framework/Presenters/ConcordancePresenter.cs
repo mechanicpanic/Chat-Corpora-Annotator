@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Viewer.Framework.Views;
 using Viewer.Framework.Services;
+using Lucene.Net.Search;
+
 namespace Viewer.Framework.Presenters
 {
     public class ConcordancePresenter
@@ -33,6 +35,7 @@ namespace Viewer.Framework.Presenters
 
         private void Conview_ConcordanceClick(object sender, EventArgs e)
         {
+            
             _concordancer.ConQuery = LuceneService.Parser.Parse(_conview.Term);
             _concordancer.FindConcordance(_conview.Term, _main.TextFieldKey, 20);
             

@@ -56,6 +56,7 @@ namespace Viewer.Framework.Presenters
                 _view.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
                 _view.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
                 _view.Messages = new List<DynamicMessage>();
+                _view.SetLineCount(Int32.Parse(info["LineCount"]));
                 _view.FileLoadState = true;
                 _reader.OpenIndex(_view.TextFieldKey);
                

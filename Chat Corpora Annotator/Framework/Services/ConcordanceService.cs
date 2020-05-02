@@ -18,7 +18,9 @@ namespace Viewer.Framework.Services
     }
     public class ConcordanceService : IConcordanceService
     {
-        public Query ConQuery { get; set; }
+        public Query ConQuery { 
+            get; 
+            set; }
         public List<string> Concordance { get; set; }
 
         public void FindConcordance(string query, string TextFieldKey, int count)

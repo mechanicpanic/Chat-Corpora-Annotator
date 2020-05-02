@@ -47,7 +47,7 @@ namespace Viewer.Framework.Services
 		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
 
 
-		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath) 
+		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath, int linecount) 
 		{
 			using (System.IO.StreamWriter file =
 			new System.IO.StreamWriter(CurrentIndexPath+@"info.txt"))
@@ -55,6 +55,7 @@ namespace Viewer.Framework.Services
 				file.WriteLine(textFieldKey);
 				file.WriteLine(senderFieldKey);
 				file.WriteLine(dateFieldKey);
+				file.WriteLine(linecount.ToString());
 			
 			}
 		}
@@ -102,6 +103,7 @@ namespace Viewer.Framework.Services
 				info.Add("TextFieldKey", reader.ReadLine());
 				info.Add("SenderFieldKey", reader.ReadLine());
 				info.Add("DateFieldKey", reader.ReadLine());
+				info.Add("LineCount", reader.ReadLine());
 				
 			}
 			return info;
@@ -204,8 +206,9 @@ namespace Viewer.Framework.Services
 
 		public int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields)
 		{
-			List<Document> documentBlock = new List<Document>();
+			
 			int result = 0;
+			int count = 0;
 			if (lookup != null)
 			{
 				string[] row = null;
@@ -218,7 +221,7 @@ namespace Viewer.Framework.Services
 					while (fileReader.ReadRow(ref row))
 
 					{
-
+						count++;
 						date = DateTime.Parse(row[lookup[0]]);
 						UserKeys.Add(row[lookup[1]]);
 
@@ -272,13 +275,13 @@ namespace Viewer.Framework.Services
 					//LuceneService.Writer.AddDocuments(documentBlock);
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
-					SaveInfoToDisk(allFields[lookup[2]],allFields[lookup[1]],allFields[lookup[0]], indexPath);
+					SaveInfoToDisk(allFields[lookup[2]],allFields[lookup[1]],allFields[lookup[0]], indexPath,count);
 					SaveFieldsToDisk(indexPath, selectedFields);
 					SaveUsersToDisk(indexPath);
 					SaveStatsToDisk(indexPath);
+
 					OpenReader();
 					result = 1;
-					
 					return result;
 
 				}
@@ -288,19 +291,25 @@ namespace Viewer.Framework.Services
 
 		private void OpenParser(string textFieldKey)
 		{
-			LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+			if (LuceneService.Analyzer != null)
+			{
+				LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+			}
+		}
+
+		private void OpenAnalyzer()
+		{
+			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 		}
 		public void OpenWriter(string textFieldKey)
 		{
-			
-			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
+
+			OpenAnalyzer();
 			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
 			LuceneService.IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
 			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
 			LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-
-
 			OpenParser(textFieldKey);
 
 			
@@ -326,6 +335,7 @@ namespace Viewer.Framework.Services
 			{
 				if (DirectoryReader.IndexExists(LuceneService.Dir))
 				{
+					OpenAnalyzer();
 					OpenReader();
 					OpenParser(textFieldKey);
 					//LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
