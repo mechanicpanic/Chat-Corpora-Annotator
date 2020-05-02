@@ -16,10 +16,12 @@ namespace Viewer.UI
         public Concordancer()
         {
             InitializeComponent();
+            comboBox1.SelectedItem = "20";
+            comboBox1.SelectedText = "20";
 
         }
      
-        private string PadString(string line, string term)
+        private string PadString(string line, string term, int count)
          {
             string left;
             string center;
@@ -42,32 +44,32 @@ namespace Viewer.UI
 
             if (!String.IsNullOrEmpty(left))
             {
-                if (left.Length < 20)
+                if (left.Length < count)
                 {
-                    left = left.PadLeft(23);
+                    left = left.PadLeft(count+3);
 
                 }
                 else
                 {
-                    left = left.Remove(0, left.Length - 20);
+                    left = left.Remove(0, left.Length - count);
                     left = "..." + left;
                 }
             }
             else
             {
                 left = " ";
-                left = left.PadLeft(23);
+                left = left.PadLeft(count+3);
             }
 
             if (!String.IsNullOrEmpty(right))
             {
-                if (right.Length < 20)
+                if (right.Length < count)
                 {
-                    right = right.PadRight(23);
+                    right = right.PadRight(count+3);
                 }
                 else
                 {
-                    var temp = right.Length - 20;
+                    var temp = right.Length - count;
                     right = right.Remove(right.Length - temp, temp);
                     right = right + "...";
                 }
@@ -76,7 +78,7 @@ namespace Viewer.UI
             {
                 right = " ";
                 
-                right = right.PadRight(23);
+                right = right.PadRight(count);
             }
             
             return left + center + right;
@@ -87,7 +89,7 @@ namespace Viewer.UI
             List<string> newlines = new List<string>();
             foreach(var line in con)
             {
-                var newline = PadString(line, Term);
+                var newline = PadString(line, Term,Int32.Parse(comboBox1.SelectedItem.ToString()));
                 newlines.Add(newline);
             }
             richTextBox1.Lines = newlines.ToArray();
