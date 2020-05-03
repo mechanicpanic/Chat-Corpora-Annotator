@@ -94,6 +94,7 @@ namespace Viewer.UI
             }
             richTextBox1.Lines = newlines.ToArray();
             
+            
         }
         public string Term { get; set; }
         public int OFFSET { get; set; }
