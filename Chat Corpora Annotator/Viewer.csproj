@@ -373,6 +373,7 @@
   <ItemGroup>
     <Compile Include="Framework\Presenters\ConcordancePresenter.cs" />
     <Compile Include="Framework\Services\ConcordanceService.cs" />
+    <Compile Include="Framework\Services\NGramService.cs" />
     <Compile Include="Framework\Views\IConcordanceView.cs" />
     <Compile Include="Framework\Views\LuceneQueryEventHandler.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
@@ -478,7 +479,7 @@
     </Compile>
     <Compile Include="Deprecated\VirtualBTree.cs" />
     <Compile Include="UI\Concordancer.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Concordancer.Designer.cs">
       <DependentUpon>Concordancer.cs</DependentUpon>

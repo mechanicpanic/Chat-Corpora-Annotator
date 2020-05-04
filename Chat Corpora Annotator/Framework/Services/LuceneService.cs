@@ -4,6 +4,7 @@ using Lucene.Net.Util;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
+using Lucene.Net.Analysis;
 
 namespace Viewer.Framework.Services
 {
@@ -18,6 +19,8 @@ namespace Viewer.Framework.Services
 		public static DirectoryReader DirReader { get; set; }
 		public static QueryParser Parser { get; set; }
 		public static IndexSearcher Searcher { get; set; }
+
+		public static Analyzer NGrammer { get; set; }
 		public static void Dispose()
 		{
 			Analyzer.Dispose();

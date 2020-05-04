@@ -80,7 +80,9 @@ namespace Viewer.Framework.Presenters
 
 
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)
+
         {
+
             _searcher.UserQuery = LuceneService.Parser.Parse(e.Query);
             if (!e.FilteredByDate && !e.FilteredByUser) {
                _searcher.SearchText(e.Count);
@@ -105,6 +107,15 @@ namespace Viewer.Framework.Presenters
                 _searcher.SearchText_UserDateFilter(e.Count);
             }
             var result = _searcher.MakeSearchResultsReadable(_csv.SelectedFields, _csv.DateFieldKey);
+            foreach(var document in result)
+            {
+                var grams = _searcher.GetNGrams(_view.TextFieldKey, document.contents[_view.TextFieldKey].ToString());
+                foreach(var gram in grams)
+                {
+                    Console.WriteLine(gram);
+                }
+                
+            }
             _view.SearchResults = result;
             _view.DisplaySearchResults();
         }

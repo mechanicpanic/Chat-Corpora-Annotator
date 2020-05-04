@@ -32,10 +32,16 @@ namespace Viewer.Framework.Services
 		List<string> LoadUsersFromDisk(string CurrentIndexPath);
 		List<string> LoadFieldsFromDisk(string CurrentIndexPath);
 		BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath);
+
+		
 	}
 
-	public class IndexService : IIndexService 
-	{
+	public class IndexService : IIndexService
+	{ 
+
+
+
+		#region fields
 		private int readerIndex = 0;
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
@@ -46,7 +52,8 @@ namespace Viewer.Framework.Services
 
 		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
 
-
+		#endregion
+		#region save info
 		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath, int linecount) 
 		{
 			using (System.IO.StreamWriter file =
@@ -94,6 +101,8 @@ namespace Viewer.Framework.Services
 				}
 			}
 		}
+		#endregion
+		#region load info
 		public OrderedDictionary<string,string> LoadInfoFromDisk(string CurrentIndexPath)
 		{
 
@@ -152,6 +161,7 @@ namespace Viewer.Framework.Services
 			}
 			return stats;
 		}
+		#endregion
 		public void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields,string[] allFields)
 		{
 			lookup = new int[3];
@@ -297,14 +307,15 @@ namespace Viewer.Framework.Services
 			}
 		}
 
-		private void OpenAnalyzer()
+		private void OpenAnalyzers()
 		{
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
+			LuceneService.NGrammer = new NGramAnalyzer();
 		}
 		public void OpenWriter(string textFieldKey)
 		{
 
-			OpenAnalyzer();
+			OpenAnalyzers();
 			LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
 			LuceneService.IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
 			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
@@ -335,7 +346,7 @@ namespace Viewer.Framework.Services
 			{
 				if (DirectoryReader.IndexExists(LuceneService.Dir))
 				{
-					OpenAnalyzer();
+					OpenAnalyzers();
 					OpenReader();
 					OpenParser(textFieldKey);
 					//LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);

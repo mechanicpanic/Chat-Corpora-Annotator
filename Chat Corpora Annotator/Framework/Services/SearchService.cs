@@ -4,6 +4,11 @@ using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
 using Lucene.Net.Queries;
+using Lucene.Net.Analysis;
+using System.IO;
+using Lucene.Net.Analysis.TokenAttributes;
+using Token = Lucene.Net.Analysis.Token;
+using Lucene.Net.Util;
 
 namespace Viewer.Framework.Services
 {
@@ -20,9 +25,10 @@ namespace Viewer.Framework.Services
 		void SearchText_UserFilter(int count);
 		void SearchText_DateFilter(int count);
 		void SearchText_UserDateFilter(int count);
-		void SearchText_WindowFilter();
 
 		List<DynamicMessage> MakeSearchResultsReadable(List<string> selectedFields, string dateFieldKey);
+
+		List<string> GetNGrams(string TextFieldKey, string document);
 		
 	}
 
@@ -136,9 +142,35 @@ namespace Viewer.Framework.Services
 			
 		}
 
-		public void SearchText_WindowFilter()
+		public List<string> GetNGrams(string TextFieldKey, string document)
 		{
-			throw new NotImplementedException();
+			List<string> ngrams = new List<string>();
+			if (LuceneService.NGrammer != null)
+			{
+				TokenStream stream = LuceneService.NGrammer.GetTokenStream(TextFieldKey, new StringReader(document));
+				//AttributeSource source = new AttributeSource();
+				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();
+				var charTermAttribute = stream.AddAttribute<ICharTermAttribute>();
+				stream.Reset();
+				while (stream.IncrementToken())
+				{
+					//Token token = new Token();
+					//int startOffset = offsetAttribute.StartOffset;
+					//int endOffset = offsetAttribute.EndOffset;
+					String term = charTermAttribute.ToString();
+					ngrams.Add(term);
+
+				}
+				stream.End();
+				stream.Dispose();
+				return ngrams;
+			}
+			else
+			{
+				throw new Exception("No ngrammer");
+			}
 		}
+
+		
 	}
 }
