@@ -21,6 +21,7 @@ namespace Viewer
             CSVLoader loader = new CSVLoader();
             LinearHeatmapForm heatmap = new LinearHeatmapForm();
             Concordancer conview = new Concordancer();
+            NGramSearch gramview = new NGramSearch();
             //ChartForm chart = new ChartForm();
 
             CSVReadService fileReader = new CSVReadService();
@@ -29,8 +30,9 @@ namespace Viewer
             HeatmapService heater = new HeatmapService();
             ConcordanceService concordancer = new ConcordanceService();
 
+            NGramPresenter nGramPresenter = new NGramPresenter(main, indexer, searcher, gramview);
             ConcordancePresenter conPresenter = new ConcordancePresenter(main, indexer, concordancer, conview);
-            MainPresenter presenter = new MainPresenter(main, loader, conview, indexer, searcher,heatmap);
+            MainPresenter presenter = new MainPresenter(main, loader, conview, gramview, indexer, searcher,heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater, indexer);
             

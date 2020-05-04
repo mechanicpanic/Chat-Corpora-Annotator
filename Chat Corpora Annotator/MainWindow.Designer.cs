@@ -35,10 +35,8 @@
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Concordance = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.scintilla1 = new ScintillaNET.Scintilla();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -79,17 +77,20 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
-            this.tabPage1.SuspendLayout();
+            this.Concordance.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -99,6 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             tabControl1.Controls.Add(this.Chat);
             tabControl1.Controls.Add(this.Statistics);
+            tabControl1.Controls.Add(this.Concordance);
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             tabControl1.Location = new System.Drawing.Point(303, 40);
@@ -198,49 +200,26 @@
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
+            // Concordance
             // 
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.scintilla1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "Analysis";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.Concordance.Controls.Add(this.button3);
+            this.Concordance.Location = new System.Drawing.Point(4, 32);
+            this.Concordance.Name = "Concordance";
+            this.Concordance.Padding = new System.Windows.Forms.Padding(3);
+            this.Concordance.Size = new System.Drawing.Size(1218, 659);
+            this.Concordance.TabIndex = 4;
+            this.Concordance.Text = "Concordance";
+            this.Concordance.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(421, 242);
+            this.button3.Location = new System.Drawing.Point(484, 601);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(329, 103);
+            this.button3.Size = new System.Drawing.Size(329, 52);
             this.button3.TabIndex = 2;
             this.button3.Text = "Concordance test";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(449, 172);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(277, 48);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // scintilla1
-            // 
-            this.scintilla1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.scintilla1.Location = new System.Drawing.Point(3, 3);
-            this.scintilla1.Name = "scintilla1";
-            this.scintilla1.Size = new System.Drawing.Size(1212, 163);
-            this.scintilla1.TabIndex = 0;
-            this.scintilla1.Text = "scintilla1";
-            this.scintilla1.Visible = false;
             // 
             // csvDialog
             // 
@@ -671,6 +650,26 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "N-gram Search";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(441, 561);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(329, 52);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Concordance test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -688,7 +687,7 @@
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
-            this.tabPage1.ResumeLayout(false);
+            this.Concordance.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -700,6 +699,7 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -738,7 +738,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.TabPage Statistics;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage Concordance;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem userColorsToolStripMenuItem;
@@ -753,9 +753,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
-        private System.Windows.Forms.Button button1;
-        private ScintillaNET.Scintilla scintilla1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

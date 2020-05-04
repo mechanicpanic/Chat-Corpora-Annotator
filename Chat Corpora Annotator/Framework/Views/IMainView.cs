@@ -38,6 +38,7 @@ namespace Viewer.Framework.Views
         event EventHandler LoadMoreClick;
 
         event EventHandler ConcordanceClick;
+        event EventHandler NGramClick;
         //event PropertyChangedEventHandler PropertyChanged;
         //bool FileLoadState { get; set; }
     }

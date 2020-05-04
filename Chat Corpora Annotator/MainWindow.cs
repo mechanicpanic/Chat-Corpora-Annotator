@@ -26,6 +26,7 @@ namespace Viewer
 		public event EventHandler LoadMoreClick;
 		public event PropertyChangedEventHandler PropertyChanged;
 		public event EventHandler ConcordanceClick;
+		public event EventHandler NGramClick;
 
 		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
@@ -494,15 +495,15 @@ namespace Viewer
 
 		}
 		int index = 0;
-		private void button1_Click(object sender, EventArgs e)
-		{
+		//private void button1_Click(object sender, EventArgs e)
+		//{
 
 
-			scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
-			analyzer.MakeTrees();
-			index++;
+		//	scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
+		//	analyzer.MakeTrees();
+		//	index++;
 			
-		}
+		//}
 
 		private void openCorpusToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -523,6 +524,11 @@ namespace Viewer
 		private void button3_Click(object sender, EventArgs e)
 		{
 			ConcordanceClick?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			NGramClick?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

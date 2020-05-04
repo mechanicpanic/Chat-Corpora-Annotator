@@ -18,10 +18,11 @@ namespace Viewer.Framework.Presenters
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
         private readonly IConcordanceView _concordance;
+        private readonly INGramView _grams;
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv, IConcordanceView concordance,IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view,ICSVView csv, IConcordanceView concordance, INGramView grams, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
         {
             this._view = view;
             this._csv = csv;
@@ -30,7 +31,7 @@ namespace Viewer.Framework.Presenters
             this._reader = reader;
             this._searcher = searcher;
             this._concordance = concordance;
-
+            this._grams = grams;
             
 
             //_view.HeatmapClick += _view_HeatmapClick;
@@ -39,6 +40,7 @@ namespace Viewer.Framework.Presenters
             _view.FindClick += _view_FindClick;
             _view.LoadMoreClick += _view_LoadMoreClick;
             _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
+            
 
         }
 

@@ -97,18 +97,13 @@ namespace Viewer.UI
             
         }
         public string Term { get; set; }
-        public int OFFSET { get; set; }
 
         public event EventHandler ConcordanceClick;
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Split().Count() > 1)
+            if (textBox1.Text.Split().Length > 1)
             {
                 MessageBox.Show("Please enter a single term");
             }

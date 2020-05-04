@@ -9,7 +9,6 @@ namespace Viewer.Framework.Views
     public interface IConcordanceView: IView
     {
         string Term { get; set; }
-        int OFFSET { get; set; }
         void DisplayConcordance(string[] con);
         event EventHandler ConcordanceClick;
         

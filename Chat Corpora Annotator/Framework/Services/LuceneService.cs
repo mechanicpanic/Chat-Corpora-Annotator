@@ -20,7 +20,7 @@ namespace Viewer.Framework.Services
 		public static QueryParser Parser { get; set; }
 		public static IndexSearcher Searcher { get; set; }
 
-		public static Analyzer NGrammer { get; set; }
+		public static NGramAnalyzer NGrammer { get; set; }
 		public static void Dispose()
 		{
 			Analyzer.Dispose();
