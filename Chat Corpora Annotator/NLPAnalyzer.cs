@@ -43,6 +43,7 @@ namespace Viewer
             props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
             props.setProperty("ner.model", _NERclassifiers + @"\english.muc.7class.distsim.crf.ser.gz");
             props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\lexparser\englishPCFG.ser.gz");
+            //props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\parser\nndep\english_SD.gz");
             props.setProperty("ner.useSUTime", "true");
             props.setProperty("ner.applyFineGrained", "false");
             props.setProperty("pos.model", _POSdirectory);

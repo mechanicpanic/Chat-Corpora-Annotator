@@ -10,13 +10,19 @@ using CSharpTest.Net.Collections;
 using System.Drawing;
 using Viewer.Framework.Views;
 using edu.stanford.nlp.pipeline;
+//using edu.berkeley.nlp.syntax;
+using edu.stanford.nlp.ling;
+using edu.stanford.nlp.trees;
+using Tree = edu.stanford.nlp.trees.Tree;
+using edu.stanford.nlp.util;
+using java.util;
 
 namespace Viewer
 {
 
 	public partial class MainWindow : Form, IMainView, INotifyPropertyChanged
 	{
-		Random rnd = new Random();
+		System.Random rnd = new System.Random();
 		#region IMainView
 
 		public event EventHandler OpenIndexedCorpus;
@@ -34,7 +40,7 @@ namespace Viewer
 		public string CurrentIndexPath { get; set; }
 
 		private List<DynamicMessage> _messages;
-		private Dictionary<string,Color> userColors;
+		private Dictionary<string, Color> userColors;
 
 		public List<string> SelectedFields { get; set; }
 		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
@@ -102,8 +108,8 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			analyzer = new NLPAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31",@"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
-			
+			analyzer = new NLPAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31", @"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
+
 			this.PropertyChanged += MainWindow_PropertyChanged;
 
 
@@ -111,7 +117,7 @@ namespace Viewer
 
 		private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if(this.FileLoadState)
+			if (this.FileLoadState)
 			{
 				queryButton.Enabled = true;
 				userToggle.Enabled = true;
@@ -153,7 +159,7 @@ namespace Viewer
 		}
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)
 		{
-			
+
 			this.CurrentPath = csvDialog.FileName;
 			SelectIndexFolder();
 
@@ -183,7 +189,7 @@ namespace Viewer
 
 		private void SetUpChatView()
 		{
-			
+
 
 			ShowUsers();
 			PopulateSenderColors();
@@ -200,7 +206,7 @@ namespace Viewer
 				};
 				cl.Text = key;
 				cl.WordWrap = true;
-				
+
 
 				columns.Add(cl);
 
@@ -218,7 +224,7 @@ namespace Viewer
 		private void ShowUsers()
 		{
 			userList.CheckBoxes = true;
-			foreach(var user in Usernames)
+			foreach (var user in Usernames)
 			{
 				userList.Items.Add(new ListViewItem(user));
 			}
@@ -318,7 +324,7 @@ namespace Viewer
 			dateView.RetrieveVirtualItem += handler;
 
 
-			}
+		}
 
 		private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
@@ -374,7 +380,7 @@ namespace Viewer
 
 		private void findButton_Click(object sender, EventArgs e)
 		{
-			
+
 			//searchResults.Clear();
 			if (searchBox.Text == "")
 			{
@@ -413,7 +419,7 @@ namespace Viewer
 						users.Add(item.Text);
 
 					}
-					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, count , users.ToArray(), false));
+					FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, count, users.ToArray(), false));
 				}
 			}
 			else if (!userToggle.Checked && dateToggle.Checked)
@@ -439,7 +445,7 @@ namespace Viewer
 				DateTime[] date = new DateTime[2];
 				date[0] = startDate.Value;
 				date[1] = finishDate.Value;
-				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery,50,users.ToArray(),date,false));
+				FindClick?.Invoke(this, new LuceneQueryEventArgs(stringQuery, 50, users.ToArray(), date, false));
 
 			}
 		}
@@ -452,7 +458,7 @@ namespace Viewer
 			{
 				check.Checked = false;
 			}
-			
+
 		}
 
 
@@ -494,7 +500,7 @@ namespace Viewer
 		{
 
 		}
-		
+
 		//private void button1_Click(object sender, EventArgs e)
 		//{
 
@@ -502,7 +508,7 @@ namespace Viewer
 		//	scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
 		//	analyzer.MakeTrees();
 		//	index++;
-			
+
 		//}
 
 		private void openCorpusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -533,8 +539,8 @@ namespace Viewer
 
 		private void button4_Click(object sender, EventArgs e)
 		{
-			
-			
+
+
 			//Console.WriteLine(analyzer.DetectQuestion(Messages[index].contents[TextFieldKey].ToString()).ToString());
 			//var tem = analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
 			//foreach (var np in tem)
@@ -548,20 +554,46 @@ namespace Viewer
 
 		private void button5_Click(object sender, EventArgs e)
 		{
-			
+
 			//analyzer.LoadParserModels();
 
-			
+
 			Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
 			CoreDocument coredoc = new CoreDocument(annotation);
 			StanfordCoreNLP pipeline = analyzer.SimplePipeline();
+			//pipeline.annotate(annotation);
 			pipeline.annotate(coredoc);
+
+			//for (int i = 0; i < coredoc.entityMentions().size(); i++)
+			//{
+			//	CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
+			//	Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
+			//}
+			Tree constituencyParse;
+			ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+			CoreMap sentence = (CoreMap)temp.get(0);
+			constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
 			
-			for (int i = 0; i < coredoc.entityMentions().size(); i++)
+			
+
+
+			
+			Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+			var treeArray = treeConstituents.toArray();
+			int index = 0;
+			while(index < treeArray.Length)
 			{
-				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
-				Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
+				Constituent constituent = (Constituent)treeArray[index];
+				if (constituent.label() != null &&
+					(constituent.label().toString().Equals("VP") || constituent.label().toString().Equals("NP")))
+				{
+					Console.WriteLine("found constituent: " + constituent.toString());
+					Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
+
+				}
+				index++;
 			}
+			
 		}
 	}
 }
