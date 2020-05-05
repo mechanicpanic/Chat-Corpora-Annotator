@@ -16,5 +16,13 @@ namespace Tagger
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(String.IsNullOrEmpty(textBox1.Text) && !listBox1.Items.Contains(textBox1.Text))
+            {
+                listBox1.Items.Add(textBox1.Text);
+            }
+        }
     }
 }
