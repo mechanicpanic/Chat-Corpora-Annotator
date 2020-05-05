@@ -29,8 +29,9 @@ namespace Viewer
             IndexService indexer = new IndexService();
             HeatmapService heater = new HeatmapService();
             ConcordanceService concordancer = new ConcordanceService();
+            NGramService ngrammer = new NGramService();
 
-            NGramPresenter nGramPresenter = new NGramPresenter(main, indexer, searcher, gramview);
+            NGramPresenter nGramPresenter = new NGramPresenter(main, indexer, searcher, ngrammer, gramview);
             ConcordancePresenter conPresenter = new ConcordancePresenter(main, indexer, concordancer, conview);
             MainPresenter presenter = new MainPresenter(main, loader, conview, gramview, indexer, searcher,heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);

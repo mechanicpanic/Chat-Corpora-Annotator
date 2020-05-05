@@ -28,7 +28,7 @@ namespace Viewer.Framework.Services
 
 		List<DynamicMessage> MakeSearchResultsReadable(List<string> selectedFields, string dateFieldKey);
 
-		List<string> GetNGrams(string TextFieldKey, string document);
+	
 		
 	}
 
@@ -142,34 +142,7 @@ namespace Viewer.Framework.Services
 			
 		}
 
-		public List<string> GetNGrams(string TextFieldKey, string document)
-		{
-			List<string> ngrams = new List<string>();
-			if (LuceneService.NGrammer != null)
-			{
-				TokenStream stream = LuceneService.NGrammer.GetTokenStream(TextFieldKey, new StringReader(document));
-				//AttributeSource source = new AttributeSource();
-				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();
-				var charTermAttribute = stream.AddAttribute<ICharTermAttribute>();
-				stream.Reset();
-				while (stream.IncrementToken())
-				{
-					//Token token = new Token();
-					//int startOffset = offsetAttribute.StartOffset;
-					//int endOffset = offsetAttribute.EndOffset;
-					String term = charTermAttribute.ToString();
-					ngrams.Add(term);
-
-				}
-				stream.End();
-				stream.Dispose();
-				return ngrams;
-			}
-			else
-			{
-				throw new Exception("No ngrammer");
-			}
-		}
+		
 
 		
 	}

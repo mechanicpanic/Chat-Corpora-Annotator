@@ -48,6 +48,7 @@ namespace Viewer.UI
         public void DisplayNGrams(List<string> grams)
         {
             richTextBox1.Lines = grams.ToArray();
+            richTextBox1.Invalidate();
         }
 
         public void ShowView()
