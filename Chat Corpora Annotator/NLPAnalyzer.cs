@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using edu.stanford.nlp.ie.crf;
 using edu.stanford.nlp.pipeline;
 using edu.stanford.nlp.time;
@@ -11,6 +7,7 @@ using edu.stanford.nlp.ling;
 using edu.stanford.nlp.process;
 using java.io;
 using edu.stanford.nlp.trees;
+using Viewer.Framework.Services;
 
 namespace Viewer
 {
@@ -18,91 +15,111 @@ namespace Viewer
     {
         public string nerRoot = @"C:\Users\voidl\Documents\stanford-ner-2016-10-31";
         public string modelRoot = @"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31\stanford-corenlp-3.7.0-models";
-        public string classifiersDirecrory;
+        public string classifiersDirectory;
         CRFClassifier classifier;
+        LexicalizedParser parser;
+        TokenizerFactory tokenizerFactory;
 
         public string modelDirectory;
         public void LoadClassifier()
         {
-            classifiersDirecrory = nerRoot + @"\classifiers";
+            classifiersDirectory = nerRoot + @"\classifiers";
 
             // Loading 3 class classifier model
             classifier = CRFClassifier.getClassifierNoExceptions(
-                classifiersDirecrory + @"\english.all.3class.distsim.crf.ser.gz");
+                classifiersDirectory + @"\english.muc.7class.distsim.crf.ser.gz");
             
         }
         public string ExtractNamedEntities(string message)
         {
 
             System.Console.WriteLine("{0}\n", classifier.classifyWithInlineXML(message));
-
             return classifier.classifyToString(message, "xml", true);
             
         }
-        //public AnnotationPipeline buildPipeline()
-        //{
-        //    Annotation document = new Annotation("Barack Obama was born in Hawaii.  He is the president. Obama was elected in 2008.");
-        //    AnnotationPipeline pl = new AnnotationPipeline();
-            
-        //    pl.addAnnotator(new ParserAnnotator(edu.stanford.nlp.parser.common.ParserGrammar.loadModel(), true, 50));
 
-        //    return pl;
-        //}
-        public void MakeTrees()
+        //public List<string> ExtractLocation(string classified) { }
+        //public List<string> ExtractTime(string classified) { }
+
+        
+        public void LoadParserModels()
         {
-            // Path to models extracted from `stanford-parser-3.7.0-models.jar`
-            
             modelDirectory = modelRoot + @"\edu\stanford\nlp\models";
+            parser = LexicalizedParser.loadModel(modelDirectory + @"\lexparser\englishPCFG.ser.gz");
+            tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
+        }
+       
+        public bool DetectQuestion(string message)
+        {
 
-            // Loading english PCFG parser from file
-            var lp = LexicalizedParser.loadModel(modelDirectory + @"\lexparser\englishPCFG.ser.gz");
+            var read = new StringReader(message);
+                var words = tokenizerFactory.getTokenizer(read).tokenize();
+                read.close();
+                Tree tree = parser.apply(words);
 
-            // This sample shows parsing a list of correctly tokenized words
-            var sent = new[] { "This", "is", "an", "easy", "sentence", "." };
-            var rawWords = SentenceUtils.toCoreLabelList(sent);
-            var tree = lp.apply(rawWords);
-            //tree.pennPrint();
+            //Extract dependencies from lexical tree
 
-            // This option shows loading and using an explicit tokenizer
-            //var sent2 = "Did we meet in California, the place where we had the best time of out spindly lives?";
-            var sent2 = "Where did we meet, in California?";
-            var tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
-            var sent2Reader = new StringReader(sent2);
-            var rawWords2 = tokenizerFactory.getTokenizer(sent2Reader).tokenize();
-            sent2Reader.close();
-            Tree tree2 = lp.apply(rawWords2);
+            //var tlp = new PennTreebankLanguagePack();
+            // var gsf = tlp.grammaticalStructureFactory();
+            // var gs = gsf.newGrammaticalStructure(tree);
+            // var tdl = gs.typedDependenciesCCprocessed();
+            // System.Console.WriteLine("\n{0}\n", tdl);
 
-            // Extract dependencies from lexical tree
-            var tlp = new PennTreebankLanguagePack();
-            var gsf = tlp.grammaticalStructureFactory();
-            var gs = gsf.newGrammaticalStructure(tree2);
-            var tdl = gs.typedDependenciesCCprocessed();
-            
-
-            // Extract collapsed dependencies from parsed tree
             var tp = new TreePrint("penn,typedDependenciesCollapsed");
-            tp.printTree(tree2);
+            tp.printTree(tree);
+            foreach (Tree subtree in tree)
+                {
 
+                if (subtree.label().value().Equals("SBARQ") || subtree.label().value().Equals("SQ")) {
+                    return true;
+                }
+                
+            }
+            return false;
+
+        }
+
+        public List<string> ExtractNounPhrases(string message)
+        {
+            var read = new StringReader(message);
+            var words = tokenizerFactory.getTokenizer(read).tokenize();
+            read.close();
+            Tree tree = parser.apply(words);
             List<Tree> phraseList = new List<Tree>();
-            
-            foreach (Tree subtree in tree2)
+            foreach (Tree subtree in tree)
             {
 
                 if (subtree.label().value().Equals("NP"))
                 {
-
-                    phraseList.Add(subtree);
-                    //java.util.List newtree = subtree.getChildrenAsList();
-                    int a = 5;
+                    var t = subtree;
+                    foreach (Tree subt in t)
+                    {
+                        if (subt.label().value().Equals("NNP") || subt.label().value().Equals("NNPS") || subt.label().value().Equals("NN") || subt.label().value().Equals("NNS"))
+                        {
+                            phraseList.Add(subtree);
+                        }
+                    }
 
                 }
-            }
-            //foreach(Tree t in phraseList)
-            //{
-            //    tp.printTree(t);
-            //}
 
+            }
+            List<string> NPs = new List<string>();
+            foreach(var t in phraseList)
+            {
+                NPs.Add(t.toString());
+            }
+            return NPs;
         }
+
+        //public AnnotationPipeline buildPipeline()
+        //{
+        //    Annotation document = new Annotation("Barack Obama was born in Hawaii.  He is the president. Obama was elected in 2008.");
+        //    AnnotationPipeline pl = new AnnotationPipeline();
+
+        //    pl.addAnnotator(new ParserAnnotator(edu.stanford.nlp.parser.common.ParserGrammar.loadModel(), true, 50));
+
+        //    return pl;
+        //}
 
 
     }

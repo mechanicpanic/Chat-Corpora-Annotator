@@ -97,7 +97,7 @@ namespace Viewer
 			this.CloseView();
 		}
 		#endregion
-
+		int index = 0;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -494,7 +494,7 @@ namespace Viewer
 		{
 
 		}
-		int index = 0;
+		
 		//private void button1_Click(object sender, EventArgs e)
 		//{
 
@@ -529,6 +529,27 @@ namespace Viewer
 		private void button1_Click(object sender, EventArgs e)
 		{
 			NGramClick?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			
+			
+			Console.WriteLine(analyzer.DetectQuestion(Messages[index].contents[TextFieldKey].ToString()).ToString());
+			var tem = analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
+			foreach (var np in tem)
+			{
+				Console.WriteLine(np);
+			}
+			Console.WriteLine(analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString()));
+			//analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
+			index++;
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			analyzer.LoadClassifier();
+			analyzer.LoadParserModels();
 		}
 	}
 }

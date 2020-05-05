@@ -36,10 +36,16 @@
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.Concordance = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -80,10 +86,7 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -92,6 +95,7 @@
             this.panel2.SuspendLayout();
             this.Concordance.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
@@ -109,6 +113,7 @@
             tabControl1.Controls.Add(this.Statistics);
             tabControl1.Controls.Add(this.Concordance);
             tabControl1.Controls.Add(this.tabPage1);
+            tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             tabControl1.Location = new System.Drawing.Point(303, 40);
             tabControl1.Name = "tabControl1";
@@ -220,6 +225,42 @@
             this.panel2.Size = new System.Drawing.Size(424, 653);
             this.panel2.TabIndex = 0;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 112);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 23);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "label7";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 78);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 23);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "label6";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 23);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "label5";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 23);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "label4";
+            // 
             // Concordance
             // 
             this.Concordance.Controls.Add(this.button3);
@@ -260,6 +301,27 @@
             this.button1.Text = "Ngram test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1218, 659);
+            this.tabPage2.TabIndex = 6;
+            this.tabPage2.Text = "Analysis test";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(246, 102);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(480, 96);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // csvDialog
             // 
@@ -690,41 +752,15 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // button5
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "label4";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 23);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "label5";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 78);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 23);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "label6";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 112);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 23);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "label7";
+            this.button5.Location = new System.Drawing.Point(403, 361);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(356, 92);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // MainWindow
             // 
@@ -748,6 +784,7 @@
             this.panel2.PerformLayout();
             this.Concordance.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -820,6 +857,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 
