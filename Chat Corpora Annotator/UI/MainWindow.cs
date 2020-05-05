@@ -102,9 +102,8 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			analyzer = new NLPAnalyzer();
-			//analyzer.LoadClassifier();
-			//analyzer.MakeTrees();
+			analyzer = new NLPAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31",@"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
+			
 			this.PropertyChanged += MainWindow_PropertyChanged;
 
 
@@ -549,15 +548,16 @@ namespace Viewer
 
 		private void button5_Click(object sender, EventArgs e)
 		{
-			//analyzer.LoadClassifier();
+			
 			//analyzer.LoadParserModels();
 
-			//AnnotationPipeline pipeline = analyzer.buildPipeline();
+			
 			Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
 			CoreDocument coredoc = new CoreDocument(annotation);
-			StanfordCoreNLP pipeline2 = analyzer.simplePipeline();
-			pipeline2.annotate(coredoc);
-			for(int i = 0; i< coredoc.entityMentions().size(); i++)
+			StanfordCoreNLP pipeline = analyzer.SimplePipeline();
+			pipeline.annotate(coredoc);
+			
+			for (int i = 0; i < coredoc.entityMentions().size(); i++)
 			{
 				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
 				Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
