@@ -1,14 +1,10 @@
-﻿using Lucene.Net.QueryParsers.Classic;
+﻿
 using Lucene.Net.Search;
 using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
 using Lucene.Net.Queries;
-using Lucene.Net.Analysis;
-using System.IO;
-using Lucene.Net.Analysis.TokenAttributes;
-using Token = Lucene.Net.Analysis.Token;
-using Lucene.Net.Util;
+
 
 namespace Viewer.Framework.Services
 {

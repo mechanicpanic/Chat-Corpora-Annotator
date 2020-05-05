@@ -12,6 +12,8 @@ using Lucene.Net.Util;
 using Lucene.Net.Analysis.TokenAttributes;
 using CSharpTest.Net.Collections;
 using Lucene.Net.Search;
+using System.Xml.Linq;
+using System.Web.Script.Serialization;
 
 namespace Viewer.Framework.Services
 {
@@ -45,10 +47,24 @@ namespace Viewer.Framework.Services
 
 	public class NGramService : INGramService {
 		public BTreeDictionary<string,int> NgramIndex { get; set; }
+
+		private string filename = @"C:\Users\voidl\Desktop";
+
+		private void FlushIndexToDisk()
+		{
+			File.WriteAllText(filename+"SomeFile.Txt", new JavaScriptSerializer().Serialize(NgramIndex));
+		}
+
+		private void ReadIndexFromDisk()
+		{
+			new JavaScriptSerializer()
+	.Deserialize<BTreeDictionary<string, int>>(File.ReadAllText(filename+"SomeFile.txt"));
+		}
 		public void BuildNgramIndex(int maxSize,int minSize,bool ShowUnigrams, string TextFieldKey, string term)
 		{
 
 			this.NgramIndex = new BTreeDictionary<string, int>();
+			
 			LuceneService.NGrammer.maxGramSize = maxSize;
 			LuceneService.NGrammer.minGramSize = minSize;
 			LuceneService.NGrammer.ShowUnigrams = ShowUnigrams;
@@ -84,6 +100,7 @@ namespace Viewer.Framework.Services
 			List<string> ngrams = new List<string>();
 			if (LuceneService.NGrammer != null)
 			{
+				
 				TokenStream stream = LuceneService.NGrammer.GetTokenStream(TextFieldKey, new StringReader(document));
 				//AttributeSource source = new AttributeSource();
 				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();

@@ -350,6 +350,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -411,10 +412,10 @@
     <Compile Include="CSV Wizard\MetadataStep.Designer.cs">
       <DependentUpon>MetadataStep.cs</DependentUpon>
     </Compile>
-    <Compile Include="CSVLoader.cs">
+    <Compile Include="UI\CSVLoader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CSVLoader.Designer.cs">
+    <Compile Include="UI\CSVLoader.Designer.cs">
       <DependentUpon>CSVLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="Deprecated\ArrayMessage.cs" />
@@ -453,16 +454,10 @@
     <Compile Include="Deprecated\HeaderForm.Designer.cs">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\2DHeatmapForm.cs">
+    <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\2DHeatmapForm.Designer.cs">
-      <DependentUpon>2DHeatmapForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="UI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -510,7 +505,7 @@
     <EmbeddedResource Include="CSV Wizard\MetadataStep.resx">
       <DependentUpon>MetadataStep.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CSVLoader.resx">
+    <EmbeddedResource Include="UI\CSVLoader.resx">
       <DependentUpon>CSVLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Deprecated\DataLoaded.resx">
@@ -519,10 +514,7 @@
     <EmbeddedResource Include="Deprecated\HeaderForm.resx">
       <DependentUpon>HeaderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\2DHeatmapForm.resx">
-      <DependentUpon>2DHeatmapForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

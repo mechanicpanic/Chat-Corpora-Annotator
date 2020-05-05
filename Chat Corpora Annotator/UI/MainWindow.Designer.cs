@@ -35,8 +35,11 @@
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.Concordance = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -77,20 +80,19 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
+            this.Statistics.SuspendLayout();
             this.Concordance.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -192,6 +194,7 @@
             // 
             // Statistics
             // 
+            this.Statistics.Controls.Add(this.panel2);
             this.Statistics.Location = new System.Drawing.Point(4, 32);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(3);
@@ -199,6 +202,14 @@
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(424, 653);
+            this.panel2.TabIndex = 0;
             // 
             // Concordance
             // 
@@ -220,6 +231,26 @@
             this.button3.Text = "Concordance test";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "N-gram Search";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(441, 561);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(329, 52);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Concordance test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // csvDialog
             // 
@@ -650,26 +681,6 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "N-gram Search";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(441, 561);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(329, 52);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Concordance test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -687,7 +698,9 @@
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
+            this.Statistics.ResumeLayout(false);
             this.Concordance.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -699,7 +712,6 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -756,6 +768,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
