@@ -6,6 +6,7 @@ using edu.stanford.nlp.parser.lexparser;
 using edu.stanford.nlp.ling;
 using edu.stanford.nlp.process;
 using java.io;
+
 using edu.stanford.nlp.trees;
 using Viewer.Framework.Services;
 
@@ -15,21 +16,21 @@ namespace Viewer
     {
         public string nerRoot = @"C:\Users\voidl\Documents\stanford-ner-2016-10-31";
         public string modelRoot = @"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31\stanford-corenlp-3.7.0-models";
-        public string classifiersDirectory;
+        public string classifiersDirectory = @"C:\Users\voidl\Documents\stanford-ner-2016-10-31" + @"\classifiers";
         CRFClassifier classifier;
         LexicalizedParser parser;
         TokenizerFactory tokenizerFactory;
 
         public string modelDirectory;
-        public void LoadClassifier()
-        {
-            classifiersDirectory = nerRoot + @"\classifiers";
+        //public void LoadClassifier()
+        //{
+        //    classifiersDirectory = nerRoot + @"\classifiers";
 
-            // Loading 3 class classifier model
-            classifier = CRFClassifier.getClassifierNoExceptions(
-                classifiersDirectory + @"\english.muc.7class.distsim.crf.ser.gz");
+        //    // Loading 7 class classifier model
+        //    classifier = CRFClassifier.getClassifierNoExceptions(
+        //        classifiersDirectory + @"\english.muc.7class.distsim.crf.ser.gz");
             
-        }
+        //}
         public string ExtractNamedEntities(string message)
         {
 
@@ -38,10 +39,12 @@ namespace Viewer
             
         }
 
-        //public List<string> ExtractLocation(string classified) { }
+        //public List<string> ExtractLocation(string classified) 
+        //{ 
+        //}
         //public List<string> ExtractTime(string classified) { }
 
-        
+
         public void LoadParserModels()
         {
             modelDirectory = modelRoot + @"\edu\stanford\nlp\models";
@@ -59,11 +62,11 @@ namespace Viewer
 
             //Extract dependencies from lexical tree
 
-            //var tlp = new PennTreebankLanguagePack();
-            // var gsf = tlp.grammaticalStructureFactory();
-            // var gs = gsf.newGrammaticalStructure(tree);
-            // var tdl = gs.typedDependenciesCCprocessed();
-            // System.Console.WriteLine("\n{0}\n", tdl);
+            var tlp = new PennTreebankLanguagePack();
+             var gsf = tlp.grammaticalStructureFactory();
+             var gs = gsf.newGrammaticalStructure(tree);
+             var tdl = gs.typedDependenciesCCprocessed();
+             System.Console.WriteLine("\n{0}\n", tdl);
 
             var tp = new TreePrint("penn,typedDependenciesCollapsed");
             tp.printTree(tree);
@@ -111,16 +114,33 @@ namespace Viewer
             return NPs;
         }
 
-        //public AnnotationPipeline buildPipeline()
-        //{
-        //    Annotation document = new Annotation("Barack Obama was born in Hawaii.  He is the president. Obama was elected in 2008.");
-        //    AnnotationPipeline pl = new AnnotationPipeline();
+        public AnnotationPipeline buildPipeline()
+        {
+            //Annotation document = new Annotation("Barack Obama was born in Hawaii.  He is the president. Obama was elected in 2008.");
+            AnnotationPipeline pl = new AnnotationPipeline();
+            pl.addAnnotator(new TokenizerAnnotator(true));
+            pl.addAnnotator(new WordsToSentencesAnnotator(false));
+            pl.addAnnotator(new ParserAnnotator(parser, true, 50));
+            pl.addAnnotator(new TimeAnnotator());
+            //edu.stanford.nlp.ie.NERClassifierCombiner combo = new edu.stanford.nlp.ie.NERClassifierCombiner(true, true, classifiersDirectory + @"\english.muc.7class.distsim.crf.ser.gz");
+            //pl.addAnnotator(new NERCombinerAnnotator(combo, true));
+            
+            return pl;
+        }
 
-        //    pl.addAnnotator(new ParserAnnotator(edu.stanford.nlp.parser.common.ParserGrammar.loadModel(), true, 50));
-
-        //    return pl;
-        //}
-
+        public StanfordCoreNLP simplePipeline()
+        {
+            java.util.Properties props = new java.util.Properties();
+            
+            props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
+            props.setProperty("ner.model", classifiersDirectory + @"\english.muc.7class.distsim.crf.ser.gz");
+            props.setProperty("parse.model", modelRoot + @"\edu\stanford\nlp\models" + @"\lexparser\englishPCFG.ser.gz");
+            props.setProperty("ner.useSUTime", "false");
+            props.setProperty("ner.applyFineGrained", "false");
+            props.setProperty("pos.model", @"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31\stanford-corenlp-3.7.0-models\edu\stanford\nlp\models\pos-tagger\english-left3words\english-left3words-distsim.tagger");
+            StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+            return pipeline;
+        }
 
     }
 }

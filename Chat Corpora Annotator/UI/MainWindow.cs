@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using CSharpTest.Net.Collections;
 using System.Drawing;
 using Viewer.Framework.Views;
+using edu.stanford.nlp.pipeline;
 
 namespace Viewer
 {
@@ -535,21 +536,32 @@ namespace Viewer
 		{
 			
 			
-			Console.WriteLine(analyzer.DetectQuestion(Messages[index].contents[TextFieldKey].ToString()).ToString());
-			var tem = analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
-			foreach (var np in tem)
-			{
-				Console.WriteLine(np);
-			}
-			Console.WriteLine(analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString()));
-			//analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
-			index++;
+			//Console.WriteLine(analyzer.DetectQuestion(Messages[index].contents[TextFieldKey].ToString()).ToString());
+			//var tem = analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
+			//foreach (var np in tem)
+			//{
+			//	Console.WriteLine(np);
+			//}
+			//Console.WriteLine(analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString()));
+			////analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
+			//index++;
 		}
 
 		private void button5_Click(object sender, EventArgs e)
 		{
-			analyzer.LoadClassifier();
-			analyzer.LoadParserModels();
+			//analyzer.LoadClassifier();
+			//analyzer.LoadParserModels();
+
+			//AnnotationPipeline pipeline = analyzer.buildPipeline();
+			Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
+			CoreDocument coredoc = new CoreDocument(annotation);
+			StanfordCoreNLP pipeline2 = analyzer.simplePipeline();
+			pipeline2.annotate(coredoc);
+			for(int i = 0; i< coredoc.entityMentions().size(); i++)
+			{
+				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
+				Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
+			}
 		}
 	}
 }
