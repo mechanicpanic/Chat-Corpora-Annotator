@@ -43,7 +43,7 @@
             this.Concordance = new System.Windows.Forms.TabPage();
             this.concordancerButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ngramButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
@@ -87,6 +87,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.concordancePanel = new System.Windows.Forms.Panel();
+            this.ngramPanel = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -292,7 +293,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.ngramPanel);
+            this.tabPage1.Controls.Add(this.ngramButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(1218, 659);
@@ -300,15 +302,16 @@
             this.tabPage1.Text = "N-gram Search";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // ngramButton
             // 
-            this.button1.Location = new System.Drawing.Point(441, 561);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(329, 52);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Ngram test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ngramButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ngramButton.Location = new System.Drawing.Point(0, 607);
+            this.ngramButton.Name = "ngramButton";
+            this.ngramButton.Size = new System.Drawing.Size(1218, 52);
+            this.ngramButton.TabIndex = 3;
+            this.ngramButton.Text = "Load ngrammer";
+            this.ngramButton.UseVisualStyleBackColor = true;
+            this.ngramButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
@@ -767,6 +770,14 @@
             this.concordancePanel.Size = new System.Drawing.Size(1212, 601);
             this.concordancePanel.TabIndex = 3;
             // 
+            // ngramPanel
+            // 
+            this.ngramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ngramPanel.Location = new System.Drawing.Point(0, 0);
+            this.ngramPanel.Name = "ngramPanel";
+            this.ngramPanel.Size = new System.Drawing.Size(1218, 607);
+            this.ngramPanel.TabIndex = 4;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -856,7 +867,7 @@
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.Button concordancerButton;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ngramButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -865,6 +876,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Panel concordancePanel;
+        private System.Windows.Forms.Panel ngramPanel;
     }
 }
 

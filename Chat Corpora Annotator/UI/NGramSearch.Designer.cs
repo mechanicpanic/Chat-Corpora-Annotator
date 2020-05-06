@@ -68,7 +68,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox1.Location = new System.Drawing.Point(251, -4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(967, 518);
+            this.richTextBox1.Size = new System.Drawing.Size(940, 518);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -78,7 +78,7 @@
             this.textBox1.MaximumSize = new System.Drawing.Size(200, 200);
             this.textBox1.MinimumSize = new System.Drawing.Size(100, 60);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 60);
+            this.textBox1.Size = new System.Drawing.Size(200, 22);
             this.textBox1.TabIndex = 6;
             // 
             // comboBox2
@@ -109,7 +109,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1191, 511);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
@@ -117,7 +116,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Name = "NGramSearch";
-            this.Text = "NGramSearch";
+            //this.Size = new System.Drawing.Size(1191, 511);
             this.ResumeLayout(false);
             this.PerformLayout();
 

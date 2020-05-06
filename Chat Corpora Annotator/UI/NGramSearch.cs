@@ -6,7 +6,7 @@ using Viewer.Framework.Views;
 
 namespace Viewer.UI
 {
-    public partial class NGramSearch : Form, INGramView
+    public partial class NGramSearch : UserControl, INGramView
     {
         public NGramSearch()
         {
@@ -41,7 +41,7 @@ namespace Viewer.UI
 
         public void CloseView()
         {
-            this.Close();
+            this.Dispose();
             
         }
 

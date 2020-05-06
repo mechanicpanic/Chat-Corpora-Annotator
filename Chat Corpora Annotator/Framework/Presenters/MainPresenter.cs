@@ -18,11 +18,11 @@ namespace Viewer.Framework.Presenters
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
         
-        private readonly INGramView _grams;
+        //private readonly INGramView _grams;
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv, INGramView grams, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view,ICSVView csv, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
         {
             this._main = view;
             this._csv = csv;
@@ -30,7 +30,7 @@ namespace Viewer.Framework.Presenters
             this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
-            this._grams = grams;
+            //this._grams = grams;
             
 
             //_view.HeatmapClick += _view_HeatmapClick;
@@ -40,10 +40,18 @@ namespace Viewer.Framework.Presenters
             _main.LoadMoreClick += _view_LoadMoreClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
+            _main.NGramClick += _main_NGramClick;
 
 
         }
-
+        private void _main_NGramClick(object sender, EventArgs e)
+        {
+            INGramView _ngram = _main.CreateNgramView();
+            INGramService _ngrammer = new NGramService();
+            NGramPresenter grampresenter = new NGramPresenter(_main, _reader, _searcher, _ngrammer, _ngram);
+            _ngram.ShowView();
+            _main.ShowNgrams(_ngram);
+        }
         private void _main_ConcordanceClick(object sender, EventArgs e)
         {
             IConcordanceView _concordance = _main.CreateConcordancer();

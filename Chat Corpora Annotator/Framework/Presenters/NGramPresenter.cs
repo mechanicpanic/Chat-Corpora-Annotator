@@ -28,13 +28,10 @@ namespace Viewer.Framework.Presenters
             this._ngrammer = ngrammer;
 
             _grams.NGramClick += _grams_NGramClick;
-            _main.NGramClick += _main_NGramClick;
+            
         }
 
-        private void _main_NGramClick(object sender, EventArgs e)
-        {
-            _grams.ShowView();
-        }
+        
 
         private void _grams_NGramClick(object sender, EventArgs e)
         {

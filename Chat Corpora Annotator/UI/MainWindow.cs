@@ -638,17 +638,19 @@ namespace Viewer
 				concordancePanel.Controls.Add((UserControl)con);
 				concordancePanel.Controls[0].Dock = DockStyle.Fill;
 			}
-			button5.Enabled = false;
+			concordancerButton.Visible = false;
 		}
 
 		public INGramView CreateNgramView()
 		{
-			throw new NotImplementedException();
+			return new NGramSearch();
 		}
 
-		public void ShowNgrams()
+		public void ShowNgrams(INGramView nGram)
 		{
-			throw new NotImplementedException();
+			ngramPanel.Controls.Add((UserControl)nGram);
+			ngramPanel.Controls[0].Dock = DockStyle.Fill;
+			ngramButton.Visible = false;
 		}
 	}
 }
