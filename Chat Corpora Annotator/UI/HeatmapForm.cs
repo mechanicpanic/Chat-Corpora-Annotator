@@ -62,9 +62,12 @@ namespace Viewer
 
         }
 
-        private void FillDates(List<DateTime> dates)
+        public void FillDates(List<DateTime> dates)
         {
-            
+            label1.Text = dates[0].Date.ToString("dd/MM/yyyy");
+            label3.Text = dates[dates.Count-1].Date.ToString("dd/MM/yyyy");
+            label2.Text = dates[(dates.Count - 1)/2].Date.ToString("dd/MM/yyyy");
+
         }
 
         private void panel1_Paint_1(object sender, PaintEventArgs e)

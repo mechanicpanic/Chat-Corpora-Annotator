@@ -30,6 +30,7 @@ namespace Viewer.Framework.Presenters
 			_heat.Colors = _painter.PopulateHeatmap(_view.MessagesPerDay);
 			_heat.ShowView();
 			_heat.DrawHeatmap();
+			_heat.FillDates(_view.MessagesPerDay.Keys.ToList());
 		}
 
 		

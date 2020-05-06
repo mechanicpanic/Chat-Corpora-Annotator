@@ -564,11 +564,11 @@ namespace Viewer
 			//pipeline.annotate(annotation);
 			pipeline.annotate(coredoc);
 
-			//for (int i = 0; i < coredoc.entityMentions().size(); i++)
-			//{
-			//	CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
-			//	Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
-			//}
+			for (int i = 0; i < coredoc.entityMentions().size(); i++)
+			{
+				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
+				Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
+			}
 			Tree constituencyParse;
 			ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
 			CoreMap sentence = (CoreMap)temp.get(0);
@@ -585,15 +585,24 @@ namespace Viewer
 			{
 				Constituent constituent = (Constituent)treeArray[index];
 				if (constituent.label() != null &&
-					(constituent.label().toString().Equals("VP") || constituent.label().toString().Equals("NP")))
+					(constituent.label().toString().Equals("NP")))
 				{
 					Console.WriteLine("found constituent: " + constituent.toString());
 					Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
 
 				}
+				if(constituent.label()!= null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ"))) {
+					Console.WriteLine("Question");
+				}
 				index++;
+
 			}
-			
+			int j = 0;
+			while (j < constituencyParse.taggedYield().toArray().Length)
+			{
+				Console.WriteLine(constituencyParse.taggedYield().toArray()[j]);
+				j++;
+			}
 		}
 	}
 }

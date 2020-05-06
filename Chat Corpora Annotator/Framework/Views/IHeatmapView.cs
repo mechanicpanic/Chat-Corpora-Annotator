@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Viewer.Framework.Views
@@ -9,6 +10,7 @@ namespace Viewer.Framework.Views
         List<Color> Colors { get; set; }
 
         void DrawHeatmap();
+        void FillDates(List<DateTime> dates);
 
     }
 }
