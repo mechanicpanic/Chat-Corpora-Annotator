@@ -41,7 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Concordance = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
+            this.concordancerButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -266,7 +266,7 @@
             // Concordance
             // 
             this.Concordance.Controls.Add(this.concordancePanel);
-            this.Concordance.Controls.Add(this.button3);
+            this.Concordance.Controls.Add(this.concordancerButton);
             this.Concordance.Location = new System.Drawing.Point(4, 32);
             this.Concordance.Name = "Concordance";
             this.Concordance.Padding = new System.Windows.Forms.Padding(3);
@@ -275,20 +275,20 @@
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // concordancerButton
             // 
-            this.button3.BackColor = System.Drawing.Color.Lavender;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(3, 604);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(1212, 52);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Load concordancer";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.concordancerButton.BackColor = System.Drawing.Color.Lavender;
+            this.concordancerButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.concordancerButton.FlatAppearance.BorderSize = 0;
+            this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.concordancerButton.Location = new System.Drawing.Point(3, 604);
+            this.concordancerButton.Name = "concordancerButton";
+            this.concordancerButton.Size = new System.Drawing.Size(1212, 52);
+            this.concordancerButton.TabIndex = 2;
+            this.concordancerButton.Text = "Load concordancer";
+            this.concordancerButton.UseVisualStyleBackColor = false;
+            this.concordancerButton.Click += new System.EventHandler(this.button3_Click);
             // 
             // tabPage1
             // 
@@ -761,10 +761,10 @@
             // 
             // concordancePanel
             // 
-            this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.concordancePanel.Location = new System.Drawing.Point(3, 3);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1212, 598);
+            this.concordancePanel.Size = new System.Drawing.Size(1212, 601);
             this.concordancePanel.TabIndex = 3;
             // 
             // MainWindow
@@ -854,7 +854,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button concordancerButton;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;

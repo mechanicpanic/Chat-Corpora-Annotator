@@ -636,7 +636,19 @@ namespace Viewer
 			if (con.IsControl)
 			{
 				concordancePanel.Controls.Add((UserControl)con);
+				concordancePanel.Controls[0].Dock = DockStyle.Fill;
 			}
+			button5.Enabled = false;
+		}
+
+		public INGramView CreateNgramView()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ShowNgrams()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

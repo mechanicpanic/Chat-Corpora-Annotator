@@ -29,6 +29,9 @@ namespace Viewer.Framework.Views
         void DisplaySearchResults();
 
         IConcordanceView CreateConcordancer();
+
+        INGramView CreateNgramView();
+        void ShowNgrams();
         void ShowConcordance(IConcordanceView con);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
