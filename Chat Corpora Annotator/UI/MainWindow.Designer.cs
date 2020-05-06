@@ -351,7 +351,7 @@
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.searchPanel.Location = new System.Drawing.Point(0, 40);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(303, 728);
+            this.searchPanel.Size = new System.Drawing.Size(306, 728);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -366,7 +366,7 @@
             this.findButton.Location = new System.Drawing.Point(0, 633);
             this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(303, 40);
+            this.findButton.Size = new System.Drawing.Size(306, 40);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -385,7 +385,7 @@
             this.clearButton.Location = new System.Drawing.Point(0, 593);
             this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(303, 40);
+            this.clearButton.Size = new System.Drawing.Size(306, 40);
             this.clearButton.TabIndex = 26;
             this.clearButton.Text = "Clear";
             this.clearButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -408,7 +408,7 @@
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.datesPanel.Size = new System.Drawing.Size(303, 73);
+            this.datesPanel.Size = new System.Drawing.Size(306, 73);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
             // 
@@ -431,11 +431,11 @@
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(78, 3);
+            this.startDate.Location = new System.Drawing.Point(79, 3);
             this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(222, 30);
+            this.startDate.Size = new System.Drawing.Size(224, 30);
             this.startDate.TabIndex = 17;
             this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
@@ -445,10 +445,10 @@
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(78, 39);
+            this.finishDate.Location = new System.Drawing.Point(79, 39);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(222, 30);
+            this.finishDate.Size = new System.Drawing.Size(224, 30);
             this.finishDate.TabIndex = 18;
             // 
             // label1
@@ -476,7 +476,7 @@
             this.dateToggle.Location = new System.Drawing.Point(0, 480);
             this.dateToggle.MinimumSize = new System.Drawing.Size(0, 40);
             this.dateToggle.Name = "dateToggle";
-            this.dateToggle.Size = new System.Drawing.Size(303, 40);
+            this.dateToggle.Size = new System.Drawing.Size(306, 40);
             this.dateToggle.TabIndex = 28;
             this.dateToggle.Text = "Select Dates Toggle";
             this.dateToggle.UseVisualStyleBackColor = true;
@@ -488,7 +488,7 @@
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.userPanel.Location = new System.Drawing.Point(0, 198);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(303, 282);
+            this.userPanel.Size = new System.Drawing.Size(306, 282);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
             // 
@@ -505,7 +505,7 @@
             this.userList.HideSelection = false;
             this.userList.Location = new System.Drawing.Point(0, 0);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(303, 282);
+            this.userList.Size = new System.Drawing.Size(306, 282);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -527,7 +527,7 @@
             this.userToggle.Location = new System.Drawing.Point(0, 158);
             this.userToggle.MinimumSize = new System.Drawing.Size(0, 40);
             this.userToggle.Name = "userToggle";
-            this.userToggle.Size = new System.Drawing.Size(303, 40);
+            this.userToggle.Size = new System.Drawing.Size(306, 40);
             this.userToggle.TabIndex = 27;
             this.userToggle.Text = "Select Users Toggle";
             this.userToggle.UseVisualStyleBackColor = true;
@@ -540,7 +540,7 @@
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.queryPanel.Location = new System.Drawing.Point(0, 40);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(303, 118);
+            this.queryPanel.Size = new System.Drawing.Size(306, 118);
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
@@ -566,7 +566,7 @@
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(303, 49);
+            this.searchBox.Size = new System.Drawing.Size(306, 49);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
@@ -583,7 +583,7 @@
             this.queryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.queryButton.MinimumSize = new System.Drawing.Size(0, 40);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(303, 40);
+            this.queryButton.Size = new System.Drawing.Size(306, 40);
             this.queryButton.TabIndex = 19;
             this.queryButton.Text = "Query";
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -595,9 +595,9 @@
             this.panel1.BackColor = System.Drawing.Color.Lavender;
             this.panel1.Controls.Add(this.messageLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(303, 734);
+            this.panel1.Location = new System.Drawing.Point(306, 740);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1226, 34);
+            this.panel1.Size = new System.Drawing.Size(1223, 28);
             this.panel1.TabIndex = 25;
             // 
             // messageLabel
@@ -605,7 +605,7 @@
             this.messageLabel.AutoSize = true;
             this.messageLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(1130, 0);
+            this.messageLabel.Location = new System.Drawing.Point(1127, 0);
             this.messageLabel.MinimumSize = new System.Drawing.Size(0, 30);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(96, 30);

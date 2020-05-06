@@ -27,7 +27,7 @@ namespace Viewer.Framework.Services
         {
             Concordance = new List<string>();
             TopDocs Hits = LuceneService.Searcher.Search(ConQuery, count);
-            for (int i = 0; i < Hits.TotalHits; i++)
+            for (int i = 0; i < Hits.ScoreDocs.Length; i++)
             {
                 
                 ScoreDoc d = Hits.ScoreDocs[i];

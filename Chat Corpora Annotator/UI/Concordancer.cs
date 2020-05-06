@@ -104,7 +104,7 @@ namespace Viewer.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Split().Length > 1)
+            if (textBox1.Text.Split().Length > 1 || String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Please enter a single term");
             }

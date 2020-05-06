@@ -13,6 +13,8 @@ namespace Viewer.UI
             InitializeComponent();
             comboBox1.SelectedItem = "2";
             comboBox1.SelectedText = "2";
+            comboBox2.SelectedItem = "2";
+            comboBox2.SelectedText = "2";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace Viewer.UI
         }
 
         public string Term { get; set; }
-        public int Size { get; set; }
+        //public int Size { get; set; }
         public int minSize { get; set; }
         public int maxSize { get; set; }
         public bool ShowUnigrams { get; set; }
