@@ -52,6 +52,7 @@
             this.stepLabel.BackColor = System.Drawing.Color.Lavender;
             this.stepLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.stepLabel.Location = new System.Drawing.Point(12, 61);
+            this.stepLabel.MaximumSize = new System.Drawing.Size(230, 0);
             this.stepLabel.Name = "stepLabel";
             this.stepLabel.Size = new System.Drawing.Size(55, 23);
             this.stepLabel.TabIndex = 0;
@@ -71,9 +72,9 @@
             // 
             this.cmdNext.BackColor = System.Drawing.Color.Lavender;
             this.cmdNext.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdNext.Location = new System.Drawing.Point(712, 492);
+            this.cmdNext.Location = new System.Drawing.Point(636, 492);
             this.cmdNext.Name = "cmdNext";
-            this.cmdNext.Size = new System.Drawing.Size(125, 30);
+            this.cmdNext.Size = new System.Drawing.Size(213, 42);
             this.cmdNext.TabIndex = 1;
             this.cmdNext.Text = "Next >";
             this.cmdNext.UseVisualStyleBackColor = false;
@@ -83,6 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(849, 534);
             this.Controls.Add(this.cmdNext);
             this.Controls.Add(this.panelStep);

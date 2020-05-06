@@ -59,13 +59,39 @@ namespace Viewer
 			messageLabel.Text = count.ToString() + " messages";
 
 		}
+		public IConcordanceView CreateConcordancer()
+		{
+			return new Concordancer();
+		}
 
+		public void ShowConcordance(IConcordanceView con)
+		{
+			if (con.IsControl)
+			{
+				concordancePanel.Controls.Add((UserControl)con);
+				concordancePanel.Controls[0].Dock = DockStyle.Fill;
+			}
+			concordancerButton.Visible = false;
+		}
+
+		public INGramView CreateNgramView()
+		{
+			return new NGramSearch();
+		}
+
+		public void ShowNgrams(INGramView nGram)
+		{
+			ngramPanel.Controls.Add((UserControl)nGram);
+			ngramPanel.Controls[0].Dock = DockStyle.Fill;
+			ngramButton.Visible = false;
+		}
 		public void DisplayDocuments()
 		{
 			chatTable.SetObjects(_messages);
 			SetUpChatView();
 			chatTable.UpdateObjects(this.Messages);
 			chatTable.Invalidate();
+			LoadDates();
 		}
 		public void DisplaySearchResults()
 		{
@@ -315,60 +341,86 @@ namespace Viewer
 		#endregion
 
 		#region date view
+
+		//public void SetDateView()
+		//{
+		//	dateView.View = View.Details;
+		//	dateView.VirtualMode = true;
+		//	dateView.VirtualListSize = MessagesPerDay.Keys.Count;
+		//	dateView.DoubleBuffering(true);
+		//	RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
+		//	dateView.RetrieveVirtualItem += handler;
+
+
+		//}
+
+		//private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+		//{
+		//	int index = e.ItemIndex;
+		//	string date = MessagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
+		//	e.Item = new ListViewItem(date);
+
+		//}
+
 		public void SetDateView()
 		{
 			dateView.View = View.Details;
-			dateView.VirtualMode = true;
-			dateView.VirtualListSize = MessagesPerDay.Keys.Count;
-			//dateView.DoubleBuffering(true);
-			RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
-			dateView.RetrieveVirtualItem += handler;
-
+			dateView.VirtualMode = false;
 
 		}
 
-		private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+		private void LoadDates()
 		{
-			int index = e.ItemIndex;
-			string date = MessagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
-			e.Item = new ListViewItem(date);
-
+			foreach(var msg in Messages)
+			{
+				AddDateToDateView((DateTime)msg.contents[DateFieldKey]);
+			}
 		}
 
+		private void AddDateToDateView(DateTime date)
+		{
+			
+			if (!dateView.Items.ContainsKey(date.Date.ToString("dd/MM/yyyy")))
+			
+			{
+				var temp = new ListViewItem(date.Date.ToString("dd/MM/yyyy"));
+				temp.Name = date.Date.ToString("dd/MM/yyyy");
+				dateView.Items.Add(temp);
+			}
+		}
+		private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			ListView lw = sender as ListView;
 
-		//private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
-		//{
-		//	ListView lw = sender as ListView;
+			ListView.SelectedIndexCollection index = dateView.SelectedIndices;
+			string date = dateView.Items[index[0]].SubItems[0].Text;
+			DateTime key = DateTime.Parse(date);
 
-		//	ListView.SelectedIndexCollection index = dateView.SelectedIndices;
-		//	string date = dateView.Items[index[0]].SubItems[0].Text;
-		//	DateTime key = DateTime.Parse(date);
+			int i = -1;
+			//int i = chatTable.IndexOf(messages[key].Block[0]);
+			foreach (var message in Messages)
+			{
+				DateTime temp = (DateTime)message.contents[DateFieldKey];
+				if (temp.Date == key)
+				{
+					i = chatTable.IndexOf(message);
+					break;
+				}
 
-		//	int i = -1;
-		//	//int i = chatTable.IndexOf(messages[key].Block[0]);
-		//	foreach (var message in messages)
-		//	{
-		//		DateTime temp = (DateTime)message.contents[dateFieldKey];
-		//		if(temp.Date == key)
-		//		{
-		//			i = chatTable.IndexOf(message);
-		//			break;
-		//		}
+			}
+			if (i != -1)
+			{
+				var item = chatTable.GetItem(i);
+				chatTable.SelectedItem = item;
+				chatTable.EnsureVisible(chatTable.GetItemCount() - 1);
+				chatTable.EnsureVisible(i);
+			}
+			else
+			{
+				MessageBox.Show("Broken!");
+			}
 
-		//	}
-		//	if (i != -1)
-		//	{
-		//		var item = chatTable.GetItem(i);
-		//		chatTable.SelectedItem = item;
-		//		chatTable.EnsureVisible(chatTable.GetItemCount() - 1);
-		//		chatTable.EnsureVisible(i);
-		//	}
-		//	else
-		//	{
-		//		MessageBox.Show("Broken!");
-		//	}
-
-		//}
+		}
 
 		#endregion
 
@@ -502,15 +554,6 @@ namespace Viewer
 
 		}
 
-		//private void button1_Click(object sender, EventArgs e)
-		//{
-
-
-		//	scintilla1.Text = analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString());
-		//	analyzer.MakeTrees();
-		//	index++;
-
-		//}
 
 		private void openCorpusToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -538,20 +581,6 @@ namespace Viewer
 			NGramClick?.Invoke(this, EventArgs.Empty);
 		}
 
-		private void button4_Click(object sender, EventArgs e)
-		{
-
-
-			//Console.WriteLine(analyzer.DetectQuestion(Messages[index].contents[TextFieldKey].ToString()).ToString());
-			//var tem = analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
-			//foreach (var np in tem)
-			//{
-			//	Console.WriteLine(np);
-			//}
-			//Console.WriteLine(analyzer.ExtractNamedEntities(Messages[index].contents[TextFieldKey].ToString()));
-			////analyzer.ExtractNounPhrases(Messages[index].contents[TextFieldKey].ToString());
-			//index++;
-		}
 
 		private void button5_Click(object sender, EventArgs e)
 		{
@@ -626,31 +655,9 @@ namespace Viewer
 			//}
 		}
 
-		public IConcordanceView CreateConcordancer()
+		private void dateView_Resize(object sender, EventArgs e)
 		{
-			return new Concordancer();
-		}
-
-		public void ShowConcordance(IConcordanceView con)
-		{
-			if (con.IsControl)
-			{
-				concordancePanel.Controls.Add((UserControl)con);
-				concordancePanel.Controls[0].Dock = DockStyle.Fill;
-			}
-			concordancerButton.Visible = false;
-		}
-
-		public INGramView CreateNgramView()
-		{
-			return new NGramSearch();
-		}
-
-		public void ShowNgrams(INGramView nGram)
-		{
-			ngramPanel.Controls.Add((UserControl)nGram);
-			ngramPanel.Controls[0].Dock = DockStyle.Fill;
-			ngramButton.Visible = false;
+			dateView.Invalidate();
 		}
 	}
 }

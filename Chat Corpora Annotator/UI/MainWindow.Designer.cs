@@ -41,8 +41,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Concordance = new System.Windows.Forms.TabPage();
+            this.concordancePanel = new System.Windows.Forms.Panel();
             this.concordancerButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ngramPanel = new System.Windows.Forms.Panel();
             this.ngramButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
@@ -86,8 +88,6 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.concordancePanel = new System.Windows.Forms.Panel();
-            this.ngramPanel = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -116,11 +116,12 @@
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            tabControl1.Location = new System.Drawing.Point(303, 43);
+            tabControl1.Location = new System.Drawing.Point(227, 35);
+            tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(1226, 695);
+            tabControl1.Size = new System.Drawing.Size(920, 565);
             tabControl1.TabIndex = 17;
             tabControl1.TabStop = false;
             // 
@@ -132,10 +133,11 @@
             this.Chat.Controls.Add(this.loadMoreButton);
             this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.Chat.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Chat.Location = new System.Drawing.Point(4, 32);
+            this.Chat.Location = new System.Drawing.Point(4, 28);
+            this.Chat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Chat.Name = "Chat";
-            this.Chat.Padding = new System.Windows.Forms.Padding(3);
-            this.Chat.Size = new System.Drawing.Size(1218, 659);
+            this.Chat.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Chat.Size = new System.Drawing.Size(912, 533);
             this.Chat.TabIndex = 0;
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
@@ -153,12 +155,12 @@
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(3, 3);
-            this.chatTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chatTable.Location = new System.Drawing.Point(2, 2);
+            this.chatTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(1017, 604);
+            this.chatTable.Size = new System.Drawing.Size(763, 491);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -175,12 +177,15 @@
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(1026, 3);
+            this.dateView.Location = new System.Drawing.Point(768, 2);
+            this.dateView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(189, 604);
+            this.dateView.Size = new System.Drawing.Size(142, 489);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
+            this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
+            this.dateView.Resize += new System.EventHandler(this.dateView_Resize);
             // 
             // Days
             // 
@@ -196,9 +201,10 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(3, 607);
+            this.loadMoreButton.Location = new System.Drawing.Point(2, 491);
+            this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(1212, 49);
+            this.loadMoreButton.Size = new System.Drawing.Size(908, 40);
             this.loadMoreButton.TabIndex = 11;
             this.loadMoreButton.Text = "Load more...";
             this.loadMoreButton.UseVisualStyleBackColor = false;
@@ -208,10 +214,11 @@
             // Statistics
             // 
             this.Statistics.Controls.Add(this.panel2);
-            this.Statistics.Location = new System.Drawing.Point(4, 32);
+            this.Statistics.Location = new System.Drawing.Point(4, 28);
+            this.Statistics.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Statistics.Name = "Statistics";
-            this.Statistics.Padding = new System.Windows.Forms.Padding(3);
-            this.Statistics.Size = new System.Drawing.Size(1218, 659);
+            this.Statistics.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Statistics.Size = new System.Drawing.Size(912, 533);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
@@ -223,44 +230,49 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(424, 653);
+            this.panel2.Size = new System.Drawing.Size(318, 529);
             this.panel2.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 112);
+            this.label7.Location = new System.Drawing.Point(3, 91);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 23);
+            this.label7.Size = new System.Drawing.Size(45, 19);
             this.label7.TabIndex = 3;
             this.label7.Text = "label7";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 78);
+            this.label6.Location = new System.Drawing.Point(3, 63);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 23);
+            this.label6.Size = new System.Drawing.Size(45, 19);
             this.label6.TabIndex = 2;
             this.label6.Text = "label6";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 40);
+            this.label5.Location = new System.Drawing.Point(3, 32);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 23);
+            this.label5.Size = new System.Drawing.Size(45, 19);
             this.label5.TabIndex = 1;
             this.label5.Text = "label5";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 5);
+            this.label4.Location = new System.Drawing.Point(3, 4);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 23);
+            this.label4.Size = new System.Drawing.Size(45, 19);
             this.label4.TabIndex = 0;
             this.label4.Text = "label4";
             // 
@@ -268,13 +280,23 @@
             // 
             this.Concordance.Controls.Add(this.concordancePanel);
             this.Concordance.Controls.Add(this.concordancerButton);
-            this.Concordance.Location = new System.Drawing.Point(4, 32);
+            this.Concordance.Location = new System.Drawing.Point(4, 28);
+            this.Concordance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Concordance.Name = "Concordance";
-            this.Concordance.Padding = new System.Windows.Forms.Padding(3);
-            this.Concordance.Size = new System.Drawing.Size(1218, 659);
+            this.Concordance.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Concordance.Size = new System.Drawing.Size(912, 533);
             this.Concordance.TabIndex = 4;
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
+            // 
+            // concordancePanel
+            // 
+            this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.concordancePanel.Location = new System.Drawing.Point(2, 2);
+            this.concordancePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.concordancePanel.Name = "concordancePanel";
+            this.concordancePanel.Size = new System.Drawing.Size(908, 487);
+            this.concordancePanel.TabIndex = 3;
             // 
             // concordancerButton
             // 
@@ -283,9 +305,10 @@
             this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.concordancerButton.FlatAppearance.BorderSize = 0;
             this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.concordancerButton.Location = new System.Drawing.Point(3, 604);
+            this.concordancerButton.Location = new System.Drawing.Point(2, 489);
+            this.concordancerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.concordancerButton.Name = "concordancerButton";
-            this.concordancerButton.Size = new System.Drawing.Size(1212, 52);
+            this.concordancerButton.Size = new System.Drawing.Size(908, 42);
             this.concordancerButton.TabIndex = 2;
             this.concordancerButton.Text = "Load concordancer";
             this.concordancerButton.UseVisualStyleBackColor = false;
@@ -295,19 +318,30 @@
             // 
             this.tabPage1.Controls.Add(this.ngramPanel);
             this.tabPage1.Controls.Add(this.ngramButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1218, 659);
+            this.tabPage1.Size = new System.Drawing.Size(912, 533);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "N-gram Search";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // ngramPanel
+            // 
+            this.ngramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ngramPanel.Location = new System.Drawing.Point(0, 0);
+            this.ngramPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ngramPanel.Name = "ngramPanel";
+            this.ngramPanel.Size = new System.Drawing.Size(912, 491);
+            this.ngramPanel.TabIndex = 4;
+            // 
             // ngramButton
             // 
             this.ngramButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ngramButton.Location = new System.Drawing.Point(0, 607);
+            this.ngramButton.Location = new System.Drawing.Point(0, 491);
+            this.ngramButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ngramButton.Name = "ngramButton";
-            this.ngramButton.Size = new System.Drawing.Size(1218, 52);
+            this.ngramButton.Size = new System.Drawing.Size(912, 42);
             this.ngramButton.TabIndex = 3;
             this.ngramButton.Text = "Load ngrammer";
             this.ngramButton.UseVisualStyleBackColor = true;
@@ -316,18 +350,20 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1218, 659);
+            this.tabPage2.Size = new System.Drawing.Size(912, 533);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(255, 255);
+            this.button5.Location = new System.Drawing.Point(191, 207);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(480, 92);
+            this.button5.Size = new System.Drawing.Size(360, 75);
             this.button5.TabIndex = 1;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
@@ -349,9 +385,10 @@
             this.searchPanel.Controls.Add(this.queryPanel);
             this.searchPanel.Controls.Add(this.queryButton);
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.searchPanel.Location = new System.Drawing.Point(0, 40);
+            this.searchPanel.Location = new System.Drawing.Point(0, 32);
+            this.searchPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(306, 728);
+            this.searchPanel.Size = new System.Drawing.Size(230, 592);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -363,10 +400,10 @@
             this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 633);
-            this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.findButton.Location = new System.Drawing.Point(0, 512);
+            this.findButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(306, 40);
+            this.findButton.Size = new System.Drawing.Size(230, 32);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -382,10 +419,10 @@
             this.clearButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearButton.Location = new System.Drawing.Point(0, 593);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearButton.Location = new System.Drawing.Point(0, 480);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(306, 40);
+            this.clearButton.Size = new System.Drawing.Size(230, 32);
             this.clearButton.TabIndex = 26;
             this.clearButton.Text = "Clear";
             this.clearButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -402,13 +439,14 @@
             this.datesPanel.Controls.Add(this.finishDate, 1, 1);
             this.datesPanel.Controls.Add(this.label1);
             this.datesPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.datesPanel.Location = new System.Drawing.Point(0, 520);
+            this.datesPanel.Location = new System.Drawing.Point(0, 421);
+            this.datesPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.datesPanel.Name = "datesPanel";
             this.datesPanel.RowCount = 2;
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.datesPanel.Size = new System.Drawing.Size(306, 73);
+            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.datesPanel.Size = new System.Drawing.Size(230, 59);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
             // 
@@ -416,10 +454,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.MinimumSize = new System.Drawing.Size(60, 36);
+            this.label2.Location = new System.Drawing.Point(2, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.MinimumSize = new System.Drawing.Size(45, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 36);
+            this.label2.Size = new System.Drawing.Size(45, 29);
             this.label2.TabIndex = 20;
             this.label2.Text = "from";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,11 +470,12 @@
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(79, 3);
+            this.startDate.Location = new System.Drawing.Point(59, 2);
+            this.startDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(224, 30);
+            this.startDate.Size = new System.Drawing.Size(169, 26);
             this.startDate.TabIndex = 17;
             this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
@@ -445,20 +485,22 @@
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(79, 39);
+            this.finishDate.Location = new System.Drawing.Point(59, 32);
+            this.finishDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(224, 30);
+            this.finishDate.Size = new System.Drawing.Size(169, 26);
             this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 36);
-            this.label1.MinimumSize = new System.Drawing.Size(40, 36);
+            this.label1.Location = new System.Drawing.Point(2, 30);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.MinimumSize = new System.Drawing.Size(30, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 36);
+            this.label1.Size = new System.Drawing.Size(30, 29);
             this.label1.TabIndex = 19;
             this.label1.Text = "to";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -473,10 +515,11 @@
             this.dateToggle.FlatAppearance.BorderSize = 0;
             this.dateToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dateToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateToggle.Location = new System.Drawing.Point(0, 480);
-            this.dateToggle.MinimumSize = new System.Drawing.Size(0, 40);
+            this.dateToggle.Location = new System.Drawing.Point(0, 389);
+            this.dateToggle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateToggle.MinimumSize = new System.Drawing.Size(0, 32);
             this.dateToggle.Name = "dateToggle";
-            this.dateToggle.Size = new System.Drawing.Size(306, 40);
+            this.dateToggle.Size = new System.Drawing.Size(230, 32);
             this.dateToggle.TabIndex = 28;
             this.dateToggle.Text = "Select Dates Toggle";
             this.dateToggle.UseVisualStyleBackColor = true;
@@ -486,9 +529,10 @@
             // 
             this.userPanel.Controls.Add(this.userList);
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.userPanel.Location = new System.Drawing.Point(0, 198);
+            this.userPanel.Location = new System.Drawing.Point(0, 160);
+            this.userPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(306, 282);
+            this.userPanel.Size = new System.Drawing.Size(230, 229);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
             // 
@@ -504,8 +548,9 @@
             this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.userList.HideSelection = false;
             this.userList.Location = new System.Drawing.Point(0, 0);
+            this.userList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(306, 282);
+            this.userList.Size = new System.Drawing.Size(230, 229);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -524,10 +569,11 @@
             this.userToggle.FlatAppearance.BorderSize = 0;
             this.userToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userToggle.Location = new System.Drawing.Point(0, 158);
-            this.userToggle.MinimumSize = new System.Drawing.Size(0, 40);
+            this.userToggle.Location = new System.Drawing.Point(0, 128);
+            this.userToggle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userToggle.MinimumSize = new System.Drawing.Size(0, 32);
             this.userToggle.Name = "userToggle";
-            this.userToggle.Size = new System.Drawing.Size(306, 40);
+            this.userToggle.Size = new System.Drawing.Size(230, 32);
             this.userToggle.TabIndex = 27;
             this.userToggle.Text = "Select Users Toggle";
             this.userToggle.UseVisualStyleBackColor = true;
@@ -538,9 +584,10 @@
             this.queryPanel.Controls.Add(this.label3);
             this.queryPanel.Controls.Add(this.searchBox);
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.queryPanel.Location = new System.Drawing.Point(0, 40);
+            this.queryPanel.Location = new System.Drawing.Point(0, 32);
+            this.queryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(306, 118);
+            this.queryPanel.Size = new System.Drawing.Size(230, 96);
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
@@ -549,11 +596,12 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(0, 49);
-            this.label3.MaximumSize = new System.Drawing.Size(303, 0);
-            this.label3.MinimumSize = new System.Drawing.Size(0, 50);
+            this.label3.Location = new System.Drawing.Point(0, 40);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.MaximumSize = new System.Drawing.Size(227, 0);
+            this.label3.MinimumSize = new System.Drawing.Size(0, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(280, 60);
+            this.label3.Size = new System.Drawing.Size(221, 45);
             this.label3.TabIndex = 16;
             this.label3.Text = "Hint: \"wikipedia page\" ~2 will search for \"wikipedia\" and \"page\" two words apart " +
     "from each other";
@@ -565,8 +613,9 @@
             this.searchBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
+            this.searchBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(306, 49);
+            this.searchBox.Size = new System.Drawing.Size(230, 40);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
@@ -580,10 +629,10 @@
             this.queryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.queryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.queryButton.Location = new System.Drawing.Point(0, 0);
-            this.queryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.queryButton.MinimumSize = new System.Drawing.Size(0, 40);
+            this.queryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.queryButton.MinimumSize = new System.Drawing.Size(0, 32);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(306, 40);
+            this.queryButton.Size = new System.Drawing.Size(230, 32);
             this.queryButton.TabIndex = 19;
             this.queryButton.Text = "Query";
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -595,9 +644,10 @@
             this.panel1.BackColor = System.Drawing.Color.Lavender;
             this.panel1.Controls.Add(this.messageLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(306, 740);
+            this.panel1.Location = new System.Drawing.Point(230, 601);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1223, 28);
+            this.panel1.Size = new System.Drawing.Size(917, 23);
             this.panel1.TabIndex = 25;
             // 
             // messageLabel
@@ -605,10 +655,11 @@
             this.messageLabel.AutoSize = true;
             this.messageLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(1127, 0);
-            this.messageLabel.MinimumSize = new System.Drawing.Size(0, 30);
+            this.messageLabel.Location = new System.Drawing.Point(840, 0);
+            this.messageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.messageLabel.MinimumSize = new System.Drawing.Size(0, 24);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(96, 30);
+            this.messageLabel.Size = new System.Drawing.Size(77, 24);
             this.messageLabel.TabIndex = 24;
             this.messageLabel.Text = "Not loaded";
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -623,10 +674,11 @@
             this.viewToolStripMenuItem,
             this.vizToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 40);
+            this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 32);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1529, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1147, 32);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -636,20 +688,20 @@
             this.loadCorpusToolStripMenuItem,
             this.openCorpusToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(49, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 28);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadCorpusToolStripMenuItem
             // 
             this.loadCorpusToolStripMenuItem.Name = "loadCorpusToolStripMenuItem";
-            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
+            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
             this.loadCorpusToolStripMenuItem.Text = "Index new file";
             this.loadCorpusToolStripMenuItem.Click += new System.EventHandler(this.loadCorpusToolStripMenuItem_Click);
             // 
             // openCorpusToolStripMenuItem
             // 
             this.openCorpusToolStripMenuItem.Name = "openCorpusToolStripMenuItem";
-            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
+            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
             this.openCorpusToolStripMenuItem.Text = "Open corpus";
             this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
             // 
@@ -658,7 +710,7 @@
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userColorsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(60, 36);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(50, 28);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // userColorsToolStripMenuItem
@@ -667,13 +719,13 @@
             this.generateNewToolStripMenuItem,
             this.editToolStripMenuItem});
             this.userColorsToolStripMenuItem.Name = "userColorsToolStripMenuItem";
-            this.userColorsToolStripMenuItem.Size = new System.Drawing.Size(178, 28);
+            this.userColorsToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.userColorsToolStripMenuItem.Text = "User colors";
             // 
             // generateNewToolStripMenuItem
             // 
             this.generateNewToolStripMenuItem.Name = "generateNewToolStripMenuItem";
-            this.generateNewToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
+            this.generateNewToolStripMenuItem.Size = new System.Drawing.Size(197, 24);
             this.generateNewToolStripMenuItem.Text = "New random colors";
             // 
             // editToolStripMenuItem
@@ -681,13 +733,13 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(243, 28);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(197, 24);
             this.editToolStripMenuItem.Text = "Color scheme";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(128, 28);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(105, 24);
             this.newToolStripMenuItem.Text = "New";
             // 
             // vizToolStripMenuItem
@@ -696,20 +748,20 @@
             this.plotToolStripMenuItem,
             this.heatmapToolStripMenuItem});
             this.vizToolStripMenuItem.Name = "vizToolStripMenuItem";
-            this.vizToolStripMenuItem.Size = new System.Drawing.Size(90, 36);
+            this.vizToolStripMenuItem.Size = new System.Drawing.Size(73, 28);
             this.vizToolStripMenuItem.Text = "Visualize";
             // 
             // plotToolStripMenuItem
             // 
             this.plotToolStripMenuItem.Name = "plotToolStripMenuItem";
-            this.plotToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.plotToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.plotToolStripMenuItem.Text = "Plot";
             this.plotToolStripMenuItem.Click += new System.EventHandler(this.plotToolStripMenuItem_Click);
             // 
             // heatmapToolStripMenuItem
             // 
             this.heatmapToolStripMenuItem.Name = "heatmapToolStripMenuItem";
-            this.heatmapToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.heatmapToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.heatmapToolStripMenuItem.Text = "Heatmap";
             this.heatmapToolStripMenuItem.Click += new System.EventHandler(this.heatmapToolStripMenuItem_Click);
             // 
@@ -755,41 +807,26 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(1305, 4);
+            this.button2.Location = new System.Drawing.Point(979, 3);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(212, 36);
+            this.button2.Size = new System.Drawing.Size(159, 29);
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // concordancePanel
-            // 
-            this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.concordancePanel.Location = new System.Drawing.Point(3, 3);
-            this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1212, 601);
-            this.concordancePanel.TabIndex = 3;
-            // 
-            // ngramPanel
-            // 
-            this.ngramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ngramPanel.Location = new System.Drawing.Point(0, 0);
-            this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(1218, 607);
-            this.ngramPanel.TabIndex = 4;
-            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1529, 768);
+            this.ClientSize = new System.Drawing.Size(1147, 624);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             tabControl1.ResumeLayout(false);
