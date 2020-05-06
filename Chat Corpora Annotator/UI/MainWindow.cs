@@ -16,6 +16,7 @@ using edu.stanford.nlp.trees;
 using Tree = edu.stanford.nlp.trees.Tree;
 using edu.stanford.nlp.util;
 using java.util;
+using Viewer.UI;
 
 namespace Viewer
 {
@@ -564,6 +565,24 @@ namespace Viewer
 			//pipeline.annotate(annotation);
 			pipeline.annotate(coredoc);
 
+			List<string> nouns = new List<string>();
+			for(int i = 0; i < coredoc.sentences().size(); i++)
+			{
+				CoreSentence sent = (CoreSentence)coredoc.sentences().get(i);
+				for (int j = 0; j < sent.tokens().size(); j++)
+				{
+					// Condition: if the word is a noun (posTag starts with "NN")
+					if (sent.posTags() != null && sent.posTags().get(j) != null) 
+					{
+						string posTags = sent.posTags().get(j).ToString();
+						if (posTags.Contains("NN"))
+						{
+							nouns.Add(sent.tokens().get(j).ToString());
+						}
+			}
+					
+				}
+			}
 			for (int i = 0; i < coredoc.entityMentions().size(); i++)
 			{
 				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
@@ -573,15 +592,15 @@ namespace Viewer
 			ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
 			CoreMap sentence = (CoreMap)temp.get(0);
 			constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
-			
-			
 
 
-			
+
+
+
 			Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
 			var treeArray = treeConstituents.toArray();
 			int index = 0;
-			while(index < treeArray.Length)
+			while (index < treeArray.Length)
 			{
 				Constituent constituent = (Constituent)treeArray[index];
 				if (constituent.label() != null &&
@@ -591,17 +610,32 @@ namespace Viewer
 					Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
 
 				}
-				if(constituent.label()!= null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ"))) {
+				if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
+				{
 					Console.WriteLine("Question");
 				}
 				index++;
 
 			}
-			int j = 0;
-			while (j < constituencyParse.taggedYield().toArray().Length)
+			constituencyParse.pennPrint();
+			//int j = 0;
+			//while (j < constituencyParse.taggedYield().toArray().Length)
+			//{
+			//	Console.WriteLine(constituencyParse.taggedYield().toArray()[j]);
+			//	j++;
+			//}
+		}
+
+		public IConcordanceView CreateConcordancer()
+		{
+			return new Concordancer();
+		}
+
+		public void ShowConcordance(IConcordanceView con)
+		{
+			if (con.IsControl)
 			{
-				Console.WriteLine(constituencyParse.taggedYield().toArray()[j]);
-				j++;
+				concordancePanel.Controls.Add((UserControl)con);
 			}
 		}
 	}

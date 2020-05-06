@@ -11,7 +11,7 @@ using Viewer.Framework.Views;
 
 namespace Viewer.UI
 {
-    public partial class Concordancer : Form, IConcordanceView
+    public partial class Concordancer : UserControl, IConcordanceView
     {
         public Concordancer()
         {
@@ -97,6 +97,7 @@ namespace Viewer.UI
             
         }
         public string Term { get; set; }
+        public bool IsControl { get { return true; } }
 
         public event EventHandler ConcordanceClick;
 
@@ -116,12 +117,13 @@ namespace Viewer.UI
 
         public void ShowView()
         {
+            
             this.Show();
         }
 
         public void CloseView()
         {
-            this.Close();
+            this.Dispose();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)

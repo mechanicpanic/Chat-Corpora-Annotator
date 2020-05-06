@@ -45,7 +45,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -86,7 +86,7 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.button5 = new System.Windows.Forms.Button();
+            this.concordancePanel = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -115,7 +115,7 @@
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            tabControl1.Location = new System.Drawing.Point(303, 40);
+            tabControl1.Location = new System.Drawing.Point(303, 43);
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
@@ -141,10 +141,12 @@
             // 
             // chatTable
             // 
+            this.chatTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.BackColor = System.Drawing.Color.White;
             this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatTable.CellEditUseWholeCell = false;
-            this.chatTable.Dock = System.Windows.Forms.DockStyle.Left;
             this.chatTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -263,6 +265,7 @@
             // 
             // Concordance
             // 
+            this.Concordance.Controls.Add(this.concordancePanel);
             this.Concordance.Controls.Add(this.button3);
             this.Concordance.Location = new System.Drawing.Point(4, 32);
             this.Concordance.Name = "Concordance";
@@ -274,12 +277,17 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(484, 601);
+            this.button3.BackColor = System.Drawing.Color.Lavender;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(3, 604);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(329, 52);
+            this.button3.Size = new System.Drawing.Size(1212, 52);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Concordance test";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Text = "Load concordancer";
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // tabPage1
@@ -305,23 +313,22 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(1218, 659);
             this.tabPage2.TabIndex = 6;
-            this.tabPage2.Text = "Analysis test";
+            this.tabPage2.Text = "Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // button5
             // 
-            this.button4.Location = new System.Drawing.Point(3, 8);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(480, 96);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button5.Location = new System.Drawing.Point(255, 255);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(480, 92);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // csvDialog
             // 
@@ -752,15 +759,13 @@
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // concordancePanel
             // 
-            this.button5.Location = new System.Drawing.Point(3, 110);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(480, 92);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.concordancePanel.Location = new System.Drawing.Point(3, 3);
+            this.concordancePanel.Name = "concordancePanel";
+            this.concordancePanel.Size = new System.Drawing.Size(1212, 598);
+            this.concordancePanel.TabIndex = 3;
             // 
             // MainWindow
             // 
@@ -858,8 +863,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel concordancePanel;
     }
 }
 

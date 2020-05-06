@@ -11,56 +11,66 @@ namespace Viewer.Framework.Presenters
 
     public class MainPresenter
     {
-        private readonly IMainView _view;
+        private readonly IMainView _main;
         private readonly ICSVView _csv;
         private readonly IChartView _chart;
         private readonly IHeatmapView _heatmap;
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
-        private readonly IConcordanceView _concordance;
+        
         private readonly INGramView _grams;
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv, IConcordanceView concordance, INGramView grams, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view,ICSVView csv, INGramView grams, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
         {
-            this._view = view;
+            this._main = view;
             this._csv = csv;
             //this._chart = chart;
             this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
-            this._concordance = concordance;
             this._grams = grams;
             
 
             //_view.HeatmapClick += _view_HeatmapClick;
             //_view.ChartClick += _view_ChartClick;
             
-            _view.FindClick += _view_FindClick;
-            _view.LoadMoreClick += _view_LoadMoreClick;
-            _view.OpenIndexedCorpus += _view_OpenIndexedCorpus;
-            
+            _main.FindClick += _view_FindClick;
+            _main.LoadMoreClick += _view_LoadMoreClick;
+            _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
+            _main.ConcordanceClick += _main_ConcordanceClick;
+
+
+        }
+
+        private void _main_ConcordanceClick(object sender, EventArgs e)
+        {
+            IConcordanceView _concordance = _main.CreateConcordancer();
+            IConcordanceService _concordancer = new ConcordanceService();
+            ConcordancePresenter presenter = new ConcordancePresenter(_main, _reader, _concordancer, _concordance);
+            _concordance.ShowView();
+            _main.ShowConcordance(_concordance);
 
         }
 
         private void _view_OpenIndexedCorpus(object sender, EventArgs e)
         {
-            _reader.OpenDirectory(_view.CurrentIndexPath);
+            _reader.OpenDirectory(_main.CurrentIndexPath);
             if(DirectoryReader.IndexExists(LuceneService.Dir))
             {
                 var info = _reader.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
-                _view.TextFieldKey = info["TextFieldKey"];
-                _view.SenderFieldKey = info["SenderFieldKey"];
-                _view.DateFieldKey = info["DateFieldKey"];
+                _main.TextFieldKey = info["TextFieldKey"];
+                _main.SenderFieldKey = info["SenderFieldKey"];
+                _main.DateFieldKey = info["DateFieldKey"];
                 _csv.SelectedFields = _reader.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
-                _view.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
-                _view.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
-                _view.Messages = new List<DynamicMessage>();
-                _view.SetLineCount(Int32.Parse(info["LineCount"]));
-                _view.FileLoadState = true;
-                _reader.OpenIndex(_view.TextFieldKey);
+                _main.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
+                _main.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
+                _main.Messages = new List<DynamicMessage>();
+                _main.SetLineCount(Int32.Parse(info["LineCount"]));
+                _main.FileLoadState = true;
+                _reader.OpenIndex(_main.TextFieldKey);
                
                 AddDocumentsToDisplay(200);
             }
@@ -75,9 +85,9 @@ namespace Viewer.Framework.Presenters
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = _reader.LoadSomeDocuments(_view.CurrentIndexPath,_view.DateFieldKey, _csv.SelectedFields, count);
-            _view.Messages.AddRange(list);
-            _view.DisplayDocuments();
+            var list = _reader.LoadSomeDocuments(_main.CurrentIndexPath,_main.DateFieldKey, _csv.SelectedFields, count);
+            _main.Messages.AddRange(list);
+            _main.DisplayDocuments();
         }
 
 
@@ -110,8 +120,8 @@ namespace Viewer.Framework.Presenters
             }
             var result = _searcher.MakeSearchResultsReadable(_csv.SelectedFields, _csv.DateFieldKey);
             
-            _view.SearchResults = result;
-            _view.DisplaySearchResults();
+            _main.SearchResults = result;
+            _main.DisplaySearchResults();
         }
 
        

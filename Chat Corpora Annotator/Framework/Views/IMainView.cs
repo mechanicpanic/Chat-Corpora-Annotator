@@ -28,6 +28,8 @@ namespace Viewer.Framework.Views
 
         void DisplaySearchResults();
 
+        IConcordanceView CreateConcordancer();
+        void ShowConcordance(IConcordanceView con);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 

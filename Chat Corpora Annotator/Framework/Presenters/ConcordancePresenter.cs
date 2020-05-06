@@ -25,13 +25,10 @@ namespace Viewer.Framework.Presenters
             this._concordancer = concordancer;
 
             _conview.ConcordanceClick += Conview_ConcordanceClick;
-            _main.ConcordanceClick += _main_ConcordanceClick;
+            
         }
 
-        private void _main_ConcordanceClick(object sender, EventArgs e)
-        {
-            _conview.ShowView();
-        }
+        
 
         private void Conview_ConcordanceClick(object sender, EventArgs e)
         {

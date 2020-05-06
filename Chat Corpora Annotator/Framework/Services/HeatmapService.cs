@@ -37,7 +37,7 @@ namespace Viewer.Framework.Services
 			double max = MessagesPerDay.Values.Max();
 			double min = MessagesPerDay.Values.Min();
 
-			double temp = 1214 / MessagesPerDay.Keys.Count;
+			double temp = 1230 / MessagesPerDay.Keys.Count;
 			if (temp >= 10.0)
 			{
 				foreach (var date in MessagesPerDay.Keys)
