@@ -387,7 +387,7 @@
     <Compile Include="MockTagger.Designer.cs">
       <DependentUpon>MockTagger.cs</DependentUpon>
     </Compile>
-    <Compile Include="NLPAnalyzer.cs" />
+    <Compile Include="CoreAnalyzer.cs" />
     <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>

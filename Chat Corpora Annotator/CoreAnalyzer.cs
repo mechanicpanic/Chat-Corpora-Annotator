@@ -11,10 +11,11 @@ using edu.stanford.nlp.trees;
 using Viewer.Framework.Services;
 using java.util;
 using edu.stanford.nlp.util;
+using System.Linq;
 
 namespace Viewer
 {
-    public class NLPAnalyzer
+    public class CoreAnalyzer
     {
 
         LexicalizedParser parser;
@@ -25,7 +26,12 @@ namespace Viewer
         public string _NERclassifiers { get; private set; }
         public string _POSdirectory { get; private set; }
         public string _root { get; private set; }
-        public NLPAnalyzer(string root, string NERroot)
+
+
+
+        Tree constituencyParse;
+        object[] treeArray;
+        public CoreAnalyzer(string root, string NERroot)
         {
             this._root = root;
             this._NERroot = NERroot;
@@ -60,18 +66,9 @@ namespace Viewer
         }
 
 
-        private bool DetectQuestion(CoreDocument coredoc)
+        public bool DetectQuestion()
         {
-            Tree constituencyParse;
-            ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-            for (int i = 0; i < sents.size(); i++)
-            {
-                CoreMap sentence = (CoreMap)sents.get(i);
-
-                constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
-
-                Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-                var treeArray = treeConstituents.toArray();
+            
                 int index = 0;
                 while (index < treeArray.Length)
                 {
@@ -84,12 +81,65 @@ namespace Viewer
                     index++;
 
                 }
-                //Some more question heuristics here, stat
+            return false;
+        }
 
+        //public List<string> DetectNounPhrases()
+        //{
+
+
+        //}
+        List<Tree> nps = new List<Tree>();
+
+        //private List<Tree> FoldTree(Tree node)
+        //{
+            
+        //    if (node.isLeaf()) { return nps; }
+        //    else
+        //    {
+        //        List<Tree> temp = (List<Tree>)node.getChildrenAsList();
+        //        temp.Aggregate(nps,();
+        //    }
+        //}
+        private bool IsNPwithNNx(Tree node)
+        {
+            if(node.label().value().Equals("NP"))
+            {
+                List<Tree> temp = (List<Tree>)node.getChildrenAsList();
+                foreach(Tree sub in temp)
+                {
+                    if (IsNNx(sub)) return true;
+                    
+                }
+                return false;
             }
             return false;
+        }
+
+        private bool IsNNx(Tree node)
+        {
+            if (node.label().value().Equals("NNP") || node.label().value().Equals("NNPS") || node.label().value().Equals("NN") || node.label().value().Equals("NNS"))
+            {
+                return true;
+            }
+            return false;
+        }
+        
+
+    public void CreateParseTree(CoreDocument coredoc)
+    {
+        ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+        for (int i = 0; i < sents.size(); i++)
+        {
+            CoreMap sentence = (CoreMap)sents.get(i);
+
+            this.constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+
+            Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+            treeArray = treeConstituents.toArray();
 
         }
+    }
 
 
 

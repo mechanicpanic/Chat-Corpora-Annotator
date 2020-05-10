@@ -249,7 +249,7 @@ namespace Viewer.Framework.Services
 						}
 
 						Document document = new Document();
-						document.Add(new StringField("id", Guid.NewGuid().ToString(), Field.Store.YES);
+						document.Add(new StringField("id", Guid.NewGuid().ToString(), Field.Store.YES));
 						for (int i = 0; i < row.Length; i++)
 						{
 							if (lookup.Contains(i))

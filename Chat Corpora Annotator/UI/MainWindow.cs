@@ -119,7 +119,7 @@ namespace Viewer
 
 		}
 
-		NLPAnalyzer analyzer;
+		CoreAnalyzer analyzer;
 
 		public void ShowView()
 		{
@@ -135,7 +135,7 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			analyzer = new NLPAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31", @"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
+			analyzer = new CoreAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31", @"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
 
 			this.PropertyChanged += MainWindow_PropertyChanged;
 
@@ -585,74 +585,61 @@ namespace Viewer
 		private void button5_Click(object sender, EventArgs e)
 		{
 
-			//analyzer.LoadParserModels();
+			////analyzer.LoadParserModels();
 
 
-			Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
-			CoreDocument coredoc = new CoreDocument(annotation);
-			StanfordCoreNLP pipeline = analyzer.SimplePipeline();
-			//pipeline.annotate(annotation);
-			pipeline.annotate(coredoc);
+			//Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
+			//CoreDocument coredoc = new CoreDocument(annotation);
+			//StanfordCoreNLP pipeline = analyzer.SimplePipeline();
+			////pipeline.annotate(annotation);
+			//pipeline.annotate(coredoc);
 
-			List<string> nouns = new List<string>();
-			for(int i = 0; i < coredoc.sentences().size(); i++)
-			{
-				CoreSentence sent = (CoreSentence)coredoc.sentences().get(i);
-				for (int j = 0; j < sent.tokens().size(); j++)
-				{
-					// Condition: if the word is a noun (posTag starts with "NN")
-					if (sent.posTags() != null && sent.posTags().get(j) != null) 
-					{
-						string posTags = sent.posTags().get(j).ToString();
-						if (posTags.Contains("NN"))
-						{
-							nouns.Add(sent.tokens().get(j).ToString());
-						}
-			}
-					
-				}
-			}
-			for (int i = 0; i < coredoc.entityMentions().size(); i++)
-			{
-				CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
-				Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
-			}
-			Tree constituencyParse;
-			ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-			CoreMap sentence = (CoreMap)temp.get(0);
-			constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+			//List<string> nouns = new List<string>();
+
+			//for (int i = 0; i < coredoc.entityMentions().size(); i++)
+			//{
+			//	CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
+			//	Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
+			//}
+			//Tree constituencyParse;
+			//ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+			//CoreMap sentence = (CoreMap)temp.get(0);
+			//constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
 
 
 
 
 
-			Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-			var treeArray = treeConstituents.toArray();
-			int index = 0;
-			while (index < treeArray.Length)
-			{
-				Constituent constituent = (Constituent)treeArray[index];
-				if (constituent.label() != null &&
-					(constituent.label().toString().Equals("NP")))
-				{
-					Console.WriteLine("found constituent: " + constituent.toString());
-					Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
+			//Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+			//var treeArray = treeConstituents.toArray();
+			//int index = 0;
+			//while (index < treeArray.Length)
+			//{
+			//	Constituent constituent = (Constituent)treeArray[index];
+			//	if (constituent.label() != null &&
+			//		(constituent.label().toString().Equals("NP")))
+			//	{
+			//		Console.WriteLine("found constituent: " + constituent.toString());
+			//		Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
 
-				}
-				if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
-				{
-					Console.WriteLine("Question");
-				}
-				index++;
+			//	}
+			//	if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
+			//	{
+			//		Console.WriteLine("Question");
+			//	}
+			//	index++;
 
-			}
-			constituencyParse.pennPrint();
+			//}
+			//constituencyParse.pennPrint();
 			//int j = 0;
 			//while (j < constituencyParse.taggedYield().toArray().Length)
 			//{
 			//	Console.WriteLine(constituencyParse.taggedYield().toArray()[j]);
 			//	j++;
 			//}
+
+			Extractor extractor = new Extractor(this.analyzer);
+			extractor.Extract();
 		}
 
 		private void dateView_Resize(object sender, EventArgs e)
