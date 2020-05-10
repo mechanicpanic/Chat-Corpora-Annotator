@@ -60,38 +60,39 @@ namespace Viewer
         }
 
 
-        public bool DetectQuestion(CoreDocument coredoc)
+        private bool DetectQuestion(CoreDocument coredoc)
         {
             Tree constituencyParse;
-            ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-            CoreMap sentence = (CoreMap)temp.get(0);
-            constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
-
-
-
-
-
-            Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-            var treeArray = treeConstituents.toArray();
-            int index = 0;
-            while (index < treeArray.Length)
+            ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+            for (int i = 0; i < sents.size(); i++)
             {
-                Constituent constituent = (Constituent)treeArray[index];
-                
-                if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
+                CoreMap sentence = (CoreMap)sents.get(i);
+
+                constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+
+                Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+                var treeArray = treeConstituents.toArray();
+                int index = 0;
+                while (index < treeArray.Length)
                 {
-                    return true;
+                    Constituent constituent = (Constituent)treeArray[index];
+
+                    if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
+                    {
+                        return true;
+                    }
+                    index++;
+
                 }
-                index++;
+                //Some more question heuristics here, stat
 
             }
-            //Some more question heuristics here, stat
             return false;
 
         }
 
-        
-       
+
+
         //public bool DetectQuestion(string message)
         //{
 
@@ -116,7 +117,7 @@ namespace Viewer
         //        if (subtree.label().value().Equals("SBARQ") || subtree.label().value().Equals("SQ")) {
         //            return true;
         //        }
-                
+
         //    }
         //    return false;
 
@@ -153,7 +154,7 @@ namespace Viewer
         //    return NPs;
         //}
 
-        
+
 
     }
 }

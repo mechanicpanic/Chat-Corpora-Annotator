@@ -659,6 +659,16 @@ namespace Viewer
 		{
 			dateView.Invalidate();
 		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			MockTagger mt = new MockTagger();
+			mt.Show();
+			mt.Invalidate();
+			mt.Messages = this.Messages;
+			mt.SetUpChatView();
+			
+		}
 	}
 }
 

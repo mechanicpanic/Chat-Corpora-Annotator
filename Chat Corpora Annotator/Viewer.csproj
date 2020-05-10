@@ -372,6 +372,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extractor.cs" />
     <Compile Include="Framework\Presenters\ConcordancePresenter.cs" />
     <Compile Include="Framework\Presenters\NGramPresenter.cs" />
     <Compile Include="Framework\Services\ConcordanceService.cs" />
@@ -380,6 +381,12 @@
     <Compile Include="Framework\Views\INGramView.cs" />
     <Compile Include="Framework\Views\LuceneQueryEventHandler.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
+    <Compile Include="MockTagger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MockTagger.Designer.cs">
+      <DependentUpon>MockTagger.cs</DependentUpon>
+    </Compile>
     <Compile Include="NLPAnalyzer.cs" />
     <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
@@ -476,17 +483,20 @@
     </Compile>
     <Compile Include="Deprecated\VirtualBTree.cs" />
     <Compile Include="UI\Concordancer.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Concordancer.Designer.cs">
       <DependentUpon>Concordancer.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NGramSearch.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\NGramSearch.Designer.cs">
       <DependentUpon>NGramSearch.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MockTagger.resx">
+      <DependentUpon>MockTagger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
