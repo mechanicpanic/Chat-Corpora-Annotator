@@ -40,7 +40,7 @@
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1214, 131);
             this.panel1.TabIndex = 0;
@@ -55,7 +55,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.MinimumSize = new System.Drawing.Size(0, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 28);
+            this.label1.Size = new System.Drawing.Size(45, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -67,7 +67,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.MinimumSize = new System.Drawing.Size(0, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 28);
+            this.label2.Size = new System.Drawing.Size(45, 28);
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
@@ -76,11 +76,11 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1176, 0);
+            this.label3.Location = new System.Drawing.Point(1169, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.MinimumSize = new System.Drawing.Size(0, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 28);
+            this.label3.Size = new System.Drawing.Size(45, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "label3";
             // 
@@ -97,13 +97,13 @@
             // 
             // LinearHeatmapForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 181);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(18, 47);

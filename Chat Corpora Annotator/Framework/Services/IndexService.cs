@@ -8,6 +8,7 @@ using Lucene.Net.Store;
 using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Wintellect.PowerCollections;
 
@@ -54,23 +55,43 @@ namespace Viewer.Framework.Services
 
 		#endregion
 		#region save info
+		private void CheckDir(string CurrentIndexPath)
+		{
+			if (!System.IO.Directory.Exists(CurrentIndexPath + "\\info"))
+			{
+				System.IO.Directory.CreateDirectory(CurrentIndexPath + "\\info");
+
+			}
+			else
+			{
+				System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(CurrentIndexPath + "\\info");
+
+				foreach (System.IO.FileInfo file in di.GetFiles())
+				{
+					file.Delete();
+				}
+			}
+		}
 		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath, int linecount) 
 		{
+			
+
 			using (System.IO.StreamWriter file =
-			new System.IO.StreamWriter(CurrentIndexPath+@"info.txt"))
+				new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-info.txt"))
 			{
 				file.WriteLine(textFieldKey);
 				file.WriteLine(senderFieldKey);
 				file.WriteLine(dateFieldKey);
 				file.WriteLine(linecount.ToString());
-			
+
 			}
 		}
 
 		private void SaveUsersToDisk(string CurrentIndexPath)
 		{
+			
 			using (System.IO.StreamWriter file =
-			new System.IO.StreamWriter(CurrentIndexPath + @"users.txt"))
+			new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
 			{
 				foreach (var user in UserKeys)
 				{
@@ -81,8 +102,9 @@ namespace Viewer.Framework.Services
 
 		private void SaveFieldsToDisk(string CurrentIndexPath, List<string> SelectedFields)
 		{
+			
 			using (System.IO.StreamWriter file =
-			new System.IO.StreamWriter(CurrentIndexPath + @"fields.txt"))
+			new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-fields.txt"))
 			{
 				foreach (var field in SelectedFields)
 				{
@@ -92,8 +114,9 @@ namespace Viewer.Framework.Services
 		}
 		private void SaveStatsToDisk(string CurrentIndexPath)
 		{
+			
 			using (System.IO.StreamWriter file =
-			new System.IO.StreamWriter(CurrentIndexPath + @"stats.txt"))
+			new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-stats.txt"))
 			{
 				foreach (var kvp in MessagesPerDay)
 				{
@@ -107,7 +130,7 @@ namespace Viewer.Framework.Services
 		{
 
 			OrderedDictionary<string,string> info = new OrderedDictionary<string,string>();
-			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"info.txt"))
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-info.txt"))
 			{
 				info.Add("TextFieldKey", reader.ReadLine());
 				info.Add("SenderFieldKey", reader.ReadLine());
@@ -121,7 +144,7 @@ namespace Viewer.Framework.Services
 		public List<string> LoadFieldsFromDisk(string CurrentIndexPath)
 		{
 			List<string> fields = new List<string>();
-			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"fields.txt"))
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-fields.txt"))
 			{
 
 				while (!reader.EndOfStream)
@@ -137,7 +160,7 @@ namespace Viewer.Framework.Services
 		public List<string> LoadUsersFromDisk(string CurrentIndexPath)
 		{
 			List<string> users = new List<string>();
-			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"users.txt"))
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
 			{
 				while (!reader.EndOfStream)
 				{
@@ -150,7 +173,7 @@ namespace Viewer.Framework.Services
 		public BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath)
 		{
 			BTreeDictionary<DateTime, int> stats = new BTreeDictionary<DateTime, int>();
-			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + @"stats.txt"))
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-stats.txt"))
 			{
 				while (!reader.EndOfStream)
 				{
@@ -286,6 +309,7 @@ namespace Viewer.Framework.Services
 					//LuceneService.Writer.AddDocuments(documentBlock);
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
+					CheckDir(indexPath);
 					SaveInfoToDisk(allFields[lookup[2]],allFields[lookup[1]],allFields[lookup[0]], indexPath,count);
 					SaveFieldsToDisk(indexPath, selectedFields);
 					SaveUsersToDisk(indexPath);
