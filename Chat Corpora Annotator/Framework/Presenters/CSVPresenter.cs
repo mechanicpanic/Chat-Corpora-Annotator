@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Viewer.CSV_Wizard;
@@ -11,14 +12,14 @@ namespace Viewer.Framework.Presenters
 {
     public class CSVPresenter
     {
-        private readonly IMainView _view;
+        private readonly IMainView _main;
         private readonly ICSVView _csv;
         private readonly ICSVReadService _reader;
         private readonly IIndexService _indexer;
 
-        public CSVPresenter(IMainView view, ICSVView csv, ICSVReadService reader, IIndexService indexer)
+        public CSVPresenter(IMainView main, ICSVView csv, ICSVReadService reader, IIndexService indexer)
         {
-            _view = view;
+            _main = main;
             _csv = csv;
             _reader = reader;
             _indexer = indexer;
@@ -28,7 +29,7 @@ namespace Viewer.Framework.Presenters
             _csv.ReadyToShow += _csv_ReadyToShow;
 
             
-            _view.FileAndIndexSelected += _view_FileAndIndexSelected;
+            _main.FileAndIndexSelected += _view_FileAndIndexSelected;
             
             //_indexer.FileIndexed += _indexer_FileIndexed;
             
@@ -38,16 +39,16 @@ namespace Viewer.Framework.Presenters
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
             
-            _view.Usernames = _indexer.UserKeys.ToList();
-            _view.MessagesPerDay = _indexer.MessagesPerDay;
+            _main.Usernames = _indexer.UserKeys.ToList();
+            _main.MessagesPerDay = _indexer.MessagesPerDay;
             int temp = (LuceneService.Writer.MaxDoc) / 5;
-            var list = _indexer.LoadSomeDocuments(_view.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
-            _view.Messages = list;
-            _view.DateFieldKey = _csv.DateFieldKey;
-            _view.TextFieldKey = _csv.TextFieldKey;
-            _view.SenderFieldKey = _csv.SenderFieldKey;
-            _view.DisplayDocuments();
-            _view.FileLoadState = true;
+            var list = _indexer.LoadSomeDocuments(_main.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
+            _main.Messages = list;
+            _main.DateFieldKey = _csv.DateFieldKey;
+            _main.TextFieldKey = _csv.TextFieldKey;
+            _main.SenderFieldKey = _csv.SenderFieldKey;
+            _main.DisplayDocuments();
+            _main.FileLoadState = true;
         }
 
 
@@ -62,10 +63,11 @@ namespace Viewer.Framework.Presenters
 
         private void _view_FileAndIndexSelected(object sender, EventArgs e)
         {
-            string path = _view.CurrentPath;
+
+            string path = _main.CurrentPath;
             string[] allFields = _reader.GetFields(path);
             int count = _reader.GetLineCount(path);
-            _view.SetLineCount(count);
+            _main.SetLineCount(count);
 
             _csv.AllFields = allFields;
             _csv.AddStep(new HeaderStep(_csv.AllFields));
@@ -79,10 +81,10 @@ namespace Viewer.Framework.Presenters
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            _indexer.OpenDirectory(_view.CurrentIndexPath);
+            _indexer.OpenDirectory(_main.CurrentIndexPath);
             _indexer.OpenWriter(_csv.TextFieldKey);
             _indexer.InitLookup(_csv.TextFieldKey, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.SelectedFields, _csv.AllFields);
-            var result =  _indexer.PopulateIndex(_view.CurrentIndexPath,_view.CurrentPath,_csv.AllFields, _csv.SelectedFields);
+            var result =  _indexer.PopulateIndex(_main.CurrentIndexPath,_main.CurrentPath,_csv.AllFields, _csv.SelectedFields);
            if (result == 1)
             {
                 _csv.CorpusIndexed();

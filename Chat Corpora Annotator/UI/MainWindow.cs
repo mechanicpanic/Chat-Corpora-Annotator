@@ -17,6 +17,7 @@ using Tree = edu.stanford.nlp.trees.Tree;
 using edu.stanford.nlp.util;
 using java.util;
 using Viewer.UI;
+using System.IO;
 
 namespace Viewer
 {
@@ -188,7 +189,25 @@ namespace Viewer
 		{
 
 			this.CurrentPath = csvDialog.FileName;
-			SelectIndexFolder();
+
+
+
+
+			string name = Path.GetFileNameWithoutExtension(CurrentPath);
+			string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+			if (Directory.Exists(folderPath + "\\CCA"))
+			{
+				Directory.CreateDirectory(folderPath + "\\CCA" + "\\" + name);
+			}
+			else
+			{
+				Directory.CreateDirectory(folderPath + "\\CCA");
+				Directory.CreateDirectory(folderPath + "\\CCA" + "\\" + name);
+			}
+
+			this.CurrentIndexPath = folderPath + "\\CCA" + "\\" + name;
+			FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
+			//SelectIndexFolder();
 
 		}
 
