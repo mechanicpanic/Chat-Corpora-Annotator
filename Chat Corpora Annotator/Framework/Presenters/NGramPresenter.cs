@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 using CSharpTest.Net.Collections;
+using IndexingServices;
 
 namespace Viewer.Framework.Presenters
 {

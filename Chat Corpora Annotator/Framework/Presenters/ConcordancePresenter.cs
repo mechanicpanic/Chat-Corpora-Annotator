@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Viewer.Framework.Views;
 using Viewer.Framework.Services;
 using Lucene.Net.Search;
+using IndexingServices;
 
 namespace Viewer.Framework.Presenters
 {

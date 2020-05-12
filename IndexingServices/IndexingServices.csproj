@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicMessage.cs" />
     <Compile Include="IndexService.cs" />
     <Compile Include="LuceneService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

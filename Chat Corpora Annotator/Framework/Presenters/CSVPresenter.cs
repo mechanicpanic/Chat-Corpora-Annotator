@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿
+using System;
 using System.Linq;
-using System.Windows;
+
+using IndexingServices;
 using Viewer.CSV_Wizard;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;

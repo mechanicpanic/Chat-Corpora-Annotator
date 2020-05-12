@@ -452,7 +452,6 @@
     <Compile Include="Framework\Views\IHeatmapView.cs" />
     <Compile Include="Framework\Views\IMainView.cs" />
     <Compile Include="Framework\Views\IView.cs" />
-    <Compile Include="DynamicMessage.cs" />
     <Compile Include="Deprecated\HeaderForm.cs">
       <SubType>Form</SubType>
     </Compile>

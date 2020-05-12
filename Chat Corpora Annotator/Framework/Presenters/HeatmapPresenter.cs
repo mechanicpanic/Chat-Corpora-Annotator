@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IndexingServices;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 namespace Viewer.Framework.Presenters
