@@ -14,6 +14,8 @@ using Wintellect.PowerCollections;
 
 namespace IndexingServices
 {
+
+
 	public interface IIndexService
 	{
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 

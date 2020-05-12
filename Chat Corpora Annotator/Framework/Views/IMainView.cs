@@ -1,7 +1,7 @@
 ﻿using CSharpTest.Net.Collections;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using IndexingServices;
 
 namespace Viewer.Framework.Views
 {

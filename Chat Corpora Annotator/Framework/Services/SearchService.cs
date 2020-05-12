@@ -4,6 +4,7 @@ using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
 using Lucene.Net.Queries;
+using IndexingServices;
 
 
 namespace Viewer.Framework.Services

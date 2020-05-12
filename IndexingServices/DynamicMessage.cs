@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Lucene.Net.Documents;
 
-namespace Viewer
+namespace IndexingServices
 {
     public class DynamicMessage : IComparable
     {
