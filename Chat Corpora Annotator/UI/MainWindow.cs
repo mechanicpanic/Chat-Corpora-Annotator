@@ -9,13 +9,7 @@ using System.Windows.Forms;
 using CSharpTest.Net.Collections;
 using System.Drawing;
 using Viewer.Framework.Views;
-using edu.stanford.nlp.pipeline;
-//using edu.berkeley.nlp.syntax;
-using edu.stanford.nlp.ling;
-using edu.stanford.nlp.trees;
-using Tree = edu.stanford.nlp.trees.Tree;
-using edu.stanford.nlp.util;
-using java.util;
+using IndexingServices;
 using Viewer.UI;
 using System.IO;
 
@@ -668,11 +662,11 @@ namespace Viewer
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			MockTagger mt = new MockTagger();
-			mt.Show();
-			mt.Invalidate();
-			mt.Messages = this.Messages;
-			mt.SetUpChatView();
+			//MockTagger mt = new MockTagger();
+			//mt.Show();
+			//mt.Invalidate();
+			//mt.Messages = this.Messages;
+			//mt.SetUpChatView();
 			
 		}
 	}

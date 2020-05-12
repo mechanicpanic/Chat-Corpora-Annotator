@@ -11,6 +11,7 @@ using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Store;
 using Lucene.Net.Index;
 using Lucene.Net.Documents;
+using IndexingServices;
 
 namespace Viewer
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using IndexingServices;
 using Viewer.Framework.Presenters;
 using Viewer.Framework.Services;
 using Viewer.UI;

@@ -285,6 +285,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
+      <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
+      <Name>IndexingServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

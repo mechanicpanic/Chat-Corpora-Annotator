@@ -11,33 +11,33 @@ using Lucene.Net.Analysis.Core;
 
 namespace IndexingServices
 {
-    public class NGramAnalyzer : Analyzer
-    {
-        LuceneVersion version = LuceneService.AppLuceneVersion;
+	public class NGramAnalyzer : Analyzer
+	{
+		LuceneVersion version = LuceneService.AppLuceneVersion;
 
-        public int minGramSize { get; set; } = 2;
-        public int maxGramSize { get; set; } = 2;
+		public int minGramSize { get; set; } = 2;
+		public int maxGramSize { get; set; } = 2;
 
-        public bool ShowUnigrams { get; set; } = false;
-        protected override TokenStreamComponents CreateComponents(string fieldName, TextReader reader)
-        {
-            var tokenizer = new StandardTokenizer(version, reader);
-            var shingler = new ShingleFilter(tokenizer, minGramSize, maxGramSize);
-            if (!this.ShowUnigrams)
-            {
-                shingler.SetOutputUnigrams(false);
-            }
-            else
-            {
-                shingler.SetOutputUnigrams(true);
-            }
-            var filter = new StopFilter(version, new LowerCaseFilter(version, shingler),
-                StopAnalyzer.ENGLISH_STOP_WORDS_SET);
-            return new TokenStreamComponents(tokenizer, filter);
-        }
+		public bool ShowUnigrams { get; set; } = false;
+		protected override TokenStreamComponents CreateComponents(string fieldName, TextReader reader)
+		{
+			var tokenizer = new StandardTokenizer(version, reader);
+			var shingler = new ShingleFilter(tokenizer, minGramSize, maxGramSize);
+			if (!this.ShowUnigrams)
+			{
+				shingler.SetOutputUnigrams(false);
+			}
+			else
+			{
+				shingler.SetOutputUnigrams(true);
+			}
+			var filter = new StopFilter(version, new LowerCaseFilter(version, shingler),
+				StopAnalyzer.ENGLISH_STOP_WORDS_SET);
+			return new TokenStreamComponents(tokenizer, filter);
+		}
 
 
-    }
+	}
 	public static class LuceneService
 	{
 		public static LuceneVersion AppLuceneVersion { get { return LuceneVersion.LUCENE_48; } }

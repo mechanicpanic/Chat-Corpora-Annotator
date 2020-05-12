@@ -1,4 +1,4 @@
-﻿namespace Annotation_Framework
+﻿namespace Tagger
 {
     partial class Form1
     {
