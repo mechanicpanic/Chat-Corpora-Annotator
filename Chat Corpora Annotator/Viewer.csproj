@@ -403,11 +403,17 @@
     <Compile Include="Extractor.cs" />
     <Compile Include="Framework\Presenters\ConcordancePresenter.cs" />
     <Compile Include="Framework\Presenters\NGramPresenter.cs" />
+    <Compile Include="Framework\Presenters\TagPresenter.cs" />
+    <Compile Include="Framework\Presenters\TagsetPresenter.cs" />
     <Compile Include="Framework\Services\ConcordanceService.cs" />
     <Compile Include="Framework\Services\NGramService.cs" />
+    <Compile Include="Framework\Services\TagFileWriter.cs" />
+    <Compile Include="Framework\Services\TagService.cs" />
     <Compile Include="Framework\Views\IConcordanceView.cs" />
     <Compile Include="Framework\Views\INGramView.cs" />
     <Compile Include="Framework\Views\LuceneQueryEventHandler.cs" />
+    <Compile Include="Framework\Views\TagsetView.cs" />
+    <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
     <Compile Include="CoreAnalyzer.cs" />
     <Compile Include="UI\ChartForm.cs">
@@ -447,21 +453,6 @@
     <Compile Include="UI\CSVLoader.Designer.cs">
       <DependentUpon>CSVLoader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Deprecated\ArrayMessage.cs" />
-    <Compile Include="Deprecated\ArrayMessageBlock.cs" />
-    <Compile Include="Deprecated\ColumnMetadata.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\ColumnMetadata.Designer.cs">
-      <DependentUpon>ColumnMetadata.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Deprecated\DataLoaded.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\DataLoaded.Designer.cs">
-      <DependentUpon>DataLoaded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Deprecated\DynamicMessageBlock.cs" />
     <Compile Include="Framework\Presenters\ChartPresenter.cs" />
     <Compile Include="Framework\Presenters\CSVPresenter.cs" />
     <Compile Include="Framework\Presenters\HeatmapPresenter.cs" />
@@ -474,12 +465,6 @@
     <Compile Include="Framework\Views\IHeatmapView.cs" />
     <Compile Include="Framework\Views\IMainView.cs" />
     <Compile Include="Framework\Views\IView.cs" />
-    <Compile Include="Deprecated\HeaderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\HeaderForm.Designer.cs">
-      <DependentUpon>HeaderForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -494,13 +479,6 @@
     <Compile Include="UI\HeatmapForm.Designer.cs">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Deprecated\SearchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\SearchForm.Designer.cs">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Deprecated\VirtualBTree.cs" />
     <Compile Include="UI\Concordancer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -513,11 +491,20 @@
     <Compile Include="UI\NGramSearch.Designer.cs">
       <DependentUpon>NGramSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TagsetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TagsetEditor.Designer.cs">
+      <DependentUpon>TagsetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TagWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TagWindow.Designer.cs">
+      <DependentUpon>TagWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UI\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\ColumnMetadata.resx">
-      <DependentUpon>ColumnMetadata.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CSV Wizard\DataLoadedStep.resx">
       <DependentUpon>DataLoadedStep.cs</DependentUpon>
@@ -533,12 +520,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CSVLoader.resx">
       <DependentUpon>CSVLoader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\DataLoaded.resx">
-      <DependentUpon>DataLoaded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\HeaderForm.resx">
-      <DependentUpon>HeaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -556,14 +537,17 @@
     <EmbeddedResource Include="UI\HeatmapForm.resx">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\SearchForm.resx">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Concordancer.resx">
       <DependentUpon>Concordancer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NGramSearch.resx">
       <DependentUpon>NGramSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TagsetEditor.resx">
+      <DependentUpon>TagsetEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TagWindow.resx">
+      <DependentUpon>TagWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

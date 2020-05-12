@@ -31,6 +31,7 @@ namespace Viewer
 		public event PropertyChangedEventHandler PropertyChanged;
 		public event EventHandler ConcordanceClick;
 		public event EventHandler NGramClick;
+		public event EventHandler TagClick;
 
 		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
@@ -644,8 +645,7 @@ namespace Viewer
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			Process.Start(
-				@"C:\Users\voidl\source\repos\Chat Corpora Annotator\Annotation Framework\bin\Debug\Tagger.exe");
+			TagClick?.Invoke(this,EventArgs.Empty);
 			
 		}
 	}

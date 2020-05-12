@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 using Viewer.Framework.Presenters;
 using Viewer.Framework.Services;
-
+using Viewer.UI;
 
 namespace Viewer
 {
@@ -27,7 +27,10 @@ namespace Viewer
             SearchService searcher = new SearchService();
             HeatmapService heater = new HeatmapService();
 
-
+            TagWindow tagger = new TagWindow();
+            TagService service = new TagService();
+            TagsetEditor editor = new TagsetEditor();
+            TagPresenter tagPresenter = new TagPresenter(main,tagger, service, editor);
 
             MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader);

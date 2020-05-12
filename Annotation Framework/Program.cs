@@ -17,7 +17,7 @@ namespace Tagger
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            MainWindow main = new MainWindow();
+            TagWindow main = new TagWindow();
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
             TagPresenter presenter = new TagPresenter(main,service, editor);

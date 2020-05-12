@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using Tagger.Framework.Main;
+using Viewer.Framework.Views;
 
-namespace Tagger
+namespace Viewer.UI
 {
-	public partial class MainWindow : Form, ITagView
+	public partial class TagWindow : Form, ITagView
 	{
 
 		public Dictionary<string,int> SituationIndex { get; set; }
 		public List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
-		public MainWindow()
+		public TagWindow()
 		{
 			InitializeComponent();
 			//Tags = new List<string>();
@@ -141,7 +141,7 @@ namespace Tagger
 
 		public void CloseView()
 		{
-			this.Close();
+			this.Hide();
 		}
 
 		public void UpdateTagset(List<string> tags)

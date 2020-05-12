@@ -44,6 +44,8 @@ namespace Viewer.Framework.Views
 
         event EventHandler ConcordanceClick;
         event EventHandler NGramClick;
+
+        event EventHandler TagClick;
         //event PropertyChangedEventHandler PropertyChanged;
         //bool FileLoadState { get; set; }
     }

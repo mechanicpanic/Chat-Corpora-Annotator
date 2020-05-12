@@ -1,6 +1,6 @@
 ﻿namespace Tagger
 {
-    partial class MainWindow
+    partial class TagWindow
     {
         /// <summary>
         /// Required designer variable.
