@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Wintellect.PowerCollections;
-using BrightIdeasSoftware;
 using Lucene.Net.Documents;
 
 namespace Viewer
