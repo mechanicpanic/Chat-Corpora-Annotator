@@ -15,6 +15,10 @@ namespace Tagger.Framework.Main
         event EventHandler AddTag;
         event EventHandler RemoveTag;
         event EventHandler EditSituation;
+        event EventHandler LoadMore;
+        void UpdateTagset(List<string> tags);
+        void DisplayDocuments();
+
     }
     
         

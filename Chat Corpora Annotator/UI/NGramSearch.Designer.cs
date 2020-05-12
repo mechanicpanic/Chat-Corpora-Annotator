@@ -97,7 +97,7 @@
             this.textBox1.MaximumSize = new System.Drawing.Size(400, 200);
             this.textBox1.MinimumSize = new System.Drawing.Size(100, 60);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 60);
+            this.textBox1.Size = new System.Drawing.Size(199, 30);
             this.textBox1.TabIndex = 6;
             // 
             // comboBox2

@@ -63,7 +63,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(219, 235);
             this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -104,7 +103,6 @@
             this.label2.Size = new System.Drawing.Size(124, 23);
             this.label2.TabIndex = 3;
             this.label2.Text = "Current tagset:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel2
             // 
@@ -119,7 +117,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(219, 662);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panel4
             // 
@@ -132,7 +129,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(967, 55);
             this.panel4.TabIndex = 14;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // button3
             // 
@@ -207,7 +203,6 @@
             this.chatTable.UseFiltering = true;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
-            this.chatTable.SelectedIndexChanged += new System.EventHandler(this.chatTable_SelectedIndexChanged);
             // 
             // panel1
             // 

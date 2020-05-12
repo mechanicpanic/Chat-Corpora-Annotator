@@ -18,16 +18,21 @@ namespace IndexingServices
 
 	public interface IIndexService
 	{
+		string CurrentIndexPath { get; set; }
+		string DateFieldKey { get; set; }
+		string TextFieldKey { get; set; }
+		string SenderFieldKey { get; set; }
+		List<string> SelectedFields { get; set; }
 		BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } 
 		HashSet<string> UserKeys { get; set; }
-		void OpenDirectory(string IndexPath);
-		void OpenWriter(string textFieldKey);
-		int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields);
+		void OpenDirectory();
+		void OpenWriter();
+		int PopulateIndex(string filePath, string[] allFields);
 
-		void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
-		List<DynamicMessage> LoadSomeDocuments(string indexPath,  string dateFieldKey, List<string> selectedFields, int count);
+		void InitLookup(string[] allFields);
+		List<DynamicMessage> LoadSomeDocuments(int count, bool viewer);
 
-		void OpenIndex(string textFieldKey);
+		void OpenIndex();
 
 		//event EventHandler FileIndexed;
 		//void SaveInfoToDisk(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
@@ -45,19 +50,23 @@ namespace IndexingServices
 
 
 		#region fields
-		private int readerIndex = 0;
+		private int viewerReadIndex = 0;
+		private int taggerReadIndex = 0;
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
 		private int[] lookup = new int[3];
 
 
-		public event EventHandler FileIndexed;
-
 		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
+		public string DateFieldKey { get; set; }
+		public string TextFieldKey { get; set; }
+		public string SenderFieldKey { get; set; }
+		public List<string> SelectedFields { get; set; }
+		public string CurrentIndexPath { get; set; }
 
 		#endregion
 		#region save info
-		private void CheckDir(string CurrentIndexPath)
+		private void CheckDir()
 		{
 			if (!System.IO.Directory.Exists(CurrentIndexPath + "\\info"))
 			{
@@ -74,22 +83,22 @@ namespace IndexingServices
 				}
 			}
 		}
-		private void SaveInfoToDisk(string textFieldKey, string senderFieldKey, string dateFieldKey, string CurrentIndexPath, int linecount) 
+		private void SaveInfoToDisk( int linecount) 
 		{
 			
 
 			using (System.IO.StreamWriter file =
 				new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-info.txt"))
 			{
-				file.WriteLine(textFieldKey);
-				file.WriteLine(senderFieldKey);
-				file.WriteLine(dateFieldKey);
+				file.WriteLine(TextFieldKey);
+				file.WriteLine(SenderFieldKey);
+				file.WriteLine(DateFieldKey);
 				file.WriteLine(linecount.ToString());
 
 			}
 		}
 
-		private void SaveUsersToDisk(string CurrentIndexPath)
+		private void SaveUsersToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -102,7 +111,7 @@ namespace IndexingServices
 			}
 		}
 
-		private void SaveFieldsToDisk(string CurrentIndexPath, List<string> SelectedFields)
+		private void SaveFieldsToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -114,7 +123,7 @@ namespace IndexingServices
 				}
 			}
 		}
-		private void SaveStatsToDisk(string CurrentIndexPath)
+		private void SaveStatsToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -187,59 +196,97 @@ namespace IndexingServices
 			return stats;
 		}
 		#endregion
-		public void InitLookup(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields,string[] allFields)
+		public void InitLookup(string[] allFields)
 		{
 			lookup = new int[3];
-			foreach (var field in selectedFields)
+			foreach (var field in SelectedFields)
 			{
-				if (field == dateFieldKey)
+				if (field == DateFieldKey)
 				{
-					lookup[0] = Array.IndexOf(allFields, dateFieldKey);
+					lookup[0] = Array.IndexOf(allFields, DateFieldKey);
 				}
-				if (field == senderFieldKey)
+				if (field == SenderFieldKey)
 				{
-					lookup[1] = Array.IndexOf(allFields, senderFieldKey);
+					lookup[1] = Array.IndexOf(allFields, SenderFieldKey);
 				}
-				if (field == textFieldKey)
+				if (field == TextFieldKey)
 				{
-					lookup[2] = Array.IndexOf(allFields, textFieldKey);
+					lookup[2] = Array.IndexOf(allFields, TextFieldKey);
 				}
 			}
 		}
-		public List<DynamicMessage> LoadSomeDocuments(string indexPath, string dateFieldKey, List<string> selectedFields, int count)
+		public List<DynamicMessage> LoadSomeDocuments(int count,bool viewer)
 		{
 			List<DynamicMessage> messages = new List<DynamicMessage>();
-			
-			for (int i = readerIndex; i < count + readerIndex; i++)
+			if (viewer)
 			{
-				Document document;
-				List<string> temp = new List<string>();
-				if (i < LuceneService.DirReader.MaxDoc)
+				for (int i = viewerReadIndex; i < count + viewerReadIndex; i++)
 				{
-					document = LuceneService.DirReader.Document(i);
-				}
-				else
-				{
-					break;
-				}
-				foreach (var field in selectedFields)
-				{
-					
-					
+					Document document;
+					List<string> temp = new List<string>();
+					if (i < LuceneService.DirReader.MaxDoc)
+					{
+						document = LuceneService.DirReader.Document(i);
+					}
+					else
+					{
+						break;
+					}
+
+					foreach (var field in SelectedFields)
+					{
+
+
 						temp.Add(document.GetField(field).GetStringValue());
-					
-					
+
+
+					}
+
+					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey);
+					messages.Add(message);
+
+
 				}
-				DynamicMessage message = new DynamicMessage(temp, selectedFields, dateFieldKey);
-				messages.Add(message);
 
-
+				viewerReadIndex = count + viewerReadIndex;
 			}
-			readerIndex = count + readerIndex;
+			else
+			{
+				for (int i = taggerReadIndex; i < count + taggerReadIndex; i++)
+				{
+					Document document;
+					List<string> temp = new List<string>();
+					if (i < LuceneService.DirReader.MaxDoc)
+					{
+						document = LuceneService.DirReader.Document(i);
+					}
+					else
+					{
+						break;
+					}
+
+					foreach (var field in SelectedFields)
+					{
+
+
+						temp.Add(document.GetField(field).GetStringValue());
+
+
+					}
+
+					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey);
+					messages.Add(message);
+
+
+				}
+
+				taggerReadIndex = count + taggerReadIndex;
+			}
+
 			return messages;
 		}
 
-		public int PopulateIndex(string indexPath, string filePath, string[] allFields, List<string> selectedFields)
+		public int PopulateIndex(string filePath, string[] allFields)
 		{
 			
 			int result = 0;
@@ -296,7 +343,7 @@ namespace IndexingServices
 							}
 							else
 							{
-								if (selectedFields.Contains(allFields[i]))
+								if (SelectedFields.Contains(allFields[i]))
 								{
 									document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
 								}
@@ -311,11 +358,14 @@ namespace IndexingServices
 					//LuceneService.Writer.AddDocuments(documentBlock);
 					LuceneService.Writer.Commit();
 					LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
-					CheckDir(indexPath);
-					SaveInfoToDisk(allFields[lookup[2]],allFields[lookup[1]],allFields[lookup[0]], indexPath,count);
-					SaveFieldsToDisk(indexPath, selectedFields);
-					SaveUsersToDisk(indexPath);
-					SaveStatsToDisk(indexPath);
+					CheckDir();
+	 //               this.DateFieldKey = allFields[lookup[0]];
+					//this.SenderFieldKey = allFields[lookup[1]];
+	 //               this.TextFieldKey = allFields[lookup[2]];
+					SaveInfoToDisk(count);
+					SaveFieldsToDisk();
+					SaveUsersToDisk();
+					SaveStatsToDisk();
 
 					OpenReader();
 					result = 1;
@@ -339,7 +389,7 @@ namespace IndexingServices
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 			LuceneService.NGrammer = new NGramAnalyzer();
 		}
-		public void OpenWriter(string textFieldKey)
+		public void OpenWriter()
 		{
 
 			OpenAnalyzers();
@@ -348,7 +398,7 @@ namespace IndexingServices
 			LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
 			LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
 			LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-			OpenParser(textFieldKey);
+			OpenParser(TextFieldKey);
 
 			
 			
@@ -362,12 +412,12 @@ namespace IndexingServices
 			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
 		}
 
-		public void OpenDirectory(string IndexPath)
+		public void OpenDirectory()
 		{
-			LuceneService.Dir = FSDirectory.Open(IndexPath);
+			LuceneService.Dir = FSDirectory.Open(CurrentIndexPath);
 		}
 
-		public void OpenIndex(string textFieldKey)
+		public void OpenIndex()
 		{
 			if (LuceneService.Dir != null)
 			{
@@ -375,7 +425,7 @@ namespace IndexingServices
 				{
 					OpenAnalyzers();
 					OpenReader();
-					OpenParser(textFieldKey);
+					OpenParser(TextFieldKey);
 					//LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
 				}

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IndexingServices;
 using Viewer.Framework.Views;
 using Viewer.Framework.Services;
 using Lucene.Net.Index;
+using SD.Tools.BCLExtensions.CollectionsRelated;
 
 namespace Viewer.Framework.Presenters
 {
@@ -63,21 +65,26 @@ namespace Viewer.Framework.Presenters
 
         private void _view_OpenIndexedCorpus(object sender, EventArgs e)
         {
-            _reader.OpenDirectory(_main.CurrentIndexPath);
+            _reader.CurrentIndexPath = _main.CurrentIndexPath;
+            _reader.OpenDirectory();
             if(DirectoryReader.IndexExists(LuceneService.Dir))
             {
                 var info = _reader.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
-                _main.TextFieldKey = info["TextFieldKey"];
-                _main.SenderFieldKey = info["SenderFieldKey"];
-                _main.DateFieldKey = info["DateFieldKey"];
-                _csv.SelectedFields = _reader.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
-                _main.Usernames = _reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
-                _main.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
+                _reader.TextFieldKey = info["TextFieldKey"];
+                _reader.SenderFieldKey = info["SenderFieldKey"];
+                _reader.DateFieldKey = info["DateFieldKey"];
+                _reader.SelectedFields = _reader.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
+                
+                _reader.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
+
+                _reader.UserKeys = IEnumerableExtensionMethods.ToHashSet(_reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
+                _main.Usernames = Enumerable.ToList(_reader.UserKeys);
+
                 _main.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;
-                _reader.OpenIndex(_main.TextFieldKey);
+                _reader.OpenIndex();
                
                 AddDocumentsToDisplay(200);
             }
@@ -92,7 +99,7 @@ namespace Viewer.Framework.Presenters
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = _reader.LoadSomeDocuments(_main.CurrentIndexPath,_main.DateFieldKey, _csv.SelectedFields, count);
+            var list = _reader.LoadSomeDocuments(count, true);
             _main.Messages.AddRange(list);
             _main.DisplayDocuments();
         }

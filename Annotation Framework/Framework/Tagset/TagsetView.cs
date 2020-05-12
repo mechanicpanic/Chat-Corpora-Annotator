@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Tagger.Framework.Tagset
 {
-    public interface ITagsetView
+    public interface ITagsetView: IView
     {
         List<string> CurrentTags { get; set; }
+        event EventHandler SaveTagset;
     }
-    public class TagsetView : ITagsetView
-    {
-        public List<string> CurrentTags { get; set; }
-    }
+
 }

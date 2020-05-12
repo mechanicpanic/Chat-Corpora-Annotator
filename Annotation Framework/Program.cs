@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Tagger.Framework.Main;
 
 namespace Tagger
 {
@@ -13,8 +14,12 @@ namespace Tagger
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            
+            //Application.Run(new Form1());
+            MainWindow main = new MainWindow();
+            TagService service = new TagService();
+            TagsetEditor editor = new TagsetEditor();
+            TagPresenter presenter = new TagPresenter(main,service, editor);
+            Application.Run(main);
         }
     }
 }

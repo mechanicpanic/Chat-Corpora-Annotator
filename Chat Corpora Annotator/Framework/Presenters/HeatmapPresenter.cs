@@ -28,7 +28,7 @@ namespace Viewer.Framework.Presenters
 
 		private void _view_HeatmapClick(object sender, EventArgs e)
 		{
-			_heat.Colors = _painter.PopulateHeatmap(_view.MessagesPerDay);
+			_heat.Colors = _painter.PopulateHeatmap(_indexer.MessagesPerDay);
 			_heat.ShowView();
 			_heat.DrawHeatmap();
 			_heat.FillDates(_view.MessagesPerDay.Keys.ToList());

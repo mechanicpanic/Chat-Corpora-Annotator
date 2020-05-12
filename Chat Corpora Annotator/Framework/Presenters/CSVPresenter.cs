@@ -41,11 +41,15 @@ namespace Viewer.Framework.Presenters
             _main.Usernames = _indexer.UserKeys.ToList();
             _main.MessagesPerDay = _indexer.MessagesPerDay;
             int temp = (LuceneService.Writer.MaxDoc) / 5;
-            var list = _indexer.LoadSomeDocuments(_main.CurrentIndexPath, _csv.DateFieldKey, _csv.SelectedFields, temp);
+            var list = _indexer.LoadSomeDocuments(temp, true);
             _main.Messages = list;
-            _main.DateFieldKey = _csv.DateFieldKey;
-            _main.TextFieldKey = _csv.TextFieldKey;
-            _main.SenderFieldKey = _csv.SenderFieldKey;
+
+            _indexer.DateFieldKey = _csv.DateFieldKey;
+            _indexer.TextFieldKey = _csv.TextFieldKey;
+            _indexer.SenderFieldKey = _csv.SenderFieldKey;
+
+            
+
             _main.DisplayDocuments();
             _main.FileLoadState = true;
         }
@@ -53,17 +57,14 @@ namespace Viewer.Framework.Presenters
 
         
 
-        private void _csv_HeaderSelected(object sender, EventArgs e)
-        {
-            
-            _csv.Steps.OfType<MetadataStep>().First().PopulateComboBoxes(_csv.SelectedFields);
 
-        }
 
         private void _view_FileAndIndexSelected(object sender, EventArgs e)
         {
 
             string path = _main.CurrentPath;
+            _indexer.CurrentIndexPath = _main.CurrentIndexPath;
+
             string[] allFields = _reader.GetFields(path);
             int count = _reader.GetLineCount(path);
             _main.SetLineCount(count);
@@ -77,13 +78,23 @@ namespace Viewer.Framework.Presenters
             
         }
 
+        private void _csv_HeaderSelected(object sender, EventArgs e)
+        {
+            _indexer.SelectedFields = _csv.SelectedFields;
+            _csv.Steps.OfType<MetadataStep>().First().PopulateComboBoxes(_indexer.SelectedFields);
+
+        }
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            _indexer.OpenDirectory(_main.CurrentIndexPath);
-            _indexer.OpenWriter(_csv.TextFieldKey);
-            _indexer.InitLookup(_csv.TextFieldKey, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.SelectedFields, _csv.AllFields);
-            var result =  _indexer.PopulateIndex(_main.CurrentIndexPath,_main.CurrentPath,_csv.AllFields, _csv.SelectedFields);
+            _indexer.OpenDirectory();
+            _indexer.TextFieldKey = _csv.TextFieldKey;
+            _indexer.SenderFieldKey = _csv.SenderFieldKey;
+            _indexer.DateFieldKey = _csv.DateFieldKey;
+
+            _indexer.OpenWriter();
+            _indexer.InitLookup(_csv.AllFields);
+            var result =  _indexer.PopulateIndex(_main.CurrentPath,_csv.AllFields);
            if (result == 1)
             {
                 _csv.CorpusIndexed();

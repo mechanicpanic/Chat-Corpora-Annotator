@@ -10,9 +10,9 @@ namespace Viewer.Framework.Views
         //TODO: R e t h i n c c
         bool FileLoadState { get; set; }
 
-        string TextFieldKey { get; set; }
-        string DateFieldKey { get; set; }
-        string SenderFieldKey { get; set; }
+        //string TextFieldKey { get; set; }
+        //string DateFieldKey { get; set; }
+        //string SenderFieldKey { get; set; }
 
         //List<string> SelectedFields { get; set; }
         List<string> Usernames { get; set; }
@@ -25,9 +25,9 @@ namespace Viewer.Framework.Views
 
         void SetLineCount(int count);
         void DisplayDocuments();
-
         void DisplaySearchResults();
 
+        
         IConcordanceView CreateConcordancer();
 
         INGramView CreateNgramView();

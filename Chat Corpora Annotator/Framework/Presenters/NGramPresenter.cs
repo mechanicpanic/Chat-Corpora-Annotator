@@ -38,7 +38,7 @@ namespace Viewer.Framework.Presenters
         {
 
 
-            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, _main.TextFieldKey,_grams.Term);
+            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, _indexer.TextFieldKey,_grams.Term);
             
             _grams.DisplayNGrams(_ngrammer.NgramIndex.Keys.ToList());
 

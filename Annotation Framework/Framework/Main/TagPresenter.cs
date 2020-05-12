@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IndexingServices;
 using Tagger.Framework.Tagset;
 
 namespace Tagger.Framework.Main
@@ -11,11 +12,41 @@ namespace Tagger.Framework.Main
     {
         private readonly ITagView _tagger;
         private readonly ITagService _service;
-        
+        private readonly ITagsetView _tagset;
+        private readonly IIndexService _reader;
 
-        public TagPresenter(ITagView tagger, ITagService service)
+        public TagPresenter(ITagView tagger, ITagService service, ITagsetView tagset)
         {
+            this._tagger = tagger;
+            this._service = service;
 
+            _tagger.TagsetClick += _tagger_TagsetClick;
+            _tagger.LoadMore += _tagger_LoadMore;
+            _tagset.SaveTagset += _tagset_SaveTagset;
         }
+
+        private void _tagger_LoadMore(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void AddDocumentsToDisplay(int count)
+        {
+            var list = _reader.LoadSomeDocuments(count, false);
+            _tagger.Messages.AddRange(list);
+            _tagger.DisplayDocuments();
+        }
+        private void _tagset_SaveTagset(object sender, EventArgs e)
+        {
+            _service.UpdateTagset(_tagset.CurrentTags);
+            _tagger.UpdateTagset(_service.Tagset);
+            _tagset.CloseView();
+        }
+
+        private void _tagger_TagsetClick(object sender, EventArgs e)
+        {
+            _tagset.ShowView();
+        }
+
     }
 }

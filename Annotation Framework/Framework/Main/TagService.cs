@@ -20,11 +20,12 @@ namespace Tagger.Framework.Main
         public Dictionary<string, int> SituationIndex { get; set; }
         public void UpdateTagset(List<string> tags)
         {
-            Tagset = tags;
+            Tagset.Clear();
+            foreach (var tag in tags)
+            {
+                Tagset.Add(tag);
+            }
         }
-        public TagService()
-        {
 
-        }
     }
 }

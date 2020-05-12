@@ -2,6 +2,7 @@
 using IndexingServices;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using Tagger.Framework.Main;
 
@@ -9,7 +10,6 @@ namespace Tagger
 {
 	public partial class MainWindow : Form, ITagView
 	{
-		public List<string> Tags { get; set; }
 
 		public Dictionary<string,int> SituationIndex { get; set; }
 		public List<DynamicMessage> Messages { get; set; }
@@ -34,44 +34,15 @@ namespace Tagger
 		public event EventHandler AddTag;
 		public event EventHandler RemoveTag;
 		public event EventHandler EditSituation;
-
-		private void chatTable_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void panel3_Paint(object sender, PaintEventArgs e)
-		{
-
-		}
-
-		private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
+		public event EventHandler LoadMore;
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			TagsetEditor te = new TagsetEditor();
+			TagsetClick?.Invoke(this,EventArgs.Empty);
 
 		}
 
 		private void button4_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void label2_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void panel2_Paint(object sender, PaintEventArgs e)
-		{
-
-		}
-
-		private void panel4_Paint(object sender, PaintEventArgs e)
 		{
 
 		}
@@ -96,14 +67,9 @@ namespace Tagger
 			}
 		}
 
-		private void label1_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
-
+			LoadMore?.Invoke(this,EventArgs.Empty);
 		}
 
 		private void panel1_Paint(object sender, PaintEventArgs e)
@@ -169,11 +135,25 @@ namespace Tagger
 		}
 
 		public void ShowView()
-		{
-			throw new NotImplementedException();
-		}
+        {
+            this.Show();
+        }
 
 		public void CloseView()
+		{
+			this.Close();
+		}
+
+		public void UpdateTagset(List<string> tags)
+		{
+			listBox1.Items.Clear();
+            foreach (var tag in tags)
+            {
+                listBox1.Items.Add(tag);
+            }
+		}
+
+		public void DisplayDocuments()
 		{
 			throw new NotImplementedException();
 		}
