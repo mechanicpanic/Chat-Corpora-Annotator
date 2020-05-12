@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using Wintellect.PowerCollections;
 
-namespace Viewer.Framework.Services
+namespace IndexingServices
 {
 	public interface IIndexService
 	{

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-
+using IndexingServices;
 using Viewer.Framework.Views;
 using Viewer.Framework.Services;
 using Lucene.Net.Index;
-
-using IndexingServices;
 
 namespace Viewer.Framework.Presenters
 {
