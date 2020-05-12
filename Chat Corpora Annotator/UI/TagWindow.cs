@@ -11,8 +11,10 @@ namespace Viewer.UI
 	public partial class TagWindow : Form, ITagView
 	{
 
-		public Dictionary<string,int> SituationIndex { get; set; }
+		public Dictionary<List<string>,int> SituationIndex { get; set; }
 		public List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
+		public List<string> CurrentSituation { get; set; } = new List<string>();
+
 		public TagWindow()
 		{
 			InitializeComponent();
@@ -44,27 +46,37 @@ namespace Viewer.UI
 
 		private void button4_Click(object sender, EventArgs e)
 		{
-
+			WriteToDisk?.Invoke(this,EventArgs.Empty);
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			if(listBox1.SelectedItem!=null && chatTable.SelectedObjects != null)
+
+			if (listBox1.SelectedItem != null && chatTable.SelectedObjects != null)
 			{
-				var temp = "";
-				foreach (var obj in chatTable.SelectedObjects)
+				CurrentSituation.Clear();
+				foreach (var VARIABLE in chatTable.SelectedObjects)
 				{
-					temp = " [" + listBox1.SelectedItem + " ID " + SituationIndex[listBox1.SelectedItem.ToString()] + "]";
-					Messages[Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
+					DynamicMessage msg = (DynamicMessage) chatTable.SelectedObject;
+					CurrentSituation.Add(msg.Id);
+				}
+				
+				AddTag?.Invoke(this,EventArgs.Empty);
+			}
+			//	var temp = "";
+			//	foreach (var obj in chatTable.SelectedObjects)
+			//	{
+			//		temp = " [" + listBox1.SelectedItem + " ID " + SituationIndex[listBox1.SelectedItem.ToString()] + "]";
+			//		Messages[Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
 
 					
 
-				}
-				listView1.Items.Add(new ListViewItem(temp));
-				listView1.Update();
-				SituationIndex[listBox1.SelectedItem.ToString()]++;
-				chatTable.UpdateObjects(Messages);
-			}
+			//	}
+			//	listView1.Items.Add(new ListViewItem(temp));
+			//	listView1.Update();
+			//	SituationIndex[listBox1.SelectedItem.ToString()]++;
+			//	chatTable.UpdateObjects(Messages);
+			//}
 		}
 
 		private void loadMoreButton_Click(object sender, EventArgs e)

@@ -6,7 +6,7 @@ namespace IndexingServices
 {
     public class DynamicMessage : IComparable
     {
-        private Guid Id { get; set; }
+        public string Id { get; set; }
         private string dateFieldKey;
         public string DateFieldKey { get { return dateFieldKey; } set { this.dateFieldKey = value; } }
 
@@ -14,7 +14,7 @@ namespace IndexingServices
 
         public DynamicMessage(string[] fields, string[] data)
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
             for (int i = 0; i < fields.Length; i++)
             {
@@ -24,7 +24,7 @@ namespace IndexingServices
         }
         public DynamicMessage()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
             string[] fields = new string[] { "a", "b", "c", "d" };
             string[] data = new string[] { "a", "b", "c", "d" };
@@ -38,7 +38,7 @@ namespace IndexingServices
 
         public DynamicMessage(string[] fields, object[] data, List<string> selectedFields)
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
 
             
@@ -58,7 +58,7 @@ namespace IndexingServices
 
         public DynamicMessage(string[] fields, string[] data, List<string> selectedFields, string dateFieldKey)
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
             this.dateFieldKey = dateFieldKey;
 
@@ -80,9 +80,10 @@ namespace IndexingServices
 
         }
 
-        public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey)
+        public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey, string id)
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
+            this.Id = id;
             if(data.Count != selectedFields.Count)
             {
                 throw new Exception("Wrong array size");

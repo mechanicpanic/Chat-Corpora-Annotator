@@ -78,7 +78,7 @@ namespace Viewer.Framework.Services
 				{
 					data.Add(idoc.GetField(field).GetStringValue());
 				}
-				DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey);
+				DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey,idoc.GetField("id").GetStringValue());
 				searchResults.Add(message);
 			}
 			return searchResults;

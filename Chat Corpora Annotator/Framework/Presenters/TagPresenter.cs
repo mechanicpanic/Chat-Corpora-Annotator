@@ -16,17 +16,34 @@ namespace Viewer.Framework.Presenters
         private readonly ITagService _service;
         private readonly ITagsetView _tagset;
         private readonly IMainView _main;
-        public TagPresenter(IMainView main, ITagView tagger, ITagService service, ITagsetView tagset)
+        private readonly ITagFileWriter _writer;
+        public TagPresenter(IMainView main, ITagView tagger, ITagService service, ITagsetView tagset, ITagFileWriter writer)
         {
             this._main = main;
             this._tagger = tagger;
             this._service = service;
             this._tagset = tagset;
+            this._writer = writer;
 
             _tagger.TagsetClick += _tagger_TagsetClick;
             _tagger.LoadMore += _tagger_LoadMore;
+            _tagger.WriteToDisk += _tagger_WriteToDisk;
+            _tagger.AddTag += _tagger_AddTag;
             _tagset.SaveTagset += _tagset_SaveTagset;
             _main.TagClick += _main_TagClick;
+        }
+
+        private void _tagger_AddTag(object sender, EventArgs e)
+        {
+            _service.AddSituation(_tagger.CurrentSituation);
+        }
+
+        private void _tagger_WriteToDisk(object sender, EventArgs e)
+        {
+            foreach (var VARIABLE in _tagger.SituationIndex)
+            {
+                
+            }
         }
 
         private void _main_TagClick(object sender, EventArgs e)

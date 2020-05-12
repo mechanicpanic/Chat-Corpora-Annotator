@@ -241,7 +241,7 @@ namespace IndexingServices
 
 					}
 
-					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey);
+					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetStringValue());
 					messages.Add(message);
 
 
@@ -274,7 +274,7 @@ namespace IndexingServices
 
 					}
 
-					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey);
+					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetStringValue());
 					messages.Add(message);
 
 

@@ -7,7 +7,13 @@ using System.Xml;
 
 namespace Viewer.Framework.Services
 {
-    public class TagFileWriter:IDisposable
+    public interface ITagFileWriter
+    {
+        void WriteMessage(string messageId, string text, string user, string date);
+        void WriteSituation(List<Dictionary<string, string>> messages, string situation);
+       void CloseWriter();
+    }
+    public class TagFileWriter:IDisposable, ITagFileWriter
     {
         private XmlWriter writer; 
         

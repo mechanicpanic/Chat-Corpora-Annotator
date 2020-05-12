@@ -9,15 +9,22 @@ namespace Viewer.Framework.Services
     public interface ITagService
     {
         List<string> Tagset { get; set; }
-        Dictionary<string, int> SituationIndex { get; set; }
+        Dictionary<List<string>,Guid> SituationIndex { get; set; }
 
         void UpdateTagset(List<string> tags);
+        void AddSituation(List<string> messages);
 
     }
     public class TagService: ITagService
     {
         public List<string> Tagset { get; set; }
-        public Dictionary<string, int> SituationIndex { get; set; }
+        public Dictionary<List<string>,Guid> SituationIndex { get; set; } = new Dictionary<List<string>, Guid>();
+
+        public void AddSituation(List<string> messages)
+        {
+            SituationIndex.Add(messages, Guid.NewGuid());
+        }
+
         public void UpdateTagset(List<string> tags)
         {
             Tagset.Clear();
