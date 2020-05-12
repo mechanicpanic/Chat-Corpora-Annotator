@@ -6,6 +6,8 @@ using Viewer.Framework.Views;
 using Viewer.Framework.Services;
 using Lucene.Net.Index;
 
+using IndexingServices;
+
 namespace Viewer.Framework.Presenters
 {
 
@@ -13,8 +15,8 @@ namespace Viewer.Framework.Presenters
     {
         private readonly IMainView _main;
         private readonly ICSVView _csv;
-        private readonly IChartView _chart;
-        private readonly IHeatmapView _heatmap;
+        //private readonly IChartView _chart;
+        //private readonly IHeatmapView _heatmap;
         private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
         
@@ -27,7 +29,7 @@ namespace Viewer.Framework.Presenters
             this._main = view;
             this._csv = csv;
             //this._chart = chart;
-            this._heatmap = heatmap;
+            //this._heatmap = heatmap;
             this._reader = reader;
             this._searcher = searcher;
             //this._grams = grams;

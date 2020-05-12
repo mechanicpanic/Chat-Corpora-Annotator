@@ -443,8 +443,6 @@
     <Compile Include="Framework\Presenters\ChartPresenter.cs" />
     <Compile Include="Framework\Presenters\CSVPresenter.cs" />
     <Compile Include="Framework\Presenters\HeatmapPresenter.cs" />
-    <Compile Include="Framework\Services\LuceneService.cs" />
-    <Compile Include="Framework\Services\IndexService.cs" />
     <Compile Include="Framework\Services\SearchService.cs" />
     <Compile Include="Framework\Services\HeatmapService.cs" />
     <Compile Include="Framework\Views\IChartView.cs" />
@@ -570,6 +568,10 @@
     <ProjectReference Include="..\Annotation Framework\Tagger.csproj">
       <Project>{c540d617-0d6b-4e10-8ff2-0eec0e0af1f3}</Project>
       <Name>Tagger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
+      <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
+      <Name>IndexingServices</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

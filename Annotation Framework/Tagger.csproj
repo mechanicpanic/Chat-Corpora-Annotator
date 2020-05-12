@@ -225,6 +225,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\Main\TagPresenter.cs" />
+    <Compile Include="Framework\Main\TagService.cs" />
+    <Compile Include="Framework\Main\TagView.cs" />
+    <Compile Include="Framework\Tagset\TagsetPresenter.cs" />
+    <Compile Include="Framework\Tagset\TagsetView.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="OneMessageTagViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +252,9 @@
     <Compile Include="TagsetEditor.Designer.cs">
       <DependentUpon>TagsetEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OneMessageTagViewer.resx">
       <DependentUpon>OneMessageTagViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,8 +285,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Framework\1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
