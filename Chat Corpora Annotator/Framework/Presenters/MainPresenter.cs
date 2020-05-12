@@ -14,22 +14,17 @@ namespace Viewer.Framework.Presenters
     {
         private readonly IMainView _main;
         private readonly ICSVView _csv;
-        //private readonly IChartView _chart;
-        //private readonly IHeatmapView _heatmap;
-        private readonly IIndexService _reader;
         private readonly ISearchService _searcher;
         
-        //private readonly INGramView _grams;
        
 
 
-        public MainPresenter(IMainView view,ICSVView csv, IIndexService reader,ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view,ICSVView csv, ISearchService searcher, IHeatmapView heatmap)
         {
             this._main = view;
             this._csv = csv;
             //this._chart = chart;
             //this._heatmap = heatmap;
-            this._reader = reader;
             this._searcher = searcher;
             //this._grams = grams;
             
@@ -49,7 +44,7 @@ namespace Viewer.Framework.Presenters
         {
             INGramView _ngram = _main.CreateNgramView();
             INGramService _ngrammer = new NGramService();
-            NGramPresenter grampresenter = new NGramPresenter(_main, _reader, _searcher, _ngrammer, _ngram);
+            NGramPresenter grampresenter = new NGramPresenter(_main, _searcher, _ngrammer, _ngram);
             _ngram.ShowView();
             _main.ShowNgrams(_ngram);
         }
@@ -57,7 +52,7 @@ namespace Viewer.Framework.Presenters
         {
             IConcordanceView _concordance = _main.CreateConcordancer();
             IConcordanceService _concordancer = new ConcordanceService();
-            ConcordancePresenter presenter = new ConcordancePresenter(_main, _reader, _concordancer, _concordance);
+            ConcordancePresenter presenter = new ConcordancePresenter(_main, _concordancer, _concordance);
             _concordance.ShowView();
             _main.ShowConcordance(_concordance);
 
@@ -65,26 +60,26 @@ namespace Viewer.Framework.Presenters
 
         private void _view_OpenIndexedCorpus(object sender, EventArgs e)
         {
-            _reader.CurrentIndexPath = _main.CurrentIndexPath;
-            _reader.OpenDirectory();
+            IndexService.CurrentIndexPath = _main.CurrentIndexPath;
+            IndexService.OpenDirectory();
             if(DirectoryReader.IndexExists(LuceneService.Dir))
             {
-                var info = _reader.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
+                var info = IndexService.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
-                _reader.TextFieldKey = info["TextFieldKey"];
-                _reader.SenderFieldKey = info["SenderFieldKey"];
-                _reader.DateFieldKey = info["DateFieldKey"];
-                _reader.SelectedFields = _reader.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
+                IndexService.TextFieldKey = info["TextFieldKey"];
+                IndexService.SenderFieldKey = info["SenderFieldKey"];
+                IndexService.DateFieldKey = info["DateFieldKey"];
+                IndexService.SelectedFields = IndexService.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
                 
-                _reader.MessagesPerDay = _reader.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
+                IndexService.MessagesPerDay = IndexService.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
 
-                _reader.UserKeys = IEnumerableExtensionMethods.ToHashSet(_reader.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
-                _main.Usernames = Enumerable.ToList(_reader.UserKeys);
+                IndexService.UserKeys = IEnumerableExtensionMethods.ToHashSet(IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
+                _main.Usernames = Enumerable.ToList(IndexService.UserKeys);
 
                 _main.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;
-                _reader.OpenIndex();
+                IndexService.OpenIndex();
                
                 AddDocumentsToDisplay(200);
             }
@@ -99,7 +94,7 @@ namespace Viewer.Framework.Presenters
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = _reader.LoadSomeDocuments(count, true);
+            var list = IndexService.LoadSomeDocuments(count, true);
             _main.Messages.AddRange(list);
             _main.DisplayDocuments();
         }

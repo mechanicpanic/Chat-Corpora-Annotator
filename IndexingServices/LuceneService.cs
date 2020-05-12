@@ -40,7 +40,12 @@ namespace IndexingServices
 	}
 	public static class LuceneService
 	{
-		public static LuceneVersion AppLuceneVersion { get { return LuceneVersion.LUCENE_48; } }
+        static LuceneService()
+        {
+			AppLuceneVersion = LuceneVersion.LUCENE_48; 
+			}
+
+        public static LuceneVersion AppLuceneVersion;
 
 		public static FSDirectory Dir { get; set; }
 		public static StandardAnalyzer Analyzer { get; set; }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using IndexingServices;
+
 using Viewer.Framework.Presenters;
 using Viewer.Framework.Services;
-using Viewer.UI;
+
 
 namespace Viewer
 {
@@ -25,14 +25,13 @@ namespace Viewer
 
             CSVReadService fileReader = new CSVReadService();
             SearchService searcher = new SearchService();
-            IndexService indexer = new IndexService();
             HeatmapService heater = new HeatmapService();
 
 
 
-            MainPresenter presenter = new MainPresenter(main, loader, indexer, searcher, heatmap);
-            CSVPresenter csv = new CSVPresenter(main, loader, fileReader, indexer);
-            HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater, indexer);
+            MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
+            CSVPresenter csv = new CSVPresenter(main, loader, fileReader);
+            HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
 
             Application.Run(main);
 

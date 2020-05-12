@@ -286,6 +286,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chat Corpora Annotator\Viewer.csproj">
+      <Project>{65809f71-7bf4-43f2-b912-738eea840e0d}</Project>
+      <Name>Viewer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
       <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
       <Name>IndexingServices</Name>

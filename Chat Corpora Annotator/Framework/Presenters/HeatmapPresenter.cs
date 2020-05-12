@@ -14,21 +14,21 @@ namespace Viewer.Framework.Presenters
 		private readonly IHeatmapView _heat;
 
 		private readonly IHeatmapService _painter;
-		private readonly IIndexService _indexer;
+		
 
-		public HeatmapPresenter(IMainView view, IHeatmapView heat, IHeatmapService painter, IIndexService indexer)
+		public HeatmapPresenter(IMainView view, IHeatmapView heat, IHeatmapService painter)
 		{
 			_view = view;
 			_heat = heat;
 			_painter = painter;
-			_indexer = indexer;
+			
 
 			_view.HeatmapClick += _view_HeatmapClick;
 		}
 
 		private void _view_HeatmapClick(object sender, EventArgs e)
 		{
-			_heat.Colors = _painter.PopulateHeatmap(_indexer.MessagesPerDay);
+			_heat.Colors = _painter.PopulateHeatmap(IndexService.MessagesPerDay);
 			_heat.ShowView();
 			_heat.DrawHeatmap();
 			_heat.FillDates(_view.MessagesPerDay.Keys.ToList());

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -355,25 +356,6 @@ namespace Viewer
 
 		#region date view
 
-		//public void SetDateView()
-		//{
-		//	dateView.View = View.Details;
-		//	dateView.VirtualMode = true;
-		//	dateView.VirtualListSize = MessagesPerDay.Keys.Count;
-		//	dateView.DoubleBuffering(true);
-		//	RetrieveVirtualItemEventHandler handler = new RetrieveVirtualItemEventHandler(dateView_RetrieveVirtualItem);
-		//	dateView.RetrieveVirtualItem += handler;
-
-
-		//}
-
-		//private void dateView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
-		//{
-		//	int index = e.ItemIndex;
-		//	string date = MessagesPerDay.Keys.ElementAt<DateTime>(index).ToShortDateString();
-		//	e.Item = new ListViewItem(date);
-
-		//}
 
 		public void SetDateView()
 		{
@@ -384,10 +366,10 @@ namespace Viewer
 
 		private void LoadDates()
 		{
-			foreach(var msg in Messages)
-			{
-				AddDateToDateView((DateTime)msg.contents[DateFieldKey]);
-			}
+			//foreach(var msg in Messages)
+			//{
+			//	AddDateToDateView((DateTime)msg.contents[DateFieldKey]);
+			//}
 		}
 
 		private void AddDateToDateView(DateTime date)
@@ -662,11 +644,8 @@ namespace Viewer
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			//MockTagger mt = new MockTagger();
-			//mt.Show();
-			//mt.Invalidate();
-			//mt.Messages = this.Messages;
-			//mt.SetUpChatView();
+			Process.Start(
+				@"C:\Users\voidl\source\repos\Chat Corpora Annotator\Annotation Framework\bin\Debug\Tagger.exe");
 			
 		}
 	}

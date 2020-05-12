@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Tagger.Framework.Main;
+using Viewer;
 
 namespace Tagger
 {
@@ -20,6 +22,7 @@ namespace Tagger
             TagsetEditor editor = new TagsetEditor();
             TagPresenter presenter = new TagPresenter(main,service, editor);
             Application.Run(main);
+            Debugger.Launch();
         }
     }
 }

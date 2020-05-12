@@ -17,14 +17,14 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly INGramView _grams;
 
-        private readonly IIndexService _indexer;
+
         private readonly ISearchService _searcher;
         private readonly INGramService _ngrammer;
-        public NGramPresenter(IMainView main, IIndexService indexer, ISearchService searcher, INGramService ngrammer, INGramView grams)
+        public NGramPresenter(IMainView main, ISearchService searcher, INGramService ngrammer, INGramView grams)
         {
             this._main = main;
             this._grams = grams;
-            this._indexer = indexer;
+            
             this._searcher = searcher;
             this._ngrammer = ngrammer;
 
@@ -38,7 +38,7 @@ namespace Viewer.Framework.Presenters
         {
 
 
-            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, _indexer.TextFieldKey,_grams.Term);
+            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, IndexService.TextFieldKey,_grams.Term);
             
             _grams.DisplayNGrams(_ngrammer.NgramIndex.Keys.ToList());
 

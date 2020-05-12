@@ -8,6 +8,7 @@ using Lucene.Net.Store;
 using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Wintellect.PowerCollections;
@@ -44,29 +45,27 @@ namespace IndexingServices
 		
 	}
 
-	public class IndexService : IIndexService
-	{ 
-
-
-
+	public static class IndexService 
+	{
+		
 		#region fields
-		private int viewerReadIndex = 0;
-		private int taggerReadIndex = 0;
-		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
+		private static int viewerReadIndex = 0;
+		private static int taggerReadIndex = 0;
+		public static BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
-		private int[] lookup = new int[3];
+		private static int[] lookup = new int[3];
 
 
-		public HashSet<string> UserKeys { get; set; } = new HashSet<string>();
-		public string DateFieldKey { get; set; }
-		public string TextFieldKey { get; set; }
-		public string SenderFieldKey { get; set; }
-		public List<string> SelectedFields { get; set; }
-		public string CurrentIndexPath { get; set; }
+		public static HashSet<string> UserKeys { get; set; } = new HashSet<string>();
+		public static string DateFieldKey { get; set; }
+		public static string TextFieldKey { get; set; }
+		public static string SenderFieldKey { get; set; }
+		public static List<string> SelectedFields { get; set; }
+		public static string CurrentIndexPath { get; set; }
 
 		#endregion
 		#region save info
-		private void CheckDir()
+		private static void CheckDir()
 		{
 			if (!System.IO.Directory.Exists(CurrentIndexPath + "\\info"))
 			{
@@ -83,7 +82,7 @@ namespace IndexingServices
 				}
 			}
 		}
-		private void SaveInfoToDisk( int linecount) 
+		private static void SaveInfoToDisk(int linecount) 
 		{
 			
 
@@ -98,7 +97,7 @@ namespace IndexingServices
 			}
 		}
 
-		private void SaveUsersToDisk()
+		private static void SaveUsersToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -111,7 +110,7 @@ namespace IndexingServices
 			}
 		}
 
-		private void SaveFieldsToDisk()
+		private static void SaveFieldsToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -123,7 +122,7 @@ namespace IndexingServices
 				}
 			}
 		}
-		private void SaveStatsToDisk()
+		private static void SaveStatsToDisk()
 		{
 			
 			using (System.IO.StreamWriter file =
@@ -137,7 +136,7 @@ namespace IndexingServices
 		}
 		#endregion
 		#region load info
-		public OrderedDictionary<string,string> LoadInfoFromDisk(string CurrentIndexPath)
+		public static OrderedDictionary<string,string> LoadInfoFromDisk(string CurrentIndexPath)
 		{
 
 			OrderedDictionary<string,string> info = new OrderedDictionary<string,string>();
@@ -152,7 +151,7 @@ namespace IndexingServices
 			return info;
 		}
 
-		public List<string> LoadFieldsFromDisk(string CurrentIndexPath)
+		public static List<string> LoadFieldsFromDisk(string CurrentIndexPath)
 		{
 			List<string> fields = new List<string>();
 			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-fields.txt"))
@@ -168,7 +167,7 @@ namespace IndexingServices
 			return fields;
 		}
 
-		public List<string> LoadUsersFromDisk(string CurrentIndexPath)
+		public static List<string> LoadUsersFromDisk(string CurrentIndexPath)
 		{
 			List<string> users = new List<string>();
 			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
@@ -181,7 +180,7 @@ namespace IndexingServices
 			return users;
 		}
 
-		public BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath)
+		public static BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath)
 		{
 			BTreeDictionary<DateTime, int> stats = new BTreeDictionary<DateTime, int>();
 			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-stats.txt"))
@@ -196,7 +195,7 @@ namespace IndexingServices
 			return stats;
 		}
 		#endregion
-		public void InitLookup(string[] allFields)
+		public static void InitLookup(string[] allFields)
 		{
 			lookup = new int[3];
 			foreach (var field in SelectedFields)
@@ -215,7 +214,7 @@ namespace IndexingServices
 				}
 			}
 		}
-		public List<DynamicMessage> LoadSomeDocuments(int count,bool viewer)
+		public static List<DynamicMessage> LoadSomeDocuments(int count,bool viewer)
 		{
 			List<DynamicMessage> messages = new List<DynamicMessage>();
 			if (viewer)
@@ -252,6 +251,7 @@ namespace IndexingServices
 			}
 			else
 			{
+				
 				for (int i = taggerReadIndex; i < count + taggerReadIndex; i++)
 				{
 					Document document;
@@ -286,7 +286,7 @@ namespace IndexingServices
 			return messages;
 		}
 
-		public int PopulateIndex(string filePath, string[] allFields)
+		public static int PopulateIndex(string filePath, string[] allFields)
 		{
 			
 			int result = 0;
@@ -376,7 +376,7 @@ namespace IndexingServices
 			return result;
 		}
 
-		private void OpenParser(string textFieldKey)
+		private static void OpenParser(string textFieldKey)
 		{
 			if (LuceneService.Analyzer != null)
 			{
@@ -384,12 +384,13 @@ namespace IndexingServices
 			}
 		}
 
-		private void OpenAnalyzers()
+		private static void OpenAnalyzers()
 		{
+			
 			LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
 			LuceneService.NGrammer = new NGramAnalyzer();
 		}
-		public void OpenWriter()
+		public static void OpenWriter()
 		{
 
 			OpenAnalyzers();
@@ -405,19 +406,19 @@ namespace IndexingServices
 
 		}
 
-		private void OpenReader()
+		private static void OpenReader()
 		{
 			
 			LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
 			LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
 		}
 
-		public void OpenDirectory()
+		public static void OpenDirectory()
 		{
 			LuceneService.Dir = FSDirectory.Open(CurrentIndexPath);
 		}
 
-		public void OpenIndex()
+		public static void OpenIndex()
 		{
 			if (LuceneService.Dir != null)
 			{

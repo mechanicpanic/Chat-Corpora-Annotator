@@ -13,12 +13,12 @@ namespace Tagger.Framework.Main
         private readonly ITagView _tagger;
         private readonly ITagService _service;
         private readonly ITagsetView _tagset;
-        private readonly IIndexService _reader;
 
         public TagPresenter(ITagView tagger, ITagService service, ITagsetView tagset)
         {
             this._tagger = tagger;
             this._service = service;
+            this._tagset = tagset;
 
             _tagger.TagsetClick += _tagger_TagsetClick;
             _tagger.LoadMore += _tagger_LoadMore;
@@ -27,12 +27,12 @@ namespace Tagger.Framework.Main
 
         private void _tagger_LoadMore(object sender, EventArgs e)
         {
-            
+            AddDocumentsToDisplay(50);
         }
 
         private void AddDocumentsToDisplay(int count)
         {
-            var list = _reader.LoadSomeDocuments(count, false);
+            var list = IndexService.LoadSomeDocuments(count, false);
             _tagger.Messages.AddRange(list);
             _tagger.DisplayDocuments();
         }

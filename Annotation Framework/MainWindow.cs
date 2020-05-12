@@ -12,7 +12,7 @@ namespace Tagger
 	{
 
 		public Dictionary<string,int> SituationIndex { get; set; }
-		public List<DynamicMessage> Messages { get; set; }
+		public List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -135,9 +135,9 @@ namespace Tagger
 		}
 
 		public void ShowView()
-        {
-            this.Show();
-        }
+		{
+			this.Show();
+		}
 
 		public void CloseView()
 		{
@@ -147,15 +147,15 @@ namespace Tagger
 		public void UpdateTagset(List<string> tags)
 		{
 			listBox1.Items.Clear();
-            foreach (var tag in tags)
-            {
-                listBox1.Items.Add(tag);
-            }
+			foreach (var tag in tags)
+			{
+				listBox1.Items.Add(tag);
+			}
 		}
 
 		public void DisplayDocuments()
 		{
-			throw new NotImplementedException();
+			SetUpChatView();
 		}
 	}
 }
