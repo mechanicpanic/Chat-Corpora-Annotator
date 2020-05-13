@@ -492,6 +492,12 @@
     <Compile Include="UI\NGramSearch.Designer.cs">
       <DependentUpon>NGramSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Suggester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Suggester.Designer.cs">
+      <DependentUpon>Suggester.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TagsetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -543,6 +549,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NGramSearch.resx">
       <DependentUpon>NGramSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Suggester.resx">
+      <DependentUpon>Suggester.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TagsetEditor.resx">
       <DependentUpon>TagsetEditor.cs</DependentUpon>
