@@ -167,9 +167,9 @@ namespace IndexingServices
 			return fields;
 		}
 
-		public static List<string> LoadUsersFromDisk(string CurrentIndexPath)
+		public static HashSet<string> LoadUsersFromDisk(string CurrentIndexPath)
 		{
-			List<string> users = new List<string>();
+			HashSet<string> users = new HashSet<string>();
 			using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
 			{
 				while (!reader.EndOfStream)

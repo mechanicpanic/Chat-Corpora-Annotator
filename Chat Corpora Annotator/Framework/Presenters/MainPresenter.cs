@@ -67,8 +67,8 @@ namespace Viewer.Framework.Presenters
                 
                 IndexService.MessagesPerDay = IndexService.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
 
-                IndexService.UserKeys = IEnumerableExtensionMethods.ToHashSet(IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
-                _main.Usernames = Enumerable.ToList(IndexService.UserKeys);
+                IndexService.UserKeys = IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
+                
 
 
                 MessageContainer.Messages = new List<DynamicMessage>();

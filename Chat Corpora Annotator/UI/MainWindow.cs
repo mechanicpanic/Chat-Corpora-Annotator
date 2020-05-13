@@ -33,23 +33,17 @@ namespace Viewer
 		public event EventHandler NGramClick;
 		public event EventHandler TagClick;
 
-		public List<string> Usernames { get; set; }
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 
 		
 		private Dictionary<string, Color> userColors;
 
-		public List<string> SelectedFields { get; set; }
 		
 
 		public List<DynamicMessage> SearchResults { get; set; }
-		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
 		private bool _fileLoadState = false;
 		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
-		public string TextFieldKey { get; set; }
-		public string DateFieldKey { get; set; }
-		public string SenderFieldKey { get; set; }
 
 		public void SetLineCount(int count)
 		{
@@ -266,7 +260,7 @@ namespace Viewer
 		private void ShowUsers()
 		{
 			userList.CheckBoxes = true;
-			foreach (var user in Usernames)
+			foreach (var user in IndexService.UserKeys)
 			{
 				userList.Items.Add(new ListViewItem(user));
 			}
@@ -277,7 +271,7 @@ namespace Viewer
 		{
 			foreach (var cl in chatTable.AllColumns)
 			{
-				if (cl.Text != TextFieldKey)
+				if (cl.Text != IndexService.TextFieldKey)
 				{
 					cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 				}
@@ -301,7 +295,7 @@ namespace Viewer
 		private void PopulateSenderColors()
 		{
 			userColors = new Dictionary<string, Color>();
-			foreach (var user in Usernames)
+			foreach (var user in IndexService.UserKeys)
 			{
 				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 				userColors.Add(user, tempColor);
@@ -309,7 +303,7 @@ namespace Viewer
 		}
 		private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
 		{
-			if (e.Column.Text == SenderFieldKey)
+			if (e.Column.Text == IndexService.SenderFieldKey)
 			{
 				e.SubItem.ForeColor = userColors[e.SubItem.Text];
 			}
@@ -396,7 +390,7 @@ namespace Viewer
 			//int i = chatTable.IndexOf(messages[key].Block[0]);
 			foreach (var message in MessageContainer.Messages)
 			{
-				DateTime temp = (DateTime)message.contents[DateFieldKey];
+				DateTime temp = (DateTime)message.contents[IndexService.DateFieldKey];
 				if (temp.Date == key)
 				{
 					i = chatTable.IndexOf(message);

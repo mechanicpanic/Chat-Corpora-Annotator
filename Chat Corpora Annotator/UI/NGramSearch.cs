@@ -19,18 +19,18 @@ namespace Viewer.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Split().Length > 1)
-            {
-                MessageBox.Show("Please enter a single term");
-            }
-            else
-            {
-                this.Term = textBox1.Text;
+            //if (textBox1.Text.Split().Length > 1)
+            //{
+            //    MessageBox.Show("Please enter a single term");
+            //}
+            //else
+            //{}
+            this.Term = textBox1.Text;
                 this.maxSize = Int32.Parse(comboBox1.SelectedItem.ToString());
                 this.minSize = Int32.Parse(comboBox2.SelectedItem.ToString());
                 this.ShowUnigrams = checkBox1.Checked;
                 NGramClick?.Invoke(this, EventArgs.Empty);
-            }
+            
         }
 
         public string Term { get; set; }

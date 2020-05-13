@@ -82,12 +82,9 @@ namespace Viewer.UI
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
 			LoadMore?.Invoke(this,EventArgs.Empty);
+			
 		}
 
-		private void panel1_Paint(object sender, PaintEventArgs e)
-		{
-
-		}
 		public void SetUpChatView()
 		{
 
@@ -115,17 +112,17 @@ namespace Viewer.UI
 			chatTable.RebuildColumns();
 
 
-			FormatColumns("text");
+			FormatColumns();
 
 		}
 
 
 
-		private void FormatColumns(string TextFieldKey)
+		private void FormatColumns()
 		{
 			foreach (var cl in chatTable.AllColumns)
 			{
-				if (cl.Text != TextFieldKey)
+				if (cl.Text != IndexService.TextFieldKey)
 				{
 					cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 				}
@@ -162,6 +159,8 @@ namespace Viewer.UI
 		public void DisplayDocuments()
 		{
 			SetUpChatView();
+			chatTable.UpdateObjects(MessageContainer.Messages);
+			chatTable.Invalidate();
 		}
 
 		public void UpdateTagIndex(List<string> tags)

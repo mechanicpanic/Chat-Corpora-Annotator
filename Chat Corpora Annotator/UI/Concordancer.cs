@@ -87,6 +87,7 @@ namespace Viewer.UI
         {
             //richTextBox1.Lines = con;
             List<string> newlines = new List<string>();
+            newlines.Add("Displaying "+con.Length.ToString()+" matches:");
             foreach(var line in con)
             {
                 var newline = PadString(line, Term,Int32.Parse(comboBox1.SelectedItem.ToString()));
