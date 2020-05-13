@@ -23,14 +23,8 @@ namespace Viewer.Framework.Presenters
         {
             this._main = view;
             this._csv = csv;
-            //this._chart = chart;
-            //this._heatmap = heatmap;
             this._searcher = searcher;
-            //this._grams = grams;
-            
 
-            //_view.HeatmapClick += _view_HeatmapClick;
-            //_view.ChartClick += _view_ChartClick;
             
             _main.FindClick += _view_FindClick;
             _main.LoadMoreClick += _view_LoadMoreClick;
@@ -76,7 +70,7 @@ namespace Viewer.Framework.Presenters
                 IndexService.UserKeys = IEnumerableExtensionMethods.ToHashSet(IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
                 _main.Usernames = Enumerable.ToList(IndexService.UserKeys);
 
-                //_main.Messages = new List<DynamicMessage>();
+
                 MessageContainer.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;

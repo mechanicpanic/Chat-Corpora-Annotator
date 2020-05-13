@@ -409,16 +409,16 @@ namespace IndexingServices
 			boolq.Add(query,Occur.MUST);
 			TopDocs hits = LuceneService.Searcher.Search(query, 1);
 			ScoreDoc message = hits.ScoreDocs[0];
-            List<string> data = new List<string>();
-            Document idoc = LuceneService.Searcher.Doc(message.Doc);
-            foreach (var field in SelectedFields)
-            {
-                data.Add(idoc.GetField(field).GetStringValue());
-            }
+			List<string> data = new List<string>();
+			Document idoc = LuceneService.Searcher.Doc(message.Doc);
+			foreach (var field in SelectedFields)
+			{
+				data.Add(idoc.GetField(field).GetStringValue());
+			}
 
-            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetStringValue());
+			return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetStringValue());
 
-        }
+		}
 
 
 	}

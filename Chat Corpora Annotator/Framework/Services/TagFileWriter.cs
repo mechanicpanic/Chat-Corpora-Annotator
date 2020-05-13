@@ -4,27 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using IndexingServices;
 
 namespace Viewer.Framework.Services
 {
     public interface ITagFileWriter
     {
         void WriteMessage(string messageId, string text, string user, string date);
-        void WriteSituation(List<Dictionary<string, string>> messages, string situation);
+        //void WriteSituation(List<Dictionary<string, string>> messages, string situation);
+        void WriteSituation(List<DynamicMessage> messages, string situation);
        void CloseWriter();
-       
+       void OpenWriter();
+
+
     }
     public class TagFileWriter:IDisposable, ITagFileWriter
     {
+        private int index = 0;
         private XmlWriter writer; 
         
-        public TagFileWriter()
+
+        public void OpenWriter()
         {
-            writer = XmlWriter.Create("tagged.xml");
+            writer = XmlWriter.Create(@"C:\Users\voidl\CCA\XMLTest\tagged"+index.ToString()+".xml");
+
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
-
-
+            index++;
         }
         
             public void WriteMessage(string messageId, string text, string user, string date)
@@ -55,6 +61,16 @@ namespace Viewer.Framework.Services
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        public void WriteSituation(List<DynamicMessage> messages,string situation)
+        {
+            writer.WriteStartElement("Situation", situation);
+            foreach (var msg in messages)
+            {
+                WriteMessage(msg.Id, msg.contents[IndexService.TextFieldKey].ToString(), msg.contents[IndexService.SenderFieldKey].ToString(), msg.contents[IndexService.DateFieldKey].ToString());
+            }
+            writer.WriteEndElement();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Viewer
             SearchService searcher = new SearchService();
             HeatmapService heater = new HeatmapService();
 
+
             TagWindow tagger = new TagWindow();
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();

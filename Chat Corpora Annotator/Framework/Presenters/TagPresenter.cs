@@ -35,15 +35,23 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_AddTag(object sender, EventArgs e)
         {
-            _service.AddSituation(_tagger.CurrentSituation);
+            _service.AddSituation(_tagger.CurrentSituation.Item1,_tagger.CurrentSituation.Item2);
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)
         {
-            foreach (var VARIABLE in _tagger.SituationIndex)
+            _writer.OpenWriter();
+            foreach (var list in _service.SituationIndex.Keys)
             {
-                
+                List<DynamicMessage> messages = new List<DynamicMessage>();
+                foreach (var id in list)
+                {
+                    var message = IndexService.RetrieveMessageById(id);
+                    messages.Add(message);
+                }
+                _writer.WriteSituation(messages,_service.SituationIndex[list].Item1);
             }
+            _writer.CloseWriter();
         }
 
         private void _main_TagClick(object sender, EventArgs e)

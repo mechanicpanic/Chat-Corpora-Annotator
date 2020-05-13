@@ -11,9 +11,9 @@ namespace Viewer.UI
 	public partial class TagWindow : Form, ITagView
 	{
 
-		public Dictionary<List<string>,int> SituationIndex { get; set; }
-		public List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
-		public List<string> CurrentSituation { get; set; } = new List<string>();
+		//public Dictionary<List<string>, Tuple<string, int>> SituationIndex { get; set; }
+		
+		public Tuple<List<string>,string> CurrentSituation { get; set; }
 
 		private Dictionary<string, int> TagIndex { get; set;} = new Dictionary<string, int>();
 		public TagWindow()
@@ -21,15 +21,15 @@ namespace Viewer.UI
 			InitializeComponent();
 			//Tags = new List<string>();
 			//SituationIndex = new Dictionary<string, int>();
-			//Tags.Add("Meeting");
-			//Tags.Add("JobDiscussion");
-			//Tags.Add("SoftwareSupport");
-			//Tags.Add("CodeAssistance");
+			TagIndex.Add("Meeting",0);
+			TagIndex.Add("JobDiscussion",0);
+			TagIndex.Add("SoftwareSupport",0);
+			TagIndex.Add("CodeAssistance",0);
 			//foreach(var tag in Tags)
 			//{
 			//	SituationIndex.Add(tag, 0);
 			//}
-		   
+
 		}
 
 		public event EventHandler WriteToDisk;
@@ -55,12 +55,13 @@ namespace Viewer.UI
 
 			if (listBox1.SelectedItem != null && chatTable.SelectedObjects != null)
 			{
-				CurrentSituation.Clear();
-				foreach (var VARIABLE in chatTable.SelectedObjects)
+				List<string> set = new List<string>();
+				foreach (var obj in chatTable.SelectedObjects)
 				{
-					DynamicMessage msg = (DynamicMessage) chatTable.SelectedObject;
-					CurrentSituation.Add(msg.Id);
+					DynamicMessage msg = (DynamicMessage) obj;
+					set.Add(msg.Id);
 				}
+				CurrentSituation = new Tuple<List<string>, string>(set,listBox1.SelectedItem.ToString());
 				
 				AddTag?.Invoke(this,EventArgs.Empty);
 			}
