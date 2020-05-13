@@ -12,6 +12,7 @@ namespace Viewer.Framework.Services
         void WriteMessage(string messageId, string text, string user, string date);
         void WriteSituation(List<Dictionary<string, string>> messages, string situation);
        void CloseWriter();
+       
     }
     public class TagFileWriter:IDisposable, ITagFileWriter
     {

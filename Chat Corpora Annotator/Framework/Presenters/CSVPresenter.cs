@@ -41,8 +41,9 @@ namespace Viewer.Framework.Presenters
             _main.Usernames = IndexService.UserKeys.ToList();
             _main.MessagesPerDay = IndexService.MessagesPerDay;
             int temp = (LuceneService.Writer.MaxDoc) / 5;
-            var list = IndexService.LoadSomeDocuments(temp, true);
-            _main.Messages = list;
+            var list = IndexService.LoadSomeDocuments(temp);
+            //_main.Messages = list;
+            MessageContainer.Messages = list;
 
             IndexService.DateFieldKey = _csv.DateFieldKey;
             IndexService.TextFieldKey = _csv.TextFieldKey;

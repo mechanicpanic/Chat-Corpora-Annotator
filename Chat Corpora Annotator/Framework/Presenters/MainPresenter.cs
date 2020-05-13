@@ -76,7 +76,8 @@ namespace Viewer.Framework.Presenters
                 IndexService.UserKeys = IEnumerableExtensionMethods.ToHashSet(IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName));
                 _main.Usernames = Enumerable.ToList(IndexService.UserKeys);
 
-                _main.Messages = new List<DynamicMessage>();
+                //_main.Messages = new List<DynamicMessage>();
+                MessageContainer.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;
                 IndexService.OpenIndex();
@@ -94,8 +95,9 @@ namespace Viewer.Framework.Presenters
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = IndexService.LoadSomeDocuments(count, true);
-            _main.Messages.AddRange(list);
+            var list = IndexService.LoadSomeDocuments(count);
+            //_main.Messages.AddRange(list);
+            MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
         }
 
@@ -127,7 +129,7 @@ namespace Viewer.Framework.Presenters
                 _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
                 _searcher.SearchText_UserDateFilter(e.Count);
             }
-            var result = _searcher.MakeSearchResultsReadable(_csv.SelectedFields, _csv.DateFieldKey);
+            var result = _searcher.MakeSearchResultsReadable();
             
             _main.SearchResults = result;
             _main.DisplaySearchResults();

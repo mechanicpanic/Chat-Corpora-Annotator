@@ -21,6 +21,8 @@ namespace Viewer.Framework.Views
         void UpdateTagset(List<string> tags);
         void DisplayDocuments();
 
+        void UpdateTagIndex(List<string> tags);
+
     }
     
         

@@ -37,11 +37,11 @@ namespace Viewer
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 
-		private List<DynamicMessage> _messages;
+		
 		private Dictionary<string, Color> userColors;
 
 		public List<string> SelectedFields { get; set; }
-		public List<DynamicMessage> Messages { get { return _messages; } set { _messages = value; } }
+		
 
 		public List<DynamicMessage> SearchResults { get; set; }
 		public BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
@@ -84,9 +84,9 @@ namespace Viewer
 		}
 		public void DisplayDocuments()
 		{
-			chatTable.SetObjects(_messages);
+			chatTable.SetObjects(MessageContainer.Messages);
 			SetUpChatView();
-			chatTable.UpdateObjects(this.Messages);
+			chatTable.UpdateObjects(MessageContainer.Messages);
 			chatTable.Invalidate();
 			LoadDates();
 		}
@@ -238,7 +238,7 @@ namespace Viewer
 			SetDateView();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
-			foreach (var key in _messages[0].contents.Keys)
+			foreach (var key in MessageContainer.Messages[0].contents.Keys)
 			{
 				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x)
@@ -394,7 +394,7 @@ namespace Viewer
 
 			int i = -1;
 			//int i = chatTable.IndexOf(messages[key].Block[0]);
-			foreach (var message in Messages)
+			foreach (var message in MessageContainer.Messages)
 			{
 				DateTime temp = (DateTime)message.contents[DateFieldKey];
 				if (temp.Date == key)
@@ -501,7 +501,7 @@ namespace Viewer
 
 		private void clearButton_Click(object sender, EventArgs e)
 		{
-			chatTable.SetObjects(_messages);
+			chatTable.SetObjects(MessageContainer.Messages);
 			chatTable.Invalidate();
 			foreach (ListViewItem check in userList.CheckedItems)
 			{

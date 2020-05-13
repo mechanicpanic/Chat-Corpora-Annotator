@@ -30,7 +30,8 @@ namespace Viewer
             TagWindow tagger = new TagWindow();
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
-            TagPresenter tagPresenter = new TagPresenter(main,tagger, service, editor);
+            TagFileWriter writer = new TagFileWriter();
+            TagPresenter tagPresenter = new TagPresenter(main,tagger, service, editor,writer);
 
             MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader);

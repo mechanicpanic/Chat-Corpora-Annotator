@@ -23,7 +23,7 @@ namespace Viewer.Framework.Services
 		void SearchText_DateFilter(int count);
 		void SearchText_UserDateFilter(int count);
 
-		List<DynamicMessage> MakeSearchResultsReadable(List<string> selectedFields, string dateFieldKey);
+		List<DynamicMessage> MakeSearchResultsReadable();
 
 	
 		
@@ -66,7 +66,7 @@ namespace Viewer.Framework.Services
 
 		public void ConstructUserFilter(string senderFieldKey, string[] users) { UserFilter = new FieldCacheTermsFilter(senderFieldKey, users); }
 
-		public List<DynamicMessage> MakeSearchResultsReadable(List<string> selectedFields, string dateFieldKey)
+		public List<DynamicMessage> MakeSearchResultsReadable()
 		{
 			List<DynamicMessage> searchResults = new List<DynamicMessage>();
 			for (int i = 0; i < Hits.TotalHits; i++)
@@ -74,11 +74,13 @@ namespace Viewer.Framework.Services
 				List<string> data = new List<string>();
 				ScoreDoc d = Hits.ScoreDocs[i];
 				Document idoc = LuceneService.Searcher.Doc(d.Doc);
-				foreach (var field in selectedFields)
+				foreach (var field in IndexService.SelectedFields)
 				{
 					data.Add(idoc.GetField(field).GetStringValue());
 				}
-				DynamicMessage message = new DynamicMessage(data, selectedFields, dateFieldKey,idoc.GetField("id").GetStringValue());
+
+				DynamicMessage message = new DynamicMessage(data, IndexService.SelectedFields, IndexService.DateFieldKey,
+					idoc.GetField("id").GetStringValue());
 				searchResults.Add(message);
 			}
 			return searchResults;

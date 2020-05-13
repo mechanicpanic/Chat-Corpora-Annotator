@@ -13,11 +13,10 @@ namespace Viewer.Framework.Views
         //string TextFieldKey { get; set; }
         //string DateFieldKey { get; set; }
         //string SenderFieldKey { get; set; }
-
         //List<string> SelectedFields { get; set; }
         List<string> Usernames { get; set; }
         BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
-        List<DynamicMessage> Messages { get; set; }
+        //List<DynamicMessage> Messages { get; set; }
 
         List<DynamicMessage> SearchResults { get; set; }
         string CurrentPath { get; set; }

@@ -15,6 +15,7 @@ namespace Viewer.UI
 		public List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
 		public List<string> CurrentSituation { get; set; } = new List<string>();
 
+		private Dictionary<string, int> TagIndex { get; set;} = new Dictionary<string, int>();
 		public TagWindow()
 		{
 			InitializeComponent();
@@ -63,21 +64,19 @@ namespace Viewer.UI
 				
 				AddTag?.Invoke(this,EventArgs.Empty);
 			}
-			//	var temp = "";
-			//	foreach (var obj in chatTable.SelectedObjects)
-			//	{
-			//		temp = " [" + listBox1.SelectedItem + " ID " + SituationIndex[listBox1.SelectedItem.ToString()] + "]";
-			//		Messages[Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
+				var temp = "";
+				foreach (var obj in chatTable.SelectedObjects)
+				{
+					temp = " [" + listBox1.SelectedItem + " ID " + TagIndex[listBox1.SelectedItem.ToString()] + "]";
+					MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
 
-					
-
-			//	}
-			//	listView1.Items.Add(new ListViewItem(temp));
-			//	listView1.Update();
-			//	SituationIndex[listBox1.SelectedItem.ToString()]++;
-			//	chatTable.UpdateObjects(Messages);
-			//}
+				}
+			listView1.Items.Add(new ListViewItem(temp));
+			listView1.Update();
+			TagIndex[listBox1.SelectedItem.ToString()]++;
+			chatTable.UpdateObjects(MessageContainer.Messages);
 		}
+	
 
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
@@ -88,19 +87,13 @@ namespace Viewer.UI
 		{
 
 		}
-
-		private void MockTagger_Load(object sender, EventArgs e)
-		{
-			
-		}
-
 		public void SetUpChatView()
 		{
 
-			chatTable.SetObjects(this.Messages);
+			chatTable.SetObjects(MessageContainer.Messages);
 			List<OLVColumn> columns = new List<OLVColumn>();
 
-			foreach (var key in Messages[0].contents.Keys)
+			foreach (var key in MessageContainer.Messages[0].contents.Keys)
 			{
 				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x)
@@ -168,6 +161,11 @@ namespace Viewer.UI
 		public void DisplayDocuments()
 		{
 			SetUpChatView();
+		}
+
+		public void UpdateTagIndex(List<string> tags)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

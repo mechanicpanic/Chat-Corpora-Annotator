@@ -50,7 +50,7 @@ namespace IndexingServices
 		
 		#region fields
 		private static int viewerReadIndex = 0;
-		private static int taggerReadIndex = 0;
+		
 		public static BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
 
 		private static int[] lookup = new int[3];
@@ -214,11 +214,11 @@ namespace IndexingServices
 				}
 			}
 		}
-		public static List<DynamicMessage> LoadSomeDocuments(int count,bool viewer)
+		public static List<DynamicMessage> LoadSomeDocuments(int count)
 		{
 			List<DynamicMessage> messages = new List<DynamicMessage>();
-			if (viewer)
-			{
+			
+			
 				for (int i = viewerReadIndex; i < count + viewerReadIndex; i++)
 				{
 					Document document;
@@ -248,41 +248,6 @@ namespace IndexingServices
 				}
 
 				viewerReadIndex = count + viewerReadIndex;
-			}
-			else
-			{
-				
-				for (int i = taggerReadIndex; i < count + taggerReadIndex; i++)
-				{
-					Document document;
-					List<string> temp = new List<string>();
-					if (i < LuceneService.DirReader.MaxDoc)
-					{
-						document = LuceneService.DirReader.Document(i);
-					}
-					else
-					{
-						break;
-					}
-
-					foreach (var field in SelectedFields)
-					{
-
-
-						temp.Add(document.GetField(field).GetStringValue());
-
-
-					}
-
-					DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetStringValue());
-					messages.Add(message);
-
-
-				}
-
-				taggerReadIndex = count + taggerReadIndex;
-			}
-
 			return messages;
 		}
 
@@ -436,6 +401,24 @@ namespace IndexingServices
 				}
 			}
 		}
+
+		public static DynamicMessage RetrieveMessageById(string id)
+		{
+			TermQuery query = new TermQuery(new Term("id",id));
+			BooleanQuery boolq = new BooleanQuery();
+			boolq.Add(query,Occur.MUST);
+			TopDocs hits = LuceneService.Searcher.Search(query, 1);
+			ScoreDoc message = hits.ScoreDocs[0];
+            List<string> data = new List<string>();
+            Document idoc = LuceneService.Searcher.Doc(message.Doc);
+            foreach (var field in SelectedFields)
+            {
+                data.Add(idoc.GetField(field).GetStringValue());
+            }
+
+            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetStringValue());
+
+        }
 
 
 	}

@@ -218,7 +218,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(967, 662);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            
             // 
             // button5
             // 
@@ -270,7 +270,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TagWindow";
             this.Text = "Tagger";
-            this.Load += new System.EventHandler(this.MockTagger_Load);
+           
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);

@@ -58,8 +58,8 @@ namespace Viewer.Framework.Presenters
 
         private void AddDocumentsToDisplay(int count)
         {
-            var list = IndexService.LoadSomeDocuments(count, false);
-            _tagger.Messages.AddRange(list);
+            var list = IndexService.LoadSomeDocuments(count);
+            MessageContainer.Messages.AddRange(list);
             _tagger.DisplayDocuments();
         }
         private void _tagset_SaveTagset(object sender, EventArgs e)
