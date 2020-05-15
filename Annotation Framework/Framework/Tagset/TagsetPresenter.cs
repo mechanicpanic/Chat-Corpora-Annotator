@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tagger.Framework.Main;
 
 
@@ -26,7 +22,7 @@ namespace Tagger.Framework.Tagset
 
         private void _main_TagsetClick(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

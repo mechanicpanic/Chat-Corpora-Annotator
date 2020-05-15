@@ -1,8 +1,7 @@
 ﻿
+using IndexingServices;
 using System;
 using System.Linq;
-using System.Windows.Documents;
-using IndexingServices;
 using Viewer.CSV_Wizard;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
@@ -21,24 +20,24 @@ namespace Viewer.Framework.Presenters
             _main = main;
             _csv = csv;
             _reader = reader;
-            
+
 
             _csv.HeaderSelected += _csv_HeaderSelected;
             _csv.MetadataAdded += _csv_MetadataAdded;
             _csv.ReadyToShow += _csv_ReadyToShow;
 
-            
+
             _main.FileAndIndexSelected += _view_FileAndIndexSelected;
-            
+
             //IndexService.FileIndexed += IndexService_FileIndexed;
-            
-            
+
+
         }
 
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
-            
-            
+
+
             int temp = (LuceneService.Writer.MaxDoc) / 5;
             var list = IndexService.LoadSomeDocuments(temp);
             //_main.Messages = list;
@@ -48,14 +47,14 @@ namespace Viewer.Framework.Presenters
             IndexService.TextFieldKey = _csv.TextFieldKey;
             IndexService.SenderFieldKey = _csv.SenderFieldKey;
 
-            
+
 
             _main.DisplayDocuments();
             _main.FileLoadState = true;
         }
 
 
-        
+
 
 
 
@@ -75,7 +74,7 @@ namespace Viewer.Framework.Presenters
             _csv.AddStep(new LoadingStep());
             _csv.AddStep(new DataLoadedStep());
             _csv.ShowView();
-            
+
         }
 
         private void _csv_HeaderSelected(object sender, EventArgs e)
@@ -94,8 +93,8 @@ namespace Viewer.Framework.Presenters
 
             IndexService.OpenWriter();
             IndexService.InitLookup(_csv.AllFields);
-            var result =  IndexService.PopulateIndex(_main.CurrentPath,_csv.AllFields);
-           if (result == 1)
+            var result = IndexService.PopulateIndex(_main.CurrentPath, _csv.AllFields);
+            if (result == 1)
             {
                 _csv.CorpusIndexed();
             }

@@ -7,6 +7,6 @@ namespace Viewer.CSV_Wizard
         string HeaderTitle { get; }
         string StepType { get; }
         List<string> GetValues();
-        
+
     }
 }

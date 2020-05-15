@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IndexingServices;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 namespace Viewer.Framework.Presenters
@@ -14,14 +11,14 @@ namespace Viewer.Framework.Presenters
 		private readonly IHeatmapView _heat;
 
 		private readonly IHeatmapService _painter;
-		
+
 
 		public HeatmapPresenter(IMainView view, IHeatmapView heat, IHeatmapService painter)
 		{
 			_view = view;
 			_heat = heat;
 			_painter = painter;
-			
+
 
 			_view.HeatmapClick += _view_HeatmapClick;
 		}
@@ -34,7 +31,7 @@ namespace Viewer.Framework.Presenters
 			_heat.FillDates(IndexService.MessagesPerDay.Keys.ToList());
 		}
 
-		
+
 
 
 	}

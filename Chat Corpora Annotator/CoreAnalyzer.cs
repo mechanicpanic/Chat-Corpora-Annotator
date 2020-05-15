@@ -1,17 +1,11 @@
-﻿using System.Collections.Generic;
-using edu.stanford.nlp.ie.crf;
-using edu.stanford.nlp.pipeline;
-using edu.stanford.nlp.time;
+﻿using edu.stanford.nlp.ling;
 using edu.stanford.nlp.parser.lexparser;
-using edu.stanford.nlp.ling;
+using edu.stanford.nlp.pipeline;
 using edu.stanford.nlp.process;
-using java.io;
-
 using edu.stanford.nlp.trees;
-using Viewer.Framework.Services;
-using java.util;
 using edu.stanford.nlp.util;
-using System.Linq;
+using java.util;
+using System.Collections.Generic;
 
 namespace Viewer
 {
@@ -38,6 +32,13 @@ namespace Viewer
             this._NERclassifiers = _NERroot + @"\classifiers";
             this._modelDirectory = root + @"\stanford-corenlp-3.7.0-models";
             this._POSdirectory = _modelDirectory + @"\edu\stanford\nlp\models\pos-tagger\english-left3words\english-left3words-distsim.tagger";
+
+
+
+
+
+
+
         }
 
 
@@ -49,15 +50,15 @@ namespace Viewer
             props.setProperty("ner.model", _NERclassifiers + @"\english.muc.7class.distsim.crf.ser.gz");
             //props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\lexparser\englishPCFG.ser.gz");
             props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\srparser\englishSR.ser.gz");
-            
+
             props.setProperty("ner.useSUTime", "true");
             props.setProperty("ner.applyFineGrained", "false");
             props.setProperty("pos.model", _POSdirectory);
             props.setProperty("sutime.binders", "0");
 
-            var sutimeRules = _root+ @"\sutime\defs.sutime.txt,"
-                              +_root  + @"\sutime\english.holidays.sutime.txt,"
-                              +_root  + @"\sutime\english.sutime.txt";
+            var sutimeRules = _root + @"\sutime\defs.sutime.txt,"
+                              + _root + @"\sutime\english.holidays.sutime.txt,"
+                              + _root + @"\sutime\english.sutime.txt";
             props.setProperty("sutime.rules", sutimeRules);
             props.setProperty("sutime.markTimeRanges", "true");
             props.setProperty("sutime.includeNested", "true");
@@ -68,19 +69,19 @@ namespace Viewer
 
         public bool DetectQuestion()
         {
-            
-                int index = 0;
-                while (index < treeArray.Length)
+
+            int index = 0;
+            while (index < treeArray.Length)
+            {
+                Constituent constituent = (Constituent)treeArray[index];
+
+                if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
                 {
-                    Constituent constituent = (Constituent)treeArray[index];
-
-                    if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
-                    {
-                        return true;
-                    }
-                    index++;
-
+                    return true;
                 }
+                index++;
+
+            }
             return false;
         }
 
@@ -93,7 +94,7 @@ namespace Viewer
 
         //private List<Tree> FoldTree(Tree node)
         //{
-            
+
         //    if (node.isLeaf()) { return nps; }
         //    else
         //    {
@@ -103,13 +104,13 @@ namespace Viewer
         //}
         private bool IsNPwithNNx(Tree node)
         {
-            if(node.label().value().Equals("NP"))
+            if (node.label().value().Equals("NP"))
             {
                 List<Tree> temp = (List<Tree>)node.getChildrenAsList();
-                foreach(Tree sub in temp)
+                foreach (Tree sub in temp)
                 {
                     if (IsNNx(sub)) return true;
-                    
+
                 }
                 return false;
             }
@@ -124,22 +125,22 @@ namespace Viewer
             }
             return false;
         }
-        
 
-    public void CreateParseTree(CoreDocument coredoc)
-    {
-        ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-        for (int i = 0; i < sents.size(); i++)
+
+        public void CreateParseTree(CoreDocument coredoc)
         {
-            CoreMap sentence = (CoreMap)sents.get(i);
+            ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+            for (int i = 0; i < sents.size(); i++)
+            {
+                CoreMap sentence = (CoreMap)sents.get(i);
 
-            this.constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+                this.constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
 
-            Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-            treeArray = treeConstituents.toArray();
+                Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+                treeArray = treeConstituents.toArray();
 
+            }
         }
-    }
 
 
 

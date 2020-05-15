@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System;
-using Wintellect.PowerCollections;
 using Viewer.Framework.Views;
 
 namespace Viewer
@@ -21,11 +20,11 @@ namespace Viewer
         {
             InitializeComponent();
             panel1.Paint += panel1_Paint;
-            
+
         }
 
 
-       
+
         public void DrawHeatmap()
         {
             RectangleWidth = panel1.Width / Colors.Count;
@@ -46,18 +45,18 @@ namespace Viewer
         {
             // Create a local version of the graphics object for the PictureBox.
             Graphics g = e.Graphics;
-            
-            for(int i = 0; i < Rectangles.Count; i++)
+
+            for (int i = 0; i < Rectangles.Count; i++)
             {
                 using (SolidBrush heatBrush = new SolidBrush(Colors[i]))
                 {
                     g.FillRectangle(heatBrush, Rectangles[i]);
                 }
-                
-                
+
+
             }
 
-            
+
 
 
         }
@@ -65,8 +64,8 @@ namespace Viewer
         public void FillDates(List<DateTime> dates)
         {
             label1.Text = dates[0].Date.ToString("dd/MM/yyyy");
-            label3.Text = dates[dates.Count-1].Date.ToString("dd/MM/yyyy");
-            label2.Text = dates[(dates.Count - 1)/2].Date.ToString("dd/MM/yyyy");
+            label3.Text = dates[dates.Count - 1].Date.ToString("dd/MM/yyyy");
+            label2.Text = dates[(dates.Count - 1) / 2].Date.ToString("dd/MM/yyyy");
 
         }
 

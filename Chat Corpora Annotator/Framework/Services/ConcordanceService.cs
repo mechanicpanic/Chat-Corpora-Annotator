@@ -1,12 +1,8 @@
-﻿using Lucene.Net.Search;
+﻿using IndexingServices;
 using Lucene.Net.Documents;
-using Lucene.Net.Search.Spans;
+using Lucene.Net.Search;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
 
 namespace Viewer.Framework.Services
 {
@@ -19,9 +15,11 @@ namespace Viewer.Framework.Services
     }
     public class ConcordanceService : IConcordanceService
     {
-        public Query ConQuery { 
-            get; 
-            set; }
+        public Query ConQuery
+        {
+            get;
+            set;
+        }
         public List<string> Concordance { get; set; }
 
         public void FindConcordance(string query, string TextFieldKey, int count)
@@ -30,12 +28,12 @@ namespace Viewer.Framework.Services
             TopDocs Hits = LuceneService.Searcher.Search(ConQuery, count);
             for (int i = 0; i < Hits.ScoreDocs.Length; i++)
             {
-                
+
                 ScoreDoc d = Hits.ScoreDocs[i];
                 Document idoc = LuceneService.Searcher.Doc(d.Doc);
                 Concordance.Add(idoc.GetField(TextFieldKey).GetStringValue());
-                
-                
+
+
             }
 
 

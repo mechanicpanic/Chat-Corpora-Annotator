@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tagger.Framework.Tagset;
 
@@ -34,7 +28,7 @@ namespace Tagger
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(textBox1.Text) && !listBox1.Items.Contains(textBox1.Text))
+            if (String.IsNullOrEmpty(textBox1.Text) && !listBox1.Items.Contains(textBox1.Text))
             {
                 listBox1.Items.Add(textBox1.Text);
             }
@@ -46,11 +40,11 @@ namespace Tagger
             {
                 foreach (int index in listBox1.SelectedIndices)
                 {
-                    
+
                     listBox1.Items.RemoveAt(index);
                 }
                 listBox1.SelectedItems.Clear();
-                
+
             }
         }
 
@@ -63,7 +57,7 @@ namespace Tagger
                     CurrentTags.Add(item.ToString());
                 }
             }
-            SaveTagset?.Invoke(this,EventArgs.Empty);
+            SaveTagset?.Invoke(this, EventArgs.Empty);
         }
     }
 }

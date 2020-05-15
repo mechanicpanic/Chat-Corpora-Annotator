@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Lucene.Net.Documents;
+using System;
 using System.Collections.Generic;
-using Lucene.Net.Documents;
 
 namespace IndexingServices
 {
@@ -41,7 +41,7 @@ namespace IndexingServices
             //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
 
-            
+
             for (int i = 0; i < fields.Length; i++)
             {
                 if (selectedFields.Contains(fields[i]))
@@ -84,7 +84,7 @@ namespace IndexingServices
         {
             //this.Id = Guid.NewGuid();
             this.Id = id;
-            if(data.Count != selectedFields.Count)
+            if (data.Count != selectedFields.Count)
             {
                 throw new Exception("Wrong array size");
 
@@ -92,12 +92,12 @@ namespace IndexingServices
             else
             {
                 this.contents = new Dictionary<string, object>();
-                for(int i = 0; i < data.Count;i++)
+                for (int i = 0; i < data.Count; i++)
                 {
-                    if(selectedFields[i] == dateFieldKey)
+                    if (selectedFields[i] == dateFieldKey)
                     {
                         contents.Add(selectedFields[i], DateTools.StringToDate(data[i]));
-                        
+
                     }
                     else
                     {
@@ -114,10 +114,10 @@ namespace IndexingServices
             DynamicMessage otherMessage = obj as DynamicMessage;
             if (otherMessage != null)
             {
-                
-                    DateTime temp = (DateTime)contents[dateFieldKey];
-                    return temp.CompareTo(otherMessage.contents[dateFieldKey]);
-                
+
+                DateTime temp = (DateTime)contents[dateFieldKey];
+                return temp.CompareTo(otherMessage.contents[dateFieldKey]);
+
             }
             else
             {

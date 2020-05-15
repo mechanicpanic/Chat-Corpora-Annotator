@@ -1,7 +1,6 @@
-﻿using CSharpTest.Net.Collections;
+﻿using IndexingServices;
 using System;
 using System.Collections.Generic;
-using IndexingServices;
 
 namespace Viewer.Framework.Views
 {
@@ -18,7 +17,7 @@ namespace Viewer.Framework.Views
         void DisplayDocuments();
         void DisplaySearchResults();
 
-        
+
         IConcordanceView CreateConcordancer();
 
         INGramView CreateNgramView();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Tagger.Framework.Main
 {
@@ -14,7 +10,7 @@ namespace Tagger.Framework.Main
         void UpdateTagset(List<string> tags);
 
     }
-    public class TagService: ITagService
+    public class TagService : ITagService
     {
         public List<string> Tagset { get; set; }
         public Dictionary<string, int> SituationIndex { get; set; }

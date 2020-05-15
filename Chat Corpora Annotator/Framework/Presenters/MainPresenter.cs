@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using IndexingServices;
-using Viewer.Framework.Views;
-using Viewer.Framework.Services;
+﻿using IndexingServices;
 using Lucene.Net.Index;
-using SD.Tools.BCLExtensions.CollectionsRelated;
+using System;
+using System.Collections.Generic;
+using Viewer.Framework.Services;
+using Viewer.Framework.Views;
+
 
 namespace Viewer.Framework.Presenters
 {
@@ -15,17 +14,17 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly ICSVView _csv;
         private readonly ISearchService _searcher;
-        
-       
 
 
-        public MainPresenter(IMainView view,ICSVView csv, ISearchService searcher, IHeatmapView heatmap)
+
+
+        public MainPresenter(IMainView view, ICSVView csv, ISearchService searcher, IHeatmapView heatmap)
         {
             this._main = view;
             this._csv = csv;
             this._searcher = searcher;
 
-            
+
             _main.FindClick += _view_FindClick;
             _main.LoadMoreClick += _view_LoadMoreClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
@@ -56,7 +55,7 @@ namespace Viewer.Framework.Presenters
         {
             IndexService.CurrentIndexPath = _main.CurrentIndexPath;
             IndexService.OpenDirectory();
-            if(DirectoryReader.IndexExists(LuceneService.Dir))
+            if (DirectoryReader.IndexExists(LuceneService.Dir))
             {
                 var info = IndexService.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
@@ -64,18 +63,18 @@ namespace Viewer.Framework.Presenters
                 IndexService.SenderFieldKey = info["SenderFieldKey"];
                 IndexService.DateFieldKey = info["DateFieldKey"];
                 IndexService.SelectedFields = IndexService.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
-                
+
                 IndexService.MessagesPerDay = IndexService.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
 
                 IndexService.UserKeys = IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
-                
+
 
 
                 MessageContainer.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;
                 IndexService.OpenIndex();
-               
+
                 AddDocumentsToDisplay(200);
             }
         }
@@ -101,21 +100,22 @@ namespace Viewer.Framework.Presenters
         {
 
             _searcher.UserQuery = LuceneService.Parser.Parse(e.Query);
-            if (!e.FilteredByDate && !e.FilteredByUser) {
-               _searcher.SearchText(e.Count);
-                
-                
+            if (!e.FilteredByDate && !e.FilteredByUser)
+            {
+                _searcher.SearchText(e.Count);
+
+
             }
             else if (e.FilteredByDate && !e.FilteredByUser)
             {
-                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start,e.Finish);
+                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start, e.Finish);
                 _searcher.SearchText_DateFilter(e.Count);
 
             }
             else if (!e.FilteredByDate && e.FilteredByUser)
             {
                 _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
-               _searcher.SearchText_UserFilter(e.Count);
+                _searcher.SearchText_UserFilter(e.Count);
             }
             else if (e.FilteredByDate && e.FilteredByUser)
             {
@@ -124,13 +124,13 @@ namespace Viewer.Framework.Presenters
                 _searcher.SearchText_UserDateFilter(e.Count);
             }
             var result = _searcher.MakeSearchResultsReadable();
-            
+
             _main.SearchResults = result;
             _main.DisplaySearchResults();
         }
 
-       
-        
+
+
     }
 
 

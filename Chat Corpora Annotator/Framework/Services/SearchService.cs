@@ -1,148 +1,148 @@
 ﻿
-using Lucene.Net.Search;
+using IndexingServices;
 using Lucene.Net.Documents;
+using Lucene.Net.Queries;
+using Lucene.Net.Search;
 using System;
 using System.Collections.Generic;
-using Lucene.Net.Queries;
-using IndexingServices;
 
 
 namespace Viewer.Framework.Services
 {
-	public interface ISearchService
-	{
-		
-		Query UserQuery { get; set; }
-		FieldCacheTermsFilter UserFilter { get; set; }
+    public interface ISearchService
+    {
 
-		TopDocs Hits { get; set; }
-		void ConstructUserFilter(string senderFieldKey, string[] users);
-		void ConstructDateFilter(string dateFieldKey, DateTime start, DateTime finish);
-		void SearchText(int count);
-		void SearchText_UserFilter(int count);
-		void SearchText_DateFilter(int count);
-		void SearchText_UserDateFilter(int count);
+        Query UserQuery { get; set; }
+        FieldCacheTermsFilter UserFilter { get; set; }
 
-		List<DynamicMessage> MakeSearchResultsReadable();
+        TopDocs Hits { get; set; }
+        void ConstructUserFilter(string senderFieldKey, string[] users);
+        void ConstructDateFilter(string dateFieldKey, DateTime start, DateTime finish);
+        void SearchText(int count);
+        void SearchText_UserFilter(int count);
+        void SearchText_DateFilter(int count);
+        void SearchText_UserDateFilter(int count);
 
-	
-		
-	}
+        List<DynamicMessage> MakeSearchResultsReadable();
 
 
 
-	public class SearchService : ISearchService
+    }
 
-	{
-		public TopDocs Hits { get; set; }
-		public Query UserQuery { get; set; }
-		public FieldCacheTermsFilter UserFilter { get; set; }
 
-		public FieldCacheRangeFilter<string> DateFilter { get; set; }
 
-		public void ConstructDateFilter(string dateFieldKey, DateTime start, DateTime finish)
-		{
-			string startString = DateTools.DateToString(start, DateTools.Resolution.MILLISECOND);
-			string finishString = DateTools.DateToString(finish, DateTools.Resolution.MILLISECOND);
-			if (!String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
-			{
-				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
-					 lowerVal: startString, includeLower: true,
-					 upperVal: finishString, includeUpper: true);
-			}
-			else if (String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
-			{
-				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
-					 lowerVal: startString, includeLower: true,
-					 upperVal: null, includeUpper: false);
-			}
-			else if (!String.IsNullOrEmpty(startString) && String.IsNullOrEmpty(finishString))
-			{
-				DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
-					 lowerVal: null, includeLower: false,
-					 upperVal: finishString, includeUpper: true);
-			}
-		}
+    public class SearchService : ISearchService
 
-		public void ConstructUserFilter(string senderFieldKey, string[] users) { UserFilter = new FieldCacheTermsFilter(senderFieldKey, users); }
+    {
+        public TopDocs Hits { get; set; }
+        public Query UserQuery { get; set; }
+        public FieldCacheTermsFilter UserFilter { get; set; }
 
-		public List<DynamicMessage> MakeSearchResultsReadable()
-		{
-			List<DynamicMessage> searchResults = new List<DynamicMessage>();
-			for (int i = 0; i < Hits.TotalHits; i++)
-			{
-				List<string> data = new List<string>();
-				ScoreDoc d = Hits.ScoreDocs[i];
-				Document idoc = LuceneService.Searcher.Doc(d.Doc);
-				foreach (var field in IndexService.SelectedFields)
-				{
-					data.Add(idoc.GetField(field).GetStringValue());
-				}
+        public FieldCacheRangeFilter<string> DateFilter { get; set; }
 
-				DynamicMessage message = new DynamicMessage(data, IndexService.SelectedFields, IndexService.DateFieldKey,
-					idoc.GetField("id").GetStringValue());
-				searchResults.Add(message);
-			}
-			return searchResults;
-		}
+        public void ConstructDateFilter(string dateFieldKey, DateTime start, DateTime finish)
+        {
+            string startString = DateTools.DateToString(start, DateTools.Resolution.MILLISECOND);
+            string finishString = DateTools.DateToString(finish, DateTools.Resolution.MILLISECOND);
+            if (!String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
+            {
+                DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+                     lowerVal: startString, includeLower: true,
+                     upperVal: finishString, includeUpper: true);
+            }
+            else if (String.IsNullOrEmpty(startString) && !String.IsNullOrEmpty(finishString))
+            {
+                DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+                     lowerVal: startString, includeLower: true,
+                     upperVal: null, includeUpper: false);
+            }
+            else if (!String.IsNullOrEmpty(startString) && String.IsNullOrEmpty(finishString))
+            {
+                DateFilter = FieldCacheRangeFilter.NewStringRange(dateFieldKey,
+                     lowerVal: null, includeLower: false,
+                     upperVal: finishString, includeUpper: true);
+            }
+        }
 
-		public void SearchText(int count)
-		{
-			
-			if (UserQuery != null)
-			{
+        public void ConstructUserFilter(string senderFieldKey, string[] users) { UserFilter = new FieldCacheTermsFilter(senderFieldKey, users); }
 
-				Hits = LuceneService.Searcher.Search(UserQuery, count);
-				
-			}
+        public List<DynamicMessage> MakeSearchResultsReadable()
+        {
+            List<DynamicMessage> searchResults = new List<DynamicMessage>();
+            for (int i = 0; i < Hits.TotalHits; i++)
+            {
+                List<string> data = new List<string>();
+                ScoreDoc d = Hits.ScoreDocs[i];
+                Document idoc = LuceneService.Searcher.Doc(d.Doc);
+                foreach (var field in IndexService.SelectedFields)
+                {
+                    data.Add(idoc.GetField(field).GetStringValue());
+                }
 
-		}
+                DynamicMessage message = new DynamicMessage(data, IndexService.SelectedFields, IndexService.DateFieldKey,
+                    idoc.GetField("id").GetStringValue());
+                searchResults.Add(message);
+            }
+            return searchResults;
+        }
 
-		public void SearchText_DateFilter(int count)
-		{
-			if (UserQuery!= null)
-			{
-				if (DateFilter != null)
-				{
-					Hits = LuceneService.Searcher.Search(UserQuery, DateFilter, count);
-				}
-			}
-		}
+        public void SearchText(int count)
+        {
 
-		public void SearchText_UserDateFilter(int count)
-		{
-			if (UserQuery != null)
-			{
-				if (DateFilter != null)
-				{
-					if (UserFilter != null)
+            if (UserQuery != null)
+            {
 
-					{
-						var filter = new BooleanFilter();
-						filter.Add(new FilterClause(DateFilter, Occur.MUST));
-						filter.Add(new FilterClause(UserFilter, Occur.MUST));
-						Hits = LuceneService.Searcher.Search(UserQuery, filter, count);
-					}
-				}
-			}
-		}
+                Hits = LuceneService.Searcher.Search(UserQuery, count);
 
-		public void SearchText_UserFilter(int count)
-		{
-			
-			if (UserQuery != null)
-			{
-				if (UserFilter != null)
-				{
-					Hits = LuceneService.Searcher.Search(UserQuery, UserFilter, count);
-					
-				}
-			}
-			
-		}
+            }
 
-		
+        }
 
-		
-	}
+        public void SearchText_DateFilter(int count)
+        {
+            if (UserQuery != null)
+            {
+                if (DateFilter != null)
+                {
+                    Hits = LuceneService.Searcher.Search(UserQuery, DateFilter, count);
+                }
+            }
+        }
+
+        public void SearchText_UserDateFilter(int count)
+        {
+            if (UserQuery != null)
+            {
+                if (DateFilter != null)
+                {
+                    if (UserFilter != null)
+
+                    {
+                        var filter = new BooleanFilter();
+                        filter.Add(new FilterClause(DateFilter, Occur.MUST));
+                        filter.Add(new FilterClause(UserFilter, Occur.MUST));
+                        Hits = LuceneService.Searcher.Search(UserQuery, filter, count);
+                    }
+                }
+            }
+        }
+
+        public void SearchText_UserFilter(int count)
+        {
+
+            if (UserQuery != null)
+            {
+                if (UserFilter != null)
+                {
+                    Hits = LuceneService.Searcher.Search(UserQuery, UserFilter, count);
+
+                }
+            }
+
+        }
+
+
+
+
+    }
 }

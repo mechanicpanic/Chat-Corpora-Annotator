@@ -26,11 +26,11 @@ namespace Viewer.UI
             //else
             //{}
             this.Term = textBox1.Text;
-                this.maxSize = Int32.Parse(comboBox1.SelectedItem.ToString());
-                this.minSize = Int32.Parse(comboBox2.SelectedItem.ToString());
-                this.ShowUnigrams = checkBox1.Checked;
-                NGramClick?.Invoke(this, EventArgs.Empty);
-            
+            this.maxSize = Int32.Parse(comboBox1.SelectedItem.ToString());
+            this.minSize = Int32.Parse(comboBox2.SelectedItem.ToString());
+            this.ShowUnigrams = checkBox1.Checked;
+            NGramClick?.Invoke(this, EventArgs.Empty);
+
         }
 
         public string Term { get; set; }
@@ -44,7 +44,7 @@ namespace Viewer.UI
         public void CloseView()
         {
             this.Dispose();
-            
+
         }
 
         public void DisplayNGrams(List<string> grams)

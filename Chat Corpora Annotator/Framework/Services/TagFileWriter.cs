@@ -1,10 +1,7 @@
-﻿using System;
+﻿using IndexingServices;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using IndexingServices;
 
 namespace Viewer.Framework.Services
 {
@@ -13,27 +10,27 @@ namespace Viewer.Framework.Services
         void WriteMessage(string messageId, string text, string user, string date);
         //void WriteSituation(List<Dictionary<string, string>> messages, string situation);
         void WriteSituation(List<DynamicMessage> messages, string situation);
-       void CloseWriter();
-       void OpenWriter();
+        void CloseWriter();
+        void OpenWriter();
 
 
     }
-    public class TagFileWriter:IDisposable, ITagFileWriter
+    public class TagFileWriter : IDisposable, ITagFileWriter
     {
         private int index = 0;
-        private XmlWriter writer; 
-        
+        private XmlWriter writer;
+
 
         public void OpenWriter()
         {
-            writer = XmlWriter.Create(@"C:\Users\voidl\CCA\XMLTest\tagged"+index.ToString()+".xml");
+            writer = XmlWriter.Create(@"C:\Users\voidl\CCA\XMLTest\tagged" + index.ToString() + ".xml");
 
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
             index++;
         }
-        
-            public void WriteMessage(string messageId, string text, string user, string date)
+
+        public void WriteMessage(string messageId, string text, string user, string date)
         {
             writer.WriteStartElement("Message");
             writer.WriteAttributeString("id", messageId);
@@ -43,12 +40,13 @@ namespace Viewer.Framework.Services
             writer.WriteEndElement();
         }
 
-        public void WriteSituation(List<Dictionary<string,string>> messages, string situation)
+        public void WriteSituation(List<Dictionary<string, string>> messages, string situation)
         {
             writer.WriteStartElement("Situation", situation);
-            foreach (var msg in messages) {
+            foreach (var msg in messages)
+            {
                 WriteMessage(msg["id"], msg["text"], msg["user"], msg["date"]);
-                    }
+            }
             writer.WriteEndElement();
         }
         public void CloseWriter()
@@ -63,7 +61,7 @@ namespace Viewer.Framework.Services
             throw new NotImplementedException();
         }
 
-        public void WriteSituation(List<DynamicMessage> messages,string situation)
+        public void WriteSituation(List<DynamicMessage> messages, string situation)
         {
             writer.WriteStartElement("Situation", situation);
             foreach (var msg in messages)

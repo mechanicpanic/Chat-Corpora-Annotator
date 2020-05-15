@@ -16,11 +16,11 @@ namespace Viewer
         {
 
             InitializeComponent();
-            
-           
+
+
         }
 
-        public ChartValues<int> ChartValues { get ; set ; }
+        public ChartValues<int> ChartValues { get; set; }
         public List<string> ChartLabels { get; set; }
 
         public void CloseView()

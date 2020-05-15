@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -20,14 +14,14 @@ namespace Viewer.UI
             comboBox1.SelectedText = "20";
 
         }
-     
+
         private string PadString(string line, string term, int count)
-         {
+        {
             string left;
             string center;
             string right;
             int index = line.ToLower().IndexOf(term);
-            if(index != -1)
+            if (index != -1)
             {
                 left = line.Substring(0, index);
                 center = line.Substring(index, term.Length);
@@ -46,7 +40,7 @@ namespace Viewer.UI
             {
                 if (left.Length < count)
                 {
-                    left = left.PadLeft(count+3);
+                    left = left.PadLeft(count + 3);
 
                 }
                 else
@@ -58,14 +52,14 @@ namespace Viewer.UI
             else
             {
                 left = " ";
-                left = left.PadLeft(count+3);
+                left = left.PadLeft(count + 3);
             }
 
             if (!String.IsNullOrEmpty(right))
             {
                 if (right.Length < count)
                 {
-                    right = right.PadRight(count+3);
+                    right = right.PadRight(count + 3);
                 }
                 else
                 {
@@ -77,25 +71,25 @@ namespace Viewer.UI
             else
             {
                 right = " ";
-                
+
                 right = right.PadRight(count);
             }
-            
+
             return left + center + right;
         }
         public void DisplayConcordance(string[] con)
         {
             //richTextBox1.Lines = con;
             List<string> newlines = new List<string>();
-            newlines.Add("Displaying "+con.Length.ToString()+" matches:");
-            foreach(var line in con)
+            newlines.Add("Displaying " + con.Length.ToString() + " matches:");
+            foreach (var line in con)
             {
-                var newline = PadString(line, Term,Int32.Parse(comboBox1.SelectedItem.ToString()));
+                var newline = PadString(line, Term, Int32.Parse(comboBox1.SelectedItem.ToString()));
                 newlines.Add(newline);
             }
             richTextBox1.Lines = newlines.ToArray();
-            
-            
+
+
         }
         public string Term { get; set; }
         public bool IsControl { get { return true; } }
@@ -118,7 +112,7 @@ namespace Viewer.UI
 
         public void ShowView()
         {
-            
+
             this.Show();
         }
 

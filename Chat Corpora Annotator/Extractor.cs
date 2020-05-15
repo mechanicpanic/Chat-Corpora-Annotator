@@ -1,16 +1,9 @@
 ﻿using CSharpTest.Net.Collections;
-using edu.stanford.nlp.ling;
 using edu.stanford.nlp.pipeline;
-using edu.stanford.nlp.trees;
-using edu.stanford.nlp.util;
+using IndexingServices;
 using java.util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
-using Viewer.Framework.Services;
 
 namespace Viewer
 {
@@ -19,9 +12,9 @@ namespace Viewer
         BTreeDictionary<string, bool> CodeStopWords { get; set; }
         BTreeDictionary<string, string> DateList { get; set; } = new BTreeDictionary<string, string>();
         BTreeDictionary<string, string> TimeList { get; set; } = new BTreeDictionary<string, string>();
-        BTreeDictionary<string, string> OrgList { get; set; }  = new BTreeDictionary<string, string>();
-        BTreeDictionary<string, string> LocList { get; set; }  = new BTreeDictionary<string, string>();
-        
+        BTreeDictionary<string, string> OrgList { get; set; } = new BTreeDictionary<string, string>();
+        BTreeDictionary<string, string> LocList { get; set; } = new BTreeDictionary<string, string>();
+
         BTreeDictionary<string, List<string>> NounList { get; set; } = new BTreeDictionary<string, List<string>>();
         public CoreAnalyzer _analyzer { get; set; }
         public StanfordCoreNLP pipe { get; set; }
@@ -40,15 +33,15 @@ namespace Viewer
         }
         //public bool DetectMeeting()
         //{
-            
+
         //}
         //public bool DetectCodeHelp()
         //{
-            
+
         //}
         //public bool DetectAssistance() { }
 
-        private void ExtractNERTags(CoreDocument coredoc,Lucene.Net.Documents.Document document)
+        private void ExtractNERTags(CoreDocument coredoc, Lucene.Net.Documents.Document document)
         {
             List nerList = coredoc.entityMentions();
             for (int j = 0; j < nerList.size(); j++)
@@ -68,7 +61,7 @@ namespace Viewer
                 }
                 if (em.entityType() == "TIME")
                 {
-                    
+
 
                     var timekey = document.GetField("id").GetStringValue();
                     if (!TimeList.ContainsKey(timekey))
@@ -80,8 +73,9 @@ namespace Viewer
                         TimeList.TryUpdate(timekey, TimeList[timekey] + ", " + em.text());
                     }
                 }
-            
-                if (em.entityType() == "LOCATION") {
+
+                if (em.entityType() == "LOCATION")
+                {
                     var lockey = document.GetField("id").GetStringValue();
                     if (!LocList.ContainsKey(lockey))
                     {
@@ -92,7 +86,8 @@ namespace Viewer
                         LocList.TryUpdate(lockey, LocList[lockey] + ", " + em.text());
                     }
                 }
-                if (em.entityType() == "ORGANIZATION") {
+                if (em.entityType() == "ORGANIZATION")
+                {
                     var orgkey = document.GetField("id").GetStringValue();
                     if (!OrgList.ContainsKey(orgkey))
                     {
@@ -133,25 +128,26 @@ namespace Viewer
 
 
         }
-        
+
 
         public void Extract()
         {
-            if(LuceneService.DirReader!=null)
+            if (LuceneService.DirReader != null)
             {
-                for(int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
+                for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
                 {
                     Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
                     CoreDocument coredoc = GetAnnotatedDocument(document.GetField("text").GetStringValue());
                     ExtractNERTags(coredoc, document);
-                    ExtractNouns(coredoc,document);
+                    ExtractNouns(coredoc, document);
                     _analyzer.CreateParseTree(coredoc);
                     var q = _analyzer.DetectQuestion();
                     Console.WriteLine(q.ToString());
-                    foreach (var a in this.NounList[document.GetField("id").GetStringValue()]) {
-                        Console.Write(a+" ");
-                            }
-                    
+                    foreach (var a in this.NounList[document.GetField("id").GetStringValue()])
+                    {
+                        Console.Write(a + " ");
+                    }
+
                 }
                 int h = 5;
             }

@@ -2,7 +2,6 @@
 using IndexingServices;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -12,19 +11,19 @@ namespace Viewer.UI
 	{
 
 		//public Dictionary<List<string>, Tuple<string, int>> SituationIndex { get; set; }
-		
-		public Tuple<List<string>,string> CurrentSituation { get; set; }
 
-		private Dictionary<string, int> TagIndex { get; set;} = new Dictionary<string, int>();
+		public Tuple<List<string>, string> CurrentSituation { get; set; }
+
+		private Dictionary<string, int> TagIndex { get; set; } = new Dictionary<string, int>();
 		public TagWindow()
 		{
 			InitializeComponent();
 			//Tags = new List<string>();
 			//SituationIndex = new Dictionary<string, int>();
-			TagIndex.Add("Meeting",0);
-			TagIndex.Add("JobDiscussion",0);
-			TagIndex.Add("SoftwareSupport",0);
-			TagIndex.Add("CodeAssistance",0);
+			TagIndex.Add("Meeting", 0);
+			TagIndex.Add("JobDiscussion", 0);
+			TagIndex.Add("SoftwareSupport", 0);
+			TagIndex.Add("CodeAssistance", 0);
 			//foreach(var tag in Tags)
 			//{
 			//	SituationIndex.Add(tag, 0);
@@ -41,13 +40,13 @@ namespace Viewer.UI
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			TagsetClick?.Invoke(this,EventArgs.Empty);
+			TagsetClick?.Invoke(this, EventArgs.Empty);
 
 		}
 
 		private void button4_Click(object sender, EventArgs e)
 		{
-			WriteToDisk?.Invoke(this,EventArgs.Empty);
+			WriteToDisk?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void button2_Click(object sender, EventArgs e)
@@ -58,31 +57,31 @@ namespace Viewer.UI
 				List<string> set = new List<string>();
 				foreach (var obj in chatTable.SelectedObjects)
 				{
-					DynamicMessage msg = (DynamicMessage) obj;
+					DynamicMessage msg = (DynamicMessage)obj;
 					set.Add(msg.Id);
 				}
-				CurrentSituation = new Tuple<List<string>, string>(set,listBox1.SelectedItem.ToString());
-				
-				AddTag?.Invoke(this,EventArgs.Empty);
-			}
-				var temp = "";
-				foreach (var obj in chatTable.SelectedObjects)
-				{
-					temp = " [" + listBox1.SelectedItem + " ID " + TagIndex[listBox1.SelectedItem.ToString()] + "]";
-					MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
+				CurrentSituation = new Tuple<List<string>, string>(set, listBox1.SelectedItem.ToString());
 
-				}
+				AddTag?.Invoke(this, EventArgs.Empty);
+			}
+			var temp = "";
+			foreach (var obj in chatTable.SelectedObjects)
+			{
+				temp = " [" + listBox1.SelectedItem + " ID " + TagIndex[listBox1.SelectedItem.ToString()] + "]";
+				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
+
+			}
 			listView1.Items.Add(new ListViewItem(temp));
 			listView1.Update();
 			TagIndex[listBox1.SelectedItem.ToString()]++;
 			chatTable.UpdateObjects(MessageContainer.Messages);
 		}
-	
+
 
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
-			LoadMore?.Invoke(this,EventArgs.Empty);
-			
+			LoadMore?.Invoke(this, EventArgs.Empty);
+
 		}
 
 		public void SetUpChatView()
@@ -129,7 +128,7 @@ namespace Viewer.UI
 				else
 				{
 					cl.FillsFreeSpace = true;
-					
+
 
 				}
 			}

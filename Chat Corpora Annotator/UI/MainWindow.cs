@@ -1,18 +1,14 @@
 ﻿using BrightIdeasSoftware;
+using IndexingServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-
-
-using CSharpTest.Net.Collections;
-using System.Drawing;
 using Viewer.Framework.Views;
-using IndexingServices;
 using Viewer.UI;
-using System.IO;
 
 namespace Viewer
 {
@@ -36,10 +32,10 @@ namespace Viewer
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 
-		
+
 		private Dictionary<string, Color> userColors;
 
-		
+
 
 		public List<DynamicMessage> SearchResults { get; set; }
 		private bool _fileLoadState = false;
@@ -369,9 +365,9 @@ namespace Viewer
 
 		private void AddDateToDateView(DateTime date)
 		{
-			
+
 			if (!dateView.Items.ContainsKey(date.Date.ToString("dd/MM/yyyy")))
-			
+
 			{
 				var temp = new ListViewItem(date.Date.ToString("dd/MM/yyyy"));
 				temp.Name = date.Date.ToString("dd/MM/yyyy");
@@ -639,10 +635,9 @@ namespace Viewer
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			TagClick?.Invoke(this,EventArgs.Empty);
-			
+			TagClick?.Invoke(this, EventArgs.Empty);
+
 		}
 	}
 }
 
- 

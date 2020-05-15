@@ -1,10 +1,6 @@
-﻿using Viewer.CSV_Wizard;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+using Viewer.CSV_Wizard;
 
 namespace Viewer.Framework.Views
 {
@@ -26,7 +22,7 @@ namespace Viewer.Framework.Views
         }
 
         string TextFieldKey { get; set; }
-        
+
         event EventHandler HeaderSelected;
         event EventHandler MetadataAdded;
         event EventHandler ReadyToShow;

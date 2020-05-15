@@ -1,14 +1,8 @@
-﻿using Lucene.Net.Search;
-using Lucene.Net.Documents;
+﻿using IndexingServices;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
-using CSharpTest.Net.Collections;
-using IndexingServices;
 
 namespace Viewer.Framework.Presenters
 {
@@ -24,27 +18,27 @@ namespace Viewer.Framework.Presenters
         {
             this._main = main;
             this._grams = grams;
-            
+
             this._searcher = searcher;
             this._ngrammer = ngrammer;
 
             _grams.NGramClick += _grams_NGramClick;
-            
+
         }
 
-        
+
 
         private void _grams_NGramClick(object sender, EventArgs e)
         {
 
 
-            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, IndexService.TextFieldKey,_grams.Term);
-            
+            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, IndexService.TextFieldKey, _grams.Term);
+
             _grams.DisplayNGrams(_ngrammer.NgramIndex.Keys.ToList());
 
 
-           
-            
+
+
         }
     }
 }

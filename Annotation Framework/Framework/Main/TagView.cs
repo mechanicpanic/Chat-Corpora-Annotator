@@ -1,13 +1,10 @@
-﻿using System;
+﻿using IndexingServices;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
 
 namespace Tagger.Framework.Main
 {
-    public interface ITagView: IView
+    public interface ITagView : IView
     {
         List<DynamicMessage> Messages { get; set; }
         event EventHandler WriteToDisk;
@@ -20,7 +17,7 @@ namespace Tagger.Framework.Main
         void DisplayDocuments();
 
     }
-    
-        
-    
+
+
+
 }

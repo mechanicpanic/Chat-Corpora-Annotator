@@ -1,9 +1,6 @@
-﻿using System;
+﻿using IndexingServices;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -35,7 +32,7 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_AddTag(object sender, EventArgs e)
         {
-            _service.AddSituation(_tagger.CurrentSituation.Item1,_tagger.CurrentSituation.Item2);
+            _service.AddSituation(_tagger.CurrentSituation.Item1, _tagger.CurrentSituation.Item2);
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)
@@ -49,7 +46,7 @@ namespace Viewer.Framework.Presenters
                     var message = IndexService.RetrieveMessageById(id);
                     messages.Add(message);
                 }
-                _writer.WriteSituation(messages,_service.SituationIndex[list].Item1);
+                _writer.WriteSituation(messages, _service.SituationIndex[list].Item1);
             }
             _writer.CloseWriter();
         }

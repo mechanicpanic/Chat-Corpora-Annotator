@@ -1,49 +1,41 @@
-﻿using Lucene.Net.Analysis;
+﻿using CSharpTest.Net.Collections;
+using IndexingServices;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.TokenAttributes;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lucene.Net.Analysis.Shingle;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Analysis.Core;
-using Lucene.Net.Util;
-using Lucene.Net.Analysis.TokenAttributes;
-using CSharpTest.Net.Collections;
-using Lucene.Net.Search;
-using System.Xml.Linq;
 using System.Web.Script.Serialization;
-using IndexingServices;
 
 namespace Viewer.Framework.Services
 {
 
 
-	public class NGramService : INGramService {
-		public BTreeDictionary<string,int> NgramIndex { get; set; }
+	public class NGramService : INGramService
+	{
+		public BTreeDictionary<string, int> NgramIndex { get; set; }
 
 		private string filename = @"C:\Users\voidl\Desktop";
 
 		private void FlushIndexToDisk()
 		{
-			File.WriteAllText(filename+"SomeFile.Txt", new JavaScriptSerializer().Serialize(NgramIndex));
+			File.WriteAllText(filename + "SomeFile.Txt", new JavaScriptSerializer().Serialize(NgramIndex));
 		}
 
 		private void ReadIndexFromDisk()
 		{
 			new JavaScriptSerializer()
-	.Deserialize<BTreeDictionary<string, int>>(File.ReadAllText(filename+"SomeFile.txt"));
+	.Deserialize<BTreeDictionary<string, int>>(File.ReadAllText(filename + "SomeFile.txt"));
 		}
-		public void BuildNgramIndex(int maxSize,int minSize,bool ShowUnigrams, string TextFieldKey, string term)
+		public void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
 		{
 
 			this.NgramIndex = new BTreeDictionary<string, int>();
-			
+
 			LuceneService.NGrammer.maxGramSize = maxSize;
 			LuceneService.NGrammer.minGramSize = minSize;
 			LuceneService.NGrammer.ShowUnigrams = ShowUnigrams;
-			for(int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
+			for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
 			{
 				var msg = LuceneService.DirReader.Document(i).GetField(TextFieldKey).GetStringValue();
 				foreach (var gram in GetNGrams(TextFieldKey, msg))
@@ -65,7 +57,7 @@ namespace Viewer.Framework.Services
 
 				}
 			}
-			
+
 		}
 
 
@@ -75,7 +67,7 @@ namespace Viewer.Framework.Services
 			List<string> ngrams = new List<string>();
 			if (LuceneService.NGrammer != null)
 			{
-				
+
 				TokenStream stream = LuceneService.NGrammer.GetTokenStream(TextFieldKey, new StringReader(document));
 				//AttributeSource source = new AttributeSource();
 				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();
@@ -107,8 +99,8 @@ namespace Viewer.Framework.Services
 	public interface INGramService
 	{
 		List<string> GetNGrams(string TextFieldKey, string document);
-		void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey,string term);
-		
+		void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term);
+
 		BTreeDictionary<string, int> NgramIndex { get; set; }
 	}
 }

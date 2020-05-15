@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IndexingServices;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IndexingServices;
-using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
 namespace Viewer.Framework.Presenters
@@ -14,7 +10,7 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly IChartView _chart;
         //private readonly IIndexService IndexService;
-       public ChartPresenter(IMainView main, IChartView chart)
+        public ChartPresenter(IMainView main, IChartView chart)
         {
             this._main = main;
             this._chart = chart;

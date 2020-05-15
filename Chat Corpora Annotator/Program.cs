@@ -21,7 +21,7 @@ namespace Viewer
             MainWindow main = new MainWindow();
             CSVLoader loader = new CSVLoader();
             LinearHeatmapForm heatmap = new LinearHeatmapForm();
-            
+
 
             CSVReadService fileReader = new CSVReadService();
             SearchService searcher = new SearchService();
@@ -32,7 +32,7 @@ namespace Viewer
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
             TagFileWriter writer = new TagFileWriter();
-            TagPresenter tagPresenter = new TagPresenter(main,tagger, service, editor,writer);
+            TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
 
             MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader);

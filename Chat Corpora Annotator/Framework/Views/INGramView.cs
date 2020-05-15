@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Viewer.Framework.Views
 {
-    public interface INGramView: IView
+    public interface INGramView : IView
     {
         int minSize { get; set; }
         int maxSize { get; set; }
