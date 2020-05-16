@@ -38,7 +38,7 @@ namespace Viewer
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
-
+            main.AddOwnedForm(delim);
             Application.Run(main);
 
 

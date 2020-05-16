@@ -21,8 +21,12 @@ namespace Viewer.Framework.Views
         IConcordanceView CreateConcordancer();
 
         INGramView CreateNgramView();
+
+        IKeywordView CreateKeywordView();
         void ShowNgrams(INGramView nGram);
         void ShowConcordance(IConcordanceView con);
+
+        void ShowKeywordView(IKeywordView key);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 
@@ -34,6 +38,7 @@ namespace Viewer.Framework.Views
 
         event EventHandler ConcordanceClick;
         event EventHandler NGramClick;
+        event EventHandler KeywordClick;
 
         event EventHandler TagClick;
         //event PropertyChangedEventHandler PropertyChanged;

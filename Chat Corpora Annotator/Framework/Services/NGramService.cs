@@ -15,17 +15,26 @@ namespace Viewer.Framework.Services
 	{
 		public BTreeDictionary<string, int> NgramIndex { get; set; }
 
-		private string filename = @"C:\Users\voidl\Desktop";
-
-		private void FlushIndexToDisk()
+		//private string filename = @"C:\Users\voidl\Desktop";
+		public bool CheckIndex() {
+			if(File.Exists(IndexService.CurrentIndexPath + @"\info\" + "ngrams.txt"))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public void FlushIndexToDisk()
 		{
-			File.WriteAllText(filename + "SomeFile.Txt", new JavaScriptSerializer().Serialize(NgramIndex));
+			File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "ngrams.txt", new JavaScriptSerializer().Serialize(NgramIndex));
 		}
 
-		private void ReadIndexFromDisk()
+		public void ReadIndexFromDisk()
 		{
 			new JavaScriptSerializer()
-	.Deserialize<BTreeDictionary<string, int>>(File.ReadAllText(filename + "SomeFile.txt"));
+	.Deserialize<BTreeDictionary<string, int>>(IndexService.CurrentIndexPath + @"\info\" + "ngrams.txt");
 		}
 		public void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
 		{
@@ -73,6 +82,7 @@ namespace Viewer.Framework.Services
 				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();
 				var charTermAttribute = stream.AddAttribute<ICharTermAttribute>();
 				stream.Reset();
+				
 				while (stream.IncrementToken())
 				{
 					//Token token = new Token();
@@ -82,6 +92,7 @@ namespace Viewer.Framework.Services
 					ngrams.Add(term);
 
 				}
+				stream.ClearAttributes();
 				stream.End();
 				stream.Dispose();
 				return ngrams;
@@ -100,7 +111,9 @@ namespace Viewer.Framework.Services
 	{
 		List<string> GetNGrams(string TextFieldKey, string document);
 		void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term);
-
+		void FlushIndexToDisk();
+		void ReadIndexFromDisk();
+		bool CheckIndex();
 		BTreeDictionary<string, int> NgramIndex { get; set; }
 	}
 }

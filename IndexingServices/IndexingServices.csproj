@@ -95,6 +95,7 @@
     <Compile Include="LuceneService.cs" />
     <Compile Include="NGramAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RakeAlgorithm.cs" />
     <Compile Include="TaggedIndexService.cs" />
     <Compile Include="TestClassifier.cs" />
   </ItemGroup>
@@ -104,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Lucene.Net.4.8.0-beta00008\analyzers\dotnet\cs\Lucene.Net.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SMARTstopset.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

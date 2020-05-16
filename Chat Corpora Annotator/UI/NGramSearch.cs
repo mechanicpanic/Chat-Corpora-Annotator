@@ -11,10 +11,10 @@ namespace Viewer.UI
         public NGramSearch()
         {
             InitializeComponent();
-            comboBox1.SelectedItem = "2";
-            comboBox1.SelectedText = "2";
-            comboBox2.SelectedItem = "2";
-            comboBox2.SelectedText = "2";
+            //comboBox1.SelectedItem = "2";
+            //comboBox1.SelectedText = "2";
+            //comboBox2.SelectedItem = "2";
+            //comboBox2.SelectedText = "2";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,9 +26,9 @@ namespace Viewer.UI
             //else
             //{}
             this.Term = textBox1.Text;
-            this.maxSize = Int32.Parse(comboBox1.SelectedItem.ToString());
-            this.minSize = Int32.Parse(comboBox2.SelectedItem.ToString());
-            this.ShowUnigrams = checkBox1.Checked;
+            this.maxSize = 2;
+            this.minSize = 3;
+            this.ShowUnigrams = false;
             NGramClick?.Invoke(this, EventArgs.Empty);
 
         }
@@ -49,6 +49,7 @@ namespace Viewer.UI
 
         public void DisplayNGrams(List<string> grams)
         {
+            richTextBox1.Clear();
             richTextBox1.Lines = grams.ToArray();
             richTextBox1.Invalidate();
         }

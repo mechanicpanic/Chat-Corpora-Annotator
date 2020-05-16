@@ -30,9 +30,20 @@ namespace Viewer.Framework.Presenters
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
             _main.NGramClick += _main_NGramClick;
+            _main.KeywordClick += _main_KeywordClick;
 
 
         }
+
+        private void _main_KeywordClick(object sender, EventArgs e)
+        {
+            IKeywordView _keyword = _main.CreateKeywordView();
+            IKeywordService keywordService = new KeywordService();
+            KeywordPresenter pres = new KeywordPresenter(_main, keywordService, _keyword);
+            _keyword.ShowView();
+            _main.ShowKeywordView(_keyword);
+        }
+
         private void _main_NGramClick(object sender, EventArgs e)
         {
             INGramView _ngram = _main.CreateNgramView();

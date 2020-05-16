@@ -1,5 +1,7 @@
 ﻿using CSharpTest.Net.Collections;
+using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
+
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers.Classic;
@@ -354,7 +356,7 @@ namespace IndexingServices
         {
 
             LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
-            LuceneService.NGrammer = new NGramAnalyzer();
+            LuceneService.NGrammer = new NGramAnalyzer(Analyzer.PER_FIELD_REUSE_STRATEGY);
         }
         public static void OpenWriter()
         {

@@ -8,9 +8,14 @@ using System.IO;
 
 namespace IndexingServices
 {
+ 
     public class NGramAnalyzer : Analyzer
     {
         LuceneVersion version = LuceneService.AppLuceneVersion;
+
+        public NGramAnalyzer(ReuseStrategy reuseStrategy) : base(reuseStrategy)
+        {
+        }
 
         public int minGramSize { get; set; } = 2;
         public int maxGramSize { get; set; } = 2;

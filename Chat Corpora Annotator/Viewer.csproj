@@ -396,14 +396,17 @@
     </Compile>
     <Compile Include="Extractor.cs" />
     <Compile Include="Framework\Presenters\ConcordancePresenter.cs" />
+    <Compile Include="Framework\Presenters\KeywordPresenter.cs" />
     <Compile Include="Framework\Presenters\NGramPresenter.cs" />
     <Compile Include="Framework\Presenters\TagPresenter.cs" />
     <Compile Include="Framework\Presenters\TagsetPresenter.cs" />
     <Compile Include="Framework\Services\ConcordanceService.cs" />
+    <Compile Include="Framework\Services\KeywordService.cs" />
     <Compile Include="Framework\Services\NGramService.cs" />
     <Compile Include="Framework\Services\TagFileWriter.cs" />
     <Compile Include="Framework\Services\TagService.cs" />
     <Compile Include="Framework\Views\IConcordanceView.cs" />
+    <Compile Include="Framework\Views\IKeywordView.cs" />
     <Compile Include="Framework\Views\INGramView.cs" />
     <Compile Include="Framework\Views\LuceneQueryEventHandler.cs" />
     <Compile Include="Framework\Views\TagsetView.cs" />
@@ -460,6 +463,12 @@
     <Compile Include="Framework\Views\IHeatmapView.cs" />
     <Compile Include="Framework\Views\IMainView.cs" />
     <Compile Include="Framework\Views\IView.cs" />
+    <Compile Include="UI\Keyworder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Keyworder.Designer.cs">
+      <DependentUpon>Keyworder.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -524,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CSVLoader.resx">
       <DependentUpon>CSVLoader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Keyworder.resx">
+      <DependentUpon>Keyworder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

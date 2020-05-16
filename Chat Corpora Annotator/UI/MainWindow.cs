@@ -28,6 +28,7 @@ namespace Viewer
 		public event EventHandler ConcordanceClick;
 		public event EventHandler NGramClick;
 		public event EventHandler TagClick;
+		public event EventHandler KeywordClick;
 
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
@@ -637,6 +638,23 @@ namespace Viewer
 		{
 			TagClick?.Invoke(this, EventArgs.Empty);
 
+		}
+
+		private void button3_Click_1(object sender, EventArgs e)
+		{
+			KeywordClick?.Invoke(this, EventArgs.Empty);
+		}
+
+		public IKeywordView CreateKeywordView()
+		{
+			return new Keyworder();
+		}
+
+		public void ShowKeywordView(IKeywordView key)
+		{
+			keywordPanel.Controls.Add((UserControl)key);
+			keywordPanel.Controls[0].Dock = DockStyle.Fill;
+			button3.Visible = false;
 		}
 	}
 }

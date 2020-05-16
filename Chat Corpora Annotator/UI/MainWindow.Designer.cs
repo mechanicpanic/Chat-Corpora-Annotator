@@ -46,6 +46,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ngramPanel = new System.Windows.Forms.Panel();
             this.ngramButton = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -83,6 +84,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.keywordPanel = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -91,12 +94,14 @@
             this.panel2.SuspendLayout();
             this.Concordance.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.keywordPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -108,6 +113,7 @@
             tabControl1.Controls.Add(this.Statistics);
             tabControl1.Controls.Add(this.Concordance);
             tabControl1.Controls.Add(this.tabPage1);
+            tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             tabControl1.Location = new System.Drawing.Point(303, 43);
             tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -339,6 +345,16 @@
             this.ngramButton.Text = "Load ngrammer";
             this.ngramButton.UseVisualStyleBackColor = false;
             this.ngramButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.keywordPanel);
+            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1219, 659);
+            this.tabPage2.TabIndex = 6;
+            this.tabPage2.Text = "Keyword Analysis";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -768,6 +784,25 @@
             this.button1.Text = "See suggestions...";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(231, 61);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(349, 54);
+            this.button3.TabIndex = 0;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // keywordPanel
+            // 
+            this.keywordPanel.Controls.Add(this.button3);
+            this.keywordPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keywordPanel.Location = new System.Drawing.Point(0, 0);
+            this.keywordPanel.Name = "keywordPanel";
+            this.keywordPanel.Size = new System.Drawing.Size(1219, 659);
+            this.keywordPanel.TabIndex = 1;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -792,6 +827,7 @@
             this.panel2.PerformLayout();
             this.Concordance.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.datesPanel.ResumeLayout(false);
@@ -803,6 +839,7 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.keywordPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -863,6 +900,9 @@
         private System.Windows.Forms.Panel concordancePanel;
         private System.Windows.Forms.Panel ngramPanel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel keywordPanel;
     }
 }
 
