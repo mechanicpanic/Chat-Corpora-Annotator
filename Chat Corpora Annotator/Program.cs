@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using Viewer.CSV_Wizard;
 using Viewer.Framework.Presenters;
 using Viewer.Framework.Services;
 using Viewer.UI;
@@ -21,7 +21,7 @@ namespace Viewer
             MainWindow main = new MainWindow();
             CSVLoader loader = new CSVLoader();
             LinearHeatmapForm heatmap = new LinearHeatmapForm();
-
+            DelimiterStep delim = new DelimiterStep();
 
             CSVReadService fileReader = new CSVReadService();
             SearchService searcher = new SearchService();
@@ -35,7 +35,8 @@ namespace Viewer
             TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
 
             MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
-            CSVPresenter csv = new CSVPresenter(main, loader, fileReader);
+
+            CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
 
             Application.Run(main);

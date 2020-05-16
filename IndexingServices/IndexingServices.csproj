@@ -52,17 +52,29 @@
     <Reference Include="Lucene.Net.Analysis.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.Analysis.Common.4.8.0-beta00008\lib\net45\Lucene.Net.Analysis.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net.Classification, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Classification.4.8.0-beta00008\lib\net45\Lucene.Net.Classification.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Grouping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Grouping.4.8.0-beta00008\lib\net45\Lucene.Net.Grouping.dll</HintPath>
+    </Reference>
     <Reference Include="Lucene.Net.Memory, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucene.Net.Memory.4.8.0-beta00007\lib\net45\Lucene.Net.Memory.dll</HintPath>
+      <HintPath>..\packages\Lucene.Net.Memory.4.8.0-beta00008\lib\net45\Lucene.Net.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Misc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Misc.4.8.0-beta00008\lib\net45\Lucene.Net.Misc.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Queries, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.Queries.4.8.0-beta00008\lib\net45\Lucene.Net.Queries.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.QueryParser, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucene.Net.QueryParser.4.8.0-beta00007\lib\net45\Lucene.Net.QueryParser.dll</HintPath>
+      <HintPath>..\packages\Lucene.Net.QueryParser.4.8.0-beta00008\lib\net45\Lucene.Net.QueryParser.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Sandbox, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.Sandbox.4.8.0-beta00008\lib\net45\Lucene.Net.Sandbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Suggest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Suggest.4.8.0-beta00008\lib\net45\Lucene.Net.Suggest.dll</HintPath>
     </Reference>
     <Reference Include="PowerCollections, Version=1.0.2141.24679, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XAct.Wintellect.PowerCollections.0.0.1\lib\net20\PowerCollections.dll</HintPath>
@@ -83,6 +95,8 @@
     <Compile Include="LuceneService.cs" />
     <Compile Include="NGramAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaggedIndexService.cs" />
+    <Compile Include="TestClassifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

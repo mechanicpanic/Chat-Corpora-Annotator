@@ -250,7 +250,7 @@ namespace IndexingServices
             return messages;
         }
 
-        public static int PopulateIndex(string filePath, string[] allFields)
+        public static int PopulateIndex(string filePath, string[] allFields, bool header)
         {
 
             int result = 0;
@@ -261,8 +261,10 @@ namespace IndexingServices
                 DateTime date;
                 using (var fileReader = new CsvReader(filePath))
                 {
-                    fileReader.ReadRow(ref row); //header read;
-
+                    if (header)
+                    {
+                        fileReader.ReadRow(ref row); //header read;
+                    }
 
                     while (fileReader.ReadRow(ref row))
 

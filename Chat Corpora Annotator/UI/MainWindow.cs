@@ -118,7 +118,7 @@ namespace Viewer
 			this.CloseView();
 		}
 		#endregion
-		int index = 0;
+		
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -167,8 +167,8 @@ namespace Viewer
 		private void openCsvDialog()
 		{
 			csvDialog = new OpenFileDialog();
-			csvDialog.Filter = "CSV files (*.csv)|*.csv";
-			csvDialog.Title = "Open a .csv file";
+			csvDialog.Filter = "CSV files (*.csv)|*.csv|TSV files (*.tsv)|*.tsv";
+			csvDialog.Title = "Open a separated-value file";
 			csvDialog.FileOk += csvDialog_FileOk;
 		}
 		private void csvDialog_FileOk(object sender, CancelEventArgs e)

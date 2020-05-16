@@ -12,9 +12,7 @@ namespace Viewer
     public class CoreAnalyzer
     {
 
-        LexicalizedParser parser;
-        TokenizerFactory tokenizerFactory;
-
+        
         public string _modelDirectory { get; private set; }
         public string _NERroot { get; private set; }
         public string _NERclassifiers { get; private set; }

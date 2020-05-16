@@ -28,7 +28,7 @@ namespace Tagger.Framework.Main
 
         private void AddDocumentsToDisplay(int count)
         {
-            var list = IndexService.LoadSomeDocuments(count, false);
+            var list = IndexService.LoadSomeDocuments(count);
             _tagger.Messages.AddRange(list);
             _tagger.DisplayDocuments();
         }

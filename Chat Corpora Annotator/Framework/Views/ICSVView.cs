@@ -7,6 +7,8 @@ namespace Viewer.Framework.Views
     public interface ICSVView : IView
     {
         void AddStep(IWizardItem step);
+
+        bool Header { get; set; }
         List<IWizardItem> Steps { get; }
         string[] AllFields { get; set; }
         List<string> SelectedFields { get; set; }
