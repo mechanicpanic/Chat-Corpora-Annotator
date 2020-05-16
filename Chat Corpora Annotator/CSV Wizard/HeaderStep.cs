@@ -17,7 +17,7 @@ namespace Viewer.CSV_Wizard
             listView1.Invalidate();
         }
 
-        public string HeaderTitle { get { return "Select the columns to be uploaded."; } }
+        public string HeaderTitle { get { return "Select the columns to be uploaded. Note: this is the first line of your file. If your file does not have a header, you can add a header under the Toggle."; } }
 
         public List<string> GetValues()
         {
@@ -77,6 +77,26 @@ namespace Viewer.CSV_Wizard
                 }
                 listView1.Invalidate();
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, System.EventArgs e)
+        {
+
         }
     }
 }
