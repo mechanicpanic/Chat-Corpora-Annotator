@@ -26,8 +26,16 @@ namespace Viewer.Framework.Presenters
             _tagger.LoadMore += _tagger_LoadMore;
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
-            _tagset.SaveTagset += _tagset_SaveTagset;
+            _tagger.EditSituation += _tagger_EditSituation;
+
+
             _main.TagClick += _main_TagClick;
+        }
+
+        private void _tagger_EditSituation(object sender, EventArgs e)
+        {
+            _tagger.CurrentSituation = null;
+            
         }
 
         private void _tagger_AddTag(object sender, EventArgs e)
@@ -67,12 +75,7 @@ namespace Viewer.Framework.Presenters
             MessageContainer.Messages.AddRange(list);
             _tagger.DisplayDocuments();
         }
-        private void _tagset_SaveTagset(object sender, EventArgs e)
-        {
-            _service.UpdateTagset(_tagset.CurrentTags);
-            _tagger.UpdateTagset(_service.Tagset);
-            _tagset.CloseView();
-        }
+
 
         private void _tagger_TagsetClick(object sender, EventArgs e)
         {

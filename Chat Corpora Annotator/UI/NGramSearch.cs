@@ -1,4 +1,5 @@
 ﻿
+using CSharpTest.Net.Collections;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -47,12 +48,33 @@ namespace Viewer.UI
 
         }
 
-        public void DisplayNGrams(List<string> grams)
+        public void DisplayNGrams(BTreeDictionary<string, int> bigrams, BTreeDictionary<string, int> trigrams, BTreeDictionary<string, int> fourgrams, BTreeDictionary<string, int> fivegrams)
         {
-            richTextBox1.Clear();
-            richTextBox1.Lines = grams.ToArray();
-            richTextBox1.Invalidate();
-        }
+            foreach(var kvp in bigrams)
+            {
+                fastObjectListView1.AddObject(kvp);
+            }
+
+            foreach (var kvp in trigrams)
+            {
+                fastObjectListView2.AddObject(kvp);
+            }
+
+            foreach (var kvp in fourgrams)
+            {
+                fastObjectListView3.AddObject(kvp);
+            }
+            foreach (var kvp in fivegrams)
+            {
+                fastObjectListView4.AddObject(kvp);
+            }
+
+
+            fastObjectListView1.Invalidate();
+            fastObjectListView2.Invalidate();
+            fastObjectListView3.Invalidate();
+            fastObjectListView4.Invalidate();
+        }                       
 
         public void ShowView()
         {
@@ -63,5 +85,6 @@ namespace Viewer.UI
         {
             throw new NotImplementedException();
         }
+
     }
 }

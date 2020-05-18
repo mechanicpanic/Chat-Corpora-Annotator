@@ -1,11 +1,13 @@
-﻿using System;
+﻿using CSharpTest.Net.Collections;
+using System;
 using System.Collections.Generic;
 
 namespace Viewer.Framework.Services
 {
     public interface ITagService
     {
-        List<string> Tagset { get; set; }
+        BTreeDictionary<string, List<string>> TagsetIndex { get; set; }
+        List<string> CurrentTagset { get; set; }
         Dictionary<List<string>, Tuple<string, Guid>> SituationIndex { get; set; }
 
         void UpdateTagset(List<string> tags);
@@ -14,8 +16,9 @@ namespace Viewer.Framework.Services
     }
     public class TagService : ITagService
     {
-        public List<string> Tagset { get; set; }
+        public List<string> CurrentTagset { get; set; }
         public Dictionary<List<string>, Tuple<string, Guid>> SituationIndex { get; set; } = new Dictionary<List<string>, Tuple<string, Guid>>();
+        public BTreeDictionary<string, List<string>> TagsetIndex { get; set; } = new BTreeDictionary<string, List<string>>();
 
         public void AddSituation(List<string> messages, string situation)
         {
@@ -24,10 +27,23 @@ namespace Viewer.Framework.Services
 
         public void UpdateTagset(List<string> tags)
         {
-            Tagset.Clear();
+            CurrentTagset.Clear();
             foreach (var tag in tags)
             {
-                Tagset.Add(tag);
+                CurrentTagset.Add(tag);
+            }
+            
+        }
+
+        public void UpdateTagsetIndex(string name, List<string> tags)
+        {
+            if (TagsetIndex.Keys.Contains(name))
+            {
+                TagsetIndex.TryUpdate(name, tags);
+            }
+            else
+            {
+                TagsetIndex.Add(name, tags);
             }
         }
 

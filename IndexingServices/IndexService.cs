@@ -263,7 +263,7 @@ namespace IndexingServices
                 DateTime date;
                 using (var fileReader = new CsvReader(filePath))
                 {
-                    if (header)
+                    if (!header)
                     {
                         fileReader.ReadRow(ref row); //header read;
                     }
@@ -272,7 +272,8 @@ namespace IndexingServices
 
                     {
                         count++;
-                        date = DateTime.Parse(row[lookup[0]]);
+                        var t = row[lookup[0]];
+                        date = DateTime.Parse(t);
                         UserKeys.Add(row[lookup[1]]);
 
 

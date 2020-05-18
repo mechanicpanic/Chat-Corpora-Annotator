@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpTest.Net.Collections;
+using System;
 using System.Collections.Generic;
 
 namespace Viewer.Framework.Views
@@ -10,7 +11,7 @@ namespace Viewer.Framework.Views
         bool ShowUnigrams { get; set; }
         string Term { get; set; }
         event EventHandler NGramClick;
-        void DisplayNGrams(List<string> grams);
-        void DisplayNGramCounts(List<int> counts);
+        void DisplayNGrams(BTreeDictionary<string, int> bigrams, BTreeDictionary<string, int> trigrams, BTreeDictionary<string, int> fourgrams, BTreeDictionary<string, int> fivegrams);
+        //void DisplayNGramCounts(List<int> counts);
     }
 }

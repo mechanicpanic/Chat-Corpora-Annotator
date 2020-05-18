@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -27,7 +21,7 @@ namespace Viewer.UI
         }
         public void DisplayRakeKeywords()
         {
-            richTextBox1.Lines = this.RakeKeywords.ToArray().;
+            richTextBox1.Lines = this.RakeKeywords.ToArray();
         }
         public void ShowView()
         {

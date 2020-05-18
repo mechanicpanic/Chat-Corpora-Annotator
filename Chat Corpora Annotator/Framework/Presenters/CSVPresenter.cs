@@ -82,6 +82,7 @@ namespace Viewer.Framework.Presenters
 
 
             _main.DisplayDocuments();
+            _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             _main.FileLoadState = true;
         }
 

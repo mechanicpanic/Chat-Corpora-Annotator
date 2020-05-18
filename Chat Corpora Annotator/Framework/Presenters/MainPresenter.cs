@@ -2,6 +2,7 @@
 using Lucene.Net.Index;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -87,6 +88,7 @@ namespace Viewer.Framework.Presenters
                 IndexService.OpenIndex();
 
                 AddDocumentsToDisplay(200);
+                _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             }
         }
 

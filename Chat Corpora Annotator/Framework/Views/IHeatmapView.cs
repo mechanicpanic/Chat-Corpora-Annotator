@@ -9,7 +9,7 @@ namespace Viewer.Framework.Views
 
         List<Color> Colors { get; set; }
 
-        void DrawHeatmap();
+        void DrawHeatmap(List<string> DateBlocks);
         void FillDates(List<DateTime> dates);
 
     }

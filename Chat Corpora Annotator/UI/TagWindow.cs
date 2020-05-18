@@ -2,6 +2,7 @@
 using IndexingServices;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -14,21 +15,54 @@ namespace Viewer.UI
 
 		public Tuple<List<string>, string> CurrentSituation { get; set; }
 
+		private Dictionary<string,Color> SituationColor = new Dictionary<string,Color>();
+		private Dictionary<List<string>,string> TaggedMessages = new Dictionary<List<string>,string>();
 		private Dictionary<string, int> TagIndex { get; set; } = new Dictionary<string, int>();
+		
+		private void GenerateSituationColors()
+		{
+			SituationColor.Add("Meeting", Color.Bisque);
+			SituationColor.Add("JobDiscussion", Color.MistyRose);
+			SituationColor.Add("SoftwareSupport", Color.LavenderBlush);
+			SituationColor.Add("CodeAssistance", Color.Lavender);
+
+			
+		}
 		public TagWindow()
 		{
 			InitializeComponent();
 			//Tags = new List<string>();
 			//SituationIndex = new Dictionary<string, int>();
-			TagIndex.Add("Meeting", 0);
-			TagIndex.Add("JobDiscussion", 0);
-			TagIndex.Add("SoftwareSupport", 0);
-			TagIndex.Add("CodeAssistance", 0);
+
 			//foreach(var tag in Tags)
 			//{
 			//	SituationIndex.Add(tag, 0);
 			//}
+			TagIndex.Add("Meeting", 0);
+			TagIndex.Add("JobDiscussion", 0);
+			TagIndex.Add("SoftwareSupport", 0);
+			TagIndex.Add("CodeAssistance", 0);
+			DisplayTagset(new List<string>());
 
+			chatTable.FormatRow += ChatTable_FormatRow;
+			GenerateSituationColors();
+		}
+
+		public void DisplayTagset(List<string> tags)
+		{
+			
+		}
+
+		private void ChatTable_FormatRow(object sender, FormatRowEventArgs e)
+		{
+			DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
+			foreach (var kvp in TaggedMessages)
+			{
+				if (kvp.Key.Contains(dyn.Id))
+				{
+					e.Item.BackColor = SituationColor[kvp.Value];
+				}
+			}
 		}
 
 		public event EventHandler WriteToDisk;
@@ -59,7 +93,10 @@ namespace Viewer.UI
 				{
 					DynamicMessage msg = (DynamicMessage)obj;
 					set.Add(msg.Id);
+					
+					
 				}
+				TaggedMessages.Add(set, listBox1.SelectedItem.ToString());
 				CurrentSituation = new Tuple<List<string>, string>(set, listBox1.SelectedItem.ToString());
 
 				AddTag?.Invoke(this, EventArgs.Empty);
@@ -165,6 +202,11 @@ namespace Viewer.UI
 		public void UpdateTagIndex(List<string> tags)
 		{
 			throw new NotImplementedException();
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			EditSituation?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

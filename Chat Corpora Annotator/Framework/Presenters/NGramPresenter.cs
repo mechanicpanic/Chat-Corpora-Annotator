@@ -31,9 +31,9 @@ namespace Viewer.Framework.Presenters
         private void _grams_NGramClick(object sender, EventArgs e)
         {
 
-            _ngrammer.BuildNgramIndex(_grams.maxSize, _grams.minSize, _grams.ShowUnigrams, IndexService.TextFieldKey, _grams.Term);
+            _ngrammer.BuildNgramIndex(5, 2, _grams.ShowUnigrams, IndexService.TextFieldKey, _grams.Term);
         
-            _grams.DisplayNGrams(_ngrammer.NgramIndex.Keys.ToList());
+            _grams.DisplayNGrams(_ngrammer.BigramIndex,_ngrammer.TrigramIndex,_ngrammer.FourgramIndex,_ngrammer.FivegramIndex);
 
 
 

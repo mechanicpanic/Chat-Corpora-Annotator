@@ -16,7 +16,10 @@ namespace Viewer.UI
         public List<string> CurrentTags { get; set; } = new List<string>();
 
         public event EventHandler SaveTagset;
+        public event EventHandler AddNewTagset;
+        public event EventHandler DeleteTagset;
 
+        public string TagsetName { get; set; }
         public void CloseView()
         {
             this.Hide();
@@ -59,6 +62,31 @@ namespace Viewer.UI
                 }
             }
             SaveTagset?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TagsetName tn = new TagsetName();
+            tn.Show();
+            tn.NameButtonClicked += new EventHandler(NameButtonHandler);
+            tn.Show();
+            
+        }
+
+        private void NameButtonHandler(object sender, EventArgs e)
+        {
+            TagsetName tn = sender as TagsetName;
+            if (tn != null)
+            {
+                this.TagsetName = tn.name;
+            }
+            tn.Close();
+            
+        }
+
+        public void DisplayTagset()
+        {
+            throw new NotImplementedException();
         }
     }
 }

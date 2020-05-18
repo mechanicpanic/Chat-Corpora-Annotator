@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace Viewer.Framework.Services
 {
@@ -10,7 +11,7 @@ namespace Viewer.Framework.Services
     public interface IHeatmapService
     {
 
-
+        List<string> DateBlocks { get; set; }
         Color HeatMapColor(double value, double min, double max);
         List<Color> PopulateHeatmap(BTreeDictionary<DateTime, int> MessagesPerDay);
 
@@ -18,6 +19,8 @@ namespace Viewer.Framework.Services
     }
     public class HeatmapService : IHeatmapService
     {
+        public List<string> DateBlocks { get; set; } = new List<string>();
+
         public Color HeatMapColor(double value, double min, double max)
         {
             double val = (value - min) / (max - min);
@@ -40,6 +43,7 @@ namespace Viewer.Framework.Services
                 foreach (var date in MessagesPerDay.Keys)
                 {
                     double x = MessagesPerDay[date];
+                    this.DateBlocks.Add(date.Date.ToString());
                     colors.Add(HeatMapColor(x, min, max));
                 }
                 return colors;
@@ -58,18 +62,25 @@ namespace Viewer.Framework.Services
                 double x = 0;
                 int count = 0;
                 int index = 0;
+                StringBuilder blockdate = new StringBuilder();
                 while (index < days.Length)
                 {
+
                     if (days.Length - index > blockDayCount)
                     {
+                        
                         while (count < blockDayCount)
                         {
+                            blockdate.Append(days[index].Date.ToString()+" ");
                             x += MessagesPerDay[days[index]];
                             index++;
                             count++;
                         }
                         if (count == blockDayCount)
                         {
+                            blockdate.Append(days[index].Date.ToString() + " ");
+                            DateBlocks.Add(blockdate.ToString());
+                            blockdate = new StringBuilder();
                             x += MessagesPerDay[days[index]];
                             newCounts.Add(x);
                             count = 0;
@@ -79,10 +90,12 @@ namespace Viewer.Framework.Services
                     }
                     else
                     {
+                        blockdate.Append(days[index].Date.ToString() + " ");
                         x += MessagesPerDay[days[index]];
                         index++;
                         if (index == days.Length - 1)
                         {
+                            DateBlocks.Add(blockdate.ToString());
                             newCounts.Add(x);
                         }
                     }

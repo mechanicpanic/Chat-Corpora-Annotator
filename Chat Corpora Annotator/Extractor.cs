@@ -1,6 +1,7 @@
 ﻿using CSharpTest.Net.Collections;
 using edu.stanford.nlp.pipeline;
 using IndexingServices;
+using java.io;
 using java.util;
 using System;
 using System.Collections.Generic;
@@ -134,24 +135,34 @@ namespace Viewer
         {
             if (LuceneService.DirReader != null)
             {
-                for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
-                {
-                    Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
-                    CoreDocument coredoc = GetAnnotatedDocument(document.GetField("text").GetStringValue());
-                    ExtractNERTags(coredoc, document);
-                    ExtractNouns(coredoc, document);
-                    _analyzer.CreateParseTree(coredoc);
-                    var q = _analyzer.DetectQuestion();
-                    Console.WriteLine(q.ToString());
-                    foreach (var a in this.NounList[document.GetField("id").GetStringValue()])
+                //using (var stream = new ByteArrayOutputStream())
+                //{
+                    for (int i = 0; i < 50; i++)
                     {
-                        Console.Write(a + " ");
-                    }
+                        Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
+                        CoreDocument coredoc = GetAnnotatedDocument(document.GetField("text").GetStringValue());
+                    //ExtractNERTags(coredoc, document);
+                    //ExtractNouns(coredoc, document);
+                    _analyzer.CreateParseTree(coredoc);
+                    //var q = _analyzer.DetectQuestion();
+                    //Console.WriteLine(q.ToString());
+                    //foreach (var a in this.NounList[document.GetField("id").GetStringValue()])
+                    //{
+                    //    Console.Write(a + " ");
+                    //}
 
+                    //pipe.prettyPrint(coredoc.annotation(), new PrintWriter(stream));
+                    //System.Console.WriteLine(stream.toString());
+                    //System.Console.WriteLine(_analyzer.Twokenize(document.GetField("text").GetStringValue()));
                 }
+                    //stream.close();
+
+                //}
+                
+            }
                 
             }
 
         }
-    }
+    
 }

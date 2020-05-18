@@ -58,6 +58,19 @@ namespace Viewer.Framework.Services
             keywords.RemoveAll(x => x.Contains("&"));
             keywords.RemoveAll(x => x.Contains("#"));
             keywords.RemoveAll(x => x.Contains("?"));
+            keywords.RemoveAll(x => x.Contains("%"));
+            keywords.RemoveAll(x => x.Contains("@"));
+            keywords.RemoveAll(x => x.Contains("+"));
+            keywords.RemoveAll(x => x.Contains(")"));
+            keywords.RemoveAll(x => x.Contains("("));
+            keywords.RemoveAll(x => x.Contains("^"));
+            keywords.RemoveAll(x => x.Contains("<"));
+            keywords.RemoveAll(x => x.Contains(">"));
+            keywords.RemoveAll(x => x.Contains("`"));
+            keywords.RemoveAll(x => x.Contains("\\"));
+            keywords.RemoveAll(x => x.Contains("*"));
+            keywords.RemoveAll(x => x.Contains("["));
+            keywords.RemoveAll(x => x.Contains("]"));
             return keywords;
         }
     }

@@ -17,12 +17,21 @@ namespace Viewer.Framework.Presenters
             this._service = service;
             this._main = main;
 
-            _main.TagsetClick += _main_TagsetClick;
+            _tagset.SaveTagset += _tagset_SaveTagset;
+            _tagset.AddNewTagset += _tagset_AddNewTagset;
 
         }
 
-        private void _main_TagsetClick(object sender, EventArgs e)
+        private void _tagset_AddNewTagset(object sender, EventArgs e)
         {
+            
+        }
+
+        private void _tagset_SaveTagset(object sender, EventArgs e)
+        {
+            _service.UpdateTagset(_tagset.CurrentTags);
+            _main.UpdateTagset(_service.CurrentTagset);
+            _tagset.CloseView();
 
         }
     }

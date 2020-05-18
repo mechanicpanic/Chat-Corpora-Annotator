@@ -656,6 +656,15 @@ namespace Viewer
 			keywordPanel.Controls[0].Dock = DockStyle.Fill;
 			button3.Visible = false;
 		}
+
+		public void ShowDates(List<DateTime> dates)
+		{
+			foreach(var item in dates)
+			{
+				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
+			}
+			dateView.Invalidate();
+		}
 	}
 }
 

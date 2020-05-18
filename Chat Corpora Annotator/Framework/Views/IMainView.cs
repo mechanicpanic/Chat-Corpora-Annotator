@@ -26,6 +26,7 @@ namespace Viewer.Framework.Views
         void ShowNgrams(INGramView nGram);
         void ShowConcordance(IConcordanceView con);
 
+        void ShowDates(List<DateTime> dates);
         void ShowKeywordView(IKeywordView key);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;

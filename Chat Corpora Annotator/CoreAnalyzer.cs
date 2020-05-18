@@ -6,6 +6,10 @@ using edu.stanford.nlp.trees;
 using edu.stanford.nlp.util;
 using java.util;
 using System.Collections.Generic;
+using NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty;
+using System.Linq;
+using java.lang;
+using System;
 
 namespace Viewer
 {
@@ -29,7 +33,7 @@ namespace Viewer
             this._NERroot = NERroot;
             this._NERclassifiers = _NERroot + @"\classifiers";
             this._modelDirectory = root + @"\stanford-corenlp-3.7.0-models";
-            this._POSdirectory = _modelDirectory + @"\edu\stanford\nlp\models\pos-tagger\english-left3words\english-left3words-distsim.tagger";
+            this._POSdirectory = _modelDirectory + @"\edu\stanford\nlp\models\pos-tagger\english-caseless-left3words-distsim.tagger";
 
 
 
@@ -45,13 +49,16 @@ namespace Viewer
             java.util.Properties props = new java.util.Properties();
 
             props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
-            props.setProperty("ner.model", _NERclassifiers + @"\english.muc.7class.distsim.crf.ser.gz");
-            //props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\lexparser\englishPCFG.ser.gz");
+
+            props.setProperty("pos.model", @"C:\Users\voidl\Documents\gate-EN-twitter.model");
+            //props.setProperty("pos.model", _POSdirectory);
+
+            props.setProperty("ner.model", _NERclassifiers + @"\english.muc.7class.caseless.distsim.crf.ser.gz");
             props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\srparser\englishSR.ser.gz");
 
             props.setProperty("ner.useSUTime", "true");
             props.setProperty("ner.applyFineGrained", "false");
-            props.setProperty("pos.model", _POSdirectory);
+            
             props.setProperty("sutime.binders", "0");
 
             var sutimeRules = _root + @"\sutime\defs.sutime.txt,"
@@ -83,29 +90,54 @@ namespace Viewer
             return false;
         }
 
-        //public List<string> DetectNounPhrases()
+        //public void PrintKeyPhrases()
         //{
-
-
+        //    FoldTree(constituencyParse);
+        //    int a = 5;
         //}
-        List<Tree> nps = new List<Tree>();
-
-        //private List<Tree> FoldTree(Tree node)
+        //private Tree FoldTree(Tree node)
         //{
+        //    Func<Tree, Tree, Tree> acc = (parent, child) => {
+        //        if (child.isLeaf())
+        //        {
+        //            //list.Add(n);
+        //            return child;
+        //        }
+        //        else
+        //        {
+        //            var temp = child.getChildrenAsList().toArray();
+        //            List<Tree> list = new List<Tree>();
+        //            foreach (var obj in temp)
+        //            {
+        //                list.Add((Tree)obj);
+        //            }
+        //            var content = list.Aggregate(child, (a, b) => FoldTree(child));
+        //            return content;
+        //        }
+        //    };
 
-        //    if (node.isLeaf()) { return nps; }
+        //    if (IsNPwithNNx(node))
+        //    {
+        //        return acc(node, node.getChild(0));
+
+        //    }
         //    else
         //    {
-        //        List<Tree> temp = (List<Tree>)node.getChildrenAsList();
-        //        temp.Aggregate(nps,();
+        //        return node;
         //    }
+
         //}
         private bool IsNPwithNNx(Tree node)
         {
             if (node.label().value().Equals("NP"))
             {
-                List<Tree> temp = (List<Tree>)node.getChildrenAsList();
-                foreach (Tree sub in temp)
+                var temp = node.getChildrenAsList().toArray();
+                List<Tree> list = new List<Tree>();
+                foreach (var obj in temp)
+                {
+                    list.Add((Tree)obj);
+                }
+                foreach (Tree sub in list)
                 {
                     if (IsNNx(sub)) return true;
 
@@ -113,6 +145,7 @@ namespace Viewer
                 return false;
             }
             return false;
+            
         }
 
         private bool IsNNx(Tree node)
@@ -140,7 +173,15 @@ namespace Viewer
             }
         }
 
+        public string Twokenize(CoreDocument coredoc)
+        {
+            return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(coredoc.text());
+        }
 
+        public string Twokenize(string text)
+        {
+            return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(text);
+        }
 
         //public bool DetectQuestion(string message)
         //{
