@@ -493,6 +493,8 @@ namespace Viewer
 		private void clearButton_Click(object sender, EventArgs e)
 		{
 			chatTable.SetObjects(MessageContainer.Messages);
+			chatTable.ModelFilter = new ModelFilter(null);
+			
 			chatTable.Invalidate();
 			foreach (ListViewItem check in userList.CheckedItems)
 			{

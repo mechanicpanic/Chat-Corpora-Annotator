@@ -38,6 +38,7 @@ namespace Viewer.UI
 			//{
 			//	SituationIndex.Add(tag, 0);
 			//}
+			GenerateSituationColors();
 			TagIndex.Add("Meeting", 0);
 			TagIndex.Add("JobDiscussion", 0);
 			TagIndex.Add("SoftwareSupport", 0);
@@ -45,11 +46,18 @@ namespace Viewer.UI
 			DisplayTagset(new List<string>());
 
 			chatTable.FormatRow += ChatTable_FormatRow;
-			GenerateSituationColors();
+			
 		}
 
 		public void DisplayTagset(List<string> tags)
 		{
+			foreach(var key in TagIndex.Keys)
+			{
+				ListViewItem lvi = new ListViewItem(key);
+				lvi.BackColor = SituationColor[key];
+				listView2.Items.Add(lvi);
+			}
+			listView2.Invalidate();
 			
 		}
 
@@ -86,7 +94,7 @@ namespace Viewer.UI
 		private void button2_Click(object sender, EventArgs e)
 		{
 
-			if (listBox1.SelectedItem != null && chatTable.SelectedObjects != null)
+			if (listView2.SelectedItems != null && chatTable.SelectedObjects != null)
 			{
 				List<string> set = new List<string>();
 				foreach (var obj in chatTable.SelectedObjects)
@@ -96,21 +104,21 @@ namespace Viewer.UI
 					
 					
 				}
-				TaggedMessages.Add(set, listBox1.SelectedItem.ToString());
-				CurrentSituation = new Tuple<List<string>, string>(set, listBox1.SelectedItem.ToString());
+				TaggedMessages.Add(set, listView2.SelectedItems[0].Text);
+				CurrentSituation = new Tuple<List<string>, string>(set, listView2.SelectedItems[0].Text);
 
 				AddTag?.Invoke(this, EventArgs.Empty);
 			}
 			var temp = "";
 			foreach (var obj in chatTable.SelectedObjects)
 			{
-				temp = " [" + listBox1.SelectedItem + " ID " + TagIndex[listBox1.SelectedItem.ToString()] + "]";
+				temp = " [" + listView2.SelectedItems[0].Text + " ID " + TagIndex[listView2.SelectedItems[0].Text] + "]";
 				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
 
 			}
 			listView1.Items.Add(new ListViewItem(temp));
 			listView1.Update();
-			TagIndex[listBox1.SelectedItem.ToString()]++;
+			TagIndex[listView2.SelectedItems[0].Text]++;
 			chatTable.UpdateObjects(MessageContainer.Messages);
 		}
 
@@ -185,10 +193,10 @@ namespace Viewer.UI
 
 		public void UpdateTagset(List<string> tags)
 		{
-			listBox1.Items.Clear();
+			listView1.Items.Clear();
 			foreach (var tag in tags)
 			{
-				listBox1.Items.Add(tag);
+				listView1.Items.Add(new ListViewItem(tag));
 			}
 		}
 
@@ -207,6 +215,11 @@ namespace Viewer.UI
 		private void button5_Click(object sender, EventArgs e)
 		{
 			EditSituation?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

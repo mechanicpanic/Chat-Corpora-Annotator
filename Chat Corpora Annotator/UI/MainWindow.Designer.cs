@@ -35,11 +35,6 @@
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.Concordance = new System.Windows.Forms.TabPage();
             this.concordancePanel = new System.Windows.Forms.Panel();
             this.concordancerButton = new System.Windows.Forms.Button();
@@ -86,12 +81,12 @@
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.Statistics.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.Concordance.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -213,7 +208,7 @@
             // 
             // Statistics
             // 
-            this.Statistics.Controls.Add(this.panel2);
+            this.Statistics.Controls.Add(this.richTextBox1);
             this.Statistics.Location = new System.Drawing.Point(4, 28);
             this.Statistics.Margin = new System.Windows.Forms.Padding(2);
             this.Statistics.Name = "Statistics";
@@ -222,59 +217,6 @@
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(2, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(318, 529);
-            this.panel2.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 91);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 19);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "label7";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 63);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 19);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "label6";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 32);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 19);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "label5";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 4);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 19);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "label4";
             // 
             // Concordance
             // 
@@ -791,6 +733,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -817,6 +760,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.GhostWhite;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(2, 2);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(908, 529);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -837,8 +791,6 @@
             this.Chat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.Statistics.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.Concordance.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -905,11 +857,6 @@
         private System.Windows.Forms.Button concordancerButton;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button ngramButton;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Panel concordancePanel;
         private System.Windows.Forms.Panel ngramPanel;
@@ -917,6 +864,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel keywordPanel;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

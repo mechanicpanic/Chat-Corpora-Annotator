@@ -25,7 +25,7 @@ namespace Viewer.Framework.Services
         public void FindConcordance(string query, string TextFieldKey, int count)
         {
             Concordance = new List<string>();
-            TopDocs Hits = LuceneService.Searcher.Search(ConQuery, count);
+            TopDocs Hits = LuceneService.Searcher.Search(ConQuery, LuceneService.DirReader.MaxDoc);
             for (int i = 0; i < Hits.ScoreDocs.Length; i++)
             {
 

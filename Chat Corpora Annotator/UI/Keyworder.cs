@@ -11,6 +11,7 @@ namespace Viewer.UI
         public Keyworder()
         {
             InitializeComponent();
+
         }
         public event EventHandler RakeClick;
         public BTreeDictionary<string, double> RakeKeywords { get; set; } = new BTreeDictionary<string, double>();
