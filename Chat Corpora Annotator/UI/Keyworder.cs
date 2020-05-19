@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpTest.Net.Collections;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
@@ -12,8 +13,9 @@ namespace Viewer.UI
             InitializeComponent();
         }
         public event EventHandler RakeClick;
-        public List<string> RakeKeywords { get; set; }
+        public BTreeDictionary<string, double> RakeKeywords { get; set; } = new BTreeDictionary<string, double>();
         public Dictionary<List<string>, int> Keyphrases { get; set; }
+        public int RakeWordCount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -21,7 +23,11 @@ namespace Viewer.UI
         }
         public void DisplayRakeKeywords()
         {
-            richTextBox1.Lines = this.RakeKeywords.ToArray();
+            foreach (var kvp in RakeKeywords)
+            {
+                fastObjectListView1.AddObject(kvp);
+            }
+
         }
         public void ShowView()
         {
@@ -31,6 +37,40 @@ namespace Viewer.UI
         {
             this.Dispose();
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (panel2.Visible)
+            {
+                panel2.Visible = false;
+
+            }
+            else
+            {
+                panel2.Visible = true;
+
+            }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (panel3.Visible)
+            {
+                panel3.Visible = false;
+
+            }
+            else
+            {
+                panel3.Visible = true;
+
+            }
         }
     }
 }

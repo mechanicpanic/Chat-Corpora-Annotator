@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpTest.Net.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace Viewer.Framework.Views
 {
     public interface IKeywordView:IView
     {
-        List<string> RakeKeywords { get; set; }
+        BTreeDictionary<string,double> RakeKeywords { get; set; }
+        int RakeWordCount { get; set; }
         Dictionary<List<string>,int> Keyphrases { get; set; }
 
        event EventHandler RakeClick;
