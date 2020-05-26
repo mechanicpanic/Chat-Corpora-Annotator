@@ -14,16 +14,16 @@ namespace Viewer.Framework.Services
 
 	public class NGramService : INGramService
 	{
-		public BTreeDictionary<string, int> BigramIndex { get; set; }
+		public BPlusTree<string, int> BigramIndex { get; set; }
 
-		public BTreeDictionary<string, int> TrigramIndex { get; set; }
-		public BTreeDictionary<string, int> FourgramIndex { get; set; }
-		public BTreeDictionary<string, int> FivegramIndex { get; set; }
+		public BPlusTree<string, int> TrigramIndex { get; set; }
+		public BPlusTree<string, int> FourgramIndex { get; set; }
+		public BPlusTree<string, int> FivegramIndex { get; set; }
 
 
 		//private string filename = @"C:\Users\voidl\Desktop";
 		public bool CheckIndex() {
-			if(File.Exists(IndexService.CurrentIndexPath + @"\info\" + "grams.txt"))
+			if(File.Exists(IndexService.CurrentIndexPath + @"\info\" + "bigrams.txt"))
 			{
 				return true;
 			}
@@ -34,11 +34,12 @@ namespace Viewer.Framework.Services
 		}
 		public void ReadIndexFromDisk()
 		{
-			new JavaScriptSerializer()
-	.Deserialize<BTreeDictionary<string, int>>(IndexService.CurrentIndexPath + @"\info\" + "ngrams.txt");
+			this.BigramIndex = new JavaScriptSerializer()
+	.Deserialize<BPlusTree<string, int>>(IndexService.CurrentIndexPath + @"\info\" + "bigrams.txt");
 		}
 		public void FlushIndexToDisk()
 		{
+			
 			File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "bigrams.txt", new JavaScriptSerializer().Serialize(BigramIndex));
 			File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "trigrams.txt", new JavaScriptSerializer().Serialize(TrigramIndex));
 			File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "fourgrams.txt", new JavaScriptSerializer().Serialize(FourgramIndex));
@@ -46,13 +47,13 @@ namespace Viewer.Framework.Services
 		}
 
 
-		public void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
+		public void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey)
 		{
 
-			this.BigramIndex = new BTreeDictionary<string, int>();
-			this.TrigramIndex = new BTreeDictionary<string, int>();
-			this.FourgramIndex = new BTreeDictionary<string, int>();
-			this.FivegramIndex = new BTreeDictionary<string, int>();
+			this.BigramIndex = new BPlusTree<string, int>();
+			this.TrigramIndex = new BPlusTree<string, int>();
+			this.FourgramIndex = new BPlusTree<string, int>();
+			this.FivegramIndex = new BPlusTree<string, int>();
 
 			LuceneService.NGrammer.maxGramSize = maxSize;
 			LuceneService.NGrammer.minGramSize = minSize;
@@ -67,9 +68,9 @@ namespace Viewer.Framework.Services
 					{
 
 						case 2:
-							if (split.ToList().Contains(term))
-							{
-								if (!BigramIndex.Keys.Contains(gram))
+							//if (split.ToList().Contains(term))
+							//{
+								if (!BigramIndex.ContainsKey(gram))
 								{
 
 									BigramIndex.Add(gram, 1);
@@ -80,12 +81,12 @@ namespace Viewer.Framework.Services
 									temp++;
 									BigramIndex.TryUpdate(gram, temp);
 								}
-							}
+							//}
 							break;
 						case 3:
-							if (split.ToList().Contains(term))
-							{
-								if (!TrigramIndex.Keys.Contains(gram))
+							//if (split.ToList().Contains(term))
+							//{
+								if (!TrigramIndex.ContainsKey(gram))
 								{
 
 									TrigramIndex.Add(gram, 1);
@@ -96,12 +97,12 @@ namespace Viewer.Framework.Services
 									temp++;
 									TrigramIndex.TryUpdate(gram, temp);
 								}
-							}
+							//}
 							break;
 						case 4:
-							if (split.ToList().Contains(term))
-							{
-								if (!FourgramIndex.Keys.Contains(gram))
+							//if (split.ToList().Contains(term))
+							//{
+								if (!FourgramIndex.ContainsKey(gram))
 								{
 
 									FourgramIndex.Add(gram, 1);
@@ -112,14 +113,14 @@ namespace Viewer.Framework.Services
 									temp++;
 									FourgramIndex.TryUpdate(gram, temp);
 								}
-							}
+							//}
 							break;
 						case 5:
-							if (split.ToList().Contains(term))
-							{
-								if (!FivegramIndex.Keys.Contains(gram))
+							//if (split.ToList().Contains(term))
+							//{
+								if (!FivegramIndex.ContainsKey(gram))
 								{
-
+								
 									FivegramIndex.Add(gram, 1);
 								}
 								else
@@ -128,7 +129,7 @@ namespace Viewer.Framework.Services
 									temp++;
 									FivegramIndex.TryUpdate(gram, temp);
 								}
-							}
+							//}
 							break;
 						default:
 							Console.WriteLine("Default case");
@@ -147,7 +148,7 @@ namespace Viewer.Framework.Services
 			List<string> ngrams = new List<string>();
 			if (LuceneService.NGrammer != null)
 			{
-
+				
 				TokenStream stream = LuceneService.NGrammer.GetTokenStream(TextFieldKey, new StringReader(document));
 				//AttributeSource source = new AttributeSource();
 				//OffsetAttribute offsetAttribute = stream.AddAttribute<OffsetAttribute>();
@@ -175,19 +176,28 @@ namespace Viewer.Framework.Services
 
 		}
 
+		public BTreeDictionary<string, int> FindTerm(string term)
+		{
+			foreach(var kvp in BigramIndex)
+			{
+				if (kvp.Key.Contains(term)) {
 
+				}
+			}
+		}
 	}
 
 	public interface INGramService
 	{
-		BTreeDictionary<string, int> BigramIndex { get; set; }
+		BPlusTree<string, int> BigramIndex { get; set; }
 
-		BTreeDictionary<string, int> TrigramIndex { get; set; }
-		BTreeDictionary<string, int> FourgramIndex { get; set; }
-		BTreeDictionary<string, int> FivegramIndex { get; set; }
+		BPlusTree<string, int> TrigramIndex { get; set; }
+		BPlusTree<string, int> FourgramIndex { get; set; }
+		BPlusTree<string, int> FivegramIndex { get; set; }
 		List<string> GetNGrams(string TextFieldKey, string document);
-		void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term);
+		void BuildNgramIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey);
 
+		BTreeDictionary<string, int> FindTerm(string term);
 		void FlushIndexToDisk();
 		void ReadIndexFromDisk();
 		bool CheckIndex();

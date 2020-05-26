@@ -9,7 +9,7 @@ using Lucene.Net.Util;
 namespace IndexingServices
 {
 
-	public static class LuceneService
+	public static class LuceneService: 
 	{
 		static LuceneService()
 		{
@@ -19,6 +19,8 @@ namespace IndexingServices
 		public static LuceneVersion AppLuceneVersion;
 
 		public static FSDirectory Dir { get; set; }
+
+		
 		public static StandardAnalyzer Analyzer { get; set; }
 		public static IndexWriterConfig IndexConfig { get; set; }
 		public static IndexWriter Writer { get; set; }
@@ -26,10 +28,14 @@ namespace IndexingServices
 		public static QueryParser Parser { get; set; }
 		public static IndexSearcher Searcher { get; set; }
 
+		public static IndexSearcher NGramSearcher { get; set; }
+		public static FSDirectory NGramDir { get; set; }
 		public static NGramAnalyzer NGrammer { get; set; }
+		public static DirectoryReader NGramReader { get; set; }
 		public static void Dispose()
 		{
 			Analyzer.Dispose();
+			NGrammer.Dispose();
 			DirReader.Dispose();
 			Writer.Dispose();
 		}

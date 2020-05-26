@@ -107,7 +107,7 @@ namespace Viewer
 
 		}
 
-		CoreAnalyzer analyzer;
+		
 
 		public void ShowView()
 		{
@@ -123,7 +123,7 @@ namespace Viewer
 		public MainWindow()
 		{
 			InitializeComponent();
-			analyzer = new CoreAnalyzer(@"C:\Users\voidl\Documents\stanford-corenlp-full-2016-10-31", @"C:\Users\voidl\Documents\stanford-ner-2016-10-31");
+			
 
 			this.PropertyChanged += MainWindow_PropertyChanged;
 
@@ -627,8 +627,7 @@ namespace Viewer
 			//	j++;
 			//}
 
-			Extractor extractor = new Extractor(this.analyzer);
-			extractor.Extract();
+			
 		}
 
 		private void dateView_Resize(object sender, EventArgs e)

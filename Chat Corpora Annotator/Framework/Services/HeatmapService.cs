@@ -55,7 +55,7 @@ namespace Viewer.Framework.Services
                 MessagesPerDay.Keys.CopyTo(days, 0);
                 //Array.Sort(days);
 
-                double block = (MessagesPerDay.Keys.Count / 998.0) * 10.0;
+                double block = (MessagesPerDay.Keys.Count / 1230.0) * 10.0;
 
                 int blockDayCount = (int)Math.Floor(block);
                 List<double> newCounts = new List<double>();
@@ -71,7 +71,10 @@ namespace Viewer.Framework.Services
                         
                         while (count < blockDayCount)
                         {
-                            blockdate.Append(days[index].Date.ToString()+" ");
+                            if (count == 0)
+                            {
+                                blockdate.Append(days[index].Date.ToString() + " ");
+                            }
                             x += MessagesPerDay[days[index]];
                             index++;
                             count++;

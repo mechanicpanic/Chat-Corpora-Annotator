@@ -73,9 +73,6 @@
     <Reference Include="CSharpTest.Net.Collections, Version=14.906.1403.1082, Culture=neutral, PublicKeyToken=06aee00cce822474, processorArchitecture=MSIL">
       <HintPath>..\packages\CSharpTest.Net.Collections.14.906.1403.1082\lib\net40\CSharpTest.Net.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.15.0.5\lib\net47\CsvHelper.dll</HintPath>
-    </Reference>
     <Reference Include="CsvParser, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SoftCircuits.CsvParser.2.1.2\lib\netstandard2.0\CsvParser.dll</HintPath>
     </Reference>
@@ -264,19 +261,13 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.7.1\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.7.2\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty.1.0.1\lib\net40\NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
-    </Reference>
-    <Reference Include="opennlp-tools-1.9.1, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenNLP.NET.1.9.1\lib\opennlp-tools-1.9.1.dll</HintPath>
-    </Reference>
-    <Reference Include="opennlp-uima-1.9.1, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenNLP.NET.1.9.1\lib\opennlp-uima-1.9.1.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
@@ -413,7 +404,6 @@
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
     <Compile Include="CoreAnalyzer.cs" />
-    <Compile Include="MessageContainer.cs" />
     <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>

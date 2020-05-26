@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace IndexingServices
 {
+    public static class MessageContainer
+    {
+        public static List<DynamicMessage> Messages { get; set; }
+
+    }
     public class DynamicMessage : IComparable
     {
         public string Id { get; set; }

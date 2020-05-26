@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -23,16 +24,17 @@ namespace Viewer
         public LinearHeatmapForm()
         {
             InitializeComponent();
-            panel1.Paint += panel1_Paint;
+            //panel1.Paint += panel1_Paint;
 
         }
 
-
+        private List<string> DateBlocks;
 
         public void DrawHeatmap(List<string> DateBlocks)
         {
-            RectangleWidth = panel1.Width / Colors.Count;
-            RectangleHeight = panel1.Height;
+            this.DateBlocks = DateBlocks;
+            RectangleWidth = this.Width / Colors.Count;
+            RectangleHeight = this.Height - panel2.Height;
 
             
             RectangleSize = new SizeF(RectangleWidth, RectangleHeight);
@@ -40,39 +42,56 @@ namespace Viewer
 
             for (int i = 0; i < Colors.Count; i++)
             {
-                RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
-                Rectangles.Add(rectangle);
+                //RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
+                //Rectangles.Add(rectangle);
                 
 
                 
                 Panel panel = new Panel();
                 panel.Size = RectangleSize.ToSize();
                 panel.Location = RectangleLocation;
-                //panel.MouseHover += Panel_MouseHover;
-                panel.MouseClick += Panel_MouseClick;
                 panel.BringToFront();
+                panel.BackColor = Colors[i];
                 panel.Enabled = true;
+                panel.Visible = true;
+                panel.Paint += Panel_Paint;
+                this.Controls.Add(panel);
                 panels.Add(panel);
-                captions.Add(panel, DateBlocks[i]);
-                //ToolTip tt = new ToolTip();
-                //tt.SetToolTip(panel,DateBlocks[i]);
-                //tooltips.Add(tt);
-               
+
+                ToolTip tt = new ToolTip();
+
+                var split = DateBlocks[i].Split(' ');
+                var date = split.ToList();
+
+                date.RemoveAll(x => String.IsNullOrEmpty(x));
+                if (date.Count == 1)
+                {
+                    tt.SetToolTip(panel, date[0]);
+                }
+                else
+                {
+                    tt.SetToolTip(panel, date[0] + " - " + date[date.Count-2]);
+                }
+                
+                tooltips.Add(tt);
+
                 RectangleLocation += new Size((int)RectangleWidth, 0);
 
             }
             
         }
 
-        private void Panel_MouseClick(object sender, MouseEventArgs e)
+        private void Panel_Paint(object sender, PaintEventArgs e)
         {
             Panel panel = sender as Panel;
-            richTextBox1.Text = captions[panel];
-        }
-
-        private void Panel_MouseHover(object sender, EventArgs e)
-        {
-            
+            int i = Array.IndexOf(panels.ToArray(), panel);
+            using (Graphics g = e.Graphics)
+            {
+                using (SolidBrush heatBrush = new SolidBrush(Colors[i]))
+                {
+                    g.FillRectangle(heatBrush, panel.ClientRectangle);
+                }
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -80,7 +99,7 @@ namespace Viewer
             // Create a local version of the graphics object for the PictureBox.
             Graphics g = e.Graphics;
 
-            for (int i = 0; i < Rectangles.Count; i++)
+            for (int i = 0; i < panels.Count; i++)
             {
                 using (SolidBrush heatBrush = new SolidBrush(Colors[i]))
                 {
@@ -103,10 +122,7 @@ namespace Viewer
 
         }
 
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
 
-        }
 
         public void ShowView()
         {
@@ -115,12 +131,9 @@ namespace Viewer
 
         public void CloseView()
         {
-            this.Close();
+            this.Hide();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
