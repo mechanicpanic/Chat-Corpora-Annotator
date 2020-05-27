@@ -11,7 +11,7 @@ namespace Viewer.Framework.Views
         bool ShowUnigrams { get; set; }
         string Term { get; set; }
         event EventHandler NGramClick;
-        void DisplayNGrams(BPlusTree<string, int> bigrams, BPlusTree<string, int> trigrams, BPlusTree<string, int> fourgrams, BPlusTree<string, int> fivegrams);
+        void DisplayNGrams(List<BTreeDictionary<string,int>> grams);
         //void DisplayNGramCounts(List<int> counts);
     }
 }

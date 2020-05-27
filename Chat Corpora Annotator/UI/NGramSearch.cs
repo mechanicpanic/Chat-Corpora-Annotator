@@ -48,23 +48,27 @@ namespace Viewer.UI
 
         }
 
-        public void DisplayNGrams(BTreeDictionary<string, int> bigrams, BTreeDictionary<string, int> trigrams, BTreeDictionary<string, int> fourgrams, BTreeDictionary<string, int> fivegrams)
+        public void DisplayNGrams(List<BTreeDictionary<string,int>> grams)
         {
-            foreach(var kvp in bigrams)
+            fastObjectListView1.ClearObjects();
+            fastObjectListView2.ClearObjects();
+            fastObjectListView3.ClearObjects();
+            fastObjectListView4.ClearObjects();
+            foreach(var kvp in grams[0])
             {
                 fastObjectListView1.AddObject(kvp);
             }
 
-            foreach (var kvp in trigrams)
+            foreach (var kvp in grams[1])
             {
                 fastObjectListView2.AddObject(kvp);
             }
 
-            foreach (var kvp in fourgrams)
+            foreach (var kvp in grams[2])
             {
                 fastObjectListView3.AddObject(kvp);
             }
-            foreach (var kvp in fivegrams)
+            foreach (var kvp in grams[3])
             {
                 fastObjectListView4.AddObject(kvp);
             }

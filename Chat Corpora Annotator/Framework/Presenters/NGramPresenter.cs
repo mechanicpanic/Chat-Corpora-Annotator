@@ -30,8 +30,8 @@ namespace Viewer.Framework.Presenters
 
         private void _grams_NGramClick(object sender, EventArgs e)
         {
-
-            _grams.DisplayNGrams(_ngrammer.BigramIndex,_ngrammer.TrigramIndex,_ngrammer.FourgramIndex,_ngrammer.FivegramIndex);
+            var result = _ngrammer.MakeResultsReadable(_grams.Term);
+            _grams.DisplayNGrams(result);
 
         }
     }

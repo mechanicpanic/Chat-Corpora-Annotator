@@ -9,7 +9,7 @@ using Lucene.Net.Util;
 namespace IndexingServices
 {
 
-	public static class LuceneService: 
+	public static class LuceneService 
 	{
 		static LuceneService()
 		{
