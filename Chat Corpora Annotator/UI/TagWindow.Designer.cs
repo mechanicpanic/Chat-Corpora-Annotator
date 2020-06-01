@@ -42,6 +42,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button5 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.panel1.SuspendLayout();
@@ -80,6 +81,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Lavender;
+            this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.listView2);
@@ -242,6 +244,21 @@
             this.columnHeader1.Text = "Situations";
             this.columnHeader1.Width = 204;
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Lavender;
+            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Location = new System.Drawing.Point(0, 560);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(214, 50);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Show suggestions";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -277,5 +294,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button button5;
     }
 }

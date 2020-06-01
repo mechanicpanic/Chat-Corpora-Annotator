@@ -31,35 +31,53 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.code = new System.Windows.Forms.TabPage();
+            this.codeView = new BrightIdeasSoftware.FastObjectListView();
+            this.job = new System.Windows.Forms.TabPage();
+            this.jobView = new BrightIdeasSoftware.FastObjectListView();
+            this.meet = new System.Windows.Forms.TabPage();
+            this.meetView = new BrightIdeasSoftware.FastObjectListView();
+            this.soft = new System.Windows.Forms.TabPage();
+            this.softView = new BrightIdeasSoftware.FastObjectListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            this.fastObjectListView2 = new BrightIdeasSoftware.FastObjectListView();
-            this.fastObjectListView3 = new BrightIdeasSoftware.FastObjectListView();
-            this.fastObjectListView4 = new BrightIdeasSoftware.FastObjectListView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView4)).BeginInit();
+            this.code.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.codeView)).BeginInit();
+            this.job.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.jobView)).BeginInit();
+            this.meet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.meetView)).BeginInit();
+            this.soft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.softView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(175, 422);
+            this.panel1.Size = new System.Drawing.Size(233, 519);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -67,175 +85,263 @@
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel2.Location = new System.Drawing.Point(175, 0);
+            this.panel2.Location = new System.Drawing.Point(233, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(648, 370);
+            this.panel2.Size = new System.Drawing.Size(864, 455);
             this.panel2.TabIndex = 2;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.code);
+            this.tabControl1.Controls.Add(this.soft);
+            this.tabControl1.Controls.Add(this.job);
+            this.tabControl1.Controls.Add(this.meet);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(648, 370);
+            this.tabControl1.Size = new System.Drawing.Size(864, 455);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // code
             // 
-            this.tabPage1.Controls.Add(this.fastObjectListView4);
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(640, 341);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.code.Controls.Add(this.codeView);
+            this.code.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.code.Location = new System.Drawing.Point(4, 29);
+            this.code.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.code.Name = "code";
+            this.code.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.code.Size = new System.Drawing.Size(856, 422);
+            this.code.TabIndex = 0;
+            this.code.Text = "CodeAssistance";
+            this.code.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // codeView
             // 
-            this.tabPage2.Controls.Add(this.fastObjectListView3);
-            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(640, 344);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.codeView.CellEditUseWholeCell = false;
+            this.codeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.codeView.HideSelection = false;
+            this.codeView.Location = new System.Drawing.Point(4, 4);
+            this.codeView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codeView.Name = "codeView";
+            this.codeView.ShowGroups = false;
+            this.codeView.Size = new System.Drawing.Size(848, 414);
+            this.codeView.TabIndex = 0;
+            this.codeView.UseCompatibleStateImageBehavior = false;
+            this.codeView.View = System.Windows.Forms.View.Details;
+            this.codeView.VirtualMode = true;
+            // 
+            // job
+            // 
+            this.job.Controls.Add(this.jobView);
+            this.job.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.job.Location = new System.Drawing.Point(4, 29);
+            this.job.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.job.Name = "job";
+            this.job.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.job.Size = new System.Drawing.Size(856, 422);
+            this.job.TabIndex = 1;
+            this.job.Text = "JobDiscussion";
+            this.job.UseVisualStyleBackColor = true;
+            // 
+            // jobView
+            // 
+            this.jobView.CellEditUseWholeCell = false;
+            this.jobView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.jobView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.jobView.HideSelection = false;
+            this.jobView.Location = new System.Drawing.Point(4, 4);
+            this.jobView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jobView.Name = "jobView";
+            this.jobView.ShowGroups = false;
+            this.jobView.Size = new System.Drawing.Size(848, 414);
+            this.jobView.TabIndex = 0;
+            this.jobView.UseCompatibleStateImageBehavior = false;
+            this.jobView.View = System.Windows.Forms.View.Details;
+            this.jobView.VirtualMode = true;
+            // 
+            // meet
+            // 
+            this.meet.Controls.Add(this.meetView);
+            this.meet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.meet.Location = new System.Drawing.Point(4, 29);
+            this.meet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.meet.Name = "meet";
+            this.meet.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.meet.Size = new System.Drawing.Size(856, 422);
+            this.meet.TabIndex = 2;
+            this.meet.Text = "Meeting";
+            this.meet.UseVisualStyleBackColor = true;
+            // 
+            // meetView
+            // 
+            this.meetView.CellEditUseWholeCell = false;
+            this.meetView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meetView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.meetView.HideSelection = false;
+            this.meetView.Location = new System.Drawing.Point(4, 4);
+            this.meetView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.meetView.Name = "meetView";
+            this.meetView.ShowGroups = false;
+            this.meetView.Size = new System.Drawing.Size(848, 414);
+            this.meetView.TabIndex = 0;
+            this.meetView.UseCompatibleStateImageBehavior = false;
+            this.meetView.View = System.Windows.Forms.View.Details;
+            this.meetView.VirtualMode = true;
+            // 
+            // soft
+            // 
+            this.soft.Controls.Add(this.softView);
+            this.soft.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.soft.Location = new System.Drawing.Point(4, 29);
+            this.soft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.soft.Name = "soft";
+            this.soft.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.soft.Size = new System.Drawing.Size(856, 422);
+            this.soft.TabIndex = 3;
+            this.soft.Text = "SoftwareSupport";
+            this.soft.UseVisualStyleBackColor = true;
+            // 
+            // softView
+            // 
+            this.softView.CellEditUseWholeCell = false;
+            this.softView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.softView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.softView.HideSelection = false;
+            this.softView.Location = new System.Drawing.Point(4, 4);
+            this.softView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.softView.Name = "softView";
+            this.softView.ShowGroups = false;
+            this.softView.Size = new System.Drawing.Size(848, 414);
+            this.softView.TabIndex = 0;
+            this.softView.UseCompatibleStateImageBehavior = false;
+            this.softView.View = System.Windows.Forms.View.Details;
+            this.softView.VirtualMode = true;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(510, 376);
+            this.button1.Location = new System.Drawing.Point(680, 463);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 34);
+            this.button1.Size = new System.Drawing.Size(272, 42);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "Next";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(299, 376);
+            this.button2.Location = new System.Drawing.Point(399, 463);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(196, 34);
+            this.button2.Size = new System.Drawing.Size(261, 42);
             this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
+            this.button2.Text = "Prev";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
-            // tabPage3
+            // label1
             // 
-            this.tabPage3.Controls.Add(this.fastObjectListView2);
-            this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(640, 344);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
             // 
-            // tabPage4
+            // label2
             // 
-            this.tabPage4.Controls.Add(this.fastObjectListView1);
-            this.tabPage4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(640, 344);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "label2";
             // 
-            // fastObjectListView1
+            // button3
             // 
-            this.fastObjectListView1.CellEditUseWholeCell = false;
-            this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(3, 3);
-            this.fastObjectListView1.Name = "fastObjectListView1";
-            this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(634, 338);
-            this.fastObjectListView1.TabIndex = 0;
-            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView1.VirtualMode = true;
+            this.button3.Location = new System.Drawing.Point(4, 24);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(222, 28);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // fastObjectListView2
+            // button4
             // 
-            this.fastObjectListView2.CellEditUseWholeCell = false;
-            this.fastObjectListView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fastObjectListView2.HideSelection = false;
-            this.fastObjectListView2.Location = new System.Drawing.Point(3, 3);
-            this.fastObjectListView2.Name = "fastObjectListView2";
-            this.fastObjectListView2.ShowGroups = false;
-            this.fastObjectListView2.Size = new System.Drawing.Size(634, 338);
-            this.fastObjectListView2.TabIndex = 0;
-            this.fastObjectListView2.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView2.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView2.VirtualMode = true;
+            this.button4.Location = new System.Drawing.Point(0, 201);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(222, 28);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
             // 
-            // fastObjectListView3
+            // button5
             // 
-            this.fastObjectListView3.CellEditUseWholeCell = false;
-            this.fastObjectListView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fastObjectListView3.HideSelection = false;
-            this.fastObjectListView3.Location = new System.Drawing.Point(3, 3);
-            this.fastObjectListView3.Name = "fastObjectListView3";
-            this.fastObjectListView3.ShowGroups = false;
-            this.fastObjectListView3.Size = new System.Drawing.Size(634, 338);
-            this.fastObjectListView3.TabIndex = 0;
-            this.fastObjectListView3.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView3.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView3.VirtualMode = true;
+            this.button5.Location = new System.Drawing.Point(0, 131);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(222, 28);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
             // 
-            // fastObjectListView4
+            // button6
             // 
-            this.fastObjectListView4.CellEditUseWholeCell = false;
-            this.fastObjectListView4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fastObjectListView4.HideSelection = false;
-            this.fastObjectListView4.Location = new System.Drawing.Point(3, 3);
-            this.fastObjectListView4.Name = "fastObjectListView4";
-            this.fastObjectListView4.ShowGroups = false;
-            this.fastObjectListView4.Size = new System.Drawing.Size(634, 335);
-            this.fastObjectListView4.TabIndex = 0;
-            this.fastObjectListView4.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView4.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView4.VirtualMode = true;
+            this.button6.Location = new System.Drawing.Point(3, 78);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(222, 28);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(-1, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 20);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(0, 178);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "label4";
             // 
             // Suggester
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 422);
+            this.ClientSize = new System.Drawing.Size(1097, 519);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Suggester";
             this.Text = "Suggester";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView4)).EndInit();
+            this.code.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.codeView)).EndInit();
+            this.job.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.jobView)).EndInit();
+            this.meet.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.meetView)).EndInit();
+            this.soft.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.softView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,15 +351,23 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView4;
-        private System.Windows.Forms.TabPage tabPage2;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView3;
-        private System.Windows.Forms.TabPage tabPage3;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView2;
-        private System.Windows.Forms.TabPage tabPage4;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
+        private System.Windows.Forms.TabPage code;
+        private BrightIdeasSoftware.FastObjectListView codeView;
+        private System.Windows.Forms.TabPage job;
+        private BrightIdeasSoftware.FastObjectListView jobView;
+        private System.Windows.Forms.TabPage meet;
+        private BrightIdeasSoftware.FastObjectListView meetView;
+        private System.Windows.Forms.TabPage soft;
+        private BrightIdeasSoftware.FastObjectListView softView;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }

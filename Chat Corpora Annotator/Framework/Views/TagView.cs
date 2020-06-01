@@ -17,6 +17,7 @@ namespace Viewer.Framework.Views
         event EventHandler EditSituation;
         event EventHandler LoadMore;
 
+        event EventHandler ShowSuggester;
         //ITagsetView CreateTagsetEditor();
         //void ShowTagsetEditor();
         void UpdateTagset(List<string> tags);

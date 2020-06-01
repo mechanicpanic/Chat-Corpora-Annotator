@@ -406,6 +406,7 @@
     <Compile Include="Framework\Views\TagsetView.cs" />
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
+    <Compile Include="SuggesterMoveEventArgs.cs" />
     <Compile Include="UI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>

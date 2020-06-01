@@ -79,6 +79,7 @@ namespace Viewer.UI
 		public event EventHandler RemoveTag;
 		public event EventHandler EditSituation;
 		public event EventHandler LoadMore;
+		public event EventHandler ShowSuggester;
 
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -220,6 +221,11 @@ namespace Viewer.UI
 		private void listView2_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void button5_Click_1(object sender, EventArgs e)
+		{
+			ShowSuggester?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
