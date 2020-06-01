@@ -16,55 +16,27 @@ namespace ExtractingServices
     public class CoreAnalyzer
     {
 
-
-        public string _modelDirectory { get; private set; }
-        public string _NERroot { get; private set; }
-        public string _NERclassifiers { get; private set; }
-        public string _POSdirectory { get; private set; }
-        public string _root { get; private set; }
-
-
-
         Tree constituencyParse;
         object[] treeArray;
-        public CoreAnalyzer(string root, string NERroot)
-        {
-            this._root = root;
-            this._NERroot = NERroot;
-            this._NERclassifiers = _NERroot + @"\classifiers";
-            this._modelDirectory = root + @"\stanford-corenlp-3.7.0-models";
-            this._POSdirectory = _modelDirectory + @"\edu\stanford\nlp\models\pos-tagger\english-caseless-left3words-distsim.tagger";
 
-
-
-
-
-
-
-        }
 
 
         public StanfordCoreNLP SimplePipeline()
         {
-            java.util.Properties props = new java.util.Properties();
+            Properties props = new Properties();
 
             props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
 
-            props.setProperty("pos.model", @"C:\Users\voidl\Documents\gate-EN-twitter.model");
-            //props.setProperty("pos.model", _POSdirectory);
-
-            props.setProperty("ner.model", _NERclassifiers + @"\english.muc.7class.caseless.distsim.crf.ser.gz");
-            props.setProperty("parse.model", _modelDirectory + @"\edu\stanford\nlp\models\srparser\englishSR.ser.gz");
+            props.setProperty("pos.model", NLPModel._POSpath);
+            props.setProperty("ner.model", NLPModel._NERpath);
+            props.setProperty("parse.model", NLPModel._SRparserpath);
 
             props.setProperty("ner.useSUTime", "true");
             props.setProperty("ner.applyFineGrained", "false");
 
             props.setProperty("sutime.binders", "0");
 
-            var sutimeRules = _root + @"\sutime\defs.sutime.txt,"
-                              + _root + @"\sutime\english.holidays.sutime.txt,"
-                              + _root + @"\sutime\english.sutime.txt";
-            props.setProperty("sutime.rules", sutimeRules);
+            props.setProperty("sutime.rules", NLPModel._sutimeRules);
             props.setProperty("sutime.markTimeRanges", "true");
             props.setProperty("sutime.includeNested", "true");
             StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -173,15 +145,15 @@ namespace ExtractingServices
             }
         }
 
-        public string Twokenize(CoreDocument coredoc)
-        {
-            return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(coredoc.text());
-        }
+        //public string Twokenize(CoreDocument coredoc)
+        //{
+        //    return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(coredoc.text());
+        //}
 
-        public string Twokenize(string text)
-        {
-            return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(text);
-        }
+        //public string Twokenize(string text)
+        //{
+        //    return TwitterNlpPartOfSpeechTagger.GetInstance(@"C:\Users\voidl\Downloads\model.ritter_ptb_alldata_fixed.20130723").GetPOS(text);
+        //}
 
         //public bool DetectQuestion(string message)
         //{

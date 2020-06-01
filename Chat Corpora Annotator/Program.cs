@@ -22,11 +22,12 @@ namespace Viewer
             CSVLoader loader = new CSVLoader();
             LinearHeatmapForm heatmap = new LinearHeatmapForm();
             DelimiterStep delim = new DelimiterStep();
+            ChartForm chart = new ChartForm();
 
             CSVReadService fileReader = new CSVReadService();
             SearchService searcher = new SearchService();
             HeatmapService heater = new HeatmapService();
-
+            FolderService folder = new FolderService();
 
             TagWindow tagger = new TagWindow();
             TagService service = new TagService();
@@ -34,7 +35,7 @@ namespace Viewer
             TagFileWriter writer = new TagFileWriter();
             TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
 
-            MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap);
+            MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap, folder);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
@@ -46,7 +47,7 @@ namespace Viewer
 
             //Concordancer conview = new Concordancer();
             //NGramSearch gramview = new NGramSearch();
-            //ChartForm chart = new ChartForm();
+            
             //ConcordanceService concordancer = new ConcordanceService();
             //NGramService ngrammer = new NGramService();
 

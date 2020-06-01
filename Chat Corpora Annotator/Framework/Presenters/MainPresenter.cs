@@ -16,15 +16,15 @@ namespace Viewer.Framework.Presenters
         private readonly ICSVView _csv;
         private readonly ISearchService _searcher;
 
+        private readonly FolderService _folder;
 
 
-
-        public MainPresenter(IMainView view, ICSVView csv, ISearchService searcher, IHeatmapView heatmap)
+        public MainPresenter(IMainView view, ICSVView csv, ISearchService searcher, IHeatmapView heatmap, FolderService folder)
         {
             this._main = view;
             this._csv = csv;
             this._searcher = searcher;
-
+            this._folder = folder;
 
             _main.FindClick += _view_FindClick;
             _main.LoadMoreClick += _view_LoadMoreClick;
@@ -32,6 +32,8 @@ namespace Viewer.Framework.Presenters
             _main.ConcordanceClick += _main_ConcordanceClick;
             _main.NGramClick += _main_NGramClick;
             _main.KeywordClick += _main_KeywordClick;
+
+            _folder.CheckFolder();
 
 
         }

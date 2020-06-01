@@ -87,14 +87,6 @@ namespace Viewer.Framework.Presenters
         }
 
 
-
-
-
-
-
-
-
-
         private void _csv_HeaderSelected(object sender, EventArgs e)
         {
             IndexService.SelectedFields = _csv.SelectedFields;

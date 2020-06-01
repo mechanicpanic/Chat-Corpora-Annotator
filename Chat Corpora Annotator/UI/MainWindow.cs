@@ -124,7 +124,6 @@ namespace Viewer
 		{
 			InitializeComponent();
 			
-
 			this.PropertyChanged += MainWindow_PropertyChanged;
 
 
@@ -140,7 +139,11 @@ namespace Viewer
 				findButton.Enabled = true;
 				clearButton.Enabled = true;
 				loadMoreButton.Visible = true;
+				concordancerButton.Enabled = true;
+				ngramButton.Enabled = true;
+				keywordButton.Enabled = true;
 			}
+
 			if (!this.FileLoadState)
 			{
 				queryButton.Enabled = false;
@@ -148,6 +151,9 @@ namespace Viewer
 				dateToggle.Enabled = false;
 				findButton.Enabled = false;
 				clearButton.Enabled = false;
+				concordancerButton.Enabled = false;
+				ngramButton.Enabled = false;
+				keywordButton.Enabled = false;
 				loadMoreButton.Visible = false;
 			}
 		}
@@ -176,10 +182,6 @@ namespace Viewer
 		{
 
 			this.CurrentPath = csvDialog.FileName;
-
-
-
-
 			string name = Path.GetFileNameWithoutExtension(CurrentPath);
 			string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			if (Directory.Exists(folderPath + "\\CCA"))
@@ -188,8 +190,9 @@ namespace Viewer
 			}
 			else
 			{
-				Directory.CreateDirectory(folderPath + "\\CCA");
-				Directory.CreateDirectory(folderPath + "\\CCA" + "\\" + name);
+				//Directory.CreateDirectory(folderPath + "\\CCA");
+				MessageBox.Show("Something went wrong. Please restart");
+				//Directory.CreateDirectory(folderPath + "\\CCA" + "\\" + name);
 			}
 
 			this.CurrentIndexPath = folderPath + "\\CCA" + "\\" + name;
@@ -655,7 +658,7 @@ namespace Viewer
 		{
 			keywordPanel.Controls.Add((UserControl)key);
 			keywordPanel.Controls[0].Dock = DockStyle.Fill;
-			button3.Visible = false;
+			keywordButton.Visible = false;
 		}
 
 		public void ShowDates(List<DateTime> dates)

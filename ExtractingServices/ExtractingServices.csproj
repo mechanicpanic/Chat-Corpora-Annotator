@@ -169,6 +169,7 @@
   <ItemGroup>
     <Compile Include="Extractor.cs" />
     <Compile Include="CoreAnalyzer.cs" />
+    <Compile Include="NLPModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
