@@ -29,6 +29,7 @@ namespace Viewer
 		public event EventHandler NGramClick;
 		public event EventHandler TagClick;
 		public event EventHandler KeywordClick;
+		public event EventHandler LoadStatistics;
 
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
@@ -41,6 +42,8 @@ namespace Viewer
 		public List<DynamicMessage> SearchResults { get; set; }
 		private bool _fileLoadState = false;
 		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
+
+		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 		public void SetLineCount(int count)
 		{
@@ -668,6 +671,16 @@ namespace Viewer
 				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
 			}
 			dateView.Invalidate();
+		}
+
+		private void button1_Click_1(object sender, EventArgs e)
+		{
+			LoadStatistics?.Invoke(this, EventArgs.Empty);
+		}
+
+		public void DisplayStatistics()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

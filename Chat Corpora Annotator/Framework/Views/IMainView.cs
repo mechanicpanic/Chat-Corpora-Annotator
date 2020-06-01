@@ -17,7 +17,9 @@ namespace Viewer.Framework.Views
         void DisplayDocuments();
         void DisplaySearchResults();
 
-
+        event EventHandler LoadStatistics;
+        void DisplayStatistics();
+        Dictionary<string,double> Statistics { get; set; }
         IConcordanceView CreateConcordancer();
 
         INGramView CreateNgramView();

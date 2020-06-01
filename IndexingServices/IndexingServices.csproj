@@ -96,6 +96,7 @@
     <Compile Include="NGramAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RakeAlgorithm.cs" />
+    <Compile Include="StatisticsService.cs" />
     <Compile Include="TaggedIndexService.cs" />
   </ItemGroup>
   <ItemGroup>

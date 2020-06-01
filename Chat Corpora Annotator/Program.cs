@@ -35,28 +35,13 @@ namespace Viewer
             TagFileWriter writer = new TagFileWriter();
             TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
 
-            MainPresenter presenter = new MainPresenter(main, loader, searcher, heatmap, folder);
+            MainPresenter presenter = new MainPresenter(main, loader, searcher, folder);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
+            ChartPresenter chartPresenter = new ChartPresenter(main, chart);
             main.AddOwnedForm(delim);
             Application.Run(main);
-
-
-
-
-            //Concordancer conview = new Concordancer();
-            //NGramSearch gramview = new NGramSearch();
-            
-            //ConcordanceService concordancer = new ConcordanceService();
-            //NGramService ngrammer = new NGramService();
-
-            //NGramPresenter nGramPresenter = new NGramPresenter(main, indexer, searcher, ngrammer, gramview);
-            //ConcordancePresenter conPresenter = new ConcordancePresenter(main, indexer, concordancer, conview);
-            //ChartPresenter chartPresenter = new ChartPresenter(main, chart, indexer);
-
-
-
         }
     }
 }

@@ -31,15 +31,6 @@ namespace ExtractingServices
             pipe.annotate(coredoc);
             return coredoc;
         }
-        //public bool DetectMeeting()
-        //{
-
-        //}
-        //public bool DetectCodeHelp()
-        //{
-
-        //}
-        //public bool DetectAssistance() { }
 
         private void ExtractNERTags(CoreDocument coredoc, Lucene.Net.Documents.Document document)
         {
@@ -136,10 +127,10 @@ namespace ExtractingServices
             {
                 //using (var stream = new ByteArrayOutputStream())
                 //{
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
                 {
                     Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
-                    CoreDocument coredoc = GetAnnotatedDocument(document.GetField("text").GetStringValue());
+                    CoreDocument coredoc = GetAnnotatedDocument(document.GetField(IndexService.TextFieldKey).GetStringValue());
                     //ExtractNERTags(coredoc, document);
                     //ExtractNouns(coredoc, document);
                     _analyzer.CreateParseTree(coredoc);
