@@ -18,7 +18,7 @@ namespace IndexingServices
         }
 
         public int minGramSize { get; set; } = 2;
-        public int maxGramSize { get; set; } = 2;
+        public int maxGramSize { get; set; } = 5;
 
         public bool ShowUnigrams { get; set; } = false;
         protected override TokenStreamComponents CreateComponents(string fieldName, TextReader reader)

@@ -16,14 +16,15 @@ namespace Viewer.Framework.Services
 
 	public class NGramService : INGramService
 	{
-		public BPlusTree<string, int> Index { get; set; }
 
 		private BPlusTree<string,int> FullIndex { get; set; }
 
-		//private string filename = @"C:\Users\voidl\Desktop";
+		private BPlusTree<string, int>.OptionsV2 Options { get; set; }
+
+		private BulkInsertOptions bulkOptions { get; set; }
 		public bool CheckIndex()
 		{
-			if (File.Exists(IndexService.CurrentIndexPath + @"\info\" + "bigrams.txt"))
+			if (File.Exists(IndexService.CurrentIndexPath + @"\info\" + "index"))
 			{
 				return true;
 			}
@@ -34,27 +35,26 @@ namespace Viewer.Framework.Services
 		}
 		public void ReadIndexFromDisk()
 		{
-
-		}
-		public void FlushIndexToDisk()
-		{
-
-			//File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "bigrams.txt", new JavaScriptSerializer().Serialize(BigramIndex));
-			//File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "trigrams.txt", new JavaScriptSerializer().Serialize(TrigramIndex));
-			//File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "fourgrams.txt", new JavaScriptSerializer().Serialize(FourgramIndex));
-			//File.WriteAllText(IndexService.CurrentIndexPath + @"\info\" + "fivegrams.txt", new JavaScriptSerializer().Serialize(FivegramIndex));
+			SetTreeOptions();
+			this.FullIndex = new BPlusTree<string, int>(Options);
 		}
 
-		private void BuildFullIndex()
+		private void SetTreeOptions()
 		{
-			BPlusTree<string, int>.OptionsV2 Options = new BPlusTree<string, int>.OptionsV2(PrimitiveSerializer.String, PrimitiveSerializer.Int32);
-			BulkInsertOptions bulkOptions = new BulkInsertOptions();
+			this.Options = new BPlusTree<string, int>.OptionsV2(PrimitiveSerializer.String, PrimitiveSerializer.Int32);
+			this.bulkOptions = new BulkInsertOptions();
 			bulkOptions.DuplicateHandling = DuplicateHandling.FirstValueWins;
 			Options.CalcBTreeOrder(48, 4);
 			Options.CreateFile = CreatePolicy.IfNeeded;
 			Options.StoragePerformance = StoragePerformance.Fastest;
 			Options.FileName = IndexService.CurrentIndexPath + @"\info\" + "index";
 
+		}
+
+		public void BuildFullIndex()
+		{
+
+			SetTreeOptions();
 			this.FullIndex = new BPlusTree<string, int>(Options);
 			Dictionary<string, int> grams = new Dictionary<string, int>();
 			
@@ -84,20 +84,19 @@ namespace Viewer.Framework.Services
 			GC.WaitForPendingFinalizers();
 		}
 
+		//private void BuildNgramTermIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
+		//{
+		//	BPlusTree<string, int>.OptionsV2 Options = new BPlusTree<string, int>.OptionsV2(PrimitiveSerializer.String, PrimitiveSerializer.Int32);
+		//	Options.CalcBTreeOrder(48, 4);
+		//	Options.CreateFile = CreatePolicy.IfNeeded;
+		//	//Options.FileName = IndexService.CurrentIndexPath + @"\info\" + "index";
 
-		private void BuildNgramTermIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
-		{
-			BPlusTree<string, int>.OptionsV2 Options = new BPlusTree<string, int>.OptionsV2(PrimitiveSerializer.String, PrimitiveSerializer.Int32);
-			Options.CalcBTreeOrder(48, 4);
-			Options.CreateFile = CreatePolicy.IfNeeded;
-			//Options.FileName = IndexService.CurrentIndexPath + @"\info\" + "index";
+		//	this.Index = new BPlusTree<string, int>(Options);
 
-			this.Index = new BPlusTree<string, int>(Options);
-
-			LuceneService.NGrammer.maxGramSize = maxSize;
-			LuceneService.NGrammer.minGramSize = minSize;
-			LuceneService.NGrammer.ShowUnigrams = ShowUnigrams;
-			BuildFullIndex();
+		//	LuceneService.NGrammer.maxGramSize = maxSize;
+		//	LuceneService.NGrammer.minGramSize = minSize;
+		//	LuceneService.NGrammer.ShowUnigrams = ShowUnigrams;
+			//BuildFullIndex();
 			//TermQuery query = new TermQuery(new Lucene.Net.Index.Term(IndexService.TextFieldKey, term));
 			//var docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
 
@@ -128,8 +127,8 @@ namespace Viewer.Framework.Services
 			//	}
 
 			//}
-			Console.WriteLine("Done!");
-		}
+			//Console.WriteLine("Done!");
+		//}
 
 
 
@@ -166,37 +165,39 @@ namespace Viewer.Framework.Services
 
 		}
 
-		public List<BTreeDictionary<string, int>> MakeResultsReadable(string term)
+		public List<BTreeDictionary<string, int>> GetReadableResultsForTerm(string term)
 		{
 			BTreeDictionary<string, int> bi = new BTreeDictionary<string, int>();
 			BTreeDictionary<string, int> tri = new BTreeDictionary<string, int>();
 			BTreeDictionary<string, int> four = new BTreeDictionary<string, int>();
 			BTreeDictionary<string, int> five = new BTreeDictionary<string, int>();
-			BuildNgramTermIndex(5, 2, false, IndexService.TextFieldKey, term);
-			//foreach (var kvp in Index)
-			//{
 
-			//	switch (kvp.Key.Split(' ').Length)
-			//	{
-			//		case 2:
-			//			bi.Add(kvp.Key, kvp.Value);
-			//			break;
-			//		case 3:
-			//			tri.Add(kvp.Key, kvp.Value);
-			//			break;
-			//		case 4:
-			//			four.Add(kvp.Key, kvp.Value);
-			//			break;
-			//		case 5:
-			//			five.Add(kvp.Key, kvp.Value);
-			//			break;
-			//		default:
-			//			break;
-			//	}
+			foreach(var kvp in FullIndex)
+			{
+				var arr = kvp.Key.Split(' ');
+				if (arr.Contains(term))
+				{
+					switch (arr.Length)
+					{
+						case 2:
+							bi.Add(kvp);
+							break;
+						case 3:
+							tri.Add(kvp);
+							break;
+						case 4:
+							four.Add(kvp);
+							break;
+						case 5:
+							five.Add(kvp);
+							break;
+						default:
+							Console.WriteLine("Whoops");
+							break;
+					}
+				}
+			}
 
-
-				
-			//}
 			var ret = new List<BTreeDictionary<string, int>>();
 			ret.Add(bi);
 			ret.Add(tri);
@@ -204,18 +205,22 @@ namespace Viewer.Framework.Services
 			ret.Add(five);
 			return ret;
 		}
+
+		
 	}
 
 	public interface INGramService
 	{
-		BPlusTree<string, int> Index { get; set; }
 
 
-		List<string> GetNGrams(string TextFieldKey, string document);
+		//List<string> GetNGrams(string TextFieldKey, string document);
 		//void BuildNgramTermIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term);
 
-		List<BTreeDictionary<string, int>> MakeResultsReadable(string term);
+		
+		List<BTreeDictionary<string, int>> GetReadableResultsForTerm(string term);
 		void ReadIndexFromDisk();
+
+		void BuildFullIndex();
 		bool CheckIndex();
 	}
 }

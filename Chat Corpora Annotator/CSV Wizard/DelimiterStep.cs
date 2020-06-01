@@ -37,7 +37,9 @@ namespace Viewer.CSV_Wizard
         }
         public void CloseView()
         {
-            this.Close();
+            comboBox1.SelectedItem = null;
+            button1.Invalidate();
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

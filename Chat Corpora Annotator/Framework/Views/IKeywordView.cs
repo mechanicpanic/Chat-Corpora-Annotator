@@ -10,7 +10,7 @@ namespace Viewer.Framework.Views
     public interface IKeywordView:IView
     {
         BTreeDictionary<string,double> RakeKeywords { get; set; }
-        int RakeWordCount { get; set; }
+        int RakeWordCount { get; }
         Dictionary<List<string>,int> Keyphrases { get; set; }
 
        event EventHandler RakeClick;

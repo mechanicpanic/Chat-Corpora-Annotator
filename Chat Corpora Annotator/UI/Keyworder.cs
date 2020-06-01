@@ -16,7 +16,9 @@ namespace Viewer.UI
         public event EventHandler RakeClick;
         public BTreeDictionary<string, double> RakeKeywords { get; set; } = new BTreeDictionary<string, double>();
         public Dictionary<List<string>, int> Keyphrases { get; set; }
-        public int RakeWordCount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int RakeWordCount { get { return RakeKeywords.Count; } }
+
+       
 
         private void button1_Click(object sender, EventArgs e)
         {

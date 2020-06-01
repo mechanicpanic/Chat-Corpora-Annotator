@@ -118,6 +118,7 @@ namespace Viewer.UI
 
         public void CloseView()
         {
+            
             this.Dispose();
         }
 

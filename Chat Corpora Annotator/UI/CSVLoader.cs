@@ -134,7 +134,7 @@ namespace Viewer
         public void CloseView()
         {
             _steps.Clear();
-            this.Close();
+            this.Hide();
         }
 
         public void ShowView()

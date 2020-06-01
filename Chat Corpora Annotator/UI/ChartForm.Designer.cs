@@ -33,12 +33,10 @@
             // 
             // cartesianChart1
             // 
-            this.cartesianChart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cartesianChart1.Location = new System.Drawing.Point(12, 12);
+            this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartesianChart1.Location = new System.Drawing.Point(0, 0);
             this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(1215, 450);
+            this.cartesianChart1.Size = new System.Drawing.Size(1239, 590);
             this.cartesianChart1.TabIndex = 0;
             this.cartesianChart1.Text = "cartesianChart1";
             // 
@@ -46,10 +44,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1239, 590);
             this.Controls.Add(this.cartesianChart1);
             this.Name = "ChartForm";
-            this.Text = "ChartForm";
+            this.Text = "Plot";
             this.ResumeLayout(false);
 
         }

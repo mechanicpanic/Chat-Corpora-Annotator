@@ -52,7 +52,15 @@ namespace Viewer.Framework.Presenters
             NGramPresenter grampresenter = new NGramPresenter(_main, _searcher, _ngrammer, _ngram);
             _ngram.ShowView();
             _main.ShowNgrams(_ngram);
+            if (_ngrammer.CheckIndex()) {
+                _ngrammer.ReadIndexFromDisk();
+            }
+            else
+            {
+                _ngrammer.BuildFullIndex();
 
+            }
+            
         }
         private void _main_ConcordanceClick(object sender, EventArgs e)
         {

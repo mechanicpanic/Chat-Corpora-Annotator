@@ -25,7 +25,7 @@ namespace Viewer
 
         public void CloseView()
         {
-            this.Close();
+            this.Hide();
         }
 
         public void DrawChart(List<DateTime> days, List<int> counts)

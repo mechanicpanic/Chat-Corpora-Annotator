@@ -85,10 +85,6 @@ namespace Viewer.UI
             this.Show();
         }
 
-        public void DisplayNGramCounts(List<int> counts)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

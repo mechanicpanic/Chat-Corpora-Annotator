@@ -30,7 +30,7 @@ namespace Viewer.Framework.Presenters
 
         private void _grams_NGramClick(object sender, EventArgs e)
         {
-            var result = _ngrammer.MakeResultsReadable(_grams.Term);
+            var result = _ngrammer.GetReadableResultsForTerm(_grams.Term);
             _grams.DisplayNGrams(result);
 
         }
