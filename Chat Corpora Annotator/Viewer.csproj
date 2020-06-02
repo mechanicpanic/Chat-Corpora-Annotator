@@ -597,6 +597,10 @@
     <Content Include="Tasks.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExtractingServices\ExtractingServices.csproj">
+      <Project>{058b093e-5a14-4daa-9ad2-296fe19c3a40}</Project>
+      <Name>ExtractingServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
       <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
       <Name>IndexingServices</Name>

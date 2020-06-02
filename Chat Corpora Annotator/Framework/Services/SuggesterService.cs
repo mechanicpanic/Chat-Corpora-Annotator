@@ -2,6 +2,7 @@
 using IndexingServices;
 using System;
 using System.Collections.Generic;
+using ExtractingServices;
 
 namespace Viewer.Framework.Services
 {
@@ -11,9 +12,14 @@ namespace Viewer.Framework.Services
         public BTreeDictionary<int, List<DynamicMessage>> CodeIndex { get; set; }
         public BTreeDictionary<int, List<DynamicMessage>> MeetIndex { get; set; }
         public BTreeDictionary<int, List<DynamicMessage>> SoftIndex { get; set; }
+
+        public SuggesterService()
+        {
+            
+        }
         public void GetCodeSuggestions()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void GetJobSuggestions()
@@ -23,7 +29,8 @@ namespace Viewer.Framework.Services
 
         public void GetMeetSuggestions()
         {
-            throw new NotImplementedException();
+            var res = Algorithms.FindMeetSituations();
+            
         }
 
 
@@ -31,6 +38,8 @@ namespace Viewer.Framework.Services
         {
             throw new NotImplementedException();
         }
+
+
     }
     public interface ISuggestService
     {
@@ -42,6 +51,6 @@ namespace Viewer.Framework.Services
         void GetMeetSuggestions();
         void GetJobSuggestions();
         void GetSoftSuggestions();
-
+        
     }
 }

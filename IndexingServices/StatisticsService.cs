@@ -35,6 +35,7 @@ namespace IndexingServices
         }
 
         public static int GetTokenNumber() {
+            return 0;
             
         }
         public static int GetQuestionNumber() { return 0; }

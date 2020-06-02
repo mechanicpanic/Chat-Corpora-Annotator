@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
-
+using ExtractingServices;
 
 namespace Viewer.Framework.Presenters
 {
@@ -28,8 +28,16 @@ namespace Viewer.Framework.Presenters
             _tagger.AddTag += _tagger_AddTag;
             _tagger.EditSituation += _tagger_EditSituation;
 
-
+            _tagger.ShowSuggester += _tagger_ShowSuggester;
             _main.TagClick += _main_TagClick;
+            
+        }
+
+        private void _tagger_ShowSuggester(object sender, EventArgs e)
+        {
+            Extractor.CreatePipeline();
+            Extractor.Extract();
+
         }
 
         private void _tagger_EditSituation(object sender, EventArgs e)

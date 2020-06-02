@@ -1,38 +1,91 @@
 ﻿using CSharpTest.Net.Collections;
 using edu.stanford.nlp.pipeline;
+using edu.stanford.nlp.trees;
 using IndexingServices;
 using java.io;
 using java.util;
 using System;
 using System.Collections.Generic;
+using NounPhraseAlgorithm;
+using edu.stanford.nlp.util;
+using System.Linq;
+
 namespace ExtractingServices
 {
-    public class Extractor
+    public static class Extractor
     {
-        BTreeDictionary<string, bool> CodeStopWords { get; set; }
-        BTreeDictionary<string, string> DateList { get; set; } = new BTreeDictionary<string, string>();
-        BTreeDictionary<string, string> TimeList { get; set; } = new BTreeDictionary<string, string>();
-        BTreeDictionary<string, string> OrgList { get; set; } = new BTreeDictionary<string, string>();
-        BTreeDictionary<string, string> LocList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<string, bool> CodeStopWords { get; set; }
+        public static BTreeDictionary<string, string> URLList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<string, string> DateList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<string, string> TimeList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<string, string> OrgList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<string, string> LocList { get; set; } = new BTreeDictionary<string, string>();
+                
+        public static BTreeDictionary<string, bool> IsQuestionList { get; set; } = new BTreeDictionary<string, bool>();        
+        public static BTreeDictionary<string, List<string>> NounList { get; set; } = new BTreeDictionary<string, List<string>>();
+        public static CoreAnalyzer _analyzer { get; set; }
 
-        BTreeDictionary<string, List<string>> NounList { get; set; } = new BTreeDictionary<string, List<string>>();
-        public CoreAnalyzer _analyzer { get; set; }
-        public StanfordCoreNLP pipe { get; set; }
-        public Extractor(CoreAnalyzer analyzer)
+        public static List<List<string>> NounPhrases = new List<List<string>>();
+        public static StanfordCoreNLP pipe { get; set; }
+        static Extractor()
         {
-            this._analyzer = analyzer;
-            pipe = _analyzer.SimplePipeline();
+            _analyzer = new CoreAnalyzer();
+            
 
         }
 
-        private CoreDocument GetAnnotatedDocument(string text)
+        public static void CreatePipeline()
+        {
+            pipe = _analyzer.SimplePipeline();
+        }
+        public static CoreDocument GetAnnotatedDocument(string text)
         {
             CoreDocument coredoc = new CoreDocument(text);
             pipe.annotate(coredoc);
             return coredoc;
         }
 
-        private void ExtractNERTags(CoreDocument coredoc, Lucene.Net.Documents.Document document)
+
+        private static void ExtractKeyPhrases(CoreDocument coredoc)
+        {
+            ArrayList sents = _analyzer.GetSents(coredoc);
+            for (int i = 0; i < sents.size(); i++)
+            {
+                CoreMap sentence = (CoreMap)sents.get(i);
+                List<Tree> smallTrees = NPExtractor.getKeyPhrases((Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation))).ToList();
+                foreach(var tree in smallTrees)
+                {
+                    List<string> NP = new List<string>();
+                    List leaves = tree.getLeaves();
+                    var objarray = leaves.toArray();
+                    foreach (var obj in objarray)
+                    {
+                        NP.Add(obj.ToString());
+                    }
+                    NounPhrases.Add(NP); 
+                }
+            }
+            
+        }
+        public static bool DetectQuestion(CoreDocument coredoc)
+        {
+            _analyzer.CreateParseTree(coredoc);
+            int index = 0;
+            while (index < _analyzer.treeArray.Length)
+            {
+                Constituent constituent = (Constituent)_analyzer.treeArray[index];
+
+                if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
+                {
+                    return true;
+                }
+                index++;
+
+            }
+            return false;
+        }
+
+        private static void ExtractNERTags(CoreDocument coredoc, Lucene.Net.Documents.Document document)
         {
             List nerList = coredoc.entityMentions();
             for (int j = 0; j < nerList.size(); j++)
@@ -90,10 +143,23 @@ namespace ExtractingServices
                     }
                 }
 
+                if (em.entityType() == "URL")
+                {
+                    var urlkey = document.GetField("id").GetStringValue();
+                    if (!URLList.ContainsKey(urlkey))
+                    {
+                        URLList.Add(urlkey, em.text());
+                    }
+                    else
+                    {
+                        URLList.TryUpdate(urlkey, OrgList[urlkey] + ", " + em.text());
+                    }
+                }
+
             }
         }
 
-        private void ExtractNouns(CoreDocument coredoc, Lucene.Net.Documents.Document document)
+        private static void ExtractNouns(CoreDocument coredoc, Lucene.Net.Documents.Document document)
         {
             List<string> nouns = new List<string>();
             for (int i = 0; i < coredoc.sentences().size(); i++)
@@ -120,34 +186,21 @@ namespace ExtractingServices
 
         }
 
-
-        public void Extract()
+        public static void Extract()
         {
             if (LuceneService.DirReader != null)
             {
-                //using (var stream = new ByteArrayOutputStream())
-                //{
+                //This is actually pathetic. Please let me leave and enjoy my shitty code, thank you.
                 for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
                 {
                     Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
                     CoreDocument coredoc = GetAnnotatedDocument(document.GetField(IndexService.TextFieldKey).GetStringValue());
-                    //ExtractNERTags(coredoc, document);
-                    //ExtractNouns(coredoc, document);
-                    _analyzer.CreateParseTree(coredoc);
-                    //var q = _analyzer.DetectQuestion();
-                    //Console.WriteLine(q.ToString());
-                    //foreach (var a in this.NounList[document.GetField("id").GetStringValue()])
-                    //{
-                    //    Console.Write(a + " ");
-                    //}
-
-                    //pipe.prettyPrint(coredoc.annotation(), new PrintWriter(stream));
-                    //System.Console.WriteLine(stream.toString());
-                    //System.Console.WriteLine(_analyzer.Twokenize(document.GetField("text").GetStringValue()));
+                    ExtractNERTags(coredoc, document);
+                    IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
+                    ExtractKeyPhrases(coredoc);
+                    int a = 5;
                 }
-                //stream.close();
-
-                //}
+                
 
             }
 

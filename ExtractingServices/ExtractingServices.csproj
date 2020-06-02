@@ -40,6 +40,9 @@
     <Reference Include="ejml-0.23, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.1.0\lib\ejml-0.23.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.7.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.7.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="IKVM.AWT.WinForms, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.AWT.WinForms.dll</HintPath>
     </Reference>
@@ -167,6 +170,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms.cs" />
     <Compile Include="Extractor.cs" />
     <Compile Include="CoreAnalyzer.cs" />
     <Compile Include="NLPModel.cs" />
@@ -176,6 +180,10 @@
     <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
       <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
       <Name>IndexingServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NounPhraseAlgorithm\NounPhraseAlgorithm.fsproj">
+      <Project>{6316656e-4b11-42ce-ba65-cdf5d079d7d8}</Project>
+      <Name>NounPhraseAlgorithm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

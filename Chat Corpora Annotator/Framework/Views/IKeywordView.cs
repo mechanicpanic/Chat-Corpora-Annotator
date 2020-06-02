@@ -14,7 +14,9 @@ namespace Viewer.Framework.Views
         Dictionary<List<string>,int> Keyphrases { get; set; }
 
        event EventHandler RakeClick;
+        event EventHandler StanfordClick;
         void DisplayRakeKeywords();
+        void DisplayKeyPhrases();
 
     }
 }

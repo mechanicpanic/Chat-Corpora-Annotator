@@ -21,6 +21,12 @@ namespace Viewer.Framework.Presenters
             this._view = view;
 
             _view.RakeClick += _view_RakeClick;
+            _view.StanfordClick += _view_StanfordClick;
+        }
+
+        private void _view_StanfordClick(object sender, EventArgs e)
+        {
+            
         }
 
         private void _view_RakeClick(object sender, EventArgs e)

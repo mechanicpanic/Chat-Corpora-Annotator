@@ -14,12 +14,14 @@ namespace Viewer.UI
 
         }
         public event EventHandler RakeClick;
+
+        public event EventHandler StanfordClick;
         public BTreeDictionary<string, double> RakeKeywords { get; set; } = new BTreeDictionary<string, double>();
         public Dictionary<List<string>, int> Keyphrases { get; set; }
         public int RakeWordCount { get { return RakeKeywords.Count; } }
 
-       
 
+        public void DisplayKeyPhrases() { }
         private void button1_Click(object sender, EventArgs e)
         {
             RakeClick?.Invoke(this, EventArgs.Empty);
@@ -74,6 +76,11 @@ namespace Viewer.UI
                 panel3.Visible = true;
 
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            StanfordClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

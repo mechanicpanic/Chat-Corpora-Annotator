@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IndexingServices;
+using ExtractingServices;
 
 namespace Viewer.Framework.Services
 {
     public interface IKeywordService
     {
+
         Dictionary<string, double> GetRakeKeywords();
         void FlushKeywordsToDisk();
         List<string> ProcessKeywordList(List<string> keywords);
@@ -77,5 +79,7 @@ namespace Viewer.Framework.Services
             keywords.RemoveAll(x => x.Contains(","));
             return keywords;
         }
+
+
     }
 }
