@@ -23,6 +23,11 @@ namespace Viewer.UI
         public List<DynamicMessage> CurrentCode { get; set; }
 
         public event SuggesterMoveEventHandler MoveSituation;
+        public event EventHandler LoadCode;
+        public event EventHandler LoadMeet;
+        public event EventHandler LoadSoft;
+        public event EventHandler LoadJob;
+
         public void CloseView()
         {
             this.Hide();
