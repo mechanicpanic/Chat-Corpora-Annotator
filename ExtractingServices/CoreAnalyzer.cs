@@ -46,16 +46,19 @@ namespace ExtractingServices
 
         public void CreateParseTree(CoreDocument coredoc)
         {
-            ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-            for (int i = 0; i < sents.size(); i++)
+            if (coredoc != null)
             {
-                CoreMap sentence = (CoreMap)sents.get(i);
+                ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+                for (int i = 0; i < sents.size(); i++)
+                {
+                    CoreMap sentence = (CoreMap)sents.get(i);
 
-                this.constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+                    this.constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
 
-                Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-                treeArray = treeConstituents.toArray();
+                    Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
+                    treeArray = treeConstituents.toArray();
 
+                }
             }
         }
 

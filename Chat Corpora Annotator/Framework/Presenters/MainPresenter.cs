@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
+using ExtractingServices;
 
 
 namespace Viewer.Framework.Presenters
@@ -33,9 +34,24 @@ namespace Viewer.Framework.Presenters
             _main.NGramClick += _main_NGramClick;
             _main.KeywordClick += _main_KeywordClick;
             _main.LoadStatistics += _main_LoadStatistics;
+            _main.ExtractInfoClick += _main_ExtractInfoClick;
             _folder.CheckFolder();
 
 
+        }
+
+        private void _main_ExtractInfoClick(object sender, EventArgs e)
+        {
+            if (!_main.InfoExtracted)
+            {
+                Extractor.CreatePipeline();
+                Extractor.Extract();
+                _main.InfoExtracted = true;
+            }
+            else
+            {
+                _main.ShowExtractedMessage();
+            }
         }
 
         private void _main_LoadStatistics(object sender, EventArgs e)

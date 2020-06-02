@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
+using ExtractingServices;
 
 namespace Viewer.Framework.Presenters
 {
@@ -26,7 +27,20 @@ namespace Viewer.Framework.Presenters
 
         private void _view_StanfordClick(object sender, EventArgs e)
         {
-            
+            if (_main.InfoExtracted)
+            {
+                _view.NounPhrases = new List<string>();
+                foreach (var np in Extractor.NounPhrases)
+                {
+                    _view.NounPhrases.AddRange(np.Value);
+                }
+                
+                _view.DisplayKeyPhrases();
+            }
+            else
+            {
+                _main.ShowSorryMessage();
+            }
         }
 
         private void _view_RakeClick(object sender, EventArgs e)

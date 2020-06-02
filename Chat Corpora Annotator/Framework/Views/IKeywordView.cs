@@ -12,7 +12,7 @@ namespace Viewer.Framework.Views
         BTreeDictionary<string,double> RakeKeywords { get; set; }
         int RakeWordCount { get; }
         Dictionary<List<string>,int> Keyphrases { get; set; }
-
+        List<string> NounPhrases { get; set; }
        event EventHandler RakeClick;
         event EventHandler StanfordClick;
         void DisplayRakeKeywords();

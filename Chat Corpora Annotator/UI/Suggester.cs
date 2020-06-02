@@ -28,6 +28,11 @@ namespace Viewer.UI
         public event EventHandler LoadSoft;
         public event EventHandler LoadJob;
 
+        private bool codeload = false;
+        private bool meetload = false;
+        private bool softload = false;
+        private bool jobload = false;
+
         public void CloseView()
         {
             this.Hide();
@@ -70,25 +75,36 @@ namespace Viewer.UI
             switch (name)
             {
                 case "job":
-                    
-                    args.Index = ijob++;
-                    args.Type = "job";
-                    MoveSituation?.Invoke(this, args);
+                    if (jobload)
+                    {
+                        args.Index = ijob++;
+                        args.Type = "job";
+                        MoveSituation?.Invoke(this, args);
+                    }
                     break;
                 case "meet":
-                    args.Index = imeet++;
-                    args.Type = "meet";
-                    MoveSituation?.Invoke(this, args);
+                    if (meetload)
+                    {
+                        args.Index = imeet++;
+                        args.Type = "meet";
+                        MoveSituation?.Invoke(this, args);
+                    }
                     break;
                 case "code":
-                    args.Index = icode++;
-                    args.Type = "code";
-                    MoveSituation?.Invoke(this, args);
+                    if (codeload)
+                    {
+                        args.Index = icode++;
+                        args.Type = "code";
+                        MoveSituation?.Invoke(this, args);
+                    }
                     break;
                 case "soft":
-                    args.Index = isoft++;
-                    args.Type = "soft";
-                    MoveSituation?.Invoke(this, args);
+                    if (softload)
+                    {
+                        args.Index = isoft++;
+                        args.Type = "soft";
+                        MoveSituation?.Invoke(this, args);
+                    }
                     break;
                 
             }
@@ -102,7 +118,7 @@ namespace Viewer.UI
             switch (name)
             {
                 case "job":
-                    if (ijob >= 1)
+                    if (ijob >= 1 && jobload)
                     {
                         args.Index = ijob--;
                         args.Type = "job";
@@ -111,7 +127,7 @@ namespace Viewer.UI
                     
                     break;
                 case "meet":
-                    if (imeet >= 1)
+                    if (imeet >= 1 && meetload)
                     {
                         args.Index = imeet--;
                         args.Type = "meet";
@@ -119,7 +135,7 @@ namespace Viewer.UI
                     }
                     break;
                 case "code":
-                    if (icode >= 1)
+                    if (icode >= 1 && codeload)
                     {
                         args.Index = icode--;
                         args.Type = "code";
@@ -127,7 +143,7 @@ namespace Viewer.UI
                     }
                     break;
                 case "soft":
-                    if (isoft >= 1)
+                    if (isoft >= 1 && softload)
                     {
                         args.Index = isoft--;
                         args.Type = "soft";
@@ -136,6 +152,17 @@ namespace Viewer.UI
                     break;
 
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            LoadMeet?.Invoke(this, EventArgs.Empty);
+            meetload = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

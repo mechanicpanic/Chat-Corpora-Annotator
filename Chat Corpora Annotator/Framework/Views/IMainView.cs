@@ -13,11 +13,12 @@ namespace Viewer.Framework.Views
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
 
+        bool InfoExtracted { get; set; }
         void SetLineCount(int count);
         void DisplayDocuments();
         void DisplaySearchResults();
 
-        event EventHandler LoadStatistics;
+        
         void DisplayStatistics();
         Dictionary<string,double> Statistics { get; set; }
         IConcordanceView CreateConcordancer();
@@ -30,6 +31,8 @@ namespace Viewer.Framework.Views
 
         void ShowDates(List<DateTime> dates);
         void ShowKeywordView(IKeywordView key);
+        void ShowSorryMessage();
+        void ShowExtractedMessage();
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 
@@ -42,8 +45,10 @@ namespace Viewer.Framework.Views
         event EventHandler ConcordanceClick;
         event EventHandler NGramClick;
         event EventHandler KeywordClick;
-
+        event EventHandler LoadStatistics;
         event EventHandler TagClick;
+
+        event EventHandler ExtractInfoClick;
         //event PropertyChangedEventHandler PropertyChanged;
         //bool FileLoadState { get; set; }
     }

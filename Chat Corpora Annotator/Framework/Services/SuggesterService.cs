@@ -29,7 +29,8 @@ namespace Viewer.Framework.Services
 
         public void GetMeetSuggestions()
         {
-            var res = Algorithms.FindMeetSituations();
+            MeetIndex = Algorithms.FindMeetSituations();
+
             
         }
 

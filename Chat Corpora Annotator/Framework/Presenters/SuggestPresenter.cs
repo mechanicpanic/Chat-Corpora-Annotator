@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
+using ExtractingServices;
 
 namespace Viewer.Framework.Presenters
 {
@@ -13,23 +14,41 @@ namespace Viewer.Framework.Presenters
         private readonly ISuggesterView _sugg;
         private readonly ISuggestService _service;
         private readonly ITagView _tagger;
+        private readonly IMainView _main;
         public SuggestPresenter(ISuggesterView sugg,
-                               ISuggestService service, ITagView tagger)
+                               ISuggestService service, ITagView tagger, IMainView main)
         {
             this._sugg = sugg;
             this._service = service;
             this._tagger = tagger;
+            this._main = main;
 
             _tagger.ShowSuggester += _tagger_ShowSuggester;
 
             _sugg.MoveSituation += _sugg_MoveSituation;
+            _sugg.LoadMeet += _sugg_LoadMeet;
+        }
+
+        private void _sugg_LoadMeet(object sender, EventArgs e)
+        {
+            _service.GetMeetSuggestions();
+            _sugg.CurrentMeet = _service.MeetIndex.First().Value;
+            _sugg.DisplaySituation("meet");
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)
         {
-            _sugg.ShowView();
+            if(_main.InfoExtracted)
+            {
+                _sugg.ShowView();
+            }
+            else
+            {
+                _main.ShowSorryMessage();
+            }
         }
 
+        
         private void _sugg_MoveSituation(object sender, SuggesterMoveEventArgs args)
         {
             switch (args.Type)

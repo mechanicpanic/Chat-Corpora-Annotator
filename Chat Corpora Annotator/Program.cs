@@ -23,18 +23,20 @@ namespace Viewer
             LinearHeatmapForm heatmap = new LinearHeatmapForm();
             DelimiterStep delim = new DelimiterStep();
             ChartForm chart = new ChartForm();
+            Suggester suggester = new Suggester();
 
             CSVReadService fileReader = new CSVReadService();
             SearchService searcher = new SearchService();
             HeatmapService heater = new HeatmapService();
             FolderService folder = new FolderService();
+            SuggesterService suggesterService = new SuggesterService();
 
             TagWindow tagger = new TagWindow();
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
             TagFileWriter writer = new TagFileWriter();
             TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
-
+            SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, tagger, main);
             MainPresenter presenter = new MainPresenter(main, loader, searcher, folder);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);

@@ -20,8 +20,11 @@ namespace Viewer.UI
         public Dictionary<List<string>, int> Keyphrases { get; set; }
         public int RakeWordCount { get { return RakeKeywords.Count; } }
 
+        public List<string> NounPhrases { get; set; }
 
-        public void DisplayKeyPhrases() { }
+        public void DisplayKeyPhrases() {
+            richTextBox2.Lines = NounPhrases.ToArray();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             RakeClick?.Invoke(this, EventArgs.Empty);

@@ -30,6 +30,7 @@ namespace Viewer
 		public event EventHandler TagClick;
 		public event EventHandler KeywordClick;
 		public event EventHandler LoadStatistics;
+		public event EventHandler ExtractInfoClick;
 
 		public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
@@ -44,6 +45,7 @@ namespace Viewer
 		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
 
 		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public bool InfoExtracted { get; set; }
 
 		public void SetLineCount(int count)
 		{
@@ -128,7 +130,7 @@ namespace Viewer
 			InitializeComponent();
 			
 			this.PropertyChanged += MainWindow_PropertyChanged;
-
+			this.InfoExtracted = false;
 
 		}
 
@@ -577,64 +579,6 @@ namespace Viewer
 		}
 
 
-		private void button5_Click(object sender, EventArgs e)
-		{
-
-			////analyzer.LoadParserModels();
-
-
-			//Annotation annotation = new Annotation("Is it like a topography that is made from cartography of me in California at 12 AM by Google");
-			//CoreDocument coredoc = new CoreDocument(annotation);
-			//StanfordCoreNLP pipeline = analyzer.SimplePipeline();
-			////pipeline.annotate(annotation);
-			//pipeline.annotate(coredoc);
-
-			//List<string> nouns = new List<string>();
-
-			//for (int i = 0; i < coredoc.entityMentions().size(); i++)
-			//{
-			//	CoreEntityMention em = (CoreEntityMention)coredoc.entityMentions().get(i);
-			//	Console.WriteLine("\tdetected entity: \t" + em.text() + "\t" + em.entityType());
-			//}
-			//Tree constituencyParse;
-			//ArrayList temp = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-			//CoreMap sentence = (CoreMap)temp.get(0);
-			//constituencyParse = (Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation));
-
-
-
-
-
-			//Set treeConstituents = (Set)constituencyParse.constituents(new LabeledScoredConstituentFactory());
-			//var treeArray = treeConstituents.toArray();
-			//int index = 0;
-			//while (index < treeArray.Length)
-			//{
-			//	Constituent constituent = (Constituent)treeArray[index];
-			//	if (constituent.label() != null &&
-			//		(constituent.label().toString().Equals("NP")))
-			//	{
-			//		Console.WriteLine("found constituent: " + constituent.toString());
-			//		Console.WriteLine(constituencyParse.getLeaves().subList(constituent.start(), constituent.end() + 1));
-
-			//	}
-			//	if (constituent.label() != null && (constituent.label().toString().Equals("SQ") || constituent.label().toString().Equals("SBARQ")))
-			//	{
-			//		Console.WriteLine("Question");
-			//	}
-			//	index++;
-
-			//}
-			//constituencyParse.pennPrint();
-			//int j = 0;
-			//while (j < constituencyParse.taggedYield().toArray().Length)
-			//{
-			//	Console.WriteLine(constituencyParse.taggedYield().toArray()[j]);
-			//	j++;
-			//}
-
-			
-		}
 
 		private void dateView_Resize(object sender, EventArgs e)
 		{
@@ -681,6 +625,21 @@ namespace Viewer
 		public void DisplayStatistics()
 		{
 			throw new NotImplementedException();
+		}
+
+		private void extractToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ExtractInfoClick?.Invoke(this, EventArgs.Empty);
+		}
+
+		public void ShowSorryMessage()
+		{
+			MessageBox.Show("You have to run the NLP extraction pipeline first. Click File > Extract...");
+		}
+
+		public void ShowExtractedMessage()
+		{
+			MessageBox.Show("Info already extracted");
 		}
 	}
 }
