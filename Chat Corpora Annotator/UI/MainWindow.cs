@@ -39,7 +39,7 @@ namespace Viewer
 		private Dictionary<string, Color> userColors;
 
 
-
+		private bool chatViewSetUp = false;
 		public List<DynamicMessage> SearchResults { get; set; }
 		private bool _fileLoadState = false;
 		public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
@@ -81,8 +81,10 @@ namespace Viewer
 		public void DisplayDocuments()
 		{
 			chatTable.SetObjects(MessageContainer.Messages);
-			SetUpChatView();
-			chatTable.UpdateObjects(MessageContainer.Messages);
+			if (!chatViewSetUp)
+			{
+				SetUpChatView();
+			}
 			chatTable.Invalidate();
 			LoadDates();
 		}
@@ -230,8 +232,6 @@ namespace Viewer
 
 		private void SetUpChatView()
 		{
-
-
 			ShowUsers();
 			PopulateSenderColors();
 			SetDateView();
@@ -259,6 +259,7 @@ namespace Viewer
 
 
 			FormatColumns();
+			chatViewSetUp = true;
 
 		}
 
