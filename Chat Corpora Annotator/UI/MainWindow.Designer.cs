@@ -111,12 +111,12 @@
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            tabControl1.Location = new System.Drawing.Point(227, 35);
-            tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            tabControl1.Location = new System.Drawing.Point(303, 43);
+            tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(920, 565);
+            tabControl1.Size = new System.Drawing.Size(1227, 695);
             tabControl1.TabIndex = 17;
             tabControl1.TabStop = false;
             // 
@@ -128,11 +128,11 @@
             this.Chat.Controls.Add(this.loadMoreButton);
             this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.Chat.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Chat.Location = new System.Drawing.Point(4, 28);
-            this.Chat.Margin = new System.Windows.Forms.Padding(2);
+            this.Chat.Location = new System.Drawing.Point(4, 32);
+            this.Chat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Chat.Name = "Chat";
-            this.Chat.Padding = new System.Windows.Forms.Padding(2);
-            this.Chat.Size = new System.Drawing.Size(912, 533);
+            this.Chat.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Chat.Size = new System.Drawing.Size(1219, 659);
             this.Chat.TabIndex = 0;
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
@@ -151,12 +151,12 @@
             this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(2, 2);
-            this.chatTable.Margin = new System.Windows.Forms.Padding(2);
+            this.chatTable.Location = new System.Drawing.Point(3, 2);
+            this.chatTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(764, 491);
+            this.chatTable.Size = new System.Drawing.Size(1019, 604);
             this.chatTable.TabIndex = 9;
             this.chatTable.UseCellFormatEvents = true;
             this.chatTable.UseCompatibleStateImageBehavior = false;
@@ -173,11 +173,11 @@
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(768, 2);
-            this.dateView.Margin = new System.Windows.Forms.Padding(2);
+            this.dateView.Location = new System.Drawing.Point(1027, 2);
+            this.dateView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(142, 489);
+            this.dateView.Size = new System.Drawing.Size(189, 606);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
@@ -197,10 +197,10 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(2, 491);
-            this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2);
+            this.loadMoreButton.Location = new System.Drawing.Point(3, 608);
+            this.loadMoreButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(908, 40);
+            this.loadMoreButton.Size = new System.Drawing.Size(1213, 49);
             this.loadMoreButton.TabIndex = 11;
             this.loadMoreButton.Text = "Load more...";
             this.loadMoreButton.UseVisualStyleBackColor = false;
@@ -212,11 +212,11 @@
             this.Statistics.Controls.Add(this.button1);
             this.Statistics.Controls.Add(this.tableLayoutPanel1);
             this.Statistics.Controls.Add(this.richTextBox1);
-            this.Statistics.Location = new System.Drawing.Point(4, 28);
-            this.Statistics.Margin = new System.Windows.Forms.Padding(2);
+            this.Statistics.Location = new System.Drawing.Point(4, 32);
+            this.Statistics.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Statistics.Name = "Statistics";
-            this.Statistics.Padding = new System.Windows.Forms.Padding(2);
-            this.Statistics.Size = new System.Drawing.Size(912, 533);
+            this.Statistics.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Statistics.Size = new System.Drawing.Size(1219, 659);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
@@ -227,10 +227,10 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(519, 246);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(692, 303);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(393, 42);
+            this.button1.Size = new System.Drawing.Size(524, 52);
             this.button1.TabIndex = 3;
             this.button1.Text = "Load concordancer";
             this.button1.UseVisualStyleBackColor = false;
@@ -242,8 +242,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -251,17 +251,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(512, 529);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(683, 655);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.GhostWhite;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(2, 2);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 2);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(908, 529);
+            this.richTextBox1.Size = new System.Drawing.Size(1213, 655);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -269,11 +270,11 @@
             // 
             this.Concordance.Controls.Add(this.concordancePanel);
             this.Concordance.Controls.Add(this.concordancerButton);
-            this.Concordance.Location = new System.Drawing.Point(4, 28);
-            this.Concordance.Margin = new System.Windows.Forms.Padding(2);
+            this.Concordance.Location = new System.Drawing.Point(4, 32);
+            this.Concordance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Concordance.Name = "Concordance";
-            this.Concordance.Padding = new System.Windows.Forms.Padding(2);
-            this.Concordance.Size = new System.Drawing.Size(912, 533);
+            this.Concordance.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Concordance.Size = new System.Drawing.Size(1219, 659);
             this.Concordance.TabIndex = 4;
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
@@ -281,10 +282,10 @@
             // concordancePanel
             // 
             this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.concordancePanel.Location = new System.Drawing.Point(2, 2);
-            this.concordancePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.concordancePanel.Location = new System.Drawing.Point(3, 2);
+            this.concordancePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(908, 487);
+            this.concordancePanel.Size = new System.Drawing.Size(1213, 603);
             this.concordancePanel.TabIndex = 3;
             // 
             // concordancerButton
@@ -294,10 +295,10 @@
             this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.concordancerButton.FlatAppearance.BorderSize = 0;
             this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.concordancerButton.Location = new System.Drawing.Point(2, 489);
-            this.concordancerButton.Margin = new System.Windows.Forms.Padding(2);
+            this.concordancerButton.Location = new System.Drawing.Point(3, 605);
+            this.concordancerButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.concordancerButton.Name = "concordancerButton";
-            this.concordancerButton.Size = new System.Drawing.Size(908, 42);
+            this.concordancerButton.Size = new System.Drawing.Size(1213, 52);
             this.concordancerButton.TabIndex = 2;
             this.concordancerButton.Text = "Load concordancer";
             this.concordancerButton.UseVisualStyleBackColor = false;
@@ -307,10 +308,10 @@
             // 
             this.tabPage1.Controls.Add(this.ngramPanel);
             this.tabPage1.Controls.Add(this.ngramButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 28);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(912, 533);
+            this.tabPage1.Size = new System.Drawing.Size(1219, 659);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "N-gram Search";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -319,9 +320,9 @@
             // 
             this.ngramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ngramPanel.Location = new System.Drawing.Point(0, 0);
-            this.ngramPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.ngramPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(912, 491);
+            this.ngramPanel.Size = new System.Drawing.Size(1219, 607);
             this.ngramPanel.TabIndex = 4;
             // 
             // ngramButton
@@ -331,10 +332,10 @@
             this.ngramButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.ngramButton.FlatAppearance.BorderSize = 0;
             this.ngramButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ngramButton.Location = new System.Drawing.Point(0, 491);
-            this.ngramButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ngramButton.Location = new System.Drawing.Point(0, 607);
+            this.ngramButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ngramButton.Name = "ngramButton";
-            this.ngramButton.Size = new System.Drawing.Size(912, 42);
+            this.ngramButton.Size = new System.Drawing.Size(1219, 52);
             this.ngramButton.TabIndex = 3;
             this.ngramButton.Text = "Load ngrammer";
             this.ngramButton.UseVisualStyleBackColor = false;
@@ -343,10 +344,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.keywordPanel);
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(912, 533);
+            this.tabPage2.Size = new System.Drawing.Size(1219, 659);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Keyword Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -356,9 +357,9 @@
             this.keywordPanel.Controls.Add(this.keywordButton);
             this.keywordPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.keywordPanel.Location = new System.Drawing.Point(0, 0);
-            this.keywordPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.keywordPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.keywordPanel.Name = "keywordPanel";
-            this.keywordPanel.Size = new System.Drawing.Size(912, 533);
+            this.keywordPanel.Size = new System.Drawing.Size(1219, 659);
             this.keywordPanel.TabIndex = 1;
             // 
             // keywordButton
@@ -367,10 +368,10 @@
             this.keywordButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.keywordButton.FlatAppearance.BorderSize = 0;
             this.keywordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.keywordButton.Location = new System.Drawing.Point(0, 489);
-            this.keywordButton.Margin = new System.Windows.Forms.Padding(2);
+            this.keywordButton.Location = new System.Drawing.Point(0, 605);
+            this.keywordButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.keywordButton.Name = "keywordButton";
-            this.keywordButton.Size = new System.Drawing.Size(912, 44);
+            this.keywordButton.Size = new System.Drawing.Size(1219, 54);
             this.keywordButton.TabIndex = 0;
             this.keywordButton.Text = "Load keyworder";
             this.keywordButton.UseVisualStyleBackColor = false;
@@ -392,10 +393,10 @@
             this.searchPanel.Controls.Add(this.queryPanel);
             this.searchPanel.Controls.Add(this.queryButton);
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.searchPanel.Location = new System.Drawing.Point(0, 32);
-            this.searchPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.searchPanel.Location = new System.Drawing.Point(0, 39);
+            this.searchPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(228, 592);
+            this.searchPanel.Size = new System.Drawing.Size(304, 729);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -407,10 +408,10 @@
             this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 512);
-            this.findButton.Margin = new System.Windows.Forms.Padding(2);
+            this.findButton.Location = new System.Drawing.Point(0, 629);
+            this.findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(228, 32);
+            this.findButton.Size = new System.Drawing.Size(304, 39);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -426,10 +427,10 @@
             this.clearButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearButton.Location = new System.Drawing.Point(0, 480);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(2);
+            this.clearButton.Location = new System.Drawing.Point(0, 590);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(228, 32);
+            this.clearButton.Size = new System.Drawing.Size(304, 39);
             this.clearButton.TabIndex = 26;
             this.clearButton.Text = "Clear";
             this.clearButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -446,14 +447,14 @@
             this.datesPanel.Controls.Add(this.finishDate, 1, 1);
             this.datesPanel.Controls.Add(this.label1);
             this.datesPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.datesPanel.Location = new System.Drawing.Point(0, 421);
-            this.datesPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.datesPanel.Location = new System.Drawing.Point(0, 517);
+            this.datesPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.datesPanel.Name = "datesPanel";
             this.datesPanel.RowCount = 2;
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.datesPanel.Size = new System.Drawing.Size(228, 59);
+            this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.datesPanel.Size = new System.Drawing.Size(304, 73);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
             // 
@@ -461,11 +462,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(2, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.MinimumSize = new System.Drawing.Size(45, 29);
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.MinimumSize = new System.Drawing.Size(60, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 29);
+            this.label2.Size = new System.Drawing.Size(60, 36);
             this.label2.TabIndex = 20;
             this.label2.Text = "from";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -477,12 +477,12 @@
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(58, 2);
-            this.startDate.Margin = new System.Windows.Forms.Padding(2);
+            this.startDate.Location = new System.Drawing.Point(78, 2);
+            this.startDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(168, 26);
+            this.startDate.Size = new System.Drawing.Size(223, 30);
             this.startDate.TabIndex = 17;
             this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
@@ -492,22 +492,21 @@
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(58, 32);
-            this.finishDate.Margin = new System.Windows.Forms.Padding(2);
+            this.finishDate.Location = new System.Drawing.Point(78, 38);
+            this.finishDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(168, 26);
+            this.finishDate.Size = new System.Drawing.Size(223, 30);
             this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(2, 30);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.MinimumSize = new System.Drawing.Size(30, 29);
+            this.label1.Location = new System.Drawing.Point(3, 36);
+            this.label1.MinimumSize = new System.Drawing.Size(40, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 29);
+            this.label1.Size = new System.Drawing.Size(40, 36);
             this.label1.TabIndex = 19;
             this.label1.Text = "to";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -522,11 +521,11 @@
             this.dateToggle.FlatAppearance.BorderSize = 0;
             this.dateToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dateToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateToggle.Location = new System.Drawing.Point(0, 389);
-            this.dateToggle.Margin = new System.Windows.Forms.Padding(2);
-            this.dateToggle.MinimumSize = new System.Drawing.Size(0, 32);
+            this.dateToggle.Location = new System.Drawing.Point(0, 478);
+            this.dateToggle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateToggle.MinimumSize = new System.Drawing.Size(0, 39);
             this.dateToggle.Name = "dateToggle";
-            this.dateToggle.Size = new System.Drawing.Size(228, 32);
+            this.dateToggle.Size = new System.Drawing.Size(304, 39);
             this.dateToggle.TabIndex = 28;
             this.dateToggle.Text = "Select Dates Toggle";
             this.dateToggle.UseVisualStyleBackColor = true;
@@ -536,10 +535,10 @@
             // 
             this.userPanel.Controls.Add(this.userList);
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.userPanel.Location = new System.Drawing.Point(0, 160);
-            this.userPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.userPanel.Location = new System.Drawing.Point(0, 196);
+            this.userPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(228, 229);
+            this.userPanel.Size = new System.Drawing.Size(304, 282);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
             // 
@@ -555,9 +554,9 @@
             this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.userList.HideSelection = false;
             this.userList.Location = new System.Drawing.Point(0, 0);
-            this.userList.Margin = new System.Windows.Forms.Padding(2);
+            this.userList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(228, 229);
+            this.userList.Size = new System.Drawing.Size(304, 282);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -576,11 +575,11 @@
             this.userToggle.FlatAppearance.BorderSize = 0;
             this.userToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userToggle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userToggle.Location = new System.Drawing.Point(0, 128);
-            this.userToggle.Margin = new System.Windows.Forms.Padding(2);
-            this.userToggle.MinimumSize = new System.Drawing.Size(0, 32);
+            this.userToggle.Location = new System.Drawing.Point(0, 157);
+            this.userToggle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.userToggle.MinimumSize = new System.Drawing.Size(0, 39);
             this.userToggle.Name = "userToggle";
-            this.userToggle.Size = new System.Drawing.Size(228, 32);
+            this.userToggle.Size = new System.Drawing.Size(304, 39);
             this.userToggle.TabIndex = 27;
             this.userToggle.Text = "Select Users Toggle";
             this.userToggle.UseVisualStyleBackColor = true;
@@ -591,10 +590,10 @@
             this.queryPanel.Controls.Add(this.label3);
             this.queryPanel.Controls.Add(this.searchBox);
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.queryPanel.Location = new System.Drawing.Point(0, 32);
-            this.queryPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.queryPanel.Location = new System.Drawing.Point(0, 39);
+            this.queryPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(228, 96);
+            this.queryPanel.Size = new System.Drawing.Size(304, 118);
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
@@ -603,12 +602,11 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(0, 40);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.MaximumSize = new System.Drawing.Size(227, 0);
-            this.label3.MinimumSize = new System.Drawing.Size(0, 41);
+            this.label3.Location = new System.Drawing.Point(0, 49);
+            this.label3.MaximumSize = new System.Drawing.Size(303, 0);
+            this.label3.MinimumSize = new System.Drawing.Size(0, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(221, 45);
+            this.label3.Size = new System.Drawing.Size(280, 60);
             this.label3.TabIndex = 16;
             this.label3.Text = "Hint: \"wikipedia page\" ~2 will search for \"wikipedia\" and \"page\" two words apart " +
     "from each other";
@@ -620,9 +618,9 @@
             this.searchBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
-            this.searchBox.Margin = new System.Windows.Forms.Padding(2);
+            this.searchBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(228, 40);
+            this.searchBox.Size = new System.Drawing.Size(304, 49);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
@@ -636,10 +634,10 @@
             this.queryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.queryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.queryButton.Location = new System.Drawing.Point(0, 0);
-            this.queryButton.Margin = new System.Windows.Forms.Padding(2);
-            this.queryButton.MinimumSize = new System.Drawing.Size(0, 32);
+            this.queryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.queryButton.MinimumSize = new System.Drawing.Size(0, 39);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(228, 32);
+            this.queryButton.Size = new System.Drawing.Size(304, 39);
             this.queryButton.TabIndex = 19;
             this.queryButton.Text = "Query";
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -651,10 +649,10 @@
             this.panel1.BackColor = System.Drawing.Color.Lavender;
             this.panel1.Controls.Add(this.messageLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(228, 596);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(304, 734);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(919, 28);
+            this.panel1.Size = new System.Drawing.Size(1225, 34);
             this.panel1.TabIndex = 25;
             // 
             // messageLabel
@@ -662,11 +660,10 @@
             this.messageLabel.AutoSize = true;
             this.messageLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(842, 0);
-            this.messageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.messageLabel.MinimumSize = new System.Drawing.Size(0, 24);
+            this.messageLabel.Location = new System.Drawing.Point(1129, 0);
+            this.messageLabel.MinimumSize = new System.Drawing.Size(0, 30);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(77, 24);
+            this.messageLabel.Size = new System.Drawing.Size(96, 30);
             this.messageLabel.TabIndex = 24;
             this.messageLabel.Text = "Not loaded";
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -680,11 +677,11 @@
             this.fileToolStripMenuItem,
             this.vizToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 32);
+            this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 39);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1147, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(1529, 39);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -695,27 +692,27 @@
             this.openCorpusToolStripMenuItem,
             this.extractToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 28);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(49, 35);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadCorpusToolStripMenuItem
             // 
             this.loadCorpusToolStripMenuItem.Name = "loadCorpusToolStripMenuItem";
-            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.loadCorpusToolStripMenuItem.Text = "Index new file";
             this.loadCorpusToolStripMenuItem.Click += new System.EventHandler(this.loadCorpusToolStripMenuItem_Click);
             // 
             // openCorpusToolStripMenuItem
             // 
             this.openCorpusToolStripMenuItem.Name = "openCorpusToolStripMenuItem";
-            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.openCorpusToolStripMenuItem.Text = "Open corpus";
             this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
             // 
             // extractToolStripMenuItem
             // 
             this.extractToolStripMenuItem.Name = "extractToolStripMenuItem";
-            this.extractToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.extractToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.extractToolStripMenuItem.Text = "Extract...";
             this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
@@ -725,20 +722,20 @@
             this.plotToolStripMenuItem,
             this.heatmapToolStripMenuItem});
             this.vizToolStripMenuItem.Name = "vizToolStripMenuItem";
-            this.vizToolStripMenuItem.Size = new System.Drawing.Size(73, 28);
+            this.vizToolStripMenuItem.Size = new System.Drawing.Size(90, 35);
             this.vizToolStripMenuItem.Text = "Visualize";
             // 
             // plotToolStripMenuItem
             // 
             this.plotToolStripMenuItem.Name = "plotToolStripMenuItem";
-            this.plotToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.plotToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
             this.plotToolStripMenuItem.Text = "Plot";
             this.plotToolStripMenuItem.Click += new System.EventHandler(this.plotToolStripMenuItem_Click);
             // 
             // heatmapToolStripMenuItem
             // 
             this.heatmapToolStripMenuItem.Name = "heatmapToolStripMenuItem";
-            this.heatmapToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.heatmapToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
             this.heatmapToolStripMenuItem.Text = "Heatmap";
             this.heatmapToolStripMenuItem.Click += new System.EventHandler(this.heatmapToolStripMenuItem_Click);
             // 
@@ -784,10 +781,10 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(988, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Location = new System.Drawing.Point(1317, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(159, 29);
+            this.button2.Size = new System.Drawing.Size(212, 36);
             this.button2.TabIndex = 29;
             this.button2.Text = "Start tagging";
             this.button2.UseVisualStyleBackColor = true;
@@ -795,16 +792,16 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1147, 624);
+            this.ClientSize = new System.Drawing.Size(1529, 768);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             tabControl1.ResumeLayout(false);
