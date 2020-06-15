@@ -19,6 +19,8 @@ namespace Viewer.UI
         public event EventHandler AddNewTagset;
         public event EventHandler DeleteTagset;
 
+        public event EventHandler SaveEditedTagset;
+
         public string TagsetName { get; set; }
         public void CloseView()
         {
@@ -32,36 +34,38 @@ namespace Viewer.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBox1.Text) && !listBox1.Items.Contains(textBox1.Text))
+            var item = new ListViewItem(textBox1.Text);
+            if (String.IsNullOrEmpty(textBox1.Text) && !listView1.Items.Contains(item))
             {
-                listBox1.Items.Add(textBox1.Text);
+                listView1.Items.Add(item);
             }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count != 0)
+            if (listView1.SelectedItems.Count != 0)
             {
-                foreach (int index in listBox1.SelectedIndices)
+                foreach (int index in listView1.SelectedIndices)
                 {
 
-                    listBox1.Items.RemoveAt(index);
+                    listView1.Items.RemoveAt(index);
                 }
-                listBox1.SelectedItems.Clear();
+                listView1.SelectedItems.Clear();
 
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0)
+            if (listView1.Items.Count != 0)
             {
-                foreach (var item in listBox1.Items)
+                foreach (var item in listView1.Items)
                 {
                     CurrentTags.Add(item.ToString());
                 }
             }
-            SaveTagset?.Invoke(this, EventArgs.Empty);
+            SaveEditedTagset?.Invoke(this, EventArgs.Empty);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -81,12 +85,18 @@ namespace Viewer.UI
                 this.TagsetName = tn.name;
             }
             tn.Close();
+            AddNewTagset?.Invoke(this, EventArgs.Empty);
             
         }
 
         public void DisplayTagset()
         {
             throw new NotImplementedException();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

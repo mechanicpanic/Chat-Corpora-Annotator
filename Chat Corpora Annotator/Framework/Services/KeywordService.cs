@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IndexingServices;
 using ExtractingServices;
+using System.Text.RegularExpressions;
 
 namespace Viewer.Framework.Services
 {
@@ -51,34 +52,10 @@ namespace Viewer.Framework.Services
         }
         public List<string> ProcessKeywordList(List<string> keywords)
         {
-            keywords.RemoveAll(x => x.Contains("http"));
-            keywords.RemoveAll(x => x.Contains("/"));
-            keywords.RemoveAll(x => x.Contains("www"));
-            keywords.RemoveAll(x => x.Contains(".com"));
-            keywords.RemoveAll(x => x.Contains(".com"));
-            keywords.RemoveAll(x => x.Contains("="));
-            keywords.RemoveAll(x => x.Contains("&"));
-            keywords.RemoveAll(x => x.Contains("#"));
-            keywords.RemoveAll(x => x.Contains("?"));
-            keywords.RemoveAll(x => x.Contains("%"));
-            keywords.RemoveAll(x => x.Contains("@"));
-            keywords.RemoveAll(x => x.Contains("+"));
-            keywords.RemoveAll(x => x.Contains(")"));
-            keywords.RemoveAll(x => x.Contains("("));
-            keywords.RemoveAll(x => x.Contains("^"));
-            keywords.RemoveAll(x => x.Contains("<"));
-            keywords.RemoveAll(x => x.Contains(">"));
-            keywords.RemoveAll(x => x.Contains("`"));
-            keywords.RemoveAll(x => x.Contains("\\"));
-            keywords.RemoveAll(x => x.Contains("*"));
-            keywords.RemoveAll(x => x.Contains("["));
-            keywords.RemoveAll(x => x.Contains("]"));
-            keywords.RemoveAll(x => x.Contains("$"));
-            keywords.RemoveAll(x => x.Contains("."));
-            keywords.RemoveAll(x => x.Contains("!"));
-            keywords.RemoveAll(x => x.Contains(","));
+            keywords.RemoveAll(x => Regex.IsMatch(x, @"[^a-zA-Z]+"));
             return keywords;
         }
+
 
 
     }

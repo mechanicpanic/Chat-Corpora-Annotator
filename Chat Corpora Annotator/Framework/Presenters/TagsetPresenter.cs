@@ -24,15 +24,12 @@ namespace Viewer.Framework.Presenters
 
         private void _tagset_AddNewTagset(object sender, EventArgs e)
         {
-            
+            _service.UpdateTagset
         }
 
         private void _tagset_SaveTagset(object sender, EventArgs e)
         {
-            _service.UpdateTagset(_tagset.CurrentTags);
-            _main.UpdateTagset(_service.CurrentTagset);
-            _tagset.CloseView();
-
+           
         }
     }
 }
