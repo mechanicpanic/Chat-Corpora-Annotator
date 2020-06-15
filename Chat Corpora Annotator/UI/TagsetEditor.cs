@@ -1,4 +1,5 @@
-﻿using System;
+﻿using java.awt;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -15,13 +16,15 @@ namespace Viewer.UI
 
         public List<string> CurrentTags { get; set; } = new List<string>();
 
-        public event EventHandler SaveTagset;
-        public event EventHandler AddNewTagset;
-        public event EventHandler DeleteTagset;
-
-        public event EventHandler SaveEditedTagset;
+        public event TagsetUpdateEventHandler SaveTagset;
+        public event TagsetUpdateEventHandler AddNewTagset;
+        public event TagsetUpdateEventHandler DeleteTagset;
+        public event TagsetUpdateEventHandler SaveEditedTagset;
+        public event TagsetUpdateEventHandler LoadExistingTagset;
 
         public string TagsetName { get; set; }
+        public List<string> SelectedTagset { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public void CloseView()
         {
             this.Hide();
@@ -60,12 +63,21 @@ namespace Viewer.UI
         {
             if (listView1.Items.Count != 0)
             {
-                foreach (var item in listView1.Items)
+                var args = new TagsetUpdateEventArgs();
+                args.Tags = new List<string>();
+                foreach (ListViewItem item in listView1.Items)
                 {
-                    CurrentTags.Add(item.ToString());
+                    args.Tags.Add(item.Text);
                 }
+                args.Name = this.TagsetName;
+                SaveEditedTagset?.Invoke(this, args);
+
             }
-            SaveEditedTagset?.Invoke(this, EventArgs.Empty);
+            else
+            {
+                MessageBox.Show("Can't save empty tagset");
+            }
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -83,20 +95,47 @@ namespace Viewer.UI
             if (tn != null)
             {
                 this.TagsetName = tn.name;
+                
             }
             tn.Close();
-            AddNewTagset?.Invoke(this, EventArgs.Empty);
             
-        }
-
-        public void DisplayTagset()
-        {
-            throw new NotImplementedException();
+            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            var result = MessageBox.Show("Save current tagset?","save", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes) {
+                var temp = new TagsetUpdateEventArgs();
+                temp.Name = TagsetName;
+                temp.Tags = this.CurrentTags;
+                SaveEditedTagset?.Invoke(this, temp);
+                var args = new TagsetUpdateEventArgs();
+                args.Name = comboBox1.SelectedItem.ToString();
+                LoadExistingTagset?.Invoke(this, args);
+            }
+            if (result == DialogResult.No)
+            {
+                var args = new TagsetUpdateEventArgs();
+                args.Name = comboBox1.SelectedItem.ToString();
+                LoadExistingTagset?.Invoke(this, args);
+            }
+            if (result == DialogResult.Cancel) { }
+        }
+
+        public void DisplayTagset(List<string> tags)
+        {
+            listView1.Items.Clear();
+            foreach(var tag in tags)
+            {
+                listView1.Items.Add(tag);
+            }
+        }
+
+        public void DisplayTagsetNames(List<string> names)
+        {
+            throw new NotImplementedException();
         }
     }
 }

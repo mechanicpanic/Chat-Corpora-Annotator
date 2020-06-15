@@ -13,4 +13,6 @@ namespace Viewer
 
     }
     public delegate void SuggesterMoveEventHandler(object sender, SuggesterMoveEventArgs args);
+
+   
 }

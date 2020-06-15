@@ -18,33 +18,7 @@ namespace IndexingServices
 {
 
 
-    public interface IIndexService
-    {
-        string CurrentIndexPath { get; set; }
-        string DateFieldKey { get; set; }
-        string TextFieldKey { get; set; }
-        string SenderFieldKey { get; set; }
-        List<string> SelectedFields { get; set; }
-        BTreeDictionary<DateTime, int> MessagesPerDay { get; set; }
-        HashSet<string> UserKeys { get; set; }
-        void OpenDirectory();
-        void OpenWriter();
-        int PopulateIndex(string filePath, string[] allFields);
-
-        void InitLookup(string[] allFields);
-        List<DynamicMessage> LoadSomeDocuments(int count, bool viewer);
-
-        void OpenIndex();
-
-        //event EventHandler FileIndexed;
-        //void SaveInfoToDisk(string textFieldKey, string dateFieldKey, string senderFieldKey, List<string> selectedFields, string[] allFields);
-        OrderedDictionary<string, string> LoadInfoFromDisk(string CurrentIndexPath);
-        List<string> LoadUsersFromDisk(string CurrentIndexPath);
-        List<string> LoadFieldsFromDisk(string CurrentIndexPath);
-        BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath);
-
-
-    }
+    
 
     public static class IndexService
     {

@@ -5,8 +5,6 @@ namespace Viewer.Framework.Views
 {
     public interface ITagView : IView
     {
-
-        //Dictionary<List<string>,Tuple<string,int>> SituationIndex { get; set; }
         Tuple<List<string>, string> CurrentSituation { get; set; }
         event EventHandler WriteToDisk;
         event EventHandler TagsetClick;

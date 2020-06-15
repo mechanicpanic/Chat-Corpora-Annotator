@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -19,12 +20,20 @@ namespace Viewer.Framework.Presenters
 
             _tagset.SaveTagset += _tagset_SaveTagset;
             _tagset.AddNewTagset += _tagset_AddNewTagset;
+            _tagset.LoadExistingTagset += _tagset_LoadExistingTagset;
+            _service.LoadTagsetsFromDisk();
 
+            _tagset.DisplayTagsetNames(_service.TagsetIndex.Keys.ToList());
         }
 
-        private void _tagset_AddNewTagset(object sender, EventArgs e)
+        private void _tagset_LoadExistingTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _service.UpdateTagset
+            _tagset.DisplayTagset(_service.TagsetIndex[args.Name]);
+        }
+
+        private void _tagset_AddNewTagset(object sender, TagsetUpdateEventArgs e)
+        {
+            _service.UpdateTagsetIndex(e.Name, e.Tags);
         }
 
         private void _tagset_SaveTagset(object sender, EventArgs e)

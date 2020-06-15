@@ -10,9 +10,11 @@ namespace Viewer.Framework.Services
         Dictionary<List<string>, Tuple<string, Guid>> SituationIndex { get; set; }
 
         void AddSituation(List<string> messages, string situation);
+        void UpdateSituation();
         void UpdateTagsetIndex(string name, List<string> tags);
 
         void FlushTagsetToDisk();
+        void LoadTagsetsFromDisk();
 
     }
     public class TagService : ITagService
@@ -36,7 +38,12 @@ namespace Viewer.Framework.Services
                 TagsetIndex.Add(name, tags);
             }
         }
-        public void FlushTagsetToDisk()
+        public void FlushTagsetsToDisk()
+        {
+
+        }
+
+        public void LoadTagsetsFromDisk()
         {
 
         }
