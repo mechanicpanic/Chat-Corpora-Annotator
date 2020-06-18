@@ -1,11 +1,11 @@
-﻿using System;
+﻿using edu.stanford.nlp.util.logging;
+using System;
 using System.Collections.Generic;
 
 namespace Viewer.Framework.Views
 {
     public interface ITagView : IView
     {
-        Tuple<List<string>, string> CurrentSituation { get; set; }
         event EventHandler WriteToDisk;
         event EventHandler TagsetClick;
 
@@ -16,8 +16,9 @@ namespace Viewer.Framework.Views
         event EventHandler LoadMore;
 
         event EventHandler ShowSuggester;
-        //ITagsetView CreateTagsetEditor();
-        //void ShowTagsetEditor();
+
+        Dictionary<string, Color> TagsetColors { get; set; }
+        void SetTagsetColors(); //Will be automatic for now
         void UpdateTagset(List<string> tags);
         void DisplayDocuments();
 

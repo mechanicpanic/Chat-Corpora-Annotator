@@ -6,7 +6,7 @@ using Lucene.Net.Store;
 using Lucene.Net.Util;
 
 
-namespace IndexingServices
+namespace IndexEngine
 {
 
 	public static class LuceneService 

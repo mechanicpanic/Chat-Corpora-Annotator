@@ -177,9 +177,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IndexingServices\IndexingServices.csproj">
+    <ProjectReference Include="..\IndexingServices\IndexEngine.csproj">
       <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
-      <Name>IndexingServices</Name>
+      <Name>IndexEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\NounPhraseAlgorithm\NounPhraseAlgorithm.fsproj">
       <Project>{6316656e-4b11-42ce-ba65-cdf5d079d7d8}</Project>

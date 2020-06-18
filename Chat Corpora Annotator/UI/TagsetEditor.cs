@@ -137,5 +137,10 @@ namespace Viewer.UI
         {
             throw new NotImplementedException();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

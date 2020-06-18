@@ -1,5 +1,5 @@
 ﻿using BrightIdeasSoftware;
-using IndexingServices;
+using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,39 +10,30 @@ namespace Viewer.UI
 {
 	public partial class TagWindow : Form, ITagView
 	{
+		public event EventHandler WriteToDisk;
+		public event EventHandler TagsetClick;
+		public event EventHandler AddTag;
+		public event EventHandler RemoveTag;
+		public event EventHandler EditSituation;
+		public event EventHandler LoadMore;
+		public event EventHandler ShowSuggester;
+		public event EventHandler LoadTagset;
+		public event EventHandler SetTagset;
 
-		//public Dictionary<List<string>, Tuple<string, int>> SituationIndex { get; set; }
 
-		public Tuple<List<string>, string> CurrentSituation { get; set; }
+		public Dictionary<string,Color> TagsetColors = new Dictionary<string,Color>();
 
-		private Dictionary<string,Color> SituationColor = new Dictionary<string,Color>();
 		private Dictionary<List<string>,string> TaggedMessages = new Dictionary<List<string>,string>();
-		private Dictionary<string, int> TagIndex { get; set; } = new Dictionary<string, int>();
+		private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
 		
-		private void GenerateSituationColors()
-		{
-			SituationColor.Add("Meeting", Color.Bisque);
-			SituationColor.Add("JobDiscussion", Color.MistyRose);
-			SituationColor.Add("SoftwareSupport", Color.LavenderBlush);
-			SituationColor.Add("CodeAssistance", Color.Lavender);
 
-			
-		}
+		public void RetrieveSituationColors()
+        {
+
+        }
 		public TagWindow()
 		{
 			InitializeComponent();
-			//Tags = new List<string>();
-			//SituationIndex = new Dictionary<string, int>();
-
-			//foreach(var tag in Tags)
-			//{
-			//	SituationIndex.Add(tag, 0);
-			//}
-			GenerateSituationColors();
-			TagIndex.Add("Meeting", 0);
-			TagIndex.Add("JobDiscussion", 0);
-			TagIndex.Add("SoftwareSupport", 0);
-			TagIndex.Add("CodeAssistance", 0);
 			DisplayTagset(new List<string>());
 
 			chatTable.FormatRow += ChatTable_FormatRow;
@@ -51,13 +42,6 @@ namespace Viewer.UI
 
 		public void DisplayTagset(List<string> tags)
 		{
-			foreach(var key in TagIndex.Keys)
-			{
-				ListViewItem lvi = new ListViewItem(key);
-				lvi.BackColor = SituationColor[key];
-				listView2.Items.Add(lvi);
-			}
-			listView2.Invalidate();
 			
 		}
 
@@ -68,18 +52,12 @@ namespace Viewer.UI
 			{
 				if (kvp.Key.Contains(dyn.Id))
 				{
-					e.Item.BackColor = SituationColor[kvp.Value];
+					e.Item.BackColor = TagsetColors[kvp.Value];
 				}
 			}
 		}
 
-		public event EventHandler WriteToDisk;
-		public event EventHandler TagsetClick;
-		public event EventHandler AddTag;
-		public event EventHandler RemoveTag;
-		public event EventHandler EditSituation;
-		public event EventHandler LoadMore;
-		public event EventHandler ShowSuggester;
+
 
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -106,20 +84,20 @@ namespace Viewer.UI
 					
 				}
 				TaggedMessages.Add(set, listView2.SelectedItems[0].Text);
-				CurrentSituation = new Tuple<List<string>, string>(set, listView2.SelectedItems[0].Text);
+				//CurrentSituation = new Tuple<List<string>, string>(set, listView2.SelectedItems[0].Text);
 
 				AddTag?.Invoke(this, EventArgs.Empty);
 			}
 			var temp = "";
 			foreach (var obj in chatTable.SelectedObjects)
 			{
-				temp = " [" + listView2.SelectedItems[0].Text + " ID " + TagIndex[listView2.SelectedItems[0].Text] + "]";
+				temp = " [" + listView2.SelectedItems[0].Text + " ID " + SessionTagIndex[listView2.SelectedItems[0].Text] + "]";
 				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
 
 			}
 			listView1.Items.Add(new ListViewItem(temp));
 			listView1.Update();
-			TagIndex[listView2.SelectedItems[0].Text]++;
+			SessionTagIndex[listView2.SelectedItems[0].Text]++;
 			chatTable.UpdateObjects(MessageContainer.Messages);
 		}
 

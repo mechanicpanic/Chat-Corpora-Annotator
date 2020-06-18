@@ -1,4 +1,4 @@
-﻿using IndexingServices;
+﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
 using Viewer.Framework.Services;
@@ -27,6 +27,7 @@ namespace Viewer.Framework.Presenters
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
             _tagger.EditSituation += _tagger_EditSituation;
+            
 
             _main.TagClick += _main_TagClick;
             
@@ -35,27 +36,27 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_EditSituation(object sender, EventArgs e)
         {
-            
-            
+
+            _service.UpdateSituation();
         }
 
         private void _tagger_AddTag(object sender, EventArgs e)
         {
-            _service.AddSituation(_tagger.CurrentSituation.Item1, _tagger.CurrentSituation.Item2);
+            //_service.AddSituation(_tagger.CurrentSituation.Item1, _tagger.CurrentSituation.Item2);
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)
         {
             _writer.OpenWriter();
-            foreach (var list in _service.SituationIndex.Keys)
+            foreach (var kvp in IndexEngine.SituationIndex.Index)
             {
                 List<DynamicMessage> messages = new List<DynamicMessage>();
-                foreach (var id in list)
+                foreach (var id in kvp.Value)
                 {
                     var message = IndexService.RetrieveMessageById(id);
                     messages.Add(message);
                 }
-                _writer.WriteSituation(messages, _service.SituationIndex[list].Item1);
+                _writer.WriteSituation(messages, );
             }
             _writer.CloseWriter();
         }

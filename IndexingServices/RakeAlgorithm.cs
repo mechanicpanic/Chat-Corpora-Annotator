@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace IndexingServices
+namespace IndexEngine
 {
 
         public class Rake

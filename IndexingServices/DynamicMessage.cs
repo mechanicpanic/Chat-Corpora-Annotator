@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace IndexingServices
+namespace IndexEngine
 {
     public static class MessageContainer
     {
         public static List<DynamicMessage> Messages { get; set; }
+        //Should be sufficient for keeping some messages in-memory.
 
     }
     public class DynamicMessage : IComparable

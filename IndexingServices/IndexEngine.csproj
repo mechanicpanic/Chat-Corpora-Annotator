@@ -89,14 +89,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutosuggestSearch.cs" />
     <Compile Include="DynamicMessage.cs" />
     <Compile Include="IndexService.cs" />
     <Compile Include="LuceneService.cs" />
     <Compile Include="NGramAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RakeAlgorithm.cs" />
+    <Compile Include="SituationIndex.cs" />
     <Compile Include="StatisticsService.cs" />
+    <Compile Include="TagsetIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

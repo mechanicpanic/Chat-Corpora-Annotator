@@ -1,5 +1,5 @@
 ﻿using BrightIdeasSoftware;
-using IndexingServices;
+using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

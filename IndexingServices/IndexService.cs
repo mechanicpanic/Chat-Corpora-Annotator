@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using Wintellect.PowerCollections;
 
-namespace IndexingServices
+namespace IndexEngine
 {
 
 

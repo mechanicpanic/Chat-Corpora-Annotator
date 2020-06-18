@@ -6,7 +6,7 @@ using Lucene.Net.Util;
 using System.IO;
 
 
-namespace IndexingServices
+namespace IndexEngine
 {
  
     public class NGramAnalyzer : Analyzer

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer", "Chat Corpora Annotator\Viewer.csproj", "{65809F71-7BF4-43F2-B912-738EEA840E0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexingServices", "IndexingServices\IndexingServices.csproj", "{3A58AB22-7CB7-47DA-8B31-F513CC71DB3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexEngine", "IndexingServices\IndexEngine.csproj", "{3A58AB22-7CB7-47DA-8B31-F513CC71DB3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtractingServices", "ExtractingServices\ExtractingServices.csproj", "{058B093E-5A14-4DAA-9AD2-296FE19C3A40}"
 EndProject
