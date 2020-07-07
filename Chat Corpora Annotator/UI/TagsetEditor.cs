@@ -21,8 +21,9 @@ namespace Viewer.UI
 		public event TagsetUpdateEventHandler DeleteTagset;
 		public event TagsetUpdateEventHandler SaveEditedTagset;
 		public event TagsetUpdateEventHandler LoadExistingTagset;
+        public event TagsetUpdateEventHandler UpdateTagset;
 
-		public string TagsetName { get; set; }
+        public string TagsetName { get; set; }
 		public List<string> SelectedTagset { get; set; }
 
 		public void CloseView()
@@ -98,7 +99,7 @@ namespace Viewer.UI
 				
 			}
 			tn.Close();
-			AddNewTagset?.Invoke(this,)
+			//AddNewTagset?.Invoke(this,)
 			
 			
 		}

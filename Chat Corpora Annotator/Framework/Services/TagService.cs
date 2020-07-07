@@ -23,6 +23,7 @@ namespace Viewer.Framework.Services
             
         }
 
+        public void ChangeProjectTagset() { }
 
         public void AddSituation(List<string> messages, string situation)
         {
@@ -31,7 +32,7 @@ namespace Viewer.Framework.Services
 
         public void UpdateTagsetIndex(string name, List<string> tags)
         {
-            TagsetIndex.UpdateIndexEntry()
+            
         }
 
         public void UpdateSituation()

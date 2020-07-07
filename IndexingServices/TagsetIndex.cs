@@ -57,8 +57,7 @@ namespace IndexEngine
         private static void AddDefaultTagset()
         {
             Index = new BTreeDictionary<string, List<string>>();
-            List<string> tags = {""}
-            AddNewIndexEntry("default",)
+            //...
         }
        
     }

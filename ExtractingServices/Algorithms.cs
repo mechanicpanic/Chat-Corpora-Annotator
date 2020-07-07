@@ -32,7 +32,7 @@ namespace ExtractingServices
             {
                 var quest = LuceneService.DirReader.Document(i).GetField("id").GetStringValue();
                 bool check = false;
-                if (Extractor.IsQuestionList[quest])
+                if (Extractor.IsQuestionList.Contains(quest))
                 {
                     var text = LuceneService.DirReader.Document(i).GetField(IndexService.TextFieldKey).GetStringValue();
 

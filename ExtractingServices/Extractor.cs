@@ -20,8 +20,8 @@ namespace ExtractingServices
         public static BTreeDictionary<string, string> TimeList { get; set; } = new BTreeDictionary<string, string>();
         public static BTreeDictionary<string, string> OrgList { get; set; } = new BTreeDictionary<string, string>();
         public static BTreeDictionary<string, string> LocList { get; set; } = new BTreeDictionary<string, string>();
-                
-        public static BTreeDictionary<string, bool> IsQuestionList { get; set; } = new BTreeDictionary<string, bool>();        
+
+        public static List<string> IsQuestionList { get; set; } = new List<string>(); 
         public static BTreeDictionary<string, List<string>> NounPhrases { get; set; } = new BTreeDictionary<string, List<string>>();
         public static CoreAnalyzer _analyzer { get; set; }
 
@@ -97,6 +97,7 @@ namespace ExtractingServices
 
         private static void ExtractNERTags(CoreDocument coredoc, Lucene.Net.Documents.Document document)
         {
+            //I have no clue as to why NER-tagged messages are stored like that. I guess there is some deep idea behind copying the same info over and over again (or, most likely, this is because some documents have more than one sentence. even tho its stil really stupid)
             if (coredoc != null)
             {
                 List nerList = coredoc.entityMentions();
@@ -105,6 +106,7 @@ namespace ExtractingServices
                     for (int j = 0; j < nerList.size(); j++)
                     {
                         CoreEntityMention em = (CoreEntityMention)nerList.get(j);
+                        //Does this need to be a switch case?
                         if (em.entityType() == "DATE")
                         {
                             var datekey = document.GetField("id").GetStringValue();
@@ -212,7 +214,11 @@ namespace ExtractingServices
                     Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
                     CoreDocument coredoc = GetAnnotatedDocument(document.GetField(IndexService.TextFieldKey).GetStringValue());
                     ExtractNERTags(coredoc, document);
-                    IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
+                    //IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
+                    if (DetectQuestion(coredoc))
+                    {
+                        IsQuestionList.Add(document.GetField("id").GetStringValue());
+                    }
                     ExtractKeyPhrases(coredoc,document.GetField("id").GetStringValue());
                     int a = 5;
                 }

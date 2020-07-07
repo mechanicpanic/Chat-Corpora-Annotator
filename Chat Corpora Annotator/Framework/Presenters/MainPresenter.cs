@@ -153,19 +153,19 @@ namespace Viewer.Framework.Presenters
             }
             else if (e.FilteredByDate && !e.FilteredByUser)
             {
-                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start, e.Finish);
+                _searcher.ConstructDateFilter(IndexService.DateFieldKey, e.Start, e.Finish);
                 _searcher.SearchText_DateFilter(e.Count);
 
             }
             else if (!e.FilteredByDate && e.FilteredByUser)
             {
-                _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
+                _searcher.ConstructUserFilter(IndexService.SenderFieldKey, e.Users);
                 _searcher.SearchText_UserFilter(e.Count);
             }
             else if (e.FilteredByDate && e.FilteredByUser)
             {
-                _searcher.ConstructDateFilter(_csv.DateFieldKey, e.Start, e.Finish);
-                _searcher.ConstructUserFilter(_csv.SenderFieldKey, e.Users);
+                _searcher.ConstructDateFilter(IndexService.DateFieldKey, e.Start, e.Finish);
+                _searcher.ConstructUserFilter(IndexService.SenderFieldKey, e.Users);
                 _searcher.SearchText_UserDateFilter(e.Count);
             }
             var result = _searcher.MakeSearchResultsReadable();

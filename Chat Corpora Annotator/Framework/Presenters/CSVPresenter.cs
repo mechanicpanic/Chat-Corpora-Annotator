@@ -1,4 +1,5 @@
 ﻿
+using edu.stanford.nlp.util;
 using IndexEngine;
 using System;
 using System.Linq;
@@ -83,6 +84,7 @@ namespace Viewer.Framework.Presenters
 
             _main.DisplayDocuments();
             _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+            _main.SetLineCount(LuceneService.DirReader.NumDocs);
             _main.FileLoadState = true;
         }
 

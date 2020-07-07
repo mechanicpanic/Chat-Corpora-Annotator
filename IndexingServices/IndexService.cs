@@ -231,6 +231,8 @@ namespace IndexEngine
 
             int result = 0;
             int count = 0;
+
+            ulong indexingValue = 0;
             if (lookup != null)
             {
                 string[] row = null;
@@ -264,14 +266,23 @@ namespace IndexEngine
                         }
 
                         Document document = new Document();
-                        document.Add(new StringField("id", Guid.NewGuid().ToString(), Field.Store.YES));
+                        document.Add(new StringField("id", indexingValue.ToString(), Field.Store.YES)) ;
+                        indexingValue++;
+                        //This change breaks all of your older indexes!!!
+
+                        //Please delete the contents of your CCA folder. These indexes are unusable.
+
+                        //I have to/am able to index messages with simple ints because:
+                        //1. Lucene's DocID is not a const field. 
+                        //2. I do not merge in or delete any messages after the index is created. No sorting either.
+                        //3. I really am not sure about calculating the distance between messages in GUIDs during retrieval. The guids might come back if they are feasbile for the task, but at the moment, I do not believe they are.
                         for (int i = 0; i < row.Length; i++)
                         {
                             if (lookup.Contains(i))
                             {
                                 if (i == lookup[0])
                                 {
-                                    var temp = DateTools.DateToString(date, DateTools.Resolution.MINUTE);
+                                    var temp = DateTools.DateToString(date, DateTools.Resolution.SECOND); //just in case
                                     document.Add(new StringField(allFields[i], temp, Field.Store.YES));
                                 }
                                 if (i == lookup[1])
@@ -295,16 +306,11 @@ namespace IndexEngine
                             //TODO: Still need to redesign this. Rework storing/indexing paradigm.
 
                         }
-                        //documentBlock.Add(document);
                         LuceneService.Writer.AddDocument(document);
                     }
-                    //LuceneService.Writer.AddDocuments(documentBlock);
                     LuceneService.Writer.Commit();
                     LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
                     CheckDir();
-                    //               this.DateFieldKey = allFields[lookup[0]];
-                    //this.SenderFieldKey = allFields[lookup[1]];
-                    //               this.TextFieldKey = allFields[lookup[2]];
                     SaveInfoToDisk(count);
                     SaveFieldsToDisk();
                     SaveUsersToDisk();
