@@ -12,7 +12,7 @@ namespace Viewer.Framework.Views
 
         event TagsetUpdateEventHandler AddNewTagset;
         event TagsetUpdateEventHandler DeleteTagset;
-        event TagsetUpdateEventHandler SaveTagset;
+        event TagsetUpdateEventHandler UpdateTagset;
 
         event TagsetUpdateEventHandler SaveEditedTagset;
         event TagsetUpdateEventHandler LoadExistingTagset;

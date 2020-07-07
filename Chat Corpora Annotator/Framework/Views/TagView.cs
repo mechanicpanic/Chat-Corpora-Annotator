@@ -1,6 +1,7 @@
 ﻿using edu.stanford.nlp.util.logging;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Viewer.Framework.Views
 {
@@ -17,7 +18,7 @@ namespace Viewer.Framework.Views
 
         event EventHandler ShowSuggester;
 
-        Dictionary<string, Color> TagsetColors { get; set; }
+        Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
         void SetTagsetColors(); //Will be automatic for now
         void UpdateTagset(List<string> tags);
         void DisplayDocuments();

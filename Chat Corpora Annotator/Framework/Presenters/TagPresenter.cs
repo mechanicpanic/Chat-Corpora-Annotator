@@ -56,7 +56,7 @@ namespace Viewer.Framework.Presenters
                     var message = IndexService.RetrieveMessageById(id);
                     messages.Add(message);
                 }
-                _writer.WriteSituation(messages, );
+                //_writer.WriteSituation(messages, );
             }
             _writer.CloseWriter();
         }

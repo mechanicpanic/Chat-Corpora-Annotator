@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace IndexEngine
@@ -23,11 +24,20 @@ namespace IndexEngine
             {
                 Index = new BTreeDictionary<Guid, List<string>>();
                 NameLookup = new Dictionary<Guid, string>();
+
+                //File.Create(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
             }
         }
         private static void LoadIndexFromDisk(string file)
         {
-           
+            var jsonString = File.ReadAllText(file);
+            Index = JsonSerializer.Deserialize<BTreeDictionary<Guid, List<string>>>(jsonString);
+        }
+
+        private static void WriteIndexToDisk(string file)
+        {
+            var jsonString = JsonSerializer.Serialize(Index);
+            File.WriteAllText(file, jsonString);
         }
         public static void AddSituationToIndex(List<string> messages, string situation)
         {

@@ -2,17 +2,19 @@
 using System;
 using System.Collections.Generic;
 using IndexEngine;
+using edu.stanford.nlp.util;
+
 namespace Viewer.Framework.Services
 {
     public interface ITagService
     {
-        
         void AddSituation(List<string> messages, string situation);
         void UpdateSituation();
         void DeleteSituation();
 
         void UpdateTagsetIndex(string name, List<string> tags);
-
+        void EditTagset(string name, string type, int op);
+        void ChangeProjectTagset();
     }
     public class TagService : ITagService
     {
@@ -20,8 +22,7 @@ namespace Viewer.Framework.Services
         {
             
         }
-        public Dictionary<List<string>, Tuple<string, Guid>> SituationIndex { get; set; } = new Dictionary<List<string>, Tuple<string, Guid>>();
-        //public BTreeDictionary<string, List<string>> TagsetIndex { get; set; } = new BTreeDictionary<string, List<string>>();
+
 
         public void AddSituation(List<string> messages, string situation)
         {
@@ -30,12 +31,29 @@ namespace Viewer.Framework.Services
 
         public void UpdateTagsetIndex(string name, List<string> tags)
         {
-            
+            TagsetIndex.UpdateIndexEntry()
         }
 
         public void UpdateSituation()
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteSituation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditTagset(string name, string tag, int op)
+        {
+            if (IndexEngine.TagsetIndex.Index.ContainsKey(name))
+            {
+
+                TagsetIndex.UpdateIndexEntry(name, tag, op);
+                
+            }
+        }
+
+
     }
 }

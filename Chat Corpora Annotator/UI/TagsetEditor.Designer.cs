@@ -106,10 +106,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(17, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 23);
+            this.label1.Size = new System.Drawing.Size(147, 19);
             this.label1.TabIndex = 9;
             this.label1.Text = "Current project tagset:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // comboBox1
             // 
@@ -117,15 +116,15 @@
             this.comboBox1.Location = new System.Drawing.Point(12, 50);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(219, 31);
+            this.comboBox1.Size = new System.Drawing.Size(219, 27);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(248, 50);
+            this.button4.Location = new System.Drawing.Point(247, 49);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 31);
+            this.button4.Size = new System.Drawing.Size(94, 28);
             this.button4.TabIndex = 10;
             this.button4.Text = "Set";
             this.button4.UseVisualStyleBackColor = true;
@@ -156,12 +155,12 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(39, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(305, 30);
+            this.textBox1.Size = new System.Drawing.Size(305, 26);
             this.textBox1.TabIndex = 0;
             // 
             // TagsetEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(708, 438);

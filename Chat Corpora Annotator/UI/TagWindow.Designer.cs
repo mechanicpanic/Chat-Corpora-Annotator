@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
@@ -42,7 +43,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button5 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,7 +70,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(0, 610);
+            this.button4.Location = new System.Drawing.Point(0, 575);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(214, 52);
             this.button4.TabIndex = 3;
@@ -91,8 +91,23 @@
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(214, 662);
+            this.panel2.Size = new System.Drawing.Size(214, 627);
             this.panel2.TabIndex = 1;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Lavender;
+            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Location = new System.Drawing.Point(0, 525);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(214, 50);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Show suggestions";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // button3
             // 
@@ -153,10 +168,10 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(0, 610);
+            this.loadMoreButton.Location = new System.Drawing.Point(0, 575);
             this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(1123, 52);
+            this.loadMoreButton.Size = new System.Drawing.Size(536, 52);
             this.loadMoreButton.TabIndex = 12;
             this.loadMoreButton.Text = "Load more...";
             this.loadMoreButton.UseVisualStyleBackColor = false;
@@ -178,7 +193,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(913, 610);
+            this.chatTable.Size = new System.Drawing.Size(326, 575);
             this.chatTable.TabIndex = 13;
             this.chatTable.UnfocusedSelectedBackColor = System.Drawing.Color.Pink;
             this.chatTable.UseCellFormatEvents = true;
@@ -197,7 +212,7 @@
             this.panel1.Location = new System.Drawing.Point(214, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1123, 662);
+            this.panel1.Size = new System.Drawing.Size(536, 627);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -205,9 +220,9 @@
             this.panel3.Controls.Add(this.button6);
             this.panel3.Controls.Add(this.listView1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(913, 0);
+            this.panel3.Location = new System.Drawing.Point(326, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 610);
+            this.panel3.Size = new System.Drawing.Size(210, 575);
             this.panel3.TabIndex = 17;
             // 
             // button6
@@ -244,27 +259,12 @@
             this.columnHeader1.Text = "Situations";
             this.columnHeader1.Width = 204;
             // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.Lavender;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(0, 560);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(214, 50);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Show suggestions";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
             // TagWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1337, 662);
+            this.ClientSize = new System.Drawing.Size(750, 627);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

@@ -21,13 +21,12 @@ namespace Viewer.UI
 		public event EventHandler SetTagset;
 
 
-		public Dictionary<string,Color> TagsetColors = new Dictionary<string,Color>();
+		public Dictionary<string, Color> TagsetColors { get; set; }
 
 		private Dictionary<List<string>,string> TaggedMessages = new Dictionary<List<string>,string>();
 		private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
-		
 
-		public void RetrieveSituationColors()
+        public void RetrieveSituationColors()
         {
 
         }
@@ -205,5 +204,10 @@ namespace Viewer.UI
 		{
 			ShowSuggester?.Invoke(this, EventArgs.Empty);
 		}
-	}
+
+        public void SetTagsetColors()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

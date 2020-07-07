@@ -12,7 +12,7 @@ namespace IndexEngine
             private readonly string _stopWordsPattern;
             private readonly int _minCharLength;
             private readonly int _maxWordsLength;
-            private readonly double _minKeywordFrequency;
+        private readonly double _minKeywordFrequency;
 
             public Rake(string stopWordsPath = @"C:\Users\voidl\source\repos\Chat Corpora Annotator\IndexingServices\SMARTstopset.txt", int minCharLength = 1, int maxWordsLength = 1, double minKeywordFrequency = 1)
             {
@@ -22,7 +22,7 @@ namespace IndexEngine
                 _stopWordsPattern = BuildStopWordRegEx(stopWordsPath);
             }
 
-
+        
             public Dictionary<string, double> Run(string text)
             {
                 var sentenceList = SplitSentences(text);

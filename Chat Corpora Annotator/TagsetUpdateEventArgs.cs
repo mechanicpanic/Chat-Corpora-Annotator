@@ -14,4 +14,4 @@ namespace Viewer
     }
     public delegate void TagsetUpdateEventHandler(object sender, TagsetUpdateEventArgs args);
 }
-}
+
