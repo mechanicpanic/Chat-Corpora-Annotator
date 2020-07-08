@@ -19,7 +19,7 @@ namespace Viewer.Framework.Views
         void DisplaySearchResults();
 
         
-        void DisplayStatistics();
+        void DisplayStatistics(StatisticsContainer stats);
         Dictionary<string,double> Statistics { get; set; }
         IConcordanceView CreateConcordancer();
 

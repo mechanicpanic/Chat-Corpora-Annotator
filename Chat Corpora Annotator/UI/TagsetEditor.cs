@@ -84,7 +84,6 @@ namespace Viewer.UI
 		private void button4_Click(object sender, EventArgs e)
 		{
 			TagsetName tn = new TagsetName();
-			tn.Show();
 			tn.NameButtonClicked += new EventHandler(NameButtonHandler);
 			tn.Show();
 			

@@ -475,6 +475,12 @@
     <Compile Include="UI\Keyworder.Designer.cs">
       <DependentUpon>Keyworder.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ListAdder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ListAdder.Designer.cs">
+      <DependentUpon>ListAdder.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -554,6 +560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Keyworder.resx">
       <DependentUpon>Keyworder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ListAdder.resx">
+      <DependentUpon>ListAdder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

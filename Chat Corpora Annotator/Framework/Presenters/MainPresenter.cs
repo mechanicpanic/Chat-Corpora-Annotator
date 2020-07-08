@@ -56,7 +56,8 @@ namespace Viewer.Framework.Presenters
 
         private void _main_LoadStatistics(object sender, EventArgs e)
         {
-                
+            StatisticsContainer stats = new StatisticsContainer();
+            _main.DisplayStatistics(stats);
         }
 
         private void _main_KeywordClick(object sender, EventArgs e)
@@ -143,7 +144,7 @@ namespace Viewer.Framework.Presenters
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)
 
         {
-
+           
             _searcher.UserQuery = LuceneService.Parser.Parse(e.Query);
             if (!e.FilteredByDate && !e.FilteredByUser)
             {

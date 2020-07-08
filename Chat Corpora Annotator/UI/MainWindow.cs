@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -97,7 +98,8 @@ namespace Viewer
 			TextMatchFilter highlightingFilter = null;
 			if (!String.IsNullOrEmpty(searchBox.Text))
 			{
-				var words = searchBox.Text.Trim().Split(null);
+				char[] sep = { ',', '\"', ':' };
+				var words = searchBox.Text.Trim().Split(sep);
 				highlightingFilter = TextMatchFilter.Contains(chatTable, words);
 				foreach (var word in words)
 				{
@@ -623,9 +625,15 @@ namespace Viewer
 			LoadStatistics?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void DisplayStatistics()
+		public void DisplayStatistics(StatisticsContainer stats)
 		{
-			throw new NotImplementedException();
+			
+			label4.Text = stats.AverageLength.ToString();
+			label5.Text = stats.NumberOfSymbols.ToString();
+			label6.Text = stats.NumberOfTokens.ToString();
+			label7.Text = stats.NumberOfUsers.ToString();
+			label8.Text = stats.AverageMessagesPerDay.ToString();
+
 		}
 
 		private void extractToolStripMenuItem_Click(object sender, EventArgs e)
@@ -642,6 +650,11 @@ namespace Viewer
 		{
 			MessageBox.Show("Info already extracted");
 		}
-	}
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+			
+        }
+    }
 }
 

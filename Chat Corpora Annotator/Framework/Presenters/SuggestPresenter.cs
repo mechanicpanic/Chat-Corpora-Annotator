@@ -24,55 +24,30 @@ namespace Viewer.Framework.Presenters
             this._main = main;
 
             _tagger.ShowSuggester += _tagger_ShowSuggester;
+            _sugg.RunQuery += _sugg_RunQuery;
 
-            _sugg.MoveSituation += _sugg_MoveSituation;
-            _sugg.LoadMeet += _sugg_LoadMeet;
         }
 
-        private void _sugg_LoadMeet(object sender, EventArgs e)
+        private void _sugg_RunQuery(object sender, EventArgs e)
         {
-            _service.GetMeetSuggestions();
-            _sugg.CurrentMeet = _service.MeetIndex.First().Value;
-            _sugg.DisplaySituation("meet");
+            _service.Parse(_sugg.QueryString);
+            //Run Parser from here
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)
         {
-            if(_main.InfoExtracted)
-            {
-                _sugg.ShowView();
-            }
-            else
-            {
-                _main.ShowSorryMessage();
-            }
+            //if(_main.InfoExtracted)
+            //{
+            //    _sugg.ShowView();
+            //}
+            //else
+            //{
+            //    _main.ShowSorryMessage();
+            //}
+
+            //Testing the window!!!
+            _sugg.ShowView();
         }
-
-        
-        private void _sugg_MoveSituation(object sender, SuggesterMoveEventArgs args)
-        {
-            switch (args.Type)
-            {
-                case "job":
-                    _sugg.CurrentJob = _service.JobIndex[args.Index];
-                    _sugg.DisplaySituation("job");
-                    break;
-                case "meet":
-                    _sugg.CurrentMeet = _service.MeetIndex[args.Index];
-                    _sugg.DisplaySituation("meet");
-                    break;
-                case "code":
-                    _sugg.CurrentCode = _service.CodeIndex[args.Index];
-                    _sugg.DisplaySituation("code");
-                    break;
-                case "soft":
-                    _sugg.CurrentSoft = _service.SoftIndex[args.Index];
-                    _sugg.DisplaySituation("soft");
-                    break;
-
-            }
-        }
-
-        
+     
     }
 }

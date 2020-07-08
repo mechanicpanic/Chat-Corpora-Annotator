@@ -1,4 +1,5 @@
-﻿using IndexEngine;
+﻿using BrightIdeasSoftware;
+using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -11,54 +12,61 @@ namespace Viewer.UI
         public Suggester()
         {
             InitializeComponent();
+            
         }
 
-        private int icode = 0;
-        private int isoft = 0;
-        private int ijob = 0;
-        private int imeet = 0;
-        public List<DynamicMessage> CurrentSoft { get; set; }
-        public List<DynamicMessage> CurrentMeet { get; set; }
-        public List<DynamicMessage> CurrentJob { get; set; }
-        public List<DynamicMessage> CurrentCode { get; set; }
 
-        public event SuggesterMoveEventHandler MoveSituation;
-        public event EventHandler LoadCode;
-        public event EventHandler LoadMeet;
-        public event EventHandler LoadSoft;
-        public event EventHandler LoadJob;
+        public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
 
-        private bool codeload = false;
-        private bool meetload = false;
-        private bool softload = false;
-        private bool jobload = false;
+        public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
+        public string QueryString { get; set; }
+
+        public event EventHandler RunQuery;
 
         public void CloseView()
         {
             this.Hide();
         }
 
-        public void DisplaySituation(string type)
+        public void DisplaySituation()
         {
-            switch (type)
-            {
-                case "job":
-                    jobView.SetObjects(CurrentJob);
-                    jobView.Invalidate();
-                    break;
-                case "meet":
-                    meetView.SetObjects(CurrentMeet);
-                    meetView.Invalidate();
-                    break;
-                case "code":
-                    codeView.SetObjects(CurrentCode);
-                    codeView.Invalidate();
-                    break;
-                case "soft":
-                    codeView.SetObjects(CurrentSoft);
-                    codeView.Invalidate();
-                    break;
+            SetUpChatView();
+            fastObjectListView1.SetObjects(CurrentSituation);
+        }
+        private void SetUpChatView()
+        {
+            List<OLVColumn> columns = new List<OLVColumn>();
 
+            foreach (var key in MessageContainer.Messages[0].contents.Keys)
+            {
+                OLVColumn cl = new OLVColumn();
+                cl.AspectGetter = delegate (object x)
+                {
+                    DynamicMessage message = (DynamicMessage)x;
+                    return message.contents[key];
+                };
+                cl.Text = key;
+                cl.WordWrap = true;
+
+
+                columns.Add(cl);
+
+
+            }
+            fastObjectListView1.AllColumns.Clear();
+            fastObjectListView1.AllColumns.AddRange(columns);
+            fastObjectListView1.RebuildColumns();
+            foreach (var cl in fastObjectListView1.AllColumns)
+            {
+                if (cl.Text != IndexService.TextFieldKey)
+                {
+                    cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
+                else
+                {
+                    cl.FillsFreeSpace = true;
+
+                }
             }
         }
 
@@ -66,103 +74,83 @@ namespace Viewer.UI
         {
             this.Show();
         }
-
+        //Buttons 1 and 2 are for seeing next/prev suggestion
         private void button1_Click(object sender, System.EventArgs e)
         {
-            TabPage page = tabControl1.SelectedTab;
-            var name = page.Name;
-            SuggesterMoveEventArgs args = new SuggesterMoveEventArgs();
-            switch (name)
-            {
-                case "job":
-                    if (jobload)
-                    {
-                        args.Index = ijob++;
-                        args.Type = "job";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                case "meet":
-                    if (meetload)
-                    {
-                        args.Index = imeet++;
-                        args.Type = "meet";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                case "code":
-                    if (codeload)
-                    {
-                        args.Index = icode++;
-                        args.Type = "code";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                case "soft":
-                    if (softload)
-                    {
-                        args.Index = isoft++;
-                        args.Type = "soft";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                
-            }
-
+            
         }
-        private void button2_Click(object sender, System.EventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
         {
-            TabPage page = tabControl1.SelectedTab;
-            var name = page.Name;
-            SuggesterMoveEventArgs args = new SuggesterMoveEventArgs();
-            switch (name)
-            {
-                case "job":
-                    if (ijob >= 1 && jobload)
-                    {
-                        args.Index = ijob--;
-                        args.Type = "job";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    
-                    break;
-                case "meet":
-                    if (imeet >= 1 && meetload)
-                    {
-                        args.Index = imeet--;
-                        args.Type = "meet";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                case "code":
-                    if (icode >= 1 && codeload)
-                    {
-                        args.Index = icode--;
-                        args.Type = "code";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-                case "soft":
-                    if (isoft >= 1 && softload)
-                    {
-                        args.Index = isoft--;
-                        args.Type = "soft";
-                        MoveSituation?.Invoke(this, args);
-                    }
-                    break;
-
-            }
+            
         }
+
+        // These are for running our pre-cooked queries
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.QueryString = "";
+            RunQuery?.Invoke(this, EventArgs.Empty);
+        }
+
 
         private void button4_Click(object sender, EventArgs e)
         {
-            LoadMeet?.Invoke(this, EventArgs.Empty);
-            meetload = true;
+            this.QueryString = "";
+            RunQuery?.Invoke(this, EventArgs.Empty);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            this.QueryString = "";
+            RunQuery?.Invoke(this, EventArgs.Empty);
+        }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+        //This is the Find button
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            if (!String.IsNullOrEmpty(richTextBox1.Text))
+            {
+                this.QueryString = richTextBox1.Text;
+                RunQuery?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private void listButton_Click(object sender, EventArgs e)
+        {
+            ListAdder la = new ListAdder();
+            
+            la.SaveList += new EventHandler(SaveListHandler);
+            la.Show();
+        }
+        private void SaveListHandler(object sender, EventArgs e)
+        {
+            ListAdder la = sender as ListAdder;
+            if (la != null)
+            {
+                UserDicts.Add(la.CurName, la.CurList);
+                var temp = new ListViewItem(la.CurName);
+                temp.SubItems.Add(String.Join(", ", la.CurList.ToArray()));
+                listView1.Items.Add(temp);
+            }
+            la.Close();
+        }
+
+        private void deleteListButton_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count != 0)
+            {
+                foreach(ListViewItem item in listView1.SelectedItems)
+                {
+                    UserDicts.Remove(item.Text);
+                    listView1.Items.Remove(item);
+                }
+            }
         }
     }
 }

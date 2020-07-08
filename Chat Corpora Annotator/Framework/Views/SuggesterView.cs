@@ -10,19 +10,11 @@ namespace Viewer.Framework.Views
 
     public interface ISuggesterView: IView
     {
-
-        event SuggesterMoveEventHandler MoveSituation;
-
-        event EventHandler LoadCode;
-        event EventHandler LoadMeet;
-        event EventHandler LoadSoft;
-        event EventHandler LoadJob;
-        void DisplaySituation(string type);
-
-        List<DynamicMessage> CurrentSoft { get; set; }
-        List<DynamicMessage> CurrentMeet { get; set; }
-        List<DynamicMessage> CurrentJob { get; set; }
-        List<DynamicMessage> CurrentCode { get; set; }
+       void DisplaySituation();
+        event EventHandler RunQuery;
+        string QueryString { get; set; }
+        List<DynamicMessage> CurrentSituation { get; set; }
+        Dictionary<string, List<string>> UserDicts { get; set; }
 
     }
 }

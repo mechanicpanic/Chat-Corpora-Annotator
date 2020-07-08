@@ -325,11 +325,11 @@ namespace IndexEngine
             return result;
         }
 
-        private static void OpenParser(string textFieldKey)
+        private static void OpenParser()
         {
             if (LuceneService.Analyzer != null)
             {
-                LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, textFieldKey, LuceneService.Analyzer);
+                LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, IndexService.TextFieldKey, LuceneService.Analyzer);
             }
         }
 
@@ -348,7 +348,7 @@ namespace IndexEngine
             LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
             LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
             LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-            OpenParser(TextFieldKey);
+            OpenParser();
 
 
 
@@ -375,7 +375,7 @@ namespace IndexEngine
                 {
                     OpenAnalyzers();
                     OpenReader();
-                    OpenParser(TextFieldKey);
+                    OpenParser();
                     //LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
                 }
