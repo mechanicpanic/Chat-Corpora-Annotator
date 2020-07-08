@@ -21,9 +21,9 @@ namespace Retrievers
     public static class Retrievers
     {
 
-        public static List<string> HasWordOfList(List<string> words)
+        public static List<int> HasWordOfList(List<string> words)
         {
-            HashSet<string> results = new HashSet<string>();
+            HashSet<int> results = new HashSet<int>();
             foreach (var word in words)
             {
                 TermQuery query = new TermQuery(new Lucene.Net.Index.Term(word));
@@ -33,53 +33,64 @@ namespace Retrievers
                 foreach (var doc in docs.ScoreDocs)
                 {
                     Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                    results.Add(idoc.GetField("id").GetStringValue());
+                    results.Add((int)idoc.GetField("id").GetInt32Value());
                 }
 
 
             }
-            List<string> ret = results.ToList();
+            List<int> ret = results.ToList();
             return ret;
 
         }
-        public static List<string> HasNERTag(NER tag)
+        public static List<int> HasNERTag(NER tag)
         {
             //Syntactic sugar for the B-trees in the Extractor class. 
-            List<string> result = new List<string>();
+            List<int> result = new List<int>();
             switch (tag)
             {
                 case NER.ORG:
                     if(Extractor.OrgList.Keys.Count != 0)
                     {
-                        return Extractor.OrgList.Keys.ToList();
+                        foreach(var temp in Extractor.OrgList.Keys.ToList())
+                        {
+                            result.Add(temp);
+                        }
+                        return result;
+                        
                     }
                     else
                     {
-                        result.Add("-1");
+                        result.Add(-1);
                         return result;
                         //
                     }
                 case NER.LOC:
                     if (Extractor.LocList.Keys.Count != 0)
                     {
-                        
-                        return Extractor.LocList.Keys.ToList();
+                        foreach(var temp in Extractor.LocList.Keys.ToList())
+                        {
+                            result.Add(temp);
+                        }
+                        return result;
                     }
                     else
                     {
-                        result.Add("-1");
+                        result.Add(-1);
                         return result;
                         //
                     }
                 case NER.TIME:
                     if (Extractor.TimeList.Keys.Count != 0)
                     {
-                        
-                        return Extractor.TimeList.Keys.ToList();
+                        foreach (var temp in Extractor.TimeList.Keys.ToList())
+                        {
+
+                        }
+                            return result;
                     }
                     else
                     {
-                        result.Add("-1");
+                        result.Add(-1);
                         return result;
                         //
                     }
@@ -91,7 +102,7 @@ namespace Retrievers
                     }
                     else
                     {
-                        result.Add("-1");
+                        result.Add(-1);
                         return result;
                         //
                     }
@@ -103,7 +114,7 @@ namespace Retrievers
                     }
                     else
                     {
-                        result.Add("-1");
+                        result.Add(-1);
                         return result;
                         
                     }
@@ -111,27 +122,54 @@ namespace Retrievers
             throw new ArgumentException();
 
         }
-
-        public static List<string> HasQuestion()
+                          
+        public static List<int> HasQuestion()
         {
-            List<string> result = new List<string>();
+            List<int> result = new List<int>();
             if(Extractor.IsQuestionList.Count != 0)
             {
                 return Extractor.IsQuestionList;
             }
             else
             {
-                result.Add("-1");
+                result.Add(-1);
                 return result;
             }
         }
-
-        public static List<string> HasUser(string user)
+                          
+        public static List<int> HasUser(string user)
         {
-            return null;
-            
+            //Love duplicate code
+            HashSet<int> results = new HashSet<int>();
+            TermQuery query = new TermQuery(new Lucene.Net.Index.Term(IndexService.SenderFieldKey,user));
+            BooleanQuery boolquery = new BooleanQuery();
+            boolquery.Add(query, Occur.MUST);
+            TopDocs docs = LuceneService.Searcher.Search(boolquery, LuceneService.DirReader.MaxDoc);
+            foreach (var doc in docs.ScoreDocs)
+            {
+                Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
+                results.Add((int)idoc.GetField("id").GetInt32Value());
+            }
+            List<int> ret = results.ToList();
+            return ret;
         }
-
+                          
+        public static List<int> HasUserMentioned(string user)
+        {
+            //Or I can check each and every message out of millions for a substring occurence :^)
+            HashSet<int> results = new HashSet<int>();
+            TermQuery query = new TermQuery(new Lucene.Net.Index.Term(user));
+            BooleanQuery boolquery = new BooleanQuery();
+            boolquery.Add(query, Occur.MUST);
+            TopDocs docs = LuceneService.Searcher.Search(boolquery, LuceneService.DirReader.MaxDoc);
+            foreach (var doc in docs.ScoreDocs)
+            {
+                Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
+                results.Add((int)idoc.GetField("id").GetInt32Value());
+            }
+            List<int> ret = results.ToList();
+            return ret;
+        }
 
 
     }

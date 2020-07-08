@@ -53,7 +53,7 @@ namespace Viewer.Framework.Presenters
                 List<DynamicMessage> messages = new List<DynamicMessage>();
                 foreach (var id in kvp.Value)
                 {
-                    var message = IndexService.RetrieveMessageById(id);
+                    var message = IndexService.RetrieveMessageById(Int32.Parse(id));
                     messages.Add(message);
                 }
                 //_writer.WriteSituation(messages, );

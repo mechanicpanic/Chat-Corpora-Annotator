@@ -26,7 +26,8 @@ namespace IndexEngine
 		public static IndexWriter Writer { get; set; }
 		public static DirectoryReader DirReader { get; set; }
 		public static QueryParser Parser { get; set; }
-		//Leaving the parser field just in case, although it is currently useless
+		
+		public static QueryParser UserParser { get; set; }
 		public static IndexSearcher Searcher { get; set; }
 
 		public static IndexSearcher NGramSearcher { get; set; }

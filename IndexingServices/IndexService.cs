@@ -232,7 +232,7 @@ namespace IndexEngine
             int result = 0;
             int count = 0;
 
-            ulong indexingValue = 0;
+            int indexingValue = 0;
             if (lookup != null)
             {
                 string[] row = null;
@@ -266,7 +266,8 @@ namespace IndexEngine
                         }
 
                         Document document = new Document();
-                        document.Add(new StringField("id", indexingValue.ToString(), Field.Store.YES)) ;
+                        document.Add(new Int32Field("id", indexingValue, Field.Store.YES));
+                        
                         indexingValue++;
                         //This change breaks all of your older indexes!!!
 
@@ -330,6 +331,7 @@ namespace IndexEngine
             if (LuceneService.Analyzer != null)
             {
                 LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, IndexService.TextFieldKey, LuceneService.Analyzer);
+                LuceneService.UserParser = new QueryParser(LuceneService.AppLuceneVersion, IndexService.SenderFieldKey, LuceneService.Analyzer);
             }
         }
 
@@ -386,21 +388,21 @@ namespace IndexEngine
             }
         }
 
-        public static DynamicMessage RetrieveMessageById(string id)
+        public static DynamicMessage RetrieveMessageById(int id)
         {
-            TermQuery query = new TermQuery(new Term("id", id));
-            BooleanQuery boolq = new BooleanQuery();
-            boolq.Add(query, Occur.MUST);
+
+            //Much better now!
+            var query = NumericRangeQuery.NewInt32Range("id", id, id, true, true);
             TopDocs hits = LuceneService.Searcher.Search(query, 1);
             ScoreDoc message = hits.ScoreDocs[0];
             List<string> data = new List<string>();
             Document idoc = LuceneService.Searcher.Doc(message.Doc);
             foreach (var field in SelectedFields)
             {
-                data.Add(idoc.GetField(field).GetStringValue());
+                data.Add(idoc.GetField(field).GetInt32Value().ToString());
             }
 
-            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetStringValue());
+            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetInt32Value().ToString());
 
         }
 

@@ -15,14 +15,14 @@ namespace ExtractingServices
 {
     public static class Extractor
     {
-        public static BTreeDictionary<string, string> URLList { get; set; } = new BTreeDictionary<string, string>();
-        public static BTreeDictionary<string, string> DateList { get; set; } = new BTreeDictionary<string, string>();
-        public static BTreeDictionary<string, string> TimeList { get; set; } = new BTreeDictionary<string, string>();
-        public static BTreeDictionary<string, string> OrgList { get; set; } = new BTreeDictionary<string, string>();
-        public static BTreeDictionary<string, string> LocList { get; set; } = new BTreeDictionary<string, string>();
+        public static BTreeDictionary<int, string> URLList { get; set; } = new BTreeDictionary<int, string>();
+        public static BTreeDictionary<int, string> DateList { get; set; } = new BTreeDictionary<int, string>();
+        public static BTreeDictionary<int, string> TimeList { get; set; } = new BTreeDictionary<int, string>();
+        public static BTreeDictionary<int, string> OrgList { get; set; } = new BTreeDictionary<int, string>();
+        public static BTreeDictionary<int, string> LocList { get; set; } = new BTreeDictionary<int, string>();
 
-        public static List<string> IsQuestionList { get; set; } = new List<string>(); 
-        public static BTreeDictionary<string, List<string>> NounPhrases { get; set; } = new BTreeDictionary<string, List<string>>();
+        public static List<int> IsQuestionList { get; set; } = new List<int>(); 
+        public static BTreeDictionary<int, List<string>> NounPhrases { get; set; } = new BTreeDictionary<int, List<string>>();
         public static CoreAnalyzer _analyzer { get; set; }
 
         public static List<List<string>> NounList = new List<List<string>>();
@@ -31,7 +31,6 @@ namespace ExtractingServices
         {
             _analyzer = new CoreAnalyzer();
             
-
         }
 
         public static void CreatePipeline()
@@ -53,7 +52,7 @@ namespace ExtractingServices
         }
 
 
-        private static void ExtractKeyPhrases(CoreDocument coredoc, string id)
+        private static void ExtractKeyPhrases(CoreDocument coredoc, int id)
         {
             ArrayList sents = _analyzer.GetSents(coredoc);
             List<string> NP = new List<string>();
@@ -109,66 +108,66 @@ namespace ExtractingServices
                         //Does this need to be a switch case?
                         if (em.entityType() == "DATE")
                         {
-                            var datekey = document.GetField("id").GetStringValue();
-                            if (!DateList.ContainsKey(datekey))
+                            var datekey = document.GetField("id").GetInt32Value();
+                            if (!DateList.ContainsKey((int)datekey))
                             {
-                                DateList.Add(datekey, em.text());
+                                DateList.Add((int)datekey, em.text());
                             }
                             else
                             {
-                                DateList.TryUpdate(datekey, DateList[datekey] + ", " + em.text());
+                                DateList.TryUpdate((int)datekey, DateList[(int)datekey] + ", " + em.text());
                             }
                         }
                         if (em.entityType() == "TIME")
                         {
 
 
-                            var timekey = document.GetField("id").GetStringValue();
-                            if (!TimeList.ContainsKey(timekey))
+                            var timekey = document.GetField("id").GetInt32Value();
+                            if (!TimeList.ContainsKey((int)timekey))
                             {
-                                TimeList.Add(timekey, em.text());
+                                TimeList.Add((int)timekey, em.text());
                             }
                             else
                             {
-                                TimeList.TryUpdate(timekey, TimeList[timekey] + ", " + em.text());
+                                TimeList.TryUpdate((int)timekey, TimeList[(int)timekey] + ", " + em.text());
                             }
                         }
 
                         if (em.entityType() == "LOCATION")
                         {
-                            var lockey = document.GetField("id").GetStringValue();
-                            if (!LocList.ContainsKey(lockey))
+                            var lockey = document.GetField("id").GetInt32Value();
+                            if (!LocList.ContainsKey((int)lockey))
                             {
-                                LocList.Add(lockey, em.text());
+                                LocList.Add((int)lockey, em.text());
                             }
                             else
                             {
-                                LocList.TryUpdate(lockey, LocList[lockey] + ", " + em.text());
+                                LocList.TryUpdate((int)lockey, LocList[(int)lockey] + ", " + em.text());
                             }
                         }
                         if (em.entityType() == "ORGANIZATION")
                         {
-                            var orgkey = document.GetField("id").GetStringValue();
-                            if (!OrgList.ContainsKey(orgkey))
+                            var orgkey = document.GetField("id").GetInt32Value();
+                            if (!OrgList.ContainsKey((int)orgkey))
                             {
-                                OrgList.Add(orgkey, em.text());
+                                OrgList.Add((int)orgkey, em.text());
                             }
                             else
                             {
-                                OrgList.TryUpdate(orgkey, OrgList[orgkey] + ", " + em.text());
+                                OrgList.TryUpdate((int)orgkey, OrgList[(int)orgkey] + ", " + em.text());
                             }
                         }
 
                         if (em.entityType() == "URL")
                         {
-                            var urlkey = document.GetField("id").GetStringValue();
-                            if (!URLList.ContainsKey(urlkey))
+                            var urlkey = document.GetField("id").GetInt32Value();
+                            if (!URLList.ContainsKey((int)urlkey))
                             {
-                                URLList.Add(urlkey, em.text());
+                                URLList.Add((int)urlkey, em.text());
                             }
                             else
                             {
-                                URLList.TryUpdate(urlkey, OrgList[urlkey] + ", " + em.text());
+                                URLList.TryUpdate((int)urlkey, OrgList[(int)urlkey] + ", " + em.text());
                             }
                         }
 
@@ -199,7 +198,7 @@ namespace ExtractingServices
 
                 }
             }
-            NounPhrases.Add(document.GetField("id").GetStringValue(), nouns);
+            NounPhrases.Add((int)document.GetField("id").GetInt32Value(), nouns);
 
 
         }
@@ -217,9 +216,9 @@ namespace ExtractingServices
                     //IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
                     if (DetectQuestion(coredoc))
                     {
-                        IsQuestionList.Add(document.GetField("id").GetStringValue());
+                        IsQuestionList.Add((int)document.GetField("id").GetInt32Value());
                     }
-                    ExtractKeyPhrases(coredoc,document.GetField("id").GetStringValue());
+                    ExtractKeyPhrases(coredoc, (int)document.GetField("id").GetInt32Value());
                     int a = 5;
                 }
                 
