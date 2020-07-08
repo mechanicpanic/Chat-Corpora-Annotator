@@ -10,6 +10,7 @@ using NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty;
 using System.Linq;
 using java.lang;
 using System;
+using IndexEngine;
 
 namespace ExtractingServices
 {

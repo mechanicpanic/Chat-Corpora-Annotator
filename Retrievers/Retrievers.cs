@@ -20,6 +20,7 @@ namespace Retrievers
     }
     public static class Retrievers
     {
+
         public static List<string> HasWordOfList(List<string> words)
         {
             HashSet<string> results = new HashSet<string>();
@@ -130,6 +131,8 @@ namespace Retrievers
             return null;
             
         }
+
+
 
     }
 }

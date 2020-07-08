@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExtractingServices
+namespace IndexEngine
 {
     public static class NLPModel
     {
@@ -14,7 +14,7 @@ namespace ExtractingServices
         public static string _POSpath { get; private set; }
 
         public static string _sutimeRules { get; private set; }
-        static string _root { get; set; }
+        public static string _root { get; private set; }
 
         static NLPModel()
         {

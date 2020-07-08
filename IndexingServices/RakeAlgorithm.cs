@@ -14,7 +14,7 @@ namespace IndexEngine
             private readonly int _maxWordsLength;
         private readonly double _minKeywordFrequency;
 
-            public Rake(string stopWordsPath = @"C:\Users\voidl\source\repos\Chat Corpora Annotator\IndexingServices\SMARTstopset.txt", int minCharLength = 1, int maxWordsLength = 1, double minKeywordFrequency = 1)
+            public Rake(string stopWordsPath, int minCharLength = 3, int maxWordsLength = 1, double minKeywordFrequency = 2)
             {
                 _minCharLength = minCharLength;
                 _maxWordsLength = maxWordsLength;

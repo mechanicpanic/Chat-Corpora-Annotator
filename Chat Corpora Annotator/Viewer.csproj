@@ -501,12 +501,6 @@
     <Compile Include="UI\Concordancer.Designer.cs">
       <DependentUpon>Concordancer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ModelChecker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ModelChecker.Designer.cs">
-      <DependentUpon>ModelChecker.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\NGramSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -582,9 +576,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Concordancer.resx">
       <DependentUpon>Concordancer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\ModelChecker.resx">
-      <DependentUpon>ModelChecker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NGramSearch.resx">
       <DependentUpon>NGramSearch.cs</DependentUpon>
