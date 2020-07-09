@@ -8,31 +8,28 @@ namespace Viewer.Framework.Services
 {
     public interface ITagService
     {
+        string ProjectTagset { get; set; }
+        void UpdateTagsetIndex(string name);
+        void EditTagset(string name, string keys, int op);
+
         void AddSituation(List<string> messages, string situation);
         void UpdateSituation();
         void DeleteSituation();
 
-        void UpdateTagsetIndex(string name, List<string> tags);
-        void EditTagset(string name, string type, int op);
-        void ChangeProjectTagset();
+
+
     }
     public class TagService : ITagService
     {
+        public string ProjectTagset { get; set; }
         public TagService()
         {
             
         }
 
-        public void ChangeProjectTagset() { }
-
         public void AddSituation(List<string> messages, string situation)
         {
-            IndexEngine.SituationIndex.AddSituationToIndex(messages, situation);
-        }
-
-        public void UpdateTagsetIndex(string name, List<string> tags)
-        {
-            
+            SituationIndex.AddSituationToIndex(messages, situation);
         }
 
         public void UpdateSituation()
@@ -45,16 +42,23 @@ namespace Viewer.Framework.Services
             throw new NotImplementedException();
         }
 
-        public void EditTagset(string name, string tag, int op)
-        {
-            if (IndexEngine.TagsetIndex.Index.ContainsKey(name))
-            {
 
-                TagsetIndex.UpdateIndexEntry(name, tag, op);
-                
+        public void UpdateTagsetIndex(string name)
+        {
+            if (!TagsetIndex.Index.ContainsKey(name))
+            {
+                TagsetIndex.AddNewIndexEntry(name, new List<string>());
             }
         }
 
 
+        public void EditTagset(string name, string tag, int op)
+        {
+            if (TagsetIndex.Index.ContainsKey(name))
+            {
+                TagsetIndex.UpdateIndexEntry(name, tag, op);
+                
+            }
+        }
     }
 }

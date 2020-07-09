@@ -42,7 +42,7 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_AddTag(object sender, EventArgs e)
         {
-            //_service.AddSituation(_tagger.CurrentSituation.Item1, _tagger.CurrentSituation.Item2);
+            
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)

@@ -57,7 +57,7 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(214, 52);
+            this.button1.Size = new System.Drawing.Size(209, 52);
             this.button1.TabIndex = 1;
             this.button1.Text = "Edit tagset...";
             this.button1.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(0, 575);
+            this.button4.Location = new System.Drawing.Point(0, 484);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(214, 52);
+            this.button4.Size = new System.Drawing.Size(209, 52);
             this.button4.TabIndex = 3;
             this.button4.Text = "Write to disk";
             this.button4.UseVisualStyleBackColor = false;
@@ -91,7 +91,7 @@
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(214, 627);
+            this.panel2.Size = new System.Drawing.Size(209, 536);
             this.panel2.TabIndex = 1;
             // 
             // button5
@@ -101,9 +101,9 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(0, 525);
+            this.button5.Location = new System.Drawing.Point(0, 434);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(214, 50);
+            this.button5.Size = new System.Drawing.Size(209, 50);
             this.button5.TabIndex = 5;
             this.button5.Text = "Show suggestions";
             this.button5.UseVisualStyleBackColor = false;
@@ -118,7 +118,7 @@
             this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(0, 338);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(214, 38);
+            this.button3.Size = new System.Drawing.Size(209, 38);
             this.button3.TabIndex = 3;
             this.button3.Text = "Remove tag";
             this.button3.UseVisualStyleBackColor = false;
@@ -132,7 +132,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(0, 300);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(214, 38);
+            this.button2.Size = new System.Drawing.Size(209, 38);
             this.button2.TabIndex = 2;
             this.button2.Text = "Add tag";
             this.button2.UseVisualStyleBackColor = false;
@@ -140,6 +140,7 @@
             // 
             // listView2
             // 
+            this.listView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listView2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -148,7 +149,7 @@
             this.listView2.Location = new System.Drawing.Point(0, 52);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(214, 248);
+            this.listView2.Size = new System.Drawing.Size(209, 248);
             this.listView2.TabIndex = 4;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -168,10 +169,10 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(0, 575);
+            this.loadMoreButton.Location = new System.Drawing.Point(0, 484);
             this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(536, 52);
+            this.loadMoreButton.Size = new System.Drawing.Size(876, 52);
             this.loadMoreButton.TabIndex = 12;
             this.loadMoreButton.Text = "Load more...";
             this.loadMoreButton.UseVisualStyleBackColor = false;
@@ -193,7 +194,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(326, 575);
+            this.chatTable.Size = new System.Drawing.Size(666, 484);
             this.chatTable.TabIndex = 13;
             this.chatTable.UnfocusedSelectedBackColor = System.Drawing.Color.Pink;
             this.chatTable.UseCellFormatEvents = true;
@@ -209,10 +210,10 @@
             this.panel1.Controls.Add(this.loadMoreButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel1.Location = new System.Drawing.Point(214, 0);
+            this.panel1.Location = new System.Drawing.Point(209, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(536, 627);
+            this.panel1.Size = new System.Drawing.Size(876, 536);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -220,15 +221,17 @@
             this.panel3.Controls.Add(this.button6);
             this.panel3.Controls.Add(this.listView1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(326, 0);
+            this.panel3.Location = new System.Drawing.Point(666, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 575);
+            this.panel3.Size = new System.Drawing.Size(210, 484);
             this.panel3.TabIndex = 17;
             // 
             // button6
             // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackColor = System.Drawing.Color.Lavender;
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -249,7 +252,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(210, 438);
+            this.listView1.Size = new System.Drawing.Size(210, 435);
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -264,7 +267,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(750, 627);
+            this.ClientSize = new System.Drawing.Size(1085, 536);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

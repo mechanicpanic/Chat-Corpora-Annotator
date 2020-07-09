@@ -20,6 +20,14 @@ namespace IndexEngine
             Index.Add(name, tags);
         }
 
+        public static void WriteInfoToDisk()
+        {
+            using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsets.txt"))
+            {
+                   
+            }
+        }
         public static void DeleteIndexEntry(string name) { Index.Remove(name); }
 
         public static void UpdateIndexEntry(string name, string tag,int type) { 

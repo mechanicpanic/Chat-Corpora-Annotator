@@ -23,19 +23,21 @@ namespace Viewer.Framework.Presenters
             _tagset.UpdateTagset += _tagset_UpdateTagset;
             _tagset.AddNewTagset += _tagset_AddNewTagset;
             _tagset.LoadExistingTagset += _tagset_LoadExistingTagset;
-            _tagset.DeleteTagset += _tagset_DeleteTagset;
+            _tagset.SetProjectTagset += _tagset_SetProjectTagset;
+            //_tagset.DeleteTagset += _tagset_DeleteTagset;
 
             _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
         }
 
-        private void _tagset_DeleteTagset(object sender, TagsetUpdateEventArgs args)
+        private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
         {
-            throw new NotImplementedException();
+            _service.ProjectTagset = args.Name;
+            _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
         }
 
         private void _tagset_UpdateTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _service.UpdateTagsetIndex(args.Name, args.Tags);
+            _service.EditTagset(args.Name, args.Tag, args.Type);
         }
 
         private void _tagset_LoadExistingTagset(object sender, TagsetUpdateEventArgs args)
@@ -45,7 +47,8 @@ namespace Viewer.Framework.Presenters
 
         private void _tagset_AddNewTagset(object sender, TagsetUpdateEventArgs e)
         {
-            _service.UpdateTagsetIndex(e.Name, null);
+            _service.UpdateTagsetIndex(e.Name);
+            _tagset.DisplayTagsetNames
         }
 
     }

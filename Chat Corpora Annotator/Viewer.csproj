@@ -618,6 +618,10 @@
       <Project>{3a58ab22-7cb7-47da-8b31-f513cc71db3a}</Project>
       <Name>IndexEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retrievers\Retrievers.csproj">
+      <Project>{aff7b858-40bb-4842-9cd4-dbc40a612d6d}</Project>
+      <Name>Retrievers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
