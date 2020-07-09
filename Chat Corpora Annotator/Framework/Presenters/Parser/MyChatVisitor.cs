@@ -11,7 +11,7 @@ namespace Viewer.Framework.Presenters.Parser
 {
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
-        private List<int> restrictions = new List<int>();
+        private List<List<int>> restrictions = new List<List<int>>();
 
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
@@ -20,12 +20,12 @@ namespace Viewer.Framework.Presenters.Parser
 
         public override object VisitBody([NotNull] ChatParser.BodyContext context)
         {
-            foreach (var r in context.restriction_expr())
-            {
-                restrictions.Add((int)VisitRestriction_expr(r));
-            }
+            //foreach (var r in context.restriction_expr())
+            //{
+            //    restrictions.Add((List<int>)VisitRestriction_expr(r));
+            //}
 
-            return restrictions;
+            return (List<int>)VisitRestriction_expr(context.restriction_expr(0));
         }
 
         public override object VisitRestriction_expr([NotNull] ChatParser.Restriction_exprContext context)
@@ -70,6 +70,11 @@ namespace Viewer.Framework.Presenters.Parser
             {
                 string username = context.huser().GetText();
                 return Retrievers.Retrievers.HasUserMentioned(username);
+            }
+            else if (context.ByUser() != null)
+            {
+                string username = context.huser().GetText();
+                return Retrievers.Retrievers.HasUser(username);
             }
 
             return null;
