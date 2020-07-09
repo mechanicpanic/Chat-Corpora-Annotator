@@ -33,7 +33,7 @@ namespace Retrievers
                 foreach (var doc in docs.ScoreDocs)
                 {
                     Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                    results.Add((int)idoc.GetField("id").GetInt32Value());
+                    results.Add(idoc.GetField("id").GetInt32Value().Value);
                 }
 
 
@@ -148,7 +148,7 @@ namespace Retrievers
             foreach (var doc in docs.ScoreDocs)
             {
                 Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                results.Add((int)idoc.GetField("id").GetInt32Value());
+                results.Add(idoc.GetField("id").GetInt32Value().Value);
             }
             List<int> ret = results.ToList();
             return ret;
@@ -165,7 +165,7 @@ namespace Retrievers
             foreach (var doc in docs.ScoreDocs)
             {
                 Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                results.Add((int)idoc.GetField("id").GetInt32Value());
+                results.Add(idoc.GetField("id").GetInt32Value().Value);
             }
             List<int> ret = results.ToList();
             return ret;

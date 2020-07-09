@@ -108,66 +108,66 @@ namespace ExtractingServices
                         //Does this need to be a switch case?
                         if (em.entityType() == "DATE")
                         {
-                            var datekey = document.GetField("id").GetInt32Value();
-                            if (!DateList.ContainsKey((int)datekey))
+                            var datekey = document.GetField("id").GetInt32Value().Value;
+                            if (!DateList.ContainsKey(datekey))
                             {
-                                DateList.Add((int)datekey, em.text());
+                                DateList.Add(datekey, em.text());
                             }
                             else
                             {
-                                DateList.TryUpdate((int)datekey, DateList[(int)datekey] + ", " + em.text());
+                                DateList.TryUpdate(datekey, DateList[datekey] + ", " + em.text());
                             }
                         }
                         if (em.entityType() == "TIME")
                         {
 
 
-                            var timekey = document.GetField("id").GetInt32Value();
-                            if (!TimeList.ContainsKey((int)timekey))
+                            var timekey = document.GetField("id").GetInt32Value().Value;
+                            if (!TimeList.ContainsKey(timekey))
                             {
-                                TimeList.Add((int)timekey, em.text());
+                                TimeList.Add(timekey, em.text());
                             }
                             else
                             {
-                                TimeList.TryUpdate((int)timekey, TimeList[(int)timekey] + ", " + em.text());
+                                TimeList.TryUpdate(timekey, TimeList[timekey] + ", " + em.text());
                             }
                         }
 
                         if (em.entityType() == "LOCATION")
                         {
-                            var lockey = document.GetField("id").GetInt32Value();
-                            if (!LocList.ContainsKey((int)lockey))
+                            var lockey = document.GetField("id").GetInt32Value().Value;
+                            if (!LocList.ContainsKey(lockey))
                             {
-                                LocList.Add((int)lockey, em.text());
+                                LocList.Add(lockey, em.text());
                             }
                             else
                             {
-                                LocList.TryUpdate((int)lockey, LocList[(int)lockey] + ", " + em.text());
+                                LocList.TryUpdate(lockey, LocList[lockey] + ", " + em.text());
                             }
                         }
                         if (em.entityType() == "ORGANIZATION")
                         {
-                            var orgkey = document.GetField("id").GetInt32Value();
-                            if (!OrgList.ContainsKey((int)orgkey))
+                            var orgkey = document.GetField("id").GetInt32Value().Value;
+                            if (!OrgList.ContainsKey(orgkey))
                             {
-                                OrgList.Add((int)orgkey, em.text());
+                                OrgList.Add(orgkey, em.text());
                             }
                             else
                             {
-                                OrgList.TryUpdate((int)orgkey, OrgList[(int)orgkey] + ", " + em.text());
+                                OrgList.TryUpdate(orgkey, OrgList[orgkey] + ", " + em.text());
                             }
                         }
 
                         if (em.entityType() == "URL")
                         {
-                            var urlkey = document.GetField("id").GetInt32Value();
-                            if (!URLList.ContainsKey((int)urlkey))
+                            var urlkey = document.GetField("id").GetInt32Value().Value;
+                            if (!URLList.ContainsKey(urlkey))
                             {
-                                URLList.Add((int)urlkey, em.text());
+                                URLList.Add(urlkey, em.text());
                             }
                             else
                             {
-                                URLList.TryUpdate((int)urlkey, OrgList[(int)urlkey] + ", " + em.text());
+                                URLList.TryUpdate(urlkey, OrgList[urlkey] + ", " + em.text());
                             }
                         }
 
@@ -198,7 +198,7 @@ namespace ExtractingServices
 
                 }
             }
-            NounPhrases.Add((int)document.GetField("id").GetInt32Value(), nouns);
+            NounPhrases.Add(document.GetField("id").GetInt32Value().Value, nouns);
 
 
         }
@@ -216,9 +216,9 @@ namespace ExtractingServices
                     //IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
                     if (DetectQuestion(coredoc))
                     {
-                        IsQuestionList.Add((int)document.GetField("id").GetInt32Value());
+                        IsQuestionList.Add(document.GetField("id").GetInt32Value().Value);
                     }
-                    ExtractKeyPhrases(coredoc, (int)document.GetField("id").GetInt32Value());
+                    ExtractKeyPhrases(coredoc, document.GetField("id").GetInt32Value().Value);
                     int a = 5;
                 }
                 
