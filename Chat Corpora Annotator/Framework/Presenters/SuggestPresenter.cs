@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 using ExtractingServices;
+using Viewer.Framework.Presenters.Parser;
 
 namespace Viewer.Framework.Presenters
 {
@@ -32,6 +33,7 @@ namespace Viewer.Framework.Presenters
         {
             _service.Parse(_sugg.QueryString);
             //Run Parser from here
+            Parser.Parser.parse(_sugg.QueryString);
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)
