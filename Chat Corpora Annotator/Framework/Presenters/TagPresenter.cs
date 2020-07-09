@@ -37,7 +37,7 @@ namespace Viewer.Framework.Presenters
         private void _tagger_EditSituation(object sender, EventArgs e)
         {
 
-            _service.UpdateSituation();
+            
         }
 
         private void _tagger_AddTag(object sender, EventArgs e)

@@ -13,8 +13,8 @@ namespace Viewer.Framework.Services
         void EditTagset(string name, string keys, int op);
 
         void AddSituation(List<string> messages, string situation);
-        void UpdateSituation();
-        void DeleteSituation();
+        void UpdateSituation(Guid key, string tag);
+        void DeleteSituation(string key);
 
 
 
@@ -32,12 +32,12 @@ namespace Viewer.Framework.Services
             SituationIndex.AddSituationToIndex(messages, situation);
         }
 
-        public void UpdateSituation()
+        public void UpdateSituation(Guid key, string tag)
         {
-            throw new NotImplementedException();
+            SituationIndex.Index[key].Remove(tag);
         }
 
-        public void DeleteSituation()
+        public void DeleteSituation(string key)
         {
             throw new NotImplementedException();
         }
