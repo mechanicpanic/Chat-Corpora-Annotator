@@ -11,7 +11,7 @@ namespace Viewer.Framework.Presenters.Parser
 {
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
-        private List<int> restrictions = new List<int>();
+        private List<List<int>> restrictions = new List<List<int>>();
 
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
@@ -22,7 +22,7 @@ namespace Viewer.Framework.Presenters.Parser
         {
             foreach (var r in context.restriction_expr())
             {
-                restrictions.Add((int)VisitRestriction_expr(r));
+                restrictions.Add((List<int>)VisitRestriction_expr(r));
             }
 
             return restrictions;

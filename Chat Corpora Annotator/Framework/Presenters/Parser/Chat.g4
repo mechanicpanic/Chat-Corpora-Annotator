@@ -52,13 +52,13 @@ HasOrganization  : 'HASORGANIZATION'  | 'hasorganization' ;
 HasUserMentioned : 'HASUSERMENTIONED' | 'hasusermentioned';
 ByUser           : 'BYUSER'           | 'byuser'          ;
 
-STRING  : '"' LETTER+ '"';
+STRING  : (LETTER | DIGIT)+;
 INTEGER : DIGIT+;
 
 WS: [ \n\r\t] -> skip;
 
 fragment DIGIT : [0-9];
-fragment LETTER : [a-zA-Z];
+fragment LETTER : [a-zA-Z_];
 
 // SELECT haswordofdict("animals")
 // SELECT haswordofdict("animals") AND haswordofdict("medicine")

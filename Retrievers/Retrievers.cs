@@ -150,8 +150,6 @@ namespace Retrievers
                           
         public static List<int> HasUser(string user)
         {
-            user = user.Remove(0, 1);
-            user = user.Remove(user.Length - 1, 1);
             //Love duplicate code
             HashSet<int> results = new HashSet<int>();
             TermQuery query = new TermQuery(new Lucene.Net.Index.Term(IndexService.SenderFieldKey,user));
@@ -170,8 +168,6 @@ namespace Retrievers
         public static List<int> HasUserMentioned(string user)
         {
             //Or I can check each and every message out of millions for a substring occurence :^)
-            user = user.Remove(0, 1);
-            user = user.Remove(user.Length - 1, 1);
             HashSet<int> results = new HashSet<int>();
             Query query = LuceneService.Parser.Parse(user);
             TopDocs docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
