@@ -48,7 +48,7 @@ namespace Viewer.Framework.Presenters
         private void _tagset_AddNewTagset(object sender, TagsetUpdateEventArgs e)
         {
             _service.UpdateTagsetIndex(e.Name);
-            _tagset.DisplayTagsetNames
+            _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
         }
 
     }

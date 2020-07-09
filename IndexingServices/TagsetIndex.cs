@@ -11,7 +11,10 @@ namespace IndexEngine
 {
     public static class TagsetIndex
     {
-        static TagsetIndex() { }
+        static TagsetIndex() 
+        {
+            Index = new BTreeDictionary<string, List<string>>();
+        }
         public static BTreeDictionary<string, List<string>> Index { get; private set; }
 
         //private static BTreeDictionary<string, Color> ColorIndex;

@@ -36,6 +36,7 @@ namespace Viewer
             TagsetEditor editor = new TagsetEditor();
             TagFileWriter writer = new TagFileWriter();
             TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
+            TagsetPresenter tagset = new TagsetPresenter(editor, service, tagger);
             SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, tagger, main);
             MainPresenter presenter = new MainPresenter(main, loader, searcher, folder);
 
