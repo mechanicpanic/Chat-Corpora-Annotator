@@ -9,7 +9,7 @@ namespace Viewer.Framework.Presenters.Parser
 {
     class Parser
     {
-        public static void parse(string query) 
+        public static List<int> parse(string query) 
         { 
             StringBuilder text = new StringBuilder(query);
 
@@ -21,7 +21,7 @@ namespace Viewer.Framework.Presenters.Parser
             var tree = speakParser.query();
 
             var visitor = new MyChatVisitor();
-            var rlist = visitor.Visit(tree);
+            return (List<int>)visitor.Visit(tree);
 
             /*foreach (Restriction r in rlist)
             {

@@ -399,7 +399,7 @@ namespace IndexEngine
             Document idoc = LuceneService.Searcher.Doc(message.Doc);
             foreach (var field in SelectedFields)
             {
-                data.Add(idoc.GetField(field).GetInt32Value().Value.ToString());
+                data.Add(idoc.GetField(field).GetStringValue());
             }
 
             return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetInt32Value().Value.ToString());

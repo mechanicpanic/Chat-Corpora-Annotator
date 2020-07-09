@@ -33,7 +33,11 @@ namespace Viewer.Framework.Presenters
         {
             _service.Parse(_sugg.QueryString);
             //Run Parser from here
-            Parser.Parser.parse(_sugg.QueryString);
+            foreach(var id in Parser.Parser.parse(_sugg.QueryString))
+            {
+                _sugg.CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(id));
+            }
+            _sugg.DisplaySituation();
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)
