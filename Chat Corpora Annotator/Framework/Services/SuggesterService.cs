@@ -4,20 +4,27 @@ using System;
 using System.Collections.Generic;
 using ExtractingServices;
 
+using Viewer.Framework.Presenters.Parser;
+
 namespace Viewer.Framework.Services
 {
     public class SuggesterService : ISuggestService
     {
         public BTreeDictionary<int, List<DynamicMessage>> Suggestions { get; set; }
+        
+        public List<int> Parse(string query) 
+        {
+            return Parser.parse(query);
+        }
 
-        public void Parse(string query) { }
+
 
     }
     public interface ISuggestService
     {
         BTreeDictionary<int, List<DynamicMessage>> Suggestions { get; set; }
 
-        void Parse(string query);
+        List<int> Parse(string query);
         
     }
 }

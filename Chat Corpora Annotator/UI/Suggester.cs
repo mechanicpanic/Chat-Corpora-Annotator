@@ -18,10 +18,12 @@ namespace Viewer.UI
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
 
-        public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
+        //public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
         public string QueryString { get; set; }
 
         public event EventHandler RunQuery;
+        public event UserDictsEventHandler AddUserDict;
+        public event UserDictsEventHandler DeleteUserDict;
 
         public void CloseView()
         {
@@ -133,10 +135,16 @@ namespace Viewer.UI
             ListAdder la = sender as ListAdder;
             if (la != null)
             {
-                UserDicts.Add(la.CurName, la.CurList);
+                UserDictsEventArgs dictargs = new UserDictsEventArgs();
+                dictargs.Name = la.CurName;
+                dictargs.Words = la.CurList;
+                //UserDicts.Add(la.CurName, la.CurList);
+                AddUserDict?.Invoke(this, dictargs);
+
                 var temp = new ListViewItem(la.CurName);
                 temp.SubItems.Add(String.Join(", ", la.CurList.ToArray()));
                 listView1.Items.Add(temp);
+
             }
             la.Close();
         }
@@ -147,7 +155,10 @@ namespace Viewer.UI
             {
                 foreach(ListViewItem item in listView1.SelectedItems)
                 {
-                    UserDicts.Remove(item.Text);
+                    //UserDicts.Remove(item.Text);
+                    UserDictsEventArgs dictargs = new UserDictsEventArgs();
+                    dictargs.Name = item.Text;
+                    DeleteUserDict?.Invoke(this, dictargs);
                     listView1.Items.Remove(item);
                 }
             }
