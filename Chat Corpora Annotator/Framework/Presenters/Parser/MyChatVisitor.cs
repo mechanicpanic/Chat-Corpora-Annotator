@@ -76,6 +76,26 @@ namespace Viewer.Framework.Presenters.Parser
                 string username = context.huser().GetText();
                 return Retrievers.Retrievers.HasUser(username);
             }
+            else if (context.HasLocation() != null)
+            {
+                return Retrievers.Retrievers.HasNERTag(NER.LOC);
+            }
+            else if (context.HasOrganization() != null)
+            {
+                return Retrievers.Retrievers.HasNERTag(NER.ORG);
+            }
+            else if (context.HasTime() != null)
+            {
+                return Retrievers.Retrievers.HasNERTag(NER.TIME);
+            }
+            else if (context.HasURL() != null)
+            {
+                return Retrievers.Retrievers.HasNERTag(NER.URL);
+            }
+            else if (context.HasQuestion() != null)
+            {
+                return Retrievers.Retrievers.HasQuestion();
+            }
 
             return null;
         }

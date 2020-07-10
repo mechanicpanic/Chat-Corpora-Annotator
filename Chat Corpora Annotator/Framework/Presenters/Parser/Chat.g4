@@ -31,6 +31,8 @@ condition
     | HasTime '(' ')'
     | HasLocation '(' ')'
     | HasOrganization '(' ')'
+    | HasURL '(' ')'
+    | HasQuestion '(' ')'
     | HasUserMentioned '(' huser ')'
     | ByUser '(' huser ')'
     ;
@@ -47,8 +49,10 @@ Or     : 'OR'     | 'or'    ;
 
 HasWordOfDict    : 'HASWORDOFDICT'    | 'haswordofdict'   ;
 HasTime          : 'HASTIME'          | 'hastime'         ;
-HasLocation      : 'HASLOCATION'      |  'haslocation'    ;
+HasLocation      : 'HASLOCATION'      | 'haslocation'     ;
 HasOrganization  : 'HASORGANIZATION'  | 'hasorganization' ;
+HasURL           : 'HASURL'           | 'hasurl'          ;
+HasQuestion      : 'HASQUESTION'      | 'hasquestion'     ;
 HasUserMentioned : 'HASUSERMENTIONED' | 'hasusermentioned';
 ByUser           : 'BYUSER'           | 'byuser'          ;
 
