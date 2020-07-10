@@ -46,11 +46,18 @@ namespace Viewer.Framework.Presenters.Parser
         {
             if (context.And() != null)
             {
-                return null;
+                List<int> lhs = (List<int>)VisitRestriction(context.restriction(0));
+                List<int> rhs = (List<int>)VisitRestriction(context.restriction(1));
+                return lhs.Intersect(rhs).ToList();
             }
             else if (context.Or() != null)
             {
-                return null;
+                List<int> lhs = (List<int>)VisitRestriction(context.restriction(0));
+                List<int> rhs = (List<int>)VisitRestriction(context.restriction(1));
+                lhs.AddRange(rhs);
+                lhs.Sort();
+
+                return lhs;
             } 
             else if (context.Not() != null)
             {
