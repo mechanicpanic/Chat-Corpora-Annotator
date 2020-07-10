@@ -14,7 +14,11 @@ namespace Viewer.Framework.Views
         event EventHandler RunQuery;
         string QueryString { get; set; }
         List<DynamicMessage> CurrentSituation { get; set; }
-        Dictionary<string, List<string>> UserDicts { get; set; }
+        //Dictionary<string, List<string>> UserDicts { get; set; }
+
+        event UserDictsEventHandler AddUserDict;
+
+        event UserDictsEventHandler DeleteUserDict;
 
     }
 }
