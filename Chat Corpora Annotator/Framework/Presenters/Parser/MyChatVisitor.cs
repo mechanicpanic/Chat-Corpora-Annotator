@@ -13,7 +13,6 @@ namespace Viewer.Framework.Presenters.Parser
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
         private List<List<int>> restrictions = new List<List<int>>();
-        public Dictionary<string, List<string>> dicts;
 
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
@@ -108,7 +107,7 @@ namespace Viewer.Framework.Presenters.Parser
             else if (context.HasWordOfDict() != null)
             {
                 string dictname = context.hdict().GetText();
-                return Retrievers.Retrievers.HasWordOfList(dicts[dictname]);
+                return Retrievers.Retrievers.HasWordOfList(UserDictsContainer.UserDicts[dictname]);
             }
 
             return null;

@@ -9,7 +9,7 @@ namespace Viewer.Framework.Presenters.Parser
 {
     class Parser
     {
-        public static List<int> parse(string query, Dictionary<string, List<string>> dicts) 
+        public static List<int> parse(string query) 
         { 
             StringBuilder text = new StringBuilder(query);
 
@@ -21,7 +21,6 @@ namespace Viewer.Framework.Presenters.Parser
             var tree = speakParser.query();
 
             var visitor = new MyChatVisitor();
-            visitor.dicts = dicts;
 
             return (List<int>)visitor.Visit(tree);
 
