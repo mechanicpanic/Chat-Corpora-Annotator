@@ -33,7 +33,7 @@ namespace Viewer.Framework.Presenters
         {
             _service.Parse(_sugg.QueryString);
             //Run Parser from here
-            foreach(var id in Parser.Parser.parse(_sugg.QueryString))
+            foreach(var id in Parser.Parser.parse(_sugg.QueryString, _sugg.UserDicts))
             {
                 _sugg.CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(id));
             }
@@ -54,6 +54,5 @@ namespace Viewer.Framework.Presenters
             //Testing the window!!!
             _sugg.ShowView();
         }
-     
     }
 }
