@@ -21,13 +21,13 @@ namespace Viewer.Framework.Presenters.Parser
 
         public override object VisitBody([NotNull] ChatParser.BodyContext context)
         {
-            var rGroups = new List<int>();
+            var rGroups = new List<List<int>>();
             foreach (var rGroup in context.restriction_group())
             {
-                rGroups.AddRange((List<int>)VisitRestriction_group(rGroup));
+                rGroups.Add((List<int>)VisitRestriction_group(rGroup));
             }
 
-            return (List<int>)VisitRestriction_group(context.restriction_group(0));
+            return rGroups;
         }
 
         public override object VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context)
