@@ -427,6 +427,7 @@
     <Compile Include="Framework\Views\TagsetView.cs" />
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
+    <Compile Include="TaggerEventArgs.cs" />
     <Compile Include="UserDictsContainer.cs" />
     <Compile Include="UserDictsEventArgs.cs" />
     <Compile Include="TagsetUpdateEventArgs.cs" />

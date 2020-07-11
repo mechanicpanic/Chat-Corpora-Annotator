@@ -12,7 +12,7 @@ namespace IndexEngine
     }
     public class DynamicMessage : IComparable
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         private string dateFieldKey;
         public string DateFieldKey { get { return dateFieldKey; } set { this.dateFieldKey = value; } }
 
@@ -86,7 +86,7 @@ namespace IndexEngine
 
         }
 
-        public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey, string id)
+        public DynamicMessage(List<string> data, List<string> selectedFields, string dateFieldKey, int id)
         {
             //this.Id = Guid.NewGuid();
             this.Id = id;

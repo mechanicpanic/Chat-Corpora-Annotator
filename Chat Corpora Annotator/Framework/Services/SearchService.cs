@@ -80,7 +80,7 @@ namespace Viewer.Framework.Services
                 }
 
                 DynamicMessage message = new DynamicMessage(data, IndexService.SelectedFields, IndexService.DateFieldKey,
-                    idoc.GetField("id").GetStringValue());
+                    idoc.GetField("id").GetInt32Value().Value);
                 searchResults.Add(message);
             }
             return searchResults;

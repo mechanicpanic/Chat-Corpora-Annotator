@@ -12,8 +12,8 @@ namespace Viewer.Framework.Services
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
 
-        void AddSituation(List<string> messages, string situation);
-        void UpdateSituation(Guid key, string tag);
+        void AddSituation(List<int> messages, string situation);
+        void UpdateSituation(Guid key, int message);
         void DeleteSituation(Guid key);
 
 
@@ -27,14 +27,14 @@ namespace Viewer.Framework.Services
             
         }
 
-        public void AddSituation(List<string> messages, string situation)
+        public void AddSituation(List<int> messages, string situation)
         {
             SituationIndex.AddSituationToIndex(messages, situation);
         }
 
-        public void UpdateSituation(Guid key, string tag)
+        public void UpdateSituation(Guid key, int message)
         {
-            SituationIndex.Index[key].Remove(tag);
+            SituationIndex.Index[key].Remove(message);
         }
 
         public void DeleteSituation(Guid key)
@@ -56,8 +56,7 @@ namespace Viewer.Framework.Services
         {
             if (TagsetIndex.Index.ContainsKey(name))
             {
-                TagsetIndex.UpdateIndexEntry(name, tag, op);
-                
+                TagsetIndex.UpdateIndexEntry(name, tag, op);                
             }
         }
     }

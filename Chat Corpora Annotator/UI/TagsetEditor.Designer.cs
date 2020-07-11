@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -81,12 +82,15 @@
             // 
             // listView1
             // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(389, 12);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(305, 334);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // label1
             // 
@@ -135,9 +139,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(158, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 19);
+            this.label2.Size = new System.Drawing.Size(50, 19);
             this.label2.TabIndex = 11;
-            this.label2.Text = "default";
+            this.label2.Text = "(None)";
             // 
             // panel2
             // 
@@ -154,6 +158,11 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(305, 26);
             this.textBox1.TabIndex = 0;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tags";
+            this.columnHeader1.Width = 294;
             // 
             // TagsetEditor
             // 
@@ -190,5 +199,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

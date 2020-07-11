@@ -20,6 +20,8 @@ namespace Viewer.UI
 
         //public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
         public string QueryString { get; set; }
+        public List<List<int>> QueryResult { get; set; } = new List<List<int>>();
+        public int DisplayIndex { get; set; } = 0;
 
         public event EventHandler RunQuery;
         public event UserDictsEventHandler AddUserDict;
@@ -33,6 +35,11 @@ namespace Viewer.UI
         public void DisplaySituation()
         {
             SetUpChatView();
+            CurrentSituation.Clear();
+            foreach (var i in QueryResult[DisplayIndex])
+            {
+                CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
+            }
             fastObjectListView1.SetObjects(CurrentSituation);
         }
         private void SetUpChatView()
@@ -81,12 +88,21 @@ namespace Viewer.UI
         //Buttons 1 and 2 are for seeing next/prev suggestion
         private void button1_Click(object sender, System.EventArgs e)
         {
-            
+            if(DisplayIndex > 0)
+            {
+                DisplayIndex--;
+                DisplaySituation();
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            if(DisplayIndex < QueryResult.Count)
+            {
+                DisplayIndex++;
+                DisplaySituation();
+            }
         }
 
         // This one is for running our pre-cooked queries

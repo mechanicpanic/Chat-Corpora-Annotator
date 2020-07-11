@@ -10,8 +10,8 @@ namespace Viewer.Framework.Views
         event EventHandler WriteToDisk;
         event EventHandler TagsetClick;
 
-        event EventHandler AddTag;
-        event EventHandler RemoveTag;
+        event TaggerEventHandler AddTag;
+        event TaggerEventHandler RemoveTag;
 
         event EventHandler EditSituation;
         event EventHandler LoadMore;
@@ -24,7 +24,8 @@ namespace Viewer.Framework.Views
         void DisplayDocuments();
 
         void DisplayTagsetColors(Dictionary<string, System.Drawing.Color> dict);
-        event EventHandler DisplayColors;
+
+        event TaggerEventHandler LoadTagset;
 
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);

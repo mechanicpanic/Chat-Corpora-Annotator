@@ -12,7 +12,7 @@ namespace Viewer.UI
 {
     public partial class TagsetName : Form
     {
-        public string name;
+        public string Tagset { get; set; }
         public event EventHandler NameButtonClicked;
         public TagsetName()
         {
@@ -21,9 +21,9 @@ namespace Viewer.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBox1.Text))
+            if (!String.IsNullOrEmpty(textBox1.Text))
             {
-                this.name = textBox1.Text;
+                this.Tagset = textBox1.Text;
                 
             }
             NameButtonClicked?.Invoke(this, EventArgs.Empty);

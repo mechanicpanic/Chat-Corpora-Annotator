@@ -40,7 +40,7 @@ namespace Viewer.UI
 		private void button1_Click(object sender, EventArgs e)
 		{
 			var item = new ListViewItem(textBox1.Text);
-			if (String.IsNullOrEmpty(textBox1.Text) && !listView1.Items.Contains(item))
+			if (!String.IsNullOrEmpty(textBox1.Text) && !listView1.Items.Contains(item))
 			{
 				listView1.Items.Add(item);
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
@@ -92,7 +92,7 @@ namespace Viewer.UI
 			if (tn != null)
 			{
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
-				args.Name = tn.Name;
+				args.Name = tn.Tagset;
 				AddNewTagset?.Invoke(this, args);
 
 			}
@@ -114,12 +114,13 @@ namespace Viewer.UI
 			listView1.Items.Clear();
 			foreach(var tag in tags)
 			{
-				listView1.Items.Add(tag);
+				listView1.Items.Add(new ListViewItem(tag));
 			}
 		}
 
 		public void DisplayTagsetNames(List<string> names)
 		{
+			comboBox1.Items.Clear();
 			comboBox1.Items.AddRange(names.ToArray());
 		}
 
@@ -130,7 +131,9 @@ namespace Viewer.UI
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
 				args.Name = comboBox1.SelectedItem.ToString();
 				SetProjectTagset?.Invoke(this, args);
+				label2.Text = comboBox1.SelectedItem.ToString();
 			}
+			
         }
     }
 }

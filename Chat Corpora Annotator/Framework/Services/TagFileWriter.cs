@@ -7,7 +7,7 @@ namespace Viewer.Framework.Services
 {
     public interface ITagFileWriter
     {
-        void WriteMessage(string messageId, string text, string user, string date);
+        void WriteMessage(int messageId, string text, string user, string date);
         //void WriteSituation(List<Dictionary<string, string>> messages, string situation);
         void WriteSituation(List<DynamicMessage> messages, string situation);
         void CloseWriter();
@@ -30,25 +30,25 @@ namespace Viewer.Framework.Services
             index++;
         }
 
-        public void WriteMessage(string messageId, string text, string user, string date)
+        public void WriteMessage(int messageId, string text, string user, string date)
         {
             writer.WriteStartElement("Message");
-            writer.WriteAttributeString("id", messageId);
+            writer.WriteAttributeString("id", messageId.ToString());
             writer.WriteElementString("Text", text);
             writer.WriteElementString("User", user);
             writer.WriteElementString("Date", date);
             writer.WriteEndElement();
         }
 
-        public void WriteSituation(List<Dictionary<string, string>> messages, string situation)
-        {
-            writer.WriteStartElement("Situation", situation);
-            foreach (var msg in messages)
-            {
-                WriteMessage(msg["id"], msg["text"], msg["user"], msg["date"]);
-            }
-            writer.WriteEndElement();
-        }
+        //public void WriteSituation(List<Dictionary<string, string>> messages, string situation)
+        //{
+        //    writer.WriteStartElement("Situation", situation);
+        //    foreach (var msg in messages)
+        //    {
+        //        WriteMessage(msg["id"], msg["text"], msg["user"], msg["date"]);
+        //    }
+        //    writer.WriteEndElement();
+        //}
         public void CloseWriter()
         {
             writer.WriteEndElement();

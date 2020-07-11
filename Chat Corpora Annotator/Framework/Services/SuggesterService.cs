@@ -12,7 +12,7 @@ namespace Viewer.Framework.Services
     {
         public BTreeDictionary<int, List<DynamicMessage>> Suggestions { get; set; }
         
-        public List<int> Parse(string query) 
+        public List<List<int>> Parse(string query) 
         {
             return Parser.parse(query);
         }
@@ -24,7 +24,7 @@ namespace Viewer.Framework.Services
     {
         BTreeDictionary<int, List<DynamicMessage>> Suggestions { get; set; }
 
-        List<int> Parse(string query);
+        List<List<int>> Parse(string query);
         
     }
 }

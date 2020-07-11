@@ -46,10 +46,8 @@ namespace Viewer.Framework.Presenters
         {
             //_service.Parse(_sugg.QueryString);
             //Run Parser from here
-            foreach(var id in Parser.Parser.parse(_sugg.QueryString))
-            {
-                _sugg.CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(id));
-            }
+            _sugg.DisplayIndex = 0;
+            _sugg.QueryResult = Parser.Parser.parse(_sugg.QueryString);
             _sugg.DisplaySituation();
         }
 

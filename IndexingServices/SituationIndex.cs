@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace IndexEngine
 {
+    public struct Situation
+    {
+        string name;
+        Guid id;
+        List<int> messages;
+    }
     public static class SituationIndex
     {
-        public static BTreeDictionary<Guid, List<string>> Index { get; private set; }
+        public static BTreeDictionary<Guid, List<int>> Index { get; private set; }
         public static Dictionary<Guid, string> NameLookup { get; private set; }
 
         static SituationIndex()
@@ -22,7 +28,7 @@ namespace IndexEngine
             }
             else
             {
-                Index = new BTreeDictionary<Guid, List<string>>();
+                Index = new BTreeDictionary<Guid, List<int>>();
                 NameLookup = new Dictionary<Guid, string>();
 
                 //File.Create(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
@@ -31,7 +37,7 @@ namespace IndexEngine
         private static void LoadIndexFromDisk(string file)
         {
             var jsonString = File.ReadAllText(file);
-            Index = JsonSerializer.Deserialize<BTreeDictionary<Guid, List<string>>>(jsonString);
+            Index = JsonSerializer.Deserialize<BTreeDictionary<Guid, List<int>>>(jsonString);
         }
 
         private static void WriteIndexToDisk(string file)
@@ -39,7 +45,7 @@ namespace IndexEngine
             var jsonString = JsonSerializer.Serialize(Index);
             File.WriteAllText(file, jsonString);
         }
-        public static void AddSituationToIndex(List<string> messages, string situation)
+        public static void AddSituationToIndex(List<int> messages, string situation)
         {
             Guid guid = Guid.NewGuid();
             Index.Add(guid, messages);

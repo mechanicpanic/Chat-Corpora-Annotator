@@ -216,7 +216,7 @@ namespace IndexEngine
 
                 }
 
-                DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetStringValue());
+                DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetInt32Value().Value);
                 messages.Add(message);
 
 
@@ -402,7 +402,7 @@ namespace IndexEngine
                 data.Add(idoc.GetField(field).GetStringValue());
             }
 
-            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetInt32Value().Value.ToString());
+            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetInt32Value().Value);
 
         }
 

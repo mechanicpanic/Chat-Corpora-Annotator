@@ -27,22 +27,27 @@ namespace Viewer.Framework.Presenters
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
             _tagger.EditSituation += _tagger_EditSituation;
-            
 
+            _tagger.LoadTagset += _tagger_LoadTagset;
             _main.TagClick += _main_TagClick;
             
         }
 
+        private void _tagger_LoadTagset(object sender, TaggerEventArgs e)
+        {
+            _tagger.DisplayTagset(TagsetIndex.Index[e.Tagset]);
+            _tagger.TagsetColors = TagsetIndex.ColorIndex[e.Tagset];
+            
+        }
 
         private void _tagger_EditSituation(object sender, EventArgs e)
         {
 
-            
         }
 
-        private void _tagger_AddTag(object sender, EventArgs e)
+        private void _tagger_AddTag(object sender, TaggerEventArgs e)
         {
-            
+            SituationIndex.AddSituationToIndex(e.messages,e.Tag);
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)
@@ -53,10 +58,10 @@ namespace Viewer.Framework.Presenters
                 List<DynamicMessage> messages = new List<DynamicMessage>();
                 foreach (var id in kvp.Value)
                 {
-                    var message = IndexService.RetrieveMessageById(Int32.Parse(id));
+                    var message = IndexService.RetrieveMessageById(id);
                     messages.Add(message);
                 }
-                //_writer.WriteSituation(messages, );
+                _writer.WriteSituation(messages,SituationIndex.NameLookup[kvp.Key]);
             }
             _writer.CloseWriter();
         }

@@ -12,11 +12,24 @@ namespace IndexEngine
 {
     public static class TagsetIndex
     {
-        static TagsetIndex() { }
-        static Random rnd;
+        //Eventually I will phase out Index for ColorIndex altogether.
+        static TagsetIndex() 
+        {
+            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsets.txt";
+            string colorpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsetscolors.txt";
+            if (!File.Exists(path))
+            {
+                AddDefaultTagset();
+            }
+            else
+            {
+                ReadIndexFromDisk(path, colorpath);
+            }
+        }
+        static Random rnd = new Random();
         public static BTreeDictionary<string, List<string>> Index { get; private set; }
 
-        public static BTreeDictionary<string, Dictionary<string,Color>> ColorIndex { get; }
+        public static BTreeDictionary<string, Dictionary<string,Color>> ColorIndex { get; set; }
         public static void AddNewIndexEntry(string name)
         {
             Index.Add(name, new List<string>());
@@ -31,13 +44,13 @@ namespace IndexEngine
 
         public static void WriteInfoToDisk()
         {
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsets.txt"))
-            {
-                   
-            }
+            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsets.txt";
+            string colorpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagsetscolors.txt";
+
+            WriteIndexToDisk(path, colorpath);
+            
         }
-        public static void DeleteIndexEntry(string name) { Index.Remove(name); }
+        public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
 
         public static void UpdateIndexEntry(string name, string tag,int type) { 
             if(type == 1)
@@ -54,15 +67,19 @@ namespace IndexEngine
         }
 
 
-        public static void WriteIndexToDisk(string file)
+        public static void WriteIndexToDisk(string file, string colorfile)
         {
             var jsonString = JsonSerializer.Serialize(Index);
+            var jsonString2 = JsonSerializer.Serialize(ColorIndex);
             File.WriteAllText(file, jsonString);
+            File.WriteAllText(colorfile, jsonString2);
         }
-        public static void ReadIndexFromDisk(string file)
+        public static void ReadIndexFromDisk(string file, string colorfile)
         {
             var jsonString = File.ReadAllText(file);
+            var jsonString2 = File.ReadAllText(colorfile);
             Index = JsonSerializer.Deserialize<BTreeDictionary<string,List<string>>>(jsonString);
+            ColorIndex = JsonSerializer.Deserialize<BTreeDictionary<string,Dictionary<string, Color>>>(jsonString2);
         }
         public static List<string> RetrieveStoredTagset(string name)
         {
@@ -76,7 +93,13 @@ namespace IndexEngine
         private static void AddDefaultTagset()
         {
             Index = new BTreeDictionary<string, List<string>>();
-            //...
+            Index.Add("default", new List<string> { "JobDiscussion", "Meeting", "CodeAssistance", "SoftwareSupport" });
+            ColorIndex = new BTreeDictionary<string, Dictionary<string, Color>>();
+            ColorIndex.Add("default", new Dictionary<string, Color>());
+            foreach(var tag in Index["default"])
+            {
+                ColorIndex["default"].Add(tag, GenerateTagColor());
+            }
         }
        
     }
