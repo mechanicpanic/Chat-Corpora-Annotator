@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,7 @@ namespace Viewer.Framework.Presenters.Parser
             {
                 List<int> lhs = (List<int>)VisitRestriction(context.restriction(0));
                 List<int> rhs = (List<int>)VisitRestriction(context.restriction(1));
+
                 return lhs.Intersect(rhs).ToList();
             }
             else if (context.Or() != null)
@@ -75,7 +77,11 @@ namespace Viewer.Framework.Presenters.Parser
             } 
             else if (context.Not() != null)
             {
-                return null;
+                int msgCount = 10000;
+                var numberList = Enumerable.Range(1, msgCount).ToList();
+                var excludeList = (List<int>)VisitRestriction(context.restriction(0));
+
+                return numberList.Except(excludeList).ToList();
             } 
             else if (context.condition() != null)
             {
@@ -124,8 +130,12 @@ namespace Viewer.Framework.Presenters.Parser
                 string dictname = context.hdict().GetText();
                 return Retrievers.Retrievers.HasWordOfList(UserDictsContainer.UserDicts[dictname]);
             }
-
-            return null;
+            else
+            {
+                // Message about incorrect query
+                return null;
+            }
+            
         }
 
         private List<int> MergeRestrictions(List<List<int>> rList, int windowSize)
@@ -142,7 +152,7 @@ namespace Viewer.Framework.Presenters.Parser
             {
                 int curPos = rList[0][fstInd];
                 int fstPos = rList[0][fstInd];
-                List<int> curMsgs = new List<int> {curPos};
+                List<int> curMsgs = new List<int> { curPos };
                 for (int i = 1; i < _size; i++)
                 {
                     foreach (var _id in rList[i])

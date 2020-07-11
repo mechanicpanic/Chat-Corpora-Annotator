@@ -23,12 +23,6 @@ namespace Viewer.Framework.Presenters.Parser
             var visitor = new MyChatVisitor();
 
             return (List<List<int>>)visitor.Visit(tree);
-
-            /*foreach (Restriction r in rlist)
-            {
-                string cur = r.restrictionText;
-                Console.WriteLine(cur);
-            }*/
         }
     }
 }
