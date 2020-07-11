@@ -19,9 +19,12 @@ namespace Viewer.Framework.Views
         event EventHandler ShowSuggester;
 
         Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
-        void SetTagsetColors(); //Will be automatic for now
+     
         void UpdateTagset(List<string> tags);
         void DisplayDocuments();
+
+        void DisplayTagsetColors(Dictionary<string, System.Drawing.Color> dict);
+        event EventHandler DisplayColors;
 
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);

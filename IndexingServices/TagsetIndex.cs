@@ -1,6 +1,7 @@
 ﻿using CSharpTest.Net.Collections;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,20 @@ namespace IndexEngine
     public static class TagsetIndex
     {
         static TagsetIndex() { }
+        static Random rnd;
         public static BTreeDictionary<string, List<string>> Index { get; private set; }
 
-        //private static BTreeDictionary<string, Color> ColorIndex;
-        public static void AddNewIndexEntry(string name, List<string> tags)
+        public static BTreeDictionary<string, Dictionary<string,Color>> ColorIndex { get; }
+        public static void AddNewIndexEntry(string name)
         {
-            Index.Add(name, tags);
+            Index.Add(name, new List<string>());
+            ColorIndex.Add(name, new Dictionary<string, Color>());
+            
+        }
+
+        public static Color GenerateTagColor()
+        {
+            return Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
         }
 
         public static void WriteInfoToDisk()
@@ -34,10 +43,12 @@ namespace IndexEngine
             if(type == 1)
             {
                 Index[name].Add(tag);
+                ColorIndex[name].Add(tag, GenerateTagColor());
             }
             if (type == 0)
             {
                 Index[name].Remove(tag);
+                ColorIndex[name].Remove(tag);
             }
 
         }

@@ -14,7 +14,7 @@ namespace Viewer.Framework.Services
 
         void AddSituation(List<string> messages, string situation);
         void UpdateSituation(Guid key, string tag);
-        void DeleteSituation(string key);
+        void DeleteSituation(Guid key);
 
 
 
@@ -37,9 +37,9 @@ namespace Viewer.Framework.Services
             SituationIndex.Index[key].Remove(tag);
         }
 
-        public void DeleteSituation(string key)
+        public void DeleteSituation(Guid key)
         {
-            throw new NotImplementedException();
+            SituationIndex.Index.Remove(key);
         }
 
 
@@ -47,7 +47,7 @@ namespace Viewer.Framework.Services
         {
             if (!TagsetIndex.Index.ContainsKey(name))
             {
-                TagsetIndex.AddNewIndexEntry(name, new List<string>());
+                TagsetIndex.AddNewIndexEntry(name);
             }
         }
 

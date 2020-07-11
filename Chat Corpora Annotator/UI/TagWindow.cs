@@ -19,9 +19,9 @@ namespace Viewer.UI
 		public event EventHandler ShowSuggester;
 		public event EventHandler LoadTagset;
 		public event EventHandler SetTagset;
+        public event EventHandler DisplayColors;
 
-
-		public Dictionary<string, Color> TagsetColors { get; set; }
+        public Dictionary<string, Color> TagsetColors { get; set; }
 
 		private Dictionary<List<string>,string> TaggedMessages = new Dictionary<List<string>,string>();
 		private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
@@ -205,7 +205,8 @@ namespace Viewer.UI
 			ShowSuggester?.Invoke(this, EventArgs.Empty);
 		}
 
-        public void SetTagsetColors()
+
+        public void DisplayTagsetColors(Dictionary<string, Color> dict)
         {
             throw new NotImplementedException();
         }
