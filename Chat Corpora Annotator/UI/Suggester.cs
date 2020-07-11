@@ -57,7 +57,7 @@ namespace Viewer.UI
             }
             fastObjectListView1.AllColumns.Clear();
             fastObjectListView1.AllColumns.AddRange(columns);
-            fastObjectListView1.RebuildColumns();
+
             foreach (var cl in fastObjectListView1.AllColumns)
             {
                 if (cl.Text != IndexService.TextFieldKey)
@@ -70,6 +70,8 @@ namespace Viewer.UI
 
                 }
             }
+            
+            fastObjectListView1.RebuildColumns();
         }
 
         public void ShowView()
@@ -87,30 +89,13 @@ namespace Viewer.UI
             
         }
 
-        // These are for running our pre-cooked queries
-        private void button3_Click(object sender, EventArgs e)
+        // This one is for running our pre-cooked queries
+        private void preCooked_Click(object sender, EventArgs e)
         {
             this.QueryString = "";
             RunQuery?.Invoke(this, EventArgs.Empty);
         }
 
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            this.QueryString = "";
-            RunQuery?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.QueryString = "";
-            RunQuery?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
         //This is the Find button
 
         private void button7_Click(object sender, EventArgs e)
@@ -162,6 +147,12 @@ namespace Viewer.UI
                     listView1.Items.Remove(item);
                 }
             }
+        }
+
+        private void operator_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            richTextBox1.Text = b.Text;
         }
     }
 }
