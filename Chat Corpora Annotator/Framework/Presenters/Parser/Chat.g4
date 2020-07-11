@@ -7,13 +7,18 @@ query
 
 body
     :
-    restriction_expr (',' restriction_expr)*
+    restriction_group (',' restriction_group)*
     ;
 
-restriction_expr
+restriction_group
     :
-    restriction InWin number
-    | restriction
+    restrictions InWin number
+    | restrictions
+    ;
+
+restrictions
+    :
+    restriction (',' restriction)*
     ;
 
 restriction

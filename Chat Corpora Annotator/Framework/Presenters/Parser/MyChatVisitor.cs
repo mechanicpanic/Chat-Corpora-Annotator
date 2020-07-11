@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
+using de.jollyday.util;
+using org.omg.CORBA;
 using Retrievers;
 using Viewer.UI;
 
@@ -12,8 +14,6 @@ namespace Viewer.Framework.Presenters.Parser
 {
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
-        private List<List<int>> restrictions = new List<List<int>>();
-
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
             return VisitBody(context.body());
@@ -21,24 +21,39 @@ namespace Viewer.Framework.Presenters.Parser
 
         public override object VisitBody([NotNull] ChatParser.BodyContext context)
         {
-            //foreach (var r in context.restriction_expr())
-            //{
-            //    restrictions.Add((List<int>)VisitRestriction_expr(r));
-            //}
+            var rGroups = new List<List<int>>();
+            foreach (var rGroup in context.restriction_group())
+            {
+                rGroups.Add((List<int>)VisitRestriction_group(rGroup));
+            }
 
-            return (List<int>)VisitRestriction_expr(context.restriction_expr(0));
+            return rGroups;
         }
 
-        public override object VisitRestriction_expr([NotNull] ChatParser.Restriction_exprContext context)
+        public override object VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context)
         {
+            // Default window size is 50
+            int windowSize = 50;
+
             if (context.InWin() != null)
             {
-                return null;
+                windowSize = Int32.Parse(context.number().GetText());
             }
-            else
+
+            var rList = (List<List<int>>)VisitRestrictions(context.restrictions());
+            return MergeRestrictions(rList, windowSize);
+        }
+
+        public override object VisitRestrictions([NotNull] ChatParser.RestrictionsContext context)
+        {
+            var rList = new List<List<int>>();
+
+            foreach (var r in context.restriction())
             {
-                return VisitRestriction(context.restriction());
+                rList.Add((List<int>)VisitRestriction(r));
             }
+
+            return rList;
         }
 
         public override object VisitRestriction([NotNull] ChatParser.RestrictionContext context)
@@ -112,6 +127,47 @@ namespace Viewer.Framework.Presenters.Parser
 
             return null;
         }
-    }
 
+        private List<int> MergeRestrictions(List<List<int>> rList, int windowSize)
+        {
+            int _size = rList.Count;
+            if (_size == 1)
+            {
+                return rList[0];
+            }
+
+            List<int> result = new List<int>();
+
+            for (int fstInd = 0; fstInd < rList[0].Count; fstInd++)
+            {
+                int curPos = rList[0][fstInd];
+                int fstPos = rList[0][fstInd];
+                List<int> curMsgs = new List<int> {curPos};
+                for (int i = 1; i < _size; i++)
+                {
+                    foreach (var _id in rList[i])
+                    {
+                        if (_id <= curPos)
+                        {
+                            continue;
+                        }
+
+                        if (_id - fstPos <= windowSize)
+                        {
+                            curMsgs.Add(_id);
+                            curPos = _id;
+                            break;
+                        }
+                    }
+                }
+
+                if (curMsgs.Count == _size)
+                {
+                    result.AddRange(curMsgs);
+                }
+            }
+
+            return result;
+        }
+    }
 }
