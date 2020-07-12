@@ -46,7 +46,7 @@ namespace Viewer.Framework.Presenters
 
         private void _main_VisualizeTokenLengths(object sender, EventArgs e)
         {
-            var numberOfBuckets = 10;
+            var numberOfBuckets = 5;
             PointPairList list = new PointPairList();
             if (stats != null)
             {
@@ -63,7 +63,7 @@ namespace Viewer.Framework.Presenters
         // Yeah this is 1000000000000% duplicate code. Sorry its 24hrs to the deadline
         private void _main_VisualizeTokens(object sender, EventArgs e)
         {
-            var numberOfBuckets = 10;
+            var numberOfBuckets = 5;
             PointPairList list = new PointPairList();
             if (stats != null)
             {
@@ -79,7 +79,7 @@ namespace Viewer.Framework.Presenters
 
         private void _main_VisualizeLengths(object sender, EventArgs e)
         {
-            var numberOfBuckets = 10;
+            var numberOfBuckets = 8;
             PointPairList list = new PointPairList();
             if (stats != null)
             {

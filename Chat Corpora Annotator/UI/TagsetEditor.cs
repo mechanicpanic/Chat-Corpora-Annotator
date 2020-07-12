@@ -135,5 +135,14 @@ namespace Viewer.UI
 			}
 			
         }
+
+        private void TagsetEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				e.Cancel = true;
+				Hide();
+			}
+		}
     }
 }

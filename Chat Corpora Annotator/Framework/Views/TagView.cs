@@ -29,6 +29,9 @@ namespace Viewer.Framework.Views
 
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);
+
+        void ClearData();
+        void SetData(List<string> tags);
     }
 
 

@@ -32,6 +32,18 @@ namespace Viewer.UI
         {
 
         }
+		public void ClearData()
+        {
+			SessionTagIndex = new Dictionary<string, int>();
+        }
+
+		public void SetData(List<string> tags)
+        {
+			foreach(var tag in tags)
+            {
+				SessionTagIndex.Add(tag, 0);
+            }
+        }
 		public TagWindow()
 		{
 			InitializeComponent();
@@ -116,7 +128,7 @@ namespace Viewer.UI
 			}
 			listView1.Items.Add(new ListViewItem(temp));
 			listView1.Update();
-			//SessionTagIndex[listView2.SelectedItems[0].Text]++;
+			SessionTagIndex[listView2.SelectedItems[0].Text]++;
 			chatTable.UpdateObjects(MessageContainer.Messages);
 		}
 

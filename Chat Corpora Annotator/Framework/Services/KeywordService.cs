@@ -25,7 +25,7 @@ namespace Viewer.Framework.Services
 
         public Dictionary<string, double> GetRakeKeywords()
         {
-            Rake generator = new Rake(NLPModel._root + "SMARTstopset.txt");
+            Rake generator = new Rake(NLPModel._root + "\\SMARTstopset.txt");
 
             return generator.Run(this.BuildBigString(this.GetList()));
         }
