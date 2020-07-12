@@ -89,6 +89,12 @@
     <Reference Include="CsvParser, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SoftCircuits.CsvParser.2.1.2\lib\netstandard2.0\CsvParser.dll</HintPath>
     </Reference>
+    <Reference Include="CsvReader, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvTools.1.0.12\lib\CsvReader.dll</HintPath>
+    </Reference>
+    <Reference Include="Digithought.Structures.Histogram, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Digithought.Structures.Histogram.1.0.2\lib\netstandard2.0\Digithought.Structures.Histogram.dll</HintPath>
+    </Reference>
     <Reference Include="ejml-0.23, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.1.0\lib\ejml-0.23.dll</HintPath>
     </Reference>
@@ -302,6 +308,9 @@
     <Reference Include="SD.Tools.BCLExtensions, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a3f87088dcb994e1, processorArchitecture=MSIL">
       <HintPath>..\packages\SD.Tools.BCLExtensions.1.2.2\lib\net452\SD.Tools.BCLExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="SharpShooterHistogram, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpShooterHistogram.0.7\lib\net40\SharpShooterHistogram.dll</HintPath>
+    </Reference>
     <Reference Include="slf4j-api, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.1.0\lib\slf4j-api.dll</HintPath>
     </Reference>
@@ -392,6 +401,9 @@
     <Reference Include="xom, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.1.0\lib\xom.dll</HintPath>
     </Reference>
+    <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSV Wizard\DelimiterStep.cs">
@@ -428,6 +440,7 @@
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
     <Compile Include="TaggerEventArgs.cs" />
+    <Compile Include="HistogramHelper.cs" />
     <Compile Include="UserDictsContainer.cs" />
     <Compile Include="UserDictsEventArgs.cs" />
     <Compile Include="TagsetUpdateEventArgs.cs" />
@@ -623,6 +636,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="License-LGPL.txt" />
     <Content Include="Tasks.txt" />
   </ItemGroup>
   <ItemGroup>

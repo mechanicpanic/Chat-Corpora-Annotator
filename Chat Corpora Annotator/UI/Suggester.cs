@@ -168,7 +168,7 @@ namespace Viewer.UI
         private void operator_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            richTextBox1.Text = b.Text;
+            richTextBox1.Text = richTextBox1.Text + " " + b.Text;
         }
     }
 }

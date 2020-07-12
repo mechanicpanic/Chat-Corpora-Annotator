@@ -6,7 +6,7 @@ using System.Linq;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 using ExtractingServices;
-
+using ZedGraph;
 
 namespace Viewer.Framework.Presenters
 {
@@ -19,7 +19,7 @@ namespace Viewer.Framework.Presenters
 
         private readonly FolderService _folder;
 
-
+        private StatisticsContainer stats;
         public MainPresenter(IMainView view, ICSVView csv, ISearchService searcher, FolderService folder)
         {
             this._main = view;
@@ -35,9 +35,62 @@ namespace Viewer.Framework.Presenters
             _main.KeywordClick += _main_KeywordClick;
             _main.LoadStatistics += _main_LoadStatistics;
             _main.ExtractInfoClick += _main_ExtractInfoClick;
+            
+            _main.VisualizeLengths += _main_VisualizeLengths;
+            _main.VisualizeTokens += _main_VisualizeTokens;
+            _main.VisualizeTokenLengths += _main_VisualizeTokenLengths;
             _folder.CheckFolder();
 
 
+        }
+
+        private void _main_VisualizeTokenLengths(object sender, EventArgs e)
+        {
+            var numberOfBuckets = 10;
+            PointPairList list = new PointPairList();
+            if (stats != null)
+            {
+                var hist = HistogramHelper.Bucketize(stats.AllTokenLengths, numberOfBuckets);
+
+                for (int i = 0; i < numberOfBuckets; i++)
+                {
+                    list.Add(i, hist[i]);
+                }
+                _main.VisualizeHist(list, "Token lengths in symbols");
+            }
+        }
+
+        // Yeah this is 1000000000000% duplicate code. Sorry its 24hrs to the deadline
+        private void _main_VisualizeTokens(object sender, EventArgs e)
+        {
+            var numberOfBuckets = 10;
+            PointPairList list = new PointPairList();
+            if (stats != null)
+            {
+                var hist = HistogramHelper.Bucketize(stats.AllTokenNumbers, numberOfBuckets);
+
+                for (int i = 0; i < numberOfBuckets; i++)
+                {
+                    list.Add(i, hist[i]);
+                }
+                _main.VisualizeHist(list, "Token number");
+            }
+        }
+
+        private void _main_VisualizeLengths(object sender, EventArgs e)
+        {
+            var numberOfBuckets = 10;
+            PointPairList list = new PointPairList();
+            if (stats != null)
+            {
+                var hist = HistogramHelper.Bucketize(stats.AllLengths, numberOfBuckets);
+
+                for (int i = 0; i < numberOfBuckets; i++)
+                {
+                    list.Add(i, hist[i]);
+                }
+                _main.VisualizeHist(list, "Message lengths in symbols");
+            }
         }
 
         private void _main_ExtractInfoClick(object sender, EventArgs e)
@@ -56,7 +109,11 @@ namespace Viewer.Framework.Presenters
 
         private void _main_LoadStatistics(object sender, EventArgs e)
         {
-            StatisticsContainer stats = new StatisticsContainer();
+
+
+            //var numberOfBuckets = (int)Math.Ceiling(Math.Sqrt((double)stats.AllLengths.Count));
+            stats = new StatisticsContainer();
+
             _main.DisplayStatistics(stats);
         }
 
