@@ -703,6 +703,11 @@ namespace Viewer
         {
 
         }
+
+        private void startTaggingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			TagClick?.Invoke(this, EventArgs.Empty);
+		}
     }
 }
 
