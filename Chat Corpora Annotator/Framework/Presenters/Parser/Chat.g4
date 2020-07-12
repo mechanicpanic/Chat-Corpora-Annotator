@@ -7,13 +7,12 @@ query
 
 body
     :
-    restriction_group (',' restriction_group)*
+    restriction_group (';' restriction_group)*
     ;
 
 restriction_group
     :
-    restrictions InWin number
-    | restrictions
+    restrictions (InWin number)?
     ;
 
 restrictions
@@ -43,9 +42,9 @@ condition
     | ByUser '(' huser ')'
     ;
 
+number : INTEGER;
 hdict : STRING;
 huser : STRING;
-number : INTEGER;
 
 Select : 'SELECT' | 'select';
 InWin  : 'INWIN'  | 'inwin' ;
@@ -63,8 +62,8 @@ HasQuestion      : 'HASQUESTION'      | 'hasquestion'     ;
 HasUserMentioned : 'HASUSERMENTIONED' | 'hasusermentioned';
 ByUser           : 'BYUSER'           | 'byuser'          ;
 
-STRING  : (LETTER | DIGIT)+;
 INTEGER : DIGIT+;
+STRING  : (LETTER | DIGIT)+;
 
 WS: [ \n\r\t] -> skip;
 

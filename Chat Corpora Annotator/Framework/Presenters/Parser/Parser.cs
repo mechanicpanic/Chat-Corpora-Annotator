@@ -22,7 +22,9 @@ namespace Viewer.Framework.Presenters.Parser
 
             var visitor = new MyChatVisitor();
 
-            return (List<List<int>>)visitor.Visit(tree);
+            var result = (List<List<int>>)visitor.Visit(tree);
+
+            return result;        
         }
     }
 }

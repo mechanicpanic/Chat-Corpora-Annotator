@@ -68,6 +68,12 @@ public interface IChatVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitCondition([NotNull] ChatParser.ConditionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="ChatParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumber([NotNull] ChatParser.NumberContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="ChatParser.hdict"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -79,10 +85,4 @@ public interface IChatVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitHuser([NotNull] ChatParser.HuserContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="ChatParser.number"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitNumber([NotNull] ChatParser.NumberContext context);
 }
