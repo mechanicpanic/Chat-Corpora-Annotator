@@ -98,7 +98,7 @@ namespace Viewer.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(DisplayIndex < QueryResult.Count)
+            if(DisplayIndex < QueryResult.Count - 1)
             {
                 DisplayIndex++;
                 DisplaySituation();

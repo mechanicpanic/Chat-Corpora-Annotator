@@ -39,7 +39,22 @@ namespace IndexEngine
 
         public static Color GenerateTagColor()
         {
-            return Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            KnownColor[] colors = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            List<Color> picker = new List<Color>();
+            foreach (KnownColor knowColor in colors)
+            {
+                Color color = Color.FromKnownColor(knowColor);
+                if(color.Equals(Color.AntiqueWhite) || color.Equals(Color.Black) || color.Equals(Color.Transparent) || color.Equals(Color.Chartreuse))
+                {
+                    continue;
+                }
+                else
+                {
+                    picker.Add(color);
+                }
+            }
+            int random = rnd.Next(0, picker.Count);
+            return picker[random];
         }
 
         public static void WriteInfoToDisk()
