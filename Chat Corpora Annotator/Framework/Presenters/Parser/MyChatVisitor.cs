@@ -130,6 +130,10 @@ namespace Viewer.Framework.Presenters.Parser
                 string dictname = context.hdict().GetText();
                 return Retrievers.Retrievers.HasWordOfList(UserDictsContainer.UserDicts[dictname]);
             }
+            else if (context.HasDate() != null)
+            {
+                return Retrievers.Retrievers.HasNERTag(NER.DATE);
+            }
             else
             {
                 // Message about incorrect query
