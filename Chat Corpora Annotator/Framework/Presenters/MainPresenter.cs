@@ -185,6 +185,7 @@ namespace Viewer.Framework.Presenters
         private void _view_LoadMoreClick(object sender, EventArgs e)
         {
             AddDocumentsToDisplay(200);
+            _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
         }
 
 

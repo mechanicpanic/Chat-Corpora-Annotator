@@ -142,7 +142,7 @@ namespace Viewer
 			
 			this.PropertyChanged += MainWindow_PropertyChanged;
 			this.InfoExtracted = false;
-
+			zedGraphControl1.GraphPane.Title.IsVisible = false;
 			zedGraphControl1.GraphPane.YAxis.Title.Text = "";
 			zedGraphControl1.GraphPane.XAxis.Title.Text = "";
 			
@@ -624,7 +624,15 @@ namespace Viewer
 
 		public void ShowDates(List<DateTime> dates)
 		{
-			foreach(var item in dates)
+			List<DateTime> container = new List<DateTime>();
+			foreach(var message in MessageContainer.Messages)
+            {
+				container.Add(DateTime.Parse(message.contents[IndexService.DateFieldKey].ToString()).Date);
+            }
+
+			IEnumerable<DateTime> intersect = container.Intersect(dates);
+			dateView.Items.Clear();
+			foreach(var item in intersect)
 			{
 				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
 			}
@@ -685,7 +693,7 @@ namespace Viewer
 			zedGraphControl1.GraphPane.GraphObjList.Clear();
 			zedGraphControl1.GraphPane.CurveList.Clear();
 			zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
-			zedGraphControl1.GraphPane.Title.IsVisible = false;
+			
 			zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
 			zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
 			zedGraphControl1.AxisChange();
