@@ -33,14 +33,14 @@ namespace Retrievers
                 //boolquery.Add(query, Occur.MUST);
 
                 //А на самом деле можно построить фильтр сразу на весь список слов без цикла.
-                string[] temp = new string[1];
-                temp[0] = word;
-                FieldCacheTermsFilter filter = new FieldCacheTermsFilter(IndexService.TextFieldKey, temp);
-                var boolFilter = new BooleanFilter();
-                boolFilter.Add(new FilterClause(filter, Occur.MUST));
+                //string[] temp = new string[1];
+                //temp[0] = word;
+                //FieldCacheTermsFilter filter = new FieldCacheTermsFilter(IndexService.TextFieldKey, temp);
+                //var boolFilter = new BooleanFilter();
+                //boolFilter.Add(new FilterClause(filter, Occur.MUST));
 
                 Query query = LuceneService.Parser.Parse(word);
-                TopDocs docs = LuceneService.Searcher.Search(query, boolFilter, LuceneService.DirReader.MaxDoc);
+                TopDocs docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
                 foreach (var doc in docs.ScoreDocs)
                 {
                     Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
