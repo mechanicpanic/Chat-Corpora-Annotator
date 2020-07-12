@@ -37,6 +37,7 @@ condition
     | HasLocation '(' ')'
     | HasOrganization '(' ')'
     | HasURL '(' ')'
+    | HasDate '(' ')'
     | HasQuestion '(' ')'
     | HasUserMentioned '(' huser ')'
     | ByUser '(' huser ')'
@@ -57,6 +58,7 @@ HasTime          : 'HASTIME'          | 'hastime'         ;
 HasLocation      : 'HASLOCATION'      | 'haslocation'     ;
 HasOrganization  : 'HASORGANIZATION'  | 'hasorganization' ;
 HasURL           : 'HASURL'           | 'hasurl'          ;
+HasDate          : 'HASDATE'          | 'hasdate'         ;
 HasQuestion      : 'HASQUESTION'      | 'hasquestion'     ;
 HasUserMentioned : 'HASUSERMENTIONED' | 'hasusermentioned';
 ByUser           : 'BYUSER'           | 'byuser'          ;
