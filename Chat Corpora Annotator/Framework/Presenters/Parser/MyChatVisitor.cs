@@ -79,7 +79,12 @@ namespace Viewer.Framework.Presenters.Parser
             } 
             else if (context.Not() != null)
             {
-                int msgCount = LuceneService.DirReader.MaxDoc - 1;
+                long tmp = LuceneService.DirReader.MaxDoc - 1;
+                int msgCount = 1000000;
+                if (msgCount > tmp)
+                {
+                    msgCount = (int)tmp;
+                }
 
                 var numberList = Enumerable.Range(1, msgCount).ToList();
                 var excludeList = (List<int>)VisitRestriction(context.restriction(0));
