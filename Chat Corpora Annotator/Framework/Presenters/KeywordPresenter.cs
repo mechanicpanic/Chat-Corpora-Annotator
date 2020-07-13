@@ -45,7 +45,8 @@ namespace Viewer.Framework.Presenters
 
         private void _view_RakeClick(object sender, EventArgs e)
         {
-            var rawKeywords = _service.GetRakeKeywords();
+            _view.RakeKeywords.Clear();
+            var rawKeywords = _service.GetRakeKeywords(_view.RakeLength);
             var keywords = _service.ProcessKeywordList(rawKeywords.Keys.ToList());
             foreach(var key in keywords)
             {

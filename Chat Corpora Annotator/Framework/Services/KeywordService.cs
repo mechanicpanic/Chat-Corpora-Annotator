@@ -12,7 +12,7 @@ namespace Viewer.Framework.Services
     public interface IKeywordService
     {
 
-        Dictionary<string, double> GetRakeKeywords();
+        Dictionary<string, double> GetRakeKeywords(int length);
         void FlushKeywordsToDisk();
         List<string> ProcessKeywordList(List<string> keywords);
     }
@@ -23,9 +23,9 @@ namespace Viewer.Framework.Services
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, double> GetRakeKeywords()
+        public Dictionary<string, double> GetRakeKeywords(int length)
         {
-            Rake generator = new Rake(NLPModel._root + "\\SMARTstopset.txt");
+            Rake generator = new Rake(NLPModel._root + "\\SMARTstopset.txt", 3, length, 3);
 
             return generator.Run(this.BuildBigString(this.GetList()));
         }

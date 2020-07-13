@@ -17,6 +17,7 @@ namespace Viewer.Framework.Views
         event EventHandler StanfordClick;
         void DisplayRakeKeywords();
         void DisplayKeyPhrases();
+        int RakeLength { get; set; }
 
     }
 }

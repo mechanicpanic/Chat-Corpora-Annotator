@@ -66,7 +66,7 @@ namespace IndexEngine
         }
         private void SetAverageMessagesPerDay()
         {
-            this.AverageMessagesPerDay = (double)IndexService.MessagesPerDay.Keys.Count / (double)this.NumberOfDocs;
+            this.AverageMessagesPerDay = (double)this.NumberOfDocs / (double)IndexService.MessagesPerDay.Keys.Count;
         }
 
         private void SetTokenNumber() {
