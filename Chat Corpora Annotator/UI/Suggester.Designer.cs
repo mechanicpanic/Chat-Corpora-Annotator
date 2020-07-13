@@ -413,6 +413,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Suggester";
             this.Text = "Suggester";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Suggester_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);

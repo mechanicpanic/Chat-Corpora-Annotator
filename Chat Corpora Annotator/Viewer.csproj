@@ -637,7 +637,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="License-LGPL.txt" />
-    <Content Include="Tasks.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExtractingServices\ExtractingServices.csproj">

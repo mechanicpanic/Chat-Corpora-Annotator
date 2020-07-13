@@ -246,5 +246,14 @@ namespace Viewer.UI
                 }
             }
         }
+
+        private void TagWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				e.Cancel = true;
+				Hide();
+			}
+		}
     }
 }

@@ -54,7 +54,7 @@
             this.stepLabel.Location = new System.Drawing.Point(12, 61);
             this.stepLabel.MaximumSize = new System.Drawing.Size(230, 0);
             this.stepLabel.Name = "stepLabel";
-            this.stepLabel.Size = new System.Drawing.Size(55, 23);
+            this.stepLabel.Size = new System.Drawing.Size(45, 19);
             this.stepLabel.TabIndex = 0;
             this.stepLabel.Text = "label1";
             // 
@@ -92,6 +92,7 @@
             this.MaximizeBox = false;
             this.Name = "CSVLoader";
             this.Text = "Load a .csv file";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CSVLoader_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

@@ -34,19 +34,21 @@ namespace Viewer.UI
 
         public void DisplaySituation()
         {
-            SetUpChatView();
+            
             CurrentSituation.Clear();
             foreach (var i in QueryResult[DisplayIndex])
             {
                 CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
             }
             fastObjectListView1.SetObjects(CurrentSituation);
+            SetUpChatView();
+            fastObjectListView1.Sort(fastObjectListView1.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
         }
         private void SetUpChatView()
         {
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in MessageContainer.Messages[0].contents.Keys)
+            foreach (var key in IndexService.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x)
@@ -169,6 +171,16 @@ namespace Viewer.UI
         {
             Button b = sender as Button;
             richTextBox1.Text = richTextBox1.Text + " " + b.Text;
+        }
+
+        private void Suggester_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+           
         }
     }
 }

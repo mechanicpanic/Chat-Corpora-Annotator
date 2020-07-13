@@ -49,6 +49,8 @@
             this.Controls.Add(this.cartesianChart1);
             this.Name = "ChartForm";
             this.Text = "Plot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChartForm_FormClosing);
+            this.Load += new System.EventHandler(this.ChartForm_Load);
             this.ResumeLayout(false);
 
         }
