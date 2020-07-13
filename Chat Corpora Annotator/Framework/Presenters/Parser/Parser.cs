@@ -9,7 +9,7 @@ namespace Viewer.Framework.Presenters.Parser
 {
     class Parser
     {
-        public static List<List<int>> parse(string query) 
+        public static List<List<List<int>>> parse(string query) 
         { 
             StringBuilder text = new StringBuilder(query);
 
@@ -22,7 +22,7 @@ namespace Viewer.Framework.Presenters.Parser
 
             var visitor = new MyChatVisitor();
 
-            var result = (List<List<int>>)visitor.Visit(tree);
+            var result = (List<List<List<int>>>)visitor.Visit(tree);
 
             return result;        
         }

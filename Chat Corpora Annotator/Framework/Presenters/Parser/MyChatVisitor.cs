@@ -8,6 +8,7 @@ using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using de.jollyday.util;
 using IndexEngine;
+using javax.xml.transform;
 using org.omg.CORBA;
 using Retrievers;
 using Viewer.UI;
@@ -23,14 +24,14 @@ namespace Viewer.Framework.Presenters.Parser
 
         public override object VisitBody([NotNull] ChatParser.BodyContext context)
         {
-            var rGroups = new List<List<int>>();
+            var rGroups = new List<List<List<int>>>();
 
             foreach (var rGroup in context.restriction_group())
             {
-                rGroups.Add((List<int>)VisitRestriction_group(rGroup));
+                rGroups.Add((List<List<int>>)VisitRestriction_group(rGroup));
             }
 
-            return rGroups;
+            return MergeRestrictionGroups(rGroups);
         }
 
         public override object VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context)
@@ -150,15 +151,15 @@ namespace Viewer.Framework.Presenters.Parser
             
         }
 
-        private List<int> MergeRestrictions(List<List<int>> rList, int windowSize)
+        private List<List<int>> MergeRestrictions(List<List<int>> rList, int windowSize)
         {
             int _size = rList.Count;
             if (_size == 1)
             {
-                return rList[0];
+                return rList;
             }
 
-            List<int> result = new List<int>();
+            var result = new List<List<int>>();
 
             for (int fstInd = 0; fstInd < rList[0].Count; fstInd++)
             {
@@ -185,11 +186,70 @@ namespace Viewer.Framework.Presenters.Parser
 
                 if (curMsgs.Count == _size)
                 {
-                    result.AddRange(curMsgs);
+                    result.Add(curMsgs);
                 }
             }
 
             return result;
+        }
+
+
+        // Merge some restriction groups to query answer
+        // For example, we have 3 group X, Y, Z:
+        // select qX1,...,qXk inwin n1, qY1,...,qYs inwin n2, qZ1...qZm inwin n3
+        // Suppose, that answer for separate groups is: [X1, X2] [Y1, Y2, Y3] [Z1, Z2]
+        // Result of MergeRestrictionGroups([[X1, X2] [Y1, Y2, Y3] [Z1, Z2]]) is:
+        // [X1, Y1, Z1]
+        // [X1, Y1, Z2]
+        // [X1, Y2, Z1]
+        // [X1, Y2, Z2]
+        // ............
+        // [X2, Y3, Z2]
+        private List<List<List<int>>> MergeRestrictionGroups(List<List<List<int>>> rList)
+        {
+            var resultList = new List<List<List<int>>>();
+            int _size = resultList.Count();
+
+            List<int> curIndex = new List<int>();
+
+            for (int i = 0; i < _size; i++)
+            {
+                curIndex.Add(0);
+            }
+
+            while (true)
+            {
+                bool can_end = true;
+                
+                var curAccomodation = new List<List<int>>();
+                for (int i = 0; i < _size; i++)
+                {
+                    var elem = rList[i][curIndex[i]];
+                    curAccomodation.Add(elem);
+                }
+
+                resultList.Add(curAccomodation);
+
+                for (int i = _size - 1; i >= 0; i--)
+                {
+                    if (curIndex[i] < rList[i].Count())
+                    {
+                        can_end = false;
+                        curIndex[i]++;
+                        for (int j = i + 1; j < _size; j++)
+                        {
+                            curIndex[j] = 0;
+                        }
+                    }
+                }
+
+                if (can_end)
+                {
+                    break;
+                }
+            }
+
+            return resultList;
         }
     }
 }
