@@ -7,7 +7,7 @@ query
 
 body
     :
-    restriction_group (';' restriction_group)*
+    restriction_group (';' restriction_group)* ';'?
     ;
 
 restriction_group

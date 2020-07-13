@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using de.jollyday.util;
+using IndexEngine;
 using org.omg.CORBA;
 using Retrievers;
 using Viewer.UI;
@@ -78,7 +79,13 @@ namespace Viewer.Framework.Presenters.Parser
             } 
             else if (context.Not() != null)
             {
-                int msgCount = 10000;
+                long tmp = LuceneService.DirReader.MaxDoc - 1;
+                int msgCount = 1000000;
+                if (msgCount > tmp)
+                {
+                    msgCount = (int)tmp;
+                }
+
                 var numberList = Enumerable.Range(1, msgCount).ToList();
                 var excludeList = (List<int>)VisitRestriction(context.restriction(0));
 
