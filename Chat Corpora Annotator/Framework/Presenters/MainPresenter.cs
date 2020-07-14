@@ -50,7 +50,8 @@ namespace Viewer.Framework.Presenters
             PointPairList list = new PointPairList();
             if (stats != null)
             {
-                var hist = HistogramHelper.Bucketize(stats.AllTokenLengths, numberOfBuckets);
+                var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenLengths, 20);
+                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
 
                 for (int i = 0; i < numberOfBuckets; i++)
                 {
@@ -67,7 +68,9 @@ namespace Viewer.Framework.Presenters
             PointPairList list = new PointPairList();
             if (stats != null)
             {
-                var hist = HistogramHelper.Bucketize(stats.AllTokenNumbers, numberOfBuckets);
+                var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenNumbers, 20);
+                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
+                
 
                 for (int i = 0; i < numberOfBuckets; i++)
                 {
@@ -83,7 +86,8 @@ namespace Viewer.Framework.Presenters
             PointPairList list = new PointPairList();
             if (stats != null)
             {
-                var hist = HistogramHelper.Bucketize(stats.AllLengths, numberOfBuckets);
+                var cleandata = HistogramHelper.RemoveOutliers(stats.AllLengths, 100);
+                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
 
                 for (int i = 0; i < numberOfBuckets; i++)
                 {

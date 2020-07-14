@@ -56,8 +56,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -423,9 +421,9 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(703, 0);
+            this.button1.Location = new System.Drawing.Point(568, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 42);
+            this.button1.Size = new System.Drawing.Size(290, 42);
             this.button1.TabIndex = 3;
             this.button1.Text = "Next suggestion >";
             this.button1.UseVisualStyleBackColor = false;
@@ -441,7 +439,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 42);
+            this.button2.Size = new System.Drawing.Size(287, 42);
             this.button2.TabIndex = 4;
             this.button2.Text = "< Previous suggestion";
             this.button2.UseVisualStyleBackColor = false;
@@ -449,8 +447,6 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.button14);
-            this.panel6.Controls.Add(this.button13);
             this.panel6.Controls.Add(this.button2);
             this.panel6.Controls.Add(this.button1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -460,38 +456,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(858, 42);
             this.panel6.TabIndex = 5;
-            // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.Lavender;
-            this.button14.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button14.FlatAppearance.BorderSize = 0;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button14.Location = new System.Drawing.Point(522, 0);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(181, 42);
-            this.button14.TabIndex = 6;
-            this.button14.Text = "Next group >";
-            this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button13
-            // 
-            this.button13.BackColor = System.Drawing.Color.Lavender;
-            this.button13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button13.FlatAppearance.BorderSize = 0;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button13.Location = new System.Drawing.Point(155, 0);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(174, 42);
-            this.button13.TabIndex = 5;
-            this.button13.Text = "< Previous group";
-            this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // panel10
             // 
@@ -602,8 +566,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel9;

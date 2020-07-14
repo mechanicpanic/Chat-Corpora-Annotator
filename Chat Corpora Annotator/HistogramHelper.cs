@@ -14,9 +14,22 @@ namespace Viewer
             UpperBoundInclusive
         }
 
-
-        public static int[] Bucketize(this IList<int> source, int totalBuckets, BucketizeDirectionEnum inclusivity = BucketizeDirectionEnum.LowerBoundInclusive)
+        public static List<int> RemoveOutliers(List<int> source, int cutoff)
         {
+            var clean = new List<int>();
+            for(int i = 0; i < source.Count; i++)
+            {
+                if (source[i] < cutoff)
+                {
+                    clean.Add(source[i]);
+                }
+            }
+            return clean;
+        }
+
+        public static int[] Bucketize(List<int> source, int totalBuckets, BucketizeDirectionEnum inclusivity = BucketizeDirectionEnum.LowerBoundInclusive)
+        {
+
             var min = source.Min();
             var max = source.Max();
             var buckets = new int[totalBuckets];

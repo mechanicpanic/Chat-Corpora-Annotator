@@ -42,7 +42,13 @@ namespace Viewer.UI
         {
             
             CurrentSituation.Clear();
-            foreach (var i in QueryResult[GroupIndex][DisplayIndex])
+            List<int> temp = new List<int>();
+            foreach (var list in QueryResult[DisplayIndex])
+            {
+                
+                temp.AddRange(list);
+            }
+            foreach(var i in temp)
             {
                 CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
             }
@@ -190,25 +196,6 @@ namespace Viewer.UI
            
         }
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            if(GroupIndex > 0)
-            {
-                GroupIndex--;
-                DisplayIndex = 0;
-                DisplaySituation();
-            }
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            if(GroupIndex < QueryResult.Count - 1)
-            {
-                GroupIndex++;
-                DisplayIndex = 0;
-                DisplaySituation();
-            }
-        }
 
         private void label2_Click(object sender, EventArgs e)
         {
