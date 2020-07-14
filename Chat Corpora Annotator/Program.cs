@@ -45,6 +45,7 @@ namespace Viewer
             ChartPresenter chartPresenter = new ChartPresenter(main, chart);
             main.AddOwnedForm(delim);
             Application.Run(main);
+           
         }
     }
 }

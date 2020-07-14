@@ -85,7 +85,7 @@
             this.textBox1.MaximumSize = new System.Drawing.Size(400, 200);
             this.textBox1.MinimumSize = new System.Drawing.Size(100, 60);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 60);
+            this.textBox1.Size = new System.Drawing.Size(199, 26);
             this.textBox1.TabIndex = 6;
             // 
             // panel1
@@ -112,7 +112,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(3, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 23);
+            this.label3.Size = new System.Drawing.Size(39, 19);
             this.label3.TabIndex = 14;
             this.label3.Text = "Filter";
             // 
@@ -125,7 +125,7 @@
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl2.Location = new System.Drawing.Point(267, 0);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl2.SelectedIndex = 0;
@@ -135,11 +135,11 @@
             // bi
             // 
             this.bi.Controls.Add(this.fastObjectListView1);
-            this.bi.Location = new System.Drawing.Point(4, 30);
-            this.bi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bi.Location = new System.Drawing.Point(4, 26);
+            this.bi.Margin = new System.Windows.Forms.Padding(4);
             this.bi.Name = "bi";
-            this.bi.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bi.Size = new System.Drawing.Size(921, 600);
+            this.bi.Padding = new System.Windows.Forms.Padding(4);
+            this.bi.Size = new System.Drawing.Size(921, 604);
             this.bi.TabIndex = 0;
             this.bi.Text = "Bigrams";
             this.bi.UseVisualStyleBackColor = true;
@@ -157,10 +157,10 @@
             this.fastObjectListView1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fastObjectListView1.HideSelection = false;
             this.fastObjectListView1.Location = new System.Drawing.Point(4, 4);
-            this.fastObjectListView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fastObjectListView1.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListView1.Name = "fastObjectListView1";
             this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(913, 592);
+            this.fastObjectListView1.Size = new System.Drawing.Size(913, 596);
             this.fastObjectListView1.TabIndex = 0;
             this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView1.View = System.Windows.Forms.View.Details;
@@ -181,11 +181,11 @@
             // tri
             // 
             this.tri.Controls.Add(this.fastObjectListView2);
-            this.tri.Location = new System.Drawing.Point(4, 30);
-            this.tri.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tri.Location = new System.Drawing.Point(4, 26);
+            this.tri.Margin = new System.Windows.Forms.Padding(4);
             this.tri.Name = "tri";
-            this.tri.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tri.Size = new System.Drawing.Size(921, 600);
+            this.tri.Padding = new System.Windows.Forms.Padding(4);
+            this.tri.Size = new System.Drawing.Size(921, 604);
             this.tri.TabIndex = 1;
             this.tri.Text = "Trigrams";
             this.tri.UseVisualStyleBackColor = true;
@@ -203,10 +203,10 @@
             this.fastObjectListView2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fastObjectListView2.HideSelection = false;
             this.fastObjectListView2.Location = new System.Drawing.Point(4, 4);
-            this.fastObjectListView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fastObjectListView2.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListView2.Name = "fastObjectListView2";
             this.fastObjectListView2.ShowGroups = false;
-            this.fastObjectListView2.Size = new System.Drawing.Size(913, 592);
+            this.fastObjectListView2.Size = new System.Drawing.Size(913, 596);
             this.fastObjectListView2.TabIndex = 1;
             this.fastObjectListView2.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView2.View = System.Windows.Forms.View.Details;
@@ -227,10 +227,10 @@
             // four
             // 
             this.four.Controls.Add(this.fastObjectListView3);
-            this.four.Location = new System.Drawing.Point(4, 30);
-            this.four.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.four.Location = new System.Drawing.Point(4, 26);
+            this.four.Margin = new System.Windows.Forms.Padding(4);
             this.four.Name = "four";
-            this.four.Size = new System.Drawing.Size(921, 600);
+            this.four.Size = new System.Drawing.Size(921, 604);
             this.four.TabIndex = 2;
             this.four.Text = "4-grams";
             this.four.UseVisualStyleBackColor = true;
@@ -248,10 +248,10 @@
             this.fastObjectListView3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fastObjectListView3.HideSelection = false;
             this.fastObjectListView3.Location = new System.Drawing.Point(0, 0);
-            this.fastObjectListView3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fastObjectListView3.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListView3.Name = "fastObjectListView3";
             this.fastObjectListView3.ShowGroups = false;
-            this.fastObjectListView3.Size = new System.Drawing.Size(921, 600);
+            this.fastObjectListView3.Size = new System.Drawing.Size(921, 604);
             this.fastObjectListView3.TabIndex = 1;
             this.fastObjectListView3.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView3.View = System.Windows.Forms.View.Details;
@@ -272,10 +272,10 @@
             // five
             // 
             this.five.Controls.Add(this.fastObjectListView4);
-            this.five.Location = new System.Drawing.Point(4, 30);
-            this.five.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.five.Location = new System.Drawing.Point(4, 26);
+            this.five.Margin = new System.Windows.Forms.Padding(4);
             this.five.Name = "five";
-            this.five.Size = new System.Drawing.Size(921, 600);
+            this.five.Size = new System.Drawing.Size(921, 604);
             this.five.TabIndex = 3;
             this.five.Text = "5-grams";
             this.five.UseVisualStyleBackColor = true;
@@ -292,10 +292,10 @@
             this.fastObjectListView4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fastObjectListView4.HideSelection = false;
             this.fastObjectListView4.Location = new System.Drawing.Point(0, 0);
-            this.fastObjectListView4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fastObjectListView4.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListView4.Name = "fastObjectListView4";
             this.fastObjectListView4.ShowGroups = false;
-            this.fastObjectListView4.Size = new System.Drawing.Size(921, 600);
+            this.fastObjectListView4.Size = new System.Drawing.Size(921, 604);
             this.fastObjectListView4.TabIndex = 1;
             this.fastObjectListView4.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView4.View = System.Windows.Forms.View.Details;
@@ -313,8 +313,8 @@
             // 
             // NGramSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

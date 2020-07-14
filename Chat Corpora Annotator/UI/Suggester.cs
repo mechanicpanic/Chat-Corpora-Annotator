@@ -81,6 +81,7 @@ namespace Viewer.UI
             }
             
             fastObjectListView1.RebuildColumns();
+            fastObjectListView1.Refresh();
         }
 
         public void ShowView()

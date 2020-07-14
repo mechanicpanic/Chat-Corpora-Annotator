@@ -24,7 +24,7 @@ namespace Viewer.UI
         public int RakeLength { get; set; } = 2;
 
         public void DisplayKeyPhrases() {
-            richTextBox2.Lines = NounPhrases.ToArray();
+            //richTextBox2.Lines = NounPhrases.ToArray();
         }
         private void button1_Click(object sender, EventArgs e)
         {
