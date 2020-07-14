@@ -1,4 +1,4 @@
-﻿using CSharpTest.Net.Collections;
+using CSharpTest.Net.Collections;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
