@@ -11,11 +11,11 @@ The See suggestions manual:
 
 This window is intended for using our query language (Matcher).
 Operators:
-1. haswordofdict()
-2. byuser()
-3. hasusermentioned()
-4. hasdate()
-5. hastime()
-6. haslocation()
-7. hasorganization()
-8. inwin
+1. haswordofdict() - Select messages where any word from a user defined dictionary occurs.
+2. byuser() - Select a username
+3. hasusermentioned() - Select messages which mention a username. Currently does not consider the "to" field, which is optional
+4. hasdate() - Has a DATE CoreNLP NER tag
+5. hastime() - Has a TIME CoreNLP NER tag
+6. haslocation() - Has a LOCATION CoreNLP NER tag
+7. hasorganization() - Has an ORGANIZATION CoreNLP NER tag
+8. inwin n - in window of n messages
