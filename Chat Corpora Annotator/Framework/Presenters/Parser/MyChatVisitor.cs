@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
+using com.sun.tools.javac.comp;
 using de.jollyday.util;
 using IndexEngine;
+using java.awt;
+using javax.swing;
 using javax.xml.transform;
+using jdk.nashorn.@internal.ir;
 using org.omg.CORBA;
 using Retrievers;
 using Viewer.UI;
@@ -17,6 +22,9 @@ namespace Viewer.Framework.Presenters.Parser
 {
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
+
+        List<int> inwin = new List<int>();
+
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
             return VisitBody(context.body());
@@ -31,6 +39,14 @@ namespace Viewer.Framework.Presenters.Parser
                 rGroups.Add((List<List<int>>)VisitRestriction_group(rGroup));
             }
 
+           /* foreach (var v in inwin)
+            {
+                Console.Write(v);
+                Console.Write(' ');
+            }
+
+            Console.WriteLine('\n');*/
+
             return MergeRestrictionGroups(rGroups);
         }
 
@@ -44,8 +60,12 @@ namespace Viewer.Framework.Presenters.Parser
                 windowSize = Int32.Parse(context.number().GetText());
             }
 
+            inwin.Add(windowSize);
+
             var rList = (List<List<int>>)VisitRestrictions(context.restrictions());
-            return MergeRestrictions(rList, windowSize);
+            var merge = MergeRestrictions(rList, windowSize);
+
+            return merge;
         }
 
         public override object VisitRestrictions([NotNull] ChatParser.RestrictionsContext context)
@@ -54,7 +74,9 @@ namespace Viewer.Framework.Presenters.Parser
 
             foreach (var r in context.restriction())
             {
-                rList.Add((List<int>)VisitRestriction(r));
+                var newList = (List<int>)VisitRestriction(r);
+                newList.Sort();
+                rList.Add(newList);
             }
 
             return rList;
@@ -154,12 +176,18 @@ namespace Viewer.Framework.Presenters.Parser
         private List<List<int>> MergeRestrictions(List<List<int>> rList, int windowSize)
         {
             int _size = rList.Count;
+            var result = new List<List<int>>();
+
             if (_size == 1)
             {
-                return rList;
+                foreach (var r in rList[0])
+                {
+                    result.Add(new List<int> { r });
+                }
+
+                return result;
             }
 
-            var result = new List<List<int>>();
 
             for (int fstInd = 0; fstInd < rList[0].Count; fstInd++)
             {
@@ -192,7 +220,6 @@ namespace Viewer.Framework.Presenters.Parser
 
             return result;
         }
-
 
         // Merge all restriction groups to query answer
         // For example, we have 3 group X, Y, Z:
@@ -228,7 +255,10 @@ namespace Viewer.Framework.Presenters.Parser
                     curAccomodation.Add(elem);
                 }
 
-                resultList.Add(curAccomodation);
+                if (isCorrectAccomodation(curAccomodation))
+                {
+                    resultList.Add(curAccomodation);
+                }
 
                 for (int i = _size - 1; i >= 0; i--)
                 {
@@ -240,6 +270,8 @@ namespace Viewer.Framework.Presenters.Parser
                         {
                             curIndex[j] = 0;
                         }
+
+                        break;
                     }
                 }
 
@@ -250,6 +282,42 @@ namespace Viewer.Framework.Presenters.Parser
             }
 
             return resultList;
+        }
+
+        private bool isCorrectAccomodation(List<List<int>> acc)
+        {
+            int _size = acc.Count();
+
+            for (int i = 1; i < _size; i++)
+            {
+                int prevLast = acc[i - 1].Last();
+                int curLast = acc[i].Last();
+                int windowSize = inwin[i];
+
+                /*Console.WriteLine("---------");
+
+                foreach(var ai in acc)
+                {
+                    foreach(var elem in ai)
+                    {
+                        Console.Write(elem);
+                        Console.Write(' ');
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine("---------");*/
+
+                bool correctOrder = (curLast >= prevLast);
+                bool correctWindow = (curLast - prevLast <= windowSize);
+
+                if (!correctOrder || !correctWindow)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
