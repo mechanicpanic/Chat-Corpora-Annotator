@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer", "Chat Corpora Annotator\Viewer.csproj", "{65809F71-7BF4-43F2-B912-738EEA840E0D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AFF7B858-40BB-4842-9CD4-DBC40A612D6D} = {AFF7B858-40BB-4842-9CD4-DBC40A612D6D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexEngine", "IndexingServices\IndexEngine.csproj", "{3A58AB22-7CB7-47DA-8B31-F513CC71DB3A}"
 EndProject

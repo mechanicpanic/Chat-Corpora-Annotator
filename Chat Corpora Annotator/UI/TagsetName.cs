@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace Viewer.UI
 {
     public partial class TagsetName : Form
     {
-        public string Tagset;
+        public string Tagset { get; set; }
         public event EventHandler NameButtonClicked;
         public TagsetName()
         {
@@ -24,10 +24,9 @@ namespace Viewer.UI
             if (!String.IsNullOrEmpty(textBox1.Text))
             {
                 this.Tagset = textBox1.Text;
-                NameButtonClicked?.Invoke(this, EventArgs.Empty);
-
+                
             }
-            
+            NameButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

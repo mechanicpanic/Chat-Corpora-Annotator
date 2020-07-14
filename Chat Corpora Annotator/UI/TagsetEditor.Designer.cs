@@ -1,4 +1,4 @@
-﻿namespace Viewer.UI
+namespace Viewer.UI
 {
     partial class TagsetEditor
     {
@@ -32,6 +32,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.createTagsetButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +92,11 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tags";
+            this.columnHeader1.Width = 294;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -139,9 +144,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(158, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 19);
+            this.label2.Size = new System.Drawing.Size(50, 19);
             this.label2.TabIndex = 11;
-            this.label2.Text = "default";
+            this.label2.Text = "(None)";
             // 
             // panel2
             // 
@@ -159,11 +164,6 @@
             this.textBox1.Size = new System.Drawing.Size(305, 26);
             this.textBox1.TabIndex = 0;
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Tags";
-            this.columnHeader1.Width = 301;
-            // 
             // TagsetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -179,6 +179,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TagsetEditor";
             this.Text = "TagsetEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TagsetEditor_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

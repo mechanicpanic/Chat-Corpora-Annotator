@@ -46,7 +46,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.MinimumSize = new System.Drawing.Size(0, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 32);
+            this.label1.Size = new System.Drawing.Size(63, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -58,7 +58,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.MinimumSize = new System.Drawing.Size(0, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 32);
+            this.label2.Size = new System.Drawing.Size(63, 28);
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
@@ -67,11 +67,11 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1135, 0);
+            this.label3.Location = new System.Drawing.Point(1151, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.MinimumSize = new System.Drawing.Size(0, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 32);
+            this.label3.Size = new System.Drawing.Size(63, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "label3";
             // 
@@ -91,7 +91,7 @@
             // 
             // LinearHeatmapForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 193);
             this.Controls.Add(this.panel2);
@@ -103,6 +103,7 @@
             this.Name = "LinearHeatmapForm";
             this.ShowIcon = false;
             this.Text = "Heatmap";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LinearHeatmapForm_FormClosing);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);

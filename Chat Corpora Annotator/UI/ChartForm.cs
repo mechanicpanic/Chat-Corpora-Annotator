@@ -53,5 +53,19 @@ namespace Viewer
         {
             this.Show();
         }
+
+        private void ChartForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChartForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
     }
 }

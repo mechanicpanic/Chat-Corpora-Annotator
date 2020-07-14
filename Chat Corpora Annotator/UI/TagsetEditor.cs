@@ -114,7 +114,7 @@ namespace Viewer.UI
 			listView1.Items.Clear();
 			foreach(var tag in tags)
 			{
-				listView1.Items.Add(tag);
+				listView1.Items.Add(new ListViewItem(tag));
 			}
 		}
 
@@ -131,7 +131,18 @@ namespace Viewer.UI
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
 				args.Name = comboBox1.SelectedItem.ToString();
 				SetProjectTagset?.Invoke(this, args);
+				label2.Text = comboBox1.SelectedItem.ToString();
 			}
+			
         }
+
+        private void TagsetEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				e.Cancel = true;
+				Hide();
+			}
+		}
     }
 }

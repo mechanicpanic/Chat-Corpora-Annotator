@@ -143,6 +143,15 @@ namespace Viewer
             panelStep.Invalidate();
             this.ShowDialog();
         }
+
+        private void CSVLoader_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
     }
 
 }

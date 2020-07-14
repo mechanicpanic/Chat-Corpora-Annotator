@@ -12,23 +12,37 @@ namespace Viewer.UI
 	{
 		public event EventHandler WriteToDisk;
 		public event EventHandler TagsetClick;
-		public event EventHandler AddTag;
-		public event EventHandler RemoveTag;
+		public event TaggerEventHandler AddTag;
+		public event TaggerEventHandler RemoveTag;
+
 		public event EventHandler EditSituation;
 		public event EventHandler LoadMore;
 		public event EventHandler ShowSuggester;
-		public event EventHandler LoadTagset;
+		
 		public event EventHandler SetTagset;
+        public event EventHandler DisplayColors;
+        public event TaggerEventHandler LoadTagset;
 
+        public Dictionary<string, Color> TagsetColors { get; set; }
 
-		public Dictionary<string, Color> TagsetColors { get; set; }
-
-		private Dictionary<List<string>,string> TaggedMessages = new Dictionary<List<string>,string>();
+		private Dictionary<List<int>,string> TaggedMessages = new Dictionary<List<int>,string>();
 		private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
 
         public void RetrieveSituationColors()
         {
 
+        }
+		public void ClearData()
+        {
+			SessionTagIndex = new Dictionary<string, int>();
+        }
+
+		public void SetData(List<string> tags)
+        {
+			foreach(var tag in tags)
+            {
+				SessionTagIndex.Add(tag, 0);
+            }
         }
 		public TagWindow()
 		{
@@ -41,7 +55,24 @@ namespace Viewer.UI
 
 		public void DisplayTagset(List<string> tags)
 		{
-			
+			listView2.Items.Clear();
+			foreach(var tag in tags)
+            {
+				listView2.Items.Add(tag);
+				
+            }
+			DisplayColors1();
+		}
+		private void DisplayColors1()
+        {
+			foreach (ListViewItem item in listView2.Items)
+			{
+				if (TagsetColors.ContainsKey(item.Text))
+				{
+					item.BackColor = TagsetColors[item.Text];
+				}
+			}
+
 		}
 
 		private void ChatTable_FormatRow(object sender, FormatRowEventArgs e)
@@ -74,7 +105,7 @@ namespace Viewer.UI
 
 			if (listView2.SelectedItems != null && chatTable.SelectedObjects != null)
 			{
-				List<string> set = new List<string>();
+				List<int> set = new List<int>();
 				foreach (var obj in chatTable.SelectedObjects)
 				{
 					DynamicMessage msg = (DynamicMessage)obj;
@@ -83,9 +114,10 @@ namespace Viewer.UI
 					
 				}
 				TaggedMessages.Add(set, listView2.SelectedItems[0].Text);
-				//CurrentSituation = new Tuple<List<string>, string>(set, listView2.SelectedItems[0].Text);
-
-				AddTag?.Invoke(this, EventArgs.Empty);
+				TaggerEventArgs args = new TaggerEventArgs();
+				args.messages = set;
+				args.Tag = listView2.SelectedItems[0].Text;
+				AddTag?.Invoke(this, args);
 			}
 			var temp = "";
 			foreach (var obj in chatTable.SelectedObjects)
@@ -123,12 +155,10 @@ namespace Viewer.UI
 				};
 				cl.Text = key;
 				cl.WordWrap = true;
-
-
 				columns.Add(cl);
 
-
 			}
+
 			chatTable.AllColumns.Clear();
 			chatTable.AllColumns.AddRange(columns);
 			chatTable.RebuildColumns();
@@ -167,14 +197,15 @@ namespace Viewer.UI
 		public void CloseView()
 		{
 			this.Hide();
+			TagsetIndex.WriteInfoToDisk();
 		}
 
 		public void UpdateTagset(List<string> tags)
 		{
-			listView1.Items.Clear();
+			listView2.Items.Clear();
 			foreach (var tag in tags)
 			{
-				listView1.Items.Add(new ListViewItem(tag));
+				listView2.Items.Add(new ListViewItem(tag));
 			}
 		}
 
@@ -205,9 +236,24 @@ namespace Viewer.UI
 			ShowSuggester?.Invoke(this, EventArgs.Empty);
 		}
 
-        public void SetTagsetColors()
+
+        public void DisplayTagsetColors(Dictionary<string, Color> dict)
         {
-            throw new NotImplementedException();
+			foreach(ListViewItem item in listView2.Items)
+            {
+                if (dict.ContainsKey(item.Text)) {
+					item.BackColor = dict[item.Text];
+                }
+            }
         }
+
+        private void TagWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				e.Cancel = true;
+				Hide();
+			}
+		}
     }
 }

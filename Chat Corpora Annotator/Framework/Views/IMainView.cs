@@ -1,6 +1,7 @@
 ﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
+using ZedGraph;
 
 namespace Viewer.Framework.Views
 {
@@ -9,6 +10,9 @@ namespace Viewer.Framework.Views
         //TODO: R e t h i n c c
         bool FileLoadState { get; set; }
 
+        //PointPairList LengthHist { get; set; }
+
+        //PointPairList TokenHist { get; set; }
         List<DynamicMessage> SearchResults { get; set; }
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
@@ -49,6 +53,13 @@ namespace Viewer.Framework.Views
         event EventHandler TagClick;
 
         event EventHandler ExtractInfoClick;
+
+        event EventHandler VisualizeLengths;
+        event EventHandler VisualizeTokens;
+        event EventHandler VisualizeTokenLengths;
+
+        void VisualizeHist(PointPairList list, string name);
+
         //event PropertyChangedEventHandler PropertyChanged;
         //bool FileLoadState { get; set; }
     }

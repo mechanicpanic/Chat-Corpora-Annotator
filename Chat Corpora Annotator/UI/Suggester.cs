@@ -3,6 +3,7 @@ using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 using Viewer.Framework.Views;
 
 namespace Viewer.UI
@@ -18,26 +19,55 @@ namespace Viewer.UI
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
 
-        public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
+        //public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
         public string QueryString { get; set; }
-
+        public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
+        public int DisplayIndex { get; set; } = 0;
+        public int GroupIndex { get; set; } = 0;
         public event EventHandler RunQuery;
+        public event UserDictsEventHandler AddUserDict;
+        public event UserDictsEventHandler DeleteUserDict;
 
         public void CloseView()
         {
             this.Hide();
         }
 
+        public void SetCounts()
+        {
+            label3.Text = QueryResult.Count.ToString();
+            label4.Text = QueryResult.Sum(x => x.Count).ToString();
+        }
         public void DisplaySituation()
         {
-            SetUpChatView();
+            
+            CurrentSituation.Clear();
+            List<int> temp = new List<int>();
+            foreach (var list in QueryResult[DisplayIndex])
+            {
+                
+                temp.AddRange(list);
+            }
+            //temp.Add(temp.Min() - 1);
+            //temp.Add(temp.Min() - 2);
+            //temp.Add(temp.Max() + 1);
+            //temp.Add(temp.Max() + 2);
+            ////bleh
+            temp.Sort();
+            for(int i = temp[0]; i <= temp[temp.Count-1];i++)
+            {
+                CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
+            }
+            
             fastObjectListView1.SetObjects(CurrentSituation);
+            SetUpChatView();
+            fastObjectListView1.Sort(fastObjectListView1.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
         }
         private void SetUpChatView()
         {
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in MessageContainer.Messages[0].contents.Keys)
+            foreach (var key in IndexService.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x)
@@ -55,7 +85,7 @@ namespace Viewer.UI
             }
             fastObjectListView1.AllColumns.Clear();
             fastObjectListView1.AllColumns.AddRange(columns);
-            fastObjectListView1.RebuildColumns();
+
             foreach (var cl in fastObjectListView1.AllColumns)
             {
                 if (cl.Text != IndexService.TextFieldKey)
@@ -68,6 +98,9 @@ namespace Viewer.UI
 
                 }
             }
+            
+            fastObjectListView1.RebuildColumns();
+            fastObjectListView1.Refresh();
         }
 
         public void ShowView()
@@ -77,38 +110,30 @@ namespace Viewer.UI
         //Buttons 1 and 2 are for seeing next/prev suggestion
         private void button1_Click(object sender, System.EventArgs e)
         {
-            
+            if(DisplayIndex > 0)
+            {
+                DisplayIndex--;
+                DisplaySituation();
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            if(DisplayIndex < QueryResult.Count - 1)
+            {
+                DisplayIndex++;
+                DisplaySituation();
+            }
         }
 
-        // These are for running our pre-cooked queries
-        private void button3_Click(object sender, EventArgs e)
+        // This one is for running our pre-cooked queries
+        private void preCooked_Click(object sender, EventArgs e)
         {
             this.QueryString = "";
             RunQuery?.Invoke(this, EventArgs.Empty);
         }
 
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            this.QueryString = "";
-            RunQuery?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.QueryString = "";
-            RunQuery?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
         //This is the Find button
 
         private void button7_Click(object sender, EventArgs e)
@@ -133,10 +158,16 @@ namespace Viewer.UI
             ListAdder la = sender as ListAdder;
             if (la != null)
             {
-                UserDicts.Add(la.CurName, la.CurList);
+                UserDictsEventArgs dictargs = new UserDictsEventArgs();
+                dictargs.Name = la.CurName;
+                dictargs.Words = la.CurList;
+                //UserDicts.Add(la.CurName, la.CurList);
+                AddUserDict?.Invoke(this, dictargs);
+
                 var temp = new ListViewItem(la.CurName);
                 temp.SubItems.Add(String.Join(", ", la.CurList.ToArray()));
                 listView1.Items.Add(temp);
+
             }
             la.Close();
         }
@@ -147,10 +178,35 @@ namespace Viewer.UI
             {
                 foreach(ListViewItem item in listView1.SelectedItems)
                 {
-                    UserDicts.Remove(item.Text);
+                    //UserDicts.Remove(item.Text);
+                    UserDictsEventArgs dictargs = new UserDictsEventArgs();
+                    dictargs.Name = item.Text;
+                    DeleteUserDict?.Invoke(this, dictargs);
                     listView1.Items.Remove(item);
                 }
             }
+        }
+
+        private void operator_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            richTextBox1.Text = richTextBox1.Text + " " + b.Text;
+        }
+
+        private void Suggester_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+           
+        }
+
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

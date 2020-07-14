@@ -2,6 +2,7 @@
 using IndexEngine;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
+using Lucene.Net.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,24 @@ namespace Retrievers
             HashSet<int> results = new HashSet<int>();
             foreach (var word in words)
             {
-                TermQuery query = new TermQuery(new Lucene.Net.Index.Term(word));
-                BooleanQuery boolquery = new BooleanQuery();
-                boolquery.Add(query, Occur.MUST);
-                TopDocs docs = LuceneService.Searcher.Search(boolquery, LuceneService.DirReader.MaxDoc);
+
+                //TermQuery query = new TermQuery(new Lucene.Net.Index.Term(word));
+                //BooleanQuery boolquery = new BooleanQuery();
+                //boolquery.Add(query, Occur.MUST);
+
+                //А на самом деле можно построить фильтр сразу на весь список слов без цикла.
+                //string[] temp = new string[1];
+                //temp[0] = word;
+                //FieldCacheTermsFilter filter = new FieldCacheTermsFilter(IndexService.TextFieldKey, temp);
+                //var boolFilter = new BooleanFilter();
+                //boolFilter.Add(new FilterClause(filter, Occur.MUST));
+
+                Query query = LuceneService.Parser.Parse(word);
+                TopDocs docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
                 foreach (var doc in docs.ScoreDocs)
                 {
                     Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                    results.Add((int)idoc.GetField("id").GetInt32Value());
+                    results.Add(idoc.GetField("id").GetInt32Value().Value);
                 }
 
 
@@ -148,7 +159,7 @@ namespace Retrievers
             foreach (var doc in docs.ScoreDocs)
             {
                 Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                results.Add((int)idoc.GetField("id").GetInt32Value());
+                results.Add(idoc.GetField("id").GetInt32Value().Value);
             }
             List<int> ret = results.ToList();
             return ret;
@@ -158,14 +169,12 @@ namespace Retrievers
         {
             //Or I can check each and every message out of millions for a substring occurence :^)
             HashSet<int> results = new HashSet<int>();
-            TermQuery query = new TermQuery(new Lucene.Net.Index.Term(user));
-            BooleanQuery boolquery = new BooleanQuery();
-            boolquery.Add(query, Occur.MUST);
-            TopDocs docs = LuceneService.Searcher.Search(boolquery, LuceneService.DirReader.MaxDoc);
+            Query query = LuceneService.Parser.Parse(user);
+            TopDocs docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
             foreach (var doc in docs.ScoreDocs)
             {
                 Document idoc = LuceneService.Searcher.IndexReader.Document(doc.Doc);
-                results.Add((int)idoc.GetField("id").GetInt32Value());
+                results.Add(idoc.GetField("id").GetInt32Value().Value);
             }
             List<int> ret = results.ToList();
             return ret;

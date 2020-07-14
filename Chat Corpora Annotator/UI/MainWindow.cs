@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 using Viewer.UI;
+using ZedGraph;
 
 namespace Viewer
 {
@@ -32,12 +33,17 @@ namespace Viewer
 		public event EventHandler KeywordClick;
 		public event EventHandler LoadStatistics;
 		public event EventHandler ExtractInfoClick;
+        public event EventHandler VisualizeLengths;
+        public event EventHandler VisualizeTokens;
+        public event EventHandler VisualizeTokenLengths;
 
-		public string CurrentPath { get; set; }
+        public string CurrentPath { get; set; }
 		public string CurrentIndexPath { get; set; }
 
 
 		private Dictionary<string, Color> userColors;
+
+		public PointPairList LengthHist { get; set; } = new PointPairList();
 
 
 		private bool chatViewSetUp = false;
@@ -47,8 +53,9 @@ namespace Viewer
 
 		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public bool InfoExtracted { get; set; }
+        public PointPairList TokenHist { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-		public void SetLineCount(int count)
+        public void SetLineCount(int count)
 		{
 			messageLabel.Text = count.ToString() + " messages";
 
@@ -135,6 +142,10 @@ namespace Viewer
 			
 			this.PropertyChanged += MainWindow_PropertyChanged;
 			this.InfoExtracted = false;
+			zedGraphControl1.GraphPane.Title.IsVisible = false;
+			zedGraphControl1.GraphPane.YAxis.Title.Text = "";
+			zedGraphControl1.GraphPane.XAxis.Title.Text = "";
+			
 
 		}
 
@@ -239,7 +250,7 @@ namespace Viewer
 			SetDateView();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
-			foreach (var key in MessageContainer.Messages[0].contents.Keys)
+			foreach (var key in IndexService.SelectedFields)
 			{
 				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x)
@@ -435,7 +446,7 @@ namespace Viewer
 			//searchResults.Clear();
 			if (searchBox.Text == "")
 			{
-				MessageBox.Show("Empty queries not supported just yet");
+				//MessageBox.Show("Empty queries not supported just yet");
 				//if (result == DialogResult.OK)
 				//{
 				//	LaunchSearch();
@@ -613,7 +624,15 @@ namespace Viewer
 
 		public void ShowDates(List<DateTime> dates)
 		{
-			foreach(var item in dates)
+			List<DateTime> container = new List<DateTime>();
+			foreach(var message in MessageContainer.Messages)
+            {
+				container.Add(DateTime.Parse(message.contents[IndexService.DateFieldKey].ToString()).Date);
+            }
+
+			IEnumerable<DateTime> intersect = container.Intersect(dates);
+			dateView.Items.Clear();
+			foreach(var item in intersect)
 			{
 				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
 			}
@@ -623,16 +642,17 @@ namespace Viewer
 		private void button1_Click_1(object sender, EventArgs e)
 		{
 			LoadStatistics?.Invoke(this, EventArgs.Empty);
+			
 		}
 
 		public void DisplayStatistics(StatisticsContainer stats)
 		{
-			
-			label4.Text = stats.AverageLength.ToString();
-			label5.Text = stats.NumberOfSymbols.ToString();
-			label6.Text = stats.NumberOfTokens.ToString();
-			label7.Text = stats.NumberOfUsers.ToString();
-			label8.Text = stats.AverageMessagesPerDay.ToString();
+
+			listView1.Items.Add(new ListViewItem(new string[2] { "Average messsage length", stats.AverageLength.ToString() }));
+			listView1.Items.Add(new ListViewItem(new string[2] { "Average messages per day", stats.AverageMessagesPerDay.ToString() }));
+			listView1.Items.Add(new ListViewItem(new string[2] { "Number of messages", stats.NumberOfDocs.ToString() }));
+			listView1.Items.Add(new ListViewItem(new string[2] { "Number of symbols", stats.NumberOfSymbols.ToString() }));
+			listView1.Items.Add(new ListViewItem(new string[2] { "Number of tokens", stats.NumberOfTokens.ToString() }));
 
 		}
 
@@ -653,8 +673,41 @@ namespace Viewer
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-			
+            switch (listBox1.Items[listBox1.SelectedIndex].ToString())
+            {
+				case "Message length":
+					VisualizeLengths?.Invoke(this, EventArgs.Empty);
+					break;
+				case "Token number by message":
+					VisualizeTokens?.Invoke(this, EventArgs.Empty);
+					break;
+				case "Token lengths":
+					VisualizeTokenLengths?.Invoke(this, EventArgs.Empty);
+					break;
+            }
+
         }
+
+		public void VisualizeHist(PointPairList list, string name)
+        {
+			zedGraphControl1.GraphPane.GraphObjList.Clear();
+			zedGraphControl1.GraphPane.CurveList.Clear();
+			zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
+			
+			zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
+			zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
+			zedGraphControl1.AxisChange();
+			zedGraphControl1.Refresh();
+		}
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startTaggingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			TagClick?.Invoke(this, EventArgs.Empty);
+		}
     }
 }
 

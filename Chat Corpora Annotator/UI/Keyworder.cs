@@ -21,9 +21,10 @@ namespace Viewer.UI
         public int RakeWordCount { get { return RakeKeywords.Count; } }
 
         public List<string> NounPhrases { get; set; }
+        public int RakeLength { get; set; } = 2;
 
         public void DisplayKeyPhrases() {
-            richTextBox2.Lines = NounPhrases.ToArray();
+            //richTextBox2.Lines = NounPhrases.ToArray();
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -49,7 +50,7 @@ namespace Viewer.UI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            RakeLength = Int32.Parse(comboBox1.SelectedItem.ToString());
         }
 
         private void button2_Click(object sender, EventArgs e)
