@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using Viewer.Framework.Views;
+using System.Drawing;
 
 namespace Viewer.UI
 {
@@ -13,9 +14,18 @@ namespace Viewer.UI
         public Suggester()
         {
             InitializeComponent();
+            fastObjectListView1.FormatRow += FastObjectListView1_FormatRow;
             
         }
 
+        private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
+            if (Hits.Contains(dyn.Id))
+            {
+                e.Item.BackColor = Color.Pink;
+            }
+        }
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
 
@@ -28,6 +38,7 @@ namespace Viewer.UI
         public event UserDictsEventHandler AddUserDict;
         public event UserDictsEventHandler DeleteUserDict;
 
+        private List<int> Hits;
         public void CloseView()
         {
             this.Hide();
@@ -63,6 +74,7 @@ namespace Viewer.UI
             //temp.Add(temp.Max() + 2);
             ////bleh
             temp.Sort();
+            Hits = temp;
             CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 2));
             CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 1));
             
