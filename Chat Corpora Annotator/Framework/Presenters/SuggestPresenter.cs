@@ -47,8 +47,11 @@ namespace Viewer.Framework.Presenters
             //_service.Parse(_sugg.QueryString);
             //Run Parser from here
             _sugg.DisplayIndex = 0;
+            _sugg.GroupIndex = 0;
+            _sugg.SetCounts();
             _sugg.QueryResult = Parser.Parser.parse(_sugg.QueryString);
             _sugg.DisplaySituation();
+            
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)

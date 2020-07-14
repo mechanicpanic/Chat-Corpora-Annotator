@@ -250,7 +250,7 @@ namespace Viewer
 			SetDateView();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
-			foreach (var key in MessageContainer.Messages[0].contents.Keys)
+			foreach (var key in IndexService.SelectedFields)
 			{
 				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x)

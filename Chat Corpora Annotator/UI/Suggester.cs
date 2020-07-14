@@ -3,6 +3,7 @@ using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 using Viewer.Framework.Views;
 
 namespace Viewer.UI
@@ -20,9 +21,9 @@ namespace Viewer.UI
 
         //public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
         public string QueryString { get; set; }
-        public List<List<int>> QueryResult { get; set; } = new List<List<int>>();
+        public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
         public int DisplayIndex { get; set; } = 0;
-
+        public int GroupIndex { get; set; } = 0;
         public event EventHandler RunQuery;
         public event UserDictsEventHandler AddUserDict;
         public event UserDictsEventHandler DeleteUserDict;
@@ -32,11 +33,16 @@ namespace Viewer.UI
             this.Hide();
         }
 
+        public void SetCounts()
+        {
+            label3.Text = QueryResult.Count.ToString();
+            label4.Text = QueryResult.Sum(x => x.Count).ToString();
+        }
         public void DisplaySituation()
         {
             
             CurrentSituation.Clear();
-            foreach (var i in QueryResult[DisplayIndex])
+            foreach (var i in QueryResult[GroupIndex][DisplayIndex])
             {
                 CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
             }
@@ -101,7 +107,7 @@ namespace Viewer.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(DisplayIndex < QueryResult.Count - 1)
+            if(DisplayIndex < QueryResult[GroupIndex].Count - 1)
             {
                 DisplayIndex++;
                 DisplaySituation();
@@ -182,6 +188,31 @@ namespace Viewer.UI
                 Hide();
             }
            
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if(GroupIndex > 0)
+            {
+                GroupIndex--;
+                DisplayIndex = 0;
+                DisplaySituation();
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if(GroupIndex < QueryResult.Count - 1)
+            {
+                GroupIndex++;
+                DisplayIndex = 0;
+                DisplaySituation();
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
