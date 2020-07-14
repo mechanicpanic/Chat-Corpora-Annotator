@@ -36,7 +36,16 @@ namespace Viewer.UI
         public void SetCounts()
         {
             label3.Text = QueryResult.Count.ToString();
-            label4.Text = QueryResult.Sum(x => x.Count).ToString();
+            //label4.Text = QueryResult.Sum(x => x.Count).ToString();
+            int count = 0;
+            foreach (var list in QueryResult)
+            {
+                foreach (var res in list)
+                {
+                    count += res.Count;
+                }
+            }
+            label4.Text = count.ToString();
         }
         public void DisplaySituation()
         {
@@ -48,17 +57,22 @@ namespace Viewer.UI
                 
                 temp.AddRange(list);
             }
-            //temp.Add(temp.Min() - 1);
+            //temp.Add();
             //temp.Add(temp.Min() - 2);
             //temp.Add(temp.Max() + 1);
             //temp.Add(temp.Max() + 2);
             ////bleh
             temp.Sort();
-            for(int i = temp[0]; i <= temp[temp.Count-1];i++)
+            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 2));
+            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 1));
+            
+            for (int i = temp[0]; i <= temp[temp.Count-1];i++)
             {
                 CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
             }
-            
+            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 1));
+            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 2));
+
             fastObjectListView1.SetObjects(CurrentSituation);
             SetUpChatView();
             fastObjectListView1.Sort(fastObjectListView1.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
