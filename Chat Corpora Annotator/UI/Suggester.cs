@@ -48,10 +48,17 @@ namespace Viewer.UI
                 
                 temp.AddRange(list);
             }
-            foreach(var i in temp)
+            //temp.Add(temp.Min() - 1);
+            //temp.Add(temp.Min() - 2);
+            //temp.Add(temp.Max() + 1);
+            //temp.Add(temp.Max() + 2);
+            ////bleh
+            temp.Sort();
+            for(int i = temp[0]; i <= temp[temp.Count-1];i++)
             {
                 CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
             }
+            
             fastObjectListView1.SetObjects(CurrentSituation);
             SetUpChatView();
             fastObjectListView1.Sort(fastObjectListView1.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
@@ -113,7 +120,7 @@ namespace Viewer.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(DisplayIndex < QueryResult[GroupIndex].Count - 1)
+            if(DisplayIndex < QueryResult.Count - 1)
             {
                 DisplayIndex++;
                 DisplaySituation();

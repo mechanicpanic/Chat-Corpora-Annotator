@@ -47,9 +47,11 @@ namespace Viewer.Framework.Presenters
             //_service.Parse(_sugg.QueryString);
             //Run Parser from here
             _sugg.DisplayIndex = 0;
-            _sugg.GroupIndex = 0;
-            _sugg.SetCounts();
+            //_sugg.GroupIndex = 0;
+            
+            _sugg.QueryResult.Clear();
             _sugg.QueryResult = Parser.Parser.parse(_sugg.QueryString);
+            _sugg.SetCounts();
             _sugg.DisplaySituation();
             
         }
