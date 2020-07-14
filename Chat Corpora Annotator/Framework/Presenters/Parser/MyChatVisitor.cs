@@ -194,7 +194,7 @@ namespace Viewer.Framework.Presenters.Parser
         }
 
 
-        // Merge some restriction groups to query answer
+        // Merge all restriction groups to query answer
         // For example, we have 3 group X, Y, Z:
         // select qX1,...,qXk inwin n1, qY1,...,qYs inwin n2, qZ1...qZm inwin n3
         // Suppose, that answer for separate groups is: [X1, X2] [Y1, Y2, Y3] [Z1, Z2]
@@ -208,7 +208,7 @@ namespace Viewer.Framework.Presenters.Parser
         private List<List<List<int>>> MergeRestrictionGroups(List<List<List<int>>> rList)
         {
             var resultList = new List<List<List<int>>>();
-            int _size = resultList.Count();
+            int _size = rList.Count();
 
             List<int> curIndex = new List<int>();
 
@@ -232,7 +232,7 @@ namespace Viewer.Framework.Presenters.Parser
 
                 for (int i = _size - 1; i >= 0; i--)
                 {
-                    if (curIndex[i] < rList[i].Count())
+                    if (curIndex[i] < rList[i].Count() - 1)
                     {
                         can_end = false;
                         curIndex[i]++;
