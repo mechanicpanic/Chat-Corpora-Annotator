@@ -7,12 +7,12 @@ query
 
 body
     :
-    restriction_group (';' restriction_group)* ';'?
+    (query_seq | restrictions) ';'? (InWin number)?
     ;
 
-restriction_group
+query_seq
     :
-    restrictions (InWin number)?
+    '(' query ')' ( ';' '(' query ')' )* 
     ;
 
 restrictions
@@ -69,8 +69,3 @@ WS: [ \n\r\t] -> skip;
 
 fragment DIGIT : [0-9];
 fragment LETTER : [a-zA-Z_];
-
-// SELECT haswordofdict("animals")
-// SELECT haswordofdict("animals") AND haswordofdict("medicine")
-// SELECT haswordofdict("animals") AND haswordofdict("medicine"), haswordofdict("qualities") INWIN 5
-// SELECT haswordofdict("animals") AND haswordofdict("medicine"), haswordofdict("qualities") INWIN 5, haswordofdict("pharmacies") INWIN 5

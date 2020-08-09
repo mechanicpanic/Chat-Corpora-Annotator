@@ -14,17 +14,17 @@ using java.awt;
 using javax.swing;
 using javax.xml.transform;
 using jdk.nashorn.@internal.ir;
+using Microsoft.VisualBasic;
 using org.omg.CORBA;
 using Retrievers;
 using Viewer.UI;
 
 namespace Viewer.Framework.Presenters.Parser
 {
+    using MsgGroups = List<List<int>>;
+
     public class MyChatVisitor : ChatBaseVisitor<object>
     {
-
-        List<int> inwin = new List<int>();
-
         public override object VisitQuery([NotNull] ChatParser.QueryContext context)
         {
             return VisitBody(context.body());
@@ -32,45 +32,67 @@ namespace Viewer.Framework.Presenters.Parser
 
         public override object VisitBody([NotNull] ChatParser.BodyContext context)
         {
-            var rGroups = new List<List<List<int>>>();
-
-            foreach (var rGroup in context.restriction_group())
-            {
-                rGroups.Add((List<List<int>>)VisitRestriction_group(rGroup));
-            }
-
-           /* foreach (var v in inwin)
-            {
-                Console.Write(v);
-                Console.Write(' ');
-            }
-
-            Console.WriteLine('\n');*/
-
-            return MergeRestrictionGroups(rGroups);
-        }
-
-        public override object VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context)
-        {
-            // Default window size is 50
-            int windowSize = 50;
-
+            // Default window size is 70
+            int windowSize = 70;
             if (context.InWin() != null)
             {
                 windowSize = Int32.Parse(context.number().GetText());
             }
 
-            inwin.Add(windowSize);
+            if (context.restrictions() != null)
+            {
+                // If query / subquery contains only restrictions -- we need only merge restrictions
+                // [x1...xn] -- result for restriction R1
+                // [y1...ym] -- result for restriction R2
+                // Select R1, R2 inwin W
+                // Result is vector of vectors [[xi, yj]] where 0 < yj - xi <= W
+                // So we have only one restriction group
 
-            var rList = (List<List<int>>)VisitRestrictions(context.restrictions());
-            var merge = MergeRestrictions(rList, windowSize);
+                var onlyRestrictions = (MsgGroups)VisitRestrictions(context.restrictions());
+                var mergedRestrcitions = MergeRestrictions(onlyRestrictions, windowSize);
 
-            return merge;
+                return OnlyRestrictionsToList(mergedRestrcitions);
+            }
+            else if (context.query_seq() != null)
+            {
+                // Now in this query subqueries only.
+                // Also we have invariant: results of son's query are calculated correctlly.
+                // It means that now we have only son's correct accomadation.
+
+                var subQueryResults = (List<List<MsgGroups>>)VisitQuery_seq(context.query_seq());
+
+                return MergeQueries(subQueryResults, windowSize);                                               
+            }
+
+            return null;
+        }
+
+        public override object VisitQuery_seq([NotNull] ChatParser.Query_seqContext context)
+        {
+            var qList = new List<List<MsgGroups>>();
+
+            foreach (var q in context.query())
+            {
+                // VisitQuery returns all correct accomodation. 
+                // For example, we have 3 group X, Y, Z:
+                // select qX1,...,qXk inwin n1, qY1,...,qYs inwin n2, qZ1...qZm inwin n3
+                // Suppose, that answer for separate groups is: [X1, X2] [Y1, Y2, Y3] [Z1, Z2]
+                // Result of MergeRestrictionGroups([[X1, X2] [Y1, Y2, Y3] [Z1, Z2]]) is:
+                // [ [X1, Y1, Z1],
+                //   [X1, Y1, Z2],
+                //   [X1, Y2, Z1],
+                //   [X1, Y2, Z2],
+                //   ............
+                //   [X2, Y3, Z2] ]
+                qList.Add((List<MsgGroups>)VisitQuery(q));
+            }
+
+            return qList;
         }
 
         public override object VisitRestrictions([NotNull] ChatParser.RestrictionsContext context)
         {
-            var rList = new List<List<int>>();
+            var rList = new MsgGroups();
 
             foreach (var r in context.restriction())
             {
@@ -173,10 +195,23 @@ namespace Viewer.Framework.Presenters.Parser
             
         }
 
-        private List<List<int>> MergeRestrictions(List<List<int>> rList, int windowSize)
+
+        private List<MsgGroups> OnlyRestrictionsToList(MsgGroups rList)
+        {
+            var result = new List<MsgGroups>();
+
+            foreach (var r in rList)
+            {
+                result.Add(new MsgGroups { r });
+            }
+
+            return result;
+        }
+
+        private MsgGroups MergeRestrictions(MsgGroups rList, int windowSize)
         {
             int _size = rList.Count;
-            var result = new List<List<int>>();
+            var result = new MsgGroups();
 
             if (_size == 1)
             {
@@ -221,22 +256,10 @@ namespace Viewer.Framework.Presenters.Parser
             return result;
         }
 
-        // Merge all restriction groups to query answer
-        // For example, we have 3 group X, Y, Z:
-        // select qX1,...,qXk inwin n1, qY1,...,qYs inwin n2, qZ1...qZm inwin n3
-        // Suppose, that answer for separate groups is: [X1, X2] [Y1, Y2, Y3] [Z1, Z2]
-        // Result of MergeRestrictionGroups([[X1, X2] [Y1, Y2, Y3] [Z1, Z2]]) is:
-        // [X1, Y1, Z1]
-        // [X1, Y1, Z2]
-        // [X1, Y2, Z1]
-        // [X1, Y2, Z2]
-        // ............
-        // [X2, Y3, Z2]
-        private List<List<List<int>>> MergeRestrictionGroups(List<List<List<int>>> rList)
+        private List<MsgGroups> MergeQueries(List<List<MsgGroups>> sqResults, int windowSize)
         {
-            var resultList = new List<List<List<int>>>();
-            int _size = rList.Count();
-
+            var result = new List<MsgGroups>();
+            int _size = sqResults.Count();
             List<int> curIndex = new List<int>();
 
             for (int i = 0; i < _size; i++)
@@ -247,22 +270,29 @@ namespace Viewer.Framework.Presenters.Parser
             while (true)
             {
                 bool can_end = true;
-                
-                var curAccomodation = new List<List<int>>();
+
+                var curAccomadtion = new List<MsgGroups>();
+
                 for (int i = 0; i < _size; i++)
                 {
-                    var elem = rList[i][curIndex[i]];
-                    curAccomodation.Add(elem);
+                    var elem = sqResults[i][curIndex[i]];
+                    curAccomadtion.Add(elem);
                 }
 
-                if (isCorrectAccomodation(curAccomodation))
+                if (isCorrectAccomodation(curAccomadtion, windowSize))
                 {
-                    resultList.Add(curAccomodation);
+                    var current = new MsgGroups();
+                    foreach (var group in curAccomadtion)
+                    {
+                        current.AddRange(group);
+                    }
+
+                    result.Add(current);
                 }
 
                 for (int i = _size - 1; i >= 0; i--)
                 {
-                    if (curIndex[i] < rList[i].Count() - 1)
+                    if (curIndex[i] < sqResults[i].Count - 1)
                     {
                         can_end = false;
                         curIndex[i]++;
@@ -275,49 +305,38 @@ namespace Viewer.Framework.Presenters.Parser
                     }
                 }
 
-                if (can_end)
+
+                if (can_end) 
                 {
                     break;
                 }
             }
 
-            return resultList;
+
+            return result;
         }
 
-        private bool isCorrectAccomodation(List<List<int>> acc)
+        private bool isCorrectAccomodation(List<MsgGroups> acc, int windowSize)
         {
             int _size = acc.Count();
 
             for (int i = 1; i < _size; i++)
             {
-                int prevLast = acc[i - 1].Last();
-                int curLast = acc[i].Last();
-                int windowSize = inwin[i];
+                int prevLast = acc[i - 1].Last().Last();
+                int curFirst = acc[i].First().First();
 
-                /*Console.WriteLine("---------");
-
-                foreach(var ai in acc)
-                {
-                    foreach(var elem in ai)
-                    {
-                        Console.Write(elem);
-                        Console.Write(' ');
-                    }
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine("---------");*/
-
-                bool correctOrder = (curLast >= prevLast);
-                bool correctWindow = (curLast - prevLast <= windowSize);
-
-                if (!correctOrder || !correctWindow)
+                if (prevLast >= curFirst)
                 {
                     return false;
                 }
             }
 
-            return true;
+            int fstFirst = acc.First().First().First();
+            int lastLast = acc.Last().Last().Last();
+
+            bool correctWindow = ((lastLast - fstFirst) <= windowSize);
+
+            return correctWindow;
         }
     }
 }
