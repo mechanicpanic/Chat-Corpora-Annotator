@@ -37,16 +37,16 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.loadMoreButton = new System.Windows.Forms.Button();
-            this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tagTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tagTable)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -183,34 +183,9 @@
             this.loadMoreButton.UseVisualStyleBackColor = false;
             this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
             // 
-            // chatTable
-            // 
-            this.chatTable.BackColor = System.Drawing.Color.White;
-            this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatTable.CellEditUseWholeCell = false;
-            this.chatTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chatTable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chatTable.FullRowSelect = true;
-            this.chatTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.chatTable.HeaderUsesThemes = true;
-            this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(0, 0);
-            this.chatTable.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.chatTable.Name = "chatTable";
-            this.chatTable.RowHeight = 52;
-            this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(851, 579);
-            this.chatTable.TabIndex = 13;
-            this.chatTable.UnfocusedSelectedBackColor = System.Drawing.Color.Pink;
-            this.chatTable.UseCellFormatEvents = true;
-            this.chatTable.UseCompatibleStateImageBehavior = false;
-            this.chatTable.UseFiltering = true;
-            this.chatTable.View = System.Windows.Forms.View.Details;
-            this.chatTable.VirtualMode = true;
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.chatTable);
+            this.panel1.Controls.Add(this.tagTable);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.loadMoreButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -266,6 +241,22 @@
             this.columnHeader1.Text = "Situations";
             this.columnHeader1.Width = 204;
             // 
+            // tagTable
+            // 
+            this.tagTable.CellEditUseWholeCell = false;
+            this.tagTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tagTable.FullRowSelect = true;
+            this.tagTable.HideSelection = false;
+            this.tagTable.Location = new System.Drawing.Point(0, 0);
+            this.tagTable.Name = "tagTable";
+            this.tagTable.RowHeight = 52;
+            this.tagTable.ShowGroups = false;
+            this.tagTable.Size = new System.Drawing.Size(851, 579);
+            this.tagTable.TabIndex = 18;
+            this.tagTable.UseCompatibleStateImageBehavior = false;
+            this.tagTable.View = System.Windows.Forms.View.Details;
+            this.tagTable.VirtualMode = true;
+            // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -280,9 +271,9 @@
             this.Text = "Tagger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TagWindow_FormClosing);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tagTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -294,7 +285,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button loadMoreButton;
-        private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -303,5 +293,6 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button button5;
+        private BrightIdeasSoftware.FastObjectListView tagTable;
     }
 }

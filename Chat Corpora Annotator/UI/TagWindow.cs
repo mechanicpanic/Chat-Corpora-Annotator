@@ -3,6 +3,8 @@ using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -49,7 +51,7 @@ namespace Viewer.UI
 			InitializeComponent();
 			DisplayTagset(new List<string>());
 
-			chatTable.FormatRow += ChatTable_FormatRow;
+			tagTable.FormatRow += ChatTable_FormatRow;
 			
 		}
 
@@ -103,10 +105,10 @@ namespace Viewer.UI
 		private void button2_Click(object sender, EventArgs e)
 		{
 
-			if (listView2.SelectedItems != null && chatTable.SelectedObjects != null)
+			if (listView2.SelectedItems != null && tagTable.SelectedObjects != null)
 			{
 				List<int> set = new List<int>();
-				foreach (var obj in chatTable.SelectedObjects)
+				foreach (var obj in tagTable.SelectedObjects)
 				{
 					DynamicMessage msg = (DynamicMessage)obj;
 					set.Add(msg.Id);
@@ -120,16 +122,18 @@ namespace Viewer.UI
 				AddTag?.Invoke(this, args);
 			}
 			var temp = "";
-			foreach (var obj in chatTable.SelectedObjects)
+			foreach (var obj in tagTable.SelectedObjects)
 			{
+				//This is so stupid.
 				temp = " [" + listView2.SelectedItems[0].Text + " ID " + SessionTagIndex[listView2.SelectedItems[0].Text] + "]";
-				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].contents["text"] += temp;
-
+				
+				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].Situations.Add(temp);
+				
 			}
 			listView1.Items.Add(new ListViewItem(temp));
 			listView1.Update();
 			SessionTagIndex[listView2.SelectedItems[0].Text]++;
-			chatTable.UpdateObjects(MessageContainer.Messages);
+			tagTable.UpdateObjects(MessageContainer.Messages);
 		}
 
 
@@ -141,38 +145,58 @@ namespace Viewer.UI
 
 		public void SetUpChatView()
 		{
+			
 
-			chatTable.SetObjects(MessageContainer.Messages);
-			List<OLVColumn> columns = new List<OLVColumn>();
 
-			foreach (var key in MessageContainer.Messages[0].contents.Keys)
-			{
-				OLVColumn cl = new OLVColumn();
-				cl.AspectGetter = delegate (object x)
-				{
-					DynamicMessage message = (DynamicMessage)x;
-					return message.contents[key];
-				};
+            tagTable.SetObjects(MessageContainer.Messages);
+            List<OLVColumn> columns = new List<OLVColumn>();
+
+            foreach (var key in MessageContainer.Messages[0].Contents.Keys)
+            {
+                OLVColumn cl = new OLVColumn();
+				cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
+
+				cl.Name = key;
 				cl.Text = key;
-				cl.WordWrap = true;
-				columns.Add(cl);
+                cl.WordWrap = true;
+                columns.Add(cl);
 
-			}
+                
 
-			chatTable.AllColumns.Clear();
-			chatTable.AllColumns.AddRange(columns);
-			chatTable.RebuildColumns();
-
-
+            }
+			
+			OLVColumn cltag = new OLVColumn();
+			cltag.Name = "Tag";
+			cltag.Text = "Tag";
+			cltag.AspectGetter = delegate (object x) { return OnTagValueGetter(cltag, x, null); };
+			tagTable.AllColumns.Clear();
+			tagTable.AllColumns.Add(cltag);
+			tagTable.AllColumns.AddRange(columns);
+			tagTable.RebuildColumns();
 			FormatColumns();
+		}
 
+		internal string OnTagValueGetter(OLVColumn cl, object o, string key)
+        {
+			//I mean shouldnt this work with AspectName instead lmao
+			if (cl.Name != "Tag")
+			{
+				DynamicMessage message = (DynamicMessage)o;
+				return message.Contents[key].ToString();
+			}
+			else
+            {
+				
+				DynamicMessage m = (DynamicMessage)o;
+				return String.Join(",", m.Situations.ToArray());
+            }
 		}
 
 
 
 		private void FormatColumns()
 		{
-			foreach (var cl in chatTable.AllColumns)
+			foreach (var cl in tagTable.AllColumns)
 			{
 				if (cl.Text != IndexService.TextFieldKey)
 				{
@@ -185,7 +209,7 @@ namespace Viewer.UI
 
 				}
 			}
-			chatTable.Refresh();
+			tagTable.Refresh();
 
 		}
 
@@ -212,8 +236,8 @@ namespace Viewer.UI
 		public void DisplayDocuments()
 		{
 			SetUpChatView();
-			chatTable.UpdateObjects(MessageContainer.Messages);
-			chatTable.Invalidate();
+			tagTable.UpdateObjects(MessageContainer.Messages);
+			tagTable.Invalidate();
 		}
 
 		public void UpdateTagIndex(List<string> tags)
@@ -255,5 +279,10 @@ namespace Viewer.UI
 				Hide();
 			}
 		}
+
+        private void tagTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

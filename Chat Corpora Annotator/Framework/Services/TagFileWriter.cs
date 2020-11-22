@@ -66,7 +66,7 @@ namespace Viewer.Framework.Services
             writer.WriteStartElement("Situation", situation);
             foreach (var msg in messages)
             {
-                WriteMessage(msg.Id, msg.contents[IndexService.TextFieldKey].ToString(), msg.contents[IndexService.SenderFieldKey].ToString(), msg.contents[IndexService.DateFieldKey].ToString());
+                WriteMessage(msg.Id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
             }
             writer.WriteEndElement();
         }
