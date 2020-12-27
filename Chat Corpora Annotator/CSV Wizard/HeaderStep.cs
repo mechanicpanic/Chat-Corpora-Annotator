@@ -5,7 +5,7 @@ namespace Viewer.CSV_Wizard
 {
     public partial class HeaderStep : UserControl, IWizardItem
     {
-        private bool header;
+        private bool header = false;
         public string StepType { get { return "Header"; } }
         public HeaderStep(string[] fields)
         {
@@ -17,7 +17,7 @@ namespace Viewer.CSV_Wizard
             listView1.Invalidate();
         }
 
-        public string HeaderTitle { get { return "Select the columns to be uploaded. Note: this is the first line of your file. If your file does not have a header, you can add a header under the Toggle."; } }
+        public string HeaderTitle { get { return "Select the columns to be uploaded."; } }
 
         public List<string> GetValues()
         {
@@ -54,29 +54,12 @@ namespace Viewer.CSV_Wizard
 
         private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
         {
-            if(checkBox1.Checked)
-            {
-                panel2.Visible = true;
-                header = false;
-            }
-            else
-            {
-                panel2.Visible = false;
-                header = true;
-            }
+            
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-            if(richTextBox1.Lines.Length > 0)
-            {
-                listView1.Items.Clear();
-                foreach(string line in richTextBox1.Lines)
-                {
-                    listView1.Items.Add(new ListViewItem(line));
-                }
-                listView1.Invalidate();
-            }
+           
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

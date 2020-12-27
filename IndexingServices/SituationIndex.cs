@@ -9,17 +9,11 @@ using System.Threading.Tasks;
 
 namespace IndexEngine
 {
-    public struct Situation
-    {
-        string name;
-        Guid id;
-        List<int> messages;
-    }
+    
     public static class SituationIndex
     {
-        public static BTreeDictionary<Guid, List<int>> Index { get; private set; }
-        public static Dictionary<Guid, string> NameLookup { get; private set; }
-
+        public static Dictionary<string, Dictionary<int, List<int>>> container { get; set; } 
+        private static Dictionary<string, int> TagsetCounter { get; set; }
         static SituationIndex()
         {
             if(File.Exists(IndexService.CurrentIndexPath + @"\info"+"situations.txt"))
@@ -28,28 +22,60 @@ namespace IndexEngine
             }
             else
             {
-                Index = new BTreeDictionary<Guid, List<int>>();
-                NameLookup = new Dictionary<Guid, string>();
-
-                //File.Create(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
+                container = new Dictionary<string, Dictionary<int, List<int>>>();
             }
         }
         private static void LoadIndexFromDisk(string file)
         {
             var jsonString = File.ReadAllText(file);
-            Index = JsonSerializer.Deserialize<BTreeDictionary<Guid, List<int>>>(jsonString);
+            container = JsonSerializer.Deserialize<Dictionary<string, Dictionary<int, List<int>>>>(jsonString);
         }
 
         private static void WriteIndexToDisk(string file)
         {
-            var jsonString = JsonSerializer.Serialize(Index);
+            var jsonString = JsonSerializer.Serialize(container);
             File.WriteAllText(file, jsonString);
         }
-        public static void AddSituationToIndex(List<int> messages, string situation)
+        public static void AddSituationToIndex(List<int> messages, int id, string situation)
         {
-            Guid guid = Guid.NewGuid();
-            Index.Add(guid, messages);
-            NameLookup.Add(guid, situation);
+            if (!container.ContainsKey(situation)) {
+                container.Add(situation, new Dictionary<int, List<int>>());
+                container[situation].Add(id, messages);
+                    }
+            else
+            {
+                if (!container[situation].ContainsKey(id))
+                {
+                    
+                    container[situation].Add(id, messages);
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+        public static void RemoveSituationFromIndex(int id, string situation)
+        {
+            
+            if(container.ContainsKey(situation) && container[situation].ContainsKey(id))
+            {
+                foreach(var i in container[situation][id])
+                {
+                    MessageContainer.Messages[i].Situations.Remove(situation);
+                }
+                container[situation].Remove(id);
+            }
+            
+        }
+
+        public static void RemoveMessageFromSituation(string situation, int id, int message)
+        {
+            if (container.ContainsKey(situation))
+            {
+                container[situation][id].Remove(message);
+            }
+            MessageContainer.Messages[message].Situations.Remove(situation);
         }
 
     }

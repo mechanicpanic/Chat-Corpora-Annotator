@@ -66,11 +66,12 @@ namespace Viewer.UI
 
 					listView1.Items.RemoveAt(index);
 				}
-				listView1.SelectedItems.Clear();
+				
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
 				args.Name = comboBox1.SelectedItem.ToString();
 				args.Type = 0;
 				args.Tag = listView1.SelectedItems[0].Text;
+				listView1.SelectedItems.Clear();
 				UpdateTagset?.Invoke(this, args);
 			}
 

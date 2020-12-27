@@ -35,8 +35,7 @@ namespace Viewer.Framework.Presenters
             _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
             _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];
             _main.DisplayTagset(TagsetIndex.Index[args.Name]);
-            _main.ClearData();
-            _main.SetData(TagsetIndex.Index[args.Name]);
+            
         }
 
         private void _tagset_UpdateTagset(object sender, TagsetUpdateEventArgs args)

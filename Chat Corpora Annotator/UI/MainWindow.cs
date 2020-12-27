@@ -256,7 +256,8 @@ namespace Viewer
 				cl.AspectGetter = delegate (object x)
 				{
 					DynamicMessage message = (DynamicMessage)x;
-					return message.Contents[key];
+					if (message != null) { return message.Contents[key]; }
+					else { return ""; }
 				};
 				cl.Text = key;
 				cl.WordWrap = true;
@@ -298,6 +299,7 @@ namespace Viewer
 				{
 					cl.FillsFreeSpace = true;
 					cl.Renderer = highlightTextRenderer1;
+					cl.Sortable = true;
 
 				}
 			}

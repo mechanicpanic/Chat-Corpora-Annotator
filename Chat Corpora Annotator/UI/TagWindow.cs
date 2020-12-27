@@ -1,73 +1,70 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
+
 namespace Viewer.UI
 {
+
+
 	public partial class TagWindow : Form, ITagView
 	{
 		public event EventHandler WriteToDisk;
 		public event EventHandler TagsetClick;
 		public event TaggerEventHandler AddTag;
 		public event TaggerEventHandler RemoveTag;
+		public event TaggerEventHandler DeleteSituation;
+		public event EventHandler RequestColor;
 
-		public event EventHandler EditSituation;
 		public event EventHandler LoadMore;
 		public event EventHandler ShowSuggester;
-		
+
 		public event EventHandler SetTagset;
-        public event EventHandler DisplayColors;
-        public event TaggerEventHandler LoadTagset;
+		public event EventHandler DisplayColors;
+		public event TaggerEventHandler LoadTagset;
+		public Dictionary<string, Color> TagsetColors { get; set; }
+		public string Tagset { get; set; }
 
-        public Dictionary<string, Color> TagsetColors { get; set; }
+		public bool IsFiltered = false;
+		public TagFilter filter = new TagFilter();
 
-		private Dictionary<List<int>,string> TaggedMessages = new Dictionary<List<int>,string>();
-		private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
+		//private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
 
-        public void RetrieveSituationColors()
-        {
 
-        }
-		public void ClearData()
-        {
-			SessionTagIndex = new Dictionary<string, int>();
-        }
-
-		public void SetData(List<string> tags)
-        {
-			foreach(var tag in tags)
-            {
-				SessionTagIndex.Add(tag, 0);
-            }
-        }
 		public TagWindow()
 		{
 			InitializeComponent();
 			DisplayTagset(new List<string>());
 
 			tagTable.FormatRow += ChatTable_FormatRow;
-			
+			LoadMore?.Invoke(this, EventArgs.Empty);
 		}
+
+
 
 		public void DisplayTagset(List<string> tags)
 		{
-			listView2.Items.Clear();
-			foreach(var tag in tags)
-            {
-				listView2.Items.Add(tag);
-				
-            }
-			DisplayColors1();
+			tagsetView.Items.Clear();
+			foreach (var tag in tags)
+			{
+				tagsetView.Items.Add(tag);
+
+			}
+			DisplayBackTagsetColors();
 		}
-		private void DisplayColors1()
-        {
-			foreach (ListViewItem item in listView2.Items)
+		private void DisplayBackTagsetColors()
+		{
+			foreach (ListViewItem item in tagsetView.Items)
 			{
 				if (TagsetColors.ContainsKey(item.Text))
 				{
@@ -80,13 +77,14 @@ namespace Viewer.UI
 		private void ChatTable_FormatRow(object sender, FormatRowEventArgs e)
 		{
 			DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
-			foreach (var kvp in TaggedMessages)
+			if (TagsetColors != null)
 			{
-				if (kvp.Key.Contains(dyn.Id))
+				if (dyn.Situations.Count != 0)
 				{
-					e.Item.BackColor = TagsetColors[kvp.Value];
+					e.Item.BackColor = TagsetColors[dyn.Situations.Keys.ToList<string>()[0]];
 				}
 			}
+
 		}
 
 
@@ -105,36 +103,33 @@ namespace Viewer.UI
 		private void button2_Click(object sender, EventArgs e)
 		{
 
-			if (listView2.SelectedItems != null && tagTable.SelectedObjects != null)
+			if (tagsetView.SelectedItems != null && tagTable.SelectedObjects != null)
 			{
-				List<int> set = new List<int>();
+				TaggerEventArgs args = new TaggerEventArgs();
+
+				args.Tag = tagsetView.SelectedItems[0].Text;
+
+				args.messages = new List<int>();
 				foreach (var obj in tagTable.SelectedObjects)
 				{
 					DynamicMessage msg = (DynamicMessage)obj;
-					set.Add(msg.Id);
-					
-					
+					args.messages.Add(msg.Id);
+
+
 				}
-				TaggedMessages.Add(set, listView2.SelectedItems[0].Text);
-				TaggerEventArgs args = new TaggerEventArgs();
-				args.messages = set;
-				args.Tag = listView2.SelectedItems[0].Text;
+
 				AddTag?.Invoke(this, args);
+
+
+				tagTable.UpdateObjects(MessageContainer.Messages);
 			}
-			var temp = "";
-			foreach (var obj in tagTable.SelectedObjects)
+			else
 			{
-				//This is so stupid.
-				temp = " [" + listView2.SelectedItems[0].Text + " ID " + SessionTagIndex[listView2.SelectedItems[0].Text] + "]";
-				
-				MessageContainer.Messages[MessageContainer.Messages.IndexOf((DynamicMessage)obj)].Situations.Add(temp);
-				
+				MessageBox.Show("Select a tag and messages first");
 			}
-			listView1.Items.Add(new ListViewItem(temp));
-			listView1.Update();
-			SessionTagIndex[listView2.SelectedItems[0].Text]++;
-			tagTable.UpdateObjects(MessageContainer.Messages);
+
 		}
+
 
 
 		private void loadMoreButton_Click(object sender, EventArgs e)
@@ -145,26 +140,28 @@ namespace Viewer.UI
 
 		public void SetUpChatView()
 		{
-			
 
 
-            tagTable.SetObjects(MessageContainer.Messages);
-            List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in MessageContainer.Messages[0].Contents.Keys)
-            {
-                OLVColumn cl = new OLVColumn();
+			tagTable.SetObjects(MessageContainer.Messages);
+			//MessageBox.Show(tagTable.VirtualListDataSource.ToString());
+
+			List<OLVColumn> columns = new List<OLVColumn>();
+
+			foreach (var key in MessageContainer.Messages[0].Contents.Keys)
+			{
+				OLVColumn cl = new OLVColumn();
 				cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
 
 				cl.Name = key;
 				cl.Text = key;
-                cl.WordWrap = true;
-                columns.Add(cl);
+				cl.WordWrap = true;
+				columns.Add(cl);
 
-                
 
-            }
-			
+
+			}
+
 			OLVColumn cltag = new OLVColumn();
 			cltag.Name = "Tag";
 			cltag.Text = "Tag";
@@ -172,12 +169,18 @@ namespace Viewer.UI
 			tagTable.AllColumns.Clear();
 			tagTable.AllColumns.Add(cltag);
 			tagTable.AllColumns.AddRange(columns);
+
+
+
+			//tagTable.ModelFilter = new TagFilter();
+
 			tagTable.RebuildColumns();
+
 			FormatColumns();
 		}
 
 		internal string OnTagValueGetter(OLVColumn cl, object o, string key)
-        {
+		{
 			//I mean shouldnt this work with AspectName instead lmao
 			if (cl.Name != "Tag")
 			{
@@ -185,12 +188,13 @@ namespace Viewer.UI
 				return message.Contents[key].ToString();
 			}
 			else
-            {
-				
+			{
+
 				DynamicMessage m = (DynamicMessage)o;
 				return String.Join(",", m.Situations.ToArray());
-            }
+			}
 		}
+
 
 
 
@@ -211,6 +215,7 @@ namespace Viewer.UI
 			}
 			tagTable.Refresh();
 
+
 		}
 
 		public void ShowView()
@@ -224,14 +229,6 @@ namespace Viewer.UI
 			TagsetIndex.WriteInfoToDisk();
 		}
 
-		public void UpdateTagset(List<string> tags)
-		{
-			listView2.Items.Clear();
-			foreach (var tag in tags)
-			{
-				listView2.Items.Add(new ListViewItem(tag));
-			}
-		}
 
 		public void DisplayDocuments()
 		{
@@ -245,10 +242,6 @@ namespace Viewer.UI
 			throw new NotImplementedException();
 		}
 
-		private void button5_Click(object sender, EventArgs e)
-		{
-			EditSituation?.Invoke(this, EventArgs.Empty);
-		}
 
 		private void listView2_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -261,18 +254,19 @@ namespace Viewer.UI
 		}
 
 
-        public void DisplayTagsetColors(Dictionary<string, Color> dict)
-        {
-			foreach(ListViewItem item in listView2.Items)
-            {
-                if (dict.ContainsKey(item.Text)) {
+		public void DisplayTagsetColors(Dictionary<string, Color> dict)
+		{
+			foreach (ListViewItem item in tagsetView.Items)
+			{
+				if (dict.ContainsKey(item.Text))
+				{
 					item.BackColor = dict[item.Text];
-                }
-            }
-        }
+				}
+			}
+		}
 
-        private void TagWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
+		private void TagWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
 			if (e.CloseReason == CloseReason.UserClosing)
 			{
 				e.Cancel = true;
@@ -280,9 +274,74 @@ namespace Viewer.UI
 			}
 		}
 
-        private void tagTable_SelectedIndexChanged(object sender, EventArgs e)
-        {
+		private void tagTable_SelectedIndexChanged(object sender, EventArgs e)
+		{
 
-        }
-    }
+		}
+
+		private void removeTagButton_Click(object sender, EventArgs e)
+		{
+			if (tagTable.SelectedObjects != null)
+			{
+
+			}
+		}
+
+		private void deleteSituationButton_Click(object sender, EventArgs e)
+		{
+			TaggerEventArgs args = new TaggerEventArgs();
+			args.Tag = situationView.SelectedItems[0].Text.Split(' ')[0];
+			args.Id = Int32.Parse(situationView.SelectedItems[0].Text.Split(' ')[1]);
+
+
+			//DeleteSituation?.Invoke(this, args);
+		}
+
+		public void DisplayTagErrorMessage()
+		{
+			MessageBox.Show("You have already added this tag to the selected message");
+
+		}
+
+		private void tagTable_SelectedIndexChanged_1(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			if (!IsFiltered)
+			{
+				IsFiltered = true;
+				tagTable.ModelFilter = filter;
+				tagTable.UseFilterIndicator = true;
+				tagTable.UseFiltering = true;
+
+			}
+			else
+			{
+				IsFiltered = false;
+				tagTable.UseFiltering = false;
+				tagTable.ModelFilter = null;
+			}
+
+		}
+	}
+
+	public class TagFilter : IModelFilter
+	{
+		public bool Filter(object modelObject)
+		{
+			if (modelObject is DynamicMessage)
+			{
+				DynamicMessage d = (DynamicMessage)modelObject;
+				if (d.Situations.Count != 0)
+				{
+					return true;
+				}
+				return false;
+			}
+			return false;
+		}
+	}
 }

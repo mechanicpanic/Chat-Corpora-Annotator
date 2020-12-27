@@ -1,6 +1,7 @@
 ﻿using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace IndexEngine
 {
@@ -14,7 +15,9 @@ namespace IndexEngine
     {
         public int Id { get; set; }
 
-        public List<string> Situations { get; set; } = new List<string>();
+        public Dictionary<string, int> Situations { get; set; } = new Dictionary<string, int>();
+
+        //public KeyValuePair<string, int> Situation { get; set; } = new KeyValuePair<string, int>
 
         private Dictionary<string, object> contents;
 
@@ -32,15 +35,7 @@ namespace IndexEngine
         }
         public DynamicMessage()
         {
-            //this.Id = Guid.NewGuid();
-            contents = new Dictionary<string, object>();
-            string[] fields = new string[] { "a", "b", "c", "d" };
-            string[] data = new string[] { "a", "b", "c", "d" };
-            for (int i = 0; i < fields.Length; i++)
-            {
-                contents.Add(fields[i], data[i]);
-            }
-
+          
 
         }
 

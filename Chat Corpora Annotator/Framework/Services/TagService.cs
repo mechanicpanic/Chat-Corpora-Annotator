@@ -3,44 +3,35 @@ using System;
 using System.Collections.Generic;
 using IndexEngine;
 using edu.stanford.nlp.util;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Framework.Services
 {
+
     public interface ITagService
     {
+
         string ProjectTagset { get; set; }
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
 
-        void AddSituation(List<int> messages, string situation);
-        void UpdateSituation(Guid key, int message);
-        void DeleteSituation(Guid key);
+        void AddSituation(List<int> messages, int id, string situation);
 
-
+        void DeleteSituation(int id, string situation);
+        void UpdateSituation_Removed(int message, int id, string situation);
 
     }
+
+
     public class TagService : ITagService
     {
         public string ProjectTagset { get; set; }
-        public TagService()
+
+        public void AddSituation(List<int> messages, int id, string situation)
         {
-            
+            SituationIndex.AddSituationToIndex(messages, id, situation);
         }
 
-        public void AddSituation(List<int> messages, string situation)
-        {
-            SituationIndex.AddSituationToIndex(messages, situation);
-        }
-
-        public void UpdateSituation(Guid key, int message)
-        {
-            SituationIndex.Index[key].Remove(message);
-        }
-
-        public void DeleteSituation(Guid key)
-        {
-            SituationIndex.Index.Remove(key);
-        }
 
 
         public void UpdateTagsetIndex(string name)
@@ -58,6 +49,16 @@ namespace Viewer.Framework.Services
             {
                 TagsetIndex.UpdateIndexEntry(name, tag, op);                
             }
+        }
+
+        public void DeleteSituation(int id, string situation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateSituation_Removed(int message, int id, string situation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

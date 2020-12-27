@@ -26,7 +26,7 @@ namespace Viewer.Framework.Presenters
             _tagger.LoadMore += _tagger_LoadMore;
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
-            _tagger.EditSituation += _tagger_EditSituation;
+            //_tagger.EditSituation += _tagger_EditSituation;
 
             _tagger.LoadTagset += _tagger_LoadTagset;
             _main.TagClick += _main_TagClick;
@@ -47,21 +47,37 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_AddTag(object sender, TaggerEventArgs e)
         {
-            SituationIndex.AddSituationToIndex(e.messages,e.Tag);
+            //SituationIndex.AddSituationToIndex(e.messages,e.Tag);
+            bool flag = false;
+            foreach(var id in e.messages)
+            {
+                try { 
+                    MessageContainer.Messages[id].Situations.Add(e.Tag, e.Id);
+                    
+                }
+                catch (ArgumentException ex) 
+                {
+                    //MessageContainer.Messages[id].Situations[e.Tag]
+                    _tagger.DisplayTagErrorMessage();
+                    flag = true;
+                }             
+            }
         }
 
         private void _tagger_WriteToDisk(object sender, EventArgs e)
         {
             _writer.OpenWriter();
-            foreach (var kvp in IndexEngine.SituationIndex.Index)
+
+            foreach (var kvp in SituationIndex.container)
             {
-                List<DynamicMessage> messages = new List<DynamicMessage>();
-                foreach (var id in kvp.Value)
+                List<DynamicMessage> list = new List<DynamicMessage>();
+                foreach (var s in kvp.Value)
                 {
-                    var message = IndexService.RetrieveMessageById(id);
-                    messages.Add(message);
+                    foreach (var id in s.Value)
+                        list.Add(IndexService.RetrieveMessageById(id));
+                    _writer.WriteSituation(list, kvp.Key, s.Key);
                 }
-                _writer.WriteSituation(messages,SituationIndex.NameLookup[kvp.Key]);
+
             }
             _writer.CloseWriter();
         }

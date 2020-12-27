@@ -1,6 +1,7 @@
 ﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace Viewer.Framework.Services
@@ -9,7 +10,7 @@ namespace Viewer.Framework.Services
     {
         void WriteMessage(int messageId, string text, string user, string date);
         //void WriteSituation(List<Dictionary<string, string>> messages, string situation);
-        void WriteSituation(List<DynamicMessage> messages, string situation);
+        void WriteSituation(List<DynamicMessage> messages, string situation, int sid);
         void CloseWriter();
         void OpenWriter();
 
@@ -23,7 +24,8 @@ namespace Viewer.Framework.Services
 
         public void OpenWriter()
         {
-            writer = XmlWriter.Create(@"C:\Users\voidl\CCA\XMLTest\tagged" + index.ToString() + ".xml");
+           
+            writer = XmlWriter.Create(@"C:\Users\annae\CCA\" + index.ToString() + ".xml");
 
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
@@ -61,9 +63,10 @@ namespace Viewer.Framework.Services
             throw new NotImplementedException();
         }
 
-        public void WriteSituation(List<DynamicMessage> messages, string situation)
+        public void WriteSituation(List<DynamicMessage> messages, string situation, int sid)
         {
             writer.WriteStartElement("Situation", situation);
+            writer.WriteAttributeString("id", sid.ToString());
             foreach (var msg in messages)
             {
                 WriteMessage(msg.Id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
