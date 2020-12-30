@@ -16,6 +16,8 @@ namespace Viewer.Framework.Services
 
 
     }
+
+    
     public class TagFileWriter : IDisposable, ITagFileWriter
     {
         private int index = 0;
@@ -25,7 +27,7 @@ namespace Viewer.Framework.Services
         public void OpenWriter()
         {
            
-            writer = XmlWriter.Create(@"C:\Users\annae\CCA\" + index.ToString() + ".xml");
+            writer = XmlWriter.Create(@"C:\Users\annae\" + index.ToString() + ".xml");
 
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
@@ -41,6 +43,7 @@ namespace Viewer.Framework.Services
             writer.WriteElementString("Date", date);
             writer.WriteEndElement();
         }
+        
 
         //public void WriteSituation(List<Dictionary<string, string>> messages, string situation)
         //{
@@ -66,12 +69,19 @@ namespace Viewer.Framework.Services
         public void WriteSituation(List<DynamicMessage> messages, string situation, int sid)
         {
             writer.WriteStartElement("Situation", situation);
-            writer.WriteAttributeString("id", sid.ToString());
+            writer.WriteAttributeString("SId", sid.ToString());
             foreach (var msg in messages)
             {
                 WriteMessage(msg.Id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
             }
             writer.WriteEndElement();
         }
+
+        public void WriteAllSituations()
+        {
+            
+        }
+
+
     }
 }

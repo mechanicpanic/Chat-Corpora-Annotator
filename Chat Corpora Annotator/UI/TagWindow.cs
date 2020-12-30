@@ -19,7 +19,10 @@ namespace Viewer.UI
 
 	public partial class TagWindow : Form, ITagView
 	{
-		public event EventHandler WriteToDisk;
+		public event WriteEventHandler WriteToDisk;
+		public event EventHandler SaveTagged;
+		public event EventHandler LoadTagged;
+		
 		public event EventHandler TagsetClick;
 		public event TaggerEventHandler AddTag;
 		public event TaggerEventHandler RemoveTag;
@@ -47,10 +50,14 @@ namespace Viewer.UI
 			DisplayTagset(new List<string>());
 
 			tagTable.FormatRow += ChatTable_FormatRow;
-			LoadMore?.Invoke(this, EventArgs.Empty);
+			
+			
 		}
 
-
+		public void RefreshTagView()
+        {
+			tagTable.UpdateObjects(MessageContainer.Messages);
+		}
 
 		public void DisplayTagset(List<string> tags)
 		{
@@ -60,7 +67,7 @@ namespace Viewer.UI
 				tagsetView.Items.Add(tag);
 
 			}
-			DisplayBackTagsetColors();
+			
 		}
 		private void DisplayBackTagsetColors()
 		{
@@ -97,19 +104,34 @@ namespace Viewer.UI
 
 		private void button4_Click(object sender, EventArgs e)
 		{
-			WriteToDisk?.Invoke(this, EventArgs.Empty);
+			WriteEventArgs args = new WriteEventArgs();
+			if (IsFiltered)
+			{
+				foreach (var obj in tagTable.FilteredObjects)
+				{
+					DynamicMessage dyn = (DynamicMessage)obj;
+					args.ids.Add(dyn);
+				}
+
+				WriteToDisk?.Invoke(this, args);
+			}
+			else
+            {
+				MessageBox.Show("Please click Tagged only");
+            }
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
 
-			if (tagsetView.SelectedItems != null && tagTable.SelectedObjects != null)
+			if (tagsetView.SelectedItems.Count != 0 && tagTable.SelectedObjects.Count != 0)
 			{
 				TaggerEventArgs args = new TaggerEventArgs();
 
 				args.Tag = tagsetView.SelectedItems[0].Text;
 
 				args.messages = new List<int>();
+				
 				foreach (var obj in tagTable.SelectedObjects)
 				{
 					DynamicMessage msg = (DynamicMessage)obj;
@@ -142,7 +164,7 @@ namespace Viewer.UI
 		{
 
 
-
+			LoadTagged?.Invoke(this, EventArgs.Empty);
 			tagTable.SetObjects(MessageContainer.Messages);
 			//MessageBox.Show(tagTable.VirtualListDataSource.ToString());
 
@@ -221,18 +243,33 @@ namespace Viewer.UI
 		public void ShowView()
 		{
 			this.Show();
+			SetUpChatView();
+
+			LoadTagset?.Invoke(this, null);
 		}
 
 		public void CloseView()
 		{
-			this.Hide();
-			TagsetIndex.WriteInfoToDisk();
+			DialogResult dialogResult = MessageBox.Show("Save tags to disk?","Saver",MessageBoxButtons.YesNoCancel);
+			if (dialogResult == DialogResult.Yes)
+			{
+				this.Hide();
+				SaveTagged?.Invoke(this, EventArgs.Empty);
+				TagsetIndex.WriteInfoToDisk();
+			}
+			if(dialogResult == DialogResult.No)
+            {
+				this.Hide();
+				TagsetIndex.WriteInfoToDisk();
+			}
+			
+			
 		}
 
 
 		public void DisplayDocuments()
 		{
-			SetUpChatView();
+			//
 			tagTable.UpdateObjects(MessageContainer.Messages);
 			tagTable.Invalidate();
 		}
@@ -256,6 +293,7 @@ namespace Viewer.UI
 
 		public void DisplayTagsetColors(Dictionary<string, Color> dict)
 		{
+			TagsetColors = dict;
 			foreach (ListViewItem item in tagsetView.Items)
 			{
 				if (dict.ContainsKey(item.Text))
@@ -270,7 +308,7 @@ namespace Viewer.UI
 			if (e.CloseReason == CloseReason.UserClosing)
 			{
 				e.Cancel = true;
-				Hide();
+				this.CloseView();
 			}
 		}
 
@@ -283,7 +321,11 @@ namespace Viewer.UI
 		{
 			if (tagTable.SelectedObjects != null)
 			{
-
+				foreach (var obj in tagTable.SelectedObjects) 
+				{
+					DynamicMessage dyn = obj as DynamicMessage;
+					MessageContainer.Messages[dyn.Id].Situations.Clear();
+						}
 			}
 		}
 

@@ -1,6 +1,7 @@
 ﻿using com.fasterxml.jackson.core.sym;
 using IndexEngine;
 using System;
+using System.IO;
 using System.Linq;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
@@ -25,13 +26,26 @@ namespace Viewer.Framework.Presenters
             _tagset.LoadExistingTagset += _tagset_LoadExistingTagset;
             _tagset.SetProjectTagset += _tagset_SetProjectTagset;
             //_tagset.DeleteTagset += _tagset_DeleteTagset;
-
+            
             _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
         }
 
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
         {
             _service.ProjectTagset = args.Name;
+            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
+            if (!_service.TagsetSet)
+            {
+                
+                File.WriteAllText(path, args.Name);
+                
+                _service.TagsetSet = true;
+            }
+            else
+            {
+                File.WriteAllText(path, String.Empty);
+                File.WriteAllText(path, args.Name);
+            }
             _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
             _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];
             _main.DisplayTagset(TagsetIndex.Index[args.Name]);

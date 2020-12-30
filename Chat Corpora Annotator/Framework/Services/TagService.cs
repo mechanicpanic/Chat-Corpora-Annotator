@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using IndexEngine;
 using edu.stanford.nlp.util;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Viewer.Framework.Services
 {
 
     public interface ITagService
     {
+        bool TagsetSet { get; set; }
 
+        Dictionary<int,string> SituationContainer { get; set; }
         string ProjectTagset { get; set; }
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
@@ -19,13 +22,32 @@ namespace Viewer.Framework.Services
 
         void DeleteSituation(int id, string situation);
         void UpdateSituation_Removed(int message, int id, string situation);
+        void CheckTagset();
 
     }
 
 
     public class TagService : ITagService
     {
+        public bool TagsetSet { get; set; } = false;
+
+
+
+        public TagService()
+        {
+            
+        }
+        public void CheckTagset()
+        {
+            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
+            if (File.Exists(path))
+            {
+                TagsetSet = true;
+            }
+        }
+        public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();
         public string ProjectTagset { get; set; }
+
 
         public void AddSituation(List<int> messages, int id, string situation)
         {

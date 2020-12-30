@@ -12,68 +12,84 @@ namespace IndexEngine
     
     public static class SituationIndex
     {
-        public static Dictionary<string, Dictionary<int, List<int>>> container { get; set; } 
-        private static Dictionary<string, int> TagsetCounter { get; set; }
+        public static Dictionary<string, Dictionary<int, List<int>>> Index { get; set; }
+        public static Dictionary<string, int> TagsetCounter = new Dictionary<string, int>();
+
         static SituationIndex()
         {
             if(File.Exists(IndexService.CurrentIndexPath + @"\info"+"situations.txt"))
             {
-                LoadIndexFromDisk(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
+                //LoadIndexFromDisk(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
             }
             else
             {
-                container = new Dictionary<string, Dictionary<int, List<int>>>();
+                Index = new Dictionary<string, Dictionary<int, List<int>>>();
             }
         }
-        private static void LoadIndexFromDisk(string file)
+
+        public static void RetrieveDictFromMessageContainer(List<DynamicMessage> msg)
         {
-            var jsonString = File.ReadAllText(file);
-            container = JsonSerializer.Deserialize<Dictionary<string, Dictionary<int, List<int>>>>(jsonString);
+            foreach(var m in msg)
+            {
+                //if (!Index.ContainsKey(m.Situations.ElementAt(0).Key))
+                { 
+                    //;
+                    foreach(var kvp in m.Situations)
+                    {
+                        if (!Index.ContainsKey(kvp.Key)) 
+                        {
+                            Index.Add(kvp.Key, new Dictionary<int, List<int>>());
+                        }
+                        if (!Index[kvp.Key].ContainsKey(kvp.Value))
+                        {
+                            Index[kvp.Key].Add(kvp.Value, new List<int>());
+                            Index[kvp.Key][kvp.Value].Add(m.Id);
+                        }
+                        else
+                        {
+                            Index[kvp.Key][kvp.Value].Add(m.Id);
+                        }
+                        
+                    }
+
+                }
+            }
         }
 
-        private static void WriteIndexToDisk(string file)
-        {
-            var jsonString = JsonSerializer.Serialize(container);
-            File.WriteAllText(file, jsonString);
-        }
         public static void AddSituationToIndex(List<int> messages, int id, string situation)
         {
-            if (!container.ContainsKey(situation)) {
-                container.Add(situation, new Dictionary<int, List<int>>());
-                container[situation].Add(id, messages);
+            if (!Index.ContainsKey(situation)) {
+                Index.Add(situation, new Dictionary<int, List<int>>());
+                Index[situation].Add(id, messages);
                     }
             else
             {
-                if (!container[situation].ContainsKey(id))
+                if (!Index[situation].ContainsKey(id))
                 {
                     
-                    container[situation].Add(id, messages);
-                }
-                else
-                {
-                    
+                    Index[situation].Add(id, messages);
                 }
             }
         }
         public static void RemoveSituationFromIndex(int id, string situation)
         {
             
-            if(container.ContainsKey(situation) && container[situation].ContainsKey(id))
+            if(Index.ContainsKey(situation) && Index[situation].ContainsKey(id))
             {
-                foreach(var i in container[situation][id])
+                foreach(var i in Index[situation][id])
                 {
                     MessageContainer.Messages[i].Situations.Remove(situation);
                 }
-                container[situation].Remove(id);
+                Index[situation].Remove(id);
             }
             
         }
 
         public static void RemoveMessageFromSituation(string situation, int id, int message)
         {
-            if (container.ContainsKey(situation))
+            if (Index.ContainsKey(situation))
             {
-                container[situation][id].Remove(message);
+                Index[situation][id].Remove(message);
             }
             MessageContainer.Messages[message].Situations.Remove(situation);
         }

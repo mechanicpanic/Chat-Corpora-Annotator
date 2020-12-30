@@ -35,6 +35,7 @@ namespace Viewer.UI
 		public void ShowView()
 		{
 			this.Show();
+			
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace Viewer.UI
 				listView1.Items.Add(item);
 				TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
 				args.Name = comboBox1.SelectedItem.ToString();
+				args.Tag = textBox1.Text;
 				args.Type = 1;
 				UpdateTagset?.Invoke(this, args);
 			}

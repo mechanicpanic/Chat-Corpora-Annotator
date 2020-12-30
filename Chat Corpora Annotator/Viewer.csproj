@@ -433,6 +433,7 @@
     <Compile Include="Framework\Services\NGramService.cs" />
     <Compile Include="Framework\Services\SuggesterService.cs" />
     <Compile Include="Framework\Services\TagFileWriter.cs" />
+    <Compile Include="Framework\Services\TagSaver.cs" />
     <Compile Include="Framework\Services\TagService.cs" />
     <Compile Include="Framework\Views\IConcordanceView.cs" />
     <Compile Include="Framework\Views\IKeywordView.cs" />
@@ -558,6 +559,7 @@
     <Compile Include="UI\TagWindow.Designer.cs">
       <DependentUpon>TagWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="WriteEventArgs.cs" />
     <EmbeddedResource Include="CSV Wizard\DelimiterStep.resx">
       <DependentUpon>DelimiterStep.cs</DependentUpon>
     </EmbeddedResource>

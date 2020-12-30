@@ -7,12 +7,15 @@ namespace Viewer.Framework.Views
 {
     public interface ITagView : IView
     {
-        event EventHandler WriteToDisk;
+        event WriteEventHandler WriteToDisk;
+        event EventHandler SaveTagged;
+        event EventHandler LoadTagged;
         event EventHandler TagsetClick;
+
 
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
-
+        void RefreshTagView();
         
         event TaggerEventHandler DeleteSituation;
         

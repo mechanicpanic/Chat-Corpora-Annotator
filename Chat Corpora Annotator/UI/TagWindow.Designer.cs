@@ -238,6 +238,7 @@
             this.tagTable.CellEditUseWholeCell = false;
             this.tagTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tagTable.FullRowSelect = true;
+            this.tagTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.tagTable.HideSelection = false;
             this.tagTable.Location = new System.Drawing.Point(0, 0);
             this.tagTable.Name = "tagTable";
