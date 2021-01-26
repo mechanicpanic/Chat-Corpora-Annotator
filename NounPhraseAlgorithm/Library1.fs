@@ -10,7 +10,7 @@ module NPExtractor =
     let toSeq (iter:Iterator) =
         let rec loop (x:Iterator) = 
             seq { 
-                yield x.next()
+                if x.hasNext() then yield x.next()
                 if x.hasNext() then 
                     yield! (loop x)
                 }

@@ -44,11 +44,11 @@ public interface IChatVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBody([NotNull] ChatParser.BodyContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="ChatParser.restriction_group"/>.
+	/// Visit a parse tree produced by <see cref="ChatParser.query_seq"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context);
+	Result VisitQuery_seq([NotNull] ChatParser.Query_seqContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="ChatParser.restrictions"/>.
 	/// </summary>

@@ -38,6 +38,7 @@ namespace IndexEngine
         public static List<string> SelectedFields { get; set; }
         public static string CurrentIndexPath { get; set; }
 
+        
         #endregion
         #region save info
         private static void CheckDir()

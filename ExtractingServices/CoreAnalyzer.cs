@@ -74,8 +74,14 @@ namespace ExtractingServices
 
         public ArrayList GetSents(CoreDocument coredoc)
         {
-            ArrayList sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
-            return sents;
+            ArrayList sents = new ArrayList();
+            if (coredoc != null)
+            {
+                sents = (ArrayList)coredoc.annotation().get(typeof(CoreAnnotations.SentencesAnnotation));
+                return sents;
+            }
+            else { return null; }
+            
         }
 
 

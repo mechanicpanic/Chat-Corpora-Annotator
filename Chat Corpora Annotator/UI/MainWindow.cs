@@ -256,7 +256,8 @@ namespace Viewer
 				cl.AspectGetter = delegate (object x)
 				{
 					DynamicMessage message = (DynamicMessage)x;
-					return message.contents[key];
+					if (message != null) { return message.Contents[key]; }
+					else { return ""; }
 				};
 				cl.Text = key;
 				cl.WordWrap = true;
@@ -298,6 +299,7 @@ namespace Viewer
 				{
 					cl.FillsFreeSpace = true;
 					cl.Renderer = highlightTextRenderer1;
+					cl.Sortable = true;
 
 				}
 			}
@@ -409,7 +411,7 @@ namespace Viewer
 			//int i = chatTable.IndexOf(messages[key].Block[0]);
 			foreach (var message in MessageContainer.Messages)
 			{
-				DateTime temp = (DateTime)message.contents[IndexService.DateFieldKey];
+				DateTime temp = (DateTime)message.Contents[IndexService.DateFieldKey];
 				if (temp.Date == key)
 				{
 					i = chatTable.IndexOf(message);
@@ -627,7 +629,7 @@ namespace Viewer
 			List<DateTime> container = new List<DateTime>();
 			foreach(var message in MessageContainer.Messages)
             {
-				container.Add(DateTime.Parse(message.contents[IndexService.DateFieldKey].ToString()).Date);
+				container.Add(DateTime.Parse(message.Contents[IndexService.DateFieldKey].ToString()).Date);
             }
 
 			IEnumerable<DateTime> intersect = container.Intersect(dates);
@@ -708,6 +710,11 @@ namespace Viewer
         {
 			TagClick?.Invoke(this, EventArgs.Empty);
 		}
+
+        private void chatTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

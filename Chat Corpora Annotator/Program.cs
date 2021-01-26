@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IndexEngine;
+using System;
 using System.Windows.Forms;
 using Viewer.CSV_Wizard;
 using Viewer.Framework.Presenters;
@@ -31,6 +32,7 @@ namespace Viewer
             FolderService folder = new FolderService();
             SuggesterService suggesterService = new SuggesterService();
 
+           
             TagWindow tagger = new TagWindow();
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();

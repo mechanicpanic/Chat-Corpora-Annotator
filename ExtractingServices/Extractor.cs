@@ -54,26 +54,30 @@ namespace ExtractingServices
 
         private static void ExtractKeyPhrases(CoreDocument coredoc, int id)
         {
+
             ArrayList sents = _analyzer.GetSents(coredoc);
-            List<string> NP = new List<string>();
-            for (int i = 0; i < sents.size(); i++)
+            if (sents != null)
             {
-                CoreMap sentence = (CoreMap)sents.get(i);
-                List<Tree> smallTrees = NPExtractor.getKeyPhrases((Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation))).ToList();
-                foreach(var tree in smallTrees)
+                List<string> NP = new List<string>();
+                for (int i = 0; i < sents.size(); i++)
                 {
-                    
-                    List leaves = tree.getLeaves();
-                    var objarray = leaves.toArray();
-                    //foreach (var obj in objarray)
-                    //{
-                    //    NP.Add(obj.ToString());
-                    //}
-                    string joinedNP = String.Join(" ", objarray);
-                    NP.Add(joinedNP);
+                    CoreMap sentence = (CoreMap)sents.get(i);
+                    List<Tree> smallTrees = NPExtractor.getKeyPhrases((Tree)sentence.get(typeof(TreeCoreAnnotations.TreeAnnotation))).ToList();
+                    foreach (var tree in smallTrees)
+                    {
+
+                        List leaves = tree.getLeaves();
+                        var objarray = leaves.toArray();
+                        //foreach (var obj in objarray)
+                        //{
+                        //    NP.Add(obj.ToString());
+                        //}
+                        string joinedNP = String.Join(" ", objarray);
+                        NP.Add(joinedNP);
+                    }
                 }
+                NounPhrases.Add(id, NP);
             }
-            NounPhrases.Add(id,NP);
 
         }
         public static bool DetectQuestion(CoreDocument coredoc)

@@ -7,20 +7,26 @@ namespace Viewer.Framework.Views
 {
     public interface ITagView : IView
     {
-        event EventHandler WriteToDisk;
+        event WriteEventHandler WriteToDisk;
+        event EventHandler SaveTagged;
+        event EventHandler LoadTagged;
         event EventHandler TagsetClick;
+
 
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
-
-        event EventHandler EditSituation;
+        void RefreshTagView();
+        
+        event TaggerEventHandler DeleteSituation;
+        
         event EventHandler LoadMore;
 
         event EventHandler ShowSuggester;
 
+
         Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
      
-        void UpdateTagset(List<string> tags);
+        
         void DisplayDocuments();
 
         void DisplayTagsetColors(Dictionary<string, System.Drawing.Color> dict);
@@ -29,9 +35,9 @@ namespace Viewer.Framework.Views
 
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);
+        void DisplayTagErrorMessage();
 
-        void ClearData();
-        void SetData(List<string> tags);
+     
     }
 
 

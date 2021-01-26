@@ -3,44 +3,57 @@ using System;
 using System.Collections.Generic;
 using IndexEngine;
 using edu.stanford.nlp.util;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Viewer.Framework.Services
 {
+
     public interface ITagService
     {
+        bool TagsetSet { get; set; }
+
+        Dictionary<int,string> SituationContainer { get; set; }
         string ProjectTagset { get; set; }
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
 
-        void AddSituation(List<int> messages, string situation);
-        void UpdateSituation(Guid key, int message);
-        void DeleteSituation(Guid key);
+        void AddSituation(List<int> messages, int id, string situation);
 
-
+        void DeleteSituation(int id, string situation);
+        void UpdateSituation_Removed(int message, int id, string situation);
+        void CheckTagset();
 
     }
+
+
     public class TagService : ITagService
     {
-        public string ProjectTagset { get; set; }
+        public bool TagsetSet { get; set; } = false;
+
+
+
         public TagService()
         {
             
         }
-
-        public void AddSituation(List<int> messages, string situation)
+        public void CheckTagset()
         {
-            SituationIndex.AddSituationToIndex(messages, situation);
+            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
+            if (File.Exists(path))
+            {
+                TagsetSet = true;
+            }
+        }
+        public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();
+        public string ProjectTagset { get; set; }
+
+
+        public void AddSituation(List<int> messages, int id, string situation)
+        {
+            SituationIndex.AddSituationToIndex(messages, id, situation);
         }
 
-        public void UpdateSituation(Guid key, int message)
-        {
-            SituationIndex.Index[key].Remove(message);
-        }
-
-        public void DeleteSituation(Guid key)
-        {
-            SituationIndex.Index.Remove(key);
-        }
 
 
         public void UpdateTagsetIndex(string name)
@@ -58,6 +71,16 @@ namespace Viewer.Framework.Services
             {
                 TagsetIndex.UpdateIndexEntry(name, tag, op);                
             }
+        }
+
+        public void DeleteSituation(int id, string situation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateSituation_Removed(int message, int id, string situation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

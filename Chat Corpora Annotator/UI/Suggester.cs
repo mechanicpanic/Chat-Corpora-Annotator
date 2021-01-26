@@ -99,7 +99,7 @@ namespace Viewer.UI
                 cl.AspectGetter = delegate (object x)
                 {
                     DynamicMessage message = (DynamicMessage)x;
-                    return message.contents[key];
+                    return message.Contents[key];
                 };
                 cl.Text = key;
                 cl.WordWrap = true;

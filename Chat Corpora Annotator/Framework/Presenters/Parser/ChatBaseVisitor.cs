@@ -54,7 +54,7 @@ public partial class ChatBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitBody([NotNull] ChatParser.BodyContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="ChatParser.restriction_group"/>.
+	/// Visit a parse tree produced by <see cref="ChatParser.query_seq"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -62,7 +62,7 @@ public partial class ChatBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitRestriction_group([NotNull] ChatParser.Restriction_groupContext context) { return VisitChildren(context); }
+	public virtual Result VisitQuery_seq([NotNull] ChatParser.Query_seqContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="ChatParser.restrictions"/>.
 	/// <para>

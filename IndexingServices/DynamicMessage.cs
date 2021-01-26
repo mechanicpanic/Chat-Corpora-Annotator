@@ -1,6 +1,7 @@
 ﻿using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace IndexEngine
 {
@@ -10,13 +11,17 @@ namespace IndexEngine
         //Should be sufficient for keeping some messages in-memory.
 
     }
-    public class DynamicMessage : IComparable
+    public class DynamicMessage 
     {
         public int Id { get; set; }
-        private string dateFieldKey;
-        public string DateFieldKey { get { return dateFieldKey; } set { this.dateFieldKey = value; } }
 
-        public Dictionary<string, object> contents;
+        public Dictionary<string, int> Situations { get; set; } = new Dictionary<string, int>();
+
+        //public KeyValuePair<string, int> Situation { get; set; } = new KeyValuePair<string, int>
+
+        private Dictionary<string, object> contents;
+
+        public Dictionary<string, object> Contents { get { return contents; } }
 
         public DynamicMessage(string[] fields, string[] data)
         {
@@ -30,15 +35,7 @@ namespace IndexEngine
         }
         public DynamicMessage()
         {
-            //this.Id = Guid.NewGuid();
-            contents = new Dictionary<string, object>();
-            string[] fields = new string[] { "a", "b", "c", "d" };
-            string[] data = new string[] { "a", "b", "c", "d" };
-            for (int i = 0; i < fields.Length; i++)
-            {
-                contents.Add(fields[i], data[i]);
-            }
-
+          
 
         }
 
@@ -66,7 +63,7 @@ namespace IndexEngine
         {
             //this.Id = Guid.NewGuid();
             contents = new Dictionary<string, object>();
-            this.dateFieldKey = dateFieldKey;
+            //this.dateFieldKey = dateFieldKey;
 
             for (int i = 0; i < fields.Length; i++)
             {
@@ -90,6 +87,7 @@ namespace IndexEngine
         {
             //this.Id = Guid.NewGuid();
             this.Id = id;
+            
             if (data.Count != selectedFields.Count)
             {
                 throw new Exception("Wrong array size");
@@ -113,23 +111,6 @@ namespace IndexEngine
             }
         }
 
-        public int CompareTo(object obj)
-        {
-            if (obj == null) return 1;
-
-            DynamicMessage otherMessage = obj as DynamicMessage;
-            if (otherMessage != null)
-            {
-
-                DateTime temp = (DateTime)contents[dateFieldKey];
-                return temp.CompareTo(otherMessage.contents[dateFieldKey]);
-
-            }
-            else
-            {
-                throw new ArgumentException("Object is not a DynamicMessage");
-            }
-        }
     }
 
 
