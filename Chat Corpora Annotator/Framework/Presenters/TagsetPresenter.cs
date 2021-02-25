@@ -38,7 +38,6 @@ namespace Viewer.Framework.Presenters
             {
                 
                 File.WriteAllText(path, args.Name);
-                
                 _service.TagsetSet = true;
             }
             else
@@ -49,6 +48,7 @@ namespace Viewer.Framework.Presenters
             _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
             _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];
             _main.DisplayTagset(TagsetIndex.Index[args.Name]);
+            _main.DisplayTagsetColors(_main.TagsetColors);
             
         }
 

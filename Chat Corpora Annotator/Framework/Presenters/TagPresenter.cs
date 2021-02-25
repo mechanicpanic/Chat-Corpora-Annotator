@@ -41,7 +41,7 @@ namespace Viewer.Framework.Presenters
             _main.TagClick += _main_TagClick;
             
         }
-
+        
         private void LoadTagged(object sender, EventArgs e)
         {
             
@@ -147,6 +147,7 @@ namespace Viewer.Framework.Presenters
                     var temp = item.Split(' ');
                     SituationIndex.TagsetCounter.Add(temp[0], int.Parse(temp[1]));
                 }
+                
                 _tagger.DisplayTagset(TagsetIndex.Index[_service.ProjectTagset]);
                 _tagger.DisplayTagsetColors(TagsetIndex.ColorIndex[_service.ProjectTagset]);
             }

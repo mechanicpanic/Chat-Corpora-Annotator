@@ -142,7 +142,7 @@ namespace Viewer.UI
 
 				AddTag?.Invoke(this, args);
 
-
+				situationView.Items.Add(args.Tag + " " + args.Id);
 				tagTable.UpdateObjects(MessageContainer.Messages);
 			}
 			else
