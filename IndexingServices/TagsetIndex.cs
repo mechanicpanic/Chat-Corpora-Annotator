@@ -13,8 +13,8 @@ namespace IndexEngine
 {
     public static class TagsetIndex
     {
-        static string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"CCA\\tagsets.txt";
-        static string colorpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"CCA\\tagsetscolors.txt";
+        static string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsets.txt";
+        static string colorpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsetscolors.txt";
         //Eventually I will phase out Index for ColorIndex altogether.
         static TagsetIndex() 
         {

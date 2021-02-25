@@ -36,6 +36,7 @@ namespace Viewer.Framework.Views
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);
         void DisplayTagErrorMessage();
+        void AddSituationIndexItem(string s);
 
      
     }

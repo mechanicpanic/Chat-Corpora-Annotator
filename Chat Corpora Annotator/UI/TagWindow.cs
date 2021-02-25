@@ -42,7 +42,7 @@ namespace Viewer.UI
 		public TagFilter filter = new TagFilter();
 
 		//private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
-
+		private HashSet<string> sit = new HashSet<string>();
 
 		public TagWindow()
 		{
@@ -69,6 +69,14 @@ namespace Viewer.UI
 			}
 			
 		}
+
+		public void AddSituationIndexItem(string s)
+        {
+			if(sit.Add(s))
+            {
+				situationView.Items.Add(s.ToString());
+            }
+        }
 		private void DisplayBackTagsetColors()
 		{
 			foreach (ListViewItem item in tagsetView.Items)
@@ -368,9 +376,20 @@ namespace Viewer.UI
 			}
 
 		}
-	}
 
-	public class TagFilter : IModelFilter
+        private void situationView_DoubleClick(object sender, EventArgs e)
+        {
+			string[] item = situationView.SelectedItems[0].Text.Split(' ');
+
+
+			int messageID = SituationIndex.Index[item[0]][Int32.Parse(item[1])][0];
+			//tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
+			tagTable.EnsureVisible(messageID);
+			
+		}
+    }
+
+    public class TagFilter : IModelFilter
 	{
 		public bool Filter(object modelObject)
 		{

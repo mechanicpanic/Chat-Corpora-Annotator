@@ -56,6 +56,28 @@ namespace IndexEngine
             }
         }
 
+        public static void RetrieveDictFromMessageContainer(DynamicMessage m)
+        {
+            foreach (var kvp in m.Situations)
+            {
+                if (!Index.ContainsKey(kvp.Key))
+                {
+                    Index.Add(kvp.Key, new Dictionary<int, List<int>>());
+                }
+                if (!Index[kvp.Key].ContainsKey(kvp.Value))
+                {
+                    Index[kvp.Key].Add(kvp.Value, new List<int>());
+                    Index[kvp.Key][kvp.Value].Add(m.Id);
+                }
+                else
+                {
+                    Index[kvp.Key][kvp.Value].Add(m.Id);
+                }
+
+            }
+        }
+
+
         public static void AddSituationToIndex(List<int> messages, int id, string situation)
         {
             if (!Index.ContainsKey(situation)) {

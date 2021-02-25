@@ -58,6 +58,7 @@ namespace Viewer.Framework.Presenters
                             var arr = line.Split(' ');
 
                             _service.SituationContainer.Add(Int32.Parse(arr[0]), arr[1]);
+                            
 
                         }
                         
@@ -87,7 +88,12 @@ namespace Viewer.Framework.Presenters
                         var s = item.Split('-');
                         if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
                         {
-                            MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1])); }
+                            MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
+                            SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
+                            _tagger.AddSituationIndexItem(s[0] + " " + s[1]);
+                        }
+                        
+
                     }
 
                 }
@@ -181,6 +187,7 @@ namespace Viewer.Framework.Presenters
                     }
 
                 }
+                _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
                 SituationIndex.TagsetCounter[e.Tag]++;
             }
             else
@@ -188,9 +195,11 @@ namespace Viewer.Framework.Presenters
                 foreach(var str in TagsetIndex.Index[_service.ProjectTagset])
                 {
                     SituationIndex.TagsetCounter.Add(str,0);
+                    _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
 
                 }
             }
+           
         }
 
 

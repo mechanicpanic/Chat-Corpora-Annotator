@@ -284,13 +284,16 @@
             this.columnHeader1});
             this.situationView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.situationView.FullRowSelect = true;
+            this.situationView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.situationView.HideSelection = false;
             this.situationView.Location = new System.Drawing.Point(0, 0);
+            this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
             this.situationView.Size = new System.Drawing.Size(210, 579);
             this.situationView.TabIndex = 15;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
+            this.situationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
             // 
             // columnHeader1
             // 
