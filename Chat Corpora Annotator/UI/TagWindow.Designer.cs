@@ -30,7 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.menuBackPanel = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.suggesterButton = new System.Windows.Forms.Button();
             this.removeTagButton = new System.Windows.Forms.Button();
@@ -39,21 +39,17 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
             this.loadMoreButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.InterfaceBackPanel = new System.Windows.Forms.Panel();
             this.tagTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.situationView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.buttonBackPanel = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.menuBackPanel.SuspendLayout();
+            this.InterfaceBackPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).BeginInit();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.buttonBackPanel.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -87,21 +83,21 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // panel2
+            // menuBackPanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.Lavender;
-            this.panel2.Controls.Add(this.tagsetView);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.suggesterButton);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(209, 631);
-            this.panel2.TabIndex = 1;
+            this.menuBackPanel.BackColor = System.Drawing.Color.Lavender;
+            this.menuBackPanel.Controls.Add(this.tagsetView);
+            this.menuBackPanel.Controls.Add(this.button3);
+            this.menuBackPanel.Controls.Add(this.suggesterButton);
+            this.menuBackPanel.Controls.Add(this.button1);
+            this.menuBackPanel.Controls.Add(this.button2);
+            this.menuBackPanel.Controls.Add(this.button4);
+            this.menuBackPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuBackPanel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.menuBackPanel.Location = new System.Drawing.Point(0, 0);
+            this.menuBackPanel.Name = "menuBackPanel";
+            this.menuBackPanel.Size = new System.Drawing.Size(209, 631);
+            this.menuBackPanel.TabIndex = 1;
             // 
             // button3
             // 
@@ -138,14 +134,14 @@
             // removeTagButton
             // 
             this.removeTagButton.BackColor = System.Drawing.Color.LightSalmon;
-            this.removeTagButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.removeTagButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.removeTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.removeTagButton.FlatAppearance.BorderSize = 0;
             this.removeTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.removeTagButton.Location = new System.Drawing.Point(0, 0);
+            this.removeTagButton.Location = new System.Drawing.Point(3, 3);
             this.removeTagButton.Name = "removeTagButton";
-            this.removeTagButton.Size = new System.Drawing.Size(530, 48);
+            this.removeTagButton.Size = new System.Drawing.Size(524, 46);
             this.removeTagButton.TabIndex = 3;
             this.removeTagButton.Text = "Remove tag";
             this.removeTagButton.UseVisualStyleBackColor = false;
@@ -154,14 +150,14 @@
             // addTagButton
             // 
             this.addTagButton.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.addTagButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addTagButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.addTagButton.FlatAppearance.BorderSize = 0;
             this.addTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addTagButton.Location = new System.Drawing.Point(0, 0);
+            this.addTagButton.Location = new System.Drawing.Point(533, 3);
             this.addTagButton.Name = "addTagButton";
-            this.addTagButton.Size = new System.Drawing.Size(530, 48);
+            this.addTagButton.Size = new System.Drawing.Size(525, 46);
             this.addTagButton.TabIndex = 2;
             this.addTagButton.Text = "Add tag";
             this.addTagButton.UseVisualStyleBackColor = false;
@@ -178,7 +174,7 @@
             this.tagsetView.Location = new System.Drawing.Point(0, 48);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(209, 316);
+            this.tagsetView.Size = new System.Drawing.Size(209, 201);
             this.tagsetView.TabIndex = 4;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
@@ -214,7 +210,7 @@
             this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(0, 534);
+            this.loadMoreButton.Location = new System.Drawing.Point(0, 527);
             this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.loadMoreButton.Name = "loadMoreButton";
             this.loadMoreButton.Size = new System.Drawing.Size(1061, 52);
@@ -223,18 +219,18 @@
             this.loadMoreButton.UseVisualStyleBackColor = false;
             this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
             // 
-            // panel1
+            // InterfaceBackPanel
             // 
-            this.panel1.Controls.Add(this.tagTable);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.loadMoreButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel1.Location = new System.Drawing.Point(209, 45);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1061, 586);
-            this.panel1.TabIndex = 0;
+            this.InterfaceBackPanel.Controls.Add(this.tagTable);
+            this.InterfaceBackPanel.Controls.Add(this.panel3);
+            this.InterfaceBackPanel.Controls.Add(this.loadMoreButton);
+            this.InterfaceBackPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InterfaceBackPanel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InterfaceBackPanel.Location = new System.Drawing.Point(209, 52);
+            this.InterfaceBackPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.InterfaceBackPanel.Name = "InterfaceBackPanel";
+            this.InterfaceBackPanel.Size = new System.Drawing.Size(1061, 579);
+            this.InterfaceBackPanel.TabIndex = 1;
             // 
             // tagTable
             // 
@@ -247,8 +243,8 @@
             this.tagTable.Name = "tagTable";
             this.tagTable.RowHeight = 52;
             this.tagTable.ShowGroups = false;
-            this.tagTable.Size = new System.Drawing.Size(851, 534);
-            this.tagTable.TabIndex = 18;
+            this.tagTable.Size = new System.Drawing.Size(851, 527);
+            this.tagTable.TabIndex = 25;
             this.tagTable.UseCompatibleStateImageBehavior = false;
             this.tagTable.View = System.Windows.Forms.View.Details;
             this.tagTable.VirtualMode = true;
@@ -260,7 +256,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(851, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 534);
+            this.panel3.Size = new System.Drawing.Size(210, 527);
             this.panel3.TabIndex = 17;
             // 
             // situationView
@@ -275,7 +271,7 @@
             this.situationView.Location = new System.Drawing.Point(0, 0);
             this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(210, 534);
+            this.situationView.Size = new System.Drawing.Size(210, 527);
             this.situationView.TabIndex = 15;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
@@ -286,36 +282,20 @@
             this.columnHeader1.Text = "Situations";
             this.columnHeader1.Width = 204;
             // 
-            // panel4
+            // tableLayoutPanel1
             // 
-            this.panel4.BackColor = System.Drawing.Color.Lavender;
-            this.panel4.Controls.Add(this.removeTagButton);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(530, 48);
-            this.panel4.TabIndex = 19;
-            // 
-            // buttonBackPanel
-            // 
-            this.buttonBackPanel.BackColor = System.Drawing.Color.Lavender;
-            this.buttonBackPanel.Controls.Add(this.panel6);
-            this.buttonBackPanel.Controls.Add(this.panel4);
-            this.buttonBackPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonBackPanel.Location = new System.Drawing.Point(209, 0);
-            this.buttonBackPanel.Name = "buttonBackPanel";
-            this.buttonBackPanel.Size = new System.Drawing.Size(1061, 48);
-            this.buttonBackPanel.TabIndex = 20;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.Lavender;
-            this.panel6.Controls.Add(this.addTagButton);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(531, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(530, 48);
-            this.panel6.TabIndex = 20;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.removeTagButton, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.addTagButton, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(209, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1061, 52);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // TagWindow
             // 
@@ -323,21 +303,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1270, 631);
-            this.Controls.Add(this.buttonBackPanel);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.InterfaceBackPanel);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.menuBackPanel);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TagWindow";
             this.Text = "Tagger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TagWindow_FormClosing);
-            this.panel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.menuBackPanel.ResumeLayout(false);
+            this.InterfaceBackPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.buttonBackPanel.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -345,11 +323,11 @@
         #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel menuBackPanel;
         private System.Windows.Forms.Button removeTagButton;
         private System.Windows.Forms.Button addTagButton;
         private System.Windows.Forms.Button loadMoreButton;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel InterfaceBackPanel;
         private System.Windows.Forms.ListView situationView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Panel panel3;
@@ -359,8 +337,6 @@
         private System.Windows.Forms.Button button2;
         private BrightIdeasSoftware.FastObjectListView tagTable;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel buttonBackPanel;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
