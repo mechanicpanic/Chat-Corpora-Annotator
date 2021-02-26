@@ -42,7 +42,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tagTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.deleteSituationButton = new System.Windows.Forms.Button();
             this.situationView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2.SuspendLayout();
@@ -89,7 +88,6 @@
             this.panel2.Controls.Add(this.suggesterButton);
             this.panel2.Controls.Add(this.removeTagButton);
             this.panel2.Controls.Add(this.addTagButton);
-            this.panel2.Controls.Add(this.tagsetView);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button4);
@@ -135,12 +133,11 @@
             // removeTagButton
             // 
             this.removeTagButton.BackColor = System.Drawing.Color.Lavender;
-            this.removeTagButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.removeTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.removeTagButton.FlatAppearance.BorderSize = 0;
             this.removeTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.removeTagButton.Location = new System.Drawing.Point(0, 338);
+            this.removeTagButton.Location = new System.Drawing.Point(0, 266);
             this.removeTagButton.Name = "removeTagButton";
             this.removeTagButton.Size = new System.Drawing.Size(209, 38);
             this.removeTagButton.TabIndex = 3;
@@ -151,12 +148,11 @@
             // addTagButton
             // 
             this.addTagButton.BackColor = System.Drawing.Color.Lavender;
-            this.addTagButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.addTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.addTagButton.FlatAppearance.BorderSize = 0;
             this.addTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addTagButton.Location = new System.Drawing.Point(0, 300);
+            this.addTagButton.Location = new System.Drawing.Point(0, 228);
             this.addTagButton.Name = "addTagButton";
             this.addTagButton.Size = new System.Drawing.Size(209, 38);
             this.addTagButton.TabIndex = 2;
@@ -172,13 +168,13 @@
             this.tagsetView.Dock = System.Windows.Forms.DockStyle.Top;
             this.tagsetView.FullRowSelect = true;
             this.tagsetView.HideSelection = false;
-            this.tagsetView.Location = new System.Drawing.Point(0, 52);
+            this.tagsetView.Location = new System.Drawing.Point(0, 0);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(209, 248);
+            this.tagsetView.Size = new System.Drawing.Size(1061, 74);
             this.tagsetView.TabIndex = 4;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
-            this.tagsetView.View = System.Windows.Forms.View.Details;
+            this.tagsetView.View = System.Windows.Forms.View.Tile;
             this.tagsetView.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // columnHeader2
@@ -225,6 +221,7 @@
             this.panel1.Controls.Add(this.tagTable);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.loadMoreButton);
+            this.panel1.Controls.Add(this.tagsetView);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel1.Location = new System.Drawing.Point(209, 0);
@@ -240,11 +237,11 @@
             this.tagTable.FullRowSelect = true;
             this.tagTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.tagTable.HideSelection = false;
-            this.tagTable.Location = new System.Drawing.Point(0, 0);
+            this.tagTable.Location = new System.Drawing.Point(0, 74);
             this.tagTable.Name = "tagTable";
             this.tagTable.RowHeight = 52;
             this.tagTable.ShowGroups = false;
-            this.tagTable.Size = new System.Drawing.Size(851, 579);
+            this.tagTable.Size = new System.Drawing.Size(851, 505);
             this.tagTable.TabIndex = 18;
             this.tagTable.UseCompatibleStateImageBehavior = false;
             this.tagTable.View = System.Windows.Forms.View.Details;
@@ -253,29 +250,12 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.deleteSituationButton);
             this.panel3.Controls.Add(this.situationView);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(851, 0);
+            this.panel3.Location = new System.Drawing.Point(851, 74);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 579);
+            this.panel3.Size = new System.Drawing.Size(210, 505);
             this.panel3.TabIndex = 17;
-            // 
-            // deleteSituationButton
-            // 
-            this.deleteSituationButton.BackColor = System.Drawing.Color.Lavender;
-            this.deleteSituationButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.deleteSituationButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.deleteSituationButton.FlatAppearance.BorderSize = 0;
-            this.deleteSituationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteSituationButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteSituationButton.Location = new System.Drawing.Point(0, 529);
-            this.deleteSituationButton.Name = "deleteSituationButton";
-            this.deleteSituationButton.Size = new System.Drawing.Size(210, 50);
-            this.deleteSituationButton.TabIndex = 16;
-            this.deleteSituationButton.Text = "Delete situation";
-            this.deleteSituationButton.UseVisualStyleBackColor = false;
-            this.deleteSituationButton.Click += new System.EventHandler(this.deleteSituationButton_Click);
             // 
             // situationView
             // 
@@ -289,7 +269,7 @@
             this.situationView.Location = new System.Drawing.Point(0, 0);
             this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(210, 579);
+            this.situationView.Size = new System.Drawing.Size(210, 505);
             this.situationView.TabIndex = 15;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
@@ -332,7 +312,6 @@
         private System.Windows.Forms.ListView situationView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button deleteSituationButton;
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button suggesterButton;

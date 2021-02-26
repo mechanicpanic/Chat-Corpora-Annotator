@@ -138,11 +138,21 @@ namespace Viewer.Framework.Presenters
                         file.Write(msg.Id.ToString());
                         foreach (var kvp in msg.Situations) {
                               file.Write(" " + kvp.Key + "-" + kvp.Value.ToString() + "+");
+                            if (!_service.SituationContainer.ContainsKey(msg.Id))
+                            {
+                                _service.SituationContainer.Add(msg.Id, kvp.Key + "-" + kvp.Value.ToString() + "+");
+                            }
+                            else
+                            {
+                                _service.SituationContainer[msg.Id] = _service.SituationContainer[msg.Id] + kvp.Key + "-" + kvp.Value.ToString() + "+"; //very bad but i will change this to stringbuilder asap
+                            }
                         }
                         file.WriteLine();
+                        
 
                     } 
                 }
+                
 
             }   
             
@@ -197,6 +207,7 @@ namespace Viewer.Framework.Presenters
 
                 }
                 _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
+                
                 SituationIndex.TagsetCounter[e.Tag]++;
             }
             else
