@@ -20,7 +20,9 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly ITagFileWriter _writer;
 
-        
+        private string savedpath;
+        private string pathcounts;
+        private string tagsetpath;
         public TagPresenter(IMainView main, ITagView tagger, ITagService service, ITagsetView tagset, ITagFileWriter writer)
         {
             this._main = main;
@@ -40,16 +42,24 @@ namespace Viewer.Framework.Presenters
             _tagger.LoadTagged += LoadTagged;
             _main.TagClick += _main_TagClick;
             
+
+    }
+
+        private void SetPaths()
+        {
+            savedpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-savedtags.txt";
+            pathcounts = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagcounts.txt";
+            tagsetpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
         }
         
         private void LoadTagged(object sender, EventArgs e)
         {
-            
+            SetPaths();
             if (_service.SituationContainer.Count == 0)
             {
-                if (File.Exists(IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-savedtags.txt"))
+                if (File.Exists(savedpath))
                 {
-                    using (System.IO.StreamReader reader = new System.IO.StreamReader(IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-savedtags.txt"))
+                    using (StreamReader reader = new StreamReader(savedpath))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
@@ -76,13 +86,13 @@ namespace Viewer.Framework.Presenters
 
         private void AddTags()
         {
-            List<int> mem = new List<int>();
+            //List<int> mem = new List<int>();
             foreach (var id in _service.SituationContainer.Keys)
             {
                 if (id < MessageContainer.Messages.Count)
                 {
                     var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
-                    mem.Add(id);
+                    //mem.Add(id);
                     foreach (var item in arr)
                     {
                         var s = item.Split('-');
@@ -99,17 +109,17 @@ namespace Viewer.Framework.Presenters
                 }
 
             }
-            foreach (var id in mem)
-            {
-                _service.SituationContainer.Remove(id);
-            }
+            //foreach (var id in mem)
+            //{
+            //    _service.SituationContainer.Remove(id);
+            //}
         }
 
         private void _tagger_SaveTagged(object sender, EventArgs e)
 
         {
-            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-savedtags.txt";
-            string pathcounts = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagcounts.txt";
+
+            
             using (StreamWriter counts = new StreamWriter(pathcounts))
             {
                 foreach (var kvp in SituationIndex.TagsetCounter)
@@ -118,15 +128,16 @@ namespace Viewer.Framework.Presenters
                 }
             }
             using (StreamWriter file =
-                new StreamWriter(path))
+                File.AppendText(savedpath))
             {
                 
                 foreach (var msg in MessageContainer.Messages)
                 {
-                    if (msg.Situations.Count != 0)
+                    if (msg.Situations.Count != 0 && !_service.SituationContainer.ContainsKey(msg.Id))
                     {
+                        file.Write(msg.Id.ToString());
                         foreach (var kvp in msg.Situations) {
-                            file.Write(msg.Id.ToString() + " " + kvp.Key + "-" + kvp.Value.ToString() + "+");
+                              file.Write(" " + kvp.Key + "-" + kvp.Value.ToString() + "+");
                         }
                         file.WriteLine();
 
@@ -139,13 +150,11 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_LoadTagset(object sender, TaggerEventArgs e)
         {
-            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
-            string pathcounts = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagcounts.txt";
-
+           
             _service.CheckTagset();
             if (_service.TagsetSet)
             {
-                _service.ProjectTagset = File.ReadAllText(path);
+                _service.ProjectTagset = File.ReadAllText(tagsetpath);
                 string line = File.ReadAllText(pathcounts);
                 string[] lines = line.Split(new char[] { '\n','\r' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach(var item in lines)

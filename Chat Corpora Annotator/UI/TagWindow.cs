@@ -35,6 +35,8 @@ namespace Viewer.UI
 		public event EventHandler SetTagset;
 		public event EventHandler DisplayColors;
 		public event TaggerEventHandler LoadTagset;
+
+
 		public Dictionary<string, Color> TagsetColors { get; set; }
 		public string Tagset { get; set; }
 
@@ -43,6 +45,7 @@ namespace Viewer.UI
 
 		//private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
 		private HashSet<string> sit = new HashSet<string>();
+		private bool chatViewSetUp = false;
 
 		public TagWindow()
 		{
@@ -171,8 +174,8 @@ namespace Viewer.UI
 		public void SetUpChatView()
 		{
 
-
-			LoadTagged?.Invoke(this, EventArgs.Empty);
+			chatViewSetUp = true;
+		LoadTagged?.Invoke(this, EventArgs.Empty);
 			tagTable.SetObjects(MessageContainer.Messages);
 			//MessageBox.Show(tagTable.VirtualListDataSource.ToString());
 
@@ -251,27 +254,18 @@ namespace Viewer.UI
 		public void ShowView()
 		{
 			this.Show();
-			SetUpChatView();
-
-			LoadTagset?.Invoke(this, null);
+			if(!chatViewSetUp) { 
+				SetUpChatView();
+				LoadTagset?.Invoke(this, null);
+			}
+			
 		}
 
 		public void CloseView()
-		{
-			DialogResult dialogResult = MessageBox.Show("Save tags to disk?","Saver",MessageBoxButtons.YesNoCancel);
-			if (dialogResult == DialogResult.Yes)
-			{
+		{		
 				this.Hide();
 				SaveTagged?.Invoke(this, EventArgs.Empty);
-				TagsetIndex.WriteInfoToDisk();
-			}
-			if(dialogResult == DialogResult.No)
-            {
-				this.Hide();
-				TagsetIndex.WriteInfoToDisk();
-			}
-			
-			
+				TagsetIndex.WriteInfoToDisk();						
 		}
 
 

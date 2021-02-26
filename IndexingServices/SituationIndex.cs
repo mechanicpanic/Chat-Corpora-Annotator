@@ -17,14 +17,19 @@ namespace IndexEngine
 
         static SituationIndex()
         {
-            if(File.Exists(IndexService.CurrentIndexPath + @"\info"+"situations.txt"))
+            if(File.Exists(IndexService.CurrentIndexPath + @"\info"+@"\situations.txt"))
             {
-                //LoadIndexFromDisk(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
+                LoadIndexFromDisk(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
             }
             else
             {
                 Index = new Dictionary<string, Dictionary<int, List<int>>>();
             }
+        }
+
+        private static void LoadIndexFromDisk(string path)
+        {
+
         }
 
         public static void RetrieveDictFromMessageContainer(List<DynamicMessage> msg)
