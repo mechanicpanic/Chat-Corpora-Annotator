@@ -154,7 +154,7 @@ namespace Viewer.UI
 				AddTag?.Invoke(this, args);
 
 				situationView.Items.Add(args.Tag + " " + args.Id);
-				tagTable.UpdateObjects(MessageContainer.Messages);
+				tagTable.UpdateObjects(MessageContainer.Messages.FindAll(x => args.messages.Contains(x.Id)));
 			}
 			else
 			{

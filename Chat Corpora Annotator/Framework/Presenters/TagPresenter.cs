@@ -9,6 +9,7 @@ using System.Text.Json;
 using Wintellect.PowerCollections;
 using System.Linq;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Viewer.Framework.Presenters
 {
@@ -188,6 +189,7 @@ namespace Viewer.Framework.Presenters
         
         private void _tagger_AddTag(object sender, TaggerEventArgs e)
         {
+            //Stopwatch.StartNew();
             if (SituationIndex.TagsetCounter.Count != 0) {
                 SituationIndex.AddSituationToIndex(e.messages,e.Id, e.Tag);
                 
@@ -219,6 +221,8 @@ namespace Viewer.Framework.Presenters
 
                 }
             }
+            //MessageBox.Show(Stopwatch.GetTimestamp().ToString());
+
            
         }
 
