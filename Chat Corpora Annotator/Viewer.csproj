@@ -442,6 +442,7 @@
     <Compile Include="Framework\Views\SuggesterView.cs" />
     <Compile Include="Framework\Views\TagsetView.cs" />
     <Compile Include="Framework\Views\TagView.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
     <Compile Include="TaggerEventArgs.cs" />
     <Compile Include="HistogramHelper.cs" />

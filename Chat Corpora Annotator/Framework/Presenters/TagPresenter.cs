@@ -193,12 +193,12 @@ namespace Viewer.Framework.Presenters
                 
                 foreach (var id in e.messages)
                 {
-                    try {
+                    if (!MessageContainer.Messages[id].Situations.ContainsKey(e.Tag)) 
+                    { 
                         MessageContainer.Messages[id].Situations.Add(e.Tag, SituationIndex.TagsetCounter[e.Tag]);
-                        
 
                     }
-                    catch (ArgumentException ex)
+                    else
                     {
                         //MessageContainer.Messages[id].Situations[e.Tag]
                         _tagger.DisplayTagErrorMessage();
@@ -226,24 +226,22 @@ namespace Viewer.Framework.Presenters
         private void _tagger_WriteToDisk(object sender, WriteEventArgs e)
         {
             _writer.OpenWriter();
-
-            SituationIndex.RetrieveDictFromMessageContainer(e.ids);
             foreach(var kvp in SituationIndex.Index)
             {
-                
-                foreach(var pair in kvp.Value.Values)
+                foreach(var list in kvp.Value.Values)
                 {
-                    List<DynamicMessage> list = new List<DynamicMessage>();
-                    foreach (int id in pair)
+
+                    List<DynamicMessage> l = new List<DynamicMessage>();
+                    foreach (int id in list)
                     {
-                        list.Add(e.ids.Find(x => x.Id == id)); //currently does not support multiple tags
+                        l.Add(IndexService.RetrieveMessageById(id));
+
                     }
-                    _writer.WriteSituation(list, kvp.Key, list[0].Situations[kvp.Key]);
+                    _writer.WriteSituation(l, kvp.Key, l[0].Situations[kvp.Key]);
                 }
-                
             }
-            _writer.CloseWriter();
         }
+
 
         private void _main_TagClick(object sender, EventArgs e)
         {

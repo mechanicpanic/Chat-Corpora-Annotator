@@ -392,12 +392,10 @@ namespace IndexEngine
         public static DynamicMessage RetrieveMessageById(int id)
         {
 
-            //Much better now!
             var query = NumericRangeQuery.NewInt32Range("id", id, id, true, true);
-            TopDocs hits = LuceneService.Searcher.Search(query, 1);
-            ScoreDoc message = hits.ScoreDocs[0];
+            ScoreDoc doc = LuceneService.Searcher.Search(query, 1).ScoreDocs.FirstOrDefault();
             List<string> data = new List<string>();
-            Document idoc = LuceneService.Searcher.Doc(message.Doc);
+            Document idoc = LuceneService.Searcher.Doc(doc.Doc);
             foreach (var field in SelectedFields)
             {
                 data.Add(idoc.GetField(field).GetStringValue());
