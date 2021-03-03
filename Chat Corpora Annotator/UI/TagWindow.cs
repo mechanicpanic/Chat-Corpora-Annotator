@@ -116,20 +116,20 @@ namespace Viewer.UI
 		private void button4_Click(object sender, EventArgs e)
 		{
 			WriteEventArgs args = new WriteEventArgs();
-			if (IsFiltered)
-			{
-				foreach (var obj in tagTable.FilteredObjects)
-				{
-					DynamicMessage dyn = (DynamicMessage)obj;
-					args.ids.Add(dyn);
-				}
+			//if (IsFiltered)
+			//{
+			//	foreach (var obj in tagTable.FilteredObjects)
+			//	{
+			//		DynamicMessage dyn = (DynamicMessage)obj;
+			//		args.ids.Add(dyn);
+			//	}
 
 				WriteToDisk?.Invoke(this, args);
-			}
-			else
-            {
-				MessageBox.Show("Please click Tagged only");
-            }
+			//}
+			//else
+            //{
+				//MessageBox.Show("Please click Tagged only");
+            //}
 		}
 
 		private void button2_Click(object sender, EventArgs e)
