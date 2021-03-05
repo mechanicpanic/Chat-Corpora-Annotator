@@ -86,17 +86,6 @@ namespace Viewer.UI
 				situationView.Items.Add(s.ToString());
             }
         }
-		private void DisplayBackTagsetColors()
-		{
-			foreach (ListViewItem item in tagsetView.Items)
-			{
-				if (TagsetColors.ContainsKey(item.Text))
-				{
-					item.BackColor = TagsetColors[item.Text];
-				}
-			}
-
-		}
 
 		private void ChatTable_FormatRow(object sender, FormatRowEventArgs e)
 		{
@@ -380,12 +369,26 @@ namespace Viewer.UI
         private void situationView_DoubleClick(object sender, EventArgs e)
         {
 			string[] item = situationView.SelectedItems[0].Text.Split(' ');
-
-
+			bool flag = false;
 			int messageID = SituationIndex.Index[item[0]][Int32.Parse(item[1])][0];
 			//tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
-			tagTable.EnsureVisible(messageID);
-			
+
+			while (!flag)
+			{
+				if (tagTable.Items.Count > messageID)
+				{
+					tagTable.EnsureVisible(messageID);
+					flag = true;
+				}
+				else
+				{
+					//DialogResult res = MessageBox.Show("This will load additional messages. Proceed?");
+					//if (res == DialogResult.OK)
+					//{
+						LoadMore?.Invoke(this, EventArgs.Empty);
+					//}
+				}
+			}
 		}
     }
 
