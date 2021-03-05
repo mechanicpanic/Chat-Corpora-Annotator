@@ -144,9 +144,9 @@ namespace Viewer.Framework.Presenters
                 {
                     if (msg.Situations.Count != 0 && !_service.SituationContainer.ContainsKey(msg.Id))
                     {
-                        file.Write(msg.Id.ToString());
+                        file.Write(msg.Id.ToString()+ " ");
                         foreach (var kvp in msg.Situations) {
-                              file.Write(" " + kvp.Key + "-" + kvp.Value.ToString() + "+");
+                              file.Write(kvp.Key + "-" + kvp.Value.ToString() + "+");
                             if (!_service.SituationContainer.ContainsKey(msg.Id))
                             {
                                 _service.SituationContainer.Add(msg.Id, kvp.Key + "-" + kvp.Value.ToString() + "+");
