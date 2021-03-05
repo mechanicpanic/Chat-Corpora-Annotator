@@ -271,8 +271,8 @@ namespace Viewer.UI
 
 		public void DisplayDocuments()
 		{
-			//
-			tagTable.UpdateObjects(MessageContainer.Messages);
+			//tagTable.UpdateObjects(MessageContainer.Messages);
+			tagTable.SetObjects(MessageContainer.Messages);
 			tagTable.Invalidate();
 		}
 

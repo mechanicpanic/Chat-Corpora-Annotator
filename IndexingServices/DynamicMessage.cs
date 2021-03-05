@@ -17,15 +17,13 @@ namespace IndexEngine
 
         public Dictionary<string, int> Situations { get; set; } = new Dictionary<string, int>();
 
-        //public KeyValuePair<string, int> Situation { get; set; } = new KeyValuePair<string, int>
-
         private Dictionary<string, object> contents;
 
         public Dictionary<string, object> Contents { get { return contents; } }
 
         public DynamicMessage(string[] fields, string[] data)
         {
-            //this.Id = Guid.NewGuid();
+            
             contents = new Dictionary<string, object>();
             for (int i = 0; i < fields.Length; i++)
             {
@@ -41,7 +39,7 @@ namespace IndexEngine
 
         public DynamicMessage(string[] fields, object[] data, List<string> selectedFields)
         {
-            //this.Id = Guid.NewGuid();
+            
             contents = new Dictionary<string, object>();
 
 
