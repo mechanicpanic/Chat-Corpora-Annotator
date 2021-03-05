@@ -12,7 +12,7 @@ namespace Viewer.Framework.Services
     public interface ITagService
     {
         bool TagsetSet { get; set; }
-
+        List<int> TaggedIds { get; set; }
         Dictionary<int,string> SituationContainer { get; set; }
         string ProjectTagset { get; set; }
         void UpdateTagsetIndex(string name);
@@ -47,7 +47,7 @@ namespace Viewer.Framework.Services
         }
         public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();
         public string ProjectTagset { get; set; }
-
+        public List<int> TaggedIds { get; set; } = new List<int>();
 
         public void AddSituation(List<int> messages, int id, string situation)
         {

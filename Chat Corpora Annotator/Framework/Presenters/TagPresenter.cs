@@ -64,57 +64,64 @@ namespace Viewer.Framework.Presenters
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
-                        {
-                            
-                            var arr = line.Split(' ');
+                        {                            
+                            var MessageIdAndSituations = line.Split(' ');
+                            _service.SituationContainer.Add(Int32.Parse(MessageIdAndSituations[0]), MessageIdAndSituations[1]);
 
-                            _service.SituationContainer.Add(Int32.Parse(arr[0]), arr[1]);
-                            
+                           var situationsSet = MessageIdAndSituations[1].Split(new char[] { '+' },StringSplitOptions.RemoveEmptyEntries);
 
+                            foreach (var situation in situationsSet)
+                            {
+                                var splitSituation = situation.Split('-');
+                                int sitId = int.Parse(splitSituation[1]);
+                                if (SituationIndex.Index.ContainsKey(splitSituation[0]))
+                                {
+                                    if (!SituationIndex.Index[splitSituation[0]].ContainsKey(sitId))
+                                        {
+                                        SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
+                                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+                                            }
+                                    else
+                                    {
+                                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+                                    }
+                                }
+                                else
+                                {
+                                    SituationIndex.Index.Add(splitSituation[0], new Dictionary<int, List<int>>());
+                                    SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
+                                    SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+
+                                }
+
+                                //TODO: Revise and add a wrapper ASAP
+                                _tagger.AddSituationIndexItem(splitSituation[0] + " " + splitSituation[1]);
+                            }
                         }
-                        
                     }
-                    AddTags();
+                    _service.TaggedIds = _service.SituationContainer.Keys.ToList();
+                    _service.TaggedIds.Sort();
+                    _tagger.UpdateSituationCount(SituationIndex.SituationCount());
                 }
             }
-            else
-            {
-                AddTags();
-            }
-            _tagger.RefreshTagView();
-            _tagger.UpdateSituationCount(SituationIndex.SituationCount());
-
         }
+    
 
-        private void AddTags()
+        private void InsertTagsInDynamicMessage(int id)
         {
-            //List<int> mem = new List<int>();
-            foreach (var id in _service.SituationContainer.Keys)
+            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var item in arr)
             {
-                if (id < MessageContainer.Messages.Count)
+                var s = item.Split('-');
+                if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
                 {
-                    var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
-                    //mem.Add(id);
-                    foreach (var item in arr)
-                    {
-                        var s = item.Split('-');
-                        if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
-                        {
-                            MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
-                            SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
-                            _tagger.AddSituationIndexItem(s[0] + " " + s[1]);
-                        }
-                        
-
-                    }
-
+                    MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
+                    SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
+                    
                 }
 
             }
-            //foreach (var id in mem)
-            //{
-            //    _service.SituationContainer.Remove(id);
-            //}
         }
 
         private void _tagger_SaveTagged(object sender, EventArgs e)
@@ -250,25 +257,41 @@ namespace Viewer.Framework.Presenters
 
         private void _main_TagClick(object sender, EventArgs e)
         {
+            if (!_tagger.SituationsLoaded)
+            {
+                LoadTagged(null, null);
+                _tagger.SituationsLoaded = true;
+            }
+            ShowTags(MessageContainer.Messages.Count);
             _tagger.ShowView();
         }
 
         private void _tagger_LoadMore(object sender, EventArgs e)
-        {
-            
+        {          
             AddDocumentsToDisplay(2000);
-
-
+            
         }
 
         private void AddDocumentsToDisplay(int count)
         {
             var list = IndexService.LoadSomeDocuments(count);
             MessageContainer.Messages.AddRange(list);
-            LoadTagged(null,null);
+            ShowTags(count);
             _tagger.DisplayDocuments();
+            
         }
 
+        private void ShowTags(int count)
+        {
+            for (int i = _tagger.CurIndex; i < _tagger.CurIndex + count; i++)
+            {
+                if (_service.TaggedIds.Contains(i))
+                {
+                    InsertTagsInDynamicMessage(i);
+                }
+            }
+            _tagger.CurIndex += count;
+        }
 
         private void _tagger_TagsetClick(object sender, EventArgs e)
         {

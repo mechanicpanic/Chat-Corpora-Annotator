@@ -27,6 +27,8 @@ namespace Viewer.UI
         {
 			label1.Text = count.ToString() + " situations";
         }
+		public int CurIndex { get; set; }  = 0;
+		public bool SituationsLoaded { get; set; }  = false;
 		public event EventHandler TagsetClick;
 		public event TaggerEventHandler AddTag;
 		public event TaggerEventHandler RemoveTag;

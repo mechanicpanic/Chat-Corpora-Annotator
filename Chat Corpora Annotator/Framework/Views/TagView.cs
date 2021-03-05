@@ -26,7 +26,8 @@ namespace Viewer.Framework.Views
 
         Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
      
-        
+        bool SituationsLoaded { get; set; }
+        int CurIndex { get; set; }
         void DisplayDocuments();
 
         void DisplayTagsetColors(Dictionary<string, System.Drawing.Color> dict);
