@@ -12,7 +12,7 @@ namespace Viewer.Framework.Views
         event EventHandler LoadTagged;
         event EventHandler TagsetClick;
 
-
+       
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
         void RefreshTagView();
@@ -37,6 +37,7 @@ namespace Viewer.Framework.Views
         void DisplayTagset(List<string> tags);
         void DisplayTagErrorMessage();
         void AddSituationIndexItem(string s);
+        void UpdateSituationCount(int count);
 
      
     }

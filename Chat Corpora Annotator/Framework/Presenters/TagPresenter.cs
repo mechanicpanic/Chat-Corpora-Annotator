@@ -82,7 +82,8 @@ namespace Viewer.Framework.Presenters
                 AddTags();
             }
             _tagger.RefreshTagView();
-            
+            _tagger.UpdateSituationCount(SituationIndex.SituationCount());
+
         }
 
         private void AddTags()
@@ -222,7 +223,7 @@ namespace Viewer.Framework.Presenters
                 }
             }
             //MessageBox.Show(Stopwatch.GetTimestamp().ToString());
-
+            _tagger.UpdateSituationCount(SituationIndex.SituationCount());
            
         }
 

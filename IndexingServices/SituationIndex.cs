@@ -32,6 +32,16 @@ namespace IndexEngine
 
         }
 
+        public static int SituationCount()
+        {
+            int count = 0;
+            foreach(var kvp in Index)
+            {
+                count += kvp.Value.Count;
+            }
+            return count;
+        }
+
         public static void RetrieveDictFromMessageContainer(List<DynamicMessage> msg)
         {
             foreach(var m in msg)

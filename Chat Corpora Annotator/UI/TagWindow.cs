@@ -22,7 +22,11 @@ namespace Viewer.UI
 		public event WriteEventHandler WriteToDisk;
 		public event EventHandler SaveTagged;
 		public event EventHandler LoadTagged;
-		
+
+		public void UpdateSituationCount(int count)
+        {
+			label1.Text = count.ToString() + " situations";
+        }
 		public event EventHandler TagsetClick;
 		public event TaggerEventHandler AddTag;
 		public event TaggerEventHandler RemoveTag;
