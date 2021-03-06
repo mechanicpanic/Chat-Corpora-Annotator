@@ -175,7 +175,6 @@ namespace Viewer.Framework.Presenters
                 IndexService.UserKeys = IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
 
 
-
                 MessageContainer.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(Int32.Parse(info["LineCount"]));
                 _main.FileLoadState = true;

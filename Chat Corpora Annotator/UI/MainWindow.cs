@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Viewer.Framework.Views;
 using Viewer.UI;
 using ZedGraph;
+using ColorLibrary;
 
 namespace Viewer
 {
@@ -246,7 +247,7 @@ namespace Viewer
 		private void SetUpChatView()
 		{
 			ShowUsers();
-			PopulateSenderColors();
+			//PopulateSenderColors();
 			SetDateView();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
@@ -313,20 +314,22 @@ namespace Viewer
 			chatTable.Refresh();
 
 		}
-		private void PopulateSenderColors()
-		{
-			userColors = new Dictionary<string, Color>();
-			foreach (var user in IndexService.UserKeys)
-			{
-				Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-				userColors.Add(user, tempColor);
-			}
-		}
+
+		//private void PopulateSenderColors()
+		//{
+		//	userColors = new Dictionary<string, Color>();
+		//	foreach (var user in IndexService.UserKeys)
+		//	{
+		//		//Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+		//		Color tempColor = ColorGenerator.GenerateHSLuvColor(false);
+		//		userColors.Add(user, tempColor);
+		//	}
+		//}
 		private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
 		{
 			if (e.Column.Text == IndexService.SenderFieldKey)
 			{
-				e.SubItem.ForeColor = userColors[e.SubItem.Text];
+				e.SubItem.ForeColor = IndexService.UserColors[e.SubItem.Text];
 			}
 
 		}

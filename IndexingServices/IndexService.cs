@@ -10,6 +10,7 @@ using Lucene.Net.Store;
 using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using Wintellect.PowerCollections;
@@ -32,6 +33,8 @@ namespace IndexEngine
 
 
         public static HashSet<string> UserKeys { get; set; } = new HashSet<string>();
+
+        public static Dictionary<string, Color> UserColors { get; set; } = new Dictionary<string, Color>();
         public static string DateFieldKey { get; set; }
         public static string TextFieldKey { get; set; }
         public static string SenderFieldKey { get; set; }
@@ -79,9 +82,9 @@ namespace IndexEngine
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
             {
-                foreach (var user in UserKeys)
+                foreach (var kvp in UserColors)
                 {
-                    file.WriteLine(user);
+                    file.WriteLine(kvp.Key+"+"+kvp.Value.ToArgb().ToString()); ;
                 }
             }
         }
@@ -150,9 +153,13 @@ namespace IndexEngine
             {
                 while (!reader.EndOfStream)
                 {
-                    users.Add(reader.ReadLine());
+                    var kvp = reader.ReadLine().Split('+');
+                    
+                    users.Add(kvp[0]);
+                    UserColors.Add(kvp[0], Color.FromArgb(int.Parse(kvp[1]))); //bad practice!
                 }
             }
+
             return users;
         }
 
@@ -270,14 +277,7 @@ namespace IndexEngine
                         document.Add(new Int32Field("id", indexingValue, Field.Store.YES));
                         
                         indexingValue++;
-                        //This change breaks all of your older indexes!!!
 
-                        //Please delete the contents of your CCA folder. These indexes are unusable.
-
-                        //I have to/am able to index messages with simple ints because:
-                        //1. Lucene's DocID is not a const field. 
-                        //2. I do not merge in or delete any messages after the index is created. No sorting either.
-                        //3. I really am not sure about calculating the distance between messages in GUIDs during retrieval. The guids might come back if they are feasbile for the task, but at the moment, I do not believe they are.
                         for (int i = 0; i < row.Length; i++)
                         {
                             if (lookup.Contains(i))
@@ -313,11 +313,12 @@ namespace IndexEngine
                     LuceneService.Writer.Commit();
                     LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
                     CheckDir();
+                    PopulateUserColors();
                     SaveInfoToDisk(count);
                     SaveFieldsToDisk();
                     SaveUsersToDisk();
                     SaveStatsToDisk();
-
+                    
                     OpenReader();
                     result = 1;
                     return result;
@@ -327,6 +328,18 @@ namespace IndexEngine
             return result;
         }
 
+
+        public static void PopulateUserColors()
+        {
+            var colors = ColorLibrary.ColorGenerator.GenerateHSLuvColors(UserKeys.Count, false);
+            int i = 0;
+            foreach(var user in UserKeys)
+            {
+                UserColors.Add(user, colors[i]);
+                i++;
+            }
+
+        }
         private static void OpenParser()
         {
             if (LuceneService.Analyzer != null)
