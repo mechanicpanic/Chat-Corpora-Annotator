@@ -145,7 +145,10 @@ namespace IndexEngine
             Index.Add("default", new List<string> { "JobSearch", "CodeHelp", "FCCBug", "SoftwareSupport", "OSSelection", "Meeting" });
             ColorIndex = new BTreeDictionary<string, Dictionary<string, Color>>();
             ColorIndex.Add("default", new Dictionary<string, Color>());
-            Color[] colors = ColorGenerator.GenerateHSVColors(6);
+            Color[] colors = ColorGenerator.GenerateHSLuvColors(6);
+
+            
+            
             for (int i = 0; i < Index["default"].Count; i++)
             {
                 ColorIndex["default"].Add(Index["default"][i], colors[i]);

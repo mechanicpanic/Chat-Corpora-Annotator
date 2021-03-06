@@ -76,14 +76,15 @@ namespace ColorLibrary
             for (int i = 0; i < count; i++)
             {
                 flag = false;
-                h = rnd.NextDouble();
-                h += golden_ratio_conjugate;
-                h %= 1;
+                
 
                 v = rnd.NextDouble() * (0.99 - 0.75) + 0.75;
                 s = rnd.NextDouble() * (0.6 - 0.4) + 0.4;
                 while (!flag)
                 {
+                    h = rnd.NextDouble();
+                    h += golden_ratio_conjugate;
+                    h %= 1;
                     flag = temp.Add(HsvToColor(h, s, v));
                 }
 
@@ -123,6 +124,58 @@ namespace ColorLibrary
             return c;
         }
 
+        public static Color[] GenerateHSLuvColors(int count)
+        {
+            Color[] colors;
+            List<double> list = new List<double>();
+            double h;
+            double s;
+            double l;
+            bool flag;
+
+            HashSet<Color> temp = new HashSet<Color>();
+            for (int i = 0; i < count; i++)
+            {
+                flag = false;
+                
+
+                l = rnd.NextDouble() * (90.0 - 55.5) + 55.5;
+                s = rnd.NextDouble() * (60.0 - 40.0) + 40.0;
+                
+                while (!flag)
+                {
+                   h = rnd.NextDouble() * (359.0 - 1.0) + 1.0;
+                    //h += golden_ratio_conjugate;
+                    //h %= 1;
+
+                    list.Add(h);
+                    list.Add(s);
+                    list.Add(l);
+
+                    var col = HsluvConverter.HsluvToRgb(list);
+                    var r = Convert.ToByte(col[0] * 255);
+                    var g = Convert.ToByte(col[1] * 255);
+                    var b = Convert.ToByte(col[2] * 255);
+
+
+                    var str = Color.FromArgb(r,g,b);
+                    Console.WriteLine("Adding colour " + str.ToString());
+                    flag = temp.Add(str);
+                    list.Clear();
+                }
+
+            }
+            colors = temp.ToArray();
+            return colors;
+        }
  
+    }
+
+    public static class ColorTester
+    {
+        public static void TestHSLuv(int count)
+        {
+            var col = ColorGenerator.GenerateHSLuvColors(count);
+        }
     }
 }
