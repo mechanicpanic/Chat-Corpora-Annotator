@@ -46,7 +46,7 @@ namespace Viewer.UI
 
         public void SetCounts()
         {
-            label3.Text = QueryResult.Count.ToString();
+            groupsLabel.Text += " " + QueryResult.Count.ToString();
             //label4.Text = QueryResult.Sum(x => x.Count).ToString();
             int count = 0;
             foreach (var list in QueryResult)
@@ -56,7 +56,7 @@ namespace Viewer.UI
                     count += res.Count;
                 }
             }
-            label4.Text = count.ToString();
+            suggLabel.Text+= " " + count.ToString();
         }
         public void DisplaySituation()
         {
@@ -151,13 +151,6 @@ namespace Viewer.UI
                 DisplayIndex++;
                 DisplaySituation();
             }
-        }
-
-        // This one is for running our pre-cooked queries
-        private void preCooked_Click(object sender, EventArgs e)
-        {
-            this.QueryString = "";
-            RunQuery?.Invoke(this, EventArgs.Empty);
         }
 
         //This is the Find button
