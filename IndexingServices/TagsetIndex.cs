@@ -16,9 +16,9 @@ namespace IndexEngine
         static string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsets.txt";
         static string colorpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsetscolors.txt";
         //Eventually I will phase out Index for ColorIndex altogether.
-        static TagsetIndex() 
+        static TagsetIndex()
         {
-            
+
             if (!File.Exists(path))
             {
                 AddDefaultTagset();
@@ -31,10 +31,10 @@ namespace IndexEngine
         static Random rnd = new Random();
         public static BTreeDictionary<string, List<string>> Index { get; private set; }
 
-        public static BTreeDictionary<string, Dictionary<string,Color>> ColorIndex { get; set; }
+        public static BTreeDictionary<string, Dictionary<string, Color>> ColorIndex { get; set; }
 
         private static string[] ColorValues = {
-    
+
     "#98724c",
     "#908f32",
     "#c8b55b",
@@ -68,39 +68,33 @@ namespace IndexEngine
         {
             Index.Add(name, new List<string>());
             ColorIndex.Add(name, new Dictionary<string, Color>());
-            
+
         }
 
         public static Color[] GenerateTagColors(int count)
         {
-            //KnownColor[] colors = (KnownColor[])Enum.GetValues(typeof(KnownColor));
-            //List<Color> picker = new List<Color>();
-            //foreach (KnownColor knowColor in colors)
-            //{
-            //    Color color = Color.FromKnownColor(knowColor);
-            //    if(color.Equals(Color.AntiqueWhite) || color.Equals(Color.Black) || color.Equals(Color.Transparent) || color.Equals(Color.Chartreuse))
-            //    {
-            //        continue;
-            //    }
-            //    else
-            //    {
-            //        picker.Add(color);
-            //    }
-            //}
             Color[] colors = new Color[count];
-            int random = rnd.Next(0, ColorValues.Length);
-            int mem = -1;
-            for (int i = 0; i < count; i++) {
-                if (mem == random)
-                {
-                    random = rnd.Next(0, ColorValues.Length);
-                }
-                Color color = System.Drawing.ColorTranslator.FromHtml(ColorValues[random]);
-                mem = random;
-                random = rnd.Next(0, ColorValues.Length);
-                colors[i] = color;
-            }
+            double h;
+            double v;
+            double golden_ratio_conjugate = 0.618033988749895;
+            bool flag;
 
+            HashSet<Color> temp = new HashSet<Color>();
+            for(int i = 0; i < count; i++)
+            {
+                flag = false;
+                h = rnd.NextDouble();
+                h += golden_ratio_conjugate;
+                h %= 1;
+
+                v = rnd.NextDouble() * (0.95 - 0.75) + 0.75;
+                while (!flag)
+                {
+                    flag = temp.Add(HsvToColor(h, 0.3, v));
+                }
+                
+            }
+            colors = temp.ToArray();
             return colors;
 
 
@@ -108,15 +102,16 @@ namespace IndexEngine
 
         public static void WriteInfoToDisk()
         {
-           
+
 
             WriteIndexToDisk(path, colorpath);
-            
+
         }
         public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
 
-        public static void UpdateIndexEntry(string name, string tag,int type) { 
-            if(type == 1)
+        public static void UpdateIndexEntry(string name, string tag, int type)
+        {
+            if (type == 1)
             {
                 Index[name].Add(tag);
                 ColorIndex[name].Add(tag, GenerateTagColors(0)[0]);
@@ -141,7 +136,7 @@ namespace IndexEngine
                 foreach (var kvp in ColorIndex)
                 {
                     sw.WriteLine("Tagset: " + kvp.Key);
-                    foreach(var kp in kvp.Value)
+                    foreach (var kp in kvp.Value)
                     {
                         sw.WriteLine(kp.Key + " " + kp.Value.Name);
                     }
@@ -150,7 +145,7 @@ namespace IndexEngine
             }
         }
 
-        
+
         public static void ReadIndexFromDisk(string file, string colorfile)
         {
             var jsonString = File.ReadAllText(file);
@@ -166,8 +161,8 @@ namespace IndexEngine
                 string tagset = sr.ReadLine().Split(' ')[1];
                 while (!sr.EndOfStream)
                 {
-                    
-                    
+
+
                     string line = sr.ReadLine();
                     var arr = line.Split(' ');
                     if (!arr[0].StartsWith("Tagset") && !arr[0].StartsWith("End"))
@@ -177,12 +172,12 @@ namespace IndexEngine
 
                         val.Add(arr[0], clr);
                     }
-                    if(arr[0].StartsWith("Tagset"))
+                    if (arr[0].StartsWith("Tagset"))
                     {
                         tagset = arr[1];
                     }
                     if (arr[0].StartsWith("End"))
-                    { 
+                    {
                         ColorIndex.Add(tagset, val);
                         val = new Dictionary<string, Color>();
                     }
@@ -206,11 +201,42 @@ namespace IndexEngine
             ColorIndex = new BTreeDictionary<string, Dictionary<string, Color>>();
             ColorIndex.Add("default", new Dictionary<string, Color>());
             Color[] colors = GenerateTagColors(6);
-            for(int i = 0; i < Index["default"].Count; i++)
+            for (int i = 0; i < Index["default"].Count; i++)
             {
                 ColorIndex["default"].Add(Index["default"][i], colors[i]);
             }
         }
-       
+
+        public static Color HsvToColor(double h, double s, double v)
+        {
+            // this doesn't work for the values of 0 and 360
+            // here's the hacky fix
+            
+            var hInt = (int)Math.Floor(h * 6.0);
+            var f = h * 6 - hInt;
+            var p = v * (1 - s);
+           var q = v * (1 - f * s);
+            var t = v * (1 - (1 - f) * s);
+            var r = 256.0;
+            var g = 256.0;
+            var b = 256.0;
+
+            switch (hInt)
+            {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            var c = Color.FromArgb(255,
+                                   (byte)Math.Floor(r * 255.0),
+                                   (byte)Math.Floor(g * 255.0),
+                                   (byte)Math.Floor(b * 255.0));
+
+            return c;
+        }
+
     }
 }
