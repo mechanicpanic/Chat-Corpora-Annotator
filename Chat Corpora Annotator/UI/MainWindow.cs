@@ -142,6 +142,7 @@ namespace Viewer
 		public void CloseView()
 		{
 			this.CloseView();
+			SaveTagged?.Invoke(this, null);
 		}
 		#endregion
 
@@ -205,6 +206,8 @@ namespace Viewer
 				concordancerButton.Enabled = true;
 				ngramButton.Enabled = true;
 				keywordButton.Enabled = true;
+				tableLayoutPanel1.Visible = true;
+				splitContainerRight.Visible = true;
 			}
 
 			if (!this.FileLoadState)
@@ -217,6 +220,8 @@ namespace Viewer
 				concordancerButton.Enabled = false;
 				ngramButton.Enabled = false;
 				keywordButton.Enabled = false;
+				tableLayoutPanel1.Visible = false;
+				splitContainerRight.Visible = false;
 				//loadMoreButton.Visible = false;
 			}
 		}
