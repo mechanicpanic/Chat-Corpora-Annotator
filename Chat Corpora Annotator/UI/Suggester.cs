@@ -14,7 +14,7 @@ namespace Viewer.UI
         public Suggester()
         {
             InitializeComponent();
-            fastObjectListView1.FormatRow += FastObjectListView1_FormatRow;
+            suggesterView.FormatRow += FastObjectListView1_FormatRow;
             
         }
 
@@ -37,6 +37,7 @@ namespace Viewer.UI
         public event EventHandler RunQuery;
         public event UserDictsEventHandler AddUserDict;
         public event UserDictsEventHandler DeleteUserDict;
+        public event FindEventHandler ShowMessageInMainWindow;
 
         private List<int> Hits;
         public void CloseView()
@@ -85,9 +86,9 @@ namespace Viewer.UI
             CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 1));
             CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 2));
 
-            fastObjectListView1.SetObjects(CurrentSituation);
+            suggesterView.SetObjects(CurrentSituation);
             SetUpChatView();
-            fastObjectListView1.Sort(fastObjectListView1.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
+            suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
         }
         private void SetUpChatView()
         {
@@ -109,10 +110,10 @@ namespace Viewer.UI
 
 
             }
-            fastObjectListView1.AllColumns.Clear();
-            fastObjectListView1.AllColumns.AddRange(columns);
+            suggesterView.AllColumns.Clear();
+            suggesterView.AllColumns.AddRange(columns);
 
-            foreach (var cl in fastObjectListView1.AllColumns)
+            foreach (var cl in suggesterView.AllColumns)
             {
                 if (cl.Text != IndexService.TextFieldKey)
                 {
@@ -125,8 +126,8 @@ namespace Viewer.UI
                 }
             }
             
-            fastObjectListView1.RebuildColumns();
-            fastObjectListView1.Refresh();
+            suggesterView.RebuildColumns();
+            suggesterView.Refresh();
         }
 
         public void ShowView()
@@ -226,6 +227,25 @@ namespace Viewer.UI
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void fastObjectListView1_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void fastObjectListView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void fastObjectListView1_ItemActivate(object sender, EventArgs e)
+        {
+            var item = suggesterView.GetModelObject(suggesterView.SelectedIndex) as DynamicMessage;
+            var arg = new FindEventArgs();
+            arg.id = item.Id;
+            ShowMessageInMainWindow?.Invoke(this, arg);
+            
         }
     }
 }

@@ -23,6 +23,13 @@ namespace Viewer.Framework.Views
         event UserDictsEventHandler AddUserDict;
 
         event UserDictsEventHandler DeleteUserDict;
+        event FindEventHandler ShowMessageInMainWindow;
 
     }
+
+    public class FindEventArgs : EventArgs
+    {
+        public int id;
+    }
+    public delegate void FindEventHandler(object sender, FindEventArgs args);
 }

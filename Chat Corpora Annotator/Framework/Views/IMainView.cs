@@ -17,6 +17,7 @@ namespace Viewer.Framework.Views
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
 
+        void EnsureMessageIsVisible(int id);
         bool InfoExtracted { get; set; }
         void SetLineCount(int count);
         void DisplayDocuments();

@@ -112,41 +112,44 @@ namespace Viewer.Framework.Presenters
 
         {
 
-            
-            using (StreamWriter counts = new StreamWriter(pathcounts))
+            if (_main.FileLoadState)
             {
-                foreach (var kvp in SituationIndex.TagsetCounter)
+                using (StreamWriter counts = new StreamWriter(pathcounts))
                 {
-                    counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
+                    foreach (var kvp in SituationIndex.TagsetCounter)
+                    {
+                        counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
+                    }
+                }
+                using (StreamWriter file = File.AppendText(savedpath))
+                {
+
+                    foreach (var msg in MessageContainer.Messages)
+                    {
+                        if (msg.Situations.Count != 0 && !_service.SituationContainer.ContainsKey(msg.Id))
+                        {
+                            file.Write(msg.Id.ToString() + " ");
+                            foreach (var kvp in msg.Situations)
+                            {
+                                file.Write(kvp.Key + "-" + kvp.Value.ToString() + "+");
+                                if (!_service.SituationContainer.ContainsKey(msg.Id))
+                                {
+                                    _service.SituationContainer.Add(msg.Id, kvp.Key + "-" + kvp.Value.ToString() + "+");
+                                }
+                                else
+                                {
+                                    _service.SituationContainer[msg.Id] = _service.SituationContainer[msg.Id] + kvp.Key + "-" + kvp.Value.ToString() + "+"; //very bad but i will change this to stringbuilder asap
+                                }
+                            }
+                            file.WriteLine();
+
+
+                        }
+                    }
+
+
                 }
             }
-            using (StreamWriter file = File.AppendText(savedpath))
-            {
-                
-                foreach (var msg in MessageContainer.Messages)
-                {
-                    if (msg.Situations.Count != 0 && !_service.SituationContainer.ContainsKey(msg.Id))
-                    {
-                        file.Write(msg.Id.ToString()+ " ");
-                        foreach (var kvp in msg.Situations) {
-                              file.Write(kvp.Key + "-" + kvp.Value.ToString() + "+");
-                            if (!_service.SituationContainer.ContainsKey(msg.Id))
-                            {
-                                _service.SituationContainer.Add(msg.Id, kvp.Key + "-" + kvp.Value.ToString() + "+");
-                            }
-                            else
-                            {
-                                _service.SituationContainer[msg.Id] = _service.SituationContainer[msg.Id] + kvp.Key + "-" + kvp.Value.ToString() + "+"; //very bad but i will change this to stringbuilder asap
-                            }
-                        }
-                        file.WriteLine();
-                        
-
-                    } 
-                }
-                
-
-            }   
             
         }
 
