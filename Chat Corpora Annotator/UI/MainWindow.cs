@@ -432,6 +432,34 @@ namespace Viewer
         {
 			WriteToDisk?.Invoke(this, null);
         }
+
+        private void chatTable_CellRightClick(object sender, CellRightClickEventArgs e)
+        {
+			var dyn = e.Model as DynamicMessage;
+			
+			MessageBox.Show(dyn.Contents[IndexService.TextFieldKey].ToString());
+		}
+		public void EnsureMessageIsVisible(int id)
+        {
+			bool flag = false;
+			while (!flag)
+			{
+				if (chatTable.Items.Count > id)
+				{
+					chatTable.EnsureVisible(id);
+					//chatTable.SelectedObjects.Add(chatTable.GetModelObject(id));
+					flag = true;
+				}
+				else
+				{
+					//DialogResult res = MessageBox.Show("This will load additional messages. Proceed?");
+					//if (res == DialogResult.OK)
+					//{
+					LoadMore?.Invoke(this, EventArgs.Empty);
+					//}
+				}
+			}
+		}
     }
 }
 

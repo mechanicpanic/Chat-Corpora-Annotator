@@ -204,6 +204,9 @@
             this.chatTable.UseFiltering = true;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
+            this.chatTable.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.chatTable_CellRightClick);
+            this.chatTable.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.ChatTable_FormatCell);
+            this.chatTable.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.ChatTable_FormatRow);
             this.chatTable.Scroll += new System.EventHandler<System.Windows.Forms.ScrollEventArgs>(this.chatTable_Scroll);
             // 
             // splitContainerRight
@@ -1009,14 +1012,14 @@
             // writeToDiskToolStripMenuItem
             // 
             this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
-            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.writeToDiskToolStripMenuItem.Text = "Write to disk";
             this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.saveToolStripMenuItem.Text = "Save ";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 

@@ -57,7 +57,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
+            this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -70,7 +70,7 @@
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -437,7 +437,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.fastObjectListView1);
+            this.panel2.Controls.Add(this.suggesterView);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel2.Location = new System.Drawing.Point(300, 0);
@@ -445,23 +445,26 @@
             this.panel2.Size = new System.Drawing.Size(858, 577);
             this.panel2.TabIndex = 2;
             // 
-            // fastObjectListView1
+            // suggesterView
             // 
-            this.fastObjectListView1.CellEditUseWholeCell = false;
-            this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fastObjectListView1.FullRowSelect = true;
-            this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(0, 0);
-            this.fastObjectListView1.Margin = new System.Windows.Forms.Padding(2);
-            this.fastObjectListView1.Name = "fastObjectListView1";
-            this.fastObjectListView1.RowHeight = 48;
-            this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(858, 577);
-            this.fastObjectListView1.TabIndex = 0;
-            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
-            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
-            this.fastObjectListView1.VirtualMode = true;
+            this.suggesterView.CellEditUseWholeCell = false;
+            this.suggesterView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.suggesterView.FullRowSelect = true;
+            this.suggesterView.HideSelection = false;
+            this.suggesterView.Location = new System.Drawing.Point(0, 0);
+            this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
+            this.suggesterView.Name = "suggesterView";
+            this.suggesterView.RowHeight = 48;
+            this.suggesterView.ShowGroups = false;
+            this.suggesterView.Size = new System.Drawing.Size(858, 577);
+            this.suggesterView.TabIndex = 0;
+            this.suggesterView.UseCompatibleStateImageBehavior = false;
+            this.suggesterView.View = System.Windows.Forms.View.Details;
+            this.suggesterView.VirtualMode = true;
+            this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);
+            this.suggesterView.DoubleClick += new System.EventHandler(this.fastObjectListView1_DoubleClick);
+            this.suggesterView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fastObjectListView1_MouseDoubleClick);
             // 
             // button1
             // 
@@ -530,7 +533,7 @@
             this.panel3.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -549,7 +552,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader listName;
         private System.Windows.Forms.ColumnHeader listContents;
-        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
+        private BrightIdeasSoftware.FastObjectListView suggesterView;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel3;

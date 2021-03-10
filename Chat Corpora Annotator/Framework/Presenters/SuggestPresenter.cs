@@ -7,6 +7,7 @@ using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 using ExtractingServices;
 using Viewer.Framework.Presenters.Parser;
+using IndexEngine;
 
 namespace Viewer.Framework.Presenters
 {
@@ -28,13 +29,23 @@ namespace Viewer.Framework.Presenters
             _sugg.RunQuery += _sugg_RunQuery;
             _sugg.DeleteUserDict += _sugg_DeleteUserDict;
             _sugg.AddUserDict += _sugg_AddUserDict;
+            _sugg.ShowMessageInMainWindow += _sugg_ShowMessageInMainWindow;
+
+        }
+
+        private void _sugg_ShowMessageInMainWindow(object sender, FindEventArgs args)
+        {
+            bool flag = false;
+            //tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
+
+            _main.EnsureMessageIsVisible(args.id);
 
         }
 
         private void _sugg_AddUserDict(object sender, UserDictsEventArgs args)
         {
             UserDictsContainer.UserDicts.Add(args.Name, args.Words);
-            var a = "a";
+            
         }
 
         private void _sugg_DeleteUserDict(object sender, UserDictsEventArgs args)
