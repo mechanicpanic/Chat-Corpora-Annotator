@@ -49,38 +49,7 @@ namespace Viewer.Framework.Presenters
 
         }
 
-        private void ShowTags(int count)
-        {
-            for (int i = _tagger.CurIndex; i < _tagger.CurIndex + count; i++)
-            {
-                if (_service.TaggedIds.Contains(i))
-                {
-                    InsertTagsInDynamicMessage(i);
-                }
-            }
-            _tagger.CurIndex += count;
-        }
-
-        private void InsertTagsInDynamicMessage(int id)
-        {
-            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var item in arr)
-            {
-                var s = item.Split('-');
-                if (id <= MessageContainer.Messages.Count)
-                {
-                    if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
-                    {
-                        MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
-                        SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
-
-                    }
-                }
-
-            }
-        }
-
+       
 
         private void _main_VisualizeTokenLengths(object sender, EventArgs e)
         {
@@ -218,9 +187,8 @@ namespace Viewer.Framework.Presenters
                 _main.FileLoadState = true;
                 IndexService.OpenIndex();
 
-                AddDocumentsToDisplay(2000);
-                ShowTags(MessageContainer.Messages.Count);
-                _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+                _view_LoadMoreClick(null, null);
+
             }
         }
 
@@ -228,7 +196,6 @@ namespace Viewer.Framework.Presenters
         {
             AddDocumentsToDisplay(2000);
             _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-            ShowTags(MessageContainer.Messages.Count);
         }
 
 
@@ -238,7 +205,42 @@ namespace Viewer.Framework.Presenters
             var list = IndexService.LoadSomeDocuments(count);
             MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
+            ShowTags(count);
+            
         }
+
+        private void ShowTags(int count)
+        {
+            for (int i = _tagger.CurIndex; i < _tagger.CurIndex + count; i++)
+            {
+                if (_service.TaggedIds.Contains(i))
+                {
+                    InsertTagsInDynamicMessage(i,count);
+                }
+            }
+            _tagger.CurIndex += count;
+        }
+
+        private void InsertTagsInDynamicMessage(int id, int offset)
+        {
+            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var item in arr)
+            {
+                var s = item.Split('-');
+                if (id <= MessageContainer.Messages.Count)
+                {
+                    if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
+                    {
+                        MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
+                        SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
+
+                    }
+                }
+
+            }
+        }
+
 
 
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)

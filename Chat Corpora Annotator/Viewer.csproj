@@ -441,8 +441,20 @@
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
+    <Compile Include="UI\MainWindowCSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainWindowHistogram.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TaggerEventArgs.cs" />
     <Compile Include="HistogramHelper.cs" />
+    <Compile Include="UI\MainWindowButtons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainWindowSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserDictsContainer.cs" />
     <Compile Include="UserDictsEventArgs.cs" />
     <Compile Include="TagsetUpdateEventArgs.cs" />

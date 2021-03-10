@@ -196,7 +196,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(863, 664);
+            this.chatTable.Size = new System.Drawing.Size(915, 664);
             this.chatTable.TabIndex = 9;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -205,12 +205,11 @@
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
             this.chatTable.Scroll += new System.EventHandler<System.Windows.Forms.ScrollEventArgs>(this.chatTable_Scroll);
-            this.chatTable.SelectedIndexChanged += new System.EventHandler(this.chatTable_SelectedIndexChanged);
             // 
             // splitContainerRight
             // 
             this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitContainerRight.Location = new System.Drawing.Point(865, 54);
+            this.splitContainerRight.Location = new System.Drawing.Point(917, 54);
             this.splitContainerRight.Name = "splitContainerRight";
             this.splitContainerRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -224,9 +223,9 @@
             this.splitContainerRight.Panel2.Controls.Add(this.situationView);
             this.splitContainerRight.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainerRight.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainerRight.Size = new System.Drawing.Size(212, 664);
+            this.splitContainerRight.Size = new System.Drawing.Size(160, 664);
             this.splitContainerRight.SplitterDistance = 332;
-            this.splitContainerRight.SplitterWidth = 10;
+            this.splitContainerRight.SplitterWidth = 20;
             this.splitContainerRight.TabIndex = 19;
             this.splitContainerRight.Visible = false;
             // 
@@ -244,16 +243,17 @@
             this.dateView.Margin = new System.Windows.Forms.Padding(2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(212, 332);
+            this.dateView.Size = new System.Drawing.Size(160, 332);
             this.dateView.TabIndex = 18;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
+            this.dateView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.dateView_ColumnWidthChanging);
             this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
             // 
             // Days
             // 
             this.Days.Text = "Active dates";
-            this.Days.Width = 163;
+            this.Days.Width = 155;
             // 
             // situationView
             // 
@@ -261,23 +261,24 @@
             this.situationView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3});
             this.situationView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.situationView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.situationView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.situationView.FullRowSelect = true;
             this.situationView.HideSelection = false;
             this.situationView.Location = new System.Drawing.Point(0, 0);
             this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(212, 322);
+            this.situationView.Size = new System.Drawing.Size(160, 312);
             this.situationView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.situationView.TabIndex = 17;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
+            this.situationView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.situationView_ColumnWidthChanging);
             this.situationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Situations";
-            this.columnHeader3.Width = 169;
+            this.columnHeader3.Width = 140;
             // 
             // tableLayoutPanel1
             // 
@@ -403,7 +404,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(302, 213);
             this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // listView1
@@ -444,7 +444,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Calculate statistics";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.statistics_Click);
             // 
             // richTextBox1
             // 
@@ -493,7 +493,7 @@
             this.concordancerButton.TabIndex = 2;
             this.concordancerButton.Text = "Load concordancer";
             this.concordancerButton.UseVisualStyleBackColor = false;
-            this.concordancerButton.Click += new System.EventHandler(this.button3_Click);
+            this.concordancerButton.Click += new System.EventHandler(this.concordance_Click);
             // 
             // tabPage1
             // 
@@ -530,7 +530,7 @@
             this.ngramButton.TabIndex = 3;
             this.ngramButton.Text = "Load ngrammer";
             this.ngramButton.UseVisualStyleBackColor = false;
-            this.ngramButton.Click += new System.EventHandler(this.button1_Click);
+            this.ngramButton.Click += new System.EventHandler(this.ngram_Click);
             // 
             // tabPage2
             // 
@@ -566,7 +566,7 @@
             this.keywordButton.TabIndex = 0;
             this.keywordButton.Text = "Load keyworder";
             this.keywordButton.UseVisualStyleBackColor = false;
-            this.keywordButton.Click += new System.EventHandler(this.button3_Click_1);
+            this.keywordButton.Click += new System.EventHandler(this.keyword_Click);
             // 
             // csvDialog
             // 
@@ -870,13 +870,7 @@
             this.extractToolStripMenuItem.Text = "Extract...";
             this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
-            // startTaggingToolStripMenuItem
-            // 
-            this.startTaggingToolStripMenuItem.Name = "startTaggingToolStripMenuItem";
-            this.startTaggingToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.startTaggingToolStripMenuItem.Text = "Start tagging";
-            this.startTaggingToolStripMenuItem.Click += new System.EventHandler(this.startTaggingToolStripMenuItem_Click);
-            // 
+
             // vizToolStripMenuItem
             // 
             this.vizToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1124,6 +1118,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1330, 850);
             this.Name = "MainWindow";
