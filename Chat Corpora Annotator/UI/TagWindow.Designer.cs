@@ -28,100 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagWindow));
             this.menuBackPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.datePanel = new System.Windows.Forms.Panel();
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button3 = new System.Windows.Forms.Button();
-            this.suggesterButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dateView = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.removeTagButton = new System.Windows.Forms.Button();
             this.addTagButton = new System.Windows.Forms.Button();
-            this.loadMoreButton = new System.Windows.Forms.Button();
             this.InterfaceBackPanel = new System.Windows.Forms.Panel();
             this.tagTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.situationView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.newSituationLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tagsetLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tagsetEditorButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.suggesterButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.filterButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.chooseTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taggedOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.writeToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tagsetToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuBackPanel.SuspendLayout();
             this.InterfaceBackPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 48);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Edit tagset...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.LightSalmon;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(0, 579);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(209, 52);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Write to disk";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // menuBackPanel
             // 
             this.menuBackPanel.BackColor = System.Drawing.Color.Lavender;
-            this.menuBackPanel.Controls.Add(this.label1);
+            this.menuBackPanel.Controls.Add(this.datePanel);
             this.menuBackPanel.Controls.Add(this.tagsetView);
-            this.menuBackPanel.Controls.Add(this.button3);
-            this.menuBackPanel.Controls.Add(this.suggesterButton);
-            this.menuBackPanel.Controls.Add(this.button1);
-            this.menuBackPanel.Controls.Add(this.button2);
-            this.menuBackPanel.Controls.Add(this.button4);
             this.menuBackPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuBackPanel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuBackPanel.Location = new System.Drawing.Point(0, 0);
             this.menuBackPanel.Name = "menuBackPanel";
-            this.menuBackPanel.Size = new System.Drawing.Size(209, 631);
+            this.menuBackPanel.Size = new System.Drawing.Size(209, 653);
             this.menuBackPanel.TabIndex = 1;
             // 
-            // label1
+            // datePanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 252);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "0 situations";
+            this.datePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.datePanel.Location = new System.Drawing.Point(0, 320);
+            this.datePanel.Name = "datePanel";
+            this.datePanel.Size = new System.Drawing.Size(209, 333);
+            this.datePanel.TabIndex = 10;
             // 
             // tagsetView
             // 
-            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tagsetView.BackColor = System.Drawing.Color.Lavender;
+            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tagsetView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.tagsetView.Dock = System.Windows.Forms.DockStyle.Top;
             this.tagsetView.FullRowSelect = true;
+            this.tagsetView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.tagsetView.HideSelection = false;
-            this.tagsetView.Location = new System.Drawing.Point(0, 48);
+            this.tagsetView.Location = new System.Drawing.Point(0, 0);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(209, 201);
+            this.tagsetView.Size = new System.Drawing.Size(209, 320);
             this.tagsetView.TabIndex = 4;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
@@ -130,55 +108,29 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Tagset";
-            this.columnHeader2.Width = 210;
+            this.columnHeader2.Width = 208;
             // 
-            // button3
+            // dateView
             // 
-            this.button3.BackColor = System.Drawing.Color.Lavender;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(0, 441);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(209, 50);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Tagged only";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.dateView.BackColor = System.Drawing.Color.Lavender;
+            this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3});
+            this.dateView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.dateView.HideSelection = false;
+            this.dateView.Location = new System.Drawing.Point(3, 3);
+            this.dateView.Name = "dateView";
+            this.dateView.Size = new System.Drawing.Size(170, 293);
+            this.dateView.TabIndex = 0;
+            this.dateView.UseCompatibleStateImageBehavior = false;
+            this.dateView.View = System.Windows.Forms.View.Details;
             // 
-            // suggesterButton
+            // columnHeader3
             // 
-            this.suggesterButton.BackColor = System.Drawing.Color.Lavender;
-            this.suggesterButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.suggesterButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.suggesterButton.FlatAppearance.BorderSize = 0;
-            this.suggesterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suggesterButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.suggesterButton.Location = new System.Drawing.Point(0, 491);
-            this.suggesterButton.Name = "suggesterButton";
-            this.suggesterButton.Size = new System.Drawing.Size(209, 50);
-            this.suggesterButton.TabIndex = 5;
-            this.suggesterButton.Text = "Show suggestions";
-            this.suggesterButton.UseVisualStyleBackColor = false;
-            this.suggesterButton.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Lavender;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(0, 541);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(209, 38);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button4_Click);
+            this.columnHeader3.Text = "Dates";
+            this.columnHeader3.Width = 169;
             // 
             // removeTagButton
             // 
@@ -190,7 +142,7 @@
             this.removeTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.removeTagButton.Location = new System.Drawing.Point(3, 3);
             this.removeTagButton.Name = "removeTagButton";
-            this.removeTagButton.Size = new System.Drawing.Size(524, 46);
+            this.removeTagButton.Size = new System.Drawing.Size(533, 46);
             this.removeTagButton.TabIndex = 3;
             this.removeTagButton.Text = "Remove tag";
             this.removeTagButton.UseVisualStyleBackColor = false;
@@ -204,49 +156,31 @@
             this.addTagButton.FlatAppearance.BorderSize = 0;
             this.addTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addTagButton.Location = new System.Drawing.Point(533, 3);
+            this.addTagButton.Location = new System.Drawing.Point(542, 3);
             this.addTagButton.Name = "addTagButton";
-            this.addTagButton.Size = new System.Drawing.Size(525, 46);
+            this.addTagButton.Size = new System.Drawing.Size(534, 46);
             this.addTagButton.TabIndex = 2;
             this.addTagButton.Text = "Add tag";
             this.addTagButton.UseVisualStyleBackColor = false;
             this.addTagButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // loadMoreButton
-            // 
-            this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
-            this.loadMoreButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loadMoreButton.FlatAppearance.BorderSize = 0;
-            this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(0, 527);
-            this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(1061, 52);
-            this.loadMoreButton.TabIndex = 12;
-            this.loadMoreButton.Text = "Load more...";
-            this.loadMoreButton.UseVisualStyleBackColor = false;
-            this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
-            // 
             // InterfaceBackPanel
             // 
             this.InterfaceBackPanel.Controls.Add(this.tagTable);
             this.InterfaceBackPanel.Controls.Add(this.panel3);
-            this.InterfaceBackPanel.Controls.Add(this.loadMoreButton);
             this.InterfaceBackPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.InterfaceBackPanel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.InterfaceBackPanel.Location = new System.Drawing.Point(209, 52);
             this.InterfaceBackPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InterfaceBackPanel.Name = "InterfaceBackPanel";
-            this.InterfaceBackPanel.Size = new System.Drawing.Size(1061, 579);
+            this.InterfaceBackPanel.Size = new System.Drawing.Size(1079, 601);
             this.InterfaceBackPanel.TabIndex = 1;
             // 
             // tagTable
             // 
             this.tagTable.CellEditUseWholeCell = false;
             this.tagTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tagTable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tagTable.FullRowSelect = true;
             this.tagTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.tagTable.HideSelection = false;
@@ -254,21 +188,38 @@
             this.tagTable.Name = "tagTable";
             this.tagTable.RowHeight = 52;
             this.tagTable.ShowGroups = false;
-            this.tagTable.Size = new System.Drawing.Size(851, 527);
+            this.tagTable.Size = new System.Drawing.Size(901, 601);
             this.tagTable.TabIndex = 25;
             this.tagTable.UseCompatibleStateImageBehavior = false;
             this.tagTable.View = System.Windows.Forms.View.Details;
             this.tagTable.VirtualMode = true;
+            this.tagTable.Scroll += new System.EventHandler<System.Windows.Forms.ScrollEventArgs>(this.tagTable_Scroll);
             this.tagTable.SelectedIndexChanged += new System.EventHandler(this.tagTable_SelectedIndexChanged_1);
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.situationView);
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.tableLayoutPanel2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(851, 0);
+            this.panel3.Location = new System.Drawing.Point(901, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 527);
+            this.panel3.Size = new System.Drawing.Size(178, 601);
             this.panel3.TabIndex = 17;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.dateView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.situationView, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(176, 599);
+            this.tableLayoutPanel2.TabIndex = 17;
             // 
             // situationView
             // 
@@ -276,14 +227,16 @@
             this.situationView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.situationView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.situationView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.situationView.FullRowSelect = true;
+            this.situationView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.situationView.HideSelection = false;
-            this.situationView.Location = new System.Drawing.Point(0, 0);
+            this.situationView.Location = new System.Drawing.Point(3, 302);
             this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(210, 527);
+            this.situationView.Size = new System.Drawing.Size(170, 294);
             this.situationView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.situationView.TabIndex = 15;
+            this.situationView.TabIndex = 16;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
             this.situationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
@@ -291,10 +244,11 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Situations";
-            this.columnHeader1.Width = 204;
+            this.columnHeader1.Width = 169;
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -305,51 +259,168 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1061, 52);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1079, 52);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newSituationLabel,
+            this.tagsetLabel,
+            this.tagsetEditorButton,
+            this.suggesterButton,
+            this.filterButton,
+            this.saveButton});
+            this.statusStrip.Location = new System.Drawing.Point(0, 653);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
+            this.statusStrip.Size = new System.Drawing.Size(1288, 22);
+            this.statusStrip.TabIndex = 5;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // newSituationLabel
+            // 
+            this.newSituationLabel.Name = "newSituationLabel";
+            this.newSituationLabel.Size = new System.Drawing.Size(67, 17);
+            this.newSituationLabel.Text = "0 situations";
+            this.newSituationLabel.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // tagsetLabel
+            // 
+            this.tagsetLabel.Name = "tagsetLabel";
+            this.tagsetLabel.Size = new System.Drawing.Size(40, 17);
+            this.tagsetLabel.Text = "Tagset";
+            // 
+            // tagsetEditorButton
+            // 
+            this.tagsetEditorButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tagsetEditorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tagsetEditorButton.Image = ((System.Drawing.Image)(resources.GetObject("tagsetEditorButton.Image")));
+            this.tagsetEditorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tagsetEditorButton.Name = "tagsetEditorButton";
+            this.tagsetEditorButton.Size = new System.Drawing.Size(90, 20);
+            this.tagsetEditorButton.Text = "Tagset Editor";
+            // 
+            // suggesterButton
+            // 
+            this.suggesterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.suggesterButton.Image = ((System.Drawing.Image)(resources.GetObject("suggesterButton.Image")));
+            this.suggesterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.suggesterButton.Name = "suggesterButton";
+            this.suggesterButton.Size = new System.Drawing.Size(75, 20);
+            this.suggesterButton.Text = "Suggester";
+            this.suggesterButton.Click += new System.EventHandler(this.suggester_Click);
+            // 
+            // filterButton
+            // 
+            this.filterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.filterButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chooseTagToolStripMenuItem,
+            this.taggedOnlyToolStripMenuItem});
+            this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
+            this.filterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(94, 20);
+            this.filterButton.Text = "Filter by tag...";
+            this.filterButton.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // chooseTagToolStripMenuItem
+            // 
+            this.chooseTagToolStripMenuItem.Name = "chooseTagToolStripMenuItem";
+            this.chooseTagToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.chooseTagToolStripMenuItem.Text = "Choose tag...";
+            // 
+            // taggedOnlyToolStripMenuItem
+            // 
+            this.taggedOnlyToolStripMenuItem.Name = "taggedOnlyToolStripMenuItem";
+            this.taggedOnlyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.taggedOnlyToolStripMenuItem.Text = "Tagged only";
+            // 
+            // saveButton
+            // 
+            this.saveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.saveButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.writeToDiskToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
+            this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(56, 20);
+            this.saveButton.Text = "Save...";
+            this.saveButton.ButtonClick += new System.EventHandler(this.toolStripSplitButton1_ButtonClick);
+            // 
+            // writeToDiskToolStripMenuItem
+            // 
+            this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.writeToDiskToolStripMenuItem.Text = "Write to disk";
+            this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveToolStripMenuItem.Text = "Save ";
+            // 
+            // tagsetToolTip
+            // 
+            this.tagsetToolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1270, 631);
+            this.ClientSize = new System.Drawing.Size(1288, 675);
             this.Controls.Add(this.InterfaceBackPanel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuBackPanel);
+            this.Controls.Add(this.statusStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TagWindow";
             this.Text = "Tagger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TagWindow_FormClosing);
             this.menuBackPanel.ResumeLayout(false);
-            this.menuBackPanel.PerformLayout();
             this.InterfaceBackPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel menuBackPanel;
         private System.Windows.Forms.Button removeTagButton;
         private System.Windows.Forms.Button addTagButton;
-        private System.Windows.Forms.Button loadMoreButton;
         private System.Windows.Forms.Panel InterfaceBackPanel;
-        private System.Windows.Forms.ListView situationView;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button suggesterButton;
-        private System.Windows.Forms.Button button2;
         private BrightIdeasSoftware.FastObjectListView tagTable;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel datePanel;
+        private System.Windows.Forms.ListView dateView;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel newSituationLabel;
+        private System.Windows.Forms.ToolStripSplitButton saveButton;
+        private System.Windows.Forms.ToolStripMenuItem writeToDiskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton filterButton;
+        private System.Windows.Forms.ToolStripMenuItem chooseTagToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taggedOnlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton suggesterButton;
+        private System.Windows.Forms.ToolStripSplitButton tagsetEditorButton;
+        private System.Windows.Forms.ListView situationView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ToolStripStatusLabel tagsetLabel;
+        private System.Windows.Forms.ToolTip tagsetToolTip;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }

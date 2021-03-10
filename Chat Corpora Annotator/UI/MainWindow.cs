@@ -718,6 +718,20 @@ namespace Viewer
         {
 
         }
+		private long scrollCount = 0;
+
+        private void chatTable_Scroll(object sender, ScrollEventArgs e)
+        {
+			scrollCount = e.NewValue;
+			//Console.WriteLine(scrollCount);
+		
+				if (scrollCount == 192 || (scrollCount - 192) % 200 == 0)
+				{
+				LoadMoreClick?.Invoke(this, EventArgs.Empty);
+			}
+			
+
+		}
     }
 }
 

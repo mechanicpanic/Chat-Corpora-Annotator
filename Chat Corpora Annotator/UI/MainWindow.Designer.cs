@@ -34,7 +34,6 @@
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.loadMoreButton = new System.Windows.Forms.Button();
             this.Statistics = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -73,8 +72,6 @@
             this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
             this.queryButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.messageLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,6 +88,8 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.messageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -107,8 +106,8 @@
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -136,9 +135,8 @@
             this.Chat.BackColor = System.Drawing.Color.Lavender;
             this.Chat.Controls.Add(this.chatTable);
             this.Chat.Controls.Add(this.dateView);
-            this.Chat.Controls.Add(this.loadMoreButton);
             this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.Chat.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Chat.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Chat.Location = new System.Drawing.Point(4, 28);
             this.Chat.Margin = new System.Windows.Forms.Padding(2);
             this.Chat.Name = "Chat";
@@ -151,13 +149,11 @@
             // chatTable
             // 
             this.chatTable.AllowColumnReorder = true;
-            this.chatTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTable.AutoArrange = false;
             this.chatTable.BackColor = System.Drawing.Color.White;
             this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatTable.CellEditUseWholeCell = false;
+            this.chatTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chatTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderUsesThemes = true;
@@ -167,7 +163,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(764, 491);
+            this.chatTable.Size = new System.Drawing.Size(766, 529);
             this.chatTable.TabIndex = 9;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -175,6 +171,7 @@
             this.chatTable.UseFiltering = true;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
+            this.chatTable.Scroll += new System.EventHandler<System.Windows.Forms.ScrollEventArgs>(this.chatTable_Scroll);
             this.chatTable.SelectedIndexChanged += new System.EventHandler(this.chatTable_SelectedIndexChanged);
             // 
             // dateView
@@ -190,7 +187,7 @@
             this.dateView.Margin = new System.Windows.Forms.Padding(2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(142, 489);
+            this.dateView.Size = new System.Drawing.Size(142, 529);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
@@ -200,25 +197,6 @@
             // 
             this.Days.Text = "Active dates";
             this.Days.Width = 115;
-            // 
-            // loadMoreButton
-            // 
-            this.loadMoreButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.loadMoreButton.BackColor = System.Drawing.Color.Lavender;
-            this.loadMoreButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loadMoreButton.FlatAppearance.BorderSize = 0;
-            this.loadMoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.loadMoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadMoreButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loadMoreButton.Location = new System.Drawing.Point(2, 491);
-            this.loadMoreButton.Margin = new System.Windows.Forms.Padding(2);
-            this.loadMoreButton.Name = "loadMoreButton";
-            this.loadMoreButton.Size = new System.Drawing.Size(908, 40);
-            this.loadMoreButton.TabIndex = 11;
-            this.loadMoreButton.Text = "Load more...";
-            this.loadMoreButton.UseVisualStyleBackColor = false;
-            this.loadMoreButton.Visible = false;
-            this.loadMoreButton.Click += new System.EventHandler(this.loadMoreButton_Click);
             // 
             // Statistics
             // 
@@ -714,32 +692,6 @@
             this.queryButton.UseVisualStyleBackColor = true;
             this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Lavender;
-            this.panel1.Controls.Add(this.messageLabel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(228, 596);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(919, 28);
-            this.panel1.TabIndex = 25;
-            // 
-            // messageLabel
-            // 
-            this.messageLabel.AutoSize = true;
-            this.messageLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(842, 0);
-            this.messageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.messageLabel.MinimumSize = new System.Drawing.Size(0, 24);
-            this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(77, 24);
-            this.messageLabel.TabIndex = 24;
-            this.messageLabel.Text = "Not loaded";
-            this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.messageLabel.Click += new System.EventHandler(this.messageLabel_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -869,13 +821,29 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.messageLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(228, 602);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(919, 22);
+            this.statusStrip1.TabIndex = 30;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // messageLabel
+            // 
+            this.messageLabel.Name = "messageLabel";
+            this.messageLabel.Size = new System.Drawing.Size(66, 17);
+            this.messageLabel.Text = "Not loaded";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1147, 624);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
@@ -900,10 +868,10 @@
             this.datesPanel.PerformLayout();
             this.userPanel.ResumeLayout(false);
             this.queryPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -929,7 +897,6 @@
         private System.Windows.Forms.Panel queryPanel;
         private System.Windows.Forms.Button queryButton;
         private System.Windows.Forms.TabPage Chat;
-        private System.Windows.Forms.Button loadMoreButton;
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
@@ -938,8 +905,6 @@
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.TabPage Statistics;
         private System.Windows.Forms.TabPage Concordance;
         private System.Windows.Forms.Label label2;
@@ -971,6 +936,8 @@
         private System.Windows.Forms.Panel panel4;
         private ZedGraph.ZedGraphControl zedGraphControl1;
         private System.Windows.Forms.ToolStripMenuItem startTaggingToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel messageLabel;
     }
 }
 

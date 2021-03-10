@@ -223,7 +223,7 @@ namespace ExtractingServices
                         IsQuestionList.Add(document.GetField("id").GetInt32Value().Value);
                     }
                     ExtractKeyPhrases(coredoc, document.GetField("id").GetInt32Value().Value);
-                    int a = 5;
+                    System.Console.WriteLine(i);
                 }
                 
 

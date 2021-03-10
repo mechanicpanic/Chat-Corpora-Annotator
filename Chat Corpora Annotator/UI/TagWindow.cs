@@ -19,13 +19,14 @@ namespace Viewer.UI
 
 	public partial class TagWindow : Form, ITagView
 	{
+		private long scrollCount = 0;
 		public event WriteEventHandler WriteToDisk;
 		public event EventHandler SaveTagged;
 		public event EventHandler LoadTagged;
 
 		public void UpdateSituationCount(int count)
         {
-			label1.Text = count.ToString() + " situations";
+			newSituationLabel.Text = count.ToString() + " situations";
         }
 		public int CurIndex { get; set; }  = 0;
 		public bool SituationsLoaded { get; set; }  = false;
@@ -59,7 +60,8 @@ namespace Viewer.UI
 			DisplayTagset(new List<string>());
 
 			tagTable.FormatRow += ChatTable_FormatRow;
-			
+			//tagsetToolTip.SetToolTip(tagsetEditorButton,"Create and edit tagsets");
+
 			
 		}
 
@@ -282,7 +284,7 @@ namespace Viewer.UI
 
 		}
 
-		private void button5_Click_1(object sender, EventArgs e)
+		private void suggester_Click(object sender, EventArgs e)
 		{
 			ShowSuggester?.Invoke(this, EventArgs.Empty);
 		}
@@ -314,6 +316,7 @@ namespace Viewer.UI
 
 		}
 
+		//TODO: Fix these.
 		private void removeTagButton_Click(object sender, EventArgs e)
 		{
 			if (tagTable.SelectedObjects != null)
@@ -390,6 +393,53 @@ namespace Viewer.UI
 				}
 			}
 		}
+
+        private void dateButton_Click(object sender, EventArgs e)
+        {
+			if(datePanel.Visible)
+            {
+				datePanel.Visible = false;
+            }
+			else
+            {
+				datePanel.Visible = true;
+            }
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+			SaveTagged?.Invoke(null, null);
+        }
+
+        private void writeToDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			WriteToDisk?.Invoke(null, null);
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void tagTable_Scroll(object sender, ScrollEventArgs e)
+        {
+			scrollCount = e.NewValue;
+			Console.WriteLine(scrollCount);
+			if (!IsFiltered)
+            {
+				if(scrollCount == 1990 || (scrollCount - 1990) % 2000 == 0)
+                {
+					LoadMore?.Invoke(this, EventArgs.Empty);
+				}
+            }
+
+
+		}
     }
 
     public class TagFilter : IModelFilter
@@ -408,4 +458,13 @@ namespace Viewer.UI
 			return false;
 		}
 	}
+
+    public class SituationTagComparer<T> : IComparer<string>
+    {
+        public int Compare(string x, string y)
+        {
+			int res = 0;
+			return res;
+        }
+    }
 }
