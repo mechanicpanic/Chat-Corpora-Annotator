@@ -159,7 +159,7 @@ namespace Viewer
 				dateToggle.Enabled = true;
 				findButton.Enabled = true;
 				clearButton.Enabled = true;
-				loadMoreButton.Visible = true;
+				//loadMoreButton.Visible = true;
 				concordancerButton.Enabled = true;
 				ngramButton.Enabled = true;
 				keywordButton.Enabled = true;
@@ -175,7 +175,7 @@ namespace Viewer
 				concordancerButton.Enabled = false;
 				ngramButton.Enabled = false;
 				keywordButton.Enabled = false;
-				loadMoreButton.Visible = false;
+				//loadMoreButton.Visible = false;
 			}
 		}
 
@@ -629,15 +629,15 @@ namespace Viewer
 
 		public void ShowDates(List<DateTime> dates)
 		{
-			List<DateTime> container = new List<DateTime>();
+			HashSet<DateTime> container = new HashSet<DateTime>();
 			foreach(var message in MessageContainer.Messages)
             {
 				container.Add(DateTime.Parse(message.Contents[IndexService.DateFieldKey].ToString()).Date);
             }
 
-			IEnumerable<DateTime> intersect = container.Intersect(dates);
+			//IEnumerable<DateTime> intersect = container.Intersect(dates);
 			dateView.Items.Clear();
-			foreach(var item in intersect)
+			foreach(var item in container)
 			{
 				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
 			}
@@ -723,9 +723,9 @@ namespace Viewer
         private void chatTable_Scroll(object sender, ScrollEventArgs e)
         {
 			scrollCount = e.NewValue;
-			//Console.WriteLine(scrollCount);
+			Console.WriteLine(scrollCount);
 		
-				if (scrollCount == 192 || (scrollCount - 192) % 200 == 0)
+				if (scrollCount == 191 || (scrollCount - 991) % 100 == 0)
 				{
 				LoadMoreClick?.Invoke(this, EventArgs.Empty);
 			}

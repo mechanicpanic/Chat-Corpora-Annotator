@@ -269,6 +269,7 @@ namespace Viewer.Framework.Presenters
         private void _tagger_LoadMore(object sender, EventArgs e)
         {          
             AddDocumentsToDisplay(2000);
+            _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             
         }
 

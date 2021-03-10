@@ -440,6 +440,57 @@ namespace Viewer.UI
 
 
 		}
+
+		private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			ListView lw = sender as ListView;
+
+			ListView.SelectedIndexCollection index = dateView.SelectedIndices;
+			string date = dateView.Items[index[0]].SubItems[0].Text;
+			DateTime key = DateTime.Parse(date);
+
+			int i = -1;
+			//int i = chatTable.IndexOf(messages[key].Block[0]);
+			foreach (var message in MessageContainer.Messages)
+			{
+				DateTime temp = (DateTime)message.Contents[IndexService.DateFieldKey];
+				if (temp.Date == key)
+				{
+					i = tagTable.IndexOf(message);
+					break;
+				}
+
+			}
+			if (i != -1)
+			{
+				var item = tagTable.GetItem(i);
+				tagTable.SelectedItem = item;
+				tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
+				tagTable.EnsureVisible(i);
+			}
+			else
+			{
+				MessageBox.Show("Broken!");
+			}
+
+		}
+
+        public void ShowDates(List<DateTime> dates)
+        {
+			HashSet<DateTime> container = new HashSet<DateTime>();
+			foreach (var message in MessageContainer.Messages)
+			{
+				container.Add(DateTime.Parse(message.Contents[IndexService.DateFieldKey].ToString()).Date);
+			}
+
+			//IEnumerable<DateTime> intersect = container.Intersect(dates);
+			dateView.Items.Clear();
+			foreach (var item in container)
+			{
+				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
+			}
+			dateView.Invalidate();
+		}
     }
 
     public class TagFilter : IModelFilter

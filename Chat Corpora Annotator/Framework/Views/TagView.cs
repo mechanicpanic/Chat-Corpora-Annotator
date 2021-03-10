@@ -11,8 +11,6 @@ namespace Viewer.Framework.Views
         event EventHandler SaveTagged;
         event EventHandler LoadTagged;
         event EventHandler TagsetClick;
-
-       
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
         void RefreshTagView();
@@ -34,6 +32,7 @@ namespace Viewer.Framework.Views
 
         event TaggerEventHandler LoadTagset;
 
+        void ShowDates(List<DateTime> dates);
         void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);
         void DisplayTagErrorMessage();

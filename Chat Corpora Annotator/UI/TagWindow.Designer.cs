@@ -81,9 +81,9 @@
             // datePanel
             // 
             this.datePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.datePanel.Location = new System.Drawing.Point(0, 320);
+            this.datePanel.Location = new System.Drawing.Point(0, 256);
             this.datePanel.Name = "datePanel";
-            this.datePanel.Size = new System.Drawing.Size(209, 333);
+            this.datePanel.Size = new System.Drawing.Size(209, 397);
             this.datePanel.TabIndex = 10;
             // 
             // tagsetView
@@ -99,7 +99,7 @@
             this.tagsetView.Location = new System.Drawing.Point(0, 0);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(209, 320);
+            this.tagsetView.Size = new System.Drawing.Size(209, 256);
             this.tagsetView.TabIndex = 4;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
@@ -126,6 +126,7 @@
             this.dateView.TabIndex = 0;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
+            this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
             // 
             // columnHeader3
             // 
@@ -264,6 +265,7 @@
             // 
             // statusStrip
             // 
+            this.statusStrip.BackColor = System.Drawing.Color.Lavender;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newSituationLabel,
             this.tagsetLabel,
