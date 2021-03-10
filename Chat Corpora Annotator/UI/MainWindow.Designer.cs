@@ -154,7 +154,7 @@
             this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatTable.CellEditUseWholeCell = false;
             this.chatTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chatTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chatTable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
@@ -180,7 +180,7 @@
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Days});
             this.dateView.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dateView.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
             this.dateView.Location = new System.Drawing.Point(768, 2);

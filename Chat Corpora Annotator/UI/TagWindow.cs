@@ -279,11 +279,6 @@ namespace Viewer.UI
 		}
 
 
-		private void listView2_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
 		private void suggester_Click(object sender, EventArgs e)
 		{
 			ShowSuggester?.Invoke(this, EventArgs.Empty);
@@ -394,17 +389,7 @@ namespace Viewer.UI
 			}
 		}
 
-        private void dateButton_Click(object sender, EventArgs e)
-        {
-			if(datePanel.Visible)
-            {
-				datePanel.Visible = false;
-            }
-			else
-            {
-				datePanel.Visible = true;
-            }
-        }
+
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {

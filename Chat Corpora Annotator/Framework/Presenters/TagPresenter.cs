@@ -264,6 +264,7 @@ namespace Viewer.Framework.Presenters
             }
             ShowTags(MessageContainer.Messages.Count);
             _tagger.ShowView();
+            _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
         }
 
         private void _tagger_LoadMore(object sender, EventArgs e)

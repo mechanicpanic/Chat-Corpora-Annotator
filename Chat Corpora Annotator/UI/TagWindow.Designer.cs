@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagWindow));
             this.menuBackPanel = new System.Windows.Forms.Panel();
-            this.datePanel = new System.Windows.Forms.Panel();
+            this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dateView = new System.Windows.Forms.ListView();
@@ -41,7 +41,7 @@
             this.InterfaceBackPanel = new System.Windows.Forms.Panel();
             this.tagTable = new BrightIdeasSoftware.FastObjectListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.splitContainerRight = new System.Windows.Forms.SplitContainer();
             this.situationView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,10 +58,16 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsetToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuBackPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
+            this.splitContainerLeft.Panel1.SuspendLayout();
+            this.splitContainerLeft.SuspendLayout();
             this.InterfaceBackPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).BeginInit();
             this.panel3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).BeginInit();
+            this.splitContainerRight.Panel1.SuspendLayout();
+            this.splitContainerRight.Panel2.SuspendLayout();
+            this.splitContainerRight.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -69,8 +75,7 @@
             // menuBackPanel
             // 
             this.menuBackPanel.BackColor = System.Drawing.Color.Lavender;
-            this.menuBackPanel.Controls.Add(this.datePanel);
-            this.menuBackPanel.Controls.Add(this.tagsetView);
+            this.menuBackPanel.Controls.Add(this.splitContainerLeft);
             this.menuBackPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuBackPanel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuBackPanel.Location = new System.Drawing.Point(0, 0);
@@ -78,32 +83,36 @@
             this.menuBackPanel.Size = new System.Drawing.Size(209, 653);
             this.menuBackPanel.TabIndex = 1;
             // 
-            // datePanel
+            // splitContainerLeft
             // 
-            this.datePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.datePanel.Location = new System.Drawing.Point(0, 256);
-            this.datePanel.Name = "datePanel";
-            this.datePanel.Size = new System.Drawing.Size(209, 397);
-            this.datePanel.TabIndex = 10;
+            this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerLeft.Name = "splitContainerLeft";
+            this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerLeft.Panel1
+            // 
+            this.splitContainerLeft.Panel1.Controls.Add(this.tagsetView);
+            this.splitContainerLeft.Size = new System.Drawing.Size(209, 653);
+            this.splitContainerLeft.SplitterDistance = 279;
+            this.splitContainerLeft.TabIndex = 0;
             // 
             // tagsetView
             // 
             this.tagsetView.BackColor = System.Drawing.Color.Lavender;
-            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tagsetView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
-            this.tagsetView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tagsetView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tagsetView.FullRowSelect = true;
-            this.tagsetView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.tagsetView.HideSelection = false;
             this.tagsetView.Location = new System.Drawing.Point(0, 0);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(209, 256);
+            this.tagsetView.Size = new System.Drawing.Size(209, 279);
             this.tagsetView.TabIndex = 4;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
-            this.tagsetView.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // columnHeader2
             // 
@@ -118,11 +127,10 @@
             this.columnHeader3});
             this.dateView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(3, 3);
+            this.dateView.Location = new System.Drawing.Point(0, 0);
             this.dateView.Name = "dateView";
-            this.dateView.Size = new System.Drawing.Size(170, 293);
+            this.dateView.Size = new System.Drawing.Size(176, 265);
             this.dateView.TabIndex = 0;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
@@ -200,27 +208,30 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.tableLayoutPanel2);
+            this.panel3.Controls.Add(this.splitContainerRight);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(901, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(178, 601);
             this.panel3.TabIndex = 17;
             // 
-            // tableLayoutPanel2
+            // splitContainerRight
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.dateView, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.situationView, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(176, 599);
-            this.tableLayoutPanel2.TabIndex = 17;
+            this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerRight.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerRight.Name = "splitContainerRight";
+            this.splitContainerRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerRight.Panel1
+            // 
+            this.splitContainerRight.Panel1.Controls.Add(this.dateView);
+            // 
+            // splitContainerRight.Panel2
+            // 
+            this.splitContainerRight.Panel2.Controls.Add(this.situationView);
+            this.splitContainerRight.Size = new System.Drawing.Size(176, 599);
+            this.splitContainerRight.SplitterDistance = 265;
+            this.splitContainerRight.TabIndex = 0;
             // 
             // situationView
             // 
@@ -230,12 +241,11 @@
             this.situationView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.situationView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.situationView.FullRowSelect = true;
-            this.situationView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.situationView.HideSelection = false;
-            this.situationView.Location = new System.Drawing.Point(3, 302);
+            this.situationView.Location = new System.Drawing.Point(0, 0);
             this.situationView.MultiSelect = false;
             this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(170, 294);
+            this.situationView.Size = new System.Drawing.Size(176, 330);
             this.situationView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.situationView.TabIndex = 16;
             this.situationView.UseCompatibleStateImageBehavior = false;
@@ -384,10 +394,16 @@
             this.Text = "Tagger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TagWindow_FormClosing);
             this.menuBackPanel.ResumeLayout(false);
+            this.splitContainerLeft.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
+            this.splitContainerLeft.ResumeLayout(false);
             this.InterfaceBackPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tagTable)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.splitContainerRight.Panel1.ResumeLayout(false);
+            this.splitContainerRight.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).EndInit();
+            this.splitContainerRight.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -406,7 +422,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private BrightIdeasSoftware.FastObjectListView tagTable;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel datePanel;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.StatusStrip statusStrip;
@@ -423,6 +438,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ToolStripStatusLabel tagsetLabel;
         private System.Windows.Forms.ToolTip tagsetToolTip;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.SplitContainer splitContainerRight;
+        private System.Windows.Forms.SplitContainer splitContainerLeft;
     }
 }
