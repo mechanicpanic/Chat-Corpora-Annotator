@@ -1,5 +1,4 @@
 ﻿using BrightIdeasSoftware;
-using IndexEngine;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -12,11 +11,12 @@ using Viewer.Framework.Views;
 using Viewer.UI;
 using ZedGraph;
 using ColorLibrary;
+using IndexEngine;
 
 namespace Viewer
 {
 
-	public partial class MainWindow : Form, IMainView, INotifyPropertyChanged
+	public partial class MainWindow : Form, IMainView, ITagView, INotifyPropertyChanged
 	{
 		System.Random rnd = new System.Random();
 		#region IMainView
@@ -26,7 +26,7 @@ namespace Viewer
 		public event EventHandler HeatmapClick;
 		public event EventHandler FileAndIndexSelected;
 		public event LuceneQueryEventHandler FindClick;
-		public event EventHandler LoadMoreClick;
+		public event EventHandler LoadMore;
 		public event PropertyChangedEventHandler PropertyChanged;
 		public event EventHandler ConcordanceClick;
 		public event EventHandler NGramClick;
@@ -89,13 +89,20 @@ namespace Viewer
 		}
 		public void DisplayDocuments()
 		{
-			chatTable.SetObjects(MessageContainer.Messages);
+			
 			if (!chatViewSetUp)
 			{
 				SetUpChatView();
+				LoadTagged?.Invoke(this, EventArgs.Empty);
+				LoadTagset?.Invoke(this, null);
+				
+
+
+
 			}
+			
 			chatTable.Invalidate();
-			LoadDates();
+			
 		}
 		public void DisplaySearchResults()
 		{
@@ -129,6 +136,7 @@ namespace Viewer
 		public void ShowView()
 		{
 			ShowDialog();
+
 		}
 
 		public void CloseView()
@@ -136,7 +144,37 @@ namespace Viewer
 			this.CloseView();
 		}
 		#endregion
-		
+
+		#region ITagView
+
+		public event WriteEventHandler WriteToDisk;
+		public event EventHandler SaveTagged;
+		public event EventHandler LoadTagged;
+
+		public void UpdateSituationCount(int count)
+		{
+			newSituationLabel.Text = count.ToString() + " situations";
+		}
+		public int CurIndex { get; set; } = 0;
+		public bool SituationsLoaded { get; set; } = false;
+		public event EventHandler TagsetClick;
+		public event TaggerEventHandler AddTag;
+		public event TaggerEventHandler RemoveTag;
+		public event TaggerEventHandler DeleteSituation;
+		public event EventHandler ShowSuggester;
+
+		public event EventHandler SetTagset;
+		public event EventHandler DisplayColors;
+		public event TaggerEventHandler LoadTagset;
+
+
+		public Dictionary<string, Color> TagsetColors { get; set; }
+		public bool IsFiltered = false;
+		public TagFilter filter = new TagFilter();
+
+		//private Dictionary<string, int> SessionTagIndex { get; set; } = new Dictionary<string, int>();
+		private HashSet<string> sit = new HashSet<string>();
+		#endregion
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -146,7 +184,11 @@ namespace Viewer
 			zedGraphControl1.GraphPane.Title.IsVisible = false;
 			zedGraphControl1.GraphPane.YAxis.Title.Text = "";
 			zedGraphControl1.GraphPane.XAxis.Title.Text = "";
-			
+
+			DisplayTagset(new List<string>());
+
+			//chatTable.FormatRow += ChatTable_FormatRow;
+
 
 		}
 
@@ -243,23 +285,29 @@ namespace Viewer
 
 		#region chat table display
 
+		private void ChatTable_FormatRow(object sender, FormatRowEventArgs e)
+		{
+			DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
+			if (TagsetColors != null)
+			{
+				if (dyn.Situations.Count != 0)
+				{
+					e.Item.BackColor = TagsetColors[dyn.Situations.Keys.ToList<string>()[0]];
+				}
+			}
 
+		}
 		private void SetUpChatView()
 		{
 			ShowUsers();
-			//PopulateSenderColors();
 			SetDateView();
+			chatTable.SetObjects(MessageContainer.Messages);
 			List<OLVColumn> columns = new List<OLVColumn>();
 
 			foreach (var key in IndexService.SelectedFields)
 			{
 				OLVColumn cl = new OLVColumn();
-				cl.AspectGetter = delegate (object x)
-				{
-					DynamicMessage message = (DynamicMessage)x;
-					if (message != null) { return message.Contents[key]; }
-					else { return ""; }
-				};
+				cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
 				cl.Text = key;
 				cl.WordWrap = true;
 
@@ -268,14 +316,36 @@ namespace Viewer
 
 
 			}
-			chatTable.AllColumns.Clear();
-			chatTable.AllColumns.AddRange(columns);
-			chatTable.RebuildColumns();
 
+			OLVColumn cltag = new OLVColumn();
+			cltag.Name = "Tag";
+			cltag.Text = "Tag";
+			cltag.AspectGetter = delegate (object x) { return OnTagValueGetter(cltag, x, null); };
+			chatTable.AllColumns.Clear();
+			chatTable.AllColumns.Add(cltag);
+			chatTable.AllColumns.AddRange(columns);
+
+
+			chatTable.RebuildColumns();
 
 			FormatColumns();
 			chatViewSetUp = true;
 
+		}
+		internal string OnTagValueGetter(OLVColumn cl, object o, string key)
+		{
+			//I mean shouldnt this work with AspectName instead lmao
+			if (cl.Name != "Tag")
+			{
+				DynamicMessage message = (DynamicMessage)o;
+				return message.Contents[key].ToString();
+			}
+			else
+			{
+
+				DynamicMessage m = (DynamicMessage)o;
+				return String.Join(",", m.Situations.ToArray());
+			}
 		}
 
 		private void ShowUsers()
@@ -311,20 +381,11 @@ namespace Viewer
 			highlightTextRenderer1.FillBrush = new SolidBrush(Color.Wheat);
 			chatTable.DefaultRenderer = highlightTextRenderer1;
 			chatTable.FormatCell += ChatTable_FormatCell;
+			chatTable.FormatRow += ChatTable_FormatRow;
 			chatTable.Refresh();
 
 		}
 
-		//private void PopulateSenderColors()
-		//{
-		//	userColors = new Dictionary<string, Color>();
-		//	foreach (var user in IndexService.UserKeys)
-		//	{
-		//		//Color tempColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-		//		Color tempColor = ColorGenerator.GenerateHSLuvColor(false);
-		//		userColors.Add(user, tempColor);
-		//	}
-		//}
 		private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
 		{
 			if (e.Column.Text == IndexService.SenderFieldKey)
@@ -333,10 +394,6 @@ namespace Viewer
 			}
 
 		}
-
-
-
-
 		#endregion
 
 
@@ -355,7 +412,7 @@ namespace Viewer
 		}
 		private void loadMoreButton_Click(object sender, EventArgs e)
 		{
-			LoadMoreClick?.Invoke(this, EventArgs.Empty);
+			LoadMore?.Invoke(this, EventArgs.Empty);
 
 		}
 		private void queryButton_Click(object sender, EventArgs e)
@@ -383,25 +440,6 @@ namespace Viewer
 
 		}
 
-		private void LoadDates()
-		{
-			//foreach(var msg in Messages)
-			//{
-			//	AddDateToDateView((DateTime)msg.contents[DateFieldKey]);
-			//}
-		}
-
-		private void AddDateToDateView(DateTime date)
-		{
-
-			if (!dateView.Items.ContainsKey(date.Date.ToString("dd/MM/yyyy")))
-
-			{
-				var temp = new ListViewItem(date.Date.ToString("dd/MM/yyyy"));
-				temp.Name = date.Date.ToString("dd/MM/yyyy");
-				dateView.Items.Add(temp);
-			}
-		}
 		private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			ListView lw = sender as ListView;
@@ -448,14 +486,8 @@ namespace Viewer
 		private void findButton_Click(object sender, EventArgs e)
 		{
 
-			//searchResults.Clear();
 			if (searchBox.Text == "")
 			{
-				//MessageBox.Show("Empty queries not supported just yet");
-				//if (result == DialogResult.OK)
-				//{
-				//	LaunchSearch();
-				//}
 			}
 			else
 			{
@@ -582,19 +614,6 @@ namespace Viewer
 			NGramClick?.Invoke(this, EventArgs.Empty);
 		}
 
-
-
-		private void dateView_Resize(object sender, EventArgs e)
-		{
-			dateView.Invalidate();
-		}
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			TagClick?.Invoke(this, EventArgs.Empty);
-
-		}
-
 		private void button3_Click_1(object sender, EventArgs e)
 		{
 			KeywordClick?.Invoke(this, EventArgs.Empty);
@@ -710,12 +729,144 @@ namespace Viewer
 			scrollCount = e.NewValue;
 			Console.WriteLine(scrollCount);
 		
-				if (scrollCount == 191 || (scrollCount - 991) % 100 == 0)
+				if ((scrollCount - 988) % 100 == 0)
 				{
-				LoadMoreClick?.Invoke(this, EventArgs.Empty);
+				LoadMore?.Invoke(this, EventArgs.Empty);
 			}
 			
 
+		}
+
+		public void SetTagsetLabel(string tagset)
+        {
+			tagsetLabel.Text = tagset;
+        }
+
+        public void RefreshTagView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DisplayTagsetColors(Dictionary<string, Color> dict)
+        {
+			TagsetColors = dict;
+			foreach (ListViewItem item in tagsetView.Items)
+			{
+				if (dict.ContainsKey(item.Text))
+				{
+					item.BackColor = dict[item.Text];
+				}
+			}
+		}
+
+        public void DisplayTagset(List<string> tags)
+        {
+			tagsetView.Items.Clear();
+			foreach (var tag in tags)
+			{
+				tagsetView.Items.Add(tag);
+
+			}
+		}
+
+        public void DisplayTagErrorMessage()
+        {
+			MessageBox.Show("You have already added this tag to the selected message");
+		}
+
+        public void AddSituationIndexItem(string s)
+        {
+			if (sit.Add(s))
+			{
+				situationView.Items.Add(s.ToString());
+			}
+		}
+
+		private void addTagButton_Click(object sender, EventArgs e)
+		{
+
+			if (tagsetView.SelectedItems.Count != 0 && chatTable.SelectedObjects.Count != 0)
+			{
+				TaggerEventArgs args = new TaggerEventArgs();
+
+				args.Tag = tagsetView.SelectedItems[0].Text;
+
+				args.messages = new List<int>();
+
+				foreach (var obj in chatTable.SelectedObjects)
+				{
+					DynamicMessage msg = (DynamicMessage)obj;
+					args.messages.Add(msg.Id);
+
+
+				}
+
+				AddTag?.Invoke(this, args);
+
+				situationView.Items.Add(args.Tag + " " + args.Id);
+				chatTable.UpdateObjects(MessageContainer.Messages.FindAll(x => args.messages.Contains(x.Id)));
+			}
+			else
+			{
+				MessageBox.Show("Select a tag and messages first");
+			}
+
+		}
+		private void suggester_Click(object sender, EventArgs e)
+		{
+			ShowSuggester?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void removeTagButton_Click(object sender, EventArgs e)
+		{
+			if (chatTable.SelectedObjects != null)
+			{
+				foreach (var obj in chatTable.SelectedObjects)
+				{
+					DynamicMessage dyn = obj as DynamicMessage;
+					MessageContainer.Messages[dyn.Id].Situations.Clear();
+				}
+			}
+		}
+
+		private void situationView_DoubleClick(object sender, EventArgs e)
+		{
+			string[] item = situationView.SelectedItems[0].Text.Split(' ');
+			bool flag = false;
+			int messageID = SituationIndex.Index[item[0]][Int32.Parse(item[1])][0];
+			//tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
+
+			while (!flag)
+			{
+				if (chatTable.Items.Count > messageID)
+				{
+					chatTable.EnsureVisible(messageID);
+					flag = true;
+				}
+				else
+				{
+					//DialogResult res = MessageBox.Show("This will load additional messages. Proceed?");
+					//if (res == DialogResult.OK)
+					//{
+					LoadMore?.Invoke(this, EventArgs.Empty);
+					//}
+				}
+			}
+		}
+
+		private void deleteSituationButton_Click(object sender, EventArgs e)
+		{
+			TaggerEventArgs args = new TaggerEventArgs();
+			args.Tag = situationView.SelectedItems[0].Text.Split(' ')[0];
+			args.Id = Int32.Parse(situationView.SelectedItems[0].Text.Split(' ')[1]);
+
+
+			//DeleteSituation?.Invoke(this, args);
+		}
+
+        private void tagsetEditorButton_ButtonClick(object sender, EventArgs e)
+        {
+			TagsetClick?.Invoke(this, EventArgs.Empty);
 		}
     }
 }

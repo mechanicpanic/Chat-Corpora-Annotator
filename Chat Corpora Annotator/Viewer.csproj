@@ -285,9 +285,6 @@
     <Reference Include="NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty.1.0.1\lib\net40\NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty.dll</HintPath>
     </Reference>
-    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
-    </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -660,6 +657,10 @@
     <ProjectReference Include="..\Retrievers\Retrievers.csproj">
       <Project>{aff7b858-40bb-4842-9cd4-dbc40a612d6d}</Project>
       <Name>Retrievers</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Downloads\objectlistview-code-r836-cs-trunk-ObjectListView\objectlistview-code-r836-cs-trunk-ObjectListView\ObjectListView2012.csproj">
+      <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
+      <Name>ObjectListView2012</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

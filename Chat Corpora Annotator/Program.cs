@@ -33,14 +33,14 @@ namespace Viewer
             SuggesterService suggesterService = new SuggesterService();
 
            
-            TagWindow tagger = new TagWindow();
+            //var tagger = main;
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
             TagFileWriter writer = new TagFileWriter();
-            TagPresenter tagPresenter = new TagPresenter(main, tagger, service, editor, writer);
-            TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, tagger);
-            SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, tagger, main);
-            MainPresenter presenter = new MainPresenter(main, loader, searcher, folder);
+            TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
+            TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
+            SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, main, main);
+            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);

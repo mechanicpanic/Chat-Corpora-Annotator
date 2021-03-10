@@ -16,19 +16,22 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly ICSVView _csv;
         private readonly ISearchService _searcher;
-
+        private readonly ITagView _tagger;
+        private readonly ITagService _service;
         private readonly FolderService _folder;
 
         private StatisticsContainer stats;
-        public MainPresenter(IMainView view, ICSVView csv, ISearchService searcher, FolderService folder)
+        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder)
         {
+            this._tagger = tagger;
+            this._service = service;
             this._main = view;
             this._csv = csv;
             this._searcher = searcher;
             this._folder = folder;
 
             _main.FindClick += _view_FindClick;
-            _main.LoadMoreClick += _view_LoadMoreClick;
+            _main.LoadMore += _view_LoadMoreClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
             _main.NGramClick += _main_NGramClick;
@@ -39,10 +42,45 @@ namespace Viewer.Framework.Presenters
             _main.VisualizeLengths += _main_VisualizeLengths;
             _main.VisualizeTokens += _main_VisualizeTokens;
             _main.VisualizeTokenLengths += _main_VisualizeTokenLengths;
+
+            
             _folder.CheckFolder();
 
 
         }
+
+        private void ShowTags(int count)
+        {
+            for (int i = _tagger.CurIndex; i < _tagger.CurIndex + count; i++)
+            {
+                if (_service.TaggedIds.Contains(i))
+                {
+                    InsertTagsInDynamicMessage(i);
+                }
+            }
+            _tagger.CurIndex += count;
+        }
+
+        private void InsertTagsInDynamicMessage(int id)
+        {
+            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var item in arr)
+            {
+                var s = item.Split('-');
+                if (id <= MessageContainer.Messages.Count)
+                {
+                    if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
+                    {
+                        MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
+                        SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
+
+                    }
+                }
+
+            }
+        }
+
 
         private void _main_VisualizeTokenLengths(object sender, EventArgs e)
         {
@@ -181,6 +219,7 @@ namespace Viewer.Framework.Presenters
                 IndexService.OpenIndex();
 
                 AddDocumentsToDisplay(2000);
+                ShowTags(MessageContainer.Messages.Count);
                 _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             }
         }
@@ -189,6 +228,7 @@ namespace Viewer.Framework.Presenters
         {
             AddDocumentsToDisplay(2000);
             _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+            ShowTags(MessageContainer.Messages.Count);
         }
 
 
@@ -196,7 +236,6 @@ namespace Viewer.Framework.Presenters
         public void AddDocumentsToDisplay(int count)
         {
             var list = IndexService.LoadSomeDocuments(count);
-            //_main.Messages.AddRange(list);
             MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
         }

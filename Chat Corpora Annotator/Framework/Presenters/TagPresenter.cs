@@ -33,7 +33,7 @@ namespace Viewer.Framework.Presenters
             this._writer = writer;
 
             _tagger.TagsetClick += _tagger_TagsetClick;
-            _tagger.LoadMore += _tagger_LoadMore;
+            //_tagger.LoadMore += _tagger_LoadMore;
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
             //_tagger.EditSituation += _tagger_EditSituation;
@@ -41,7 +41,7 @@ namespace Viewer.Framework.Presenters
             _tagger.LoadTagset += _tagger_LoadTagset;
             _tagger.SaveTagged += _tagger_SaveTagged;
             _tagger.LoadTagged += LoadTagged;
-            _main.TagClick += _main_TagClick;
+            //_main.TagClick += _main_TagClick;
             
 
     }
@@ -107,22 +107,6 @@ namespace Viewer.Framework.Presenters
         }
     
 
-        private void InsertTagsInDynamicMessage(int id)
-        {
-            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var item in arr)
-            {
-                var s = item.Split('-');
-                if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
-                {
-                    MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
-                    SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
-                    
-                }
-
-            }
-        }
 
         private void _tagger_SaveTagged(object sender, EventArgs e)
 
@@ -183,6 +167,7 @@ namespace Viewer.Framework.Presenters
                 }
                 
                 _tagger.DisplayTagset(TagsetIndex.Index[_service.ProjectTagset]);
+                _main.SetTagsetLabel(_service.ProjectTagset);
                 _tagger.DisplayTagsetColors(TagsetIndex.ColorIndex[_service.ProjectTagset]);
             }
             
@@ -255,45 +240,37 @@ namespace Viewer.Framework.Presenters
         }
 
 
-        private void _main_TagClick(object sender, EventArgs e)
-        {
-            if (!_tagger.SituationsLoaded)
-            {
-                LoadTagged(null, null);
-                _tagger.SituationsLoaded = true;
-            }
-            ShowTags(MessageContainer.Messages.Count);
-            _tagger.ShowView();
-            _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-        }
+        //private void _main_TagClick(object sender, EventArgs e)
+        //{
+        //    if (!_tagger.SituationsLoaded)
+        //    {
+        //        LoadTagged(null, null);
+        //        _tagger.SituationsLoaded = true;
+        //    }
+        //    ShowTags(MessageContainer.Messages.Count);
+        //    _tagger.ShowView();
+        //    _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+        //}
 
-        private void _tagger_LoadMore(object sender, EventArgs e)
-        {          
-            AddDocumentsToDisplay(2000);
-            _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+        //private void _tagger_LoadMore(object sender, EventArgs e)
+        //{          
+        //    AddDocumentsToDisplay(2000);
+        //    _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+
+        //}
+
+
+
+        //private void AddDocumentsTagsToDisplay(int count)
+        //{
+        //    var list = IndexService.LoadSomeDocuments(count);
+        //    MessageContainer.Messages.AddRange(list);
+        //    ShowTags(count);
             
-        }
 
-        private void AddDocumentsToDisplay(int count)
-        {
-            var list = IndexService.LoadSomeDocuments(count);
-            MessageContainer.Messages.AddRange(list);
-            ShowTags(count);
-            _tagger.DisplayDocuments();
-            
-        }
+        //}
 
-        private void ShowTags(int count)
-        {
-            for (int i = _tagger.CurIndex; i < _tagger.CurIndex + count; i++)
-            {
-                if (_service.TaggedIds.Contains(i))
-                {
-                    InsertTagsInDynamicMessage(i);
-                }
-            }
-            _tagger.CurIndex += count;
-        }
+
 
         private void _tagger_TagsetClick(object sender, EventArgs e)
         {

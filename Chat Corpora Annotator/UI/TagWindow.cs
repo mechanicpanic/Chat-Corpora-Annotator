@@ -45,8 +45,6 @@ namespace Viewer.UI
 
 
 		public Dictionary<string, Color> TagsetColors { get; set; }
-		public string Tagset { get; set; }
-
 		public bool IsFiltered = false;
 		public TagFilter filter = new TagFilter();
 
@@ -129,7 +127,7 @@ namespace Viewer.UI
             //}
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		private void addTagButton_Click(object sender, EventArgs e)
 		{
 
 			if (tagsetView.SelectedItems.Count != 0 && tagTable.SelectedObjects.Count != 0)
@@ -162,12 +160,6 @@ namespace Viewer.UI
 
 
 
-		private void loadMoreButton_Click(object sender, EventArgs e)
-		{
-			LoadMore?.Invoke(this, EventArgs.Empty);
-
-		}
-
 		public void SetUpChatView()
 		{
 
@@ -181,6 +173,7 @@ namespace Viewer.UI
 			foreach (var key in MessageContainer.Messages[0].Contents.Keys)
 			{
 				OLVColumn cl = new OLVColumn();
+				
 				cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
 
 				cl.Name = key;
@@ -266,7 +259,7 @@ namespace Viewer.UI
 		}
 
 
-		public void DisplayDocuments()
+		public void DisplayTagsInDocuments()
 		{
 			//tagTable.UpdateObjects(MessageContainer.Messages);
 			tagTable.SetObjects(MessageContainer.Messages);

@@ -22,7 +22,7 @@ namespace Viewer.Framework.Views
         void DisplayDocuments();
         void DisplaySearchResults();
 
-        
+        void SetTagsetLabel(string tagset);
         void DisplayStatistics(StatisticsContainer stats);
         Dictionary<string,double> Statistics { get; set; }
         IConcordanceView CreateConcordancer();
@@ -44,7 +44,7 @@ namespace Viewer.Framework.Views
         event EventHandler HeatmapClick;
         event LuceneQueryEventHandler FindClick;
 
-        event EventHandler LoadMoreClick;
+        event EventHandler LoadMore;
 
         event EventHandler ConcordanceClick;
         event EventHandler NGramClick;
