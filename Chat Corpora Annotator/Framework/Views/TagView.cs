@@ -17,7 +17,7 @@ namespace Viewer.Framework.Views
         
         event TaggerEventHandler DeleteSituation;
         
-        event EventHandler LoadMore;
+        //event EventHandler LoadMore;
 
         event EventHandler ShowSuggester;
 
@@ -26,14 +26,13 @@ namespace Viewer.Framework.Views
      
         bool SituationsLoaded { get; set; }
         int CurIndex { get; set; }
-        void DisplayDocuments();
-
+        //void DisplayTagsInDocuments();
         void DisplayTagsetColors(Dictionary<string, System.Drawing.Color> dict);
 
         event TaggerEventHandler LoadTagset;
 
         void ShowDates(List<DateTime> dates);
-        void UpdateTagIndex(List<string> tags);
+        //void UpdateTagIndex(List<string> tags);
         void DisplayTagset(List<string> tags);
         void DisplayTagErrorMessage();
         void AddSituationIndexItem(string s);

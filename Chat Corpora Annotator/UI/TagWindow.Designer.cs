@@ -56,11 +56,11 @@
             this.saveButton = new System.Windows.Forms.ToolStripSplitButton();
             this.writeToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tagsetToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.editSituationButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.changeTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteSituationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSituationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tagsetToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuBackPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
             this.splitContainerLeft.Panel1.SuspendLayout();
@@ -175,7 +175,7 @@
             this.addTagButton.TabIndex = 2;
             this.addTagButton.Text = "Add tag";
             this.addTagButton.UseVisualStyleBackColor = false;
-            this.addTagButton.Click += new System.EventHandler(this.button2_Click);
+            this.addTagButton.Click += new System.EventHandler(this.addTagButton_Click);
             // 
             // InterfaceBackPanel
             // 
@@ -345,13 +345,13 @@
             // chooseTagToolStripMenuItem
             // 
             this.chooseTagToolStripMenuItem.Name = "chooseTagToolStripMenuItem";
-            this.chooseTagToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.chooseTagToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.chooseTagToolStripMenuItem.Text = "Choose tag...";
             // 
             // taggedOnlyToolStripMenuItem
             // 
             this.taggedOnlyToolStripMenuItem.Name = "taggedOnlyToolStripMenuItem";
-            this.taggedOnlyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.taggedOnlyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.taggedOnlyToolStripMenuItem.Text = "Tagged only";
             // 
             // saveButton
@@ -370,19 +370,15 @@
             // writeToDiskToolStripMenuItem
             // 
             this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
-            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.writeToDiskToolStripMenuItem.Text = "Write to disk";
             this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save ";
-            // 
-            // tagsetToolTip
-            // 
-            this.tagsetToolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
             // editSituationButton
             // 
@@ -398,23 +394,27 @@
             this.editSituationButton.Text = "Edit Situation";
             this.editSituationButton.Visible = false;
             // 
-            // changeTagToolStripMenuItem
+            // mergeToolStripMenuItem
             // 
-            this.changeTagToolStripMenuItem.Name = "changeTagToolStripMenuItem";
-            this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.changeTagToolStripMenuItem.Text = "Change tag";
+            this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
+            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.mergeToolStripMenuItem.Text = "Merge...";
             // 
             // deleteSituationToolStripMenuItem
             // 
             this.deleteSituationToolStripMenuItem.Name = "deleteSituationToolStripMenuItem";
-            this.deleteSituationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteSituationToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.deleteSituationToolStripMenuItem.Text = "Delete situation";
             // 
-            // mergeToolStripMenuItem
+            // changeTagToolStripMenuItem
             // 
-            this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
-            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mergeToolStripMenuItem.Text = "Merge...";
+            this.changeTagToolStripMenuItem.Name = "changeTagToolStripMenuItem";
+            this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.changeTagToolStripMenuItem.Text = "Change tag";
+            // 
+            // tagsetToolTip
+            // 
+            this.tagsetToolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
             // TagWindow
             // 
