@@ -13,7 +13,7 @@ namespace Viewer.Framework.Views
         event EventHandler TagsetClick;
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
-        void RefreshTagView();
+        //void RefreshTagView();
         
         event TaggerEventHandler DeleteSituation;
         
