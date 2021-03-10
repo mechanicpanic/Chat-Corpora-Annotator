@@ -476,6 +476,18 @@ namespace Viewer.UI
 			}
 			dateView.Invalidate();
 		}
+
+        private void situationView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+			if(situationView.SelectedItems.Count == 1)
+            {
+				editSituationButton.Visible = true;
+            }
+			if(situationView.SelectedItems.Count == 0)
+            {
+				editSituationButton.Visible = false;
+            }
+        }
     }
 
     public class TagFilter : IModelFilter

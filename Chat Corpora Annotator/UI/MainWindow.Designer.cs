@@ -126,7 +126,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(920, 565);
+            tabControl1.Size = new System.Drawing.Size(1087, 752);
             tabControl1.TabIndex = 17;
             tabControl1.TabStop = false;
             // 
@@ -141,7 +141,7 @@
             this.Chat.Margin = new System.Windows.Forms.Padding(2);
             this.Chat.Name = "Chat";
             this.Chat.Padding = new System.Windows.Forms.Padding(2);
-            this.Chat.Size = new System.Drawing.Size(912, 533);
+            this.Chat.Size = new System.Drawing.Size(1079, 720);
             this.Chat.TabIndex = 0;
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(766, 529);
+            this.chatTable.Size = new System.Drawing.Size(933, 716);
             this.chatTable.TabIndex = 9;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -183,11 +183,11 @@
             this.dateView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
-            this.dateView.Location = new System.Drawing.Point(768, 2);
+            this.dateView.Location = new System.Drawing.Point(935, 2);
             this.dateView.Margin = new System.Windows.Forms.Padding(2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(142, 529);
+            this.dateView.Size = new System.Drawing.Size(142, 716);
             this.dateView.TabIndex = 12;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dateView_MouseDoubleClick);
@@ -456,7 +456,7 @@
             this.searchPanel.Location = new System.Drawing.Point(0, 32);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(2);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(228, 592);
+            this.searchPanel.Size = new System.Drawing.Size(228, 779);
             this.searchPanel.TabIndex = 16;
             // 
             // findButton
@@ -530,7 +530,6 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "from";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // startDate
             // 
@@ -572,7 +571,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "to";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dateToggle
             // 
@@ -704,7 +702,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1147, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(1314, 32);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -812,7 +810,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(988, 3);
+            this.button2.Location = new System.Drawing.Point(1155, 3);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(159, 29);
@@ -825,9 +823,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.messageLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(228, 602);
+            this.statusStrip1.Location = new System.Drawing.Point(228, 789);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(919, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1086, 22);
             this.statusStrip1.TabIndex = 30;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -842,13 +840,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1147, 624);
+            this.ClientSize = new System.Drawing.Size(1314, 811);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button2);
             this.Controls.Add(tabControl1);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(1330, 850);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             tabControl1.ResumeLayout(false);

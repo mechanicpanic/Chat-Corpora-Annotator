@@ -57,6 +57,10 @@
             this.writeToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsetToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.editSituationButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.changeTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSituationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBackPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
             this.splitContainerLeft.Panel1.SuspendLayout();
@@ -250,6 +254,7 @@
             this.situationView.TabIndex = 16;
             this.situationView.UseCompatibleStateImageBehavior = false;
             this.situationView.View = System.Windows.Forms.View.Details;
+            this.situationView.SelectedIndexChanged += new System.EventHandler(this.situationView_SelectedIndexChanged);
             this.situationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
             // 
             // columnHeader1
@@ -282,7 +287,8 @@
             this.tagsetEditorButton,
             this.suggesterButton,
             this.filterButton,
-            this.saveButton});
+            this.saveButton,
+            this.editSituationButton});
             this.statusStrip.Location = new System.Drawing.Point(0, 653);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
@@ -378,6 +384,38 @@
             // 
             this.tagsetToolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
+            // editSituationButton
+            // 
+            this.editSituationButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.editSituationButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mergeToolStripMenuItem,
+            this.deleteSituationToolStripMenuItem,
+            this.changeTagToolStripMenuItem});
+            this.editSituationButton.Image = ((System.Drawing.Image)(resources.GetObject("editSituationButton.Image")));
+            this.editSituationButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editSituationButton.Name = "editSituationButton";
+            this.editSituationButton.Size = new System.Drawing.Size(90, 20);
+            this.editSituationButton.Text = "Edit Situation";
+            this.editSituationButton.Visible = false;
+            // 
+            // changeTagToolStripMenuItem
+            // 
+            this.changeTagToolStripMenuItem.Name = "changeTagToolStripMenuItem";
+            this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeTagToolStripMenuItem.Text = "Change tag";
+            // 
+            // deleteSituationToolStripMenuItem
+            // 
+            this.deleteSituationToolStripMenuItem.Name = "deleteSituationToolStripMenuItem";
+            this.deleteSituationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteSituationToolStripMenuItem.Text = "Delete situation";
+            // 
+            // mergeToolStripMenuItem
+            // 
+            this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
+            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mergeToolStripMenuItem.Text = "Merge...";
+            // 
             // TagWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -440,5 +478,9 @@
         private System.Windows.Forms.ToolTip tagsetToolTip;
         private System.Windows.Forms.SplitContainer splitContainerRight;
         private System.Windows.Forms.SplitContainer splitContainerLeft;
+        private System.Windows.Forms.ToolStripDropDownButton editSituationButton;
+        private System.Windows.Forms.ToolStripMenuItem mergeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteSituationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeTagToolStripMenuItem;
     }
 }
