@@ -422,6 +422,16 @@ namespace Viewer
         {
 			SaveTagged?.Invoke(this, null);
 		}
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			SaveTagged?.Invoke(this, null);
+		}
+
+        private void writeToDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			WriteToDisk?.Invoke(this, null);
+        }
     }
 }
 

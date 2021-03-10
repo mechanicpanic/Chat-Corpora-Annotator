@@ -228,7 +228,7 @@ namespace Viewer.Framework.Presenters
             foreach (var item in arr)
             {
                 var s = item.Split('-');
-                if (id <= MessageContainer.Messages.Count)
+                if (id <= MessageContainer.Messages.Count+offset)
                 {
                     if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
                     {

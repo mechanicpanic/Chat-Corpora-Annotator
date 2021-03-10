@@ -1009,14 +1009,16 @@
             // writeToDiskToolStripMenuItem
             // 
             this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
-            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.writeToDiskToolStripMenuItem.Text = "Write to disk";
+            this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save ";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // suggesterButton
             // 
