@@ -59,7 +59,7 @@ namespace Viewer
 		public void CloseView()
 		{
 			this.CloseView();
-			SaveTagged?.Invoke(this, null);
+			
 		}
 
 		public void SetLineCount(int count)
@@ -418,6 +418,10 @@ namespace Viewer
 			e.Cancel = true;
 		}
 
-	}
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			SaveTagged?.Invoke(this, null);
+		}
+    }
 }
 

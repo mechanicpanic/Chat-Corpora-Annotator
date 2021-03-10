@@ -120,8 +120,7 @@ namespace Viewer.Framework.Presenters
                     counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
                 }
             }
-            using (StreamWriter file =
-                File.AppendText(savedpath))
+            using (StreamWriter file = File.AppendText(savedpath))
             {
                 
                 foreach (var msg in MessageContainer.Messages)

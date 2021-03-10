@@ -870,7 +870,11 @@
             this.extractToolStripMenuItem.Text = "Extract...";
             this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
-
+            // startTaggingToolStripMenuItem
+            // 
+            this.startTaggingToolStripMenuItem.Name = "startTaggingToolStripMenuItem";
+            this.startTaggingToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            // 
             // vizToolStripMenuItem
             // 
             this.vizToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1123,6 +1127,7 @@
             this.MinimumSize = new System.Drawing.Size(1330, 850);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             tabControl1.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             this.Chat.PerformLayout();
