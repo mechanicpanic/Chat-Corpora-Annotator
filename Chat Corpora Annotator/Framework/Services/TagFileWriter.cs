@@ -11,6 +11,7 @@ namespace Viewer.Framework.Services
         void WriteMessage(int messageId, string text, string user, string date);
         //void WriteSituation(List<Dictionary<string, string>> messages, string situation);
         void WriteSituation(List<DynamicMessage> messages, string situation, int sid);
+        void WriteSituation(List<int> messageIds, string situation, int sid);
         void CloseWriter();
         void OpenWriter();
 
@@ -18,20 +19,17 @@ namespace Viewer.Framework.Services
     }
 
     
-    public class TagFileWriter : IDisposable, ITagFileWriter
+    public class TagFileWriter : ITagFileWriter
     {
-        private int index = 0;
         private XmlWriter writer;
 
 
         public void OpenWriter()
         {
            
-            writer = XmlWriter.Create(@"C:\Users\annae\" + index.ToString() + ".xml");
-
+            writer = XmlWriter.Create(IndexService.CurrentIndexPath + @"\info\output.xml");
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
-            index++;
         }
 
         public void WriteMessage(int messageId, string text, string user, string date)
@@ -44,26 +42,11 @@ namespace Viewer.Framework.Services
             writer.WriteEndElement();
         }
         
-
-        //public void WriteSituation(List<Dictionary<string, string>> messages, string situation)
-        //{
-        //    writer.WriteStartElement("Situation", situation);
-        //    foreach (var msg in messages)
-        //    {
-        //        WriteMessage(msg["id"], msg["text"], msg["user"], msg["date"]);
-        //    }
-        //    writer.WriteEndElement();
-        //}
         public void CloseWriter()
         {
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         public void WriteSituation(List<DynamicMessage> messages, string situation, int sid)
@@ -76,12 +59,17 @@ namespace Viewer.Framework.Services
             }
             writer.WriteEndElement();
         }
-
-        public void WriteAllSituations()
+        public void WriteSituation(List<int> messageIds, string situation, int sid)
         {
-            
+            writer.WriteStartElement("Situation", situation);
+            writer.WriteAttributeString("SId", sid.ToString());
+
+            foreach (var id in messageIds)
+            {
+                var msg = IndexService.RetrieveMessageById(id);
+                WriteMessage(id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
+            }
+            writer.WriteEndElement();
         }
-
-
     }
 }

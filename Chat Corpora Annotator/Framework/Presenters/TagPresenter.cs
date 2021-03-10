@@ -224,18 +224,12 @@ namespace Viewer.Framework.Presenters
             _writer.OpenWriter();
             foreach(var kvp in SituationIndex.Index)
             {
-                foreach(var list in kvp.Value.Values)
+                foreach(var pair in kvp.Value)
                 {
-
-                    List<DynamicMessage> l = new List<DynamicMessage>();
-                    foreach (int id in list)
-                    {
-                        l.Add(IndexService.RetrieveMessageById(id));
-
-                    }
-                    _writer.WriteSituation(l, kvp.Key, l[0].Situations[kvp.Key]);
+                    _writer.WriteSituation(pair.Value, kvp.Key, pair.Key); //was this hard?
                 }
             }
+            _writer.CloseWriter();
         }
 
 
