@@ -47,48 +47,58 @@ namespace Viewer.UI
 
         public void SetCounts()
         {
-            groupsLabel.Text += " " + QueryResult.Count.ToString();
-            //label4.Text = QueryResult.Sum(x => x.Count).ToString();
-            int count = 0;
-            foreach (var list in QueryResult)
+            if (QueryResult != null)
             {
-                foreach (var res in list)
+                groupsLabel.Text = " " + QueryResult.Count.ToString();
+                //label4.Text = QueryResult.Sum(x => x.Count).ToString();
+                int count = 0;
+                foreach (var list in QueryResult)
                 {
-                    count += res.Count;
+                    foreach (var res in list)
+                    {
+                        count += res.Count;
+                    }
                 }
+                suggLabel.Text += " " + count.ToString();
             }
-            suggLabel.Text+= " " + count.ToString();
         }
         public void DisplaySituation()
         {
             
             CurrentSituation.Clear();
             List<int> temp = new List<int>();
-            foreach (var list in QueryResult[DisplayIndex])
+            if (QueryResult != null)
             {
-                
-                temp.AddRange(list);
-            }
-            //temp.Add();
-            //temp.Add(temp.Min() - 2);
-            //temp.Add(temp.Max() + 1);
-            //temp.Add(temp.Max() + 2);
-            ////bleh
-            temp.Sort();
-            Hits = temp;
-            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 2));
-            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 1));
-            
-            for (int i = temp[0]; i <= temp[temp.Count-1];i++)
-            {
-                CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
-            }
-            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 1));
-            CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 2));
+                foreach (var list in QueryResult[DisplayIndex])
+                {
 
-            suggesterView.SetObjects(CurrentSituation);
-            SetUpChatView();
-            suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
+                    temp.AddRange(list);
+                }
+                //temp.Add();
+                //temp.Add(temp.Min() - 2);
+                //temp.Add(temp.Max() + 1);
+                //temp.Add(temp.Max() + 2);
+                ////bleh
+                temp.Sort();
+                Hits = temp;
+                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 2));
+                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 1));
+
+                for (int i = temp[0]; i <= temp[temp.Count - 1]; i++)
+                {
+                    CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
+                }
+                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 1));
+                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 2));
+
+                suggesterView.SetObjects(CurrentSituation);
+                SetUpChatView();
+                suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
+            }
+            else
+            {
+                MessageBox.Show("Nothing found");
+            }
         }
         private void SetUpChatView()
         {
