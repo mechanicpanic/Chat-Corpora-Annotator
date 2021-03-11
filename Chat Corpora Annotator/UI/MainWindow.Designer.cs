@@ -84,7 +84,6 @@
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startTaggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.heatmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -846,37 +845,32 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadCorpusToolStripMenuItem,
             this.openCorpusToolStripMenuItem,
-            this.extractToolStripMenuItem,
-            this.startTaggingToolStripMenuItem});
+            this.extractToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 18);
             this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // loadCorpusToolStripMenuItem
             // 
             this.loadCorpusToolStripMenuItem.Name = "loadCorpusToolStripMenuItem";
-            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.loadCorpusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadCorpusToolStripMenuItem.Text = "Index new file";
             this.loadCorpusToolStripMenuItem.Click += new System.EventHandler(this.loadCorpusToolStripMenuItem_Click);
             // 
             // openCorpusToolStripMenuItem
             // 
             this.openCorpusToolStripMenuItem.Name = "openCorpusToolStripMenuItem";
-            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openCorpusToolStripMenuItem.Text = "Open corpus";
             this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
             // 
             // extractToolStripMenuItem
             // 
             this.extractToolStripMenuItem.Name = "extractToolStripMenuItem";
-            this.extractToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.extractToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.extractToolStripMenuItem.Text = "Extract...";
             this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
-            // 
-            // startTaggingToolStripMenuItem
-            // 
-            this.startTaggingToolStripMenuItem.Name = "startTaggingToolStripMenuItem";
-            this.startTaggingToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             // 
             // vizToolStripMenuItem
             // 
@@ -984,6 +978,7 @@
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(94, 20);
             this.filterButton.Text = "Filter by tag...";
+            this.filterButton.Visible = false;
             // 
             // chooseTagToolStripMenuItem
             // 
@@ -1008,18 +1003,19 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(56, 20);
             this.saveButton.Text = "Save...";
+            this.saveButton.Visible = false;
             // 
             // writeToDiskToolStripMenuItem
             // 
             this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
-            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.writeToDiskToolStripMenuItem.Text = "Write to disk";
             this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save ";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -1031,6 +1027,7 @@
             this.suggesterButton.Name = "suggesterButton";
             this.suggesterButton.Size = new System.Drawing.Size(75, 20);
             this.suggesterButton.Text = "Suggester";
+            this.suggesterButton.Visible = false;
             this.suggesterButton.Click += new System.EventHandler(this.suggester_Click);
             // 
             // tagsetEditorButton
@@ -1042,6 +1039,7 @@
             this.tagsetEditorButton.Name = "tagsetEditorButton";
             this.tagsetEditorButton.Size = new System.Drawing.Size(90, 20);
             this.tagsetEditorButton.Text = "Tagset Editor";
+            this.tagsetEditorButton.Visible = false;
             this.tagsetEditorButton.ButtonClick += new System.EventHandler(this.tagsetEditorButton_ButtonClick);
             // 
             // editSituationButton
@@ -1111,6 +1109,7 @@
             this.tagsetView.TabIndex = 5;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
+            this.tagsetView.Visible = false;
             // 
             // columnHeader4
             // 
@@ -1223,7 +1222,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Panel panel4;
         private ZedGraph.ZedGraphControl zedGraphControl1;
-        private System.Windows.Forms.ToolStripMenuItem startTaggingToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel messageLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

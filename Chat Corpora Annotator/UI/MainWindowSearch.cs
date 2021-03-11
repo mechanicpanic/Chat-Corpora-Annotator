@@ -29,7 +29,7 @@ namespace Viewer
 				{
 					var filter = TextMatchFilter.Contains(chatTable, word);
 					filters.Add(filter);
-					filters.Add(tagFilter);
+					//filters.Add(tagFilter);
 				}
 			}
 			var compositeFilter = new CompositeAllFilter(filters);

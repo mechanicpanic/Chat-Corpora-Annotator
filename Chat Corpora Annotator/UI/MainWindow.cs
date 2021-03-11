@@ -128,6 +128,11 @@ namespace Viewer
 				keywordButton.Enabled = true;
 				tableLayoutPanel1.Visible = true;
 				splitContainerRight.Visible = true;
+				filterButton.Visible = true;
+				tagsetEditorButton.Visible = true;
+				saveButton.Visible = true;
+				suggesterButton.Visible = true;
+				tagsetView.Visible = true;
 			}
 
 			if (!this.FileLoadState)
@@ -142,6 +147,11 @@ namespace Viewer
 				keywordButton.Enabled = false;
 				tableLayoutPanel1.Visible = false;
 				splitContainerRight.Visible = false;
+				filterButton.Visible = false;
+				tagsetEditorButton.Visible = false;
+				saveButton.Visible = false;
+				suggesterButton.Visible = false;
+				tagsetView.Visible = false;
 			}
 		}
 
@@ -217,7 +227,14 @@ namespace Viewer
 			{
 
 				DynamicMessage m = (DynamicMessage)o;
-				return String.Join(",", m.Situations.ToArray());
+				if (m.Situations != null)
+				{
+					return String.Join(",", m.Situations.ToArray());
+				}
+				else
+                {
+					return "";
+                }
 			}
 		}
 		private void FormatColumns()
@@ -460,6 +477,11 @@ namespace Viewer
 				}
 			}
 		}
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
