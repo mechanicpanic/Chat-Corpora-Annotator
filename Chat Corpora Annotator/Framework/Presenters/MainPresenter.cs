@@ -53,55 +53,55 @@ namespace Viewer.Framework.Presenters
 
         private void _main_VisualizeTokenLengths(object sender, EventArgs e)
         {
-            var numberOfBuckets = 3;
-            PointPairList list = new PointPairList();
-            if (stats != null)
-            {
-                var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenLengths, 20);
-                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
+            //var numberOfBuckets = 3;
+            //PointPairList list = new PointPairList();
+            //if (stats != null)
+            //{
+            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenLengths, 20);
+            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
 
-                for (int i = 0; i < numberOfBuckets; i++)
-                {
-                    list.Add(i, hist[i]);
-                }
-                _main.VisualizeHist(list, "Token lengths in symbols");
-            }
+            //    for (int i = 0; i < numberOfBuckets; i++)
+            //    {
+            //        list.Add(i, hist[i]);
+            //    }
+            //    _main.VisualizeHist(list, "Token lengths in symbols");
+            //}
         }
 
         // Yeah this is 1000000000000% duplicate code. Sorry its 24hrs to the deadline
         private void _main_VisualizeTokens(object sender, EventArgs e)
         {
-            var numberOfBuckets = 3;
-            PointPairList list = new PointPairList();
-            if (stats != null)
-            {
-                var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenNumbers, 20);
-                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
+            //var numberOfBuckets = 3;
+            //PointPairList list = new PointPairList();
+            //if (stats != null)
+            //{
+            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenNumbers, 20);
+            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
                 
 
-                for (int i = 0; i < numberOfBuckets; i++)
-                {
-                    list.Add(i, hist[i]);
-                }
-                _main.VisualizeHist(list, "Token number");
-            }
+            //    for (int i = 0; i < numberOfBuckets; i++)
+            //    {
+            //        list.Add(i, hist[i]);
+            //    }
+            //    _main.VisualizeHist(list, "Token number");
+            //}
         }
 
         private void _main_VisualizeLengths(object sender, EventArgs e)
         {
-            var numberOfBuckets = 3;
-            PointPairList list = new PointPairList();
-            if (stats != null)
-            {
-                var cleandata = HistogramHelper.RemoveOutliers(stats.AllLengths, 100);
-                var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
+            //var numberOfBuckets = 3;
+            //PointPairList list = new PointPairList();
+            //if (stats != null)
+            //{
+            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllLengths, 100);
+            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
 
-                for (int i = 0; i < numberOfBuckets; i++)
-                {
-                    list.Add(i, hist[i]);
-                }
-                _main.VisualizeHist(list, "Message lengths in symbols");
-            }
+            //    for (int i = 0; i < numberOfBuckets; i++)
+            //    {
+            //        list.Add(i, hist[i]);
+            //    }
+            //    _main.VisualizeHist(list, "Message lengths in symbols");
+            //}
         }
 
         private void _main_ExtractInfoClick(object sender, EventArgs e)
