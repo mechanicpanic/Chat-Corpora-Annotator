@@ -460,6 +460,7 @@
             this.suggesterView.Size = new System.Drawing.Size(858, 577);
             this.suggesterView.TabIndex = 0;
             this.suggesterView.UseCompatibleStateImageBehavior = false;
+            this.suggesterView.UseHotItem = true;
             this.suggesterView.View = System.Windows.Forms.View.Details;
             this.suggesterView.VirtualMode = true;
             this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);

@@ -482,7 +482,7 @@ namespace Viewer
 
         }
 
-        private void statistics_Click(object sender, EventArgs e)
+        private void Statistics_Click(object sender, EventArgs e)
         {
 
         }

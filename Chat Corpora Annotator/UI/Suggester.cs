@@ -15,7 +15,8 @@ namespace Viewer.UI
         {
             InitializeComponent();
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
-            
+            this.suggesterView.HotItemStyle = new HotItemStyle();
+            suggesterView.HotItemStyle.BackColor = Color.CornflowerBlue;
         }
 
         private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
@@ -49,7 +50,7 @@ namespace Viewer.UI
         {
             if (QueryResult != null)
             {
-                groupsLabel.Text = " " + QueryResult.Count.ToString();
+                groupsLabel.Text = "Found groups: " + QueryResult.Count.ToString();
                 //label4.Text = QueryResult.Sum(x => x.Count).ToString();
                 int count = 0;
                 foreach (var list in QueryResult)
@@ -59,7 +60,7 @@ namespace Viewer.UI
                         count += res.Count;
                     }
                 }
-                suggLabel.Text += " " + count.ToString();
+                suggLabel.Text= "Found suggestions: " + count.ToString();
             }
         }
         public void DisplaySituation()

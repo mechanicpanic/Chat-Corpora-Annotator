@@ -51,7 +51,7 @@ namespace Viewer.Framework.Views
         event EventHandler NGramClick;
         event EventHandler KeywordClick;
         event EventHandler LoadStatistics;
-        event EventHandler TagClick;
+        //event EventHandler TagClick;
 
         event EventHandler ExtractInfoClick;
 
