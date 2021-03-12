@@ -33,7 +33,6 @@ namespace Viewer
 
 		public event EventHandler ConcordanceClick;
 		public event EventHandler NGramClick;
-		public event EventHandler TagClick;
 		public event EventHandler KeywordClick;
 		public event EventHandler LoadStatistics;
 		public event EventHandler ExtractInfoClick;
@@ -105,9 +104,9 @@ namespace Viewer
 			
 			this.PropertyChanged += MainWindow_PropertyChanged;
 			this.InfoExtracted = false;
-			zedGraphControl1.GraphPane.Title.IsVisible = false;
-			zedGraphControl1.GraphPane.YAxis.Title.Text = "";
-			zedGraphControl1.GraphPane.XAxis.Title.Text = "";
+			//zedGraphControl1.GraphPane.Title.IsVisible = false;
+			//zedGraphControl1.GraphPane.YAxis.Title.Text = "";
+			//zedGraphControl1.GraphPane.XAxis.Title.Text = "";
 
 			DisplayTagset(new List<string>());
 
@@ -479,6 +478,11 @@ namespace Viewer
 		}
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statistics_Click(object sender, EventArgs e)
         {
 
         }

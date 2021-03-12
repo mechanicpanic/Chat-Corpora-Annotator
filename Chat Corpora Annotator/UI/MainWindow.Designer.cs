@@ -43,12 +43,15 @@
             this.Statistics = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.statisticsButton = new System.Windows.Forms.Button();
+            this.statisticsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Concordance = new System.Windows.Forms.TabPage();
             this.concordancePanel = new System.Windows.Forms.Panel();
@@ -81,10 +84,10 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.heatmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -121,7 +124,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.Statistics.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.Concordance.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -332,7 +336,6 @@
             // Statistics
             // 
             this.Statistics.Controls.Add(this.panel2);
-            this.Statistics.Controls.Add(this.button1);
             this.Statistics.Controls.Add(this.richTextBox1);
             this.Statistics.Location = new System.Drawing.Point(4, 28);
             this.Statistics.Margin = new System.Windows.Forms.Padding(2);
@@ -346,86 +349,119 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.panel4);
-            this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1075, 674);
+            this.panel2.Size = new System.Drawing.Size(1075, 716);
             this.panel2.TabIndex = 4;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.tableLayoutPanel2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(773, 674);
+            this.panel4.Size = new System.Drawing.Size(1075, 716);
             this.panel4.TabIndex = 1;
             // 
-            // panel3
+            // tableLayoutPanel2
             // 
-            this.panel3.Controls.Add(this.listBox1);
-            this.panel3.Controls.Add(this.listView1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(773, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(302, 674);
-            this.panel3.TabIndex = 0;
-            // 
-            // listBox1
-            // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Items.AddRange(new object[] {
-            "Message length",
-            "Token number by message",
-            "Token lengths"});
-            this.listBox1.Location = new System.Drawing.Point(0, 258);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(302, 213);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(302, 258);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Value";
-            this.columnHeader2.Width = 219;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.statisticsButton, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.statisticsListView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.listView1, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 674F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1075, 716);
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Lavender;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(2, 676);
+            this.button1.Location = new System.Drawing.Point(539, 676);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(1075, 42);
-            this.button1.TabIndex = 3;
+            this.button1.Size = new System.Drawing.Size(534, 38);
+            this.button1.TabIndex = 4;
             this.button1.Text = "Calculate statistics";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.statistics_Click);
+            // 
+            // statisticsButton
+            // 
+            this.statisticsButton.BackColor = System.Drawing.Color.Lavender;
+            this.statisticsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statisticsButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.statisticsButton.FlatAppearance.BorderSize = 0;
+            this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.statisticsButton.Location = new System.Drawing.Point(2, 676);
+            this.statisticsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.statisticsButton.Name = "statisticsButton";
+            this.statisticsButton.Size = new System.Drawing.Size(533, 38);
+            this.statisticsButton.TabIndex = 3;
+            this.statisticsButton.Text = "Calculate statistics";
+            this.statisticsButton.UseVisualStyleBackColor = false;
+            this.statisticsButton.Click += new System.EventHandler(this.statistics_Click);
+            // 
+            // statisticsListView
+            // 
+            this.statisticsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.statisticsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statisticsListView.HideSelection = false;
+            this.statisticsListView.Location = new System.Drawing.Point(2, 2);
+            this.statisticsListView.Margin = new System.Windows.Forms.Padding(2);
+            this.statisticsListView.Name = "statisticsListView";
+            this.statisticsListView.Size = new System.Drawing.Size(533, 670);
+            this.statisticsListView.TabIndex = 2;
+            this.statisticsListView.UseCompatibleStateImageBehavior = false;
+            this.statisticsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 186;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.Width = 330;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(539, 2);
+            this.listView1.Margin = new System.Windows.Forms.Padding(2);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(534, 670);
+            this.listView1.TabIndex = 3;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Name";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Value";
+            this.columnHeader6.Width = 219;
             // 
             // richTextBox1
             // 
@@ -647,14 +683,14 @@
             // 
             this.startDate.Checked = false;
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.startDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDate.Location = new System.Drawing.Point(58, 2);
             this.startDate.Margin = new System.Windows.Forms.Padding(2);
             this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(168, 26);
+            this.startDate.Size = new System.Drawing.Size(168, 25);
             this.startDate.TabIndex = 17;
             this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
@@ -662,20 +698,20 @@
             // 
             this.finishDate.Checked = false;
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.finishDate.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.finishDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(58, 32);
+            this.finishDate.Location = new System.Drawing.Point(58, 31);
             this.finishDate.Margin = new System.Windows.Forms.Padding(2);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(168, 26);
+            this.finishDate.Size = new System.Drawing.Size(168, 25);
             this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(2, 30);
+            this.label1.Location = new System.Drawing.Point(2, 29);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.MinimumSize = new System.Drawing.Size(30, 29);
             this.label1.Name = "label1";
@@ -721,7 +757,7 @@
             this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Users});
             this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userList.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userList.FullRowSelect = true;
             this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.userList.HideSelection = false;
@@ -809,7 +845,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.vizToolStripMenuItem});
+            this.vizToolStripMenuItem,
+            this.extractToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 22);
             this.menuStrip1.Name = "menuStrip1";
@@ -823,8 +860,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadCorpusToolStripMenuItem,
-            this.openCorpusToolStripMenuItem,
-            this.extractToolStripMenuItem});
+            this.openCorpusToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 18);
             this.fileToolStripMenuItem.Text = "File";
@@ -843,13 +879,6 @@
             this.openCorpusToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.openCorpusToolStripMenuItem.Text = "Open corpus";
             this.openCorpusToolStripMenuItem.Click += new System.EventHandler(this.openCorpusToolStripMenuItem_Click);
-            // 
-            // extractToolStripMenuItem
-            // 
-            this.extractToolStripMenuItem.Name = "extractToolStripMenuItem";
-            this.extractToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.extractToolStripMenuItem.Text = "Extract...";
-            this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
             // vizToolStripMenuItem
             // 
@@ -873,6 +902,13 @@
             this.heatmapToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.heatmapToolStripMenuItem.Text = "Heatmap";
             this.heatmapToolStripMenuItem.Click += new System.EventHandler(this.heatmapToolStripMenuItem_Click);
+            // 
+            // extractToolStripMenuItem1
+            // 
+            this.extractToolStripMenuItem1.Name = "extractToolStripMenuItem1";
+            this.extractToolStripMenuItem1.Size = new System.Drawing.Size(55, 18);
+            this.extractToolStripMenuItem1.Text = "Extract";
+            this.extractToolStripMenuItem1.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
             // BottomToolStripPanel
             // 
@@ -1122,7 +1158,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.Statistics.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.Concordance.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -1190,14 +1227,7 @@
         private System.Windows.Forms.Button keywordButton;
         private System.Windows.Forms.Panel keywordPanel;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel messageLabel;
@@ -1227,6 +1257,16 @@
         private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button statisticsButton;
+        private System.Windows.Forms.ListView statisticsListView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem1;
     }
 }
 
