@@ -17,30 +17,30 @@ namespace Viewer
 		public void DisplayStatistics(StatisticsContainer stats)
 		{
 
-			listView1.Items.Add(new ListViewItem(new string[2] { "Average messsage length", stats.AverageLength.ToString() }));
-			listView1.Items.Add(new ListViewItem(new string[2] { "Average messages per day", stats.AverageMessagesPerDay.ToString() }));
-			listView1.Items.Add(new ListViewItem(new string[2] { "Number of messages", stats.NumberOfDocs.ToString() }));
-			listView1.Items.Add(new ListViewItem(new string[2] { "Number of symbols", stats.NumberOfSymbols.ToString() }));
-			listView1.Items.Add(new ListViewItem(new string[2] { "Number of tokens", stats.NumberOfTokens.ToString() }));
+			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Average messsage length", stats.AverageLength.ToString() }));
+			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Average messages per day", stats.AverageMessagesPerDay.ToString() }));
+			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of messages", stats.NumberOfDocs.ToString() }));
+			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of symbols", stats.NumberOfSymbols.ToString() }));
+			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of tokens", stats.NumberOfTokens.ToString() }));
 
 		}
 		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			switch (listBox1.Items[listBox1.SelectedIndex].ToString())
-			{
-				case "Message length":
-					VisualizeLengths?.Invoke(this, EventArgs.Empty);
-					break;
-				case "Token number by message":
-					VisualizeTokens?.Invoke(this, EventArgs.Empty);
-					break;
-				case "Token lengths":
-					VisualizeTokenLengths?.Invoke(this, EventArgs.Empty);
-					break;
-			}
+		//private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+		//{
+		//	switch (listBox1.Items[listBox1.SelectedIndex].ToString())
+		//	{
+		//		case "Message length":
+		//			VisualizeLengths?.Invoke(this, EventArgs.Empty);
+		//			break;
+		//		case "Token number by message":
+		//			VisualizeTokens?.Invoke(this, EventArgs.Empty);
+		//			break;
+		//		case "Token lengths":
+		//			VisualizeTokenLengths?.Invoke(this, EventArgs.Empty);
+		//			break;
+		//	}
 
-		}
+		//}
 
 		public void VisualizeHist(PointPairList list, string name)
 		{
