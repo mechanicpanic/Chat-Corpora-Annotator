@@ -25,8 +25,6 @@ namespace Viewer
 
 		}
 		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public PointPairList LengthHist { get; set; } = new PointPairList();
-		public PointPairList TokenHist { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			switch (listBox1.Items[listBox1.SelectedIndex].ToString())
@@ -46,14 +44,14 @@ namespace Viewer
 
 		public void VisualizeHist(PointPairList list, string name)
 		{
-			zedGraphControl1.GraphPane.GraphObjList.Clear();
-			zedGraphControl1.GraphPane.CurveList.Clear();
-			zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
+			//zedGraphControl1.GraphPane.GraphObjList.Clear();
+			//zedGraphControl1.GraphPane.CurveList.Clear();
+			//zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
 
-			zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
-			zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
-			zedGraphControl1.AxisChange();
-			zedGraphControl1.Refresh();
+			//zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
+			//zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
+			//zedGraphControl1.AxisChange();
+			//zedGraphControl1.Refresh();
 		}
 	}
 }
