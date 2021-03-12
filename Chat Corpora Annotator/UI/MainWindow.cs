@@ -191,6 +191,9 @@ namespace Viewer
 		{
 			ShowUsers();
 			chatTable.SetObjects(MessageContainer.Messages);
+			fastSituationView.SetObjects(sit);
+			fastSituationView.AllColumns[0].AspectGetter = delegate (object x) { return x.ToString(); };
+			fastSituationView.RebuildColumns();
 			List<OLVColumn> columns = new List<OLVColumn>();
 
 			foreach (var key in IndexService.SelectedFields)
@@ -358,11 +361,12 @@ namespace Viewer
 			{
 				container.Add(DateTime.Parse(message.Contents[IndexService.DateFieldKey].ToString()).Date);
 			}
-
+			//fastDateView.SetObjects(container);
 			//IEnumerable<DateTime> intersect = container.Intersect(dates);
 			dateView.Items.Clear();
 			foreach (var item in container)
 			{
+				//fastDateView.AddObject(item.Date.ToString().Split(' ')[0]);
 				dateView.Items.Add(new ListViewItem(item.Date.ToString().Split(' ')[0]));
 			}
 			dateView.Invalidate();
@@ -417,14 +421,14 @@ namespace Viewer
         {
 			if (sit.Add(s))
 			{
-				situationView.Items.Add(s.ToString());
+				fastSituationView.AddObject(s);
 			}
 		}
 
 		
         private void situationView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
-			e.NewWidth = this.situationView.Columns[e.ColumnIndex].Width;
+			e.NewWidth = this.fastSituationView.Columns[e.ColumnIndex].Width;
 			e.Cancel = true;
 
         }
@@ -478,11 +482,6 @@ namespace Viewer
 		}
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Statistics_Click(object sender, EventArgs e)
         {
 
         }

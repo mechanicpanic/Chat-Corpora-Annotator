@@ -35,8 +35,8 @@
             this.splitContainerRight = new System.Windows.Forms.SplitContainer();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.situationView = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fastSituationView = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.removeTagButton = new System.Windows.Forms.Button();
             this.addTagButton = new System.Windows.Forms.Button();
@@ -121,6 +121,7 @@
             this.splitContainerRight.Panel1.SuspendLayout();
             this.splitContainerRight.Panel2.SuspendLayout();
             this.splitContainerRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastSituationView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.Statistics.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -223,7 +224,7 @@
             // 
             // splitContainerRight.Panel2
             // 
-            this.splitContainerRight.Panel2.Controls.Add(this.situationView);
+            this.splitContainerRight.Panel2.Controls.Add(this.fastSituationView);
             this.splitContainerRight.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainerRight.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainerRight.Size = new System.Drawing.Size(160, 664);
@@ -258,30 +259,29 @@
             this.Days.Text = "Active dates";
             this.Days.Width = 155;
             // 
-            // situationView
+            // fastSituationView
             // 
-            this.situationView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.situationView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3});
-            this.situationView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.situationView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.situationView.FullRowSelect = true;
-            this.situationView.HideSelection = false;
-            this.situationView.Location = new System.Drawing.Point(0, 0);
-            this.situationView.MultiSelect = false;
-            this.situationView.Name = "situationView";
-            this.situationView.Size = new System.Drawing.Size(160, 312);
-            this.situationView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.situationView.TabIndex = 17;
-            this.situationView.UseCompatibleStateImageBehavior = false;
-            this.situationView.View = System.Windows.Forms.View.Details;
-            this.situationView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.situationView_ColumnWidthChanging);
-            this.situationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
+            this.fastSituationView.AllColumns.Add(this.olvColumn1);
+            this.fastSituationView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1});
+            this.fastSituationView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fastSituationView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastSituationView.HideSelection = false;
+            this.fastSituationView.Location = new System.Drawing.Point(0, 0);
+            this.fastSituationView.Name = "fastSituationView";
+            this.fastSituationView.ShowGroups = false;
+            this.fastSituationView.Size = new System.Drawing.Size(160, 312);
+            this.fastSituationView.TabIndex = 0;
+            this.fastSituationView.UseCompatibleStateImageBehavior = false;
+            this.fastSituationView.UseHotItem = true;
+            this.fastSituationView.View = System.Windows.Forms.View.Details;
+            this.fastSituationView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.situationView_ColumnWidthChanging);
+            this.fastSituationView.DoubleClick += new System.EventHandler(this.situationView_DoubleClick);
             // 
-            // columnHeader3
+            // olvColumn1
             // 
-            this.columnHeader3.Text = "Situations";
-            this.columnHeader3.Width = 140;
+            this.olvColumn1.Text = "Situations";
+            this.olvColumn1.Width = 154;
             // 
             // tableLayoutPanel1
             // 
@@ -1155,6 +1155,7 @@
             this.splitContainerRight.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).EndInit();
             this.splitContainerRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fastSituationView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.Statistics.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -1248,13 +1249,9 @@
         private System.Windows.Forms.ToolStripMenuItem mergeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSituationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeTagToolStripMenuItem;
-        private System.Windows.Forms.ListView situationView;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private BrightIdeasSoftware.FastObjectListView chatTable;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainerRight;
-        private System.Windows.Forms.ListView dateView;
-        private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -1267,6 +1264,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem1;
+        private BrightIdeasSoftware.ObjectListView fastSituationView;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private System.Windows.Forms.ListView dateView;
+        private System.Windows.Forms.ColumnHeader Days;
     }
 }
 
