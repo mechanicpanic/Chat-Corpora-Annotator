@@ -15,8 +15,8 @@ namespace Viewer.UI
         {
             InitializeComponent();
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
-            this.suggesterView.HotItemStyle = new HotItemStyle();
-            suggesterView.HotItemStyle.BackColor = Color.CornflowerBlue;
+            //this.suggesterView.HotItemStyle = new HotItemStyle();
+            //suggesterView.HotItemStyle.BackColor = SystemColors.MenuHighlight;
         }
 
         private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
@@ -68,7 +68,7 @@ namespace Viewer.UI
             
             CurrentSituation.Clear();
             List<int> temp = new List<int>();
-            if (QueryResult != null)
+            if (QueryResult != null || QueryResult.Count != 0)
             {
                 foreach (var list in QueryResult[DisplayIndex])
                 {

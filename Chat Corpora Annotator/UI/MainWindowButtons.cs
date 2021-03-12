@@ -86,6 +86,7 @@ namespace Viewer
 			if (tagsetView.SelectedItems.Count != 0 && chatTable.SelectedObjects.Count != 0)
 			{
 				TaggerEventArgs args = new TaggerEventArgs();
+				args.Id = IndexEngine.SituationIndex.TagsetCounter[tagsetView.SelectedItems[0].Text];
 
 				args.Tag = tagsetView.SelectedItems[0].Text;
 
@@ -101,7 +102,7 @@ namespace Viewer
 
 				AddTag?.Invoke(this, args);
 
-				situationView.Items.Add(args.Tag + " " + args.Id);
+				//fastSituationView.Items.Add(args.Tag + " " + args.Id);
 				chatTable.UpdateObjects(MessageContainer.Messages.FindAll(x => args.messages.Contains(x.Id)));
 			}
 			else
@@ -135,7 +136,7 @@ namespace Viewer
 
 		private void situationView_DoubleClick(object sender, EventArgs e)
 		{
-			string[] item = situationView.SelectedItems[0].Text.Split(' ');
+			string[] item = fastSituationView.SelectedObject.ToString().Split(' ');
 			bool flag = false;
 			int messageID = SituationIndex.Index[item[0]][Int32.Parse(item[1])][0];
 			//tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
@@ -161,8 +162,8 @@ namespace Viewer
 		private void deleteSituationButton_Click(object sender, EventArgs e)
 		{
 			TaggerEventArgs args = new TaggerEventArgs();
-			args.Tag = situationView.SelectedItems[0].Text.Split(' ')[0];
-			args.Id = Int32.Parse(situationView.SelectedItems[0].Text.Split(' ')[1]);
+			args.Tag = fastSituationView.SelectedObject.ToString().Split(' ')[0];
+			args.Id = Int32.Parse(fastSituationView.SelectedObject.ToString().Split(' ')[1]);
 
 
 			//DeleteSituation?.Invoke(this, args);
