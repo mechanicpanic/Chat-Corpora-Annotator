@@ -425,11 +425,14 @@
     <Compile Include="Framework\Presenters\TagPresenter.cs" />
     <Compile Include="Framework\Presenters\TagsetPresenter.cs" />
     <Compile Include="Framework\Services\ConcordanceService.cs" />
+    <Compile Include="Framework\Services\DatasetStatisticsService.cs" />
     <Compile Include="Framework\Services\FolderService.cs" />
     <Compile Include="Framework\Services\KeywordService.cs" />
     <Compile Include="Framework\Services\NGramService.cs" />
+    <Compile Include="Framework\Services\IStatisticsService.cs" />
     <Compile Include="Framework\Services\SuggesterService.cs" />
     <Compile Include="Framework\Services\TagFileWriter.cs" />
+    <Compile Include="Framework\Services\TaggedCollectionStatisticsService.cs" />
     <Compile Include="Framework\Services\TagSaver.cs" />
     <Compile Include="Framework\Services\TagService.cs" />
     <Compile Include="Framework\Views\IConcordanceView.cs" />

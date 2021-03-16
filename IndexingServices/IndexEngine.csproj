@@ -266,7 +266,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RakeAlgorithm.cs" />
     <Compile Include="SituationIndex.cs" />
-    <Compile Include="StatisticsContainer.cs" />
     <Compile Include="TagsetIndex.cs" />
   </ItemGroup>
   <ItemGroup>
