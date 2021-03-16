@@ -31,7 +31,8 @@ namespace Viewer
             HeatmapService heater = new HeatmapService();
             FolderService folder = new FolderService();
             SuggesterService suggesterService = new SuggesterService();
-
+            DatasetStatisticsService dataset = new DatasetStatisticsService();
+            TaggedCollectionStatisticsService corpus = new TaggedCollectionStatisticsService();
            
             //var tagger = main;
             TagService service = new TagService();
@@ -40,7 +41,7 @@ namespace Viewer
             TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
             TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
             SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, main, main);
-            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder);
+            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder,dataset,corpus);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);

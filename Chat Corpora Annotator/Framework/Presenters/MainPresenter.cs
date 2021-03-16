@@ -19,16 +19,18 @@ namespace Viewer.Framework.Presenters
         private readonly ITagView _tagger;
         private readonly ITagService _service;
         private readonly FolderService _folder;
-
-        private StatisticsContainer stats;
-        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder)
-        {
+        private readonly IStatisticsService _dataset;
+        private readonly ITaggedStatisticsService _corpus;
+        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus)
+        {                                                                                                                                       
             this._tagger = tagger;
             this._service = service;
             this._main = view;
             this._csv = csv;
             this._searcher = searcher;
             this._folder = folder;
+            this._dataset = dataset;
+            this._corpus = corpus;
 
             _main.FindClick += _view_FindClick;
             _main.LoadMore += _view_LoadMoreClick;
@@ -120,12 +122,11 @@ namespace Viewer.Framework.Presenters
 
         private void _main_LoadStatistics(object sender, EventArgs e)
         {
+            _corpus.CalculateAll();
+            _dataset.CalculateAll();
 
-
-            //var numberOfBuckets = (int)Math.Ceiling(Math.Sqrt((double)stats.AllLengths.Count));
-            stats = new StatisticsContainer();
-
-            _main.DisplayStatistics(stats);
+            _main.DisplayStatistics(0, _dataset.AllFields);
+            _main.DisplayStatistics(1, _corpus.AllFields);
         }
 
         private void _main_KeywordClick(object sender, EventArgs e)

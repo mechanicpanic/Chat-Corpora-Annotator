@@ -49,7 +49,7 @@
             this.statisticsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.corpusStatisticsView = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -373,7 +373,7 @@
             this.tableLayoutPanel2.Controls.Add(this.button1, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.statisticsButton, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.statisticsListView, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.listView1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.corpusStatisticsView, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -437,31 +437,32 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Value";
-            this.columnHeader2.Width = 330;
+            this.columnHeader2.Width = 343;
             // 
-            // listView1
+            // corpusStatisticsView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.corpusStatisticsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5,
             this.columnHeader6});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(539, 2);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(534, 670);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.corpusStatisticsView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.corpusStatisticsView.HideSelection = false;
+            this.corpusStatisticsView.Location = new System.Drawing.Point(539, 2);
+            this.corpusStatisticsView.Margin = new System.Windows.Forms.Padding(2);
+            this.corpusStatisticsView.Name = "corpusStatisticsView";
+            this.corpusStatisticsView.Size = new System.Drawing.Size(534, 670);
+            this.corpusStatisticsView.TabIndex = 3;
+            this.corpusStatisticsView.UseCompatibleStateImageBehavior = false;
+            this.corpusStatisticsView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Name";
+            this.columnHeader5.Width = 175;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Value";
-            this.columnHeader6.Width = 219;
+            this.columnHeader6.Width = 470;
             // 
             // richTextBox1
             // 
@@ -1260,7 +1261,7 @@
         private System.Windows.Forms.ListView statisticsListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView corpusStatisticsView;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem1;

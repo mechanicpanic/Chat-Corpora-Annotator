@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -14,17 +15,34 @@ namespace Viewer
     public partial class MainWindow : Form, IMainView, ITagView, INotifyPropertyChanged
 
     {
-		public void DisplayStatistics(StatisticsContainer stats)
+		public void DisplayStatistics(int type, Dictionary<string,double> args)
 		{
+			if (type == 0)
+			{
+				string specifier = "G";
+				foreach (var param in args)
+				{
+					
+					{
+						statisticsListView.Items.Add(new ListViewItem(new string[] { param.Key, param.Value.ToString() }));
+					}
+					
 
-			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Average messsage length", stats.AverageLength.ToString() }));
-			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Average messages per day", stats.AverageMessagesPerDay.ToString() }));
-			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of messages", stats.NumberOfDocs.ToString() }));
-			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of symbols", stats.NumberOfSymbols.ToString() }));
-			statisticsListView.Items.Add(new ListViewItem(new string[2] { "Number of tokens", stats.NumberOfTokens.ToString() }));
+				}
+			}
+			if (type == 1)
+            {
+				foreach(var param in args)
+                {
+					corpusStatisticsView.Items.Add(new ListViewItem(new string[] { param.Key, param.Value.ToString() }));
+				}
+			}
 
-		}
-		Dictionary<string, double> IMainView.Statistics { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+			}
+	}
+
+		
+		
 		//private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
 		//{
 		//	switch (listBox1.Items[listBox1.SelectedIndex].ToString())
@@ -42,16 +60,16 @@ namespace Viewer
 
 		//}
 
-		public void VisualizeHist(PointPairList list, string name)
-		{
-			//zedGraphControl1.GraphPane.GraphObjList.Clear();
-			//zedGraphControl1.GraphPane.CurveList.Clear();
-			//zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
+		//public void VisualizeHist(PointPairList list, string name)
+		//{
+		//	//zedGraphControl1.GraphPane.GraphObjList.Clear();
+		//	//zedGraphControl1.GraphPane.CurveList.Clear();
+		//	//zedGraphControl1.GraphPane.AddBar(name, list, Color.CornflowerBlue);
 
-			//zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
-			//zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
-			//zedGraphControl1.AxisChange();
-			//zedGraphControl1.Refresh();
-		}
+		//	//zedGraphControl1.GraphPane.YAxis.Title.Text = "Count";
+		//	//zedGraphControl1.GraphPane.XAxis.Title.Text = "Value";
+		//	//zedGraphControl1.AxisChange();
+		//	//zedGraphControl1.Refresh();
+		//}
 	}
-}
+
