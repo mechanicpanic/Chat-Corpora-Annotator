@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Linq;
 using Viewer.Framework.Views;
 using System.Drawing;
+using System.Reflection;
 
 namespace Viewer.UI
 {
@@ -17,6 +18,17 @@ namespace Viewer.UI
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
             //this.suggesterView.HotItemStyle = new HotItemStyle();
             //suggesterView.HotItemStyle.BackColor = SystemColors.MenuHighlight;
+
+        }
+
+        private void Suggester_AddingUserArgument(object sender, EventArgs e)
+        {
+            //TODO: Implement small textbox window.
+        }
+
+        private void Suggester_AddingDictArgument(object sender, EventArgs e)
+        {
+            
         }
 
         private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
@@ -167,12 +179,12 @@ namespace Viewer.UI
 
         //This is the Find button
 
-        private void button7_Click(object sender, EventArgs e)
+        private void findButton_Click(object sender, EventArgs e)
         {
 
-            if (!String.IsNullOrEmpty(richTextBox1.Text))
+            if (!String.IsNullOrEmpty(queryBox.Text))
             {
-                this.QueryString = richTextBox1.Text;
+                this.QueryString = queryBox.Text;
                 RunQuery?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -194,7 +206,16 @@ namespace Viewer.UI
                 dictargs.Words = la.CurList;
                 //UserDicts.Add(la.CurName, la.CurList);
                 AddUserDict?.Invoke(this, dictargs);
-
+                foreach(var control in queryPanel.Controls)
+                {
+                    var button = control as Button;
+                    if(button.Text == "haswordofdict()")
+                    {
+                        ToolStripMenuItem item = new ToolStripMenuItem(la.CurName);
+                        item.Click += MenuStripItem_Click;
+                        button.ContextMenuStrip.Items.Add(item);
+                    }
+                }
                 var temp = new ListViewItem(la.CurName);
                 temp.SubItems.Add(String.Join(", ", la.CurList.ToArray()));
                 listView1.Items.Add(temp);
@@ -221,7 +242,18 @@ namespace Viewer.UI
         private void operator_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            richTextBox1.Text = richTextBox1.Text + " " + b.Text;
+            if(b.Text == ",")
+            {
+                queryBox.Text = queryBox.Text + ";";
+            }
+            if (b.Text == ",")
+            {
+                queryBox.Text = queryBox.Text + ",";
+            }
+            else
+            {
+                queryBox.Text = queryBox.Text + " " + b.Text;
+            }
         }
 
         private void Suggester_FormClosing(object sender, FormClosingEventArgs e)
@@ -257,6 +289,122 @@ namespace Viewer.UI
             arg.id = item.Id;
             ShowMessageInMainWindow?.Invoke(this, arg);
             
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void operator_MouseDown(object sender, MouseEventArgs e)
+        {
+            var control = sender as Control;
+         
+            this.DoDragDrop(control.Name, DragDropEffects.Copy);
+        }
+
+        private void flowLayoutPanel1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(string)))
+                return;
+
+            var name = e.Data.GetData(typeof(string)) as string;
+            var control = this.Controls.Find(name, true).FirstOrDefault();
+            if (control != null)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
+        {
+
+            var name = e.Data.GetData(typeof(string)) as string;
+            var control = this.Controls.Find(name, true).FirstOrDefault() as Button;
+            if (control != null)
+            {
+                var panel = sender as FlowLayoutPanel;
+                var clone = control.Clone();
+                clone.Dock = DockStyle.None;
+                clone.AutoSize = true;
+                clone.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                
+                clone.AllowDrop = false;
+                if (clone.Text == "haswordofdict()") {
+                    clone.ContextMenuStrip = new ContextMenuStrip();
+                    clone.MouseClick += operator_MouseClick;
+                    foreach (var kvp in UserDictsContainer.UserDicts) {
+                        ToolStripMenuItem item = new ToolStripMenuItem(kvp.Key);
+                        item.Click += MenuStripItem_Click;
+                        clone.ContextMenuStrip.Items.Add(item);
+                    }
+                }
+                if (clone.Text == "hasusermentioned()" || clone.Text == "byuser()") 
+                {
+
+                }
+
+              
+
+                //cp.Location = this.flowLayoutPanel1.PointToClient(new Point(e.X, e.Y));
+                ((FlowLayoutPanel)sender).Controls.Add(clone);
+            }
+        }
+
+
+
+        private void button5_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void MenuStripItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem item = (sender as ToolStripItem);
+            if (item != null)
+            {
+                ContextMenuStrip owner = item.Owner as ContextMenuStrip;
+                if (owner != null)
+                {
+                    Button button = owner.SourceControl as Button;
+                    if(button.Text == "haswordofdict()")
+                    {
+                        button.Text = "haswordofdict(" + item.Text + ")";
+                    }
+                }
+            }
+        }
+
+
+        private void operator_MouseClick(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if(e.Button == MouseButtons.Right)
+            {
+                button.ContextMenuStrip.Show();
+            }
+        }
+    }
+
+
+    public static class ControlExtensions
+    {
+        public static T Clone<T>(this T controlToClone)
+            where T : Control
+        {
+            PropertyInfo[] controlProperties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            T instance = Activator.CreateInstance<T>();
+
+            foreach (PropertyInfo propInfo in controlProperties)
+            {
+                if (propInfo.CanWrite)
+                {
+                    if (propInfo.Name != "WindowTarget")
+                        propInfo.SetValue(instance, propInfo.GetValue(controlToClone, null), null);
+                }
+            }
+
+            return instance;
         }
     }
 }
