@@ -33,7 +33,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
+            this.findButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.listButton = new System.Windows.Forms.Button();
             this.deleteListButton = new System.Windows.Forms.Button();
@@ -68,6 +68,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.switchModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.sidePanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -77,12 +82,14 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.panel6.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidePanel
             // 
             this.sidePanel.BackColor = System.Drawing.Color.Lavender;
-            this.sidePanel.Controls.Add(this.queryBox);
             this.sidePanel.Controls.Add(this.label4);
             this.sidePanel.Controls.Add(this.label3);
             this.sidePanel.Controls.Add(this.controlPanel);
@@ -99,14 +106,16 @@
             // queryBox
             // 
             this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.queryBox.Location = new System.Drawing.Point(3, 510);
+            this.queryBox.Location = new System.Drawing.Point(0, 0);
             this.queryBox.Margin = new System.Windows.Forms.Padding(2);
             this.queryBox.Name = "queryBox";
             this.queryBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.queryBox.Size = new System.Drawing.Size(395, 99);
+            this.queryBox.Size = new System.Drawing.Size(901, 140);
             this.queryBox.TabIndex = 6;
-            this.queryBox.Text = "select";
+            this.queryBox.Text = "";
+            this.queryBox.Visible = false;
             // 
             // label4
             // 
@@ -126,32 +135,33 @@
             // 
             // controlPanel
             // 
-            this.controlPanel.Controls.Add(this.button7);
-            this.controlPanel.Controls.Add(this.tableLayoutPanel2);
+            this.controlPanel.Controls.Add(this.findButton);
             this.controlPanel.Controls.Add(this.listView1);
+            this.controlPanel.Controls.Add(this.tableLayoutPanel2);
+            this.controlPanel.Controls.Add(this.panel4);
             this.controlPanel.Controls.Add(this.operatorPanel);
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlPanel.Location = new System.Drawing.Point(0, 30);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(400, 463);
+            this.controlPanel.Size = new System.Drawing.Size(400, 587);
             this.controlPanel.TabIndex = 14;
             // 
-            // button7
+            // findButton
             // 
-            this.button7.BackColor = System.Drawing.Color.Pink;
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(0, 395);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(400, 37);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "Find suggestions...";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.findButton_Click);
+            this.findButton.BackColor = System.Drawing.Color.Pink;
+            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.findButton.FlatAppearance.BorderSize = 0;
+            this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.findButton.Location = new System.Drawing.Point(0, 443);
+            this.findButton.Margin = new System.Windows.Forms.Padding(2);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(400, 45);
+            this.findButton.TabIndex = 7;
+            this.findButton.Text = "Find suggestions...";
+            this.findButton.UseVisualStyleBackColor = false;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -161,7 +171,7 @@
             this.tableLayoutPanel2.Controls.Add(this.listButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.deleteListButton, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 350);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 182);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -212,13 +222,14 @@
             this.listView1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 134);
+            this.listView1.Location = new System.Drawing.Point(0, 227);
             this.listView1.Margin = new System.Windows.Forms.Padding(2);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(400, 216);
             this.listView1.TabIndex = 10;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // listName
             // 
@@ -292,7 +303,6 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.operator_Click);
             this.button5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
-            this.button5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button5_MouseUp);
             // 
             // button4
             // 
@@ -482,6 +492,7 @@
             this.button20.Text = ";";
             this.button20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button20.UseVisualStyleBackColor = false;
+            this.button20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button19
             // 
@@ -498,6 +509,7 @@
             this.button19.Text = ",";
             this.button19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button19.UseVisualStyleBackColor = false;
+            this.button19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button18
             // 
@@ -514,6 +526,7 @@
             this.button18.Text = ")";
             this.button18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button18.UseVisualStyleBackColor = false;
+            this.button18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button17
             // 
@@ -625,13 +638,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.suggesterView);
-            this.panel2.Controls.Add(this.queryPanel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel2.Location = new System.Drawing.Point(400, 0);
+            this.panel2.Location = new System.Drawing.Point(400, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(901, 631);
+            this.panel2.Size = new System.Drawing.Size(901, 140);
             this.panel2.TabIndex = 2;
             // 
             // suggesterView
@@ -642,7 +654,7 @@
             this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.suggesterView.FullRowSelect = true;
             this.suggesterView.HideSelection = false;
-            this.suggesterView.Location = new System.Drawing.Point(0, 164);
+            this.suggesterView.Location = new System.Drawing.Point(400, 164);
             this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
             this.suggesterView.Name = "suggesterView";
             this.suggesterView.RowHeight = 48;
@@ -661,10 +673,10 @@
             // 
             this.queryPanel.AllowDrop = true;
             this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
-            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryPanel.Location = new System.Drawing.Point(0, 0);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(901, 164);
+            this.queryPanel.Size = new System.Drawing.Size(901, 140);
             this.queryPanel.TabIndex = 1;
             this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
@@ -713,15 +725,58 @@
             this.panel6.Size = new System.Drawing.Size(901, 42);
             this.panel6.TabIndex = 5;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.switchModeToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(400, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(901, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // switchModeToolStripMenuItem
+            // 
+            this.switchModeToolStripMenuItem.Name = "switchModeToolStripMenuItem";
+            this.switchModeToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.switchModeToolStripMenuItem.Text = "Switch Mode";
+            this.switchModeToolStripMenuItem.Click += new System.EventHandler(this.switchModeToolStripMenuItem_Click);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.queryBox);
+            this.panel1.Controls.Add(this.queryPanel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(901, 140);
+            this.panel1.TabIndex = 7;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 134);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(400, 48);
+            this.panel4.TabIndex = 26;
+            // 
             // Suggester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1301, 673);
+            this.Controls.Add(this.suggesterView);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel6);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.sidePanel);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Suggester";
             this.Text = "Suggester";
@@ -736,7 +791,12 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.panel6.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -747,7 +807,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox queryBox;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button deleteListButton;
         private System.Windows.Forms.Button listButton;
         private System.Windows.Forms.ListView listView1;
@@ -782,5 +842,10 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem switchModeToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Panel panel4;
     }
 }

@@ -7,42 +7,21 @@ using System.Linq;
 using Viewer.Framework.Views;
 using System.Drawing;
 using System.Reflection;
+using System.Text;
 
 namespace Viewer.UI
 {
     public partial class Suggester : Form, ISuggesterView
     {
+        private bool IsLockedMode = true;
         public Suggester()
         {
             InitializeComponent();
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
-            //this.suggesterView.HotItemStyle = new HotItemStyle();
-            //suggesterView.HotItemStyle.BackColor = SystemColors.MenuHighlight;
-
-        }
-
-        private void Suggester_AddingUserArgument(object sender, EventArgs e)
-        {
-            //TODO: Implement small textbox window.
-        }
-
-        private void Suggester_AddingDictArgument(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
-        {
-            DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
-            if (Hits.Contains(dyn.Id))
-            {
-                e.Item.BackColor = Color.Pink;
-            }
+            queryBox.Parent = this.panel2;
         }
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
-
-        //public Dictionary<string, List<string>> UserDicts { get; set; } = new Dictionary<string, List<string>>();
         public string QueryString { get; set; }
         public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
         public int DisplayIndex { get; set; } = 0;
@@ -53,6 +32,15 @@ namespace Viewer.UI
         public event FindEventHandler ShowMessageInMainWindow;
 
         private List<int> Hits;
+
+        private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
+            if (Hits.Contains(dyn.Id))
+            {
+                e.Item.BackColor = Color.Pink;
+            }
+        }
         public void CloseView()
         {
             this.Hide();
@@ -181,11 +169,19 @@ namespace Viewer.UI
 
         private void findButton_Click(object sender, EventArgs e)
         {
-
-            if (!String.IsNullOrEmpty(queryBox.Text))
+            if (!IsLockedMode)
             {
-                this.QueryString = queryBox.Text;
-                RunQuery?.Invoke(this, EventArgs.Empty);
+                if (!String.IsNullOrEmpty(queryBox.Text))
+                {
+                    this.QueryString = queryBox.Text;
+                    RunQuery?.Invoke(this, EventArgs.Empty);
+                }
+            }
+            else
+            {
+                this.QueryString = CreateQueryString();
+                MessageBox.Show(QueryString);
+                //RunQuery?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -328,8 +324,9 @@ namespace Viewer.UI
                 clone.Dock = DockStyle.None;
                 clone.AutoSize = true;
                 clone.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                
                 clone.AllowDrop = false;
+                clone.KeyDown += Clone_KeyDown;
+
                 if (clone.Text == "haswordofdict()") {
                     clone.ContextMenuStrip = new ContextMenuStrip();
                     clone.MouseClick += operator_MouseClick;
@@ -339,11 +336,15 @@ namespace Viewer.UI
                         clone.ContextMenuStrip.Items.Add(item);
                     }
                 }
-                if (clone.Text == "hasusermentioned()" || clone.Text == "byuser()") 
+                else if (clone.Text == "hasusermentioned()" || clone.Text == "byuser()" || clone.Text == "num") 
                 {
-
+                    clone.ContextMenuStrip = new ContextMenuStrip();
+                    clone.MouseClick += operator_MouseClick;
+                    ToolStripTextBox item = new ToolStripTextBox();
+                    clone.ContextMenuStrip.Items.Add(item);
+                    item.TextBox.KeyDown += TextBox_KeyDown;
+                    
                 }
-
               
 
                 //cp.Location = this.flowLayoutPanel1.PointToClient(new Point(e.X, e.Y));
@@ -351,7 +352,39 @@ namespace Viewer.UI
             }
         }
 
+        private void Clone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                var control = sender as Control;
+                var parent = control.Parent as FlowLayoutPanel;
+                parent.Controls.Remove(control);
+            }
+        }
 
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            int res;
+            var box = sender as TextBox;
+            if (e.KeyCode == Keys.Enter && box.TextLength > 0)
+            {
+                
+                var strip = box.Parent as ContextMenuStrip;
+                var button = strip.SourceControl as Button;
+                if (button.Text.Contains("by"))
+                {
+                    button.Text = "byuser(" + box.Text + ")";
+                }
+                else if(button.Text.Contains("hasuser"))
+                {
+                    button.Text = "hasusermentioned(" + box.Text + ")";
+                }
+                else if(button.Text.Contains("num") ||  int.TryParse(button.Text,out res))
+                {
+                    button.Text = box.Text;
+                }
+            }
+        }
 
         private void button5_MouseUp(object sender, MouseEventArgs e)
         {
@@ -366,7 +399,7 @@ namespace Viewer.UI
                 if (owner != null)
                 {
                     Button button = owner.SourceControl as Button;
-                    if(button.Text == "haswordofdict()")
+                    if(button.Text.Contains("haswordofdict"))
                     {
                         button.Text = "haswordofdict(" + item.Text + ")";
                     }
@@ -382,6 +415,91 @@ namespace Viewer.UI
             {
                 button.ContextMenuStrip.Show();
             }
+        }
+
+
+        private string CreateQueryString()
+        {
+            StringBuilder builder = new StringBuilder();
+            if (IsLockedMode)
+            {
+                foreach (var control in queryPanel.Controls)
+                {
+                    var button = control as Button;
+
+                    if (button.Text == "," || button.Text == ";" || button.Text == "(" || button.Text == ")"  || button.Text == "select")
+                    {
+                        builder.Append(button.Text);
+                    }
+                    else
+                    {
+                        builder.Append(" ");
+                        builder.Append(button.Text);
+                        
+                    }
+                }
+            }
+            return builder.ToString();
+        }
+
+        private void SwitchMode()
+        {
+            if (IsLockedMode)
+            {
+                foreach (var control in boolPanel.Controls)
+                {
+                    var button = control as Button;
+                    button.MouseDown -= operator_MouseDown;
+                    button.Click += operator_Click;
+                }
+                foreach (var control in operatorPanel.Controls)
+                {
+                    var button = control as Button;
+                    button.MouseDown -= operator_MouseDown;
+                    button.Click += operator_Click;
+                }
+            }
+            else
+            {
+                foreach (var control in boolPanel.Controls)
+                {
+                    var button = control as Button;
+                    button.MouseDown += operator_MouseDown;
+                    button.Click -= operator_Click;
+                }
+                foreach (var control in operatorPanel.Controls)
+                {
+                    var button = control as Button;
+                    button.MouseDown += operator_MouseDown;
+                    button.Click -= operator_Click;
+                }
+            }
+        }
+
+        private void switchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (IsLockedMode)
+            {
+                SwitchMode();
+                IsLockedMode = false;
+                queryBox.Visible = true;
+                queryPanel.Visible = false;
+                queryBox.Invalidate();
+
+            }
+            else
+            {
+                SwitchMode();
+                IsLockedMode = true;
+                queryPanel.Visible = true;
+                queryBox.Visible = false;
+            }
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
