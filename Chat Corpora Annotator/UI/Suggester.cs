@@ -306,8 +306,11 @@ namespace Viewer.UI
                 clone.Dock = DockStyle.None;
                 clone.AutoSize = true;
                 clone.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                clone.AllowDrop = false;
+                clone.AllowDrop = true;
                 clone.KeyDown += Clone_KeyDown;
+                clone.DragOver += clone_DragOver;
+                clone.MouseDown += clone_MouseDown;
+                clone.DragEnter += clone_DragEnter;
 
                 if (clone.Text == "haswordofdict()") {
                     clone.ContextMenuStrip = new ContextMenuStrip();
@@ -487,6 +490,42 @@ namespace Viewer.UI
         private void queryBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void clone_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks == 1)
+            {
+                base.OnMouseDown(e);
+                DoDragDrop(sender, DragDropEffects.All);
+            }
+            else 
+            {
+                var control = sender as Control;
+                var parent = control.Parent as FlowLayoutPanel;
+                parent.Controls.Remove(control);
+            }
+        }
+
+        void clone_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        void clone_DragOver(object sender, DragEventArgs e)
+        {
+            base.OnDragOver(e);
+            // is another dragable
+            if (e.Data.GetData(typeof(Button)) != null)
+            {
+                FlowLayoutPanel p = (FlowLayoutPanel)(sender as Button).Parent;
+                //Current Position             
+                int myIndex = p.Controls.GetChildIndex((sender as Button));
+
+                //Dragged to control to location of next button
+                Button q = (Button)e.Data.GetData(typeof(Button));
+                p.Controls.SetChildIndex(q, myIndex);
+            }
         }
     }
 

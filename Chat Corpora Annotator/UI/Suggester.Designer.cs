@@ -621,6 +621,7 @@
             // 
             // queryBox
             // 
+            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.queryBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.queryBox.Location = new System.Drawing.Point(0, 0);
@@ -634,6 +635,7 @@
             // 
             this.queryPanel.AllowDrop = true;
             this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
+            this.queryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.queryPanel.Enabled = false;
             this.queryPanel.Location = new System.Drawing.Point(0, 69);
