@@ -18,7 +18,9 @@ namespace Viewer.UI
         {
             InitializeComponent();
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
-            queryBox.Parent = this.panel2;
+            //queryBox.Parent = this.panel2;
+            SwitchMode();
+
         }
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
@@ -188,7 +190,6 @@ namespace Viewer.UI
         private void listButton_Click(object sender, EventArgs e)
         {
             ListAdder la = new ListAdder();
-            
             la.SaveList += new EventHandler(SaveListHandler);
             la.Show();
         }
@@ -200,7 +201,6 @@ namespace Viewer.UI
                 UserDictsEventArgs dictargs = new UserDictsEventArgs();
                 dictargs.Name = la.CurName;
                 dictargs.Words = la.CurList;
-                //UserDicts.Add(la.CurName, la.CurList);
                 AddUserDict?.Invoke(this, dictargs);
                 foreach(var control in queryPanel.Controls)
                 {
@@ -262,22 +262,6 @@ namespace Viewer.UI
            
         }
 
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fastObjectListView1_DoubleClick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void fastObjectListView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
         private void fastObjectListView1_ItemActivate(object sender, EventArgs e)
         {
             var item = suggesterView.GetModelObject(suggesterView.SelectedIndex) as DynamicMessage;
@@ -289,13 +273,11 @@ namespace Viewer.UI
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void operator_MouseDown(object sender, MouseEventArgs e)
         {
             var control = sender as Control;
-         
             this.DoDragDrop(control.Name, DragDropEffects.Copy);
         }
 
@@ -482,8 +464,8 @@ namespace Viewer.UI
             {
                 SwitchMode();
                 IsLockedMode = false;
-                queryBox.Visible = true;
-                queryPanel.Visible = false;
+                queryBox.Enabled = true;
+                queryPanel.Enabled = false;
                 queryBox.Invalidate();
 
             }
@@ -491,13 +473,18 @@ namespace Viewer.UI
             {
                 SwitchMode();
                 IsLockedMode = true;
-                queryPanel.Visible = true;
-                queryBox.Visible = false;
+                queryPanel.Enabled = true;
+                queryBox.Enabled  = false;
             }
 
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void queryBox_TextChanged(object sender, EventArgs e)
         {
 
         }

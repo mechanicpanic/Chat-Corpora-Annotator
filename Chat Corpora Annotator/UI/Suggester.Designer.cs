@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.sidePanel = new System.Windows.Forms.Panel();
-            this.queryBox = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.findButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.listButton = new System.Windows.Forms.Button();
-            this.deleteListButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContents = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.listButton = new System.Windows.Forms.Button();
+            this.deleteListButton = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.operatorPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -63,16 +63,16 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.queryBox = new EasyScintilla.SimpleEditor();
             this.queryPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.switchModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.sidePanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -80,11 +80,11 @@
             this.panel3.SuspendLayout();
             this.boolPanel.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.panel6.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidePanel
@@ -102,20 +102,6 @@
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Size = new System.Drawing.Size(400, 673);
             this.sidePanel.TabIndex = 1;
-            // 
-            // queryBox
-            // 
-            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.queryBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.queryBox.Location = new System.Drawing.Point(0, 0);
-            this.queryBox.Margin = new System.Windows.Forms.Padding(2);
-            this.queryBox.Name = "queryBox";
-            this.queryBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.queryBox.Size = new System.Drawing.Size(901, 140);
-            this.queryBox.TabIndex = 6;
-            this.queryBox.Text = "";
-            this.queryBox.Visible = false;
             // 
             // label4
             // 
@@ -162,6 +148,34 @@
             this.findButton.Text = "Find suggestions...";
             this.findButton.UseVisualStyleBackColor = false;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listName,
+            this.listContents});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listView1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(0, 227);
+            this.listView1.Margin = new System.Windows.Forms.Padding(2);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(400, 216);
+            this.listView1.TabIndex = 10;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // listName
+            // 
+            this.listName.Text = "Name";
+            this.listName.Width = 74;
+            // 
+            // listContents
+            // 
+            this.listContents.Text = "Contents";
+            this.listContents.Width = 416;
             // 
             // tableLayoutPanel2
             // 
@@ -213,33 +227,13 @@
             this.deleteListButton.Click += new System.EventHandler(this.deleteListButton_Click);
             this.deleteListButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.operator_MouseClick);
             // 
-            // listView1
+            // panel4
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.listName,
-            this.listContents});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 227);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(400, 216);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // listName
-            // 
-            this.listName.Text = "Name";
-            this.listName.Width = 74;
-            // 
-            // listContents
-            // 
-            this.listContents.Text = "Contents";
-            this.listContents.Width = 416;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 134);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(400, 48);
+            this.panel4.TabIndex = 26;
             // 
             // operatorPanel
             // 
@@ -282,8 +276,6 @@
             this.button8.Text = "inwin";
             this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.operator_Click);
-            this.button8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button5
             // 
@@ -301,8 +293,6 @@
             this.button5.Text = "hasorganization()";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.operator_Click);
-            this.button5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button4
             // 
@@ -320,8 +310,6 @@
             this.button4.Text = "hasdate()";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.operator_Click);
-            this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button12
             // 
@@ -339,8 +327,6 @@
             this.button12.Text = "hastime()";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.operator_Click);
-            this.button12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button3
             // 
@@ -358,7 +344,6 @@
             this.button3.Text = "hasusermentioned()";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button6
             // 
@@ -376,8 +361,6 @@
             this.button6.Text = "haslocation()";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.operator_Click);
-            this.button6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button9
             // 
@@ -395,8 +378,6 @@
             this.button9.Text = "byuser()";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.operator_Click);
-            this.button9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button11
             // 
@@ -414,8 +395,6 @@
             this.button11.Text = "haswordofdict()";
             this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.operator_Click);
-            this.button11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // suggLabel
             // 
@@ -426,7 +405,6 @@
             this.suggLabel.Size = new System.Drawing.Size(125, 16);
             this.suggLabel.TabIndex = 20;
             this.suggLabel.Text = "Found suggestions:";
-            this.suggLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupsLabel
             // 
@@ -492,7 +470,6 @@
             this.button20.Text = ";";
             this.button20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button20.UseVisualStyleBackColor = false;
-            this.button20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button19
             // 
@@ -509,7 +486,6 @@
             this.button19.Text = ",";
             this.button19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button19.UseVisualStyleBackColor = false;
-            this.button19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button18
             // 
@@ -526,7 +502,6 @@
             this.button18.Text = ")";
             this.button18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button18.UseVisualStyleBackColor = false;
-            this.button18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button17
             // 
@@ -543,8 +518,6 @@
             this.button17.Text = "(";
             this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button17.UseVisualStyleBackColor = false;
-            this.button17.Click += new System.EventHandler(this.operator_Click);
-            this.button17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button16
             // 
@@ -561,8 +534,6 @@
             this.button16.Text = "num";
             this.button16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button16.UseVisualStyleBackColor = false;
-            this.button16.Click += new System.EventHandler(this.operator_Click);
-            this.button16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button15
             // 
@@ -579,8 +550,6 @@
             this.button15.Text = "and";
             this.button15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.operator_Click);
-            this.button15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button14
             // 
@@ -597,8 +566,6 @@
             this.button14.Text = "select";
             this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.operator_Click);
-            this.button14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button13
             // 
@@ -615,8 +582,6 @@
             this.button13.Text = "not";
             this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.operator_Click);
-            this.button13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // button10
             // 
@@ -633,8 +598,6 @@
             this.button10.Text = "or";
             this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.operator_Click);
-            this.button10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.operator_MouseDown);
             // 
             // panel2
             // 
@@ -645,6 +608,40 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(901, 140);
             this.panel2.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.queryPanel);
+            this.panel1.Controls.Add(this.queryBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(901, 140);
+            this.panel1.TabIndex = 7;
+            // 
+            // queryBox
+            // 
+            this.queryBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
+            this.queryBox.Location = new System.Drawing.Point(0, 0);
+            this.queryBox.Name = "queryBox";
+            this.queryBox.ScrollWidth = 500;
+            this.queryBox.Size = new System.Drawing.Size(901, 69);
+            this.queryBox.Styler = null;
+            this.queryBox.TabIndex = 0;
+            // 
+            // queryPanel
+            // 
+            this.queryPanel.AllowDrop = true;
+            this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
+            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.queryPanel.Enabled = false;
+            this.queryPanel.Location = new System.Drawing.Point(0, 69);
+            this.queryPanel.Name = "queryPanel";
+            this.queryPanel.Size = new System.Drawing.Size(901, 71);
+            this.queryPanel.TabIndex = 1;
+            this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
+            this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // suggesterView
             // 
@@ -666,20 +663,6 @@
             this.suggesterView.View = System.Windows.Forms.View.Details;
             this.suggesterView.VirtualMode = true;
             this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);
-            this.suggesterView.DoubleClick += new System.EventHandler(this.fastObjectListView1_DoubleClick);
-            this.suggesterView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fastObjectListView1_MouseDoubleClick);
-            // 
-            // queryPanel
-            // 
-            this.queryPanel.AllowDrop = true;
-            this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
-            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.queryPanel.Location = new System.Drawing.Point(0, 0);
-            this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(901, 140);
-            this.queryPanel.TabIndex = 1;
-            this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
-            this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // button1
             // 
@@ -747,24 +730,6 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.queryBox);
-            this.panel1.Controls.Add(this.queryPanel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 140);
-            this.panel1.TabIndex = 7;
-            // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 134);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(400, 48);
-            this.panel4.TabIndex = 26;
-            // 
             // Suggester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -789,12 +754,12 @@
             this.panel3.ResumeLayout(false);
             this.boolPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.panel6.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -806,7 +771,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RichTextBox queryBox;
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button deleteListButton;
         private System.Windows.Forms.Button listButton;
@@ -847,5 +811,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Panel panel4;
+        private EasyScintilla.SimpleEditor queryBox;
     }
 }
