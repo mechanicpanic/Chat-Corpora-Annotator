@@ -21,6 +21,8 @@ namespace Viewer.UI
             //queryBox.Parent = this.panel2;
             SwitchMode();
             IsLockedMode = false;
+            foreach (var margin in queryBox.Margins)
+                margin.Width = 0;
 
         }
 
@@ -528,6 +530,18 @@ namespace Viewer.UI
         private void queryBox_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (IsLockedMode)
+            {
+                queryPanel.Controls.Clear();
+            }
+            else
+            {
+                queryBox.Text = "";
+            }
         }
     }
 

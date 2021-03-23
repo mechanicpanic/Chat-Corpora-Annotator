@@ -71,6 +71,9 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sidePanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -82,6 +85,8 @@
             this.panel6.SuspendLayout();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidePanel
@@ -100,7 +105,6 @@
             // 
             // controlPanel
             // 
-            this.controlPanel.Controls.Add(this.findButton);
             this.controlPanel.Controls.Add(this.listView1);
             this.controlPanel.Controls.Add(this.tableLayoutPanel2);
             this.controlPanel.Controls.Add(this.suggLabel);
@@ -237,7 +241,7 @@
             this.modeButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.modeButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.modeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.modeButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modeButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modeButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.modeButton.Location = new System.Drawing.Point(3, 3);
             this.modeButton.Name = "modeButton";
@@ -609,14 +613,15 @@
             // 
             // findButton
             // 
-            this.findButton.BackColor = System.Drawing.Color.Pink;
+            this.findButton.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.findButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(-2, 596);
+            this.findButton.Location = new System.Drawing.Point(452, 2);
             this.findButton.Margin = new System.Windows.Forms.Padding(2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(400, 45);
+            this.findButton.Size = new System.Drawing.Size(447, 39);
             this.findButton.TabIndex = 7;
             this.findButton.Text = "Run query";
             this.findButton.UseVisualStyleBackColor = false;
@@ -630,21 +635,21 @@
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryPanel.Location = new System.Drawing.Point(0, 0);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(901, 164);
+            this.queryPanel.Size = new System.Drawing.Size(901, 93);
             this.queryPanel.TabIndex = 1;
             this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // queryBox
             // 
-            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.queryBox.Location = new System.Drawing.Point(0, 0);
+            this.queryBox.Margin = new System.Windows.Forms.Padding(0);
             this.queryBox.Name = "queryBox";
             this.queryBox.ScrollWidth = 500;
             this.queryBox.ScrollWidthTracking = false;
-            this.queryBox.Size = new System.Drawing.Size(901, 164);
+            this.queryBox.Size = new System.Drawing.Size(901, 93);
             this.queryBox.Styler = null;
             this.queryBox.TabIndex = 0;
             this.queryBox.WrapMode = ScintillaNET.WrapMode.Word;
@@ -653,14 +658,14 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Lavender;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(611, 0);
+            this.button1.Location = new System.Drawing.Point(453, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(290, 42);
+            this.button1.Size = new System.Drawing.Size(445, 36);
             this.button1.TabIndex = 3;
             this.button1.Text = "Next suggestion >";
             this.button1.UseVisualStyleBackColor = false;
@@ -669,14 +674,14 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Lavender;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(0, 0);
+            this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(287, 42);
+            this.button2.Size = new System.Drawing.Size(444, 36);
             this.button2.TabIndex = 4;
             this.button2.Text = "< Previous suggestion";
             this.button2.UseVisualStyleBackColor = false;
@@ -684,8 +689,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.button1);
+            this.panel6.Controls.Add(this.tableLayoutPanel4);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel6.Location = new System.Drawing.Point(400, 631);
@@ -699,31 +703,76 @@
             this.topPanel.Controls.Add(this.queryBox);
             this.topPanel.Controls.Add(this.queryPanel);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(400, 0);
+            this.topPanel.Location = new System.Drawing.Point(400, 43);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(901, 164);
+            this.topPanel.Size = new System.Drawing.Size(901, 93);
             this.topPanel.TabIndex = 23;
             // 
             // suggesterView
             // 
-            this.suggesterView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.suggesterView.CellEditUseWholeCell = false;
             this.suggesterView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.suggesterView.FullRowSelect = true;
             this.suggesterView.HideSelection = false;
-            this.suggesterView.Location = new System.Drawing.Point(400, 164);
+            this.suggesterView.Location = new System.Drawing.Point(400, 136);
             this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
             this.suggesterView.Name = "suggesterView";
             this.suggesterView.RowHeight = 48;
             this.suggesterView.ShowGroups = false;
-            this.suggesterView.Size = new System.Drawing.Size(901, 467);
+            this.suggesterView.Size = new System.Drawing.Size(901, 495);
             this.suggesterView.TabIndex = 0;
             this.suggesterView.UseCompatibleStateImageBehavior = false;
             this.suggesterView.UseHotItem = true;
             this.suggesterView.View = System.Windows.Forms.View.Details;
             this.suggesterView.VirtualMode = true;
             this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.button7, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.findButton, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(400, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(901, 43);
+            this.tableLayoutPanel3.TabIndex = 24;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.LightSalmon;
+            this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button7.Location = new System.Drawing.Point(2, 2);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(446, 39);
+            this.button7.TabIndex = 8;
+            this.button7.Text = "Clear";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.button2, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.button1, 1, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(901, 42);
+            this.tableLayoutPanel4.TabIndex = 0;
             // 
             // Suggester
             // 
@@ -734,6 +783,7 @@
             this.Controls.Add(this.suggesterView);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.topPanel);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.sidePanel);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Suggester";
@@ -752,6 +802,8 @@
             this.panel6.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -801,5 +853,8 @@
         private System.Windows.Forms.Button modeButton;
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }
