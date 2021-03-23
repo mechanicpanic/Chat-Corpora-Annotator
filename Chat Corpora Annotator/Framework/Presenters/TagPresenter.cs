@@ -33,9 +33,9 @@ namespace Viewer.Framework.Presenters
             this._writer = writer;
 
             _tagger.TagsetClick += _tagger_TagsetClick;
-            //_tagger.LoadMore += _tagger_LoadMore;
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
+            _tagger.DeleteSituation += _tagger_DeleteSituation;
             //_tagger.EditSituation += _tagger_EditSituation;
 
             _tagger.LoadTagset += _tagger_LoadTagset;
@@ -45,6 +45,48 @@ namespace Viewer.Framework.Presenters
             
 
     }
+
+        private void _tagger_DeleteSituation(object sender, TaggerEventArgs args)
+        {
+            
+            foreach(var id in SituationIndex.Index[args.Tag][args.Id])
+            {
+                MessageContainer.Messages[id].Situations.Remove(args.Tag);
+            }
+            SituationIndex.RemoveSituationFromIndex(args.Id, args.Tag);
+            SituationIndex.TagsetCounter[args.Tag]--;
+
+            _tagger.DeleteSituationIndexItem(args.Tag + " " + args.Id.ToString());
+            _tagger.UpdateSituationCount(SituationIndex.SituationCount());
+            
+
+            if (args.Id < SituationIndex.Index[args.Tag].Count + 1)
+            {
+                for(int i = args.Id + 1; i <= SituationIndex.Index[args.Tag].Count; i++ )
+                {
+                    var list = SituationIndex.Index[args.Tag][i];
+                        foreach (var id in list)
+                        {
+                            MessageContainer.Messages[id].Situations[args.Tag]--;
+                        }
+
+                    SituationIndex.RemoveSituationFromIndex(i, args.Tag);
+                    SituationIndex.AddSituationToIndex(list, i - 1, args.Tag);
+                        
+                        _tagger.DeleteSituationIndexItem(args.Tag + " " + i.ToString());
+                        _tagger.AddSituationIndexItem(args.Tag + " " + (i - 1).ToString());
+
+
+                        
+                    
+
+
+                }
+            }
+            
+
+        }
+
 
         private void SetPaths()
         {
@@ -216,7 +258,6 @@ namespace Viewer.Framework.Presenters
 
                 }
             }
-            //MessageBox.Show(Stopwatch.GetTimestamp().ToString());
             _tagger.UpdateSituationCount(SituationIndex.SituationCount());
            
         }

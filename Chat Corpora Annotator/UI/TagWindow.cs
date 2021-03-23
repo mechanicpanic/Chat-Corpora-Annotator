@@ -17,7 +17,7 @@ namespace Viewer.UI
 {
 
 
-	public partial class TagWindow : Form, ITagView
+	public partial class TagWindow : Form
 	{
 		private long scrollCount = 0;
 		public event WriteEventHandler WriteToDisk;

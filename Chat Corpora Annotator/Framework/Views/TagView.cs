@@ -13,11 +13,12 @@ namespace Viewer.Framework.Views
         event EventHandler TagsetClick;
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
-        //void RefreshTagView();
         
         event TaggerEventHandler DeleteSituation;
-        
-        //event EventHandler LoadMore;
+        event TaggerEventHandler EditSituation;
+        event TaggerEventHandler MergeSituations;
+        event EventHandler CrossMergeSituations; //todo new handler
+
 
         event EventHandler ShowSuggester;
 
@@ -36,6 +37,7 @@ namespace Viewer.Framework.Views
         void DisplayTagset(List<string> tags);
         void DisplayTagErrorMessage();
         void AddSituationIndexItem(string s);
+        void DeleteSituationIndexItem(string s);
         void UpdateSituationCount(int count);
 
      

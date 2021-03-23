@@ -301,6 +301,7 @@
             this.fastSituationView.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastSituationView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastSituationView.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fastSituationView.FullRowSelect = true;
             this.fastSituationView.HideSelection = false;
             this.fastSituationView.Location = new System.Drawing.Point(0, 0);
             this.fastSituationView.Name = "fastSituationView";
@@ -393,7 +394,6 @@
             // 
             this.button4.BackColor = System.Drawing.Color.Lavender;
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Enabled = false;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

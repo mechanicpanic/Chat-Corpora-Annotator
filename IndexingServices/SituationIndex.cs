@@ -113,10 +113,10 @@ namespace IndexEngine
             
             if(Index.ContainsKey(situation) && Index[situation].ContainsKey(id))
             {
-                foreach(var i in Index[situation][id])
-                {
-                    MessageContainer.Messages[i].Situations.Remove(situation);
-                }
+                //foreach(var i in Index[situation][id])
+                //{
+                //    MessageContainer.Messages[i].Situations.Remove(situation);
+                //}
                 Index[situation].Remove(id);
             }
             

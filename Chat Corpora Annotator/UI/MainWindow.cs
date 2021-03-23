@@ -87,6 +87,10 @@ namespace Viewer
 		public event TaggerEventHandler DeleteSituation;
 		public event EventHandler ShowSuggester;
 
+		public event TaggerEventHandler EditSituation;
+		public event TaggerEventHandler MergeSituations;
+		public event EventHandler CrossMergeSituations;
+
 		public event EventHandler SetTagset;
 		public event EventHandler DisplayColors;
 		public event TaggerEventHandler LoadTagset;
@@ -427,6 +431,14 @@ namespace Viewer
 			}
 		}
 
+		public void DeleteSituationIndexItem(string s)
+        {
+            if (sit.Contains(s))
+            {
+				sit.Remove(s);
+				fastSituationView.RemoveObject(s);
+            }
+        }
 		
         private void situationView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
@@ -500,7 +512,17 @@ namespace Viewer
 
         private void button4_Click(object sender, EventArgs e)
         {
-			DeleteSituation?.Invoke(this, null);
+			if (fastSituationView.SelectedIndex != -1)
+			{
+				foreach (var item in fastSituationView.SelectedObjects)
+				{
+					TaggerEventArgs args = new TaggerEventArgs();
+					var arr = item.ToString().Split();
+					args.Id = int.Parse(arr[1]);
+					args.Tag = arr[0];
+					DeleteSituation?.Invoke(this, args);
+				}
+			}
         }
     }
 }
