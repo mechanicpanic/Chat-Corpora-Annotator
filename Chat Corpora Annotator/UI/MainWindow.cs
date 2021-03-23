@@ -125,6 +125,7 @@ namespace Viewer
 				concordancerButton.Enabled = true;
 				ngramButton.Enabled = true;
 				keywordButton.Enabled = true;
+				chatTable.Visible = true;
 				tableLayoutPanel1.Visible = true;
 				splitContainerRight.Visible = true;
 				filterButton.Visible = true;
@@ -144,6 +145,7 @@ namespace Viewer
 				concordancerButton.Enabled = false;
 				ngramButton.Enabled = false;
 				keywordButton.Enabled = false;
+				chatTable.Visible = false;
 				tableLayoutPanel1.Visible = false;
 				splitContainerRight.Visible = false;
 				filterButton.Visible = false;
@@ -298,7 +300,7 @@ namespace Viewer
 			scrollCount = e.NewValue;
 			Console.WriteLine(scrollCount);
 
-			if ((scrollCount - 988) % 100 == 0 || ((scrollCount - 985) % 100 == 0) && scrollCount != 0) //i promise i will learn what wndproc is one day...
+			if ((scrollCount - 988) % 100 == 0 || ((scrollCount - 984) % 100 == 0) && scrollCount != 0) //i promise i will learn what wndproc is one day...
 			{
 				LoadMore?.Invoke(this, EventArgs.Empty);
 			}
@@ -484,6 +486,21 @@ namespace Viewer
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+			MessageBox.Show("Not implemented yet");
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+			DeleteSituation?.Invoke(this, null);
         }
     }
 }

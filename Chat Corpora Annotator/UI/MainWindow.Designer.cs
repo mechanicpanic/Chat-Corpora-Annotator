@@ -28,15 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TabControl tabControl1;
+            System.Windows.Forms.TabControl mainTabs;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Chat = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chatTable = new BrightIdeasSoftware.FastObjectListView();
             this.splitContainerRight = new System.Windows.Forms.SplitContainer();
             this.dateView = new System.Windows.Forms.ListView();
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fastSituationView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.removeTagButton = new System.Windows.Forms.Button();
             this.addTagButton = new System.Windows.Forms.Button();
@@ -65,6 +71,7 @@
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.findButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.datesPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -94,7 +101,7 @@
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.bottomStrip = new System.Windows.Forms.StatusStrip();
             this.messageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tagsetLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.newSituationLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -110,18 +117,24 @@
             this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSituationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            tabControl1 = new System.Windows.Forms.TabControl();
-            tabControl1.SuspendLayout();
+            this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            mainTabs = new System.Windows.Forms.TabControl();
+            mainTabs.SuspendLayout();
             this.Chat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).BeginInit();
             this.splitContainerRight.Panel1.SuspendLayout();
             this.splitContainerRight.Panel2.SuspendLayout();
             this.splitContainerRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastSituationView)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.Statistics.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -132,72 +145,91 @@
             this.tabPage2.SuspendLayout();
             this.keywordPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.bottomStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
+            this.splitContainerLeft.Panel1.SuspendLayout();
+            this.splitContainerLeft.Panel2.SuspendLayout();
+            this.splitContainerLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
+            this.splitContainerMain.Panel1.SuspendLayout();
+            this.splitContainerMain.Panel2.SuspendLayout();
+            this.splitContainerMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // mainTabs
             // 
-            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            tabControl1.Controls.Add(this.Chat);
-            tabControl1.Controls.Add(this.Statistics);
-            tabControl1.Controls.Add(this.Concordance);
-            tabControl1.Controls.Add(this.tabPage1);
-            tabControl1.Controls.Add(this.tabPage2);
-            tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            tabControl1.Location = new System.Drawing.Point(227, 35);
-            tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            tabControl1.Name = "tabControl1";
-            tabControl1.Padding = new System.Drawing.Point(0, 0);
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(1087, 752);
-            tabControl1.TabIndex = 17;
-            tabControl1.TabStop = false;
+            mainTabs.Controls.Add(this.Chat);
+            mainTabs.Controls.Add(this.Statistics);
+            mainTabs.Controls.Add(this.Concordance);
+            mainTabs.Controls.Add(this.tabPage1);
+            mainTabs.Controls.Add(this.tabPage2);
+            mainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainTabs.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            mainTabs.Location = new System.Drawing.Point(0, 0);
+            mainTabs.Margin = new System.Windows.Forms.Padding(2);
+            mainTabs.Name = "mainTabs";
+            mainTabs.Padding = new System.Drawing.Point(0, 0);
+            mainTabs.SelectedIndex = 0;
+            mainTabs.Size = new System.Drawing.Size(1087, 767);
+            mainTabs.TabIndex = 17;
+            mainTabs.TabStop = false;
             // 
             // Chat
             // 
             this.Chat.BackColor = System.Drawing.Color.Lavender;
-            this.Chat.Controls.Add(this.chatTable);
-            this.Chat.Controls.Add(this.splitContainerRight);
+            this.Chat.Controls.Add(this.splitContainer2);
             this.Chat.Controls.Add(this.tableLayoutPanel1);
             this.Chat.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.Chat.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Chat.Location = new System.Drawing.Point(4, 28);
+            this.Chat.Location = new System.Drawing.Point(4, 27);
             this.Chat.Margin = new System.Windows.Forms.Padding(2);
             this.Chat.Name = "Chat";
             this.Chat.Padding = new System.Windows.Forms.Padding(2);
-            this.Chat.Size = new System.Drawing.Size(1079, 720);
+            this.Chat.Size = new System.Drawing.Size(1079, 736);
             this.Chat.TabIndex = 0;
             this.Chat.Text = "Chat";
             this.Chat.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(2, 54);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.chatTable);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainerRight);
+            this.splitContainer2.Size = new System.Drawing.Size(1075, 680);
+            this.splitContainer2.SplitterDistance = 864;
+            this.splitContainer2.SplitterWidth = 6;
+            this.splitContainer2.TabIndex = 14;
             // 
             // chatTable
             // 
             this.chatTable.AllowColumnReorder = true;
             this.chatTable.AutoArrange = false;
             this.chatTable.BackColor = System.Drawing.Color.White;
-            this.chatTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatTable.CellEditUseWholeCell = false;
             this.chatTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chatTable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chatTable.FullRowSelect = true;
             this.chatTable.HeaderUsesThemes = true;
             this.chatTable.HideSelection = false;
-            this.chatTable.Location = new System.Drawing.Point(2, 54);
+            this.chatTable.Location = new System.Drawing.Point(0, 0);
             this.chatTable.Margin = new System.Windows.Forms.Padding(2);
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(915, 664);
+            this.chatTable.Size = new System.Drawing.Size(864, 680);
             this.chatTable.TabIndex = 9;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -205,6 +237,7 @@
             this.chatTable.UseFiltering = true;
             this.chatTable.View = System.Windows.Forms.View.Details;
             this.chatTable.VirtualMode = true;
+            this.chatTable.Visible = false;
             this.chatTable.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.chatTable_CellRightClick);
             this.chatTable.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.ChatTable_FormatCell);
             this.chatTable.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.ChatTable_FormatRow);
@@ -212,8 +245,8 @@
             // 
             // splitContainerRight
             // 
-            this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitContainerRight.Location = new System.Drawing.Point(917, 54);
+            this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerRight.Location = new System.Drawing.Point(0, 0);
             this.splitContainerRight.Name = "splitContainerRight";
             this.splitContainerRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -225,29 +258,30 @@
             // splitContainerRight.Panel2
             // 
             this.splitContainerRight.Panel2.Controls.Add(this.fastSituationView);
+            this.splitContainerRight.Panel2.Controls.Add(this.tableLayoutPanel3);
             this.splitContainerRight.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainerRight.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainerRight.Size = new System.Drawing.Size(160, 664);
-            this.splitContainerRight.SplitterDistance = 332;
-            this.splitContainerRight.SplitterWidth = 20;
+            this.splitContainerRight.Size = new System.Drawing.Size(205, 680);
+            this.splitContainerRight.SplitterDistance = 240;
+            this.splitContainerRight.SplitterWidth = 10;
             this.splitContainerRight.TabIndex = 19;
             this.splitContainerRight.Visible = false;
             // 
             // dateView
             // 
             this.dateView.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dateView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dateView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Days});
             this.dateView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateView.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateView.FullRowSelect = true;
             this.dateView.HideSelection = false;
             this.dateView.Location = new System.Drawing.Point(0, 0);
             this.dateView.Margin = new System.Windows.Forms.Padding(2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(160, 332);
+            this.dateView.Size = new System.Drawing.Size(205, 240);
             this.dateView.TabIndex = 18;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
@@ -266,11 +300,12 @@
             this.olvColumn1});
             this.fastSituationView.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastSituationView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastSituationView.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fastSituationView.HideSelection = false;
             this.fastSituationView.Location = new System.Drawing.Point(0, 0);
             this.fastSituationView.Name = "fastSituationView";
             this.fastSituationView.ShowGroups = false;
-            this.fastSituationView.Size = new System.Drawing.Size(160, 312);
+            this.fastSituationView.Size = new System.Drawing.Size(205, 360);
             this.fastSituationView.TabIndex = 0;
             this.fastSituationView.UseCompatibleStateImageBehavior = false;
             this.fastSituationView.UseHotItem = true;
@@ -282,6 +317,95 @@
             // 
             this.olvColumn1.Text = "Situations";
             this.olvColumn1.Width = 154;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.button3, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button5, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button4, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 360);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(205, 70);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Lavender;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Enabled = false;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Location = new System.Drawing.Point(104, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(99, 31);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "Edit tag";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Lavender;
+            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button5.Enabled = false;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Location = new System.Drawing.Point(2, 37);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(98, 31);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "Merge";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Lavender;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(104, 37);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 31);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Cross-merge";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Lavender;
+            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button4.Enabled = false;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button4.Location = new System.Drawing.Point(2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(98, 31);
+            this.button4.TabIndex = 18;
+            this.button4.Text = "Delete";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -308,7 +432,7 @@
             this.removeTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.removeTagButton.FlatAppearance.BorderSize = 0;
             this.removeTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removeTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.removeTagButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.removeTagButton.Location = new System.Drawing.Point(3, 3);
             this.removeTagButton.Name = "removeTagButton";
             this.removeTagButton.Size = new System.Drawing.Size(531, 46);
@@ -324,7 +448,7 @@
             this.addTagButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.addTagButton.FlatAppearance.BorderSize = 0;
             this.addTagButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addTagButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addTagButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addTagButton.Location = new System.Drawing.Point(540, 3);
             this.addTagButton.Name = "addTagButton";
             this.addTagButton.Size = new System.Drawing.Size(532, 46);
@@ -337,11 +461,11 @@
             // 
             this.Statistics.Controls.Add(this.panel2);
             this.Statistics.Controls.Add(this.richTextBox1);
-            this.Statistics.Location = new System.Drawing.Point(4, 28);
+            this.Statistics.Location = new System.Drawing.Point(4, 27);
             this.Statistics.Margin = new System.Windows.Forms.Padding(2);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(2);
-            this.Statistics.Size = new System.Drawing.Size(1079, 720);
+            this.Statistics.Size = new System.Drawing.Size(1079, 736);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
@@ -352,7 +476,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1075, 716);
+            this.panel2.Size = new System.Drawing.Size(1075, 732);
             this.panel2.TabIndex = 4;
             // 
             // panel4
@@ -362,7 +486,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1075, 716);
+            this.panel4.Size = new System.Drawing.Size(1075, 732);
             this.panel4.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -380,20 +504,19 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 674F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1075, 716);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1075, 732);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Lavender;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
-            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(539, 676);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(534, 38);
+            this.button1.Size = new System.Drawing.Size(534, 54);
             this.button1.TabIndex = 4;
             this.button1.Text = "Calculate statistics";
             this.button1.UseVisualStyleBackColor = false;
@@ -402,13 +525,12 @@
             // 
             this.statisticsButton.BackColor = System.Drawing.Color.Lavender;
             this.statisticsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statisticsButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
-            this.statisticsButton.FlatAppearance.BorderSize = 0;
+            this.statisticsButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statisticsButton.Location = new System.Drawing.Point(2, 676);
             this.statisticsButton.Margin = new System.Windows.Forms.Padding(2);
             this.statisticsButton.Name = "statisticsButton";
-            this.statisticsButton.Size = new System.Drawing.Size(533, 38);
+            this.statisticsButton.Size = new System.Drawing.Size(533, 54);
             this.statisticsButton.TabIndex = 3;
             this.statisticsButton.Text = "Calculate statistics";
             this.statisticsButton.UseVisualStyleBackColor = false;
@@ -471,7 +593,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(2, 2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1075, 716);
+            this.richTextBox1.Size = new System.Drawing.Size(1075, 732);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -479,11 +601,11 @@
             // 
             this.Concordance.Controls.Add(this.concordancePanel);
             this.Concordance.Controls.Add(this.concordancerButton);
-            this.Concordance.Location = new System.Drawing.Point(4, 28);
+            this.Concordance.Location = new System.Drawing.Point(4, 27);
             this.Concordance.Margin = new System.Windows.Forms.Padding(2);
             this.Concordance.Name = "Concordance";
             this.Concordance.Padding = new System.Windows.Forms.Padding(2);
-            this.Concordance.Size = new System.Drawing.Size(1079, 720);
+            this.Concordance.Size = new System.Drawing.Size(1079, 736);
             this.Concordance.TabIndex = 4;
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
@@ -494,7 +616,7 @@
             this.concordancePanel.Location = new System.Drawing.Point(2, 2);
             this.concordancePanel.Margin = new System.Windows.Forms.Padding(2);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1075, 674);
+            this.concordancePanel.Size = new System.Drawing.Size(1075, 690);
             this.concordancePanel.TabIndex = 3;
             // 
             // concordancerButton
@@ -504,7 +626,7 @@
             this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.concordancerButton.FlatAppearance.BorderSize = 0;
             this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.concordancerButton.Location = new System.Drawing.Point(2, 676);
+            this.concordancerButton.Location = new System.Drawing.Point(2, 692);
             this.concordancerButton.Margin = new System.Windows.Forms.Padding(2);
             this.concordancerButton.Name = "concordancerButton";
             this.concordancerButton.Size = new System.Drawing.Size(1075, 42);
@@ -517,10 +639,10 @@
             // 
             this.tabPage1.Controls.Add(this.ngramPanel);
             this.tabPage1.Controls.Add(this.ngramButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 28);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1079, 720);
+            this.tabPage1.Size = new System.Drawing.Size(1079, 736);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "N-gram Search";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -531,7 +653,7 @@
             this.ngramPanel.Location = new System.Drawing.Point(0, 0);
             this.ngramPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(1079, 678);
+            this.ngramPanel.Size = new System.Drawing.Size(1079, 694);
             this.ngramPanel.TabIndex = 4;
             // 
             // ngramButton
@@ -541,7 +663,7 @@
             this.ngramButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
             this.ngramButton.FlatAppearance.BorderSize = 0;
             this.ngramButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ngramButton.Location = new System.Drawing.Point(0, 678);
+            this.ngramButton.Location = new System.Drawing.Point(0, 694);
             this.ngramButton.Margin = new System.Windows.Forms.Padding(2);
             this.ngramButton.Name = "ngramButton";
             this.ngramButton.Size = new System.Drawing.Size(1079, 42);
@@ -553,10 +675,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.keywordPanel);
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1079, 720);
+            this.tabPage2.Size = new System.Drawing.Size(1079, 736);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Keyword Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -568,7 +690,7 @@
             this.keywordPanel.Location = new System.Drawing.Point(0, 0);
             this.keywordPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keywordPanel.Name = "keywordPanel";
-            this.keywordPanel.Size = new System.Drawing.Size(1079, 720);
+            this.keywordPanel.Size = new System.Drawing.Size(1079, 736);
             this.keywordPanel.TabIndex = 1;
             // 
             // keywordButton
@@ -577,7 +699,7 @@
             this.keywordButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.keywordButton.FlatAppearance.BorderSize = 0;
             this.keywordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.keywordButton.Location = new System.Drawing.Point(0, 676);
+            this.keywordButton.Location = new System.Drawing.Point(0, 692);
             this.keywordButton.Margin = new System.Windows.Forms.Padding(2);
             this.keywordButton.Name = "keywordButton";
             this.keywordButton.Size = new System.Drawing.Size(1079, 44);
@@ -593,8 +715,7 @@
             // 
             // searchPanel
             // 
-            this.searchPanel.Controls.Add(this.findButton);
-            this.searchPanel.Controls.Add(this.clearButton);
+            this.searchPanel.Controls.Add(this.tableLayoutPanel4);
             this.searchPanel.Controls.Add(this.datesPanel);
             this.searchPanel.Controls.Add(this.dateToggle);
             this.searchPanel.Controls.Add(this.userPanel);
@@ -605,22 +726,37 @@
             this.searchPanel.Location = new System.Drawing.Point(0, 0);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(2);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(228, 493);
+            this.searchPanel.Size = new System.Drawing.Size(223, 480);
             this.searchPanel.TabIndex = 16;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.findButton, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.clearButton, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 423);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(223, 55);
+            this.tableLayoutPanel4.TabIndex = 29;
             // 
             // findButton
             // 
             this.findButton.BackColor = System.Drawing.Color.Lavender;
-            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.findButton.Enabled = false;
+            this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.findButton.FlatAppearance.BorderSize = 0;
             this.findButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 455);
+            this.findButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.findButton.Location = new System.Drawing.Point(2, 29);
             this.findButton.Margin = new System.Windows.Forms.Padding(2);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(228, 32);
+            this.findButton.Size = new System.Drawing.Size(218, 20);
             this.findButton.TabIndex = 15;
             this.findButton.Text = "Find";
             this.findButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -630,16 +766,16 @@
             // clearButton
             // 
             this.clearButton.BackColor = System.Drawing.Color.Lavender;
-            this.clearButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.clearButton.Enabled = false;
+            this.clearButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.clearButton.FlatAppearance.BorderSize = 0;
             this.clearButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearButton.Location = new System.Drawing.Point(0, 423);
+            this.clearButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clearButton.Location = new System.Drawing.Point(2, 2);
             this.clearButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(228, 32);
+            this.clearButton.Size = new System.Drawing.Size(218, 23);
             this.clearButton.TabIndex = 26;
             this.clearButton.Text = "Clear";
             this.clearButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -663,14 +799,14 @@
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.datesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.datesPanel.Size = new System.Drawing.Size(228, 59);
+            this.datesPanel.Size = new System.Drawing.Size(223, 59);
             this.datesPanel.TabIndex = 23;
             this.datesPanel.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(2, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.MinimumSize = new System.Drawing.Size(45, 29);
@@ -684,14 +820,14 @@
             // 
             this.startDate.Checked = false;
             this.startDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.startDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startDate.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(58, 2);
+            this.startDate.Location = new System.Drawing.Point(57, 2);
             this.startDate.Margin = new System.Windows.Forms.Padding(2);
             this.startDate.MaxDate = new System.DateTime(9998, 1, 1, 0, 0, 0, 0);
             this.startDate.Name = "startDate";
             this.startDate.ShowCheckBox = true;
-            this.startDate.Size = new System.Drawing.Size(168, 25);
+            this.startDate.Size = new System.Drawing.Size(164, 23);
             this.startDate.TabIndex = 17;
             this.startDate.Value = new System.DateTime(2020, 4, 28, 0, 0, 0, 0);
             // 
@@ -699,19 +835,19 @@
             // 
             this.finishDate.Checked = false;
             this.finishDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.finishDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.finishDate.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.finishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDate.Location = new System.Drawing.Point(58, 31);
+            this.finishDate.Location = new System.Drawing.Point(57, 31);
             this.finishDate.Margin = new System.Windows.Forms.Padding(2);
             this.finishDate.Name = "finishDate";
             this.finishDate.ShowCheckBox = true;
-            this.finishDate.Size = new System.Drawing.Size(168, 25);
+            this.finishDate.Size = new System.Drawing.Size(164, 23);
             this.finishDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(2, 29);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.MinimumSize = new System.Drawing.Size(30, 29);
@@ -727,14 +863,15 @@
             this.dateToggle.AutoSize = true;
             this.dateToggle.Dock = System.Windows.Forms.DockStyle.Top;
             this.dateToggle.Enabled = false;
+            this.dateToggle.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.dateToggle.FlatAppearance.BorderSize = 0;
             this.dateToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dateToggle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateToggle.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateToggle.Location = new System.Drawing.Point(0, 332);
             this.dateToggle.Margin = new System.Windows.Forms.Padding(2);
             this.dateToggle.MinimumSize = new System.Drawing.Size(0, 32);
             this.dateToggle.Name = "dateToggle";
-            this.dateToggle.Size = new System.Drawing.Size(228, 32);
+            this.dateToggle.Size = new System.Drawing.Size(223, 32);
             this.dateToggle.TabIndex = 28;
             this.dateToggle.Text = "Select Dates Toggle";
             this.dateToggle.UseVisualStyleBackColor = true;
@@ -747,25 +884,25 @@
             this.userPanel.Location = new System.Drawing.Point(0, 103);
             this.userPanel.Margin = new System.Windows.Forms.Padding(2);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(228, 229);
+            this.userPanel.Size = new System.Drawing.Size(223, 229);
             this.userPanel.TabIndex = 21;
             this.userPanel.Visible = false;
             // 
             // userList
             // 
-            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.userList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.userList.CheckBoxes = true;
             this.userList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Users});
             this.userList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userList.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userList.FullRowSelect = true;
             this.userList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.userList.HideSelection = false;
             this.userList.Location = new System.Drawing.Point(0, 0);
             this.userList.Margin = new System.Windows.Forms.Padding(2);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(228, 229);
+            this.userList.Size = new System.Drawing.Size(223, 229);
             this.userList.TabIndex = 16;
             this.userList.UseCompatibleStateImageBehavior = false;
             this.userList.View = System.Windows.Forms.View.Details;
@@ -781,14 +918,15 @@
             this.userToggle.AutoSize = true;
             this.userToggle.Dock = System.Windows.Forms.DockStyle.Top;
             this.userToggle.Enabled = false;
+            this.userToggle.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.userToggle.FlatAppearance.BorderSize = 0;
             this.userToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userToggle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userToggle.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userToggle.Location = new System.Drawing.Point(0, 71);
             this.userToggle.Margin = new System.Windows.Forms.Padding(2);
             this.userToggle.MinimumSize = new System.Drawing.Size(0, 32);
             this.userToggle.Name = "userToggle";
-            this.userToggle.Size = new System.Drawing.Size(228, 32);
+            this.userToggle.Size = new System.Drawing.Size(223, 32);
             this.userToggle.TabIndex = 27;
             this.userToggle.Text = "Select Users Toggle";
             this.userToggle.UseVisualStyleBackColor = true;
@@ -801,21 +939,21 @@
             this.queryPanel.Location = new System.Drawing.Point(0, 32);
             this.queryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(228, 39);
+            this.queryPanel.Size = new System.Drawing.Size(223, 39);
             this.queryPanel.TabIndex = 20;
             this.queryPanel.Visible = false;
             // 
             // searchBox
             // 
             this.searchBox.AutoWordSelection = true;
-            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBox.Font = new System.Drawing.Font("Segoe UI", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.searchBox.Location = new System.Drawing.Point(0, 0);
             this.searchBox.Margin = new System.Windows.Forms.Padding(2);
             this.searchBox.Multiline = false;
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(228, 40);
+            this.searchBox.Size = new System.Drawing.Size(223, 39);
             this.searchBox.TabIndex = 15;
             this.searchBox.Text = "Enter query...";
             this.searchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick);
@@ -824,15 +962,16 @@
             // 
             this.queryButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.queryButton.Enabled = false;
+            this.queryButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.queryButton.FlatAppearance.BorderSize = 0;
             this.queryButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.queryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.queryButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.queryButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.queryButton.Location = new System.Drawing.Point(0, 0);
             this.queryButton.Margin = new System.Windows.Forms.Padding(2);
             this.queryButton.MinimumSize = new System.Drawing.Size(0, 32);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(228, 32);
+            this.queryButton.Size = new System.Drawing.Size(223, 32);
             this.queryButton.TabIndex = 19;
             this.queryButton.Text = "Query";
             this.queryButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -841,7 +980,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip1.BackColor = System.Drawing.Color.Lavender;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -947,10 +1086,11 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(547, 175);
             // 
-            // statusStrip1
+            // bottomStrip
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.Lavender;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bottomStrip.BackColor = System.Drawing.Color.Lavender;
+            this.bottomStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bottomStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.messageLabel,
             this.tagsetLabel,
             this.newSituationLabel,
@@ -959,11 +1099,11 @@
             this.suggesterButton,
             this.tagsetEditorButton,
             this.editSituationButton});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 789);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1314, 22);
-            this.statusStrip1.TabIndex = 30;
-            this.statusStrip1.Text = "statusStrip1";
+            this.bottomStrip.Location = new System.Drawing.Point(0, 789);
+            this.bottomStrip.Name = "bottomStrip";
+            this.bottomStrip.Size = new System.Drawing.Size(1314, 22);
+            this.bottomStrip.TabIndex = 30;
+            this.bottomStrip.Text = "statusStrip1";
             // 
             // messageLabel
             // 
@@ -1090,38 +1230,38 @@
             this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.changeTagToolStripMenuItem.Text = "Change tag";
             // 
-            // splitContainer1
+            // splitContainerLeft
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 22);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerLeft.Name = "splitContainerLeft";
+            this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerLeft.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.searchPanel);
+            this.splitContainerLeft.Panel1.Controls.Add(this.searchPanel);
             // 
-            // splitContainer1.Panel2
+            // splitContainerLeft.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tagsetView);
-            this.splitContainer1.Size = new System.Drawing.Size(228, 767);
-            this.splitContainer1.SplitterDistance = 493;
-            this.splitContainer1.TabIndex = 29;
+            this.splitContainerLeft.Panel2.Controls.Add(this.tagsetView);
+            this.splitContainerLeft.Size = new System.Drawing.Size(223, 767);
+            this.splitContainerLeft.SplitterDistance = 480;
+            this.splitContainerLeft.TabIndex = 29;
             // 
             // tagsetView
             // 
-            this.tagsetView.BackColor = System.Drawing.Color.Lavender;
-            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tagsetView.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tagsetView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tagsetView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4});
-            this.tagsetView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tagsetView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tagsetView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tagsetView.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tagsetView.FullRowSelect = true;
             this.tagsetView.HideSelection = false;
             this.tagsetView.Location = new System.Drawing.Point(0, 0);
             this.tagsetView.MultiSelect = false;
             this.tagsetView.Name = "tagsetView";
-            this.tagsetView.Size = new System.Drawing.Size(228, 270);
+            this.tagsetView.Size = new System.Drawing.Size(223, 280);
             this.tagsetView.TabIndex = 5;
             this.tagsetView.UseCompatibleStateImageBehavior = false;
             this.tagsetView.View = System.Windows.Forms.View.Details;
@@ -1132,31 +1272,53 @@
             this.columnHeader4.Text = "Tagset";
             this.columnHeader4.Width = 223;
             // 
+            // splitContainerMain
+            // 
+            this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMain.Location = new System.Drawing.Point(0, 22);
+            this.splitContainerMain.Name = "splitContainerMain";
+            // 
+            // splitContainerMain.Panel1
+            // 
+            this.splitContainerMain.Panel1.Controls.Add(this.splitContainerLeft);
+            this.splitContainerMain.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
+            // 
+            // splitContainerMain.Panel2
+            // 
+            this.splitContainerMain.Panel2.Controls.Add(mainTabs);
+            this.splitContainerMain.Size = new System.Drawing.Size(1314, 767);
+            this.splitContainerMain.SplitterDistance = 223;
+            this.splitContainerMain.TabIndex = 31;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1314, 811);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(tabControl1);
+            this.Controls.Add(this.splitContainerMain);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.bottomStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1330, 850);
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-            tabControl1.ResumeLayout(false);
+            mainTabs.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             this.Chat.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chatTable)).EndInit();
             this.splitContainerRight.Panel1.ResumeLayout(false);
             this.splitContainerRight.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).EndInit();
             this.splitContainerRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastSituationView)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.Statistics.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -1168,18 +1330,23 @@
             this.keywordPanel.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.datesPanel.ResumeLayout(false);
             this.datesPanel.PerformLayout();
             this.userPanel.ResumeLayout(false);
             this.queryPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.bottomStrip.ResumeLayout(false);
+            this.bottomStrip.PerformLayout();
+            this.splitContainerLeft.Panel1.ResumeLayout(false);
+            this.splitContainerLeft.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
+            this.splitContainerLeft.ResumeLayout(false);
+            this.splitContainerMain.Panel1.ResumeLayout(false);
+            this.splitContainerMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
+            this.splitContainerMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1231,7 +1398,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip bottomStrip;
         private System.Windows.Forms.ToolStripStatusLabel messageLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button removeTagButton;
@@ -1251,7 +1418,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteSituationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeTagToolStripMenuItem;
         private BrightIdeasSoftware.FastObjectListView chatTable;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerLeft;
         private System.Windows.Forms.SplitContainer splitContainerRight;
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
@@ -1269,6 +1436,14 @@
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.SplitContainer splitContainerMain;
     }
 }
 
