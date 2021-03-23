@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.sidePanel = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.findButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -40,6 +38,7 @@
             this.listButton = new System.Windows.Forms.Button();
             this.deleteListButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.modeButton = new System.Windows.Forms.Button();
             this.operatorPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -49,6 +48,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.suggLabel = new System.Windows.Forms.Label();
             this.groupsLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -62,37 +63,31 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.queryBox = new EasyScintilla.SimpleEditor();
             this.queryPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.queryBox = new EasyScintilla.SimpleEditor();
             this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.switchModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.topPanel = new System.Windows.Forms.Panel();
             this.sidePanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.operatorPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.boolPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.panel6.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidePanel
             // 
             this.sidePanel.BackColor = System.Drawing.Color.Lavender;
+            this.sidePanel.Controls.Add(this.controlPanel);
             this.sidePanel.Controls.Add(this.label4);
             this.sidePanel.Controls.Add(this.label3);
-            this.sidePanel.Controls.Add(this.controlPanel);
             this.sidePanel.Controls.Add(this.suggLabel);
             this.sidePanel.Controls.Add(this.groupsLabel);
             this.sidePanel.Controls.Add(this.panel3);
@@ -103,22 +98,6 @@
             this.sidePanel.Size = new System.Drawing.Size(400, 673);
             this.sidePanel.TabIndex = 1;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(118, 492);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 16);
-            this.label4.TabIndex = 22;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(102, 472);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 16);
-            this.label3.TabIndex = 21;
-            // 
             // controlPanel
             // 
             this.controlPanel.Controls.Add(this.findButton);
@@ -126,10 +105,10 @@
             this.controlPanel.Controls.Add(this.tableLayoutPanel2);
             this.controlPanel.Controls.Add(this.panel4);
             this.controlPanel.Controls.Add(this.operatorPanel);
-            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlPanel.Location = new System.Drawing.Point(0, 30);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(400, 587);
+            this.controlPanel.Size = new System.Drawing.Size(400, 643);
             this.controlPanel.TabIndex = 14;
             // 
             // findButton
@@ -137,7 +116,6 @@
             this.findButton.BackColor = System.Drawing.Color.Pink;
             this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.findButton.FlatAppearance.BorderSize = 0;
             this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.findButton.Location = new System.Drawing.Point(0, 443);
@@ -229,11 +207,29 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.modeButton);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 134);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(400, 48);
             this.panel4.TabIndex = 26;
+            // 
+            // modeButton
+            // 
+            this.modeButton.BackColor = System.Drawing.Color.Lavender;
+            this.modeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modeButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.modeButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.modeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.modeButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modeButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.modeButton.Location = new System.Drawing.Point(0, 0);
+            this.modeButton.Name = "modeButton";
+            this.modeButton.Size = new System.Drawing.Size(400, 48);
+            this.modeButton.TabIndex = 22;
+            this.modeButton.Text = "Switch Mode";
+            this.modeButton.UseVisualStyleBackColor = false;
+            this.modeButton.Click += new System.EventHandler(this.switchModeToolStripMenuItem_Click);
             // 
             // operatorPanel
             // 
@@ -395,6 +391,22 @@
             this.button11.Text = "haswordofdict()";
             this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button11.UseVisualStyleBackColor = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(118, 492);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 16);
+            this.label4.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(102, 472);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 16);
+            this.label3.TabIndex = 21;
             // 
             // suggLabel
             // 
@@ -599,51 +611,30 @@
             this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button10.UseVisualStyleBackColor = false;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel2.Location = new System.Drawing.Point(400, 24);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(901, 140);
-            this.panel2.TabIndex = 2;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.queryPanel);
-            this.panel1.Controls.Add(this.queryBox);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 140);
-            this.panel1.TabIndex = 7;
-            // 
-            // queryBox
-            // 
-            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.queryBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
-            this.queryBox.Location = new System.Drawing.Point(0, 0);
-            this.queryBox.Name = "queryBox";
-            this.queryBox.ScrollWidth = 500;
-            this.queryBox.Size = new System.Drawing.Size(901, 69);
-            this.queryBox.Styler = null;
-            this.queryBox.TabIndex = 0;
-            // 
             // queryPanel
             // 
             this.queryPanel.AllowDrop = true;
             this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
             this.queryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.queryPanel.Enabled = false;
-            this.queryPanel.Location = new System.Drawing.Point(0, 69);
+            this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.queryPanel.Location = new System.Drawing.Point(0, 0);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(901, 71);
+            this.queryPanel.Size = new System.Drawing.Size(901, 79);
             this.queryPanel.TabIndex = 1;
             this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
+            // 
+            // queryBox
+            // 
+            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
+            this.queryBox.Location = new System.Drawing.Point(0, 0);
+            this.queryBox.Name = "queryBox";
+            this.queryBox.ScrollWidth = 500;
+            this.queryBox.Size = new System.Drawing.Size(901, 79);
+            this.queryBox.Styler = null;
+            this.queryBox.TabIndex = 0;
             // 
             // suggesterView
             // 
@@ -653,12 +644,12 @@
             this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.suggesterView.FullRowSelect = true;
             this.suggesterView.HideSelection = false;
-            this.suggesterView.Location = new System.Drawing.Point(400, 164);
+            this.suggesterView.Location = new System.Drawing.Point(400, 79);
             this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
             this.suggesterView.Name = "suggesterView";
             this.suggesterView.RowHeight = 48;
             this.suggesterView.ShowGroups = false;
-            this.suggesterView.Size = new System.Drawing.Size(901, 467);
+            this.suggesterView.Size = new System.Drawing.Size(901, 552);
             this.suggesterView.TabIndex = 0;
             this.suggesterView.UseCompatibleStateImageBehavior = false;
             this.suggesterView.UseHotItem = true;
@@ -710,27 +701,15 @@
             this.panel6.Size = new System.Drawing.Size(901, 42);
             this.panel6.TabIndex = 5;
             // 
-            // menuStrip1
+            // topPanel
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.switchModeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(400, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(901, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // switchModeToolStripMenuItem
-            // 
-            this.switchModeToolStripMenuItem.Name = "switchModeToolStripMenuItem";
-            this.switchModeToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-            this.switchModeToolStripMenuItem.Text = "Switch Mode";
-            this.switchModeToolStripMenuItem.Click += new System.EventHandler(this.switchModeToolStripMenuItem_Click);
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.topPanel.Controls.Add(this.queryBox);
+            this.topPanel.Controls.Add(this.queryPanel);
+            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel.Location = new System.Drawing.Point(400, 0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(901, 79);
+            this.topPanel.TabIndex = 23;
             // 
             // Suggester
             // 
@@ -739,11 +718,9 @@
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1301, 673);
             this.Controls.Add(this.suggesterView);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel6);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.topPanel);
             this.Controls.Add(this.sidePanel);
-            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Suggester";
             this.Text = "Suggester";
@@ -752,25 +729,20 @@
             this.sidePanel.PerformLayout();
             this.controlPanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.operatorPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.boolPanel.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.panel6.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel sidePanel;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button findButton;
@@ -808,11 +780,9 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem switchModeToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Panel panel4;
         private EasyScintilla.SimpleEditor queryBox;
+        private System.Windows.Forms.Button modeButton;
+        private System.Windows.Forms.Panel topPanel;
     }
 }

@@ -20,6 +20,7 @@ namespace Viewer.UI
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
             //queryBox.Parent = this.panel2;
             SwitchMode();
+            IsLockedMode = false;
 
         }
 
@@ -467,8 +468,8 @@ namespace Viewer.UI
             {
                 SwitchMode();
                 IsLockedMode = false;
-                queryBox.Enabled = true;
-                queryPanel.Enabled = false;
+                queryBox.Visible = true;
+                queryPanel.Visible = false;
                 queryBox.Invalidate();
 
             }
@@ -476,8 +477,8 @@ namespace Viewer.UI
             {
                 SwitchMode();
                 IsLockedMode = true;
-                queryPanel.Enabled = true;
-                queryBox.Enabled  = false;
+                queryPanel.Visible = true;
+                queryBox.Visible  = false;
             }
 
         }
