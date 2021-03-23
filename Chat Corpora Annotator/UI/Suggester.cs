@@ -71,7 +71,7 @@ namespace Viewer.UI
             
             CurrentSituation.Clear();
             List<int> temp = new List<int>();
-            if (QueryResult != null || QueryResult.Count != 0)
+            if (QueryResult != null && QueryResult.Count != 0)
             {
                 foreach (var list in QueryResult[DisplayIndex])
                 {
@@ -183,8 +183,8 @@ namespace Viewer.UI
             else
             {
                 this.QueryString = CreateQueryString();
-                MessageBox.Show(QueryString);
-                //RunQuery?.Invoke(this, EventArgs.Empty);
+                //MessageBox.Show(QueryString);
+                RunQuery?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Viewer.UI
                 foreach(var control in queryPanel.Controls)
                 {
                     var button = control as Button;
-                    if(button.Text == "haswordofdict()")
+                    if(button.Text.Contains("haswordofdict"))
                     {
                         ToolStripMenuItem item = new ToolStripMenuItem(la.CurName);
                         item.Click += MenuStripItem_Click;
@@ -315,7 +315,7 @@ namespace Viewer.UI
 
                 if (clone.Text == "haswordofdict()") {
                     clone.ContextMenuStrip = new ContextMenuStrip();
-                    clone.MouseClick += operator_MouseClick;
+                    clone.MouseUp += operator_MouseUp;
                     foreach (var kvp in UserDictsContainer.UserDicts) {
                         ToolStripMenuItem item = new ToolStripMenuItem(kvp.Key);
                         item.Click += MenuStripItem_Click;
@@ -325,7 +325,7 @@ namespace Viewer.UI
                 else if (clone.Text == "hasusermentioned()" || clone.Text == "byuser()" || clone.Text == "num") 
                 {
                     clone.ContextMenuStrip = new ContextMenuStrip();
-                    clone.MouseClick += operator_MouseClick;
+                    clone.MouseUp += operator_MouseUp;
                     ToolStripTextBox item = new ToolStripTextBox();
                     clone.ContextMenuStrip.Items.Add(item);
                     item.TextBox.KeyDown += TextBox_KeyDown;
@@ -372,10 +372,6 @@ namespace Viewer.UI
             }
         }
 
-        private void button5_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
         private void MenuStripItem_Click(object sender, EventArgs e)
         {
             ToolStripItem item = (sender as ToolStripItem);
@@ -393,11 +389,10 @@ namespace Viewer.UI
             }
         }
 
-
-        private void operator_MouseClick(object sender, MouseEventArgs e)
+        private void operator_MouseUp(object sender, MouseEventArgs e)
         {
             var button = sender as Button;
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 button.ContextMenuStrip.Show();
             }
@@ -495,12 +490,13 @@ namespace Viewer.UI
 
         void clone_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Clicks == 1)
+
+            if (e.Clicks == 1 && e.Button == MouseButtons.Left)
             {
                 base.OnMouseDown(e);
                 DoDragDrop(sender, DragDropEffects.All);
             }
-            else 
+            else if(e.Clicks > 1 && e.Button == MouseButtons.Left)
             {
                 var control = sender as Control;
                 var parent = control.Parent as FlowLayoutPanel;
@@ -527,6 +523,11 @@ namespace Viewer.UI
                 Button q = (Button)e.Data.GetData(typeof(Button));
                 p.Controls.SetChildIndex(q, myIndex);
             }
+        }
+
+        private void queryBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

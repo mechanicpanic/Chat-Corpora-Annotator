@@ -30,14 +30,16 @@
         {
             this.sidePanel = new System.Windows.Forms.Panel();
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.findButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContents = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.listButton = new System.Windows.Forms.Button();
             this.deleteListButton = new System.Windows.Forms.Button();
+            this.suggLabel = new System.Windows.Forms.Label();
+            this.groupsLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.modeButton = new System.Windows.Forms.Button();
             this.operatorPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button8 = new System.Windows.Forms.Button();
@@ -50,8 +52,6 @@
             this.button11 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.suggLabel = new System.Windows.Forms.Label();
-            this.groupsLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.boolPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button20 = new System.Windows.Forms.Button();
@@ -63,23 +63,25 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.findButton = new System.Windows.Forms.Button();
             this.queryPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.queryBox = new EasyScintilla.SimpleEditor();
-            this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.topPanel = new System.Windows.Forms.Panel();
+            this.suggesterView = new BrightIdeasSoftware.FastObjectListView();
             this.sidePanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.operatorPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.boolPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.panel6.SuspendLayout();
             this.topPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).BeginInit();
             this.SuspendLayout();
             // 
             // sidePanel
@@ -88,8 +90,6 @@
             this.sidePanel.Controls.Add(this.controlPanel);
             this.sidePanel.Controls.Add(this.label4);
             this.sidePanel.Controls.Add(this.label3);
-            this.sidePanel.Controls.Add(this.suggLabel);
-            this.sidePanel.Controls.Add(this.groupsLabel);
             this.sidePanel.Controls.Add(this.panel3);
             this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -103,29 +103,15 @@
             this.controlPanel.Controls.Add(this.findButton);
             this.controlPanel.Controls.Add(this.listView1);
             this.controlPanel.Controls.Add(this.tableLayoutPanel2);
+            this.controlPanel.Controls.Add(this.suggLabel);
+            this.controlPanel.Controls.Add(this.groupsLabel);
             this.controlPanel.Controls.Add(this.panel4);
             this.controlPanel.Controls.Add(this.operatorPanel);
-            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlPanel.Location = new System.Drawing.Point(0, 30);
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(400, 643);
             this.controlPanel.TabIndex = 14;
-            // 
-            // findButton
-            // 
-            this.findButton.BackColor = System.Drawing.Color.Pink;
-            this.findButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.findButton.Location = new System.Drawing.Point(0, 443);
-            this.findButton.Margin = new System.Windows.Forms.Padding(2);
-            this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(400, 45);
-            this.findButton.TabIndex = 7;
-            this.findButton.Text = "Find suggestions...";
-            this.findButton.UseVisualStyleBackColor = false;
-            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // listView1
             // 
@@ -133,10 +119,10 @@
             this.listName,
             this.listContents});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 227);
+            this.listView1.Location = new System.Drawing.Point(0, 299);
             this.listView1.Margin = new System.Windows.Forms.Padding(2);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(400, 216);
@@ -163,7 +149,7 @@
             this.tableLayoutPanel2.Controls.Add(this.listButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.deleteListButton, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 182);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 254);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -175,7 +161,6 @@
             this.listButton.BackColor = System.Drawing.Color.Lavender;
             this.listButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.listButton.FlatAppearance.BorderSize = 0;
             this.listButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.listButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listButton.Location = new System.Drawing.Point(2, 2);
@@ -192,7 +177,6 @@
             this.deleteListButton.BackColor = System.Drawing.Color.Lavender;
             this.deleteListButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deleteListButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.deleteListButton.FlatAppearance.BorderSize = 0;
             this.deleteListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteListButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deleteListButton.Location = new System.Drawing.Point(202, 2);
@@ -203,29 +187,61 @@
             this.deleteListButton.Text = "Delete dictionary";
             this.deleteListButton.UseVisualStyleBackColor = false;
             this.deleteListButton.Click += new System.EventHandler(this.deleteListButton_Click);
-            this.deleteListButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.operator_MouseClick);
+            // 
+            // suggLabel
+            // 
+            this.suggLabel.AutoSize = true;
+            this.suggLabel.Location = new System.Drawing.Point(0, 535);
+            this.suggLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.suggLabel.Name = "suggLabel";
+            this.suggLabel.Size = new System.Drawing.Size(125, 16);
+            this.suggLabel.TabIndex = 20;
+            this.suggLabel.Text = "Found suggestions:";
+            // 
+            // groupsLabel
+            // 
+            this.groupsLabel.AutoSize = true;
+            this.groupsLabel.Location = new System.Drawing.Point(0, 551);
+            this.groupsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.groupsLabel.Name = "groupsLabel";
+            this.groupsLabel.Size = new System.Drawing.Size(94, 16);
+            this.groupsLabel.TabIndex = 19;
+            this.groupsLabel.Text = "Found groups:";
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.modeButton);
+            this.panel4.Controls.Add(this.tableLayoutPanel1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 134);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(400, 48);
+            this.panel4.Size = new System.Drawing.Size(400, 120);
             this.panel4.TabIndex = 26;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.modeButton, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 43);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // modeButton
             // 
             this.modeButton.BackColor = System.Drawing.Color.Lavender;
-            this.modeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modeButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modeButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.modeButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.modeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.modeButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modeButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modeButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.modeButton.Location = new System.Drawing.Point(0, 0);
+            this.modeButton.Location = new System.Drawing.Point(3, 3);
             this.modeButton.Name = "modeButton";
-            this.modeButton.Size = new System.Drawing.Size(400, 48);
+            this.modeButton.Size = new System.Drawing.Size(394, 37);
             this.modeButton.TabIndex = 22;
             this.modeButton.Text = "Switch Mode";
             this.modeButton.UseVisualStyleBackColor = false;
@@ -407,26 +423,6 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 21;
-            // 
-            // suggLabel
-            // 
-            this.suggLabel.AutoSize = true;
-            this.suggLabel.Location = new System.Drawing.Point(2, 631);
-            this.suggLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.suggLabel.Name = "suggLabel";
-            this.suggLabel.Size = new System.Drawing.Size(125, 16);
-            this.suggLabel.TabIndex = 20;
-            this.suggLabel.Text = "Found suggestions:";
-            // 
-            // groupsLabel
-            // 
-            this.groupsLabel.AutoSize = true;
-            this.groupsLabel.Location = new System.Drawing.Point(2, 647);
-            this.groupsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.groupsLabel.Name = "groupsLabel";
-            this.groupsLabel.Size = new System.Drawing.Size(94, 16);
-            this.groupsLabel.TabIndex = 19;
-            this.groupsLabel.Text = "Found groups:";
             // 
             // panel3
             // 
@@ -611,6 +607,21 @@
             this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button10.UseVisualStyleBackColor = false;
             // 
+            // findButton
+            // 
+            this.findButton.BackColor = System.Drawing.Color.Pink;
+            this.findButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.findButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.findButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.findButton.Location = new System.Drawing.Point(-2, 596);
+            this.findButton.Margin = new System.Windows.Forms.Padding(2);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(400, 45);
+            this.findButton.TabIndex = 7;
+            this.findButton.Text = "Run query";
+            this.findButton.UseVisualStyleBackColor = false;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
+            // 
             // queryPanel
             // 
             this.queryPanel.AllowDrop = true;
@@ -619,43 +630,25 @@
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryPanel.Location = new System.Drawing.Point(0, 0);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(901, 79);
+            this.queryPanel.Size = new System.Drawing.Size(901, 164);
             this.queryPanel.TabIndex = 1;
             this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // queryBox
             // 
-            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.queryBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.queryBox.Location = new System.Drawing.Point(0, 0);
             this.queryBox.Name = "queryBox";
             this.queryBox.ScrollWidth = 500;
-            this.queryBox.Size = new System.Drawing.Size(901, 79);
+            this.queryBox.ScrollWidthTracking = false;
+            this.queryBox.Size = new System.Drawing.Size(901, 164);
             this.queryBox.Styler = null;
             this.queryBox.TabIndex = 0;
-            // 
-            // suggesterView
-            // 
-            this.suggesterView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.suggesterView.CellEditUseWholeCell = false;
-            this.suggesterView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.suggesterView.FullRowSelect = true;
-            this.suggesterView.HideSelection = false;
-            this.suggesterView.Location = new System.Drawing.Point(400, 79);
-            this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
-            this.suggesterView.Name = "suggesterView";
-            this.suggesterView.RowHeight = 48;
-            this.suggesterView.ShowGroups = false;
-            this.suggesterView.Size = new System.Drawing.Size(901, 552);
-            this.suggesterView.TabIndex = 0;
-            this.suggesterView.UseCompatibleStateImageBehavior = false;
-            this.suggesterView.UseHotItem = true;
-            this.suggesterView.View = System.Windows.Forms.View.Details;
-            this.suggesterView.VirtualMode = true;
-            this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);
+            this.queryBox.WrapMode = ScintillaNET.WrapMode.Word;
+            this.queryBox.Click += new System.EventHandler(this.queryBox_Click);
             // 
             // button1
             // 
@@ -708,8 +701,29 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(400, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(901, 79);
+            this.topPanel.Size = new System.Drawing.Size(901, 164);
             this.topPanel.TabIndex = 23;
+            // 
+            // suggesterView
+            // 
+            this.suggesterView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.suggesterView.CellEditUseWholeCell = false;
+            this.suggesterView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.suggesterView.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.suggesterView.FullRowSelect = true;
+            this.suggesterView.HideSelection = false;
+            this.suggesterView.Location = new System.Drawing.Point(400, 164);
+            this.suggesterView.Margin = new System.Windows.Forms.Padding(2);
+            this.suggesterView.Name = "suggesterView";
+            this.suggesterView.RowHeight = 48;
+            this.suggesterView.ShowGroups = false;
+            this.suggesterView.Size = new System.Drawing.Size(901, 467);
+            this.suggesterView.TabIndex = 0;
+            this.suggesterView.UseCompatibleStateImageBehavior = false;
+            this.suggesterView.UseHotItem = true;
+            this.suggesterView.View = System.Windows.Forms.View.Details;
+            this.suggesterView.VirtualMode = true;
+            this.suggesterView.ItemActivate += new System.EventHandler(this.fastObjectListView1_ItemActivate);
             // 
             // Suggester
             // 
@@ -728,14 +742,16 @@
             this.sidePanel.ResumeLayout(false);
             this.sidePanel.PerformLayout();
             this.controlPanel.ResumeLayout(false);
+            this.controlPanel.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.operatorPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.boolPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.panel6.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.suggesterView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -784,5 +800,6 @@
         private EasyScintilla.SimpleEditor queryBox;
         private System.Windows.Forms.Button modeButton;
         private System.Windows.Forms.Panel topPanel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
