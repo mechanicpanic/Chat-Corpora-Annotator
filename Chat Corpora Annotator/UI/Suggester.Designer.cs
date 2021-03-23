@@ -195,6 +195,7 @@
             this.listButton.TabIndex = 8;
             this.listButton.Text = "Add dictionary";
             this.listButton.UseVisualStyleBackColor = false;
+            this.listButton.Click += new System.EventHandler(this.listButton_Click);
             // 
             // deleteListButton
             // 
@@ -210,6 +211,7 @@
             this.deleteListButton.TabIndex = 9;
             this.deleteListButton.Text = "Delete dictionary";
             this.deleteListButton.UseVisualStyleBackColor = false;
+            this.deleteListButton.Click += new System.EventHandler(this.deleteListButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -239,6 +241,7 @@
             this.modeButton.TabIndex = 22;
             this.modeButton.Text = "Switch Mode";
             this.modeButton.UseVisualStyleBackColor = false;
+            this.modeButton.Click += new System.EventHandler(this.switchModeToolStripMenuItem_Click);
             // 
             // operatorPanel
             // 
@@ -620,30 +623,29 @@
             // queryPanel
             // 
             this.queryPanel.AllowDrop = true;
+            this.queryPanel.AutoScroll = true;
             this.queryPanel.BackColor = System.Drawing.Color.GhostWhite;
             this.queryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.queryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryPanel.Location = new System.Drawing.Point(0, 0);
             this.queryPanel.Name = "queryPanel";
-            this.queryPanel.Size = new System.Drawing.Size(864, 115);
+            this.queryPanel.Size = new System.Drawing.Size(864, 106);
             this.queryPanel.TabIndex = 1;
             this.queryPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.queryPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // queryBox
             // 
-            this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.queryBox.Location = new System.Drawing.Point(0, 0);
             this.queryBox.Margin = new System.Windows.Forms.Padding(0);
             this.queryBox.Name = "queryBox";
             this.queryBox.ScrollWidth = 500;
             this.queryBox.ScrollWidthTracking = false;
-            this.queryBox.Size = new System.Drawing.Size(864, 115);
+            this.queryBox.Size = new System.Drawing.Size(864, 114);
             this.queryBox.Styler = null;
             this.queryBox.TabIndex = 0;
             this.queryBox.WrapMode = ScintillaNET.WrapMode.Word;
-            this.queryBox.Click += new System.EventHandler(this.queryBox_Click);
             // 
             // button1
             // 
@@ -684,7 +686,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(864, 115);
+            this.topPanel.Size = new System.Drawing.Size(864, 106);
             this.topPanel.TabIndex = 23;
             // 
             // suggesterView
@@ -699,7 +701,7 @@
             this.suggesterView.Name = "suggesterView";
             this.suggesterView.RowHeight = 48;
             this.suggesterView.ShowGroups = false;
-            this.suggesterView.Size = new System.Drawing.Size(864, 554);
+            this.suggesterView.Size = new System.Drawing.Size(864, 520);
             this.suggesterView.TabIndex = 0;
             this.suggesterView.UseCompatibleStateImageBehavior = false;
             this.suggesterView.UseHotItem = true;
@@ -743,7 +745,7 @@
             // 
             this.splitContainerView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerView.IsSplitterFixed = true;
-            this.splitContainerView.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerView.Location = new System.Drawing.Point(0, 43);
             this.splitContainerView.Name = "splitContainerView";
             this.splitContainerView.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -754,8 +756,8 @@
             // splitContainerView.Panel2
             // 
             this.splitContainerView.Panel2.Controls.Add(this.suggesterView);
-            this.splitContainerView.Size = new System.Drawing.Size(864, 673);
-            this.splitContainerView.SplitterDistance = 115;
+            this.splitContainerView.Size = new System.Drawing.Size(864, 630);
+            this.splitContainerView.SplitterDistance = 106;
             this.splitContainerView.TabIndex = 25;
             // 
             // bottomButtonPanel
@@ -785,9 +787,9 @@
             // 
             // splitContainerMain.Panel2
             // 
-            this.splitContainerMain.Panel2.Controls.Add(this.topButtonPanel);
             this.splitContainerMain.Panel2.Controls.Add(this.bottomButtonPanel);
             this.splitContainerMain.Panel2.Controls.Add(this.splitContainerView);
+            this.splitContainerMain.Panel2.Controls.Add(this.topButtonPanel);
             this.splitContainerMain.Size = new System.Drawing.Size(1301, 673);
             this.splitContainerMain.SplitterDistance = 433;
             this.splitContainerMain.TabIndex = 26;

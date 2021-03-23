@@ -13,14 +13,23 @@ namespace Viewer.UI
 {
     public partial class Suggester : Form, ISuggesterView
     {
-        private bool IsLockedMode = true;
+        private bool IsLockedMode = false;
         public Suggester()
         {
             InitializeComponent();
             suggesterView.FormatRow += FastObjectListView1_FormatRow;
             //queryBox.Parent = this.panel2;
-            SwitchMode();
-            IsLockedMode = false;
+            //SwitchMode();
+            foreach(var control in boolPanel.Controls)
+            {
+                (control as Button).Click += operator_Click;
+
+            }
+            foreach (var control in operatorPanel.Controls)
+            {
+                (control as Button).Click += operator_Click;
+
+            }
             foreach (var margin in queryBox.Margins)
                 margin.Width = 0;
 
@@ -525,11 +534,6 @@ namespace Viewer.UI
                 Button q = (Button)e.Data.GetData(typeof(Button));
                 p.Controls.SetChildIndex(q, myIndex);
             }
-        }
-
-        private void queryBox_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button7_Click(object sender, EventArgs e)

@@ -520,10 +520,27 @@ namespace Viewer
 					var arr = item.ToString().Split();
 					args.Id = int.Parse(arr[1]);
 					args.Tag = arr[0];
-					DeleteSituation?.Invoke(this, args);
+					if ((sender as Button).Text == "Delete")
+					{
+						DeleteSituation?.Invoke(this, args);
+					}
+					else
+                    {
+						if (tagsetView.SelectedItems.Count > 0) {
+							args.AdditionalInfo = new Dictionary<string, object>();
+							args.AdditionalInfo.Add("Change", tagsetView.SelectedItems[0].Text);
+							EditSituation?.Invoke(this, args);
+								}
+                    }
 				}
 			}
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+		}
     }
 }
 

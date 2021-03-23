@@ -342,7 +342,6 @@
             // 
             this.button3.BackColor = System.Drawing.Color.Lavender;
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Enabled = false;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -354,6 +353,7 @@
             this.button3.TabIndex = 21;
             this.button3.Text = "Edit tag";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 

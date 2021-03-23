@@ -15,6 +15,8 @@ namespace Viewer
         public List<int> messages;
 
         public int Id;
+
+        public Dictionary<string, object> AdditionalInfo;
     }
     public delegate void TaggerEventHandler(object sender, TaggerEventArgs args);
 }
