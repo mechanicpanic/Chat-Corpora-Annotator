@@ -44,8 +44,14 @@ namespace Viewer.Framework.Presenters
 
         private void _sugg_AddUserDict(object sender, UserDictsEventArgs args)
         {
-            UserDictsContainer.UserDicts.Add(args.Name, args.Words);
-            
+            if (!UserDictsContainer.UserDicts.ContainsKey(args.Name))
+            {
+                UserDictsContainer.UserDicts.Add(args.Name, args.Words);
+            }
+            else
+            {
+                //todo
+            }
         }
 
         private void _sugg_DeleteUserDict(object sender, UserDictsEventArgs args)

@@ -220,6 +220,7 @@ namespace Viewer.UI
                     if(button.Text.Contains("haswordofdict"))
                     {
                         ToolStripMenuItem item = new ToolStripMenuItem(la.CurName);
+                        item.Name = la.CurName;
                         item.Click += MenuStripItem_Click;
                         button.ContextMenuStrip.Items.Add(item);
                     }
@@ -242,6 +243,16 @@ namespace Viewer.UI
                     UserDictsEventArgs dictargs = new UserDictsEventArgs();
                     dictargs.Name = item.Text;
                     DeleteUserDict?.Invoke(this, dictargs);
+                    
+                    foreach(var control in queryPanel.Controls)
+                    {
+                        if((control as Button).Text.Contains("haswordofdict"))
+                        {
+                            
+                            (control as Button).ContextMenuStrip.Items.RemoveByKey(item.Text);
+                        }
+                        
+                    }
                     listView1.Items.Remove(item);
                 }
             }
@@ -546,6 +557,11 @@ namespace Viewer.UI
             {
                 queryBox.Text = "";
             }
+        }
+
+        private void queryBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

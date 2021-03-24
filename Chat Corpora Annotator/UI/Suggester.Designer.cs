@@ -129,8 +129,8 @@
             // 
             this.suggLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.suggLabel.Name = "suggLabel";
-            this.suggLabel.Size = new System.Drawing.Size(147, 17);
-            this.suggLabel.Text = "Found suggestions: 0";
+            this.suggLabel.Size = new System.Drawing.Size(98, 17);
+            this.suggLabel.Text = "Found hits: 0";
             // 
             // groupsLabel
             // 
@@ -463,10 +463,10 @@
             // 
             this.button20.BackColor = System.Drawing.Color.Lavender;
             this.button20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Crimson;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button20.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button20.ForeColor = System.Drawing.Color.Crimson;
+            this.button20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button20.Location = new System.Drawing.Point(306, 3);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(36, 24);
@@ -479,10 +479,10 @@
             // 
             this.button19.BackColor = System.Drawing.Color.Lavender;
             this.button19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Crimson;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button19.ForeColor = System.Drawing.Color.Crimson;
+            this.button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button19.Location = new System.Drawing.Point(264, 3);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(36, 24);
@@ -495,10 +495,10 @@
             // 
             this.button18.BackColor = System.Drawing.Color.Lavender;
             this.button18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Crimson;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button18.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button18.ForeColor = System.Drawing.Color.Crimson;
+            this.button18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button18.Location = new System.Drawing.Point(390, 3);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(40, 24);
@@ -511,26 +511,25 @@
             // 
             this.button17.BackColor = System.Drawing.Color.Lavender;
             this.button17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Crimson;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button17.ForeColor = System.Drawing.Color.Crimson;
+            this.button17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button17.Location = new System.Drawing.Point(348, 3);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(36, 24);
             this.button17.TabIndex = 23;
             this.button17.Text = "(";
-            this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button17.UseVisualStyleBackColor = false;
             // 
             // button16
             // 
             this.button16.BackColor = System.Drawing.Color.Lavender;
             this.button16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.Crimson;
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button16.ForeColor = System.Drawing.Color.Crimson;
+            this.button16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button16.Location = new System.Drawing.Point(217, 3);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(41, 24);
@@ -600,7 +599,6 @@
             this.button10.Size = new System.Drawing.Size(41, 24);
             this.button10.TabIndex = 18;
             this.button10.Text = "or";
-            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button10.UseVisualStyleBackColor = false;
             // 
             // findButton
@@ -636,16 +634,18 @@
             // 
             // queryBox
             // 
+            this.queryBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.queryBox.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.queryBox.Location = new System.Drawing.Point(0, 0);
             this.queryBox.Margin = new System.Windows.Forms.Padding(0);
             this.queryBox.Name = "queryBox";
             this.queryBox.ScrollWidth = 500;
             this.queryBox.ScrollWidthTracking = false;
-            this.queryBox.Size = new System.Drawing.Size(864, 114);
+            this.queryBox.Size = new System.Drawing.Size(864, 106);
             this.queryBox.Styler = null;
             this.queryBox.TabIndex = 0;
             this.queryBox.WrapMode = ScintillaNET.WrapMode.Word;
+            this.queryBox.Click += new System.EventHandler(this.queryBox_Click);
             // 
             // button1
             // 

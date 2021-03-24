@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
@@ -500,12 +503,19 @@ namespace Viewer.UI
 		}
 	}
 
-    public class SituationTagComparer<T> : IComparer<string>
+	[SuppressUnmanagedCodeSecurity]
+	internal static class SafeNativeMethods
+	{
+		[DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
+		public static extern int StrCmpLogicalW(string psz1, string psz2);
+	}
+
+
+	public class SituationTagComparer: IComparer
     {
-        public int Compare(string x, string y)
+        public int Compare(object x, object y)
         {
-			int res = 0;
-			return res;
-        }
+			return SafeNativeMethods.StrCmpLogicalW(x.ToString(), y.ToString()) ;
+		}
     }
 }

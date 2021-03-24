@@ -12,6 +12,8 @@ using Viewer.UI;
 using ZedGraph;
 using ColorLibrary;
 using IndexEngine;
+using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace Viewer
 {
@@ -113,7 +115,13 @@ namespace Viewer
 			//zedGraphControl1.GraphPane.XAxis.Title.Text = "";
 
 			DisplayTagset(new List<string>());
-
+			fastSituationView.CustomSorter = delegate (OLVColumn column, SortOrder order)
+			{
+				if (column.Text == "Situations")
+				{
+					fastSituationView.ListViewItemSorter = new SituationTagComparer(order);
+				}
+			};
 
 		}
 
@@ -505,10 +513,6 @@ namespace Viewer
 			MessageBox.Show("Not implemented yet");
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -535,12 +539,31 @@ namespace Viewer
 				}
 			}
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-
-		}
     }
+	internal static class SafeNativeMethods
+	{
+		[DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
+		public static extern int StrCmpLogicalW(string psz1, string psz2);
+	}
+
+	public class SituationTagComparer : IComparer
+	{
+		SortOrder _order;
+		public SituationTagComparer(SortOrder order)
+		{
+			_order = order;
+		}
+		public int Compare(object x, object y)
+		{
+			if (_order == SortOrder.Ascending)
+			{
+				return SafeNativeMethods.StrCmpLogicalW(x.ToString(), y.ToString());
+			}
+			else
+			{
+				return -SafeNativeMethods.StrCmpLogicalW(x.ToString(), y.ToString());
+			}
+		}
+	}
 }
 

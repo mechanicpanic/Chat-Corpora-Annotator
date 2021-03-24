@@ -37,7 +37,7 @@ namespace Viewer.Framework.Presenters
             _tagger.AddTag += _tagger_AddTag;
             _tagger.DeleteSituation += _tagger_DeleteSituation;
             _tagger.EditSituation += _tagger_EditSituation;
-
+            _tagger.MergeSituations += _tagger_MergeSituations;
             _tagger.LoadTagset += _tagger_LoadTagset;
             _tagger.SaveTagged += _tagger_SaveTagged;
             _tagger.LoadTagged += LoadTagged;
@@ -45,6 +45,11 @@ namespace Viewer.Framework.Presenters
             
 
     }
+
+        private void _tagger_MergeSituations(object sender, TaggerEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
 
         private void _tagger_EditSituation(object sender, TaggerEventArgs e)
         {
