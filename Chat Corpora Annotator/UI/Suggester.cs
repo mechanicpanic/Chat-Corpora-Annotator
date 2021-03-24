@@ -84,6 +84,7 @@ namespace Viewer.UI
             List<int> temp = new List<int>();
             if (QueryResult != null && QueryResult.Count != 0)
             {
+                counterLabel.Text = DisplayIndex.ToString() + "/" + QueryResult.Count.ToString();
                 foreach (var list in QueryResult[DisplayIndex])
                 {
 
@@ -167,6 +168,7 @@ namespace Viewer.UI
                 DisplayIndex--;
                 DisplaySituation();
             }
+            counterLabel.Text = DisplayIndex.ToString() + "/" + QueryResult.Count.ToString();
 
         }
 
@@ -177,6 +179,7 @@ namespace Viewer.UI
                 DisplayIndex++;
                 DisplaySituation();
             }
+            counterLabel.Text = DisplayIndex.ToString() + "/" + QueryResult.Count.ToString();
         }
 
         //This is the Find button

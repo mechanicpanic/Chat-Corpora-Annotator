@@ -74,6 +74,7 @@
             this.splitContainerView = new System.Windows.Forms.SplitContainer();
             this.bottomButtonPanel = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.counterLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.sidePanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -118,7 +119,8 @@
             this.statusStrip1.BackColor = System.Drawing.Color.Lavender;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.suggLabel,
-            this.groupsLabel});
+            this.groupsLabel,
+            this.counterLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 651);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(433, 22);
@@ -457,7 +459,6 @@
             this.boolPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.boolPanel.Size = new System.Drawing.Size(433, 30);
             this.boolPanel.TabIndex = 0;
-            this.boolPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // button20
             // 
@@ -794,6 +795,14 @@
             this.splitContainerMain.SplitterDistance = 433;
             this.splitContainerMain.TabIndex = 26;
             // 
+            // counterLabel
+            // 
+            this.counterLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.counterLabel.Name = "counterLabel";
+            this.counterLabel.Size = new System.Drawing.Size(177, 17);
+            this.counterLabel.Spring = true;
+            this.counterLabel.Text = "0/0";
+            // 
             // Suggester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -878,5 +887,6 @@
         private System.Windows.Forms.SplitContainer splitContainerView;
         private System.Windows.Forms.TableLayoutPanel bottomButtonPanel;
         private System.Windows.Forms.SplitContainer splitContainerMain;
+        private System.Windows.Forms.ToolStripStatusLabel counterLabel;
     }
 }
