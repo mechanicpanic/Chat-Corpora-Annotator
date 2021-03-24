@@ -565,5 +565,22 @@ namespace Viewer
 			}
 		}
 	}
+
+	public class TagFilter : IModelFilter
+	{
+		public bool Filter(object modelObject)
+		{
+			if (modelObject is DynamicMessage)
+			{
+				DynamicMessage d = (DynamicMessage)modelObject;
+				if (d.Situations.Count != 0)
+				{
+					return true;
+				}
+				return false;
+			}
+			return false;
+		}
+	}
 }
 
