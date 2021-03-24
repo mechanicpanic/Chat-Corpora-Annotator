@@ -572,12 +572,6 @@
     <Compile Include="UI\TagsetName.Designer.cs">
       <DependentUpon>TagsetName.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TagWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\TagWindow.Designer.cs">
-      <DependentUpon>TagWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="WriteEventArgs.cs" />
     <EmbeddedResource Include="CSV Wizard\DelimiterStep.resx">
       <DependentUpon>DelimiterStep.cs</DependentUpon>
@@ -636,9 +630,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TagsetName.resx">
       <DependentUpon>TagsetName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\TagWindow.resx">
-      <DependentUpon>TagWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Framework\Presenters\Parser\Chat.g4" />
     <None Include="Framework\Presenters\Parser\Chat.interp" />
