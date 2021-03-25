@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Globalization", "CA1305:Укажите IFormatProvider", Justification = "<Ожидание>", Scope = "member", Target = "~M:Viewer.Framework.Presenters.TagPresenter._tagger_AddTag(System.Object,Viewer.TaggerEventArgs)")]
+[assembly: SuppressMessage("Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<Pending>", Scope = "member", Target = "~F:Viewer.UI.Suggester._rules")]

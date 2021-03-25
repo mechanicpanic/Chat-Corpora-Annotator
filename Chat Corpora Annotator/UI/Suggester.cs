@@ -8,12 +8,14 @@ using Viewer.Framework.Views;
 using System.Drawing;
 using System.Reflection;
 using System.Text;
+using Wintellect.PowerCollections;
 
 namespace Viewer.UI
 {
-    public partial class Suggester : Form, ISuggesterView
+   public partial class Suggester : Form, ISuggesterView
     {
         private bool IsLockedMode = false;
+        private string lastOperator;
         public Suggester()
         {
             InitializeComponent();
@@ -22,17 +24,71 @@ namespace Viewer.UI
             //SwitchMode();
             foreach(var control in boolPanel.Controls)
             {
-                (control as Button).Click += operator_Click;
+                var button = control as Button;
+                button.Click += operator_Click;
+                button.Tag = new ButtonTag(boolPanel.Controls.GetChildIndex(button), button.Text);
+                Console.WriteLine(button.Text + " " + (button.Tag as ButtonTag).Index.ToString());
 
             }
             foreach (var control in operatorPanel.Controls)
             {
-                (control as Button).Click += operator_Click;
+                var button = control as Button;
+                button.Click += operator_Click;
+                button.Tag = new ButtonTag(operatorPanel.Controls.GetChildIndex(button)+9, button.Text);
+                Console.WriteLine(button.Text + " " + (button.Tag as ButtonTag).Index.ToString());
 
             }
             foreach (var margin in queryBox.Margins)
                 margin.Width = 0;
+            this.LastElementChanged += Suggester_LastElementChanged;
+        }
 
+        private void Suggester_LastElementChanged(object sender, EventArgs e)
+        {
+            if (queryPanel.Controls.Count > 0)
+            {
+                this.lastOperator = (queryPanel.Controls[queryPanel.Controls.Count - 1].Tag as ButtonTag).Name;
+                for (int i = 0; i < rules[lastOperator].Length; i++)
+                {
+                    if (i < 9)
+                    {
+                        if (rules[lastOperator][i] == 1)
+                        {
+                            boolPanel.Controls[i].BackColor = Color.BlanchedAlmond;
+                        }
+                        if (rules[lastOperator][i] == 0)
+                        {
+                            boolPanel.Controls[i].BackColor = Color.Lavender;
+                        }
+                    }
+
+
+                    else
+                    {
+                        if (rules[lastOperator][i] == 1)
+                        {
+                            operatorPanel.Controls[i - 9].BackColor = Color.BlanchedAlmond;
+                        }
+                        else
+                        {
+                            operatorPanel.Controls[i - 9].BackColor = Color.Lavender;
+                        }
+                    }
+
+
+                }
+            }
+            else
+            {
+                foreach(var control in boolPanel.Controls)
+                {
+                    (control as Button).BackColor = Color.Lavender;
+                }
+                foreach (var control in operatorPanel.Controls)
+                {
+                    (control as Button).BackColor = Color.Lavender;
+                }
+            }
         }
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
@@ -337,8 +393,9 @@ namespace Viewer.UI
                 clone.DragOver += clone_DragOver;
                 clone.MouseDown += clone_MouseDown;
                 clone.DragEnter += clone_DragEnter;
-
+                clone.BackColor = Color.Lavender;
                 if (clone.Text == "haswordofdict()") {
+                    
                     clone.ContextMenuStrip = new ContextMenuStrip();
                     clone.MouseUp += operator_MouseUp;
                     foreach (var kvp in UserDictsContainer.UserDicts) {
@@ -360,6 +417,7 @@ namespace Viewer.UI
 
                 //cp.Location = this.flowLayoutPanel1.PointToClient(new Point(e.X, e.Y));
                 ((FlowLayoutPanel)sender).Controls.Add(clone);
+                LastElementChanged?.Invoke(this, null);
             }
         }
 
@@ -482,7 +540,7 @@ namespace Viewer.UI
             }
         }
 
-        private void switchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void switchMode_Click(object sender, EventArgs e)
         {
             if (IsLockedMode)
             {
@@ -503,16 +561,6 @@ namespace Viewer.UI
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void queryBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         void clone_MouseDown(object sender, MouseEventArgs e)
         {
 
@@ -526,7 +574,9 @@ namespace Viewer.UI
                 var control = sender as Control;
                 var parent = control.Parent as FlowLayoutPanel;
                 parent.Controls.Remove(control);
+
             }
+            LastElementChanged?.Invoke(this, null);
         }
 
         void clone_DragEnter(object sender, DragEventArgs e)
@@ -562,10 +612,30 @@ namespace Viewer.UI
             }
         }
 
-        private void queryBox_Click(object sender, EventArgs e)
+        private readonly Dictionary<string, int[]> rules = new Dictionary<string, int[]>()
         {
+            //                               ;  ,  )  (  n  && st ! ||  i org dt tm us lc bs dc
+            {";",                 new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
+            {",",                 new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {")",                 new int[] {1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"(",                 new int[] {0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {"num",               new int[] {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
+            {"and",               new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {"select",            new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {"not",               new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {"or",                new int[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1}},
+            {"inwin",             new int[] {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
+            {"hasorganization()", new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"hasdate()",         new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"hastime()",         new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"hasusermentioned()",new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"haslocation()",     new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"byuser()",          new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
+            {"haswordofdict()",   new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0}},
 
-        }
+        };
+
+        private event EventHandler LastElementChanged;
     }
 
 
@@ -589,5 +659,17 @@ namespace Viewer.UI
 
             return instance;
         }
+    }
+
+    internal class ButtonTag
+    {
+        public int Index { get; private set; }
+        public string Name { get; private set; }
+        public ButtonTag(int i, string n)
+        {
+            this.Index = i;
+            this.Name = n;
+        }
+
     }
 }

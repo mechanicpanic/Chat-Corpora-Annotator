@@ -631,6 +631,9 @@
     <EmbeddedResource Include="UI\TagsetName.resx">
       <DependentUpon>TagsetName.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Framework\Presenters\Parser\Chat.g4" />
     <None Include="Framework\Presenters\Parser\Chat.interp" />
     <None Include="Framework\Presenters\Parser\Chat.tokens" />

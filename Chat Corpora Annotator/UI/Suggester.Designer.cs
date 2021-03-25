@@ -243,7 +243,7 @@
             this.modeButton.TabIndex = 22;
             this.modeButton.Text = "Switch Mode";
             this.modeButton.UseVisualStyleBackColor = false;
-            this.modeButton.Click += new System.EventHandler(this.switchModeToolStripMenuItem_Click);
+            this.modeButton.Click += new System.EventHandler(this.switchMode_Click);
             // 
             // operatorPanel
             // 
@@ -646,7 +646,6 @@
             this.queryBox.Styler = null;
             this.queryBox.TabIndex = 0;
             this.queryBox.WrapMode = ScintillaNET.WrapMode.Word;
-            this.queryBox.Click += new System.EventHandler(this.queryBox_Click);
             // 
             // button1
             // 
