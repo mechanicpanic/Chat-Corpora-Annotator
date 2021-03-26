@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Suggester));
             this.sidePanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.suggLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupsLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.counterLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContents = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -74,7 +76,6 @@
             this.splitContainerView = new System.Windows.Forms.SplitContainer();
             this.bottomButtonPanel = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-            this.counterLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.sidePanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -140,6 +141,14 @@
             this.groupsLabel.Name = "groupsLabel";
             this.groupsLabel.Size = new System.Drawing.Size(112, 17);
             this.groupsLabel.Text = "Found groups: 0";
+            // 
+            // counterLabel
+            // 
+            this.counterLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.counterLabel.Name = "counterLabel";
+            this.counterLabel.Size = new System.Drawing.Size(208, 17);
+            this.counterLabel.Spring = true;
+            this.counterLabel.Text = "0/0";
             // 
             // listView1
             // 
@@ -794,14 +803,6 @@
             this.splitContainerMain.SplitterDistance = 433;
             this.splitContainerMain.TabIndex = 26;
             // 
-            // counterLabel
-            // 
-            this.counterLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.counterLabel.Name = "counterLabel";
-            this.counterLabel.Size = new System.Drawing.Size(177, 17);
-            this.counterLabel.Spring = true;
-            this.counterLabel.Text = "0/0";
-            // 
             // Suggester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -809,6 +810,7 @@
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1301, 673);
             this.Controls.Add(this.splitContainerMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Suggester";
             this.Text = "Run Matcher";
