@@ -1,7 +1,10 @@
 # Chat-Corpora-Annotator
 This is my frist try at implementing a chat dataset viewer and corpus (tagged dataset) creator in a standalone project. This has been mostly done for my 2020 undergrad thesis at SPbU. After that, we have cooperated with Evgeniy Slobodkin to include his ANTLR4 parser for the Matcher query language into the project. The theoretical work has been done under the guidance of George Chernishev.
 
-
+<p align="center">
+<img src="https://github.com/mechanicpanic/Chat-Corpora-Annotator/blob/master/icon2.png" width="400">
+</p>  
+  
 Simple instructions:
 
 1. CCA saves all its data in \username\CCA.
@@ -11,7 +14,9 @@ Simple instructions:
 
 `Suggester` manual:
 This window is intended for using our query language Matcher. It is based on Boolean retrieval model and pattern matching, and its main purpose is to select *groups* of messages wrapped in *suggestions*: as in, the query language allows the user to select `n` messages, which are then wrapped in their context in the dataset. This is intended to help the user select *situations*: explained in a future paper.
+
 Operators:
+
 0. `select` - Start a query or a subquery.
 1. `(`, `)`: Subqueries have to be surrounded by parentheses. Can also be used in Boolean retreival.
 2. `;`: Separator for subqueries.
