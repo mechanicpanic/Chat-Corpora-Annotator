@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using com.sun.tools.javac.comp;
@@ -34,10 +35,23 @@ namespace Viewer.Framework.Presenters.Parser
         {
             // Default window size is 70
             int windowSize = 70;
-            if (context.InWin() != null)
+
+            if (context != null)
             {
-                windowSize = Int32.Parse(context.number().GetText());
-            }
+                if (context.InWin() != null)
+                {
+                    try
+                    {
+                        windowSize = Int32.Parse(context.number().GetText());
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Incorrect query");
+                    }
+                }
+
+            
+
 
             if (context.restrictions() != null)
             {
@@ -63,7 +77,12 @@ namespace Viewer.Framework.Presenters.Parser
 
                 return MergeQueries(subQueryResults, windowSize);                                               
             }
-
+            }
+            else
+            {
+                
+                return null;
+            }
             return null;
         }
 
@@ -99,6 +118,7 @@ namespace Viewer.Framework.Presenters.Parser
                 var newList = (List<int>)VisitRestriction(r);
                 newList.Sort();
                 rList.Add(newList);
+                
             }
 
             return rList;
@@ -151,12 +171,26 @@ namespace Viewer.Framework.Presenters.Parser
             if (context.HasUserMentioned() != null)
             {
                 string username = context.huser().GetText();
-                return Retrievers.Retrievers.HasUserMentioned(username);
+                if (username != "<missing STRING>")
+                {
+                    return Retrievers.Retrievers.HasUserMentioned(username);
+                }
+                else
+                {
+                    return new List<int>();
+                }
             }
             else if (context.ByUser() != null)
             {
                 string username = context.huser().GetText();
-                return Retrievers.Retrievers.HasUser(username);
+                if (username != "<missing STRING>")
+                {
+                    return Retrievers.Retrievers.HasUser(username);
+                }
+                else
+                {
+                    return new List<int>();
+                }
             }
             else if (context.HasLocation() != null)
             {
@@ -181,7 +215,25 @@ namespace Viewer.Framework.Presenters.Parser
             else if (context.HasWordOfDict() != null)
             {
                 string dictname = context.hdict().GetText();
-                return Retrievers.Retrievers.HasWordOfList(UserDictsContainer.UserDicts[dictname]);
+                List<string> list = new List<string>();
+                if (dictname != "<missing STRING>")
+                {
+                    if(UserDictsContainer.UserDicts.TryGetValue(dictname, out list))
+                    {
+                        return Retrievers.Retrievers.HasWordOfList(list);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+ 
+                
+                
             }
             else if (context.HasDate() != null)
             {

@@ -167,7 +167,11 @@ namespace Viewer.UI
                 SetUpChatView();
                 suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
             }
-            else
+            if(QueryResult == null)
+            {
+                MessageBox.Show("Incorrect query");
+            }
+            if(QueryResult != null && QueryResult.Count == 0)
             {
                 MessageBox.Show("Nothing found");
             }
