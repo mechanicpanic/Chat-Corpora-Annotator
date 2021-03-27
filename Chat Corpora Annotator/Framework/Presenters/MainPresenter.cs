@@ -22,7 +22,8 @@ namespace Viewer.Framework.Presenters
         private readonly FolderService _folder;
         private readonly IStatisticsService _dataset;
         private readonly ITaggedStatisticsService _corpus;
-        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus)
+        private readonly IConcordanceService _concordancer;
+        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus, IConcordanceService concordancer)
         {                                                                                                                                       
             this._tagger = tagger;
             this._service = service;
@@ -32,6 +33,7 @@ namespace Viewer.Framework.Presenters
             this._folder = folder;
             this._dataset = dataset;
             this._corpus = corpus;
+            this._concordancer = concordancer;
 
             _main.FindClick += _view_FindClick;
             _main.LoadMore += _view_LoadMoreClick;
@@ -150,24 +152,19 @@ namespace Viewer.Framework.Presenters
                 _ngrammer.ReadIndexFromDisk();
             }
             else
-            {
-                
-                
+            {                                
                 Thread t = new Thread(_ngrammer.BuildFullIndex);
                 t.Start();
                 
-                
-
             }
             
         }
-        private void _main_ConcordanceClick(object sender, EventArgs e)
+        private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
         {
-            IConcordanceView _concordance = _main.CreateConcordancer();
-            IConcordanceService _concordancer = new ConcordanceService();
-            ConcordancePresenter presenter = new ConcordancePresenter(_main, _concordancer, _concordance);
-            _concordance.ShowView();
-            _main.ShowConcordance(_concordance);
+            _concordancer.ConQuery = LuceneService.Parser.Parse(e.Term);
+            _concordancer.FindConcordance(e.Term, IndexService.TextFieldKey, e.Chars);
+
+            _main.DisplayConcordance(_concordancer.Concordance.ToArray());
 
         }
 

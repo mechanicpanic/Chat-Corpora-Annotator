@@ -19,25 +19,117 @@ namespace Viewer
 			LoadStatistics?.Invoke(this, EventArgs.Empty);
 
 		}
-        #region concordance
+		#region concordance
+		private ConcordanceEventArgs _argstrack;
         private void concordance_Click(object sender, EventArgs e)
 		{
-			ConcordanceClick?.Invoke(this, EventArgs.Empty);
+			if (concordanceBox.Text.Split().Length > 1 || String.IsNullOrEmpty(Concordance.Text) || String.IsNullOrWhiteSpace(concordanceBox.Text))
+			{
+				MessageBox.Show("Please enter a single term");
+			}
+			else
+			{
+				if (charSelectionBox.SelectedIndex != -1) {
+					ConcordanceEventArgs args = new ConcordanceEventArgs();
+					args.Term = concordanceBox.Text;
+					args.Chars = int.Parse(charSelectionBox.SelectedItem.ToString());
+					_argstrack = args;
+
+					ConcordanceClick?.Invoke(this, args);
+					
+
+						
+				}
+				else
+                {
+					MessageBox.Show("Please select char length");
+				}
+			}
 		}
-		public IConcordanceView CreateConcordancer()
+		private string PadString(string line, string term, int count)
 		{
-			return new Concordancer();
+			string left;
+			string center;
+			string right;
+			int index = line.ToLower().IndexOf(term);
+			if (index != -1)
+			{
+				left = line.Substring(0, index);
+				center = line.Substring(index, term.Length);
+				right = line.Substring(index + term.Length);
+			}
+			else
+			{
+				//left = null;
+				//center = null;
+				//right = null;
+				return null;
+
+			}
+
+			if (!String.IsNullOrEmpty(left))
+			{
+				if (left.Length < count)
+				{
+					left = left.PadLeft(count + 3);
+
+				}
+				else
+				{
+					left = left.Remove(0, left.Length - count);
+					left = "..." + left;
+				}
+			}
+			else
+			{
+				left = " ";
+				left = left.PadLeft(count + 3);
+			}
+
+			if (!String.IsNullOrEmpty(right))
+			{
+				if (right.Length < count)
+				{
+					right = right.PadRight(count + 3);
+				}
+				else
+				{
+					var temp = right.Length - count;
+					right = right.Remove(right.Length - temp, temp);
+					right = right + "...";
+				}
+			}
+			else
+			{
+				right = " ";
+
+				right = right.PadRight(count);
+			}
+
+			return left + center + right;
+		}
+		public void DisplayConcordance(string[] con)
+		{
+			//richTextBox1.Lines = con;
+			concordanceView.Text = "";
+			List<string> newlines = new List<string>();
+			newlines.Add("Displaying " + con.Length.ToString() + " matches:");
+			foreach (var line in con)
+			{
+				var newline = PadString(line, _argstrack.Term, _argstrack.Chars);
+				newlines.Add(newline);
+			}
+			foreach(var line in newlines)
+            {
+				concordanceView.AddText(line);
+				concordanceView.AddText("\n");
+			}
+			
+
+
 		}
 
-		public void ShowConcordance(IConcordanceView con)
-		{
-			if (con.IsControl)
-			{
-				concordancePanel.Controls.Add((UserControl)con);
-				concordancePanel.Controls[0].Dock = DockStyle.Fill;
-			}
-			concordancerButton.Visible = false;
-		}
+
         #endregion
 
         #region ngram
@@ -54,7 +146,7 @@ namespace Viewer
 		{
 			ngramPanel.Controls.Add((UserControl)nGram);
 			ngramPanel.Controls[0].Dock = DockStyle.Fill;
-			ngramButton.Visible = false;
+			ngramIndexButton.Visible = false;
 		}
         #endregion
 
