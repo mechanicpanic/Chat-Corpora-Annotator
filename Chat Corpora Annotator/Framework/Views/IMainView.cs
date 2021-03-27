@@ -22,18 +22,19 @@ namespace Viewer.Framework.Views
 
         void SetTagsetLabel(string tagset);
         void DisplayStatistics(int type, Dictionary<string,double> args);
-        IConcordanceView CreateConcordancer();
 
         INGramView CreateNgramView();
 
         IKeywordView CreateKeywordView();
         void ShowNgrams(INGramView nGram);
-        void ShowConcordance(IConcordanceView con);
+        
 
         void ShowDates(List<DateTime> dates);
         void ShowKeywordView(IKeywordView key);
         void ShowSorryMessage();
         void ShowExtractedMessage();
+
+        void DisplayConcordance(string[] con);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 
@@ -43,7 +44,7 @@ namespace Viewer.Framework.Views
 
         event EventHandler LoadMore;
 
-        event EventHandler ConcordanceClick;
+        event ConcordanceEventHandler ConcordanceClick;
         event EventHandler NGramClick;
         event EventHandler KeywordClick;
         event EventHandler LoadStatistics;

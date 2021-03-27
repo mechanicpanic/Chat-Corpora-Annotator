@@ -33,7 +33,7 @@ namespace Viewer
 		public event EventHandler FileAndIndexSelected;
 		public event EventHandler LoadMore;
 
-		public event EventHandler ConcordanceClick;
+		public event ConcordanceEventHandler ConcordanceClick;
 		public event EventHandler NGramClick;
 		public event EventHandler KeywordClick;
 		public event EventHandler LoadStatistics;
@@ -135,7 +135,7 @@ namespace Viewer
 				findButton.Enabled = true;
 				clearButton.Enabled = true;
 				concordancerButton.Enabled = true;
-				ngramButton.Enabled = true;
+				ngramIndexButton.Enabled = true;
 				keywordButton.Enabled = true;
 				chatTable.Visible = true;
 				tableLayoutPanel1.Visible = true;
@@ -155,7 +155,7 @@ namespace Viewer
 				findButton.Enabled = false;
 				clearButton.Enabled = false;
 				concordancerButton.Enabled = false;
-				ngramButton.Enabled = false;
+				ngramIndexButton.Enabled = false;
 				keywordButton.Enabled = false;
 				chatTable.Visible = false;
 				tableLayoutPanel1.Visible = false;
@@ -540,7 +540,7 @@ namespace Viewer
 			}
         }
     }
-	internal static class SafeNativeMethods
+    internal static class SafeNativeMethods
 	{
 		[DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
 		public static extern int StrCmpLogicalW(string psz1, string psz2);

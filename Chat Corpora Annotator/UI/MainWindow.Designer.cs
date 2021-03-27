@@ -61,13 +61,43 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Concordance = new System.Windows.Forms.TabPage();
             this.concordancePanel = new System.Windows.Forms.Panel();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.concordancerButton = new System.Windows.Forms.Button();
+            this.charSelectionBox = new System.Windows.Forms.ComboBox();
+            this.concordanceBox = new System.Windows.Forms.TextBox();
+            this.concordanceView = new EasyScintilla.SimpleEditor();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ngramPanel = new System.Windows.Forms.Panel();
-            this.ngramButton = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ngramIndexButton = new System.Windows.Forms.Button();
+            this.ngramSearchButton = new System.Windows.Forms.Button();
+            this.ngramSearchBox = new System.Windows.Forms.TextBox();
+            this.ngramTabs = new System.Windows.Forms.TabControl();
+            this.bi = new System.Windows.Forms.TabPage();
+            this.bigramView = new BrightIdeasSoftware.FastObjectListView();
+            this.phrase2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.count2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.trigramPage = new System.Windows.Forms.TabPage();
+            this.trigramView = new BrightIdeasSoftware.FastObjectListView();
+            this.phrase3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.count3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.four = new System.Windows.Forms.TabPage();
+            this.fourgramView = new BrightIdeasSoftware.FastObjectListView();
+            this.phrase4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.count4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.five = new System.Windows.Forms.TabPage();
+            this.fivegramView = new BrightIdeasSoftware.FastObjectListView();
+            this.phrase = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.count = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.keywordPanel = new System.Windows.Forms.Panel();
+            this.keywordSplitContainer = new System.Windows.Forms.SplitContainer();
             this.keywordButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.fastObjectListView5 = new BrightIdeasSoftware.FastObjectListView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.csvDialog = new System.Windows.Forms.OpenFileDialog();
             this.indexDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -141,9 +171,36 @@
             this.panel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.Concordance.SuspendLayout();
+            this.concordancePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.ngramPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.ngramTabs.SuspendLayout();
+            this.bi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bigramView)).BeginInit();
+            this.trigramPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trigramView)).BeginInit();
+            this.four.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fourgramView)).BeginInit();
+            this.five.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fivegramView)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.keywordPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.keywordSplitContainer)).BeginInit();
+            this.keywordSplitContainer.Panel1.SuspendLayout();
+            this.keywordSplitContainer.Panel2.SuspendLayout();
+            this.keywordSplitContainer.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView5)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.datesPanel.SuspendLayout();
@@ -600,7 +657,6 @@
             // Concordance
             // 
             this.Concordance.Controls.Add(this.concordancePanel);
-            this.Concordance.Controls.Add(this.concordancerButton);
             this.Concordance.Location = new System.Drawing.Point(4, 27);
             this.Concordance.Margin = new System.Windows.Forms.Padding(2);
             this.Concordance.Name = "Concordance";
@@ -612,33 +668,116 @@
             // 
             // concordancePanel
             // 
+            this.concordancePanel.Controls.Add(this.splitContainer4);
             this.concordancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.concordancePanel.Location = new System.Drawing.Point(2, 2);
             this.concordancePanel.Margin = new System.Windows.Forms.Padding(2);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1075, 690);
+            this.concordancePanel.Size = new System.Drawing.Size(1075, 732);
             this.concordancePanel.TabIndex = 3;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.BackColor = System.Drawing.Color.Lavender;
+            this.splitContainer4.Panel1.Controls.Add(this.concordancerButton);
+            this.splitContainer4.Panel1.Controls.Add(this.charSelectionBox);
+            this.splitContainer4.Panel1.Controls.Add(this.concordanceBox);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.concordanceView);
+            this.splitContainer4.Size = new System.Drawing.Size(1075, 732);
+            this.splitContainer4.SplitterDistance = 358;
+            this.splitContainer4.TabIndex = 3;
             // 
             // concordancerButton
             // 
             this.concordancerButton.BackColor = System.Drawing.Color.Lavender;
-            this.concordancerButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.concordancerButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.concordancerButton.FlatAppearance.BorderSize = 0;
             this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.concordancerButton.Location = new System.Drawing.Point(2, 692);
+            this.concordancerButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.concordancerButton.Location = new System.Drawing.Point(0, 53);
             this.concordancerButton.Margin = new System.Windows.Forms.Padding(2);
             this.concordancerButton.Name = "concordancerButton";
-            this.concordancerButton.Size = new System.Drawing.Size(1075, 42);
-            this.concordancerButton.TabIndex = 2;
-            this.concordancerButton.Text = "Load concordancer";
+            this.concordancerButton.Size = new System.Drawing.Size(358, 46);
+            this.concordancerButton.TabIndex = 9;
+            this.concordancerButton.Text = "Show concordance";
             this.concordancerButton.UseVisualStyleBackColor = false;
             this.concordancerButton.Click += new System.EventHandler(this.concordance_Click);
+            // 
+            // charSelectionBox
+            // 
+            this.charSelectionBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.charSelectionBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.charSelectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.charSelectionBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.charSelectionBox.FormattingEnabled = true;
+            this.charSelectionBox.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"});
+            this.charSelectionBox.Location = new System.Drawing.Point(0, 26);
+            this.charSelectionBox.Margin = new System.Windows.Forms.Padding(2);
+            this.charSelectionBox.Name = "charSelectionBox";
+            this.charSelectionBox.Size = new System.Drawing.Size(358, 27);
+            this.charSelectionBox.TabIndex = 10;
+            // 
+            // concordanceBox
+            // 
+            this.concordanceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.concordanceBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.concordanceBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.concordanceBox.Location = new System.Drawing.Point(0, 0);
+            this.concordanceBox.Margin = new System.Windows.Forms.Padding(2);
+            this.concordanceBox.MinimumSize = new System.Drawing.Size(76, 60);
+            this.concordanceBox.Name = "concordanceBox";
+            this.concordanceBox.Size = new System.Drawing.Size(358, 26);
+            this.concordanceBox.TabIndex = 8;
+            // 
+            // concordanceView
+            // 
+            this.concordanceView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.concordanceView.IndentationGuides = ScintillaNET.IndentView.LookBoth;
+            this.concordanceView.Location = new System.Drawing.Point(0, 0);
+            this.concordanceView.Name = "concordanceView";
+            this.concordanceView.Size = new System.Drawing.Size(713, 732);
+            this.concordanceView.Styler = null;
+            this.concordanceView.TabIndex = 1;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.ngramPanel);
-            this.tabPage1.Controls.Add(this.ngramButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
@@ -649,28 +788,277 @@
             // 
             // ngramPanel
             // 
+            this.ngramPanel.Controls.Add(this.splitContainer1);
             this.ngramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ngramPanel.Location = new System.Drawing.Point(0, 0);
             this.ngramPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(1079, 694);
+            this.ngramPanel.Size = new System.Drawing.Size(1079, 736);
             this.ngramPanel.TabIndex = 4;
             // 
-            // ngramButton
+            // splitContainer1
             // 
-            this.ngramButton.BackColor = System.Drawing.Color.Lavender;
-            this.ngramButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ngramButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
-            this.ngramButton.FlatAppearance.BorderSize = 0;
-            this.ngramButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ngramButton.Location = new System.Drawing.Point(0, 694);
-            this.ngramButton.Margin = new System.Windows.Forms.Padding(2);
-            this.ngramButton.Name = "ngramButton";
-            this.ngramButton.Size = new System.Drawing.Size(1079, 42);
-            this.ngramButton.TabIndex = 3;
-            this.ngramButton.Text = "Load ngrammer";
-            this.ngramButton.UseVisualStyleBackColor = false;
-            this.ngramButton.Click += new System.EventHandler(this.ngram_Click);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Lavender;
+            this.splitContainer1.Panel1.Controls.Add(this.ngramIndexButton);
+            this.splitContainer1.Panel1.Controls.Add(this.ngramSearchButton);
+            this.splitContainer1.Panel1.Controls.Add(this.ngramSearchBox);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.ngramTabs);
+            this.splitContainer1.Size = new System.Drawing.Size(1079, 736);
+            this.splitContainer1.SplitterDistance = 359;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // ngramIndexButton
+            // 
+            this.ngramIndexButton.BackColor = System.Drawing.Color.Lavender;
+            this.ngramIndexButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ngramIndexButton.FlatAppearance.BorderColor = System.Drawing.Color.Lavender;
+            this.ngramIndexButton.FlatAppearance.BorderSize = 0;
+            this.ngramIndexButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ngramIndexButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ngramIndexButton.Location = new System.Drawing.Point(0, 72);
+            this.ngramIndexButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ngramIndexButton.Name = "ngramIndexButton";
+            this.ngramIndexButton.Size = new System.Drawing.Size(359, 42);
+            this.ngramIndexButton.TabIndex = 3;
+            this.ngramIndexButton.Text = "Build Index";
+            this.ngramIndexButton.UseVisualStyleBackColor = false;
+            this.ngramIndexButton.Click += new System.EventHandler(this.ngram_Click);
+            // 
+            // ngramSearchButton
+            // 
+            this.ngramSearchButton.BackColor = System.Drawing.Color.Lavender;
+            this.ngramSearchButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ngramSearchButton.Enabled = false;
+            this.ngramSearchButton.FlatAppearance.BorderSize = 0;
+            this.ngramSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ngramSearchButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ngramSearchButton.Location = new System.Drawing.Point(0, 23);
+            this.ngramSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ngramSearchButton.Name = "ngramSearchButton";
+            this.ngramSearchButton.Size = new System.Drawing.Size(359, 49);
+            this.ngramSearchButton.TabIndex = 16;
+            this.ngramSearchButton.Text = "Search for n-grams";
+            this.ngramSearchButton.UseVisualStyleBackColor = false;
+            // 
+            // ngramSearchBox
+            // 
+            this.ngramSearchBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ngramSearchBox.Enabled = false;
+            this.ngramSearchBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ngramSearchBox.Location = new System.Drawing.Point(0, 0);
+            this.ngramSearchBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ngramSearchBox.MaximumSize = new System.Drawing.Size(400, 200);
+            this.ngramSearchBox.MinimumSize = new System.Drawing.Size(100, 60);
+            this.ngramSearchBox.Name = "ngramSearchBox";
+            this.ngramSearchBox.Size = new System.Drawing.Size(359, 23);
+            this.ngramSearchBox.TabIndex = 15;
+            // 
+            // ngramTabs
+            // 
+            this.ngramTabs.Controls.Add(this.bi);
+            this.ngramTabs.Controls.Add(this.trigramPage);
+            this.ngramTabs.Controls.Add(this.four);
+            this.ngramTabs.Controls.Add(this.five);
+            this.ngramTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ngramTabs.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ngramTabs.Location = new System.Drawing.Point(0, 0);
+            this.ngramTabs.Margin = new System.Windows.Forms.Padding(4);
+            this.ngramTabs.Name = "ngramTabs";
+            this.ngramTabs.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ngramTabs.SelectedIndex = 0;
+            this.ngramTabs.Size = new System.Drawing.Size(716, 736);
+            this.ngramTabs.TabIndex = 14;
+            // 
+            // bi
+            // 
+            this.bi.Controls.Add(this.bigramView);
+            this.bi.Location = new System.Drawing.Point(4, 24);
+            this.bi.Margin = new System.Windows.Forms.Padding(4);
+            this.bi.Name = "bi";
+            this.bi.Padding = new System.Windows.Forms.Padding(4);
+            this.bi.Size = new System.Drawing.Size(708, 708);
+            this.bi.TabIndex = 0;
+            this.bi.Text = "Bigrams";
+            this.bi.UseVisualStyleBackColor = true;
+            // 
+            // bigramView
+            // 
+            this.bigramView.AllColumns.Add(this.phrase2);
+            this.bigramView.AllColumns.Add(this.count2);
+            this.bigramView.CellEditUseWholeCell = false;
+            this.bigramView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.phrase2,
+            this.count2});
+            this.bigramView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.bigramView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bigramView.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bigramView.HideSelection = false;
+            this.bigramView.Location = new System.Drawing.Point(4, 4);
+            this.bigramView.Margin = new System.Windows.Forms.Padding(4);
+            this.bigramView.Name = "bigramView";
+            this.bigramView.ShowGroups = false;
+            this.bigramView.Size = new System.Drawing.Size(700, 700);
+            this.bigramView.TabIndex = 0;
+            this.bigramView.UseCompatibleStateImageBehavior = false;
+            this.bigramView.View = System.Windows.Forms.View.Details;
+            this.bigramView.VirtualMode = true;
+            // 
+            // phrase2
+            // 
+            this.phrase2.AspectName = "Key";
+            this.phrase2.Text = "Phrase";
+            this.phrase2.Width = 368;
+            // 
+            // count2
+            // 
+            this.count2.AspectName = "Value";
+            this.count2.Text = "Count";
+            this.count2.Width = 450;
+            // 
+            // trigramPage
+            // 
+            this.trigramPage.Controls.Add(this.trigramView);
+            this.trigramPage.Location = new System.Drawing.Point(4, 24);
+            this.trigramPage.Margin = new System.Windows.Forms.Padding(4);
+            this.trigramPage.Name = "trigramPage";
+            this.trigramPage.Padding = new System.Windows.Forms.Padding(4);
+            this.trigramPage.Size = new System.Drawing.Size(708, 708);
+            this.trigramPage.TabIndex = 1;
+            this.trigramPage.Text = "Trigrams";
+            this.trigramPage.UseVisualStyleBackColor = true;
+            // 
+            // trigramView
+            // 
+            this.trigramView.AllColumns.Add(this.phrase3);
+            this.trigramView.AllColumns.Add(this.count3);
+            this.trigramView.CellEditUseWholeCell = false;
+            this.trigramView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.phrase3,
+            this.count3});
+            this.trigramView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.trigramView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trigramView.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.trigramView.HideSelection = false;
+            this.trigramView.Location = new System.Drawing.Point(4, 4);
+            this.trigramView.Margin = new System.Windows.Forms.Padding(4);
+            this.trigramView.Name = "trigramView";
+            this.trigramView.ShowGroups = false;
+            this.trigramView.Size = new System.Drawing.Size(700, 700);
+            this.trigramView.TabIndex = 1;
+            this.trigramView.UseCompatibleStateImageBehavior = false;
+            this.trigramView.View = System.Windows.Forms.View.Details;
+            this.trigramView.VirtualMode = true;
+            // 
+            // phrase3
+            // 
+            this.phrase3.AspectName = "Key";
+            this.phrase3.Text = "Phrase";
+            this.phrase3.Width = 316;
+            // 
+            // count3
+            // 
+            this.count3.AspectName = "Value";
+            this.count3.Text = "Count";
+            this.count3.Width = 189;
+            // 
+            // four
+            // 
+            this.four.Controls.Add(this.fourgramView);
+            this.four.Location = new System.Drawing.Point(4, 24);
+            this.four.Margin = new System.Windows.Forms.Padding(4);
+            this.four.Name = "four";
+            this.four.Size = new System.Drawing.Size(708, 708);
+            this.four.TabIndex = 2;
+            this.four.Text = "4-grams";
+            this.four.UseVisualStyleBackColor = true;
+            // 
+            // fourgramView
+            // 
+            this.fourgramView.AllColumns.Add(this.phrase4);
+            this.fourgramView.AllColumns.Add(this.count4);
+            this.fourgramView.CellEditUseWholeCell = false;
+            this.fourgramView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.phrase4,
+            this.count4});
+            this.fourgramView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fourgramView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fourgramView.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fourgramView.HideSelection = false;
+            this.fourgramView.Location = new System.Drawing.Point(0, 0);
+            this.fourgramView.Margin = new System.Windows.Forms.Padding(4);
+            this.fourgramView.Name = "fourgramView";
+            this.fourgramView.ShowGroups = false;
+            this.fourgramView.Size = new System.Drawing.Size(708, 708);
+            this.fourgramView.TabIndex = 1;
+            this.fourgramView.UseCompatibleStateImageBehavior = false;
+            this.fourgramView.View = System.Windows.Forms.View.Details;
+            this.fourgramView.VirtualMode = true;
+            // 
+            // phrase4
+            // 
+            this.phrase4.AspectName = "Key";
+            this.phrase4.Text = "Phrase";
+            this.phrase4.Width = 218;
+            // 
+            // count4
+            // 
+            this.count4.AspectName = "Value";
+            this.count4.Text = "Count";
+            this.count4.Width = 315;
+            // 
+            // five
+            // 
+            this.five.Controls.Add(this.fivegramView);
+            this.five.Location = new System.Drawing.Point(4, 24);
+            this.five.Margin = new System.Windows.Forms.Padding(4);
+            this.five.Name = "five";
+            this.five.Size = new System.Drawing.Size(708, 708);
+            this.five.TabIndex = 3;
+            this.five.Text = "5-grams";
+            this.five.UseVisualStyleBackColor = true;
+            // 
+            // fivegramView
+            // 
+            this.fivegramView.AllColumns.Add(this.phrase);
+            this.fivegramView.AllColumns.Add(this.count);
+            this.fivegramView.CellEditUseWholeCell = false;
+            this.fivegramView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.phrase,
+            this.count});
+            this.fivegramView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fivegramView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fivegramView.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fivegramView.HideSelection = false;
+            this.fivegramView.Location = new System.Drawing.Point(0, 0);
+            this.fivegramView.Margin = new System.Windows.Forms.Padding(4);
+            this.fivegramView.Name = "fivegramView";
+            this.fivegramView.ShowGroups = false;
+            this.fivegramView.Size = new System.Drawing.Size(708, 708);
+            this.fivegramView.TabIndex = 1;
+            this.fivegramView.UseCompatibleStateImageBehavior = false;
+            this.fivegramView.View = System.Windows.Forms.View.Details;
+            this.fivegramView.VirtualMode = true;
+            // 
+            // phrase
+            // 
+            this.phrase.AspectName = "Key";
+            this.phrase.Text = "Phrase";
+            this.phrase.Width = 428;
+            // 
+            // count
+            // 
+            this.count.AspectName = "Value";
+            this.count.Text = "Count";
+            this.count.Width = 587;
             // 
             // tabPage2
             // 
@@ -685,7 +1073,7 @@
             // 
             // keywordPanel
             // 
-            this.keywordPanel.Controls.Add(this.keywordButton);
+            this.keywordPanel.Controls.Add(this.keywordSplitContainer);
             this.keywordPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.keywordPanel.Location = new System.Drawing.Point(0, 0);
             this.keywordPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -693,20 +1081,93 @@
             this.keywordPanel.Size = new System.Drawing.Size(1079, 736);
             this.keywordPanel.TabIndex = 1;
             // 
+            // keywordSplitContainer
+            // 
+            this.keywordSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keywordSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.keywordSplitContainer.Name = "keywordSplitContainer";
+            // 
+            // keywordSplitContainer.Panel1
+            // 
+            this.keywordSplitContainer.Panel1.Controls.Add(this.keywordButton);
+            // 
+            // keywordSplitContainer.Panel2
+            // 
+            this.keywordSplitContainer.Panel2.Controls.Add(this.tabControl1);
+            this.keywordSplitContainer.Size = new System.Drawing.Size(1079, 736);
+            this.keywordSplitContainer.SplitterDistance = 359;
+            this.keywordSplitContainer.TabIndex = 0;
+            // 
             // keywordButton
             // 
             this.keywordButton.BackColor = System.Drawing.Color.Lavender;
-            this.keywordButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.keywordButton.FlatAppearance.BorderSize = 0;
             this.keywordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.keywordButton.Location = new System.Drawing.Point(0, 692);
+            this.keywordButton.Location = new System.Drawing.Point(38, 230);
             this.keywordButton.Margin = new System.Windows.Forms.Padding(2);
             this.keywordButton.Name = "keywordButton";
-            this.keywordButton.Size = new System.Drawing.Size(1079, 44);
+            this.keywordButton.Size = new System.Drawing.Size(290, 42);
             this.keywordButton.TabIndex = 0;
             this.keywordButton.Text = "Load keyworder";
             this.keywordButton.UseVisualStyleBackColor = false;
             this.keywordButton.Click += new System.EventHandler(this.keyword_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(716, 736);
+            this.tabControl1.TabIndex = 14;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.fastObjectListView5);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(708, 708);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Keywords";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // fastObjectListView5
+            // 
+            this.fastObjectListView5.CellEditUseWholeCell = false;
+            this.fastObjectListView5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastObjectListView5.HideSelection = false;
+            this.fastObjectListView5.Location = new System.Drawing.Point(3, 3);
+            this.fastObjectListView5.Name = "fastObjectListView5";
+            this.fastObjectListView5.ShowGroups = false;
+            this.fastObjectListView5.Size = new System.Drawing.Size(702, 702);
+            this.fastObjectListView5.TabIndex = 0;
+            this.fastObjectListView5.UseCompatibleStateImageBehavior = false;
+            this.fastObjectListView5.View = System.Windows.Forms.View.Details;
+            this.fastObjectListView5.VirtualMode = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.richTextBox2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(708, 708);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Noun Phrases";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(702, 702);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
             // 
             // csvDialog
             // 
@@ -1325,9 +1786,38 @@
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.Concordance.ResumeLayout(false);
+            this.concordancePanel.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel1.PerformLayout();
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.ngramPanel.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.ngramTabs.ResumeLayout(false);
+            this.bi.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bigramView)).EndInit();
+            this.trigramPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trigramView)).EndInit();
+            this.four.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fourgramView)).EndInit();
+            this.five.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fivegramView)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.keywordPanel.ResumeLayout(false);
+            this.keywordSplitContainer.Panel1.ResumeLayout(false);
+            this.keywordSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.keywordSplitContainer)).EndInit();
+            this.keywordSplitContainer.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView5)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1387,9 +1877,8 @@
         private System.Windows.Forms.ListView userList;
         private System.Windows.Forms.ColumnHeader Users;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
-        private System.Windows.Forms.Button concordancerButton;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button ngramButton;
+        private System.Windows.Forms.Button ngramIndexButton;
         private System.Windows.Forms.Panel concordancePanel;
         private System.Windows.Forms.Panel ngramPanel;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1444,6 +1933,37 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.SplitContainer splitContainerMain;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabControl ngramTabs;
+        private System.Windows.Forms.TabPage bi;
+        private BrightIdeasSoftware.FastObjectListView bigramView;
+        private BrightIdeasSoftware.OLVColumn phrase2;
+        private BrightIdeasSoftware.OLVColumn count2;
+        private BrightIdeasSoftware.FastObjectListView trigramView;
+        private BrightIdeasSoftware.OLVColumn phrase3;
+        private BrightIdeasSoftware.OLVColumn count3;
+        private System.Windows.Forms.TabPage four;
+        private BrightIdeasSoftware.FastObjectListView fourgramView;
+        private BrightIdeasSoftware.OLVColumn phrase4;
+        private BrightIdeasSoftware.OLVColumn count4;
+        private System.Windows.Forms.TabPage five;
+        private BrightIdeasSoftware.FastObjectListView fivegramView;
+        private BrightIdeasSoftware.OLVColumn phrase;
+        private BrightIdeasSoftware.OLVColumn count;
+        private System.Windows.Forms.SplitContainer keywordSplitContainer;
+        private System.Windows.Forms.Button ngramSearchButton;
+        private System.Windows.Forms.TextBox ngramSearchBox;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private BrightIdeasSoftware.FastObjectListView fastObjectListView5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TabPage trigramPage;
+        private System.Windows.Forms.ComboBox charSelectionBox;
+        private System.Windows.Forms.TextBox concordanceBox;
+        private System.Windows.Forms.Button concordancerButton;
+        private EasyScintilla.SimpleEditor concordanceView;
     }
 }
 
