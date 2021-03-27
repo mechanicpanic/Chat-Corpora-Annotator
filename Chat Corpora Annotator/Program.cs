@@ -17,7 +17,7 @@ namespace Viewer
         static void Main()
         {
 
-            
+            NGramService ngrammer = new NGramService();
             ConcordanceService concordancer = new ConcordanceService();
 
             Application.EnableVisualStyles();
@@ -45,7 +45,7 @@ namespace Viewer
             TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
             TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
             SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, main, main);
-            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder,dataset,corpus, concordancer);
+            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder,dataset,corpus, concordancer,ngrammer);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);

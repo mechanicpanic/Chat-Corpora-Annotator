@@ -1,5 +1,6 @@
 ﻿
 using BrightIdeasSoftware;
+using CSharpTest.Net.Collections;
 using IndexEngine;
 using System;
 using System.Collections.Generic;
@@ -135,23 +136,83 @@ namespace Viewer
         #region ngram
         private void ngram_Click(object sender, EventArgs e)
 		{
-			NGramClick?.Invoke(this, EventArgs.Empty);
-		}
-		public INGramView CreateNgramView()
-		{
-			return new NGramSearch();
+			if (ngramSearchBox.Text.Split().Length > 1 || String.IsNullOrEmpty(ngramSearchBox.Text) || String.IsNullOrWhiteSpace(ngramSearchBox.Text))
+			{
+				MessageBox.Show("Please enter a single term");
+			}
+			else
+			{
+				NgramEventArgs args = new NgramEventArgs();
+				args.Term = ngramSearchBox.Text;
+				args.maxSize = 2;
+				args.minSize = 3;
+				args.ShowUnigrams = false;
+
+
+
+				NGramClick?.Invoke(this, args);
+			}
 		}
 
-		public void ShowNgrams(INGramView nGram)
-		{
-			ngramPanel.Controls.Add((UserControl)nGram);
-			ngramPanel.Controls[0].Dock = DockStyle.Fill;
-			ngramIndexButton.Visible = false;
-		}
-        #endregion
+		public void UpdateNgramState(bool state, bool readstate)
+        {
+            if (state && readstate)
+            {
+				ngramIndexButton.Visible = false;
+				ngramSearchButton.Enabled = true;
+            }
+			else if(state && !readstate)
+            {
+				ngramIndexButton.Visible = true;
+				ngramSearchButton.Visible = true;
+				ngramIndexButton.Text = "Read index";
+				ngramSearchButton.Enabled = false;
+			}
+			else if(!state && !readstate)
+            {
+				ngramIndexButton.Visible = true;
+				ngramSearchButton.Visible = true;
+				ngramIndexButton.Text = "Build index";
+				ngramSearchButton.Enabled = false;
+			}
+        }
 
-        #region keyword
-        private void keyword_Click(object sender, EventArgs e)
+		public void DisplayNGrams(List<BTreeDictionary<string, int>> grams)
+		{
+			bigramView.ClearObjects();
+			trigramView.ClearObjects();
+			fourgramView.ClearObjects();
+			fivegramView.ClearObjects();
+			foreach (var kvp in grams[0])
+			{
+				bigramView.AddObject(kvp);
+			}
+
+			foreach (var kvp in grams[1])
+			{
+				trigramView.AddObject(kvp);
+			}
+
+			foreach (var kvp in grams[2])
+			{
+				fourgramView.AddObject(kvp);
+			}
+			foreach (var kvp in grams[3])
+			{
+				fivegramView.AddObject(kvp);
+			}
+
+
+			bigramView.Invalidate();
+			trigramView.Invalidate();
+			fourgramView.Invalidate();
+			fivegramView.Invalidate();
+		}
+
+		#endregion
+
+		#region keyword
+		private void keyword_Click(object sender, EventArgs e)
 		{
 			KeywordClick?.Invoke(this, EventArgs.Empty);
 		}

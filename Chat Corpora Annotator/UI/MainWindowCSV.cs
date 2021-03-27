@@ -38,26 +38,8 @@ namespace Viewer
 
 			this.CurrentIndexPath = folderPath + "\\CCA" + "\\" + name;
 			FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
-			//SelectIndexFolder();
 
 		}
-
-		//private void SelectIndexFolder()
-		//{
-		//	indexDialog = new FolderBrowserDialog();
-
-		//	indexDialog.Description = "Select index folder";
-		//	DialogResult result = indexDialog.ShowDialog();
-		//	if (result == DialogResult.OK)
-		//	{
-
-		//		this.CurrentIndexPath = indexDialog.SelectedPath;
-
-
-		//		FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
-		//	}
-
-		//}
 
 	}
 }

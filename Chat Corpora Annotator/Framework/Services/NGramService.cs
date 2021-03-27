@@ -17,26 +17,44 @@ namespace Viewer.Framework.Services
 	public class NGramService : INGramService
 	{
 
-		private BPlusTree<string,int> FullIndex { get; set; }
+		private BPlusTree<string, int> FullIndex { get; set; } 
 
 		private BPlusTree<string, int>.OptionsV2 Options { get; set; }
 
 		private BulkInsertOptions bulkOptions { get; set; }
-		public bool CheckIndex()
+
+		public bool IndexExists { get; private set; }
+		public bool IndexIsRead { get; private set; } = false;
+
+
+		public void CheckIndex()
 		{
 			if (File.Exists(IndexService.CurrentIndexPath + @"\info\" + "index"))
 			{
-				return true;
+				this.IndexExists = true;
 			}
 			else
 			{
-				return false;
+				this.IndexExists = false;
+				this.IndexIsRead = false;
 			}
+			if(IndexExists)
+            {
+				if(FullIndex != null)
+				IndexIsRead = true;
+            }
+			else
+            {
+				IndexIsRead = false;
+            }
 		}
 		public void ReadIndexFromDisk()
 		{
 			SetTreeOptions();
 			this.FullIndex = new BPlusTree<string, int>(Options);
+			this.IndexExists = true;
+			this.IndexIsRead = true;
+
 		}
 
 		private void SetTreeOptions()
@@ -80,55 +98,12 @@ namespace Viewer.Framework.Services
 			
 			FullIndex.BulkInsert(grams,bulkOptions);
 			grams = null;
+			this.IndexExists = true;
+			this.IndexIsRead = true;
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 		}
 
-		//private void BuildNgramTermIndex(int maxSize, int minSize, bool ShowUnigrams, string TextFieldKey, string term)
-		//{
-		//	BPlusTree<string, int>.OptionsV2 Options = new BPlusTree<string, int>.OptionsV2(PrimitiveSerializer.String, PrimitiveSerializer.Int32);
-		//	Options.CalcBTreeOrder(48, 4);
-		//	Options.CreateFile = CreatePolicy.IfNeeded;
-		//	//Options.FileName = IndexService.CurrentIndexPath + @"\info\" + "index";
-
-		//	this.Index = new BPlusTree<string, int>(Options);
-
-		//	LuceneService.NGrammer.maxGramSize = maxSize;
-		//	LuceneService.NGrammer.minGramSize = minSize;
-		//	LuceneService.NGrammer.ShowUnigrams = ShowUnigrams;
-			//BuildFullIndex();
-			//TermQuery query = new TermQuery(new Lucene.Net.Index.Term(IndexService.TextFieldKey, term));
-			//var docs = LuceneService.Searcher.Search(query, LuceneService.DirReader.MaxDoc);
-
-
-			//for (int i = 0; i < docs.ScoreDocs.Length; i++)
-			//{
-			//	var msg = LuceneService.Searcher.Doc(docs.ScoreDocs[i].Doc).GetField(TextFieldKey).GetStringValue();
-			//	foreach (var gram in GetNGrams(TextFieldKey, msg))
-			//	{
-
-			//		if (gram.Split(' ').Contains(term))
-			//		{
-
-			//			if (!Index.ContainsKey(gram))
-			//			{
-
-			//				Index.Add(gram, 1);
-			//			}
-			//			else
-			//			{
-			//				int temp = Index[gram];
-			//				temp++;
-			//				Index.TryUpdate(gram, temp);
-			//			}
-			//		}
-
-
-			//	}
-
-			//}
-			//Console.WriteLine("Done!");
-		//}
 
 
 
@@ -221,7 +196,9 @@ namespace Viewer.Framework.Services
 		void ReadIndexFromDisk();
 
 		void BuildFullIndex();
-		bool CheckIndex();
+		void CheckIndex();
+		bool IndexExists { get; }
+		bool IndexIsRead { get; }
 	}
 }
 
