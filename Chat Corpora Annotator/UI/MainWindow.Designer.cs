@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TabControl mainTabs;
+            System.Windows.Forms.TabControl mainTabControl;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Chat = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -66,7 +66,7 @@
             this.charSelectionBox = new System.Windows.Forms.ComboBox();
             this.concordanceBox = new System.Windows.Forms.TextBox();
             this.concordanceView = new EasyScintilla.SimpleEditor();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ngramPage = new System.Windows.Forms.TabPage();
             this.ngramPanel = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ngramIndexButton = new System.Windows.Forms.Button();
@@ -93,7 +93,7 @@
             this.keywordPanel = new System.Windows.Forms.Panel();
             this.keywordSplitContainer = new System.Windows.Forms.SplitContainer();
             this.keywordButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.keywordTabs = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.fastObjectListView5 = new BrightIdeasSoftware.FastObjectListView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -117,7 +117,7 @@
             this.queryPanel = new System.Windows.Forms.Panel();
             this.searchBox = new System.Windows.Forms.RichTextBox();
             this.queryButton = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.topMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCorpusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,8 +151,8 @@
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-            mainTabs = new System.Windows.Forms.TabControl();
-            mainTabs.SuspendLayout();
+            mainTabControl = new System.Windows.Forms.TabControl();
+            mainTabControl.SuspendLayout();
             this.Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -176,7 +176,7 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.ngramPage.SuspendLayout();
             this.ngramPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -197,7 +197,7 @@
             this.keywordSplitContainer.Panel1.SuspendLayout();
             this.keywordSplitContainer.Panel2.SuspendLayout();
             this.keywordSplitContainer.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.keywordTabs.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView5)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -206,7 +206,7 @@
             this.datesPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.queryPanel.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.topMenuStrip.SuspendLayout();
             this.bottomStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
             this.splitContainerLeft.Panel1.SuspendLayout();
@@ -218,23 +218,23 @@
             this.splitContainerMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mainTabs
+            // mainTabControl
             // 
-            mainTabs.Controls.Add(this.Chat);
-            mainTabs.Controls.Add(this.Statistics);
-            mainTabs.Controls.Add(this.Concordance);
-            mainTabs.Controls.Add(this.tabPage1);
-            mainTabs.Controls.Add(this.tabPage2);
-            mainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            mainTabs.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            mainTabs.Location = new System.Drawing.Point(0, 0);
-            mainTabs.Margin = new System.Windows.Forms.Padding(2);
-            mainTabs.Name = "mainTabs";
-            mainTabs.Padding = new System.Drawing.Point(0, 0);
-            mainTabs.SelectedIndex = 0;
-            mainTabs.Size = new System.Drawing.Size(1087, 767);
-            mainTabs.TabIndex = 17;
-            mainTabs.TabStop = false;
+            mainTabControl.Controls.Add(this.Chat);
+            mainTabControl.Controls.Add(this.Statistics);
+            mainTabControl.Controls.Add(this.Concordance);
+            mainTabControl.Controls.Add(this.ngramPage);
+            mainTabControl.Controls.Add(this.tabPage2);
+            mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainTabControl.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            mainTabControl.Location = new System.Drawing.Point(0, 0);
+            mainTabControl.Margin = new System.Windows.Forms.Padding(2);
+            mainTabControl.Name = "mainTabControl";
+            mainTabControl.Padding = new System.Drawing.Point(0, 0);
+            mainTabControl.SelectedIndex = 0;
+            mainTabControl.Size = new System.Drawing.Size(1087, 767);
+            mainTabControl.TabIndex = 17;
+            mainTabControl.TabStop = false;
             // 
             // Chat
             // 
@@ -703,8 +703,8 @@
             this.concordancerButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.concordancerButton.FlatAppearance.BorderSize = 0;
             this.concordancerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.concordancerButton.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.concordancerButton.Location = new System.Drawing.Point(0, 53);
+            this.concordancerButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.concordancerButton.Location = new System.Drawing.Point(0, 46);
             this.concordancerButton.Margin = new System.Windows.Forms.Padding(2);
             this.concordancerButton.Name = "concordancerButton";
             this.concordancerButton.Size = new System.Drawing.Size(358, 46);
@@ -718,7 +718,7 @@
             this.charSelectionBox.BackColor = System.Drawing.Color.AliceBlue;
             this.charSelectionBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.charSelectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.charSelectionBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.charSelectionBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.charSelectionBox.FormattingEnabled = true;
             this.charSelectionBox.Items.AddRange(new object[] {
             "5",
@@ -747,22 +747,22 @@
             "28",
             "29",
             "30"});
-            this.charSelectionBox.Location = new System.Drawing.Point(0, 26);
+            this.charSelectionBox.Location = new System.Drawing.Point(0, 23);
             this.charSelectionBox.Margin = new System.Windows.Forms.Padding(2);
             this.charSelectionBox.Name = "charSelectionBox";
-            this.charSelectionBox.Size = new System.Drawing.Size(358, 27);
+            this.charSelectionBox.Size = new System.Drawing.Size(358, 23);
             this.charSelectionBox.TabIndex = 10;
             // 
             // concordanceBox
             // 
             this.concordanceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.concordanceBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.concordanceBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.concordanceBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.concordanceBox.Location = new System.Drawing.Point(0, 0);
             this.concordanceBox.Margin = new System.Windows.Forms.Padding(2);
             this.concordanceBox.MinimumSize = new System.Drawing.Size(76, 60);
             this.concordanceBox.Name = "concordanceBox";
-            this.concordanceBox.Size = new System.Drawing.Size(358, 26);
+            this.concordanceBox.Size = new System.Drawing.Size(358, 23);
             this.concordanceBox.TabIndex = 8;
             // 
             // concordanceView
@@ -775,16 +775,16 @@
             this.concordanceView.Styler = null;
             this.concordanceView.TabIndex = 1;
             // 
-            // tabPage1
+            // ngramPage
             // 
-            this.tabPage1.Controls.Add(this.ngramPanel);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1079, 736);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "N-gram Search";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.ngramPage.Controls.Add(this.ngramPanel);
+            this.ngramPage.Location = new System.Drawing.Point(4, 27);
+            this.ngramPage.Margin = new System.Windows.Forms.Padding(2);
+            this.ngramPage.Name = "ngramPage";
+            this.ngramPage.Size = new System.Drawing.Size(1079, 736);
+            this.ngramPage.TabIndex = 5;
+            this.ngramPage.Text = "N-gram Search";
+            this.ngramPage.UseVisualStyleBackColor = true;
             // 
             // ngramPanel
             // 
@@ -829,9 +829,10 @@
             this.ngramIndexButton.Name = "ngramIndexButton";
             this.ngramIndexButton.Size = new System.Drawing.Size(359, 42);
             this.ngramIndexButton.TabIndex = 3;
-            this.ngramIndexButton.Text = "Build Index";
+            this.ngramIndexButton.Text = "Get index";
             this.ngramIndexButton.UseVisualStyleBackColor = false;
-            this.ngramIndexButton.Click += new System.EventHandler(this.ngram_Click);
+            this.ngramIndexButton.Visible = false;
+            this.ngramIndexButton.Click += new System.EventHandler(this.ngramIndexButton_Click);
             // 
             // ngramSearchButton
             // 
@@ -848,11 +849,12 @@
             this.ngramSearchButton.TabIndex = 16;
             this.ngramSearchButton.Text = "Search for n-grams";
             this.ngramSearchButton.UseVisualStyleBackColor = false;
+            this.ngramSearchButton.Visible = false;
+            this.ngramSearchButton.Click += new System.EventHandler(this.ngram_Click);
             // 
             // ngramSearchBox
             // 
             this.ngramSearchBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ngramSearchBox.Enabled = false;
             this.ngramSearchBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ngramSearchBox.Location = new System.Drawing.Point(0, 0);
             this.ngramSearchBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -861,6 +863,7 @@
             this.ngramSearchBox.Name = "ngramSearchBox";
             this.ngramSearchBox.Size = new System.Drawing.Size(359, 23);
             this.ngramSearchBox.TabIndex = 15;
+            this.ngramSearchBox.Visible = false;
             // 
             // ngramTabs
             // 
@@ -877,6 +880,7 @@
             this.ngramTabs.SelectedIndex = 0;
             this.ngramTabs.Size = new System.Drawing.Size(716, 736);
             this.ngramTabs.TabIndex = 14;
+            this.ngramTabs.Visible = false;
             // 
             // bi
             // 
@@ -1093,7 +1097,7 @@
             // 
             // keywordSplitContainer.Panel2
             // 
-            this.keywordSplitContainer.Panel2.Controls.Add(this.tabControl1);
+            this.keywordSplitContainer.Panel2.Controls.Add(this.keywordTabs);
             this.keywordSplitContainer.Size = new System.Drawing.Size(1079, 736);
             this.keywordSplitContainer.SplitterDistance = 359;
             this.keywordSplitContainer.TabIndex = 0;
@@ -1112,17 +1116,17 @@
             this.keywordButton.UseVisualStyleBackColor = false;
             this.keywordButton.Click += new System.EventHandler(this.keyword_Click);
             // 
-            // tabControl1
+            // keywordTabs
             // 
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(716, 736);
-            this.tabControl1.TabIndex = 14;
+            this.keywordTabs.Controls.Add(this.tabPage3);
+            this.keywordTabs.Controls.Add(this.tabPage4);
+            this.keywordTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keywordTabs.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.keywordTabs.Location = new System.Drawing.Point(0, 0);
+            this.keywordTabs.Name = "keywordTabs";
+            this.keywordTabs.SelectedIndex = 0;
+            this.keywordTabs.Size = new System.Drawing.Size(716, 736);
+            this.keywordTabs.TabIndex = 14;
             // 
             // tabPage3
             // 
@@ -1439,23 +1443,23 @@
             this.queryButton.UseVisualStyleBackColor = true;
             this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
             // 
-            // menuStrip1
+            // topMenuStrip
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Lavender;
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.topMenuStrip.BackColor = System.Drawing.Color.Lavender;
+            this.topMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.topMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.topMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.vizToolStripMenuItem,
             this.extractToolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.MinimumSize = new System.Drawing.Size(0, 22);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1314, 22);
-            this.menuStrip1.TabIndex = 14;
-            this.menuStrip1.Text = "menuStrip1";
+            this.topMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.topMenuStrip.MinimumSize = new System.Drawing.Size(0, 22);
+            this.topMenuStrip.Name = "topMenuStrip";
+            this.topMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.topMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.topMenuStrip.Size = new System.Drawing.Size(1314, 22);
+            this.topMenuStrip.TabIndex = 14;
+            this.topMenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -1745,7 +1749,7 @@
             // 
             // splitContainerMain.Panel2
             // 
-            this.splitContainerMain.Panel2.Controls.Add(mainTabs);
+            this.splitContainerMain.Panel2.Controls.Add(mainTabControl);
             this.splitContainerMain.Size = new System.Drawing.Size(1314, 767);
             this.splitContainerMain.SplitterDistance = 223;
             this.splitContainerMain.TabIndex = 31;
@@ -1757,7 +1761,7 @@
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1314, 811);
             this.Controls.Add(this.splitContainerMain);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.topMenuStrip);
             this.Controls.Add(this.bottomStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1766,7 +1770,7 @@
             this.Name = "MainWindow";
             this.Text = "Chat Corpora Annotator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-            mainTabs.ResumeLayout(false);
+            mainTabControl.ResumeLayout(false);
             this.Chat.ResumeLayout(false);
             this.Chat.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -1792,7 +1796,7 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.ngramPage.ResumeLayout(false);
             this.ngramPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -1814,7 +1818,7 @@
             this.keywordSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.keywordSplitContainer)).EndInit();
             this.keywordSplitContainer.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.keywordTabs.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView5)).EndInit();
             this.tabPage4.ResumeLayout(false);
@@ -1825,8 +1829,8 @@
             this.datesPanel.PerformLayout();
             this.userPanel.ResumeLayout(false);
             this.queryPanel.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.topMenuStrip.ResumeLayout(false);
+            this.topMenuStrip.PerformLayout();
             this.bottomStrip.ResumeLayout(false);
             this.bottomStrip.PerformLayout();
             this.splitContainerLeft.Panel1.ResumeLayout(false);
@@ -1845,7 +1849,7 @@
         #endregion
         private System.Windows.Forms.OpenFileDialog csvDialog;
         private System.Windows.Forms.FolderBrowserDialog indexDialog;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip topMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vizToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plotToolStripMenuItem;
@@ -1877,7 +1881,7 @@
         private System.Windows.Forms.ListView userList;
         private System.Windows.Forms.ColumnHeader Users;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage ngramPage;
         private System.Windows.Forms.Button ngramIndexButton;
         private System.Windows.Forms.Panel concordancePanel;
         private System.Windows.Forms.Panel ngramPanel;
@@ -1954,7 +1958,7 @@
         private System.Windows.Forms.Button ngramSearchButton;
         private System.Windows.Forms.TextBox ngramSearchBox;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl keywordTabs;
         private System.Windows.Forms.TabPage tabPage3;
         private BrightIdeasSoftware.FastObjectListView fastObjectListView5;
         private System.Windows.Forms.TabPage tabPage4;

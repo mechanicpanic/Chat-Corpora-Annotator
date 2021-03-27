@@ -34,14 +34,13 @@ namespace Viewer
 		public event EventHandler LoadMore;
 
 		public event ConcordanceEventHandler ConcordanceClick;
-		public event EventHandler NGramClick;
+		public event NgramEventHandler NGramClick;
+		public event EventHandler BuildIndexClick;
+		public event EventHandler CheckNgramState;
 		public event EventHandler KeywordClick;
 		public event EventHandler LoadStatistics;
 		public event EventHandler ExtractInfoClick;
 
-        public event EventHandler VisualizeLengths;
-        public event EventHandler VisualizeTokens;
-        public event EventHandler VisualizeTokenLengths;
 
 		public event LuceneQueryEventHandler FindClick;
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -145,6 +144,9 @@ namespace Viewer
 				saveButton.Visible = true;
 				suggesterButton.Visible = true;
 				tagsetView.Visible = true;
+				CheckNgramState?.Invoke(this, null);
+				ngramSearchBox.Visible = true;
+				ngramTabs.Visible = true;
 			}
 
 			if (!this.FileLoadState)
@@ -165,7 +167,11 @@ namespace Viewer
 				saveButton.Visible = false;
 				suggesterButton.Visible = false;
 				tagsetView.Visible = false;
+				ngramSearchBox.Visible = false;
+				ngramTabs.Visible = false;
+
 			}
+			
 		}
 
 		protected void OnPropertyChanged(string name = "FileLoadState")
@@ -539,6 +545,16 @@ namespace Viewer
 				}
 			}
         }
+
+
+
+        private void ngramIndexButton_Click(object sender, EventArgs e)
+        {
+			BuildIndexClick?.Invoke(this, null);
+        }
+
+
+
     }
     internal static class SafeNativeMethods
 	{

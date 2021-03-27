@@ -23,7 +23,8 @@ namespace Viewer.Framework.Presenters
         private readonly IStatisticsService _dataset;
         private readonly ITaggedStatisticsService _corpus;
         private readonly IConcordanceService _concordancer;
-        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus, IConcordanceService concordancer)
+        private readonly INGramService _ngrammer;
+        public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus, IConcordanceService concordancer, INGramService ngrammer)
         {                                                                                                                                       
             this._tagger = tagger;
             this._service = service;
@@ -34,79 +35,41 @@ namespace Viewer.Framework.Presenters
             this._dataset = dataset;
             this._corpus = corpus;
             this._concordancer = concordancer;
+            this._ngrammer = ngrammer;
 
             _main.FindClick += _view_FindClick;
-            _main.LoadMore += _view_LoadMoreClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
             _main.NGramClick += _main_NGramClick;
             _main.KeywordClick += _main_KeywordClick;
             _main.LoadStatistics += _main_LoadStatistics;
             _main.ExtractInfoClick += _main_ExtractInfoClick;
-            
-            _main.VisualizeLengths += _main_VisualizeLengths;
-            _main.VisualizeTokens += _main_VisualizeTokens;
-            _main.VisualizeTokenLengths += _main_VisualizeTokenLengths;
-
-            
+            _main.BuildIndexClick += _main_BuildIndexClick;
+            _main.CheckNgramState += _main_CheckNgramState;
             _folder.CheckFolder();
-
+           
 
         }
 
-       
-
-        private void _main_VisualizeTokenLengths(object sender, EventArgs e)
+        private void _main_CheckNgramState(object sender, EventArgs e)
         {
-            //var numberOfBuckets = 3;
-            //PointPairList list = new PointPairList();
-            //if (stats != null)
-            //{
-            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenLengths, 20);
-            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
-
-            //    for (int i = 0; i < numberOfBuckets; i++)
-            //    {
-            //        list.Add(i, hist[i]);
-            //    }
-            //    _main.VisualizeHist(list, "Token lengths in symbols");
-            //}
+            _ngrammer.CheckIndex();
+            _main.UpdateNgramState(_ngrammer.IndexExists, _ngrammer.IndexIsRead);
         }
 
-        // Yeah this is 1000000000000% duplicate code. Sorry its 24hrs to the deadline
-        private void _main_VisualizeTokens(object sender, EventArgs e)
+        private void _main_BuildIndexClick(object sender, EventArgs e)
         {
-            //var numberOfBuckets = 3;
-            //PointPairList list = new PointPairList();
-            //if (stats != null)
-            //{
-            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllTokenNumbers, 20);
-            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
-                
-
-            //    for (int i = 0; i < numberOfBuckets; i++)
-            //    {
-            //        list.Add(i, hist[i]);
-            //    }
-            //    _main.VisualizeHist(list, "Token number");
-            //}
-        }
-
-        private void _main_VisualizeLengths(object sender, EventArgs e)
-        {
-            //var numberOfBuckets = 3;
-            //PointPairList list = new PointPairList();
-            //if (stats != null)
-            //{
-            //    var cleandata = HistogramHelper.RemoveOutliers(stats.AllLengths, 100);
-            //    var hist = HistogramHelper.Bucketize(cleandata, numberOfBuckets);
-
-            //    for (int i = 0; i < numberOfBuckets; i++)
-            //    {
-            //        list.Add(i, hist[i]);
-            //    }
-            //    _main.VisualizeHist(list, "Message lengths in symbols");
-            //}
+            if (_ngrammer.IndexExists)
+            {
+                _ngrammer.ReadIndexFromDisk();
+                _main.UpdateNgramState(_ngrammer.IndexExists, _ngrammer.IndexIsRead);
+            }
+            else
+            {
+                Thread t = new Thread(_ngrammer.BuildFullIndex);
+                t.Start();
+                _main.UpdateNgramState(_ngrammer.IndexExists,_ngrammer.IndexIsRead);
+            }
         }
 
         private void _main_ExtractInfoClick(object sender, EventArgs e)
@@ -141,22 +104,13 @@ namespace Viewer.Framework.Presenters
             _main.ShowKeywordView(_keyword);
         }
 
-        private void _main_NGramClick(object sender, EventArgs e)
+        private void _main_NGramClick(object sender, NgramEventArgs e)
         {
-            INGramView _ngram = _main.CreateNgramView();
-            INGramService _ngrammer = new NGramService();
-            NGramPresenter grampresenter = new NGramPresenter(_main, _searcher, _ngrammer, _ngram);
-            _ngram.ShowView();
-            _main.ShowNgrams(_ngram);
-            if (_ngrammer.CheckIndex()) {
-                _ngrammer.ReadIndexFromDisk();
-            }
-            else
-            {                                
-                Thread t = new Thread(_ngrammer.BuildFullIndex);
-                t.Start();
-                
-            }
+
+
+            var result = _ngrammer.GetReadableResultsForTerm(e.Term);
+            _main.DisplayNGrams(result);
+
             
         }
         private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
@@ -191,18 +145,13 @@ namespace Viewer.Framework.Presenters
                 _main.FileLoadState = true;
                 IndexService.OpenIndex();
 
-                _view_LoadMoreClick(null, null);
+                AddDocumentsToDisplay(2000);
+                _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+                //_main.UpdateNgramState(_ngrammer.IndexExists);
+
 
             }
         }
-
-        private void _view_LoadMoreClick(object sender, EventArgs e)
-        {
-            AddDocumentsToDisplay(2000);
-            _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-        }
-
-
 
         public void AddDocumentsToDisplay(int count)
         {

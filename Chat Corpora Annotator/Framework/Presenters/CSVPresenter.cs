@@ -71,8 +71,8 @@ namespace Viewer.Framework.Presenters
         {
 
 
-            int temp = (LuceneService.Writer.MaxDoc) / 5;
-            var list = IndexService.LoadSomeDocuments(temp);
+            
+            var list = IndexService.LoadSomeDocuments(2000);
             //_main.Messages = list;
             MessageContainer.Messages = list;
 
@@ -86,6 +86,7 @@ namespace Viewer.Framework.Presenters
             _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             _main.SetLineCount(LuceneService.DirReader.NumDocs);
             _main.FileLoadState = true;
+            
         }
 
 

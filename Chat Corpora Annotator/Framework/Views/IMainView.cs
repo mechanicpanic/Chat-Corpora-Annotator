@@ -1,4 +1,5 @@
-﻿using IndexEngine;
+﻿using CSharpTest.Net.Collections;
+using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -13,9 +14,10 @@ namespace Viewer.Framework.Views
         List<DynamicMessage> SearchResults { get; set; }
         string CurrentPath { get; set; }
         string CurrentIndexPath { get; set; }
+        bool InfoExtracted { get; set; }
 
         void EnsureMessageIsVisible(int id);
-        bool InfoExtracted { get; set; }
+
         void SetLineCount(int count);
         void DisplayDocuments();
         void DisplaySearchResults();
@@ -23,18 +25,20 @@ namespace Viewer.Framework.Views
         void SetTagsetLabel(string tagset);
         void DisplayStatistics(int type, Dictionary<string,double> args);
 
-        INGramView CreateNgramView();
-
         IKeywordView CreateKeywordView();
-        void ShowNgrams(INGramView nGram);
-        
+        void ShowKeywordView(IKeywordView key);
+
+
 
         void ShowDates(List<DateTime> dates);
-        void ShowKeywordView(IKeywordView key);
+
         void ShowSorryMessage();
         void ShowExtractedMessage();
 
         void DisplayConcordance(string[] con);
+        void DisplayNGrams(List<BTreeDictionary<string, int>> grams);
+        event EventHandler CheckNgramState;
+        void UpdateNgramState(bool state, bool readstate);
         event EventHandler FileAndIndexSelected;
         event EventHandler OpenIndexedCorpus;
 
@@ -45,16 +49,12 @@ namespace Viewer.Framework.Views
         event EventHandler LoadMore;
 
         event ConcordanceEventHandler ConcordanceClick;
-        event EventHandler NGramClick;
+        event NgramEventHandler NGramClick;
+        event EventHandler BuildIndexClick;
         event EventHandler KeywordClick;
         event EventHandler LoadStatistics;
 
         event EventHandler ExtractInfoClick;
-
-        event EventHandler VisualizeLengths;
-        event EventHandler VisualizeTokens;
-        event EventHandler VisualizeTokenLengths;
-
         //void VisualizeHist(PointPairList list, string name);
 
     }

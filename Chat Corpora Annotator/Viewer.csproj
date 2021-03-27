@@ -420,7 +420,6 @@
       <DependentUpon>DelimiterStep.cs</DependentUpon>
     </Compile>
     <Compile Include="Framework\Presenters\KeywordPresenter.cs" />
-    <Compile Include="Framework\Presenters\NGramPresenter.cs" />
     <Compile Include="Framework\Presenters\Parser\ChatBaseVisitor.cs" />
     <Compile Include="Framework\Presenters\Parser\ChatLexer.cs" />
     <Compile Include="Framework\Presenters\Parser\ChatParser.cs" />
@@ -441,15 +440,14 @@
     <Compile Include="Framework\Services\TaggedCollectionStatisticsService.cs" />
     <Compile Include="Framework\Services\TagSaver.cs" />
     <Compile Include="Framework\Services\TagService.cs" />
-    <Compile Include="Framework\Views\IConcordanceView.cs" />
     <Compile Include="Framework\Views\IKeywordView.cs" />
-    <Compile Include="Framework\Views\INGramView.cs" />
     <Compile Include="Framework\Views\LuceneQueryEventHandler.cs" />
     <Compile Include="Framework\Views\SuggesterView.cs" />
     <Compile Include="Framework\Views\TagsetView.cs" />
     <Compile Include="Framework\Views\TagView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LuceneQueryEventArgs.cs" />
+    <Compile Include="NgramEventArgs.cs" />
     <Compile Include="UI\MainWindowCSV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,12 +540,6 @@
     <Compile Include="UI\HeatmapForm.Designer.cs">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\NGramSearch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\NGramSearch.Designer.cs">
-      <DependentUpon>NGramSearch.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Suggester.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -609,9 +601,6 @@
     </Compile>
     <EmbeddedResource Include="UI\HeatmapForm.resx">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\NGramSearch.resx">
-      <DependentUpon>NGramSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Suggester.resx">
       <DependentUpon>Suggester.cs</DependentUpon>
