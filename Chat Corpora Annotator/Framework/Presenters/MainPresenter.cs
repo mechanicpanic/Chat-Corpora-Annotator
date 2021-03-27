@@ -7,6 +7,7 @@ using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 using ExtractingServices;
 using ZedGraph;
+using System.Threading;
 
 namespace Viewer.Framework.Presenters
 {
@@ -150,7 +151,12 @@ namespace Viewer.Framework.Presenters
             }
             else
             {
-                _ngrammer.BuildFullIndex();
+                
+                
+                Thread t = new Thread(_ngrammer.BuildFullIndex);
+                t.Start();
+                
+                
 
             }
             
