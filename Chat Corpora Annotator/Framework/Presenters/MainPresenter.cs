@@ -1,13 +1,12 @@
-﻿using IndexEngine;
+﻿using ExtractingServices;
+using IndexEngine;
 using Lucene.Net.Index;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
-using ExtractingServices;
-using ZedGraph;
-using System.Threading;
 
 namespace Viewer.Framework.Presenters
 {
@@ -25,7 +24,7 @@ namespace Viewer.Framework.Presenters
         private readonly IConcordanceService _concordancer;
         private readonly INGramService _ngrammer;
         public MainPresenter(IMainView view, ITagView tagger, ITagService service, ICSVView csv, ISearchService searcher, FolderService folder, IStatisticsService dataset, ITaggedStatisticsService corpus, IConcordanceService concordancer, INGramService ngrammer)
-        {                                                                                                                                       
+        {
             this._tagger = tagger;
             this._service = service;
             this._main = view;
@@ -47,7 +46,7 @@ namespace Viewer.Framework.Presenters
             _main.BuildIndexClick += _main_BuildIndexClick;
             _main.CheckNgramState += _main_CheckNgramState;
             _folder.CheckFolder();
-           
+
 
         }
 
@@ -68,7 +67,7 @@ namespace Viewer.Framework.Presenters
             {
                 Thread t = new Thread(_ngrammer.BuildFullIndex);
                 t.Start();
-                _main.UpdateNgramState(_ngrammer.IndexExists,_ngrammer.IndexIsRead);
+                _main.UpdateNgramState(_ngrammer.IndexExists, _ngrammer.IndexIsRead);
             }
         }
 
@@ -111,7 +110,7 @@ namespace Viewer.Framework.Presenters
             var result = _ngrammer.GetReadableResultsForTerm(e.Term);
             _main.DisplayNGrams(result);
 
-            
+
         }
         private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
         {
@@ -159,7 +158,7 @@ namespace Viewer.Framework.Presenters
             MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
             ShowTags(count);
-            
+
         }
 
         private void ShowTags(int count)
@@ -168,7 +167,7 @@ namespace Viewer.Framework.Presenters
             {
                 if (_service.TaggedIds.Contains(i))
                 {
-                    InsertTagsInDynamicMessage(i,count);
+                    InsertTagsInDynamicMessage(i, count);
                 }
             }
             _tagger.CurIndex += count;
@@ -181,7 +180,7 @@ namespace Viewer.Framework.Presenters
             foreach (var item in arr)
             {
                 var s = item.Split('-');
-                if (id <= MessageContainer.Messages.Count+offset)
+                if (id <= MessageContainer.Messages.Count + offset)
                 {
                     if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
                     {
@@ -199,7 +198,7 @@ namespace Viewer.Framework.Presenters
         private void _view_FindClick(object sender, LuceneQueryEventArgs e)
 
         {
-           
+
             _searcher.UserQuery = LuceneService.Parser.Parse(e.Query);
             if (!e.FilteredByDate && !e.FilteredByUser)
             {

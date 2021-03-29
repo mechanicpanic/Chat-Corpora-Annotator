@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Viewer.Framework.Views;
 
@@ -26,13 +20,14 @@ namespace Viewer.CSV_Wizard
         }
 
         public string ReturnDelimiter()
-            
+
         {
-                return Delimiters[comboBox1.SelectedItem.ToString()];
+            return Delimiters[comboBox1.SelectedItem.ToString()];
 
         }
 
-        public void ShowView() {
+        public void ShowView()
+        {
             this.Show();
         }
         public void CloseView()
@@ -51,7 +46,7 @@ namespace Viewer.CSV_Wizard
             else
             {
                 MessageBox.Show("Please select item");
-                
+
             }
         }
     }

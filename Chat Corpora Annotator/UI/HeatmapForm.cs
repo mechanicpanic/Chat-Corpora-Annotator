@@ -36,7 +36,7 @@ namespace Viewer
             RectangleWidth = this.Width / Colors.Count;
             RectangleHeight = this.Height - panel2.Height;
 
-            
+
             RectangleSize = new SizeF(RectangleWidth, RectangleHeight);
             RectangleLocation = new Point(0, 0);
 
@@ -44,9 +44,9 @@ namespace Viewer
             {
                 //RectangleF rectangle = new RectangleF(RectangleLocation, RectangleSize);
                 //Rectangles.Add(rectangle);
-                
 
-                
+
+
                 Panel panel = new Panel();
                 panel.Size = RectangleSize.ToSize();
                 panel.Location = RectangleLocation;
@@ -70,15 +70,15 @@ namespace Viewer
                 }
                 else
                 {
-                    tt.SetToolTip(panel, date[0] + " - " + date[date.Count-2]);
+                    tt.SetToolTip(panel, date[0] + " - " + date[date.Count - 2]);
                 }
-                
+
                 tooltips.Add(tt);
 
                 RectangleLocation += new Size((int)RectangleWidth, 0);
 
             }
-            
+
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)

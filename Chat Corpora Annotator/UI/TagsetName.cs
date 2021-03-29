@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Viewer.UI
@@ -24,7 +17,7 @@ namespace Viewer.UI
             if (!String.IsNullOrEmpty(textBox1.Text))
             {
                 this.Tagset = textBox1.Text;
-                
+
             }
             NameButtonClicked?.Invoke(this, EventArgs.Empty);
         }

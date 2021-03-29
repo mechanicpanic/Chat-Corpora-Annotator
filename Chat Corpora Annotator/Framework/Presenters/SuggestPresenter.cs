@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
-using ExtractingServices;
-using Viewer.Framework.Presenters.Parser;
-using IndexEngine;
 
 namespace Viewer.Framework.Presenters
 {
@@ -72,7 +65,7 @@ namespace Viewer.Framework.Presenters
             _sugg.QueryResult = Parser.Parser.parse(_sugg.QueryString);
             _sugg.SetCounts();
             _sugg.DisplaySituation();
-            
+
         }
 
         private void _tagger_ShowSuggester(object sender, EventArgs e)

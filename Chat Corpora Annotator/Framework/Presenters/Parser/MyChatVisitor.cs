@@ -1,24 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Antlr4.Runtime.Atn;
-using Antlr4.Runtime.Misc;
-using com.sun.tools.javac.comp;
-using de.jollyday.util;
+﻿using Antlr4.Runtime.Misc;
 using IndexEngine;
-using java.awt;
-using javax.swing;
-using javax.xml.transform;
-using jdk.nashorn.@internal.ir;
-using Microsoft.VisualBasic;
-using org.omg.CORBA;
 using Retrievers;
-using Viewer.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Viewer.Framework.Presenters.Parser
 {
@@ -50,37 +36,37 @@ namespace Viewer.Framework.Presenters.Parser
                     }
                 }
 
-            
 
 
-            if (context.restrictions() != null)
-            {
-                // If query / subquery contains only restrictions -- we need only merge restrictions
-                // [x1...xn] -- result for restriction R1
-                // [y1...ym] -- result for restriction R2
-                // Select R1, R2 inwin W
-                // Result is vector of vectors [[xi, yj]] where 0 < yj - xi <= W
-                // So we have only one restriction group
 
-                var onlyRestrictions = (MsgGroups)VisitRestrictions(context.restrictions());
-                var mergedRestrcitions = MergeRestrictions(onlyRestrictions, windowSize);
+                if (context.restrictions() != null)
+                {
+                    // If query / subquery contains only restrictions -- we need only merge restrictions
+                    // [x1...xn] -- result for restriction R1
+                    // [y1...ym] -- result for restriction R2
+                    // Select R1, R2 inwin W
+                    // Result is vector of vectors [[xi, yj]] where 0 < yj - xi <= W
+                    // So we have only one restriction group
 
-                return OnlyRestrictionsToList(mergedRestrcitions);
-            }
-            else if (context.query_seq() != null)
-            {
-                // Now in this query subqueries only.
-                // Also we have invariant: results of son's query are calculated correctlly.
-                // It means that now we have only son's correct accomadation.
+                    var onlyRestrictions = (MsgGroups)VisitRestrictions(context.restrictions());
+                    var mergedRestrcitions = MergeRestrictions(onlyRestrictions, windowSize);
 
-                var subQueryResults = (List<List<MsgGroups>>)VisitQuery_seq(context.query_seq());
+                    return OnlyRestrictionsToList(mergedRestrcitions);
+                }
+                else if (context.query_seq() != null)
+                {
+                    // Now in this query subqueries only.
+                    // Also we have invariant: results of son's query are calculated correctlly.
+                    // It means that now we have only son's correct accomadation.
 
-                return MergeQueries(subQueryResults, windowSize);                                               
-            }
+                    var subQueryResults = (List<List<MsgGroups>>)VisitQuery_seq(context.query_seq());
+
+                    return MergeQueries(subQueryResults, windowSize);
+                }
             }
             else
             {
-                
+
                 return null;
             }
             return null;
@@ -118,7 +104,7 @@ namespace Viewer.Framework.Presenters.Parser
                 var newList = (List<int>)VisitRestriction(r);
                 newList.Sort();
                 rList.Add(newList);
-                
+
             }
 
             return rList;
@@ -141,7 +127,7 @@ namespace Viewer.Framework.Presenters.Parser
                 lhs.Sort();
 
                 return lhs;
-            } 
+            }
             else if (context.Not() != null)
             {
                 long tmp = LuceneService.DirReader.MaxDoc - 1;
@@ -155,11 +141,11 @@ namespace Viewer.Framework.Presenters.Parser
                 var excludeList = (List<int>)VisitRestriction(context.restriction(0));
 
                 return numberList.Except(excludeList).ToList();
-            } 
+            }
             else if (context.condition() != null)
             {
                 return VisitCondition(context.condition());
-            } 
+            }
             else
             {
                 return VisitRestriction(context.restriction(0));
@@ -218,7 +204,7 @@ namespace Viewer.Framework.Presenters.Parser
                 List<string> list = new List<string>();
                 if (dictname != "<missing STRING>")
                 {
-                    if(UserDictsContainer.UserDicts.TryGetValue(dictname, out list))
+                    if (UserDictsContainer.UserDicts.TryGetValue(dictname, out list))
                     {
                         return Retrievers.Retrievers.HasWordOfList(list);
                     }
@@ -231,9 +217,9 @@ namespace Viewer.Framework.Presenters.Parser
                 {
                     return null;
                 }
- 
-                
-                
+
+
+
             }
             else if (context.HasDate() != null)
             {
@@ -244,7 +230,7 @@ namespace Viewer.Framework.Presenters.Parser
                 // Message about incorrect query
                 return null;
             }
-            
+
         }
 
 
@@ -358,7 +344,7 @@ namespace Viewer.Framework.Presenters.Parser
                 }
 
 
-                if (can_end) 
+                if (can_end)
                 {
                     break;
                 }

@@ -1,7 +1,5 @@
 ﻿using IndexEngine;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Xml;
 
 namespace Viewer.Framework.Services
@@ -18,7 +16,7 @@ namespace Viewer.Framework.Services
 
     }
 
-    
+
     public class TagFileWriter : ITagFileWriter
     {
         private XmlWriter writer;
@@ -26,7 +24,7 @@ namespace Viewer.Framework.Services
 
         public void OpenWriter()
         {
-           
+
             writer = XmlWriter.Create(IndexService.CurrentIndexPath + @"\info\output.xml");
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
@@ -41,7 +39,7 @@ namespace Viewer.Framework.Services
             writer.WriteElementString("Date", date);
             writer.WriteEndElement();
         }
-        
+
         public void CloseWriter()
         {
             writer.WriteEndElement();

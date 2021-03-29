@@ -7,7 +7,7 @@ namespace Viewer.Framework.Services
     public interface ICSVReadService
     {
         //Dictionary<string, int> MessagesPerDay { get; set; }
-        string[] GetFields(string path,string delimiter);
+        string[] GetFields(string path, string delimiter);
         int GetLineCount(string path, bool header);
 
 
@@ -19,7 +19,7 @@ namespace Viewer.Framework.Services
 
     public class CSVReadService : ICSVReadService
     {
-        public string[] GetFields(string path,string delimiter)
+        public string[] GetFields(string path, string delimiter)
         {
             string[] allFields;
             using (var parser = new TextFieldParser(path))
@@ -41,7 +41,7 @@ namespace Viewer.Framework.Services
                 {
                     csv.ReadRow(ref row); //header read;
                 }
-                
+
                 while (csv.ReadRow(ref row))
                 {
                     count++;

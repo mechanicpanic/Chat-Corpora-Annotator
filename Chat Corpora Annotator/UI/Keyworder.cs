@@ -23,7 +23,8 @@ namespace Viewer.UI
         public List<string> NounPhrases { get; set; }
         public int RakeLength { get; set; } = 2;
 
-        public void DisplayKeyPhrases() {
+        public void DisplayKeyPhrases()
+        {
             //richTextBox2.Lines = NounPhrases.ToArray();
         }
         private void button1_Click(object sender, EventArgs e)

@@ -2,12 +2,9 @@
 using IndexEngine;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
-using Lucene.Net.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Retrievers
 {

@@ -1,5 +1,4 @@
-﻿using IndexEngine;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using Viewer.CSV_Wizard;
 using Viewer.Framework.Presenters;
@@ -37,7 +36,7 @@ namespace Viewer
             SuggesterService suggesterService = new SuggesterService();
             DatasetStatisticsService dataset = new DatasetStatisticsService();
             TaggedCollectionStatisticsService corpus = new TaggedCollectionStatisticsService();
-           
+
             //var tagger = main;
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
@@ -45,14 +44,14 @@ namespace Viewer
             TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
             TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
             SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, main, main);
-            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder,dataset,corpus, concordancer,ngrammer);
+            MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder, dataset, corpus, concordancer, ngrammer);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);
             HeatmapPresenter heatmapPresenter = new HeatmapPresenter(main, heatmap, heater);
             ChartPresenter chartPresenter = new ChartPresenter(main, chart);
             main.AddOwnedForm(delim);
             Application.Run(main);
-           
+
         }
     }
 }

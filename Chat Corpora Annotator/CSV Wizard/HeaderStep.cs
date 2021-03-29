@@ -22,29 +22,29 @@ namespace Viewer.CSV_Wizard
         public List<string> GetValues()
         {
             List<string> selectedFields = new List<string>();
-           
+
             foreach (ListViewItem item in listView1.CheckedItems)
-                {
-                    selectedFields.Add(item.Text);
-                }
-            if(header)
             {
-                
+                selectedFields.Add(item.Text);
+            }
+            if (header)
+            {
+
                 selectedFields.Add("header");
-                
+
             }
             else
             {
                 selectedFields.Add("no header");
-                foreach(ListViewItem item in listView1.Items)
+                foreach (ListViewItem item in listView1.Items)
                 {
                     selectedFields.Add(item.Text);
                 }
             }
-                
-                return selectedFields;
-            
-            
+
+            return selectedFields;
+
+
         }
 
         private void label1_Click(object sender, System.EventArgs e)
@@ -54,12 +54,12 @@ namespace Viewer.CSV_Wizard
 
         private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-           
+
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

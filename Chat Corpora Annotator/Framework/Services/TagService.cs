@@ -1,9 +1,6 @@
-﻿using CSharpTest.Net.Collections;
+﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
-using IndexEngine;
-using edu.stanford.nlp.util;
-using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Viewer.Framework.Services
@@ -13,7 +10,7 @@ namespace Viewer.Framework.Services
     {
         bool TagsetSet { get; set; }
         List<int> TaggedIds { get; set; }
-        Dictionary<int,string> SituationContainer { get; set; }
+        Dictionary<int, string> SituationContainer { get; set; }
         string ProjectTagset { get; set; }
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
@@ -35,7 +32,7 @@ namespace Viewer.Framework.Services
 
         public TagService()
         {
-            
+
         }
         public void CheckTagset()
         {
@@ -69,7 +66,7 @@ namespace Viewer.Framework.Services
         {
             if (TagsetIndex.Index.ContainsKey(name))
             {
-                TagsetIndex.UpdateIndexEntry(name, tag, op);                
+                TagsetIndex.UpdateIndexEntry(name, tag, op);
             }
         }
 

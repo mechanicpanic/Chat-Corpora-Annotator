@@ -1,6 +1,4 @@
-﻿
-using edu.stanford.nlp.util;
-using IndexEngine;
+﻿using IndexEngine;
 using System;
 using System.Linq;
 using Viewer.CSV_Wizard;
@@ -52,7 +50,7 @@ namespace Viewer.Framework.Presenters
             _csv.AllFields = _reader.GetFields(_main.CurrentPath, _delim.ReturnDelimiter());
             _delim.CloseView();
             LaunchWizard();
-            
+
         }
         private void LaunchWizard()
         {
@@ -71,7 +69,7 @@ namespace Viewer.Framework.Presenters
         {
 
 
-            
+
             var list = IndexService.LoadSomeDocuments(2000);
             //_main.Messages = list;
             MessageContainer.Messages = list;
@@ -86,7 +84,7 @@ namespace Viewer.Framework.Presenters
             _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
             _main.SetLineCount(LuceneService.DirReader.NumDocs);
             _main.FileLoadState = true;
-            
+
         }
 
 

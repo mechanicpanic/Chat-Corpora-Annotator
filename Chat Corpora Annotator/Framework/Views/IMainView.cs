@@ -2,8 +2,6 @@
 using IndexEngine;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using ZedGraph;
 
 namespace Viewer.Framework.Views
 {
@@ -23,7 +21,7 @@ namespace Viewer.Framework.Views
         void DisplaySearchResults();
 
         void SetTagsetLabel(string tagset);
-        void DisplayStatistics(int type, Dictionary<string,double> args);
+        void DisplayStatistics(int type, Dictionary<string, double> args);
 
         IKeywordView CreateKeywordView();
         void ShowKeywordView(IKeywordView key);

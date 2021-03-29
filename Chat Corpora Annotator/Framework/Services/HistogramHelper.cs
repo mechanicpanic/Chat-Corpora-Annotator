@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Viewer
 {
@@ -17,7 +15,7 @@ namespace Viewer
         public static List<int> RemoveOutliers(List<int> source, int cutoff)
         {
             var clean = new List<int>();
-            for(int i = 0; i < source.Count; i++)
+            for (int i = 0; i < source.Count; i++)
             {
                 if (source[i] < cutoff)
                 {
@@ -49,7 +47,7 @@ namespace Viewer
             {
                 foreach (var value in source)
                 {
-                    int bucketIndex = (int)Math.Ceiling((value - min) / (double) bucketSize) - 1;
+                    int bucketIndex = (int)Math.Ceiling((value - min) / (double)bucketSize) - 1;
                     if (bucketIndex < 0)
                         continue;
                     buckets[bucketIndex]++;

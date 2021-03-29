@@ -1,14 +1,5 @@
-﻿using IndexEngine;
-using Lucene.Net.Analysis;
-using Lucene.Net.Analysis.TokenAttributes;
-using Lucene.Net.Documents;
-using Lucene.Net.Search;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Viewer.Framework.Services
 {
@@ -47,7 +38,7 @@ namespace Viewer.Framework.Services
 
 
     }
-    
+
 }
 
 

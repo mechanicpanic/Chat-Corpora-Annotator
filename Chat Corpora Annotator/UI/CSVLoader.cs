@@ -82,7 +82,8 @@ namespace Viewer
             {
                 case "Header":
                     var f = _steps[currentStep].GetValues();
-                    if (f[f.Count-1] == "header") {
+                    if (f[f.Count - 1] == "header")
+                    {
                         this.Header = true;
                         f.RemoveAt(f.Count - 1);
                     }
@@ -91,16 +92,16 @@ namespace Viewer
                         this.Header = false;
                         int index = f.FindIndex(x => x == "no header");
                         int index2 = 0;
-                        for(int i = index+1; i < f.Count; i++)
+                        for (int i = index + 1; i < f.Count; i++)
                         {
                             this.AllFields.SetValue(f[i], index2);
                             index2++;
-                            
+
                         }
                         f.RemoveRange(index, f.Count - index);
 
                     }
-                    
+
                     this.SelectedFields = f;
                     HeaderSelected?.Invoke(this, EventArgs.Empty);
                     currentStep++;

@@ -68,7 +68,7 @@ namespace Viewer.Framework.Services
 
                     if (days.Length - index > blockDayCount)
                     {
-                        
+
                         while (count < blockDayCount)
                         {
                             if (count == 0)

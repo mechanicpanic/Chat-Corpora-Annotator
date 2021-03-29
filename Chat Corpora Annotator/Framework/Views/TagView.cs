@@ -1,7 +1,5 @@
-﻿using edu.stanford.nlp.util.logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Viewer.Framework.Views
 {
@@ -13,7 +11,7 @@ namespace Viewer.Framework.Views
         event EventHandler TagsetClick;
         event TaggerEventHandler AddTag;
         event TaggerEventHandler RemoveTag;
-        
+
         event TaggerEventHandler DeleteSituation;
         event TaggerEventHandler EditSituation;
         event TaggerEventHandler MergeSituations;
@@ -24,7 +22,7 @@ namespace Viewer.Framework.Views
 
 
         Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
-     
+
         bool SituationsLoaded { get; set; }
         int CurIndex { get; set; }
         //void DisplayTagsInDocuments();
@@ -40,7 +38,7 @@ namespace Viewer.Framework.Views
         void DeleteSituationIndexItem(string s);
         void UpdateSituationCount(int count);
 
-     
+
     }
 
 

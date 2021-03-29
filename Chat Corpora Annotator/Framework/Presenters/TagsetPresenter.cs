@@ -1,5 +1,4 @@
-﻿using com.fasterxml.jackson.core.sym;
-using IndexEngine;
+﻿using IndexEngine;
 using System;
 using System.IO;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace Viewer.Framework.Presenters
             _tagset.LoadExistingTagset += _tagset_LoadExistingTagset;
             _tagset.SetProjectTagset += _tagset_SetProjectTagset;
             //_tagset.DeleteTagset += _tagset_DeleteTagset;
-            
+
             _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
         }
 
@@ -36,7 +35,7 @@ namespace Viewer.Framework.Presenters
             string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
             if (!_service.TagsetSet)
             {
-                
+
                 File.WriteAllText(path, args.Name);
                 _service.TagsetSet = true;
             }
@@ -49,7 +48,7 @@ namespace Viewer.Framework.Presenters
             _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];
             _main.DisplayTagset(TagsetIndex.Index[args.Name]);
             _main.DisplayTagsetColors(_main.TagsetColors);
-            
+
         }
 
         private void _tagset_UpdateTagset(object sender, TagsetUpdateEventArgs args)

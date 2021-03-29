@@ -1,10 +1,7 @@
-﻿using System;
+﻿using IndexEngine;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using IndexEngine;
-using ExtractingServices;
 using System.Text.RegularExpressions;
 
 namespace Viewer.Framework.Services
@@ -16,7 +13,7 @@ namespace Viewer.Framework.Services
         void FlushKeywordsToDisk();
         List<string> ProcessKeywordList(List<string> keywords);
     }
-    public class KeywordService: IKeywordService
+    public class KeywordService : IKeywordService
     {
         public void FlushKeywordsToDisk()
         {
@@ -33,7 +30,7 @@ namespace Viewer.Framework.Services
         private string BuildBigString(List<string> list)
         {
             StringBuilder str = new StringBuilder();
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 str.Append(item);
             }
@@ -42,13 +39,13 @@ namespace Viewer.Framework.Services
         private List<string> GetList()
         {
             List<string> sents = new List<string>();
-            for(int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
+            for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
             {
                 var document = LuceneService.DirReader.Document(i);
                 sents.Add(document.GetField(IndexService.TextFieldKey).GetStringValue());
             }
             return sents;
-            
+
         }
         public List<string> ProcessKeywordList(List<string> keywords)
         {

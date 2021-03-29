@@ -1,11 +1,9 @@
-﻿using System;
+﻿using ExtractingServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
-using ExtractingServices;
 
 namespace Viewer.Framework.Presenters
 {
@@ -34,7 +32,7 @@ namespace Viewer.Framework.Presenters
                 {
                     _view.NounPhrases.AddRange(np.Value);
                 }
-                
+
                 _view.DisplayKeyPhrases();
             }
             else
@@ -48,7 +46,7 @@ namespace Viewer.Framework.Presenters
             _view.RakeKeywords.Clear();
             var rawKeywords = _service.GetRakeKeywords(_view.RakeLength);
             var keywords = _service.ProcessKeywordList(rawKeywords.Keys.ToList());
-            foreach(var key in keywords)
+            foreach (var key in keywords)
             {
                 if (rawKeywords[key] > 1)
                 {
@@ -56,7 +54,7 @@ namespace Viewer.Framework.Presenters
                 }
             }
             _view.DisplayRakeKeywords();
-            
+
         }
     }
 }

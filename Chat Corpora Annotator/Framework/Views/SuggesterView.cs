@@ -1,16 +1,13 @@
 ﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Viewer.Framework.Views
 {
 
-    public interface ISuggesterView: IView
+    public interface ISuggesterView : IView
     {
-       void DisplaySituation();
+        void DisplaySituation();
 
         event EventHandler RunQuery;
         string QueryString { get; set; }
