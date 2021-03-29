@@ -215,7 +215,7 @@ namespace ExtractingServices
                 for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
                 {
                     Lucene.Net.Documents.Document document = LuceneService.DirReader.Document(i);
-                    CoreDocument coredoc = GetAnnotatedDocument(document.GetField(IndexService.TextFieldKey).GetStringValue());
+                    CoreDocument coredoc = GetAnnotatedDocument(document.GetField(ProjectInfo.TextFieldKey).GetStringValue());
                     ExtractNERTags(coredoc, document);
                     //IsQuestionList.Add(document.GetField("id").GetStringValue(), DetectQuestion(coredoc));
                     if (DetectQuestion(coredoc))

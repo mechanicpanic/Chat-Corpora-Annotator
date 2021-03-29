@@ -84,8 +84,8 @@ namespace Viewer.Framework.Services
                             windows.Add(index - prev);
                         }
                         prev = index;
-                        symcount += LuceneService.DirReader.Document(index).GetField(IndexService.TextFieldKey).GetStringValue().Length;
-                        usersInSituation.Add(LuceneService.DirReader.Document(index).GetField(IndexService.SenderFieldKey).GetStringValue());
+                        symcount += LuceneService.DirReader.Document(index).GetField(ProjectInfo.TextFieldKey).GetStringValue().Length;
+                        usersInSituation.Add(LuceneService.DirReader.Document(index).GetField(ProjectInfo.SenderFieldKey).GetStringValue());
                     }
 
                     userPerSituationPerTagCounts[kvp.Key] += usersInSituation.Count;

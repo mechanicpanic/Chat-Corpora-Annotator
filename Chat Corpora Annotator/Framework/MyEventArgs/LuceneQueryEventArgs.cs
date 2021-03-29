@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Viewer
+namespace Viewer.Framework.MyEventArgs
 {
     public class LuceneQueryEventArgs : EventArgs
     {
@@ -81,4 +81,6 @@ namespace Viewer
         public bool FilteredByDate { get { return date; } }
         public bool FilteredByUser { get { return user; } }
     }
+
+    public delegate void LuceneQueryEventHandler(object sender, LuceneQueryEventArgs args);
 }

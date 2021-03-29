@@ -1,12 +1,7 @@
 ﻿using CSharpTest.Net.Collections;
-using Lucene.Net.Analysis;
-using Lucene.Net.Analysis.Standard;
 
 using Lucene.Net.Documents;
-using Lucene.Net.Index;
-using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
-using Lucene.Net.Store;
 using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
@@ -17,43 +12,30 @@ using Wintellect.PowerCollections;
 
 namespace IndexEngine
 {
-
-
-    
-
     public static class IndexService
     {
 
         #region fields
         private static int viewerReadIndex = 0;
 
-        public static BTreeDictionary<DateTime, int> MessagesPerDay { get; set; } = new BTreeDictionary<DateTime, int>();
+       
 
         private static int[] lookup = new int[3];
 
-
-        public static HashSet<string> UserKeys { get; set; } = new HashSet<string>();
-
-        public static Dictionary<string, Color> UserColors { get; set; } = new Dictionary<string, Color>();
-        public static string DateFieldKey { get; set; }
-        public static string TextFieldKey { get; set; }
-        public static string SenderFieldKey { get; set; }
-        public static List<string> SelectedFields { get; set; }
-        public static string CurrentIndexPath { get; set; }
 
         
         #endregion
         #region save info
         private static void CheckDir()
         {
-            if (!System.IO.Directory.Exists(CurrentIndexPath + "\\info"))
+            if (!System.IO.Directory.Exists(ProjectInfo.InfoPath))
             {
-                System.IO.Directory.CreateDirectory(CurrentIndexPath + "\\info");
+                System.IO.Directory.CreateDirectory(ProjectInfo.InfoPath);
 
             }
             else
             {
-                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(CurrentIndexPath + "\\info");
+                DirectoryInfo di = new DirectoryInfo(ProjectInfo.InfoPath);
 
                 foreach (System.IO.FileInfo file in di.GetFiles())
                 {
@@ -61,17 +43,17 @@ namespace IndexEngine
                 }
             }
         }
-        private static void SaveInfoToDisk(int linecount)
+        private static void SaveInfoToDisk()
         {
 
 
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-info.txt"))
+            using (StreamWriter file =
+                new StreamWriter(ProjectInfo.KeyPath))
             {
-                file.WriteLine(TextFieldKey);
-                file.WriteLine(SenderFieldKey);
-                file.WriteLine(DateFieldKey);
-                file.WriteLine(linecount.ToString());
+                file.WriteLine(ProjectInfo.TextFieldKey);
+                file.WriteLine(ProjectInfo.SenderFieldKey);
+                file.WriteLine(ProjectInfo.DateFieldKey);
+                file.WriteLine(ProjectInfo.Data.LineCount.ToString());
 
             }
         }
@@ -79,12 +61,11 @@ namespace IndexEngine
         private static void SaveUsersToDisk()
         {
 
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
+            using (StreamWriter file = new StreamWriter(ProjectInfo.UsersPath))
             {
-                foreach (var kvp in UserColors)
+                foreach (var kvp in ProjectInfo.Data.UserColors)
                 {
-                    file.WriteLine(kvp.Key+"+"+kvp.Value.ToArgb().ToString()); ;
+                    file.WriteLine(kvp.Key + "+" + kvp.Value.ToArgb().ToString());
                 }
             }
         }
@@ -92,10 +73,9 @@ namespace IndexEngine
         private static void SaveFieldsToDisk()
         {
 
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-fields.txt"))
+            using (StreamWriter file = new StreamWriter(ProjectInfo.FieldsPath))
             {
-                foreach (var field in SelectedFields)
+                foreach (var field in ProjectInfo.Data.SelectedFields)
                 {
                     file.WriteLine(field);
                 }
@@ -104,10 +84,9 @@ namespace IndexEngine
         private static void SaveStatsToDisk()
         {
 
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-stats.txt"))
+            using (StreamWriter file = new StreamWriter(ProjectInfo.StatsPath))
             {
-                foreach (var kvp in MessagesPerDay)
+                foreach (var kvp in ProjectInfo.Data.MessagesPerDay)
                 {
                     file.WriteLine(kvp.Key.ToString() + "#" + kvp.Value);
                 }
@@ -115,11 +94,11 @@ namespace IndexEngine
         }
         #endregion
         #region load info
-        public static OrderedDictionary<string, string> LoadInfoFromDisk(string CurrentIndexPath)
+        public static OrderedDictionary<string, string> LoadInfoFromDisk(string keyPath)
         {
 
             OrderedDictionary<string, string> info = new OrderedDictionary<string, string>();
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-info.txt"))
+            using (StreamReader reader = new StreamReader(keyPath))
             {
                 info.Add("TextFieldKey", reader.ReadLine());
                 info.Add("SenderFieldKey", reader.ReadLine());
@@ -130,10 +109,10 @@ namespace IndexEngine
             return info;
         }
 
-        public static List<string> LoadFieldsFromDisk(string CurrentIndexPath)
+        public static List<string> LoadFieldsFromDisk(string fieldsPath)
         {
             List<string> fields = new List<string>();
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-fields.txt"))
+            using (StreamReader reader = new StreamReader(fieldsPath))
             {
 
                 while (!reader.EndOfStream)
@@ -146,27 +125,27 @@ namespace IndexEngine
             return fields;
         }
 
-        public static HashSet<string> LoadUsersFromDisk(string CurrentIndexPath)
+        public static HashSet<string> LoadUsersFromDisk(string usersPath)
         {
             HashSet<string> users = new HashSet<string>();
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-users.txt"))
+            using (StreamReader reader = new StreamReader(usersPath))
             {
                 while (!reader.EndOfStream)
                 {
                     var kvp = reader.ReadLine().Split('+');
                     
                     users.Add(kvp[0]);
-                    UserColors.Add(kvp[0], Color.FromArgb(int.Parse(kvp[1]))); //bad practice!
+                    ProjectInfo.Data.UserColors.Add(kvp[0], Color.FromArgb(int.Parse(kvp[1]))); //bad practice!
                 }
             }
 
             return users;
         }
 
-        public static BTreeDictionary<DateTime, int> LoadStatsFromDisk(string CurrentIndexPath)
+        public static BTreeDictionary<DateTime, int> LoadStatsFromDisk(string statsPath)
         {
             BTreeDictionary<DateTime, int> stats = new BTreeDictionary<DateTime, int>();
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(CurrentIndexPath) + @"-stats.txt"))
+            using (StreamReader reader = new StreamReader(statsPath))
             {
                 while (!reader.EndOfStream)
                 {
@@ -178,26 +157,26 @@ namespace IndexEngine
             return stats;
         }
         #endregion
-        public static void InitLookup(string[] allFields)
+        private static void InitLookup(string[] allFields)
         {
             lookup = new int[3];
-            foreach (var field in SelectedFields)
+            foreach (var field in ProjectInfo.Data.SelectedFields)
             {
-                if (field == DateFieldKey)
+                if (field == ProjectInfo.DateFieldKey)
                 {
-                    lookup[0] = Array.IndexOf(allFields, DateFieldKey);
+                    lookup[0] = Array.IndexOf(allFields, ProjectInfo.DateFieldKey);
                 }
-                if (field == SenderFieldKey)
+                if (field == ProjectInfo.SenderFieldKey)
                 {
-                    lookup[1] = Array.IndexOf(allFields, SenderFieldKey);
+                    lookup[1] = Array.IndexOf(allFields, ProjectInfo.SenderFieldKey);
                 }
-                if (field == TextFieldKey)
+                if (field == ProjectInfo.TextFieldKey)
                 {
-                    lookup[2] = Array.IndexOf(allFields, TextFieldKey);
+                    lookup[2] = Array.IndexOf(allFields, ProjectInfo.TextFieldKey);
                 }
             }
         }
-        public static List<DynamicMessage> LoadSomeDocuments(int count)
+        public static List<DynamicMessage> LoadNDocumentsFromIndex(int count)
         {
             List<DynamicMessage> messages = new List<DynamicMessage>();
 
@@ -215,7 +194,7 @@ namespace IndexEngine
                     break;
                 }
 
-                foreach (var field in SelectedFields)
+                foreach (var field in ProjectInfo.Data.SelectedFields)
                 {
 
 
@@ -224,7 +203,7 @@ namespace IndexEngine
 
                 }
 
-                DynamicMessage message = new DynamicMessage(temp, SelectedFields, DateFieldKey, document.GetField("id").GetInt32Value().Value);
+                DynamicMessage message = new DynamicMessage(temp, ProjectInfo.Data.SelectedFields, ProjectInfo.DateFieldKey, document.GetField("id").GetInt32Value().Value);
                 messages.Add(message);
 
 
@@ -236,7 +215,7 @@ namespace IndexEngine
 
         public static int PopulateIndex(string filePath, string[] allFields, bool header)
         {
-
+            InitLookup(allFields);
             int result = 0;
             int count = 0;
 
@@ -258,19 +237,19 @@ namespace IndexEngine
                         count++;
                         var t = row[lookup[0]];
                         date = DateTime.Parse(t);
-                        UserKeys.Add(row[lookup[1]]);
+                        ProjectInfo.Data.UserKeys.Add(row[lookup[1]]);
 
 
                         var day = date.Date;
-                        if (!MessagesPerDay.Keys.Contains(day))
+                        if (!ProjectInfo.Data.MessagesPerDay.Keys.Contains(day))
                         {
-                            MessagesPerDay.Add(day, 1);
+                            ProjectInfo.Data.MessagesPerDay.Add(day, 1);
                         }
                         else
                         {
-                            int temp = MessagesPerDay[day];
+                            int temp = ProjectInfo.Data.MessagesPerDay[day];
                             temp++;
-                            MessagesPerDay.TryUpdate(day, temp);
+                            ProjectInfo.Data.MessagesPerDay.TryUpdate(day, temp);
                         }
 
                         Document document = new Document();
@@ -299,7 +278,7 @@ namespace IndexEngine
                             }
                             else
                             {
-                                if (SelectedFields.Contains(allFields[i]))
+                                if (ProjectInfo.Data.SelectedFields.Contains(allFields[i]))
                                 {
                                     document.Add(new StringField(allFields[i], row[i], Field.Store.YES));
                                 }
@@ -314,15 +293,14 @@ namespace IndexEngine
                     LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
                     CheckDir();
                     PopulateUserColors();
-                    SaveInfoToDisk(count);
+                    SaveInfoToDisk();
                     SaveFieldsToDisk();
                     SaveUsersToDisk();
                     SaveStatsToDisk();
                     
-                    OpenReader();
+                   
                     result = 1;
                     return result;
-
                 }
             }
             return result;
@@ -331,76 +309,16 @@ namespace IndexEngine
 
         public static void PopulateUserColors()
         {
-            var colors = ColorLibrary.ColorGenerator.GenerateHSLuvColors(UserKeys.Count, false);
+            var colors = ColorLibrary.ColorGenerator.GenerateHSLuvColors(ProjectInfo.Data.UserKeys.Count, false);
             int i = 0;
-            foreach(var user in UserKeys)
+            foreach(var user in ProjectInfo.Data.UserKeys)
             {
-                UserColors.Add(user, colors[i]);
+                ProjectInfo.Data.UserColors.Add(user, colors[i]);
                 i++;
             }
 
         }
-        private static void OpenParser()
-        {
-            if (LuceneService.Analyzer != null)
-            {
-                LuceneService.Parser = new QueryParser(LuceneService.AppLuceneVersion, IndexService.TextFieldKey, LuceneService.Analyzer);
-                LuceneService.UserParser = new QueryParser(LuceneService.AppLuceneVersion, IndexService.SenderFieldKey, LuceneService.Analyzer);
-            }
-        }
 
-        private static void OpenAnalyzers()
-        {
-
-            LuceneService.Analyzer = new StandardAnalyzer(LuceneService.AppLuceneVersion);
-            LuceneService.NGrammer = new NGramAnalyzer(Analyzer.PER_FIELD_REUSE_STRATEGY);
-        }
-        public static void OpenWriter()
-        {
-
-            OpenAnalyzers();
-            LuceneService.IndexConfig = new IndexWriterConfig(LuceneService.AppLuceneVersion, LuceneService.Analyzer);
-            LuceneService.IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
-            LuceneService.IndexConfig.RAMBufferSizeMB = 50.0;
-            LuceneService.IndexConfig.OpenMode = OpenMode.CREATE;
-            LuceneService.Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
-            OpenParser();
-
-
-
-
-        }
-
-        private static void OpenReader()
-        {
-
-            LuceneService.DirReader = DirectoryReader.Open(LuceneService.Dir);
-            LuceneService.Searcher = new IndexSearcher(LuceneService.DirReader);
-        }
-
-        public static void OpenDirectory()
-        {
-            LuceneService.Dir = FSDirectory.Open(CurrentIndexPath);
-        }
-
-        public static void OpenIndex()
-        {
-            if (LuceneService.Dir != null)
-            {
-                if (DirectoryReader.IndexExists(LuceneService.Dir))
-                {
-                    OpenAnalyzers();
-                    OpenReader();
-                    OpenParser();
-                    //LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
-
-                }
-                else
-                {
-                    throw new Exception("No index here");
-                }
-            }
-        }
 
         public static DynamicMessage RetrieveMessageById(int id)
         {
@@ -409,12 +327,12 @@ namespace IndexEngine
             ScoreDoc doc = LuceneService.Searcher.Search(query, 1).ScoreDocs.FirstOrDefault();
             List<string> data = new List<string>();
             Document idoc = LuceneService.Searcher.Doc(doc.Doc);
-            foreach (var field in SelectedFields)
+            foreach (var field in ProjectInfo.Data.SelectedFields)
             {
                 data.Add(idoc.GetField(field).GetStringValue());
             }
 
-            return new DynamicMessage(data, SelectedFields, DateFieldKey, idoc.GetField("id").GetInt32Value().Value);
+            return new DynamicMessage(data, ProjectInfo.Data.SelectedFields, ProjectInfo.DateFieldKey, idoc.GetField("id").GetInt32Value().Value);
 
         }
 

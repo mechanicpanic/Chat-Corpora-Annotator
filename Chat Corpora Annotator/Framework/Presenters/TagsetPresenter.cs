@@ -32,17 +32,17 @@ namespace Viewer.Framework.Presenters
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
         {
             _service.ProjectTagset = args.Name;
-            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
+            
             if (!_service.TagsetSet)
             {
 
-                File.WriteAllText(path, args.Name);
+                File.WriteAllText(ProjectInfo.TagsetPath, args.Name);
                 _service.TagsetSet = true;
             }
             else
             {
-                File.WriteAllText(path, String.Empty);
-                File.WriteAllText(path, args.Name);
+                File.WriteAllText(ProjectInfo.TagsetPath, String.Empty);
+                File.WriteAllText(ProjectInfo.TagsetPath, args.Name);
             }
             _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
             _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];

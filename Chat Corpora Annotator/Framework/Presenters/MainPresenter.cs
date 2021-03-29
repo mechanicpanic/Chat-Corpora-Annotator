@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -115,46 +117,42 @@ namespace Viewer.Framework.Presenters
         private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
         {
             _concordancer.ConQuery = LuceneService.Parser.Parse(e.Term);
-            _concordancer.FindConcordance(e.Term, IndexService.TextFieldKey, e.Chars);
+            _concordancer.FindConcordance(e.Term, ProjectInfo.TextFieldKey, e.Chars);
 
             _main.DisplayConcordance(_concordancer.Concordance.ToArray());
 
         }
 
-        private void _view_OpenIndexedCorpus(object sender, EventArgs e)
+        private void _view_OpenIndexedCorpus(object sender, OpenEventArgs e)
         {
-            IndexService.CurrentIndexPath = _main.CurrentIndexPath;
-            IndexService.OpenDirectory();
-            if (DirectoryReader.IndexExists(LuceneService.Dir))
+            //ProjectInfo.CurrentIndexPath = _main.CurrentIndexPath;
+
+            ProjectInfo.LoadProject(e.Path);
+            if(LuceneService.OpenIndex())
             {
-                var info = IndexService.LoadInfoFromDisk(LuceneService.Dir.Directory.FullName);
 
-                IndexService.TextFieldKey = info["TextFieldKey"];
-                IndexService.SenderFieldKey = info["SenderFieldKey"];
-                IndexService.DateFieldKey = info["DateFieldKey"];
-                IndexService.SelectedFields = IndexService.LoadFieldsFromDisk(LuceneService.Dir.Directory.FullName);
-
-                IndexService.MessagesPerDay = IndexService.LoadStatsFromDisk(LuceneService.Dir.Directory.FullName);
-
-                IndexService.UserKeys = IndexService.LoadUsersFromDisk(LuceneService.Dir.Directory.FullName);
-
+                
 
                 MessageContainer.Messages = new List<DynamicMessage>();
-                _main.SetLineCount(Int32.Parse(info["LineCount"]));
+                _main.SetLineCount(ProjectInfo.Data.LineCount);
                 _main.FileLoadState = true;
-                IndexService.OpenIndex();
+
 
                 AddDocumentsToDisplay(2000);
-                _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
+                _main.ShowDates(ProjectInfo.Data.MessagesPerDay.Keys.ToList());
                 //_main.UpdateNgramState(_ngrammer.IndexExists);
 
 
+            }
+            else
+            {
+                MessageBox.Show("No index");
             }
         }
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = IndexService.LoadSomeDocuments(count);
+            var list = IndexService.LoadNDocumentsFromIndex(count);
             MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
             ShowTags(count);
@@ -208,19 +206,19 @@ namespace Viewer.Framework.Presenters
             }
             else if (e.FilteredByDate && !e.FilteredByUser)
             {
-                _searcher.ConstructDateFilter(IndexService.DateFieldKey, e.Start, e.Finish);
+                _searcher.ConstructDateFilter(ProjectInfo.DateFieldKey, e.Start, e.Finish);
                 _searcher.SearchText_DateFilter(e.Count);
 
             }
             else if (!e.FilteredByDate && e.FilteredByUser)
             {
-                _searcher.ConstructUserFilter(IndexService.SenderFieldKey, e.Users);
+                _searcher.ConstructUserFilter(ProjectInfo.SenderFieldKey, e.Users);
                 _searcher.SearchText_UserFilter(e.Count);
             }
             else if (e.FilteredByDate && e.FilteredByUser)
             {
-                _searcher.ConstructDateFilter(IndexService.DateFieldKey, e.Start, e.Finish);
-                _searcher.ConstructUserFilter(IndexService.SenderFieldKey, e.Users);
+                _searcher.ConstructDateFilter(ProjectInfo.DateFieldKey, e.Start, e.Finish);
+                _searcher.ConstructUserFilter(ProjectInfo.SenderFieldKey, e.Users);
                 _searcher.SearchText_UserDateFilter(e.Count);
             }
             var result = _searcher.MakeSearchResultsReadable();

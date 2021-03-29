@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Viewer.CSV_Wizard;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -15,7 +16,8 @@ namespace Viewer.Framework.Presenters
 
         private readonly DelimiterStep _delim;
 
-
+        private string _path; //big bad
+        private string _filepath;
         public CSVPresenter(IMainView main, ICSVView csv, ICSVReadService reader, DelimiterStep delim)
         {
             _main = main;
@@ -37,17 +39,18 @@ namespace Viewer.Framework.Presenters
 
         }
 
-        private void _view_FileAndIndexSelected(object sender, EventArgs e)
+        private void _view_FileAndIndexSelected(object sender, OpenEventArgs e)
         {
 
-            IndexService.CurrentIndexPath = _main.CurrentIndexPath;
+            this._path = e.Path;
+            this._filepath = e.FilePath;
             _delim.ShowView();
 
         }
 
         private void _delim_DelimiterSelected(object sender, EventArgs e)
         {
-            _csv.AllFields = _reader.GetFields(_main.CurrentPath, _delim.ReturnDelimiter());
+            _csv.AllFields = _reader.GetFields(this._filepath, _delim.ReturnDelimiter());
             _delim.CloseView();
             LaunchWizard();
 
@@ -68,21 +71,18 @@ namespace Viewer.Framework.Presenters
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
 
+            ProjectInfo.Data.LineCount = LuceneService.DirReader.NumDocs;
 
-
-            var list = IndexService.LoadSomeDocuments(2000);
+            var list = IndexService.LoadNDocumentsFromIndex(2000);
             //_main.Messages = list;
             MessageContainer.Messages = list;
 
-            IndexService.DateFieldKey = _csv.DateFieldKey;
-            IndexService.TextFieldKey = _csv.TextFieldKey;
-            IndexService.SenderFieldKey = _csv.SenderFieldKey;
-
+            
 
 
             _main.DisplayDocuments();
-            _main.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-            _main.SetLineCount(LuceneService.DirReader.NumDocs);
+            _main.ShowDates(ProjectInfo.Data.MessagesPerDay.Keys.ToList());
+            _main.SetLineCount(ProjectInfo.Data.LineCount);
             _main.FileLoadState = true;
 
         }
@@ -90,22 +90,18 @@ namespace Viewer.Framework.Presenters
 
         private void _csv_HeaderSelected(object sender, EventArgs e)
         {
-            IndexService.SelectedFields = _csv.SelectedFields;
-            _csv.Steps.OfType<MetadataStep>().First().PopulateComboBoxes(IndexService.SelectedFields);
+            ProjectInfo.Data.SelectedFields = _csv.SelectedFields;
+            _csv.Steps.OfType<MetadataStep>().First().PopulateComboBoxes(ProjectInfo.Data.SelectedFields);
 
         }
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            IndexService.OpenDirectory();
-            IndexService.TextFieldKey = _csv.TextFieldKey;
-            IndexService.SenderFieldKey = _csv.SenderFieldKey;
-            IndexService.DateFieldKey = _csv.DateFieldKey;
-
-            IndexService.OpenWriter();
-            IndexService.InitLookup(_csv.AllFields);
-            _reader.GetLineCount(_main.CurrentPath, _csv.Header);
-            var result = IndexService.PopulateIndex(_main.CurrentPath, _csv.AllFields, _csv.Header);
+            ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.TextFieldKey, _csv.SenderFieldKey);
+            LuceneService.OpenNewIndex();
+            _reader.GetLineCount(this._filepath, _csv.Header); //i have no fucking clue what this does
+            var result = IndexService.PopulateIndex(this._filepath, _csv.AllFields, _csv.Header);
+            LuceneService.OpenReader();
             if (result == 1)
             {
                 _csv.CorpusIndexed();

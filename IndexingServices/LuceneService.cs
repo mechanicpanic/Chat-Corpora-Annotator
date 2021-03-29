@@ -50,7 +50,7 @@ namespace IndexEngine
 		{
 			Dictionary<int, List<int>> res = new Dictionary<int, List<int>>();
 			List<int> list = new List<int>();
-			TokenStream stream = LuceneService.Analyzer.GetTokenStream(IndexService.TextFieldKey, new StringReader(document));
+			TokenStream stream = LuceneService.Analyzer.GetTokenStream(ProjectInfo.TextFieldKey, new StringReader(document));
 			var index = 0;
 			var charTermAttribute = stream.AddAttribute<ICharTermAttribute>();
 			stream.Reset();
@@ -71,6 +71,80 @@ namespace IndexEngine
 			stream.Dispose();
 			return res;
 
+		}
+
+		internal static void OpenParser()
+		{
+			if (Analyzer != null)
+			{
+				Parser = new QueryParser(AppLuceneVersion, ProjectInfo.TextFieldKey, Analyzer);
+				UserParser = new QueryParser(AppLuceneVersion, ProjectInfo.SenderFieldKey, Analyzer);
+			}
+		}
+
+		internal static void OpenAnalyzers()
+		{
+
+			Analyzer = new StandardAnalyzer(AppLuceneVersion);
+			NGrammer = new NGramAnalyzer(StandardAnalyzer.PER_FIELD_REUSE_STRATEGY);
+		}
+		internal static void OpenWriter()
+		{
+
+			OpenAnalyzers();
+			IndexConfig = new IndexWriterConfig(AppLuceneVersion, Analyzer);
+			IndexConfig.MaxBufferedDocs = IndexWriterConfig.DISABLE_AUTO_FLUSH;
+			IndexConfig.RAMBufferSizeMB = 50.0;
+			IndexConfig.OpenMode = OpenMode.CREATE;
+			Writer = new IndexWriter(LuceneService.Dir, LuceneService.IndexConfig);
+			OpenParser();
+
+
+
+
+		}
+
+		public static void OpenReader()
+		{
+
+            DirReader = DirectoryReader.Open(Dir);
+			Searcher = new IndexSearcher(DirReader);
+		}
+
+		internal static void OpenDirectory()
+		{
+			Dir = FSDirectory.Open(ProjectInfo.IndexPath);
+		}
+
+		public static void OpenNewIndex()
+        {
+			OpenDirectory();
+			OpenWriter();
+			
+        }
+
+		public static bool OpenIndex()
+		{
+			OpenDirectory();
+			if (Dir != null)
+			{
+				if (DirectoryReader.IndexExists(Dir))
+				{
+					OpenAnalyzers();
+					OpenReader();
+					OpenParser();
+					return true;
+
+				}
+				else
+				{
+					return false;
+				}
+			}
+            else
+            {
+				return false;
+            }
 		}
 	}
 }

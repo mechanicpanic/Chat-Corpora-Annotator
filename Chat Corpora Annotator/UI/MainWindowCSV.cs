@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
 namespace Viewer
@@ -18,8 +19,9 @@ namespace Viewer
         private void csvDialog_FileOk(object sender, CancelEventArgs e)
         {
 
-            this.CurrentPath = csvDialog.FileName;
-            string name = Path.GetFileNameWithoutExtension(CurrentPath);
+            string path = csvDialog.FileName;
+            
+            string name = Path.GetFileNameWithoutExtension(path);
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             if (Directory.Exists(folderPath + "\\CCA"))
             {
@@ -30,8 +32,11 @@ namespace Viewer
                 MessageBox.Show("Something went wrong. Please restart");
             }
 
-            this.CurrentIndexPath = folderPath + "\\CCA" + "\\" + name;
-            FileAndIndexSelected?.Invoke(this, EventArgs.Empty);
+            //this.CurrentIndexPath = folderPath + "\\CCA" + "\\" + name;
+            OpenEventArgs args = new OpenEventArgs();
+            args.Path = folderPath + "\\CCA" + "\\" + name;
+            args.FilePath = csvDialog.FileName;
+            FileAndIndexSelected?.Invoke(this, args);
 
         }
 

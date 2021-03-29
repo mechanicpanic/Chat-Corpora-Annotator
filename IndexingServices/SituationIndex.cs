@@ -17,9 +17,9 @@ namespace IndexEngine
 
         static SituationIndex()
         {
-            if(File.Exists(IndexService.CurrentIndexPath + @"\info"+@"\situations.txt"))
+            if(File.Exists(ProjectInfo.SituationsPath))
             {
-                LoadIndexFromDisk(IndexService.CurrentIndexPath + @"\info" + @"\situations.txt");
+                LoadIndexFromDisk(ProjectInfo.SituationsPath);
             }
             else
             {

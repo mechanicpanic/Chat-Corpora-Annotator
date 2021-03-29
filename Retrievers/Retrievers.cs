@@ -32,7 +32,7 @@ namespace Retrievers
                 //А на самом деле можно построить фильтр сразу на весь список слов без цикла.
                 //string[] temp = new string[1];
                 //temp[0] = word;
-                //FieldCacheTermsFilter filter = new FieldCacheTermsFilter(IndexService.TextFieldKey, temp);
+                //FieldCacheTermsFilter filter = new FieldCacheTermsFilter(ProjectInfo.TextFieldKey, temp);
                 //var boolFilter = new BooleanFilter();
                 //boolFilter.Add(new FilterClause(filter, Occur.MUST));
 
@@ -149,7 +149,7 @@ namespace Retrievers
         {
             //Love duplicate code
             HashSet<int> results = new HashSet<int>();
-            TermQuery query = new TermQuery(new Lucene.Net.Index.Term(IndexService.SenderFieldKey,user));
+            TermQuery query = new TermQuery(new Lucene.Net.Index.Term(ProjectInfo.SenderFieldKey, user));
             BooleanQuery boolquery = new BooleanQuery();
             boolquery.Add(query, Occur.MUST);
             TopDocs docs = LuceneService.Searcher.Search(boolquery, LuceneService.DirReader.MaxDoc);

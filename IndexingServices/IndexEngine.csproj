@@ -263,6 +263,7 @@
     <Compile Include="LuceneService.cs" />
     <Compile Include="NGramAnalyzer.cs" />
     <Compile Include="NLPModel.cs" />
+    <Compile Include="ProjectInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RakeAlgorithm.cs" />
     <Compile Include="SituationIndex.cs" />

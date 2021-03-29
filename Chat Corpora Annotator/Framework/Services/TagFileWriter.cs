@@ -25,7 +25,7 @@ namespace Viewer.Framework.Services
         public void OpenWriter()
         {
 
-            writer = XmlWriter.Create(IndexService.CurrentIndexPath + @"\info\output.xml");
+            writer = XmlWriter.Create(ProjectInfo.InfoPath + @"\output.xml");
             writer.WriteStartDocument();
             writer.WriteStartElement("Corpus");
         }
@@ -53,7 +53,7 @@ namespace Viewer.Framework.Services
             writer.WriteAttributeString("SId", sid.ToString());
             foreach (var msg in messages)
             {
-                WriteMessage(msg.Id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
+                WriteMessage(msg.Id, msg.Contents[ProjectInfo.TextFieldKey].ToString(), msg.Contents[ProjectInfo.SenderFieldKey].ToString(), msg.Contents[ProjectInfo.DateFieldKey].ToString());
             }
             writer.WriteEndElement();
         }
@@ -65,7 +65,7 @@ namespace Viewer.Framework.Services
             foreach (var id in messageIds)
             {
                 var msg = IndexService.RetrieveMessageById(id);
-                WriteMessage(id, msg.Contents[IndexService.TextFieldKey].ToString(), msg.Contents[IndexService.SenderFieldKey].ToString(), msg.Contents[IndexService.DateFieldKey].ToString());
+                WriteMessage(id, msg.Contents[ProjectInfo.TextFieldKey].ToString(), msg.Contents[ProjectInfo.SenderFieldKey].ToString(), msg.Contents[ProjectInfo.DateFieldKey].ToString());
             }
             writer.WriteEndElement();
         }

@@ -2,6 +2,7 @@
 using IndexEngine;
 using System;
 using System.Collections.Generic;
+using Viewer.Framework.MyEventArgs;
 
 namespace Viewer.Framework.Views
 {
@@ -10,17 +11,18 @@ namespace Viewer.Framework.Views
         //TODO: R e t h i n c c
         bool FileLoadState { get; set; }
         List<DynamicMessage> SearchResults { get; set; }
-        string CurrentPath { get; set; }
-        string CurrentIndexPath { get; set; }
+
         bool InfoExtracted { get; set; }
 
         void EnsureMessageIsVisible(int id);
-
+        // will be replaced by ShowProjectData()
         void SetLineCount(int count);
+        void SetTagsetLabel(string tagset);
+        void ShowDates(List<DateTime> dates);
         void DisplayDocuments();
         void DisplaySearchResults();
 
-        void SetTagsetLabel(string tagset);
+
         void DisplayStatistics(int type, Dictionary<string, double> args);
 
         IKeywordView CreateKeywordView();
@@ -28,7 +30,7 @@ namespace Viewer.Framework.Views
 
 
 
-        void ShowDates(List<DateTime> dates);
+
 
         void ShowSorryMessage();
         void ShowExtractedMessage();
@@ -37,8 +39,8 @@ namespace Viewer.Framework.Views
         void DisplayNGrams(List<BTreeDictionary<string, int>> grams);
         event EventHandler CheckNgramState;
         void UpdateNgramState(bool state, bool readstate);
-        event EventHandler FileAndIndexSelected;
-        event EventHandler OpenIndexedCorpus;
+        event OpenEventHandler FileAndIndexSelected;
+        event OpenEventHandler OpenIndexedCorpus;
 
         event EventHandler ChartClick;
         event EventHandler HeatmapClick;

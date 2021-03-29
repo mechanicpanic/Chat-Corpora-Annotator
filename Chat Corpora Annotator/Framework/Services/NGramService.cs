@@ -27,7 +27,7 @@ namespace Viewer.Framework.Services
 
         public void CheckIndex()
         {
-            if (File.Exists(IndexService.CurrentIndexPath + @"\info\" + "index"))
+            if (File.Exists(ProjectInfo.InfoPath + "index"))
             {
                 this.IndexExists = true;
             }
@@ -63,7 +63,7 @@ namespace Viewer.Framework.Services
             Options.CalcBTreeOrder(48, 4);
             Options.CreateFile = CreatePolicy.IfNeeded;
             Options.StoragePerformance = StoragePerformance.Fastest;
-            Options.FileName = IndexService.CurrentIndexPath + @"\info\" + "index";
+            Options.FileName = ProjectInfo.InfoPath + "index";
 
         }
 
@@ -77,9 +77,9 @@ namespace Viewer.Framework.Services
             for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
             {
 
-                var msg = LuceneService.DirReader.Document(i).GetField(IndexService.TextFieldKey).GetStringValue();
+                var msg = LuceneService.DirReader.Document(i).GetField(ProjectInfo.TextFieldKey).GetStringValue();
                 int value;
-                foreach (var gram in GetNGrams(IndexService.TextFieldKey, msg))
+                foreach (var gram in GetNGrams(ProjectInfo.TextFieldKey, msg))
                 {
                     if (!grams.TryGetValue(gram, out value))
                     {

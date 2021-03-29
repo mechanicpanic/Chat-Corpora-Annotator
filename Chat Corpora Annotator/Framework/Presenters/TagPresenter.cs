@@ -114,21 +114,16 @@ namespace Viewer.Framework.Presenters
         }
 
 
-        private void SetPaths()
-        {
-            savedpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-savedtags.txt";
-            pathcounts = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagcounts.txt";
-            tagsetpath = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
-        }
+
 
         private void LoadTagged(object sender, EventArgs e)
         {
-            SetPaths();
+            
             if (_service.SituationContainer.Count == 0)
             {
-                if (File.Exists(savedpath))
+                if (File.Exists(ProjectInfo.SavedTagsPath))
                 {
-                    using (StreamReader reader = new StreamReader(savedpath))
+                    using (StreamReader reader = new StreamReader(ProjectInfo.SavedTagsPath))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
@@ -182,14 +177,14 @@ namespace Viewer.Framework.Presenters
 
             if (_main.FileLoadState)
             {
-                using (StreamWriter counts = new StreamWriter(pathcounts))
+                using (StreamWriter counts = new StreamWriter(ProjectInfo.TagCountsPath))
                 {
                     foreach (var kvp in SituationIndex.TagsetCounter)
                     {
                         counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
                     }
                 }
-                using (StreamWriter file = File.AppendText(savedpath))
+                using (StreamWriter file = File.AppendText(ProjectInfo.SavedTagsPath))
                 {
 
                     foreach (var msg in MessageContainer.Messages)
@@ -227,8 +222,8 @@ namespace Viewer.Framework.Presenters
             _service.CheckTagset();
             if (_service.TagsetSet)
             {
-                _service.ProjectTagset = File.ReadAllText(tagsetpath);
-                string line = File.ReadAllText(pathcounts);
+                _service.ProjectTagset = File.ReadAllText(ProjectInfo.TagsetPath);
+                string line = File.ReadAllText(ProjectInfo.TagCountsPath);
                 string[] lines = line.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var item in lines)
                 {

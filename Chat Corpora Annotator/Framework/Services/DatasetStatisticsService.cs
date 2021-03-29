@@ -30,9 +30,9 @@ namespace Viewer.Framework.Services
         private void SetDuration()
         {
 
-            var test = LuceneService.DirReader.Document(LuceneService.DirReader.MaxDoc - 1).GetField(IndexService.DateFieldKey).GetStringValue();
+            var test = LuceneService.DirReader.Document(LuceneService.DirReader.MaxDoc - 1).GetField(ProjectInfo.DateFieldKey).GetStringValue();
             var end = DateTools.StringToDate(test);
-            var start = DateTools.StringToDate(LuceneService.DirReader.Document(0).GetField(IndexService.DateFieldKey).GetStringValue());
+            var start = DateTools.StringToDate(LuceneService.DirReader.Document(0).GetField(ProjectInfo.DateFieldKey).GetStringValue());
 
             Duration = end - start;
             AllFields.Add("Duration in days", Math.Ceiling(Duration.TotalDays));
@@ -45,7 +45,7 @@ namespace Viewer.Framework.Services
         }
         private void SetUserNumber()
         {
-            this.NumberOfUsers = IndexService.UserKeys.Count;
+            this.NumberOfUsers = ProjectInfo.Data.UserKeys.Count;
             AllFields.Add("Number of users", this.NumberOfUsers);
         }
 
@@ -54,7 +54,7 @@ namespace Viewer.Framework.Services
             long length = 0;
             for (int i = 0; i < this.NumberOfDocs; i++)
             {
-                var temp = LuceneService.DirReader.Document(i).GetField(IndexService.TextFieldKey).GetStringValue().Length;
+                var temp = LuceneService.DirReader.Document(i).GetField(ProjectInfo.TextFieldKey).GetStringValue().Length;
                 length += temp;
                 AllLengths.Add(temp);
             }
@@ -70,17 +70,17 @@ namespace Viewer.Framework.Services
         }
         private void SetAverageMessagesPerDay()
         {
-            this.AverageMessagesPerUnit = (double)this.NumberOfDocs / (double)IndexService.MessagesPerDay.Keys.Count;
+            this.AverageMessagesPerUnit = (double)this.NumberOfDocs / (double)ProjectInfo.Data.MessagesPerDay.Keys.Count;
             AllFields.Add("Average number of messages per day", this.AverageMessagesPerUnit);
         }
 
         private void SetTokenNumber()
         {
-            CollectionStatistics stat = LuceneService.Searcher.CollectionStatistics(IndexService.TextFieldKey);
+            CollectionStatistics stat = LuceneService.Searcher.CollectionStatistics(ProjectInfo.TextFieldKey);
             this.NumberOfTokens = (ulong)stat.SumTotalTermFreq;
             for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
             {
-                LuceneService.GetTokenDataForDoc(LuceneService.DirReader.Document(i).GetField(IndexService.TextFieldKey).GetStringValue());
+                LuceneService.GetTokenDataForDoc(LuceneService.DirReader.Document(i).GetField(ProjectInfo.TextFieldKey).GetStringValue());
             }
             AllFields.Add("Tokens", this.NumberOfTokens);
 

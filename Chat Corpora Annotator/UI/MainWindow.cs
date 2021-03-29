@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
 namespace Viewer
@@ -22,10 +23,10 @@ namespace Viewer
         public bool FileLoadState { get { return _fileLoadState; } set { _fileLoadState = value; OnPropertyChanged(); } }
         #region IMainView
 
-        public event EventHandler OpenIndexedCorpus;
+        public event OpenEventHandler OpenIndexedCorpus;
         public event EventHandler ChartClick;
         public event EventHandler HeatmapClick;
-        public event EventHandler FileAndIndexSelected;
+        public event OpenEventHandler FileAndIndexSelected;
         public event EventHandler LoadMore;
 
         public event ConcordanceEventHandler ConcordanceClick;
@@ -192,9 +193,9 @@ namespace Viewer
         }
         private void ChatTable_FormatCell(object sender, FormatCellEventArgs e)
         {
-            if (e.Column.Text == IndexService.SenderFieldKey)
+            if (e.Column.Text == ProjectInfo.SenderFieldKey)
             {
-                e.SubItem.ForeColor = IndexService.UserColors[e.SubItem.Text];
+                e.SubItem.ForeColor = ProjectInfo.Data.UserColors[e.SubItem.Text];
             }
 
         }
@@ -211,7 +212,7 @@ namespace Viewer
             fastSituationView.RebuildColumns();
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in IndexService.SelectedFields)
+            foreach (var key in ProjectInfo.Data.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
@@ -258,7 +259,7 @@ namespace Viewer
         {
             foreach (var cl in chatTable.AllColumns)
             {
-                if (cl.Text != IndexService.TextFieldKey)
+                if (cl.Text != ProjectInfo.TextFieldKey)
                 {
                     cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
@@ -287,7 +288,7 @@ namespace Viewer
         private void ShowUsers()
         {
             userList.CheckBoxes = true;
-            foreach (var user in IndexService.UserKeys)
+            foreach (var user in ProjectInfo.Data.UserKeys) // lmaooooo ok
             {
                 userList.Items.Add(new ListViewItem(user));
             }
@@ -347,7 +348,7 @@ namespace Viewer
             //int i = chatTable.IndexOf(messages[key].Block[0]);
             foreach (var message in MessageContainer.Messages)
             {
-                DateTime temp = (DateTime)message.Contents[IndexService.DateFieldKey];
+                DateTime temp = (DateTime)message.Contents[ProjectInfo.DateFieldKey];
                 if (temp.Date == key)
                 {
                     i = chatTable.IndexOf(message);
@@ -374,7 +375,7 @@ namespace Viewer
             HashSet<DateTime> container = new HashSet<DateTime>();
             foreach (var message in MessageContainer.Messages)
             {
-                container.Add(DateTime.Parse(message.Contents[IndexService.DateFieldKey].ToString()).Date);
+                container.Add(DateTime.Parse(message.Contents[ProjectInfo.DateFieldKey].ToString()).Date);
             }
             //fastDateView.SetObjects(container);
             //IEnumerable<DateTime> intersect = container.Intersect(dates);
@@ -480,7 +481,7 @@ namespace Viewer
         {
             var dyn = e.Model as DynamicMessage;
 
-            MessageBox.Show(dyn.Contents[IndexService.TextFieldKey].ToString());
+            MessageBox.Show(dyn.Contents[ProjectInfo.TextFieldKey].ToString());
         }
         public void EnsureMessageIsVisible(int id)
         {

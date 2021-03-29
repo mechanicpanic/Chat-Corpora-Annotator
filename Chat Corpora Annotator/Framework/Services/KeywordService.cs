@@ -42,7 +42,7 @@ namespace Viewer.Framework.Services
             for (int i = 0; i < LuceneService.DirReader.MaxDoc; i++)
             {
                 var document = LuceneService.DirReader.Document(i);
-                sents.Add(document.GetField(IndexService.TextFieldKey).GetStringValue());
+                sents.Add(document.GetField(ProjectInfo.TextFieldKey).GetStringValue());
             }
             return sents;
 

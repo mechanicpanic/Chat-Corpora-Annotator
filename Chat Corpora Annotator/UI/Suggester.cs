@@ -164,7 +164,7 @@ namespace Viewer.UI
 
                 suggesterView.SetObjects(CurrentSituation);
                 SetUpChatView();
-                suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(IndexService.DateFieldKey)), SortOrder.Ascending);
+                suggesterView.Sort(suggesterView.AllColumns.Find(x => x.Text.Equals(ProjectInfo.DateFieldKey)), SortOrder.Ascending);
             }
             if (QueryResult == null)
             {
@@ -179,7 +179,7 @@ namespace Viewer.UI
         {
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in IndexService.SelectedFields)
+            foreach (var key in ProjectInfo.Data.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x)
@@ -200,7 +200,7 @@ namespace Viewer.UI
 
             foreach (var cl in suggesterView.AllColumns)
             {
-                if (cl.Text != IndexService.TextFieldKey)
+                if (cl.Text != ProjectInfo.TextFieldKey)
                 {
                     cl.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }

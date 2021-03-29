@@ -74,12 +74,12 @@ namespace Viewer.Framework.Services
                 List<string> data = new List<string>();
                 ScoreDoc d = Hits.ScoreDocs[i];
                 Document idoc = LuceneService.Searcher.Doc(d.Doc);
-                foreach (var field in IndexService.SelectedFields)
+                foreach (var field in ProjectInfo.Data.SelectedFields)
                 {
                     data.Add(idoc.GetField(field).GetStringValue());
                 }
 
-                DynamicMessage message = new DynamicMessage(data, IndexService.SelectedFields, IndexService.DateFieldKey,
+                DynamicMessage message = new DynamicMessage(data, ProjectInfo.Data.SelectedFields, ProjectInfo.DateFieldKey,
                     idoc.GetField("id").GetInt32Value().Value);
                 searchResults.Add(message);
             }

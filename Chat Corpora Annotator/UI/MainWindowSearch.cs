@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
 namespace Viewer

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 using Viewer.UI;
 
@@ -339,10 +340,11 @@ namespace Viewer
             if (result == DialogResult.OK)
             {
 
-                this.CurrentIndexPath = indexDialog.SelectedPath;
+                //this.CurrentIndexPath = indexDialog.SelectedPath;
 
-
-                OpenIndexedCorpus?.Invoke(this, EventArgs.Empty);
+                OpenEventArgs args = new OpenEventArgs();
+                args.Path = indexDialog.SelectedPath;
+                OpenIndexedCorpus?.Invoke(this, args);
             }
         }
         private void extractToolStripMenuItem_Click(object sender, EventArgs e)
@@ -357,7 +359,7 @@ namespace Viewer
         }
         private void plotToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //ChartClick?.Invoke(this, EventArgs.Empty);
+            ChartClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void heatmapToolStripMenuItem_Click(object sender, EventArgs e)

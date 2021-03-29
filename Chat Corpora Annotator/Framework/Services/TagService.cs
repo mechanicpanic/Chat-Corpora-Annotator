@@ -36,8 +36,8 @@ namespace Viewer.Framework.Services
         }
         public void CheckTagset()
         {
-            string path = IndexService.CurrentIndexPath + "\\info\\" + Path.GetFileNameWithoutExtension(IndexService.CurrentIndexPath) + @"-tagset.txt";
-            if (File.Exists(path))
+            
+            if (File.Exists(ProjectInfo.TagsetPath))
             {
                 TagsetSet = true;
             }

@@ -20,7 +20,7 @@ namespace Viewer.Framework.Presenters
 
         private void _main_ChartClick(object sender, EventArgs e)
         {
-            _chart.DrawChart(IndexService.MessagesPerDay.Keys.ToList(), IndexService.MessagesPerDay.Values.ToList());
+            _chart.DrawChart(ProjectInfo.Data.MessagesPerDay.Keys.ToList(), ProjectInfo.Data.MessagesPerDay.Values.ToList());
             _chart.ShowView();
         }
     }

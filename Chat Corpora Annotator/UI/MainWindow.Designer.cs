@@ -1,4 +1,6 @@
-﻿namespace Viewer
+﻿
+
+namespace Viewer
 {
     partial class MainWindow
     {

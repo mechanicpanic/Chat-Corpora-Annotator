@@ -25,10 +25,10 @@ namespace Viewer.Framework.Presenters
 
         private void _view_HeatmapClick(object sender, EventArgs e)
         {
-            _heat.Colors = _painter.PopulateHeatmap(IndexService.MessagesPerDay);
+            _heat.Colors = _painter.PopulateHeatmap(ProjectInfo.Data.MessagesPerDay);
             _heat.ShowView();
             _heat.DrawHeatmap(_painter.DateBlocks);
-            _heat.FillDates(IndexService.MessagesPerDay.Keys.ToList());
+            _heat.FillDates(ProjectInfo.Data.MessagesPerDay.Keys.ToList());
         }
 
 
