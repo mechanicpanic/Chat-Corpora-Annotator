@@ -226,7 +226,7 @@ namespace Viewer
 		{
 			keywordPanel.Controls.Add((UserControl)key);
 			keywordPanel.Controls[0].Dock = DockStyle.Fill;
-			keywordButton.Visible = false;
+			//keywordButton.Visible = false;
 		}
 		#endregion
 
