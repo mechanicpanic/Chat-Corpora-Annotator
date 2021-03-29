@@ -92,7 +92,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.keywordPanel = new System.Windows.Forms.Panel();
             this.keywordSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.keywordButton = new System.Windows.Forms.Button();
             this.keywordTabs = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.fastObjectListView5 = new BrightIdeasSoftware.FastObjectListView();
@@ -151,6 +150,11 @@
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.button8 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             mainTabControl = new System.Windows.Forms.TabControl();
             mainTabControl.SuspendLayout();
             this.Chat.SuspendLayout();
@@ -216,6 +220,7 @@
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -1093,7 +1098,8 @@
             // 
             // keywordSplitContainer.Panel1
             // 
-            this.keywordSplitContainer.Panel1.Controls.Add(this.keywordButton);
+            this.keywordSplitContainer.Panel1.BackColor = System.Drawing.Color.Lavender;
+            this.keywordSplitContainer.Panel1.Controls.Add(this.tableLayoutPanel5);
             // 
             // keywordSplitContainer.Panel2
             // 
@@ -1101,20 +1107,6 @@
             this.keywordSplitContainer.Size = new System.Drawing.Size(1079, 736);
             this.keywordSplitContainer.SplitterDistance = 359;
             this.keywordSplitContainer.TabIndex = 0;
-            // 
-            // keywordButton
-            // 
-            this.keywordButton.BackColor = System.Drawing.Color.Lavender;
-            this.keywordButton.FlatAppearance.BorderSize = 0;
-            this.keywordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.keywordButton.Location = new System.Drawing.Point(38, 230);
-            this.keywordButton.Margin = new System.Windows.Forms.Padding(2);
-            this.keywordButton.Name = "keywordButton";
-            this.keywordButton.Size = new System.Drawing.Size(290, 42);
-            this.keywordButton.TabIndex = 0;
-            this.keywordButton.Text = "Load keyworder";
-            this.keywordButton.UseVisualStyleBackColor = false;
-            this.keywordButton.Click += new System.EventHandler(this.keyword_Click);
             // 
             // keywordTabs
             // 
@@ -1754,6 +1746,87 @@
             this.splitContainerMain.SplitterDistance = 223;
             this.splitContainerMain.TabIndex = 31;
             // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.Lavender;
+            this.button8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button8.Enabled = false;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button8.Location = new System.Drawing.Point(182, 2);
+            this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(174, 41);
+            this.button8.TabIndex = 8;
+            this.button8.Text = "Extract noun phrases";
+            this.button8.UseVisualStyleBackColor = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.Enabled = false;
+            this.comboBox1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBox1.Location = new System.Drawing.Point(3, 47);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(173, 23);
+            this.comboBox1.TabIndex = 7;
+            this.comboBox1.Text = "Phrase length (def 2)";
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Lavender;
+            this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button6.Enabled = false;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button6.Location = new System.Drawing.Point(3, 2);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(173, 41);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Extract keywords";
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.button6, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.comboBox1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.button8, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label3, 1, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(359, 91);
+            this.tableLayoutPanel5.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(182, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(174, 46);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "(Requires CoreNLP)";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1841,6 +1914,8 @@
             this.splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1886,7 +1961,6 @@
         private System.Windows.Forms.Panel concordancePanel;
         private System.Windows.Forms.Panel ngramPanel;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button keywordButton;
         private System.Windows.Forms.Panel keywordPanel;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel2;
@@ -1968,6 +2042,11 @@
         private System.Windows.Forms.TextBox concordanceBox;
         private System.Windows.Forms.Button concordancerButton;
         private EasyScintilla.SimpleEditor concordanceView;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -135,7 +135,7 @@ namespace Viewer
 				clearButton.Enabled = true;
 				concordancerButton.Enabled = true;
 				ngramIndexButton.Enabled = true;
-				keywordButton.Enabled = true;
+				//keywordButton.Enabled = true;
 				chatTable.Visible = true;
 				tableLayoutPanel1.Visible = true;
 				splitContainerRight.Visible = true;
@@ -158,7 +158,7 @@ namespace Viewer
 				clearButton.Enabled = false;
 				concordancerButton.Enabled = false;
 				ngramIndexButton.Enabled = false;
-				keywordButton.Enabled = false;
+				//keywordButton.Enabled = false;
 				chatTable.Visible = false;
 				tableLayoutPanel1.Visible = false;
 				splitContainerRight.Visible = false;
