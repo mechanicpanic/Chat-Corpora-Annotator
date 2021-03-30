@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Viewer
+namespace Viewer.Framework.MyEventArgs
 {
     public class NgramEventArgs : EventArgs
     {

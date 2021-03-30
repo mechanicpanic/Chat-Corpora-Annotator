@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Viewer
+namespace Viewer.Framework.MyEventArgs
 {
     public static class UserDictsContainer
     {

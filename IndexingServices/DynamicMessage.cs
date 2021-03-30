@@ -7,7 +7,7 @@ namespace IndexEngine
 {
     public static class MessageContainer
     {
-        public static List<DynamicMessage> Messages { get; set; }
+        public static List<DynamicMessage> Messages { get; set; } = new List<DynamicMessage>();
         //Should be sufficient for keeping some messages in-memory.
 
     }

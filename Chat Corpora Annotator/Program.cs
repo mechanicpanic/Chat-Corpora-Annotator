@@ -33,7 +33,6 @@ namespace Viewer
             SearchService searcher = new SearchService();
             HeatmapService heater = new HeatmapService();
             FolderService folder = new FolderService();
-            SuggesterService suggesterService = new SuggesterService();
             DatasetStatisticsService dataset = new DatasetStatisticsService();
             TaggedCollectionStatisticsService corpus = new TaggedCollectionStatisticsService();
 
@@ -43,7 +42,7 @@ namespace Viewer
             TagFileWriter writer = new TagFileWriter();
             TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
             TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
-            SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, suggesterService, main, main);
+            SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, main, main);
             MainPresenter presenter = new MainPresenter(main, main, service, loader, searcher, folder, dataset, corpus, concordancer, ngrammer);
 
             CSVPresenter csv = new CSVPresenter(main, loader, fileReader, delim);

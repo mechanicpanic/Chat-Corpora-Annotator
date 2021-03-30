@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
 namespace Viewer.UI

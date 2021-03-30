@@ -344,7 +344,10 @@ namespace Viewer
 
                 OpenEventArgs args = new OpenEventArgs();
                 args.Path = indexDialog.SelectedPath;
+                chatViewSetUp = false;
+                sit.Clear();
                 OpenIndexedCorpus?.Invoke(this, args);
+                
             }
         }
         private void extractToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
 
@@ -7,14 +8,11 @@ namespace Viewer.Framework.Presenters
     public class SuggestPresenter
     {
         private readonly ISuggesterView _sugg;
-        private readonly ISuggestService _service;
         private readonly ITagView _tagger;
         private readonly IMainView _main;
-        public SuggestPresenter(ISuggesterView sugg,
-                               ISuggestService service, ITagView tagger, IMainView main)
+        public SuggestPresenter(ISuggesterView sugg, ITagView tagger, IMainView main)
         {
             this._sugg = sugg;
-            this._service = service;
             this._tagger = tagger;
             this._main = main;
 

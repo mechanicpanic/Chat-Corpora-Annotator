@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Viewer
+namespace Viewer.Framework.MyEventArgs
 {
     public class TaggerEventArgs : EventArgs
     {

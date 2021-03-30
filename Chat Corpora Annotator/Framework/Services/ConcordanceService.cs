@@ -10,7 +10,6 @@ namespace Viewer.Framework.Services
     {
         Query ConQuery { get; set; }
         List<string> Concordance { get; set; }
-        void FlushConcordanceToDisk();
         void FindConcordance(string query, string TextFieldKey, int count);
     }
     public class ConcordanceService : IConcordanceService
@@ -39,9 +38,5 @@ namespace Viewer.Framework.Services
 
         }
 
-        public void FlushConcordanceToDisk()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

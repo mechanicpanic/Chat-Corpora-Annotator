@@ -51,6 +51,7 @@ namespace Viewer.Framework.Presenters
         private void _delim_DelimiterSelected(object sender, EventArgs e)
         {
             _csv.AllFields = _reader.GetFields(this._filepath, _delim.ReturnDelimiter());
+            ProjectInfo.UnloadData();
             _delim.CloseView();
             LaunchWizard();
 
@@ -71,7 +72,7 @@ namespace Viewer.Framework.Presenters
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
 
-            ProjectInfo.Data.LineCount = LuceneService.DirReader.NumDocs;
+            
 
             var list = IndexService.LoadNDocumentsFromIndex(2000);
             //_main.Messages = list;
@@ -97,7 +98,7 @@ namespace Viewer.Framework.Presenters
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.TextFieldKey, _csv.SenderFieldKey);
+            ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.TextFieldKey);
             LuceneService.OpenNewIndex();
             _reader.GetLineCount(this._filepath, _csv.Header); //i have no fucking clue what this does
             var result = IndexService.PopulateIndex(this._filepath, _csv.AllFields, _csv.Header);

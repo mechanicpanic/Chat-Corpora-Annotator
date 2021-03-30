@@ -36,7 +36,9 @@ namespace Viewer
             OpenEventArgs args = new OpenEventArgs();
             args.Path = folderPath + "\\CCA" + "\\" + name;
             args.FilePath = csvDialog.FileName;
+            chatViewSetUp = false;
             FileAndIndexSelected?.Invoke(this, args);
+            
 
         }
 

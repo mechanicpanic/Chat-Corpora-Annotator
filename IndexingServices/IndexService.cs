@@ -17,9 +17,6 @@ namespace IndexEngine
 
         #region fields
         private static int viewerReadIndex = 0;
-
-       
-
         private static int[] lookup = new int[3];
 
 
@@ -94,7 +91,7 @@ namespace IndexEngine
         }
         #endregion
         #region load info
-        public static OrderedDictionary<string, string> LoadInfoFromDisk(string keyPath)
+        internal static OrderedDictionary<string, string> LoadInfoFromDisk(string keyPath)
         {
 
             OrderedDictionary<string, string> info = new OrderedDictionary<string, string>();
@@ -109,7 +106,7 @@ namespace IndexEngine
             return info;
         }
 
-        public static List<string> LoadFieldsFromDisk(string fieldsPath)
+        internal static List<string> LoadFieldsFromDisk(string fieldsPath)
         {
             List<string> fields = new List<string>();
             using (StreamReader reader = new StreamReader(fieldsPath))
@@ -125,7 +122,7 @@ namespace IndexEngine
             return fields;
         }
 
-        public static HashSet<string> LoadUsersFromDisk(string usersPath)
+        internal static HashSet<string> LoadUsersFromDisk(string usersPath)
         {
             HashSet<string> users = new HashSet<string>();
             using (StreamReader reader = new StreamReader(usersPath))
@@ -142,7 +139,7 @@ namespace IndexEngine
             return users;
         }
 
-        public static BTreeDictionary<DateTime, int> LoadStatsFromDisk(string statsPath)
+        internal static BTreeDictionary<DateTime, int> LoadStatsFromDisk(string statsPath)
         {
             BTreeDictionary<DateTime, int> stats = new BTreeDictionary<DateTime, int>();
             using (StreamReader reader = new StreamReader(statsPath))
@@ -291,6 +288,7 @@ namespace IndexEngine
                     }
                     LuceneService.Writer.Commit();
                     LuceneService.Writer.Flush(triggerMerge: false, applyAllDeletes: false);
+                    ProjectInfo.Data.LineCount = count;
                     CheckDir();
                     PopulateUserColors();
                     SaveInfoToDisk();
@@ -307,7 +305,7 @@ namespace IndexEngine
         }
 
 
-        public static void PopulateUserColors()
+        private static void PopulateUserColors()
         {
             var colors = ColorLibrary.ColorGenerator.GenerateHSLuvColors(ProjectInfo.Data.UserKeys.Count, false);
             int i = 0;
@@ -336,6 +334,10 @@ namespace IndexEngine
 
         }
 
-
+        internal static void UnloadData()
+        {
+            viewerReadIndex = 0;
+            lookup = new int[3];
+        }
     }
 }

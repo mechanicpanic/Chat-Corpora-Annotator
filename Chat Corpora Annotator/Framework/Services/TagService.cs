@@ -21,6 +21,8 @@ namespace Viewer.Framework.Services
         void UpdateSituation_Removed(int message, int id, string situation);
         void CheckTagset();
 
+        void UnloadData();
+
     }
 
 
@@ -29,7 +31,13 @@ namespace Viewer.Framework.Services
         public bool TagsetSet { get; set; } = false;
 
 
+        public void UnloadData()
+        {
+            TagsetSet = false;
+            TaggedIds.Clear();
+            SituationContainer.Clear();
 
+        }
         public TagService()
         {
 
@@ -40,6 +48,10 @@ namespace Viewer.Framework.Services
             if (File.Exists(ProjectInfo.TagsetPath))
             {
                 TagsetSet = true;
+            }
+            else
+            {
+                TagsetSet = false;
             }
         }
         public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();

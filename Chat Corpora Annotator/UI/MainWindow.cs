@@ -41,8 +41,6 @@ namespace Viewer
         public event LuceneQueryEventHandler FindClick;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string CurrentPath { get; set; }
-        public string CurrentIndexPath { get; set; }
         public bool InfoExtracted { get; set; }
         public List<DynamicMessage> SearchResults { get; set; }
 
@@ -206,17 +204,19 @@ namespace Viewer
         private void SetUpChatView()
         {
             ShowUsers();
-            chatTable.SetObjects(MessageContainer.Messages);
+            chatTable.AllColumns.Clear();
+            chatTable.Columns.Clear();
+
             fastSituationView.SetObjects(sit);
             fastSituationView.AllColumns[0].AspectGetter = delegate (object x) { return x.ToString(); };
             fastSituationView.RebuildColumns();
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach (var key in ProjectInfo.Data.SelectedFields)
+            foreach(var key in ProjectInfo.Data.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
-                cl.Text = key;
+                cl.Text =key;
                 cl.WordWrap = true;
                 columns.Add(cl);
             }
@@ -227,6 +227,9 @@ namespace Viewer
             chatTable.AllColumns.Clear();
             chatTable.AllColumns.Add(cltag);
             chatTable.AllColumns.AddRange(columns);
+
+            chatTable.Objects = null;
+            chatTable.SetObjects(MessageContainer.Messages);
             chatTable.RebuildColumns();
 
             FormatColumns();
@@ -243,16 +246,19 @@ namespace Viewer
             }
             else
             {
-
-                DynamicMessage m = (DynamicMessage)o;
-                if (m.Situations != null)
+                if (o != null)
                 {
-                    return String.Join(",", m.Situations.ToArray());
+                    DynamicMessage m = (DynamicMessage)o;
+                    if (m.Situations != null)
+                    {
+                        return String.Join(",", m.Situations.ToArray());
+                    }
+                    else
+                    {
+                        return "";
+                    }
                 }
-                else
-                {
-                    return "";
-                }
+                else { return ""; }
             }
         }
         private void FormatColumns()
@@ -327,15 +333,6 @@ namespace Viewer
         #endregion
 
         #region DateView Display
-
-
-        public void SetDateView()
-        {
-            dateView.View = View.Details;
-            dateView.VirtualMode = false;
-
-        }
-
         private void dateView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListView lw = sender as ListView;

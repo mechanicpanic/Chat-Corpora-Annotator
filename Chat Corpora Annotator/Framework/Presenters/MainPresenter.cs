@@ -47,9 +47,16 @@ namespace Viewer.Framework.Presenters
             _main.ExtractInfoClick += _main_ExtractInfoClick;
             _main.BuildIndexClick += _main_BuildIndexClick;
             _main.CheckNgramState += _main_CheckNgramState;
+            _main.LoadMore += _main_LoadMore;
             _folder.CheckFolder();
 
 
+        }
+
+        private void _main_LoadMore(object sender, EventArgs e)
+        {
+            AddDocumentsToDisplay(2000);
+            _main.ShowDates(ProjectInfo.Data.MessagesPerDay.Keys.ToList());
         }
 
         private void _main_CheckNgramState(object sender, EventArgs e)
@@ -126,7 +133,10 @@ namespace Viewer.Framework.Presenters
         private void _view_OpenIndexedCorpus(object sender, OpenEventArgs e)
         {
             //ProjectInfo.CurrentIndexPath = _main.CurrentIndexPath;
+            ProjectInfo.UnloadData();
 
+            _service.UnloadData();
+            SituationIndex.UnloadData();
             ProjectInfo.LoadProject(e.Path);
             if(LuceneService.OpenIndex())
             {

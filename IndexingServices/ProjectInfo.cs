@@ -23,6 +23,7 @@ namespace IndexEngine
 
         public static void LoadProject(string path)
         {
+            UnloadData();
             SetPaths(path);
             var list = IndexService.LoadInfoFromDisk(KeyPath);
             SetKeys(list["DateFieldKey"], list["SenderFieldKey"], list["TextFieldKey"]);
@@ -34,10 +35,21 @@ namespace IndexEngine
 
         public static void CreateNewProject(string path, string date, string sender, string text)
         {
+            UnloadData();
             SetPaths(path);
             SetKeys(date, sender, text);
-            
 
+
+        }
+
+        public static void UnloadData()
+        {
+            Data.MessagesPerDay.Clear();
+            Data.UserColors.Clear();
+            Data.UserKeys.Clear();
+            Data.SelectedFields.Clear();
+            Data.LineCount = 0;
+            IndexService.UnloadData();
         }
         private static void SetPaths(string path)
         {
@@ -79,5 +91,7 @@ namespace IndexEngine
         public static string TagCountsPath { get; private set; }
         public static string SavedTagsPath { get; private set; }
         public static string TagsetPath { get; private set; }
+
+        public static string Tagset { get; private set; }
     }
 }

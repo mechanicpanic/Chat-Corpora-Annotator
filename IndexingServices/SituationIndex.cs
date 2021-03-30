@@ -15,6 +15,12 @@ namespace IndexEngine
         public static Dictionary<string, Dictionary<int, List<int>>> Index { get; set; }
         public static Dictionary<string, int> TagsetCounter = new Dictionary<string, int>();
 
+        public static void UnloadData()
+        {
+            Index.Clear();
+            TagsetCounter.Clear();
+        }
+
         static SituationIndex()
         {
             if(File.Exists(ProjectInfo.SituationsPath))

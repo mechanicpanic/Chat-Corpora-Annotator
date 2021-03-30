@@ -1,6 +1,7 @@
 ﻿using IndexEngine;
 using System;
 using System.Collections.Generic;
+using Viewer.Framework.MyEventArgs;
 
 namespace Viewer.Framework.Views
 {
@@ -24,9 +25,5 @@ namespace Viewer.Framework.Views
 
     }
 
-    public class FindEventArgs : EventArgs
-    {
-        public int id;
-    }
-    public delegate void FindEventHandler(object sender, FindEventArgs args);
+
 }
