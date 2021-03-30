@@ -1,16 +1,9 @@
 ﻿using edu.stanford.nlp.ling;
-using edu.stanford.nlp.parser.lexparser;
 using edu.stanford.nlp.pipeline;
-using edu.stanford.nlp.process;
 using edu.stanford.nlp.trees;
 using edu.stanford.nlp.util;
+using IndexEngine.Paths;
 using java.util;
-using System.Collections.Generic;
-using NTTU.BigODM.SocialMediaNLP.Twitter.ThirdParty;
-using System.Linq;
-using java.lang;
-using System;
-using IndexEngine;
 
 namespace ExtractingServices
 {
@@ -29,16 +22,16 @@ namespace ExtractingServices
 
             props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
 
-            props.setProperty("pos.model", NLPModel._POSpath);
-            props.setProperty("ner.model", NLPModel._NERpath);
-            props.setProperty("parse.model", NLPModel._SRparserpath);
+            props.setProperty("pos.model", ToolInfo.POSpath);
+            props.setProperty("ner.model", ToolInfo.NERpath);
+            props.setProperty("parse.model", ToolInfo.SRparserpath);
 
             props.setProperty("ner.useSUTime", "true");
             props.setProperty("ner.applyFineGrained", "false");
 
             props.setProperty("sutime.binders", "0");
 
-            props.setProperty("sutime.rules", NLPModel._sutimeRules);
+            props.setProperty("sutime.rules", ToolInfo.sutimeRules);
             props.setProperty("sutime.markTimeRanges", "true");
             props.setProperty("sutime.includeNested", "true");
             StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -65,11 +58,11 @@ namespace ExtractingServices
 
         public Tree GetParseTree(CoreMap sent)
         {
-            
 
-                return (Tree)sent.get(typeof(TreeCoreAnnotations.TreeAnnotation));
 
-            
+            return (Tree)sent.get(typeof(TreeCoreAnnotations.TreeAnnotation));
+
+
         }
 
         public ArrayList GetSents(CoreDocument coredoc)
@@ -81,7 +74,7 @@ namespace ExtractingServices
                 return sents;
             }
             else { return null; }
-            
+
         }
 
 

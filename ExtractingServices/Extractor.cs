@@ -1,15 +1,14 @@
 ﻿using CSharpTest.Net.Collections;
 using edu.stanford.nlp.pipeline;
 using edu.stanford.nlp.trees;
+using edu.stanford.nlp.util;
 using IndexEngine;
-using java.io;
+using IndexEngine.Paths;
 using java.util;
+using NounPhraseAlgorithm;
 using System;
 using System.Collections.Generic;
-using NounPhraseAlgorithm;
-using edu.stanford.nlp.util;
 using System.Linq;
-
 
 namespace ExtractingServices
 {
@@ -21,7 +20,7 @@ namespace ExtractingServices
         public static BTreeDictionary<int, string> OrgList { get; set; } = new BTreeDictionary<int, string>();
         public static BTreeDictionary<int, string> LocList { get; set; } = new BTreeDictionary<int, string>();
 
-        public static List<int> IsQuestionList { get; set; } = new List<int>(); 
+        public static List<int> IsQuestionList { get; set; } = new List<int>();
         public static BTreeDictionary<int, List<string>> NounPhrases { get; set; } = new BTreeDictionary<int, List<string>>();
         public static CoreAnalyzer _analyzer { get; set; }
 
@@ -30,7 +29,7 @@ namespace ExtractingServices
         static Extractor()
         {
             _analyzer = new CoreAnalyzer();
-            
+
         }
 
         public static void CreatePipeline()
@@ -225,15 +224,15 @@ namespace ExtractingServices
                     ExtractKeyPhrases(coredoc, document.GetField("id").GetInt32Value().Value);
                     System.Console.WriteLine(i);
                 }
-                
+
 
             }
 
         }
 
-        private static void FlushToDisk() 
+        private static void FlushToDisk()
         {
-            
+
         }
         private static void ReadFromDisk() { }
 

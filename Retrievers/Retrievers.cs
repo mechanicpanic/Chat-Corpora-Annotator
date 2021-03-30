@@ -1,5 +1,6 @@
 ﻿using ExtractingServices;
 using IndexEngine;
+using IndexEngine.Paths;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
 using System;
@@ -57,14 +58,14 @@ namespace Retrievers
             switch (tag)
             {
                 case NER.ORG:
-                    if(Extractor.OrgList.Keys.Count != 0)
+                    if (Extractor.OrgList.Keys.Count != 0)
                     {
-                        foreach(var temp in Extractor.OrgList.Keys.ToList())
+                        foreach (var temp in Extractor.OrgList.Keys.ToList())
                         {
                             result.Add(temp);
                         }
                         return result;
-                        
+
                     }
                     else
                     {
@@ -75,7 +76,7 @@ namespace Retrievers
                 case NER.LOC:
                     if (Extractor.LocList.Keys.Count != 0)
                     {
-                        foreach(var temp in Extractor.LocList.Keys.ToList())
+                        foreach (var temp in Extractor.LocList.Keys.ToList())
                         {
                             result.Add(temp);
                         }
@@ -94,7 +95,7 @@ namespace Retrievers
                         {
 
                         }
-                            return result;
+                        return result;
                     }
                     else
                     {
@@ -118,23 +119,23 @@ namespace Retrievers
                     if (Extractor.DateList.Keys.Count != 0)
                     {
                         return Extractor.DateList.Keys.ToList();
-                         
+
                     }
                     else
                     {
                         result.Add(-1);
                         return result;
-                        
+
                     }
             }
             throw new ArgumentException();
 
         }
-                          
+
         public static List<int> HasQuestion()
         {
             List<int> result = new List<int>();
-            if(Extractor.IsQuestionList.Count != 0)
+            if (Extractor.IsQuestionList.Count != 0)
             {
                 return Extractor.IsQuestionList;
             }
@@ -144,7 +145,7 @@ namespace Retrievers
                 return result;
             }
         }
-                          
+
         public static List<int> HasUser(string user)
         {
             //Love duplicate code
@@ -161,7 +162,7 @@ namespace Retrievers
             List<int> ret = results.ToList();
             return ret;
         }
-                          
+
         public static List<int> HasUserMentioned(string user)
         {
             //Or I can check each and every message out of millions for a substring occurence :^)

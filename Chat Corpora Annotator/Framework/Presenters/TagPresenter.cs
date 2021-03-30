@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,11 +45,11 @@ namespace Viewer.Framework.Presenters
         {
 
 
-             SituationIndex.RemoveMessageFromSituation(args.Tag, args.Id, args.messages[0]);
-             MessageContainer.Messages[args.messages[0]].Situations.Remove(args.Tag);
+            SituationIndex.RemoveMessageFromSituation(args.Tag, args.Id, args.messages[0]);
+            MessageContainer.Messages[args.messages[0]].Situations.Remove(args.Tag);
 
-            
-            if(SituationIndex.Index[args.Tag][args.Id].Count == 0)
+
+            if (SituationIndex.Index[args.Tag][args.Id].Count == 0)
             {
                 DeleteOrEditTag(args, true);
             }
@@ -131,7 +132,7 @@ namespace Viewer.Framework.Presenters
 
         private void LoadTagged(object sender, EventArgs e)
         {
-            
+
             if (_service.SituationContainer.Count == 0)
             {
                 if (File.Exists(ProjectInfo.SavedTagsPath))

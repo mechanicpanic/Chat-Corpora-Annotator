@@ -1,7 +1,6 @@
 ﻿using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 
 namespace IndexEngine
 {
@@ -11,7 +10,7 @@ namespace IndexEngine
         //Should be sufficient for keeping some messages in-memory.
 
     }
-    public class DynamicMessage 
+    public class DynamicMessage
     {
         public int Id { get; set; }
 
@@ -23,7 +22,7 @@ namespace IndexEngine
 
         public DynamicMessage(string[] fields, string[] data)
         {
-            
+
             contents = new Dictionary<string, object>();
             for (int i = 0; i < fields.Length; i++)
             {
@@ -33,13 +32,13 @@ namespace IndexEngine
         }
         public DynamicMessage()
         {
-          
+
 
         }
 
         public DynamicMessage(string[] fields, object[] data, List<string> selectedFields)
         {
-            
+
             contents = new Dictionary<string, object>();
 
 
@@ -85,7 +84,7 @@ namespace IndexEngine
         {
             //this.Id = Guid.NewGuid();
             this.Id = id;
-            
+
             if (data.Count != selectedFields.Count)
             {
                 throw new Exception("Wrong array size");

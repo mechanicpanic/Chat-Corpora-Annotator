@@ -20,7 +20,7 @@ namespace Viewer
         {
 
             string path = csvDialog.FileName;
-            
+
             string name = Path.GetFileNameWithoutExtension(path);
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             if (Directory.Exists(folderPath + "\\CCA"))
@@ -38,7 +38,7 @@ namespace Viewer
             args.FilePath = csvDialog.FileName;
             chatViewSetUp = false;
             FileAndIndexSelected?.Invoke(this, args);
-            
+
 
         }
 

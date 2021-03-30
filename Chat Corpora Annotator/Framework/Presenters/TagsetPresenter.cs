@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.IO;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Viewer.Framework.Presenters
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
         {
             _service.ProjectTagset = args.Name;
-            
+
             if (!_service.TagsetSet)
             {
 

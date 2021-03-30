@@ -8,7 +8,7 @@ using System.IO;
 
 namespace IndexEngine
 {
- 
+
     public class NGramAnalyzer : Analyzer
     {
         LuceneVersion version = LuceneService.AppLuceneVersion;

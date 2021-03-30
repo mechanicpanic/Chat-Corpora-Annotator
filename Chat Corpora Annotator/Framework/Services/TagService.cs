@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,7 +45,7 @@ namespace Viewer.Framework.Services
         }
         public void CheckTagset()
         {
-            
+
             if (File.Exists(ProjectInfo.TagsetPath))
             {
                 TagsetSet = true;

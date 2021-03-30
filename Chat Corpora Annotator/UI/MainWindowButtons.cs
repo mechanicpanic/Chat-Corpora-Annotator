@@ -273,10 +273,10 @@ namespace Viewer
             TaggerEventArgs args = new TaggerEventArgs();
             if (chatTable.SelectedObjects != null)
             {
-                
+
                 foreach (var obj in chatTable.SelectedObjects)
                 {
-                    
+
                     DynamicMessage dyn = obj as DynamicMessage;
                     args.messages = new List<int>();
                     args.messages.Add(dyn.Id);
@@ -284,10 +284,10 @@ namespace Viewer
                     {
                         args.Tag = dyn.Situations.FirstOrDefault().Key;
                         args.Id = dyn.Situations.FirstOrDefault().Value;
-                            RemoveTag?.Invoke(this, args);
-                        
+                        RemoveTag?.Invoke(this, args);
+
                     }
-                    if(dyn.Situations.Count > 1)
+                    if (dyn.Situations.Count > 1)
                     {
                         //todo
                     }
@@ -365,7 +365,7 @@ namespace Viewer
                 chatViewSetUp = false;
                 sit.Clear();
                 OpenIndexedCorpus?.Invoke(this, args);
-                
+
             }
         }
         private void extractToolStripMenuItem_Click(object sender, EventArgs e)

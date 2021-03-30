@@ -1,32 +1,29 @@
 using ColorLibrary;
 using CSharpTest.Net.Collections;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace IndexEngine
 {
     public static class TagsetIndex
     {
-        static string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsets.txt";
-        static string colorpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsetscolors.txt";
-        
+
+
         static TagsetIndex()
         {
 
-            if (!File.Exists(path))
+            if (!File.Exists(ToolInfo.TagsetIndexPath))
             {
                 AddDefaultTagset();
             }
             else
             {
-                ReadIndexFromDisk(path, colorpath);
+                ReadIndexFromDisk(ToolInfo.TagsetIndexPath, ToolInfo.TagsetColorIndexPath);
             }
         }
         static Random rnd = new Random();
@@ -34,7 +31,7 @@ namespace IndexEngine
 
         public static BTreeDictionary<string, Dictionary<string, Color>> ColorIndex { get; set; }
 
- 
+
 
         public static void AddNewIndexEntry(string name)
         {
@@ -49,7 +46,7 @@ namespace IndexEngine
         {
 
 
-            WriteIndexToDisk(path, colorpath);
+            WriteIndexToDisk(ToolInfo.TagsetIndexPath, ToolInfo.TagsetColorIndexPath);
 
         }
         public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
@@ -147,8 +144,8 @@ namespace IndexEngine
             ColorIndex.Add("default", new Dictionary<string, Color>());
             Color[] colors = ColorGenerator.GenerateHSLuvColors(6);
 
-            
-            
+
+
             for (int i = 0; i < Index["default"].Count; i++)
             {
                 ColorIndex["default"].Add(Index["default"][i], colors[i]);

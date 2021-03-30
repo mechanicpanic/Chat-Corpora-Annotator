@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

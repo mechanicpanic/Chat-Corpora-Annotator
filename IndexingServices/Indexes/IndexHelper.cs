@@ -1,7 +1,6 @@
 ﻿using CSharpTest.Net.Collections;
-
+using IndexEngine.Paths;
 using Lucene.Net.Documents;
-using Lucene.Net.Search;
 using SoftCircuits.CsvParser;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using Wintellect.PowerCollections;
 
 namespace IndexEngine
 {
-    public static class IndexService
+    public static class IndexHelper
     {
 
         #region fields
@@ -20,7 +19,7 @@ namespace IndexEngine
         private static int[] lookup = new int[3];
 
 
-        
+
         #endregion
         #region save info
         private static void CheckDir()
@@ -130,7 +129,7 @@ namespace IndexEngine
                 while (!reader.EndOfStream)
                 {
                     var kvp = reader.ReadLine().Split('+');
-                    
+
                     users.Add(kvp[0]);
                     ProjectInfo.Data.UserColors.Add(kvp[0], Color.FromArgb(int.Parse(kvp[1]))); //bad practice!
                 }
@@ -251,7 +250,7 @@ namespace IndexEngine
 
                         Document document = new Document();
                         document.Add(new Int32Field("id", indexingValue, Field.Store.YES));
-                        
+
                         indexingValue++;
 
                         for (int i = 0; i < row.Length; i++)
@@ -295,8 +294,8 @@ namespace IndexEngine
                     SaveFieldsToDisk();
                     SaveUsersToDisk();
                     SaveStatsToDisk();
-                    
-                   
+
+
                     result = 1;
                     return result;
                 }
@@ -309,7 +308,7 @@ namespace IndexEngine
         {
             var colors = ColorLibrary.ColorGenerator.GenerateHSLuvColors(ProjectInfo.Data.UserKeys.Count, false);
             int i = 0;
-            foreach(var user in ProjectInfo.Data.UserKeys)
+            foreach (var user in ProjectInfo.Data.UserKeys)
             {
                 ProjectInfo.Data.UserColors.Add(user, colors[i]);
                 i++;

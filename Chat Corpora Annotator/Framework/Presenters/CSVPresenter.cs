@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Linq;
 using Viewer.CSV_Wizard;
@@ -72,13 +73,13 @@ namespace Viewer.Framework.Presenters
         private void _csv_ReadyToShow(object sender, EventArgs e)
         {
 
-            
 
-            var list = IndexService.LoadNDocumentsFromIndex(2000);
+
+            var list = IndexHelper.LoadNDocumentsFromIndex(2000);
             //_main.Messages = list;
             MessageContainer.Messages = list;
 
-            
+
 
 
             _main.DisplayDocuments();
@@ -101,7 +102,7 @@ namespace Viewer.Framework.Presenters
             ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.TextFieldKey);
             LuceneService.OpenNewIndex();
             _reader.GetLineCount(this._filepath, _csv.Header); //i have no fucking clue what this does
-            var result = IndexService.PopulateIndex(this._filepath, _csv.AllFields, _csv.Header);
+            var result = IndexHelper.PopulateIndex(this._filepath, _csv.AllFields, _csv.Header);
             LuceneService.OpenReader();
             if (result == 1)
             {

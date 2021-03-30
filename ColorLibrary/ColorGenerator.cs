@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Hsluv;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hsluv;
 
 namespace ColorLibrary
 {
@@ -124,7 +122,7 @@ namespace ColorLibrary
             return c;
         }
 
-        public static Color[] GenerateHSLuvColors(int count, bool back=true)
+        public static Color[] GenerateHSLuvColors(int count, bool back = true)
         {
             Color[] colors;
             bool flag;
@@ -139,7 +137,7 @@ namespace ColorLibrary
                 {
                     var col = GenerateHSLuvColor(back);
                     flag = temp.Add(col);
-                    
+
                 }
 
             }
@@ -158,35 +156,35 @@ namespace ColorLibrary
             double l;
 
 
-            
-                if (back)
-                {
-                    l = rnd.NextDouble() * (90.0 - 55.5) + 55.5;
-                    s = rnd.NextDouble() * (67.0 - 40.0) + 40.0;
-                }
-                else
-                {
-                    l = rnd.NextDouble() * (55.5 - 10.0) + 10.0;
-                    s = rnd.NextDouble() * (99.0 - 30.0) + 30.0;
-                }
 
-                h = rnd.NextDouble() * (359.0 - 1.0) + 1.0;
-                list.Add(h);
-                list.Add(s);
-                list.Add(l);
+            if (back)
+            {
+                l = rnd.NextDouble() * (90.0 - 55.5) + 55.5;
+                s = rnd.NextDouble() * (67.0 - 40.0) + 40.0;
+            }
+            else
+            {
+                l = rnd.NextDouble() * (55.5 - 10.0) + 10.0;
+                s = rnd.NextDouble() * (99.0 - 30.0) + 30.0;
+            }
 
-                var col = HsluvConverter.HsluvToRgb(list);
-                var r = Convert.ToByte(col[0] * 255);
-                var g = Convert.ToByte(col[1] * 255);
-                var b = Convert.ToByte(col[2] * 255);
+            h = rnd.NextDouble() * (359.0 - 1.0) + 1.0;
+            list.Add(h);
+            list.Add(s);
+            list.Add(l);
 
-
-                return(Color.FromArgb(r, g, b));
+            var col = HsluvConverter.HsluvToRgb(list);
+            var r = Convert.ToByte(col[0] * 255);
+            var g = Convert.ToByte(col[1] * 255);
+            var b = Convert.ToByte(col[2] * 255);
 
 
+            return (Color.FromArgb(r, g, b));
 
-            
-         
+
+
+
+
         }
     }
 

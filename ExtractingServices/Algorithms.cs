@@ -1,11 +1,4 @@
-﻿using IndexEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CSharpTest.Net.Collections;
-namespace ExtractingServices
+﻿namespace ExtractingServices
 {
     //public static class Algorithms
     //{
@@ -78,7 +71,7 @@ namespace ExtractingServices
     //                    }
     //                }
     //            }
-            
+
     //        return result;
     //    }
 
@@ -92,7 +85,7 @@ namespace ExtractingServices
     //            if (Extractor.URLList.ContainsKey(quest))
     //            {
     //                var url = Extractor.URLList[quest];
-                    
+
     //                foreach (var word in codeKeywords)
     //                {
     //                    if (url.Contains(word))
@@ -101,7 +94,7 @@ namespace ExtractingServices
     //                        break;
     //                    }
     //                }
-                    
+
     //            }
     //        }
     //        return result;

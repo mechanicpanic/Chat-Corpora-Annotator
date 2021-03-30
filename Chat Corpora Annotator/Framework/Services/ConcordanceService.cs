@@ -1,7 +1,6 @@
 ﻿using IndexEngine;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
-using System;
 using System.Collections.Generic;
 
 namespace Viewer.Framework.Services

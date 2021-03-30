@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Viewer.Framework.Services
 
         public Dictionary<string, double> GetRakeKeywords(int length)
         {
-            Rake generator = new Rake(NLPModel._root + "\\SMARTstopset.txt", 3, length, 3);
+            Rake generator = new Rake(ToolInfo.root + "\\SMARTstopset.txt", 3, length, 3);
 
             return generator.Run(this.BuildBigString(this.GetList()));
         }

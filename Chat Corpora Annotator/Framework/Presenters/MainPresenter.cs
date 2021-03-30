@@ -1,6 +1,6 @@
 ﻿using ExtractingServices;
 using IndexEngine;
-using Lucene.Net.Index;
+using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,10 +138,10 @@ namespace Viewer.Framework.Presenters
             _service.UnloadData();
             SituationIndex.UnloadData();
             ProjectInfo.LoadProject(e.Path);
-            if(LuceneService.OpenIndex())
+            if (LuceneService.OpenIndex())
             {
 
-                
+
 
                 MessageContainer.Messages = new List<DynamicMessage>();
                 _main.SetLineCount(ProjectInfo.Data.LineCount);
@@ -162,7 +162,7 @@ namespace Viewer.Framework.Presenters
 
         public void AddDocumentsToDisplay(int count)
         {
-            var list = IndexService.LoadNDocumentsFromIndex(count);
+            var list = IndexHelper.LoadNDocumentsFromIndex(count);
             MessageContainer.Messages.AddRange(list);
             _main.DisplayDocuments();
             ShowTags(count);

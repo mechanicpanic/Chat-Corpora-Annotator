@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
+using IndexEngine.Paths;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -212,11 +213,11 @@ namespace Viewer
             fastSituationView.RebuildColumns();
             List<OLVColumn> columns = new List<OLVColumn>();
 
-            foreach(var key in ProjectInfo.Data.SelectedFields)
+            foreach (var key in ProjectInfo.Data.SelectedFields)
             {
                 OLVColumn cl = new OLVColumn();
                 cl.AspectGetter = delegate (object x) { return OnTagValueGetter(cl, x, key); };
-                cl.Text =key;
+                cl.Text = key;
                 cl.WordWrap = true;
                 columns.Add(cl);
             }

@@ -1,15 +1,10 @@
-﻿using CSharpTest.Net.Collections;
-using System;
+﻿using IndexEngine.Paths;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace IndexEngine
 {
-    
+
     public static class SituationIndex
     {
         public static Dictionary<string, Dictionary<int, List<int>>> Index { get; set; }
@@ -23,7 +18,7 @@ namespace IndexEngine
 
         static SituationIndex()
         {
-            if(File.Exists(ProjectInfo.SituationsPath))
+            if (File.Exists(ProjectInfo.SituationsPath))
             {
                 LoadIndexFromDisk(ProjectInfo.SituationsPath);
             }
@@ -41,7 +36,7 @@ namespace IndexEngine
         public static int SituationCount()
         {
             int count = 0;
-            foreach(var kvp in Index)
+            foreach (var kvp in Index)
             {
                 count += kvp.Value.Count;
             }
@@ -50,14 +45,14 @@ namespace IndexEngine
 
         public static void RetrieveDictFromMessageContainer(List<DynamicMessage> msg)
         {
-            foreach(var m in msg)
+            foreach (var m in msg)
             {
                 //if (!Index.ContainsKey(m.Situations.ElementAt(0).Key))
-                { 
+                {
                     //;
-                    foreach(var kvp in m.Situations)
+                    foreach (var kvp in m.Situations)
                     {
-                        if (!Index.ContainsKey(kvp.Key)) 
+                        if (!Index.ContainsKey(kvp.Key))
                         {
                             Index.Add(kvp.Key, new Dictionary<int, List<int>>());
                         }
@@ -70,7 +65,7 @@ namespace IndexEngine
                         {
                             Index[kvp.Key][kvp.Value].Add(m.Id);
                         }
-                        
+
                     }
 
                 }
@@ -101,23 +96,24 @@ namespace IndexEngine
 
         public static void AddSituationToIndex(List<int> messages, int id, string situation)
         {
-            if (!Index.ContainsKey(situation)) {
+            if (!Index.ContainsKey(situation))
+            {
                 Index.Add(situation, new Dictionary<int, List<int>>());
                 Index[situation].Add(id, messages);
-                    }
+            }
             else
             {
                 if (!Index[situation].ContainsKey(id))
                 {
-                    
+
                     Index[situation].Add(id, messages);
                 }
             }
         }
         public static void RemoveSituationFromIndex(int id, string situation)
         {
-            
-            if(Index.ContainsKey(situation) && Index[situation].ContainsKey(id))
+
+            if (Index.ContainsKey(situation) && Index[situation].ContainsKey(id))
             {
                 //foreach(var i in Index[situation][id])
                 //{
@@ -125,7 +121,7 @@ namespace IndexEngine
                 //}
                 Index[situation].Remove(id);
             }
-            
+
         }
 
         public static void RemoveMessageFromSituation(string situation, int id, int message)
