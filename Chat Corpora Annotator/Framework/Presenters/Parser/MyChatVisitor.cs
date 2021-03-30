@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using IndexEngine;
-using Retrievers;
+using IndexEngine.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,7 +160,7 @@ namespace Viewer.Framework.Presenters.Parser
                 string username = context.huser().GetText();
                 if (username != "<missing STRING>")
                 {
-                    return Retrievers.Retrievers.HasUserMentioned(username);
+                    return Retrievers.HasUserMentioned(username);
                 }
                 else
                 {
@@ -172,7 +172,7 @@ namespace Viewer.Framework.Presenters.Parser
                 string username = context.huser().GetText();
                 if (username != "<missing STRING>")
                 {
-                    return Retrievers.Retrievers.HasUser(username);
+                    return Retrievers.HasUser(username);
                 }
                 else
                 {
@@ -181,23 +181,23 @@ namespace Viewer.Framework.Presenters.Parser
             }
             else if (context.HasLocation() != null)
             {
-                return Retrievers.Retrievers.HasNERTag(NER.LOC);
+                return Retrievers.HasNERTag(NER.LOC);
             }
             else if (context.HasOrganization() != null)
             {
-                return Retrievers.Retrievers.HasNERTag(NER.ORG);
+                return Retrievers.HasNERTag(NER.ORG);
             }
             else if (context.HasTime() != null)
             {
-                return Retrievers.Retrievers.HasNERTag(NER.TIME);
+                return Retrievers.HasNERTag(NER.TIME);
             }
             else if (context.HasURL() != null)
             {
-                return Retrievers.Retrievers.HasNERTag(NER.URL);
+                return Retrievers.HasNERTag(NER.URL);
             }
             else if (context.HasQuestion() != null)
             {
-                return Retrievers.Retrievers.HasQuestion();
+                return Retrievers.HasQuestion();
             }
             else if (context.HasWordOfDict() != null)
             {
@@ -207,7 +207,7 @@ namespace Viewer.Framework.Presenters.Parser
                 {
                     if (UserDictsContainer.UserDicts.TryGetValue(dictname, out list))
                     {
-                        return Retrievers.Retrievers.HasWordOfList(list);
+                        return Retrievers.HasWordOfList(list);
                     }
                     else
                     {
@@ -224,7 +224,7 @@ namespace Viewer.Framework.Presenters.Parser
             }
             else if (context.HasDate() != null)
             {
-                return Retrievers.Retrievers.HasNERTag(NER.DATE);
+                return Retrievers.HasNERTag(NER.DATE);
             }
             else
             {

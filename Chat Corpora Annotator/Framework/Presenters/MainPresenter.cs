@@ -1,5 +1,5 @@
-﻿using ExtractingServices;
-using IndexEngine;
+﻿using IndexEngine;
+using IndexEngine.NLP;
 using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
