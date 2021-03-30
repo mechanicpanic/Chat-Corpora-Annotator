@@ -5,6 +5,7 @@ using IndexEngine;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
@@ -269,13 +270,30 @@ namespace Viewer
 
         private void removeTagButton_Click(object sender, EventArgs e)
         {
+            TaggerEventArgs args = new TaggerEventArgs();
             if (chatTable.SelectedObjects != null)
             {
+                
                 foreach (var obj in chatTable.SelectedObjects)
                 {
+                    
                     DynamicMessage dyn = obj as DynamicMessage;
-                    MessageContainer.Messages[dyn.Id].Situations.Clear();
+                    args.messages = new List<int>();
+                    args.messages.Add(dyn.Id);
+                    if (dyn.Situations.Count == 1)
+                    {
+                        args.Tag = dyn.Situations.FirstOrDefault().Key;
+                        args.Id = dyn.Situations.FirstOrDefault().Value;
+                            RemoveTag?.Invoke(this, args);
+                        
+                    }
+                    if(dyn.Situations.Count > 1)
+                    {
+                        //todo
+                    }
+                    //MessageContainer.Messages[dyn.Id].Situations.Clear();
                 }
+
             }
         }
 

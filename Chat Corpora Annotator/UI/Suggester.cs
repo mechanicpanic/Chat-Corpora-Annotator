@@ -153,15 +153,15 @@ namespace Viewer.UI
                 ////bleh
                 temp.Sort();
                 Hits = temp;
-                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 2));
-                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Min() - 1));
+                CurrentSituation.Add(LuceneService.RetrieveMessageById(temp.Min() - 2));
+                CurrentSituation.Add(LuceneService.RetrieveMessageById(temp.Min() - 1));
 
                 for (int i = temp[0]; i <= temp[temp.Count - 1]; i++)
                 {
-                    CurrentSituation.Add(IndexEngine.IndexService.RetrieveMessageById(i));
+                    CurrentSituation.Add(LuceneService.RetrieveMessageById(i));
                 }
-                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 1));
-                CurrentSituation.Add(IndexService.RetrieveMessageById(temp.Max() + 2));
+                CurrentSituation.Add(LuceneService.RetrieveMessageById(temp.Max() + 1));
+                CurrentSituation.Add(LuceneService.RetrieveMessageById(temp.Max() + 2));
 
                 suggesterView.SetObjects(CurrentSituation);
                 SetUpChatView();

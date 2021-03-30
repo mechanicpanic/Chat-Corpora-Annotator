@@ -318,21 +318,7 @@ namespace IndexEngine
         }
 
 
-        public static DynamicMessage RetrieveMessageById(int id)
-        {
 
-            var query = NumericRangeQuery.NewInt32Range("id", id, id, true, true);
-            ScoreDoc doc = LuceneService.Searcher.Search(query, 1).ScoreDocs.FirstOrDefault();
-            List<string> data = new List<string>();
-            Document idoc = LuceneService.Searcher.Doc(doc.Doc);
-            foreach (var field in ProjectInfo.Data.SelectedFields)
-            {
-                data.Add(idoc.GetField(field).GetStringValue());
-            }
-
-            return new DynamicMessage(data, ProjectInfo.Data.SelectedFields, ProjectInfo.DateFieldKey, idoc.GetField("id").GetInt32Value().Value);
-
-        }
 
         internal static void UnloadData()
         {

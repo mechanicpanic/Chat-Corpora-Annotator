@@ -17,9 +17,6 @@ namespace Viewer.Framework.Presenters
         private readonly IMainView _main;
         private readonly ITagFileWriter _writer;
 
-        private string savedpath;
-        private string pathcounts;
-        private string tagsetpath;
         public TagPresenter(IMainView main, ITagView tagger, ITagService service, ITagsetView tagset, ITagFileWriter writer)
         {
             this._main = main;
@@ -31,6 +28,7 @@ namespace Viewer.Framework.Presenters
             _tagger.TagsetClick += _tagger_TagsetClick;
             _tagger.WriteToDisk += _tagger_WriteToDisk;
             _tagger.AddTag += _tagger_AddTag;
+            _tagger.RemoveTag += _tagger_RemoveTag;
             _tagger.DeleteSituation += _tagger_DeleteSituation;
             _tagger.EditSituation += _tagger_EditSituation;
             _tagger.MergeSituations += _tagger_MergeSituations;
@@ -40,6 +38,20 @@ namespace Viewer.Framework.Presenters
             //_main.TagClick += _main_TagClick;
 
 
+        }
+
+        private void _tagger_RemoveTag(object sender, TaggerEventArgs args)
+        {
+
+
+             SituationIndex.RemoveMessageFromSituation(args.Tag, args.Id, args.messages[0]);
+             MessageContainer.Messages[args.messages[0]].Situations.Remove(args.Tag);
+
+            
+            if(SituationIndex.Index[args.Tag][args.Id].Count == 0)
+            {
+                DeleteOrEditTag(args, true);
+            }
         }
 
         private void _tagger_MergeSituations(object sender, TaggerEventArgs args)

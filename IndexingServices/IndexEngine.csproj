@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicMessage.cs" />
+    <Compile Include="Index.cs" />
     <Compile Include="IndexService.cs" />
     <Compile Include="LuceneService.cs" />
     <Compile Include="NGramAnalyzer.cs" />

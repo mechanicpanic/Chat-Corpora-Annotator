@@ -64,7 +64,7 @@ namespace Viewer.Framework.Services
 
             foreach (var id in messageIds)
             {
-                var msg = IndexService.RetrieveMessageById(id);
+                var msg = LuceneService.RetrieveMessageById(id);
                 WriteMessage(id, msg.Contents[ProjectInfo.TextFieldKey].ToString(), msg.Contents[ProjectInfo.SenderFieldKey].ToString(), msg.Contents[ProjectInfo.DateFieldKey].ToString());
             }
             writer.WriteEndElement();
