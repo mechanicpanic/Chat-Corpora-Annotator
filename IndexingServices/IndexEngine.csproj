@@ -377,6 +377,7 @@
     <Compile Include="Extractor\Extractor.cs" />
     <Compile Include="Indexes\Index.cs" />
     <Compile Include="Indexes\IndexHelper.cs" />
+    <Compile Include="Indexes\NGramIndex.cs" />
     <Compile Include="Paths\ToolInfo.cs" />
     <Compile Include="Search\LuceneService.cs" />
     <Compile Include="Search\NGramAnalyzer.cs" />

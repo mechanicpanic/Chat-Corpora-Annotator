@@ -2,11 +2,20 @@
 
 namespace IndexEngine
 {
-    public abstract class Index
+    public abstract class Index<TKey,TValue>
     {
+
+        public abstract Dictionary<TKey,TValue> IndexCollection { get; set; } 
         public abstract void UnloadData();
-        public abstract void ReadIndexFromDisk(string path);
-        public abstract void FlushIndexToDisk(string path);
+        internal abstract bool CheckFiles();
+        internal abstract bool CheckDirectory();
+        public abstract void ReadIndexFromDisk();
+        public abstract void FlushIndexToDisk();
+        public abstract void AddIndexEntry(TKey key, TValue value);
+        public abstract void DeleteIndexEntry(TKey key);
+
+        public abstract void UpdateIndexEntry(TKey key, TValue value);
+
     }
 
     public abstract class Container<T>

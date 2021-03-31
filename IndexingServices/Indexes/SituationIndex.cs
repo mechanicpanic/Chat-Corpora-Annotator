@@ -1,13 +1,72 @@
 ﻿using IndexEngine.Paths;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 
 namespace IndexEngine
 {
+    public class SituationIndexNew : Index<string, Dictionary<int, List<int>>>
+    {
+        private static readonly Lazy<SituationIndexNew> lazy = new Lazy<SituationIndexNew>(() => new SituationIndexNew());
+
+        public static SituationIndexNew GetInstance()
+        {
+            return lazy.Value;
+        }
+
+        private SituationIndexNew() { }
+
+        public override Dictionary<string, Dictionary<int, List<int>>> IndexCollection { get; set; } = new Dictionary<string, Dictionary<int, List<int>>>();
+
+        public override void AddIndexEntry(string key, Dictionary<int, List<int>> value)
+        {
+            IndexCollection.Add(key, value);
+        }
+
+        public override void DeleteIndexEntry(string key)
+        {
+            IndexCollection.Remove(key);
+        }
+
+        public override void FlushIndexToDisk()
+        {
+            var jsonString = JsonSerializer.Serialize(IndexCollection);
+            File.WriteAllText(ProjectInfo.SituationsPath, jsonString);
+        }
+
+        public override void ReadIndexFromDisk()
+        {
+            var jsonString = File.ReadAllText(ProjectInfo.SituationsPath);
+
+            IndexCollection = JsonSerializer.Deserialize<Dictionary<string, Dictionary<int,List<int>>>>(jsonString);
+        }
+
+        public override void UnloadData()
+        {
+            IndexCollection.Clear();
+        }
+
+        public override void UpdateIndexEntry(string key, Dictionary<int, List<int>> value)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal override bool CheckDirectory()
+        {
+            return false;
+        }
+
+        internal override bool CheckFiles()
+        {
+            return false;
+        }
+    }
 
     public static class SituationIndex
     {
         public static Dictionary<string, Dictionary<int, List<int>>> Index { get; set; }
+
         public static Dictionary<string, int> TagsetCounter = new Dictionary<string, int>();
 
         public static void UnloadData()
@@ -42,36 +101,6 @@ namespace IndexEngine
             }
             return count;
         }
-
-        public static void RetrieveDictFromMessageContainer(List<DynamicMessage> msg)
-        {
-            foreach (var m in msg)
-            {
-                //if (!Index.ContainsKey(m.Situations.ElementAt(0).Key))
-                {
-                    //;
-                    foreach (var kvp in m.Situations)
-                    {
-                        if (!Index.ContainsKey(kvp.Key))
-                        {
-                            Index.Add(kvp.Key, new Dictionary<int, List<int>>());
-                        }
-                        if (!Index[kvp.Key].ContainsKey(kvp.Value))
-                        {
-                            Index[kvp.Key].Add(kvp.Value, new List<int>());
-                            Index[kvp.Key][kvp.Value].Add(m.Id);
-                        }
-                        else
-                        {
-                            Index[kvp.Key][kvp.Value].Add(m.Id);
-                        }
-
-                    }
-
-                }
-            }
-        }
-
         public static void RetrieveDictFromMessageContainer(DynamicMessage m)
         {
             foreach (var kvp in m.Situations)

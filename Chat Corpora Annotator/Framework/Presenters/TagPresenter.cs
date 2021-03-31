@@ -88,6 +88,7 @@ namespace Viewer.Framework.Presenters
                 var tag = args.AdditionalInfo["Change"].ToString();
 
                 var count = SituationIndex.TagsetCounter[tag];
+                var count2 = SituationIndex.Index[tag].Count;
                 var list = SituationIndex.Index[args.Tag][args.Id];
 
                 SituationIndex.TagsetCounter[tag]++;
@@ -279,7 +280,7 @@ namespace Viewer.Framework.Presenters
 
                 }
                 _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
-
+                var count = SituationIndex.Index[e.Tag].Count;
                 SituationIndex.TagsetCounter[e.Tag]++;
             }
             else

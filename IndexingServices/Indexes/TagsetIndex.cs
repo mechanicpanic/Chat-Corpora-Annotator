@@ -40,15 +40,6 @@ namespace IndexEngine
 
         }
 
-
-
-        public static void WriteInfoToDisk()
-        {
-
-
-            WriteIndexToDisk(ToolInfo.TagsetIndexPath, ToolInfo.TagsetColorIndexPath);
-
-        }
         public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
 
         public static void UpdateIndexEntry(string name, string tag, int type)
@@ -126,14 +117,6 @@ namespace IndexEngine
                 }
 
             }
-        }
-        public static List<string> RetrieveStoredTagset(string name)
-        {
-            List<string> tagset = new List<string>();
-            tagset.Add(name);
-            tagset.AddRange(Index[name]);
-
-            return tagset;
         }
 
         private static void AddDefaultTagset()
