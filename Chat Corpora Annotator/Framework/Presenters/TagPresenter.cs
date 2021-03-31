@@ -1,4 +1,5 @@
-﻿using IndexEngine;
+﻿using CSharpTest.Net.Collections;
+using IndexEngine;
 using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
@@ -133,55 +134,61 @@ namespace Viewer.Framework.Presenters
 
         private void LoadTagged(object sender, EventArgs e)
         {
-
-            if (_service.SituationContainer.Count == 0)
+            foreach(var kvp in SituationIndex.Index)
             {
-                if (File.Exists(ProjectInfo.SavedTagsPath))
+                foreach (var sit in kvp.Value)
                 {
-                    using (StreamReader reader = new StreamReader(ProjectInfo.SavedTagsPath))
-                    {
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            var MessageIdAndSituations = line.Split(' ');
-                            _service.SituationContainer.Add(Int32.Parse(MessageIdAndSituations[0]), MessageIdAndSituations[1]);
+                    _tagger.AddSituationIndexItem(kvp.Key + " " + sit.Value);
+                }
+            }
+            //if (_service.SituationContainer.Count == 0)
+            //{
+            //    if (File.Exists(ProjectInfo.SavedTagsPath))
+            //    {
+            //        using (StreamReader reader = new StreamReader(ProjectInfo.SavedTagsPath))
+            //        {
+            //            string line;
+            //            while ((line = reader.ReadLine()) != null)
+            //            {
+            //                var MessageIdAndSituations = line.Split(' ');
+            //                _service.SituationContainer.Add(Int32.Parse(MessageIdAndSituations[0]), MessageIdAndSituations[1]);
 
-                            var situationsSet = MessageIdAndSituations[1].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+            //                var situationsSet = MessageIdAndSituations[1].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
 
-                            foreach (var situation in situationsSet)
-                            {
-                                var splitSituation = situation.Split('-');
-                                int sitId = int.Parse(splitSituation[1]);
-                                if (SituationIndex.Index.ContainsKey(splitSituation[0]))
-                                {
-                                    if (!SituationIndex.Index[splitSituation[0]].ContainsKey(sitId))
-                                    {
-                                        SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
-                                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
-                                    }
-                                    else
-                                    {
-                                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
-                                    }
-                                }
-                                else
-                                {
-                                    SituationIndex.Index.Add(splitSituation[0], new Dictionary<int, List<int>>());
-                                    SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
-                                    SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+            //                foreach (var situation in situationsSet)
+            //                {
+            //                    var splitSituation = situation.Split('-');
+            //                    int sitId = int.Parse(splitSituation[1]);
+            //                    if (SituationIndex.Index.ContainsKey(splitSituation[0]))
+            //                    {
+            //                        if (!SituationIndex.Index[splitSituation[0]].ContainsKey(sitId))
+            //                        {
+            //                            SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
+            //                            SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+            //                        }
+            //                        else
+            //                        {
+            //                            SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        SituationIndex.Index.Add(splitSituation[0], new Dictionary<int, List<int>>());
+            //                        SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
+            //                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
 
-                                }
+            //                    }
 
-                                //TODO: Revise and add a wrapper ASAP
-                                _tagger.AddSituationIndexItem(splitSituation[0] + " " + splitSituation[1]);
-                            }
-                        }
-                    }
+            //                    //TODO: Revise and add a wrapper ASAP
+            //                    _tagger.AddSituationIndexItem(splitSituation[0] + " " + splitSituation[1]);
+            //                }
+            //            }
+            //        }
                     _service.TaggedIds = _service.SituationContainer.Keys.ToList();
                     _service.TaggedIds.Sort();
                     _tagger.UpdateSituationCount(SituationIndex.SituationCount());
-                }
-            }
+                
+            
         }
 
 
@@ -199,6 +206,7 @@ namespace Viewer.Framework.Presenters
                         counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
                     }
                 }
+                SituationIndex.WriteIndexToDisk();
                 using (StreamWriter file = File.AppendText(ProjectInfo.SavedTagsPath))
                 {
 
@@ -309,39 +317,6 @@ namespace Viewer.Framework.Presenters
             }
             _writer.CloseWriter();
         }
-
-
-        //private void _main_TagClick(object sender, EventArgs e)
-        //{
-        //    if (!_tagger.SituationsLoaded)
-        //    {
-        //        LoadTagged(null, null);
-        //        _tagger.SituationsLoaded = true;
-        //    }
-        //    ShowTags(MessageContainer.Messages.Count);
-        //    _tagger.ShowView();
-        //    _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-        //}
-
-        //private void _tagger_LoadMore(object sender, EventArgs e)
-        //{          
-        //    AddDocumentsToDisplay(2000);
-        //    _tagger.ShowDates(IndexService.MessagesPerDay.Keys.ToList());
-
-        //}
-
-
-
-        //private void AddDocumentsTagsToDisplay(int count)
-        //{
-        //    var list = IndexService.LoadSomeDocuments(count);
-        //    MessageContainer.Messages.AddRange(list);
-        //    ShowTags(count);
-
-
-        //}
-
-
 
         private void _tagger_TagsetClick(object sender, EventArgs e)
         {

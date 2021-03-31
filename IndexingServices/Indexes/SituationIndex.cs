@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
-
+using Newtonsoft.Json;
 namespace IndexEngine
 {
-    public class SituationIndexNew : Index<string, Dictionary<int, List<int>>>
+    public class SituationIndexNew : Index<string, Dictionary<int, List<int>>, int, List<int>>
     {
         private static readonly Lazy<SituationIndexNew> lazy = new Lazy<SituationIndexNew>(() => new SituationIndexNew());
 
@@ -19,35 +18,108 @@ namespace IndexEngine
 
         public override Dictionary<string, Dictionary<int, List<int>>> IndexCollection { get; set; } = new Dictionary<string, Dictionary<int, List<int>>>();
 
-        public override void AddIndexEntry(string key, Dictionary<int, List<int>> value)
+        public Dictionary<int, Dictionary<string, int>> InvertedIndex { get; set; } = new Dictionary<int, Dictionary<string, int>>();
+
+        public override void AddOuterIndexEntry(string key, Dictionary<int, List<int>> value)
         {
-            IndexCollection.Add(key, value);
+            if (!IndexCollection.ContainsKey(key))
+            {
+                IndexCollection.Add(key, value);
+            }
+            else
+            {
+                foreach(var kvp in value)
+                {
+                    AddInnerIndexEntry(key, kvp.Key, kvp.Value);
+                }
+            }
+            foreach(var kvp in value)
+            {
+                foreach(var id in kvp.Value)
+                {
+                    if (!InvertedIndex.ContainsKey(id)) {
+                        InvertedIndex.Add(id, new Dictionary<string, int>());
+                        InvertedIndex[id].Add(key, kvp.Key);
+                        }
+                    else
+                    {
+                        InvertedIndex[id].Add(key, kvp.Key);
+                    }
+                }
+            }
+        }
+        public override void AddInnerIndexEntry(string key, int sid, List<int> messages)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                IndexCollection[key].Add(sid, messages);
+            }
+            else
+            {
+                IndexCollection.Add(key, new Dictionary<int, List<int>>());
+                IndexCollection[key].Add(sid, messages);
+            }
+
+            foreach (var id in messages)
+            {
+                if (!InvertedIndex.ContainsKey(id))
+                {
+                    InvertedIndex.Add(id, new Dictionary<string, int>());
+                    InvertedIndex[id].Add(key, sid);
+                }
+                else
+                {
+                    InvertedIndex[id].Add(key, sid);
+                }
+            }
         }
 
-        public override void DeleteIndexEntry(string key)
+
+        public override void DeleteOuterIndexEntry(string key)
         {
             IndexCollection.Remove(key);
+            foreach(var kvp in InvertedIndex)
+            {
+                if (kvp.Value.ContainsKey(key))
+                {
+                    kvp.Value.Remove(key);
+                }
+            }
+
         }
+
+        public override void DeleteInnerIndexEntry(string key, int sid)
+        {
+            IndexCollection[key].Remove(sid);
+            foreach(var kvp in InvertedIndex)
+            {
+                if (kvp.Value.ContainsKey(key)){
+                    if(kvp.Value[key] == sid)
+                    {
+                        kvp.Value.Remove(key);
+                    }
+                }
+            }
+        }
+
 
         public override void FlushIndexToDisk()
         {
-            var jsonString = JsonSerializer.Serialize(IndexCollection);
-            File.WriteAllText(ProjectInfo.SituationsPath, jsonString);
+            
         }
 
         public override void ReadIndexFromDisk()
         {
-            var jsonString = File.ReadAllText(ProjectInfo.SituationsPath);
-
-            IndexCollection = JsonSerializer.Deserialize<Dictionary<string, Dictionary<int,List<int>>>>(jsonString);
+            
         }
 
         public override void UnloadData()
         {
             IndexCollection.Clear();
+            InvertedIndex.Clear();
         }
 
-        public override void UpdateIndexEntry(string key, Dictionary<int, List<int>> value)
+        public override void UpdateOuterIndexEntry(string key, Dictionary<int, List<int>> value)
         {
             throw new System.NotImplementedException();
         }
@@ -61,6 +133,15 @@ namespace IndexEngine
         {
             return false;
         }
+
+
+
+        public override void InitializeIndex(List<string> list)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteMessageFromSituation() { }
     }
 
     public static class SituationIndex
@@ -79,7 +160,7 @@ namespace IndexEngine
         {
             if (File.Exists(ProjectInfo.SituationsPath))
             {
-                LoadIndexFromDisk(ProjectInfo.SituationsPath);
+                LoadIndexFromDisk();
             }
             else
             {
@@ -87,9 +168,18 @@ namespace IndexEngine
             }
         }
 
-        private static void LoadIndexFromDisk(string path)
+        private static void LoadIndexFromDisk()
+        {
+            var jsonString = File.ReadAllText(ProjectInfo.SituationsPath);
+            Index = (Dictionary<string, Dictionary<int, List<int>>>)JsonConvert.DeserializeObject(jsonString);
+        }
+
+        public static void WriteIndexToDisk()
         {
 
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(Index);
+
+            File.WriteAllText(ProjectInfo.SituationsPath, jsonString);
         }
 
         public static int SituationCount()

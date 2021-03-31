@@ -193,7 +193,7 @@ namespace Viewer.Framework.Presenters
                     if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
                     {
                         MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
-                        SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
+                        //SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
 
                     }
                 }
