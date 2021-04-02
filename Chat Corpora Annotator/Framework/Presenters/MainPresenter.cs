@@ -136,7 +136,7 @@ namespace Viewer.Framework.Presenters
             ProjectInfo.UnloadData();
 
             _service.UnloadData();
-            SituationIndex.UnloadData();
+            SituationIndex.GetInstance().UnloadData();
             ProjectInfo.LoadProject(e.Path);
             if (LuceneService.OpenIndex())
             {
@@ -183,20 +183,22 @@ namespace Viewer.Framework.Presenters
 
         private void InsertTagsInDynamicMessage(int id, int offset)
         {
-            var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+            //var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var item in arr)
+
+
+            if (id <= MessageContainer.Messages.Count + offset)
             {
-                var s = item.Split('-');
-                if (id <= MessageContainer.Messages.Count + offset)
+                foreach (var str in SituationIndex.GetInstance().InvertedIndex[id])
                 {
-                    if (!MessageContainer.Messages[id].Situations.ContainsKey(s[0]))
+                    if (!MessageContainer.Messages[id].Situations.ContainsKey(str.Key))
                     {
-                        MessageContainer.Messages[id].Situations.Add(s[0], Int32.Parse(s[1]));
+                        MessageContainer.Messages[id].Situations.Add(str.Key, str.Value);
                         //SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
 
                     }
                 }
+
 
             }
         }

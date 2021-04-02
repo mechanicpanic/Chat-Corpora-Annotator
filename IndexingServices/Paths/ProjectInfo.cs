@@ -62,6 +62,7 @@ namespace IndexEngine.Paths
             StatsPath = InfoPath + Name + @"-stats.txt";
 
             SavedTagsPath = InfoPath + Name + @"-savedtags.txt";
+            SavedTagsPathTemp = InfoPath + Name + @"-savedtagsnew.txt";
             TagCountsPath = InfoPath + Name + @"-tagcounts.txt";
             TagsetPath = InfoPath + Name + @"-tagset.txt";
             SituationsPath = InfoPath + Name + @"-situations.txt";
@@ -90,6 +91,7 @@ namespace IndexEngine.Paths
         public static string SituationsPath { get; private set; }
         public static string TagCountsPath { get; private set; }
         public static string SavedTagsPath { get; private set; }
+        public static string SavedTagsPathTemp { get; private set; }
         public static string TagsetPath { get; private set; }
 
         public static string Tagset { get; private set; }

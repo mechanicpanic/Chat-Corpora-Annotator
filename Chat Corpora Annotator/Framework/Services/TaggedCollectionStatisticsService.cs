@@ -60,18 +60,18 @@ namespace Viewer.Framework.Services
             List<int> windows = new List<int>(); // all windows lengths;
             int count = 0; //all messages in all situations
             int symcount = 0; //all symbols in all situations
-            int sitcount = SituationIndex.SituationCount(); //the number of all situations
+            int sitcount = SituationIndex.GetInstance().ItemCount; //the number of all situations
 
             HashSet<string> usersInSituation = new HashSet<string>(); //counts all unique users in a situation
             Dictionary<string, int> userPerSituationPerTagCounts = new Dictionary<string, int>(); //the sum of unique users in each tag
 
-            foreach (var kvp in SituationIndex.TagsetCounter)
+            foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
             {
                 userPerSituationPerTagCounts.Add(kvp.Key, 0);
                 this.AverageUsersInSituationPerTag.Add(kvp.Key, 0);
             }
 
-            foreach (var kvp in SituationIndex.Index)
+            foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
             {
                 count += kvp.Value.Values.Count;
                 foreach (var dict in kvp.Value)
@@ -101,16 +101,16 @@ namespace Viewer.Framework.Services
             this.AverageUsersPerSituation = userPerSituationPerTagCounts.Values.Sum() / sitcount;
             foreach (var kvp in userPerSituationPerTagCounts)
             {
-                this.AverageUsersInSituationPerTag[kvp.Key] = kvp.Value / SituationIndex.Index[kvp.Key].Count;
-                this.SituationsPerTag.Add(kvp.Key, SituationIndex.Index[kvp.Key].Count);
+                this.AverageUsersInSituationPerTag[kvp.Key] = kvp.Value / SituationIndex.GetInstance().GetValueCount(kvp.Key);
+                this.SituationsPerTag.Add(kvp.Key, SituationIndex.GetInstance().GetValueCount(kvp.Key));
                 this.AllFields.Add("Average number of users in " + kvp.Key, AverageUsersInSituationPerTag[kvp.Key]);
-                this.AllFields.Add(kvp.Key, SituationIndex.Index[kvp.Key].Count);
+                this.AllFields.Add(kvp.Key, SituationIndex.GetInstance().GetValueCount(kvp.Key));
 
             }
 
             this.AllFields.Add("Number of tagged messages", this.NumberOfDocs);
             this.AllFields.Add("Number of symbols", this.NumberOfSymbols);
-            this.AllFields.Add("Average number of messages per situation", this.AverageUsersPerSituation);
+            this.AllFields.Add("Average number of messages per situation", this.AverageMessagesPerUnit);
             this.AllFields.Add("Average length of a tagged message", AverageLength);
             this.AllFields.Add("Average window length", AverageWindowLength);
             this.AllFields.Add("Number of windows", windows.Count);
@@ -123,7 +123,7 @@ namespace Viewer.Framework.Services
             {
 
                 Tuple<int, int> tuple;
-                foreach (var kvp in SituationIndex.Index)
+                foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
                 {
                     foreach (var dict in kvp.Value)
                     {

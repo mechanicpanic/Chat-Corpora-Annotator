@@ -242,7 +242,7 @@ namespace Viewer
             if (tagsetView.SelectedItems.Count != 0 && chatTable.SelectedObjects.Count != 0)
             {
                 TaggerEventArgs args = new TaggerEventArgs();
-                args.Id = IndexEngine.SituationIndex.TagsetCounter[tagsetView.SelectedItems[0].Text];
+                args.Id = SituationIndex.GetInstance().GetValueCount(tagsetView.SelectedItems[0].Text);
 
                 args.Tag = tagsetView.SelectedItems[0].Text;
 
@@ -311,7 +311,7 @@ namespace Viewer
         {
             string[] item = fastSituationView.SelectedObject.ToString().Split(' ');
             bool flag = false;
-            int messageID = SituationIndex.Index[item[0]][Int32.Parse(item[1])][0];
+            int messageID = SituationIndex.GetInstance().IndexCollection[item[0]][Int32.Parse(item[1])][0];
             //tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
 
             while (!flag)
@@ -322,12 +322,9 @@ namespace Viewer
                     flag = true;
                 }
                 else
-                {
-                    //DialogResult res = MessageBox.Show("This will load additional messages. Proceed?");
-                    //if (res == DialogResult.OK)
-                    //{
+                { 
                     LoadMore?.Invoke(this, EventArgs.Empty);
-                    //}
+
                 }
             }
         }

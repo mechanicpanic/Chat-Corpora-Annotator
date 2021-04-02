@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Services;
 using Viewer.Framework.Views;
@@ -46,11 +47,11 @@ namespace Viewer.Framework.Presenters
         {
 
 
-            SituationIndex.RemoveMessageFromSituation(args.Tag, args.Id, args.messages[0]);
+            SituationIndex.GetInstance().DeleteMessageFromSituation(args.Tag, args.Id, args.messages[0]);
             MessageContainer.Messages[args.messages[0]].Situations.Remove(args.Tag);
 
 
-            if (SituationIndex.Index[args.Tag][args.Id].Count == 0)
+            if (SituationIndex.GetInstance().GetInnerValueCount(args.Tag,args.Id) == 0)
             {
                 DeleteOrEditTag(args, true);
             }
@@ -75,53 +76,59 @@ namespace Viewer.Framework.Presenters
 
         private void DeleteOrEditTag(TaggerEventArgs args, bool type)
         {
-            foreach (var id in SituationIndex.Index[args.Tag][args.Id])
+            
+            foreach (var id in SituationIndex.GetInstance().IndexCollection[args.Tag][args.Id])
             {
                 MessageContainer.Messages[id].Situations.Remove(args.Tag);
             }
 
             if (type)
             {
-                _tagger.UpdateSituationCount(SituationIndex.SituationCount());
+                _tagger.UpdateSituationCount(SituationIndex.GetInstance().ItemCount);
             }
             else
             {
                 var tag = args.AdditionalInfo["Change"].ToString();
 
-                var count = SituationIndex.TagsetCounter[tag];
-                var count2 = SituationIndex.Index[tag].Count;
-                var list = SituationIndex.Index[args.Tag][args.Id];
+                var count = SituationIndex.GetInstance().GetValueCount(tag);
 
-                SituationIndex.TagsetCounter[tag]++;
-                SituationIndex.AddSituationToIndex(list, count, tag);
+                var list = SituationIndex.GetInstance().IndexCollection[args.Tag][args.Id];
+
+
+                SituationIndex.GetInstance().AddInnerIndexEntry(tag,count,list);
                 foreach (var id in list)
                 {
-                    MessageContainer.Messages[id].Situations.Add(tag, count);
+                    try
+                    {
+                        MessageContainer.Messages[id].Situations.Add(tag, count);
+                    }
+                    catch (ArgumentException)
+                    {
+                        MessageBox.Show("todo");
+                    }
                 }
                 _tagger.AddSituationIndexItem(tag + " " + count);
 
             }
 
-            SituationIndex.RemoveSituationFromIndex(args.Id, args.Tag);
-            SituationIndex.TagsetCounter[args.Tag]--;
-
+            SituationIndex.GetInstance().DeleteInnerIndexEntry(args.Tag, args.Id);
             _tagger.DeleteSituationIndexItem(args.Tag + " " + args.Id.ToString());
 
 
 
 
-            if (args.Id < SituationIndex.Index[args.Tag].Count + 1)
+            if (args.Id < SituationIndex.GetInstance().GetValueCount(args.Tag) + 1)
             {
-                for (int i = args.Id + 1; i <= SituationIndex.Index[args.Tag].Count; i++)
+                for (int i = args.Id + 1; i <= SituationIndex.GetInstance().GetValueCount(args.Tag); i++)
                 {
-                    var list = SituationIndex.Index[args.Tag][i];
+                    var list = SituationIndex.GetInstance().IndexCollection[args.Tag][i];
                     foreach (var id in list)
                     {
                         MessageContainer.Messages[id].Situations[args.Tag]--;
                     }
 
-                    SituationIndex.RemoveSituationFromIndex(i, args.Tag);
-                    SituationIndex.AddSituationToIndex(list, i - 1, args.Tag);
+                    SituationIndex.GetInstance().DeleteInnerIndexEntry(args.Tag, i);
+                    SituationIndex.GetInstance().AddInnerIndexEntry(args.Tag, i - 1, list );
 
                     _tagger.DeleteSituationIndexItem(args.Tag + " " + i.ToString());
                     _tagger.AddSituationIndexItem(args.Tag + " " + (i - 1).ToString());
@@ -134,61 +141,24 @@ namespace Viewer.Framework.Presenters
 
         private void LoadTagged(object sender, EventArgs e)
         {
-            foreach(var kvp in SituationIndex.Index)
+            SituationIndex.GetInstance().ReadIndexFromDisk();
+            //SituationIndexNew.GetInstance().RemakeOldIndexFile();
+            //SituationIndexNew.GetInstance().RemakeFromInverted();
+            foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
             {
                 foreach (var sit in kvp.Value)
                 {
-                    _tagger.AddSituationIndexItem(kvp.Key + " " + sit.Value);
+                    
+                    
+                        _tagger.AddSituationIndexItem(kvp.Key + " " +sit.Key.ToString());
+                    
                 }
             }
-            //if (_service.SituationContainer.Count == 0)
-            //{
-            //    if (File.Exists(ProjectInfo.SavedTagsPath))
-            //    {
-            //        using (StreamReader reader = new StreamReader(ProjectInfo.SavedTagsPath))
-            //        {
-            //            string line;
-            //            while ((line = reader.ReadLine()) != null)
-            //            {
-            //                var MessageIdAndSituations = line.Split(' ');
-            //                _service.SituationContainer.Add(Int32.Parse(MessageIdAndSituations[0]), MessageIdAndSituations[1]);
 
-            //                var situationsSet = MessageIdAndSituations[1].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
-
-            //                foreach (var situation in situationsSet)
-            //                {
-            //                    var splitSituation = situation.Split('-');
-            //                    int sitId = int.Parse(splitSituation[1]);
-            //                    if (SituationIndex.Index.ContainsKey(splitSituation[0]))
-            //                    {
-            //                        if (!SituationIndex.Index[splitSituation[0]].ContainsKey(sitId))
-            //                        {
-            //                            SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
-            //                            SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
-            //                        }
-            //                        else
-            //                        {
-            //                            SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
-            //                        }
-            //                    }
-            //                    else
-            //                    {
-            //                        SituationIndex.Index.Add(splitSituation[0], new Dictionary<int, List<int>>());
-            //                        SituationIndex.Index[splitSituation[0]].Add(sitId, new List<int>());
-            //                        SituationIndex.Index[splitSituation[0]][sitId].Add(int.Parse(MessageIdAndSituations[0]));
-
-            //                    }
-
-            //                    //TODO: Revise and add a wrapper ASAP
-            //                    _tagger.AddSituationIndexItem(splitSituation[0] + " " + splitSituation[1]);
-            //                }
-            //            }
-            //        }
-                    _service.TaggedIds = _service.SituationContainer.Keys.ToList();
+                    _service.TaggedIds = SituationIndex.GetInstance().InvertedIndex.Keys.ToList();
                     _service.TaggedIds.Sort();
-                    _tagger.UpdateSituationCount(SituationIndex.SituationCount());
-                
-            
+                    _tagger.UpdateSituationCount(SituationIndex.GetInstance().ItemCount);
+
         }
 
 
@@ -199,42 +169,7 @@ namespace Viewer.Framework.Presenters
 
             if (_main.FileLoadState)
             {
-                using (StreamWriter counts = new StreamWriter(ProjectInfo.TagCountsPath))
-                {
-                    foreach (var kvp in SituationIndex.TagsetCounter)
-                    {
-                        counts.WriteLine(kvp.Key + " " + kvp.Value.ToString());
-                    }
-                }
-                SituationIndex.WriteIndexToDisk();
-                using (StreamWriter file = File.AppendText(ProjectInfo.SavedTagsPath))
-                {
-
-                    foreach (var msg in MessageContainer.Messages)
-                    {
-                        if (msg.Situations.Count != 0 && !_service.SituationContainer.ContainsKey(msg.Id))
-                        {
-                            file.Write(msg.Id.ToString() + " ");
-                            foreach (var kvp in msg.Situations)
-                            {
-                                file.Write(kvp.Key + "-" + kvp.Value.ToString() + "+");
-                                if (!_service.SituationContainer.ContainsKey(msg.Id))
-                                {
-                                    _service.SituationContainer.Add(msg.Id, kvp.Key + "-" + kvp.Value.ToString() + "+");
-                                }
-                                else
-                                {
-                                    _service.SituationContainer[msg.Id] = _service.SituationContainer[msg.Id] + kvp.Key + "-" + kvp.Value.ToString() + "+"; //very bad but i will change this to stringbuilder asap
-                                }
-                            }
-                            file.WriteLine();
-
-
-                        }
-                    }
-
-
-                }
+                SituationIndex.GetInstance().FlushIndexToDisk();                
             }
 
         }
@@ -246,14 +181,7 @@ namespace Viewer.Framework.Presenters
             if (_service.TagsetSet)
             {
                 _service.ProjectTagset = File.ReadAllText(ProjectInfo.TagsetPath);
-                string line = File.ReadAllText(ProjectInfo.TagCountsPath);
-                string[] lines = line.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var item in lines)
-                {
-                    var temp = item.Split(' ');
-                    SituationIndex.TagsetCounter.Add(temp[0], int.Parse(temp[1]));
-                }
-
+                
                 _tagger.DisplayTagset(TagsetIndex.Index[_service.ProjectTagset]);
                 _main.SetTagsetLabel(_service.ProjectTagset);
                 _tagger.DisplayTagsetColors(TagsetIndex.ColorIndex[_service.ProjectTagset]);
@@ -267,40 +195,24 @@ namespace Viewer.Framework.Presenters
 
         private void _tagger_AddTag(object sender, TaggerEventArgs e)
         {
-            //Stopwatch.StartNew();
-            if (SituationIndex.TagsetCounter.Count != 0)
-            {
-                SituationIndex.AddSituationToIndex(e.messages, e.Id, e.Tag);
+
+                SituationIndex.GetInstance().AddInnerIndexEntry( e.Tag, e.Id, e.messages);
 
                 foreach (var id in e.messages)
                 {
                     if (!MessageContainer.Messages[id].Situations.ContainsKey(e.Tag))
                     {
-                        MessageContainer.Messages[id].Situations.Add(e.Tag, SituationIndex.TagsetCounter[e.Tag]);
-
+                        MessageContainer.Messages[id].Situations.Add(e.Tag, e.Id);
                     }
                     else
                     {
-                        //MessageContainer.Messages[id].Situations[e.Tag]
                         _tagger.DisplayTagErrorMessage();
-
                     }
 
                 }
-                _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
-                var count = SituationIndex.Index[e.Tag].Count;
-                SituationIndex.TagsetCounter[e.Tag]++;
-            }
-            else
-            {
-                foreach (var str in TagsetIndex.Index[_service.ProjectTagset])
-                {
-                    SituationIndex.TagsetCounter.Add(str, 0);
-                    _tagger.AddSituationIndexItem(e.Tag + " " + SituationIndex.TagsetCounter[e.Tag].ToString());
+                _tagger.AddSituationIndexItem(e.Tag + " " + (SituationIndex.GetInstance().GetValueCount(e.Tag)-1));
 
-                }
-            }
-            _tagger.UpdateSituationCount(SituationIndex.SituationCount());
+            _tagger.UpdateSituationCount(SituationIndex.GetInstance().ItemCount);
 
         }
 
@@ -308,7 +220,7 @@ namespace Viewer.Framework.Presenters
         private void _tagger_WriteToDisk(object sender, WriteEventArgs e)
         {
             _writer.OpenWriter();
-            foreach (var kvp in SituationIndex.Index)
+            foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
             {
                 foreach (var pair in kvp.Value)
                 {

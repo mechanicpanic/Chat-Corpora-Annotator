@@ -7,7 +7,7 @@ using System.IO;
 namespace Viewer.Framework.Services
 {
 
-    public interface ITagService
+    public interface ITagService : IUnloadable
     {
         bool TagsetSet { get; set; }
         List<int> TaggedIds { get; set; }
@@ -16,11 +16,7 @@ namespace Viewer.Framework.Services
         void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
 
-        void AddSituation(List<int> messages, int id, string situation);
-
-        void DeleteSituation(int id, string situation);
-        void UpdateSituation_Removed(int message, int id, string situation);
-        void CheckTagset();
+          void CheckTagset();
 
         void UnloadData();
 
@@ -59,11 +55,7 @@ namespace Viewer.Framework.Services
         public string ProjectTagset { get; set; }
         public List<int> TaggedIds { get; set; } = new List<int>();
 
-        public void AddSituation(List<int> messages, int id, string situation)
-        {
-            SituationIndex.AddSituationToIndex(messages, id, situation);
-        }
-
+   
 
 
         public void UpdateTagsetIndex(string name)
@@ -81,16 +73,6 @@ namespace Viewer.Framework.Services
             {
                 TagsetIndex.UpdateIndexEntry(name, tag, op);
             }
-        }
-
-        public void DeleteSituation(int id, string situation)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateSituation_Removed(int message, int id, string situation)
-        {
-            throw new NotImplementedException();
         }
     }
 }
