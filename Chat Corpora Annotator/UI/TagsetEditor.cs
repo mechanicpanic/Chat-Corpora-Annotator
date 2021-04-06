@@ -20,6 +20,7 @@ namespace Viewer.UI
         public event TagsetUpdateEventHandler LoadExistingTagset;
         public event TagsetUpdateEventHandler UpdateTagset;
         public event TagsetUpdateEventHandler SetProjectTagset;
+        public event TagsetUpdateEventHandler DeleteTagset;
 
         public void DisplayProjectTagsetName(string name)
         {
@@ -128,13 +129,18 @@ namespace Viewer.UI
 
         private void setButton_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
+            DialogResult res = MessageBox.Show("This will delete all previously tagged messages from the project. Auto-saving XML output...","a", MessageBoxButtons.OKCancel);
+            if (res == DialogResult.OK)
             {
-                TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
-                args.Name = comboBox1.SelectedItem.ToString();
-                SetProjectTagset?.Invoke(this, args);
-                label2.Text = comboBox1.SelectedItem.ToString();
+                if (comboBox1.SelectedItem != null)
+                {
+                    TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
+                    args.Name = comboBox1.SelectedItem.ToString();
+                    SetProjectTagset?.Invoke(this, args);
+                    label2.Text = comboBox1.SelectedItem.ToString();
+                }
             }
+            
 
         }
 
@@ -145,6 +151,11 @@ namespace Viewer.UI
                 e.Cancel = true;
                 Hide();
             }
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

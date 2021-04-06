@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 
 namespace IndexEngine.Paths
 {
@@ -31,6 +32,7 @@ namespace IndexEngine.Paths
             Data.MessagesPerDay = IndexHelper.LoadStatsFromDisk(StatsPath);
             Data.UserKeys = IndexHelper.LoadUsersFromDisk(UsersPath);
             Data.SelectedFields = IndexHelper.LoadFieldsFromDisk(FieldsPath);
+            Tagset = File.ReadAllText(ProjectInfo.TagsetPath);
         }
 
         public static void CreateNewProject(string path, string date, string sender, string text)
@@ -50,6 +52,14 @@ namespace IndexEngine.Paths
             Data.SelectedFields.Clear();
             Data.LineCount = 0;
             IndexHelper.UnloadData();
+
+            foreach (PropertyInfo prop in typeof(ProjectInfo).GetProperties())
+            {
+                if (prop.PropertyType.Name == "String")
+                {
+                    prop.SetValue(prop,"");
+                }
+            }
         }
         private static void SetPaths(string path)
         {
@@ -95,6 +105,7 @@ namespace IndexEngine.Paths
         public static string TagsetPath { get; private set; }
 
         public static string Tagset { get; private set; }
+        public static bool TagsetSet { get; set; }
 
     }
 }

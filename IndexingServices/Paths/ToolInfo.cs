@@ -14,6 +14,8 @@ namespace IndexEngine.Paths
         public static string TagsetIndexPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsets.txt";
         public static string TagsetColorIndexPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsetscolors.txt";
 
+        public static string UserDictsPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\userdicts.txt";
+
         public static void SetModelPaths()
         {
             root = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\CCA" + "\\Models";

@@ -26,9 +26,14 @@ namespace Viewer.Framework.Presenters
             _tagset.AddNewTagset += _tagset_AddNewTagset;
             _tagset.LoadExistingTagset += _tagset_LoadExistingTagset;
             _tagset.SetProjectTagset += _tagset_SetProjectTagset;
-            //_tagset.DeleteTagset += _tagset_DeleteTagset;
+            _tagset.DeleteTagset += _tagset_DeleteTagset;
 
             _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
+        }
+
+        private void _tagset_DeleteTagset(object sender, TagsetUpdateEventArgs args)
+        {
+            TagsetIndex.GetInstance().DeleteOuterIndexEntry(args.Name);
         }
 
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)

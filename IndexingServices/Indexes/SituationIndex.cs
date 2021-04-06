@@ -5,7 +5,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.ComponentModel;
 
-namespace IndexEngine
+namespace IndexEngine.Indexes
 {
     public class SituationIndex : INestedIndex<string, Dictionary<int, List<int>>, int, List<int>>
     {
@@ -35,7 +35,7 @@ namespace IndexEngine
             }
         }
 
-        public  void AddOuterIndexEntry(string key, Dictionary<int, List<int>> value)
+        public  void AddIndexEntry(string key, Dictionary<int, List<int>> value)
         {
             if (!IndexCollection.ContainsKey(key))
             {
@@ -90,7 +90,7 @@ namespace IndexEngine
         }
 
 
-        public  void DeleteOuterIndexEntry(string key)
+        public  void DeleteIndexEntry(string key)
         {
             IndexCollection.Remove(key);
             foreach(var kvp in InvertedIndex)
@@ -145,7 +145,7 @@ namespace IndexEngine
             InvertedIndex.Clear();
         }
 
-        public void UpdateOuterIndexEntry(string key, Dictionary<int, List<int>> value)
+        public void UpdateIndexEntry(string key, Dictionary<int, List<int>> value)
         {
             throw new System.NotImplementedException();
         }

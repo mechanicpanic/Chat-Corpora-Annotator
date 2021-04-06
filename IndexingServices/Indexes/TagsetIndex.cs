@@ -1,6 +1,7 @@
 using ColorLibrary;
 using CSharpTest.Net.Collections;
 using IndexEngine.Paths;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,15 +9,19 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 
-namespace IndexEngine
+namespace IndexEngine.Indexes
 {
-    public static class TagsetIndex
+    public class TagsetIndex: INestedIndex<string,Dictionary<string,Color>, string, Color>
     {
+        private static readonly Lazy<TagsetIndex> lazy = new Lazy<TagsetIndex>(() => new TagsetIndex());
 
-
-        static TagsetIndex()
+        public static TagsetIndex GetInstance()
         {
+            return lazy.Value;
+        }
 
+        private TagsetIndex() 
+        {
             if (!File.Exists(ToolInfo.TagsetIndexPath))
             {
                 AddDefaultTagset();
@@ -26,19 +31,13 @@ namespace IndexEngine
                 ReadIndexFromDisk(ToolInfo.TagsetIndexPath, ToolInfo.TagsetColorIndexPath);
             }
         }
-        static Random rnd = new Random();
         public static BTreeDictionary<string, List<string>> Index { get; private set; }
 
         public static BTreeDictionary<string, Dictionary<string, Color>> ColorIndex { get; set; }
 
+        public IDictionary<string, Dictionary<string, Color>> IndexCollection { get; private set; } = new BTreeDictionary<string, Dictionary<string, Color>>();
 
-
-        public static void AddNewIndexEntry(string name)
-        {
-            Index.Add(name, new List<string>());
-            ColorIndex.Add(name, new Dictionary<string, Color>());
-
-        }
+        public int ItemCount => throw new NotImplementedException();
 
         public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
 
@@ -58,67 +57,6 @@ namespace IndexEngine
         }
 
 
-        public static void WriteIndexToDisk(string file, string colorfile)
-        {
-            var jsonString = JsonSerializer.Serialize(Index);
-            //var jsonString2 = JsonSerializer.Serialize(ColorIndex);
-            File.WriteAllText(file, jsonString);
-            //File.WriteAllText(colorfile, jsonString2);
-            using (StreamWriter sw = new StreamWriter(colorfile))
-            {
-                foreach (var kvp in ColorIndex)
-                {
-                    sw.WriteLine("Tagset: " + kvp.Key);
-                    foreach (var kp in kvp.Value)
-                    {
-                        sw.WriteLine(kp.Key + " " + kp.Value.Name);
-                    }
-                    sw.WriteLine("End of Tagset");
-                }
-            }
-        }
-
-
-        public static void ReadIndexFromDisk(string file, string colorfile)
-        {
-            var jsonString = File.ReadAllText(file);
-            var jsonString2 = File.ReadAllText(colorfile);
-            Index = JsonSerializer.Deserialize<BTreeDictionary<string, List<string>>>(jsonString);
-            //ColorIndex = JsonSerializer.Deserialize<BTreeDictionary<string,Dictionary<string, Color>>>(jsonString2);
-
-            ColorIndex = new BTreeDictionary<string, Dictionary<string, Color>>();
-            using (StreamReader sr = new StreamReader(colorfile))
-            {
-                ColorConverter colorConverter = new ColorConverter();
-                Dictionary<string, Color> val = new Dictionary<string, Color>();
-                string tagset = sr.ReadLine().Split(' ')[1];
-                while (!sr.EndOfStream)
-                {
-
-
-                    string line = sr.ReadLine();
-                    var arr = line.Split(' ');
-                    if (!arr[0].StartsWith("Tagset") && !arr[0].StartsWith("End"))
-                    {
-                        int argb = Int32.Parse(arr[1], NumberStyles.HexNumber);
-                        Color clr = Color.FromArgb(argb);
-
-                        val.Add(arr[0], clr);
-                    }
-                    if (arr[0].StartsWith("Tagset"))
-                    {
-                        tagset = arr[1];
-                    }
-                    if (arr[0].StartsWith("End"))
-                    {
-                        ColorIndex.Add(tagset, val);
-                        val = new Dictionary<string, Color>();
-                    }
-                }
-
-            }
-        }
-
         private static void AddDefaultTagset()
         {
             Index = new BTreeDictionary<string, List<string>>();
@@ -133,6 +71,119 @@ namespace IndexEngine
             {
                 ColorIndex["default"].Add(Index["default"][i], colors[i]);
             }
+        }
+
+        public bool CheckFiles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckDirectory()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadIndexFromDisk()
+        {
+            if (CheckFiles())
+            {
+                var jsonString = File.ReadAllText(ToolInfo.TagsetColorIndexPath);
+                IndexCollection = JsonConvert.DeserializeObject<BTreeDictionary<string, >>(jsonString);
+            }
+        }
+
+        public void FlushIndexToDisk()
+        {
+            var jsonString = JsonConvert.SerializeObject(IndexCollection);
+            File.WriteAllText(ToolInfo.TagsetColorIndexPath, jsonString);
+        }
+
+        public void AddIndexEntry(string key, Dictionary<string, Color> value)
+        {
+            if (!IndexCollection.ContainsKey(key) && value == null)
+            {
+                IndexCollection.Add(key, new Dictionary<string, Color>());
+            }
+            if(!IndexCollection.ContainsKey(key) && value != null)
+            {
+                IndexCollection.Add(key, value);
+            }
+        }
+
+        public void AddInnerIndexEntry(string key, string inkey, Color invalue)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                if (!IndexCollection[key].ContainsKey(inkey))
+                {
+                    IndexCollection[key].Add(inkey, invalue);
+                }
+            }
+        }
+
+
+        public void AddInnerIndexEntry(string key, string inkey)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                if (!IndexCollection[key].ContainsKey(inkey))
+                {
+                    IndexCollection[key].Add(inkey, ColorGenerator.GenerateHSVColors(0)[0]);
+                }
+            }
+        }
+        public void DeleteIndexEntry(string key)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                IndexCollection.Remove(key);
+            }
+        }
+
+        public void DeleteInnerIndexEntry(string key, string inkey)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                if (!IndexCollection[key].ContainsKey(inkey))
+                {
+                    IndexCollection[key].Remove(inkey);
+                }
+            }
+        }
+
+        public void InitializeIndex(List<string> list)
+        {
+            foreach(var tag in list)
+            {
+                AddIndexEntry(tag, null);
+            }
+        }
+
+        public void UpdateIndexEntry(string key, Dictionary<string, Color> value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetValueCount(string key)
+        {
+            if (IndexCollection.ContainsKey(key))
+            {
+                return IndexCollection[key].Count;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int GetInnerValueCount(string key, string inkey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnloadData()
+        {
+            IndexCollection.Clear();
         }
     }
 }

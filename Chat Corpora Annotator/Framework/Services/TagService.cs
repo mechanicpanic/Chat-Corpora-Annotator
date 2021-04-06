@@ -13,7 +13,6 @@ namespace Viewer.Framework.Services
         List<int> TaggedIds { get; set; }
         Dictionary<int, string> SituationContainer { get; set; }
         string ProjectTagset { get; set; }
-        void UpdateTagsetIndex(string name);
         void EditTagset(string name, string keys, int op);
 
           void CheckTagset();
@@ -44,27 +43,16 @@ namespace Viewer.Framework.Services
 
             if (File.Exists(ProjectInfo.TagsetPath))
             {
-                TagsetSet = true;
+                ProjectInfo.TagsetSet = true;
             }
             else
             {
-                TagsetSet = false;
+                ProjectInfo.TagsetSet = false;
             }
         }
         public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();
         public string ProjectTagset { get; set; }
         public List<int> TaggedIds { get; set; } = new List<int>();
-
-   
-
-
-        public void UpdateTagsetIndex(string name)
-        {
-            if (!TagsetIndex.Index.ContainsKey(name))
-            {
-                TagsetIndex.AddNewIndexEntry(name);
-            }
-        }
 
 
         public void EditTagset(string name, string tag, int op)
