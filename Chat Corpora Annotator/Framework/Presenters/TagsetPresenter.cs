@@ -39,34 +39,38 @@ namespace Viewer.Framework.Presenters
 
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _service.ProjectTagset = args.Name;
+            
 
-            if (!_service.TagsetSet)
+            if (!ProjectInfo.TagsetSet)
             {
-
                 File.WriteAllText(ProjectInfo.TagsetPath, args.Name);
-                _service.TagsetSet = true;
             }
             else
             {
                 File.WriteAllText(ProjectInfo.TagsetPath, String.Empty);
                 File.WriteAllText(ProjectInfo.TagsetPath, args.Name);
             }
-            _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
-            _main.TagsetColors = TagsetIndex.GetInstance().IndexCollection[args.Name];
+            _tagset.DisplayProjectTagsetName(ProjectInfo.Tagset);
             _main.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[args.Name].Keys.ToList());
-            _main.DisplayTagsetColors(_main.TagsetColors);
+            _main.DisplayTagsetColors(TagsetIndex.GetInstance().IndexCollection[args.Name]);
 
         }
 
         private void _tagset_UpdateTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _service.EditTagset(args.Name, args.Tag, args.Type);
+            if (args.Type == 0)
+            {
+                TagsetIndex.GetInstance().DeleteInnerIndexEntry(args.Name, args.Tag);
+            }
+            if(args.Type == 1)
+            {
+                TagsetIndex.GetInstance().AddInnerIndexEntry(args.Name, args.Tag);
+            }
         }
 
         private void _tagset_LoadExistingTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _tagset.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[args.Name].Keys.ToList());
+            _tagset.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[args.Name]);
         }
 
         private void _tagset_AddNewTagset(object sender, TagsetUpdateEventArgs e)

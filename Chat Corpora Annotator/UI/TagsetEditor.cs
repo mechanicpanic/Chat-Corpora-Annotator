@@ -1,5 +1,7 @@
-﻿using System;
+﻿using IndexEngine.Paths;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
@@ -24,7 +26,7 @@ namespace Viewer.UI
 
         public void DisplayProjectTagsetName(string name)
         {
-            label2.Text = name;
+            label1.Text = "Current project tagset: " + name;
         }
 
         public void CloseView()
@@ -34,6 +36,12 @@ namespace Viewer.UI
 
         public void ShowView()
         {
+
+            if (ProjectInfo.TagsetSet)
+            {
+                DisplayProjectTagsetName(ProjectInfo.Tagset);
+                comboBox1.SelectedItem =  ProjectInfo.Tagset;
+            }
             this.Show();
 
         }
@@ -41,14 +49,15 @@ namespace Viewer.UI
         private void button1_Click(object sender, EventArgs e)
         {
             var item = new ListViewItem(textBox1.Text);
-            if (!String.IsNullOrEmpty(textBox1.Text) && !listView1.Items.Contains(item))
+            if (!String.IsNullOrEmpty(textBox1.Text) && !tagView.Items.Contains(item))
             {
-                listView1.Items.Add(item);
+                tagView.Items.Add(item);
                 TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
                 args.Name = comboBox1.SelectedItem.ToString();
                 args.Tag = textBox1.Text;
                 args.Type = 1;
                 UpdateTagset?.Invoke(this, args);
+                textBox1.Clear();
             }
             else
             {
@@ -60,21 +69,22 @@ namespace Viewer.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-            if (listView1.SelectedItems.Count != 0)
+            TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
+            args.Name = comboBox1.SelectedItem.ToString();
+            args.Type = 0;
+            args.Tag = tagView.SelectedItems[0].Text;
+            UpdateTagset?.Invoke(this, args);
+            if (tagView.SelectedItems.Count != 0)
             {
-                foreach (int index in listView1.SelectedIndices)
+                foreach (int index in tagView.SelectedIndices)
                 {
 
-                    listView1.Items.RemoveAt(index);
+                    tagView.Items.RemoveAt(index);
                 }
 
-                TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
-                args.Name = comboBox1.SelectedItem.ToString();
-                args.Type = 0;
-                args.Tag = listView1.SelectedItems[0].Text;
-                listView1.SelectedItems.Clear();
-                UpdateTagset?.Invoke(this, args);
+
+                tagView.SelectedItems.Clear();
+
             }
 
 
@@ -85,8 +95,14 @@ namespace Viewer.UI
         {
             TagsetName tn = new TagsetName();
             tn.NameButtonClicked += new EventHandler(NameButtonHandler);
+            tn.FormClosed += Tn_FormClosed;
             tn.Show();
+            
+        }
 
+        private void Tn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            comboBox1.SelectedItem = (sender as TagsetName).Tagset;
         }
 
         private void NameButtonHandler(object sender, EventArgs e)
@@ -112,12 +128,15 @@ namespace Viewer.UI
             LoadExistingTagset?.Invoke(this, args);
         }
 
-        public void DisplayTagset(List<string> tags)
+        public void DisplayTagset(Dictionary<string,Color> tags)
         {
-            listView1.Items.Clear();
+            tagView.Items.Clear();
             foreach (var tag in tags)
             {
-                listView1.Items.Add(new ListViewItem(tag));
+                var item = new ListViewItem(tag.Key);
+                item.BackColor = tag.Value;
+                tagView.Items.Add(item);
+               
             }
         }
 
@@ -137,7 +156,7 @@ namespace Viewer.UI
                     TagsetUpdateEventArgs args = new TagsetUpdateEventArgs();
                     args.Name = comboBox1.SelectedItem.ToString();
                     SetProjectTagset?.Invoke(this, args);
-                    label2.Text = comboBox1.SelectedItem.ToString();
+                    label1.Text = "Current project tagset: " + comboBox1.SelectedItem.ToString();
                 }
             }
             

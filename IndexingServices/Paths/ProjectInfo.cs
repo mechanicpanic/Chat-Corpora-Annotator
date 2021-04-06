@@ -32,7 +32,10 @@ namespace IndexEngine.Paths
             Data.MessagesPerDay = IndexHelper.LoadStatsFromDisk(StatsPath);
             Data.UserKeys = IndexHelper.LoadUsersFromDisk(UsersPath);
             Data.SelectedFields = IndexHelper.LoadFieldsFromDisk(FieldsPath);
-            Tagset = File.ReadAllText(ProjectInfo.TagsetPath);
+            if (TagsetSet)
+            {
+                Tagset = File.ReadAllText(ProjectInfo.TagsetPath);
+            }
         }
 
         public static void CreateNewProject(string path, string date, string sender, string text)
@@ -105,7 +108,7 @@ namespace IndexEngine.Paths
         public static string TagsetPath { get; private set; }
 
         public static string Tagset { get; private set; }
-        public static bool TagsetSet { get; set; }
+        public static bool TagsetSet { get { return File.Exists(TagsetPath); } }
 
     }
 }

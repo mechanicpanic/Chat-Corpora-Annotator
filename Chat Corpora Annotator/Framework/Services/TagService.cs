@@ -16,8 +16,6 @@ namespace Viewer.Framework.Services
         string ProjectTagset { get; set; }
         void EditTagset(string name, string keys, int op);
 
-          void CheckTagset();
-
         void UnloadData();
 
     }
@@ -35,22 +33,7 @@ namespace Viewer.Framework.Services
             SituationContainer.Clear();
 
         }
-        public TagService()
-        {
 
-        }
-        public void CheckTagset()
-        {
-
-            if (File.Exists(ProjectInfo.TagsetPath))
-            {
-                ProjectInfo.TagsetSet = true;
-            }
-            else
-            {
-                ProjectInfo.TagsetSet = false;
-            }
-        }
         public Dictionary<int, string> SituationContainer { get; set; } = new Dictionary<int, string>();
         public string ProjectTagset { get; set; }
         public List<int> TaggedIds { get; set; } = new List<int>();

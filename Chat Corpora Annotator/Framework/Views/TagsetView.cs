@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using Viewer.Framework.MyEventArgs;
 
 namespace Viewer.Framework.Views
@@ -12,7 +13,7 @@ namespace Viewer.Framework.Views
 
         event TagsetUpdateEventHandler SetProjectTagset;
         void DisplayTagsetNames(List<string> names);
-        void DisplayTagset(List<string> tags);
+        void DisplayTagset(Dictionary<string,Color> tags);
         void DisplayProjectTagsetName(string name);
     }
 

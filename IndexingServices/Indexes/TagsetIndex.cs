@@ -22,7 +22,7 @@ namespace IndexEngine.Indexes
 
         private TagsetIndex() 
         {
-            if (!File.Exists(ToolInfo.TagsetIndexPath))
+            if (!File.Exists(ToolInfo.TagsetColorIndexPath))
             {
                 AddDefaultTagset();
             }
@@ -100,7 +100,7 @@ namespace IndexEngine.Indexes
             {
                 if (!IndexCollection[key].ContainsKey(inkey))
                 {
-                    IndexCollection[key].Add(inkey, ColorGenerator.GenerateHSVColors(0)[0]);
+                    IndexCollection[key].Add(inkey, ColorGenerator.GenerateHSLuvColor());
                 }
             }
         }

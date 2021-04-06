@@ -179,14 +179,14 @@ namespace Viewer.Framework.Presenters
         private void _tagger_LoadTagset(object sender, TaggerEventArgs e)
         {
 
-            _service.CheckTagset();
-            if (_service.TagsetSet)
+            
+            if (ProjectInfo.TagsetSet)
             {
-                _service.ProjectTagset = File.ReadAllText(ProjectInfo.TagsetPath);
+               
                 
-                _tagger.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[_service.ProjectTagset].Keys.ToList());
-                _main.SetTagsetLabel(_service.ProjectTagset);
-                _tagger.DisplayTagsetColors(TagsetIndex.GetInstance().IndexCollection[_service.ProjectTagset]);
+                _tagger.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[ProjectInfo.Tagset].Keys.ToList());
+                _main.SetTagsetLabel(ProjectInfo.Tagset);
+                _tagger.DisplayTagsetColors(TagsetIndex.GetInstance().IndexCollection[ProjectInfo.Tagset]);
             }
 
 

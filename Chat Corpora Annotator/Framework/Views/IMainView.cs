@@ -11,9 +11,7 @@ namespace Viewer.Framework.Views
         //TODO: R e t h i n c c
         bool FileLoadState { get; set; }
         List<DynamicMessage> SearchResults { get; set; }
-
         bool InfoExtracted { get; set; }
-
         void EnsureMessageIsVisible(int id);
         // will be replaced by ShowProjectData()
         void SetLineCount(int count);
@@ -21,16 +19,10 @@ namespace Viewer.Framework.Views
         void ShowDates(List<DateTime> dates);
         void DisplayDocuments();
         void DisplaySearchResults();
-
-
         void DisplayStatistics(int type, Dictionary<string, double> args);
 
         IKeywordView CreateKeywordView();
         void ShowKeywordView(IKeywordView key);
-
-
-
-
 
         void ShowSorryMessage();
         void ShowExtractedMessage();

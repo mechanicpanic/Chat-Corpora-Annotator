@@ -21,9 +21,6 @@ namespace Viewer.Framework.Views
 
         event EventHandler ShowSuggester;
 
-
-        Dictionary<string, System.Drawing.Color> TagsetColors { get; set; }
-
         bool SituationsLoaded { get; set; }
         int CurIndex { get; set; }
         //void DisplayTagsInDocuments();
