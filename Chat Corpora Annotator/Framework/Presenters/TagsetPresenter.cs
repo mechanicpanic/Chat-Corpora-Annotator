@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.Paths;
 using System;
 using System.IO;
@@ -28,12 +29,12 @@ namespace Viewer.Framework.Presenters
             _tagset.SetProjectTagset += _tagset_SetProjectTagset;
             _tagset.DeleteTagset += _tagset_DeleteTagset;
 
-            _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
+            _tagset.DisplayTagsetNames(TagsetIndex.GetInstance().IndexCollection.Keys.ToList());
         }
 
         private void _tagset_DeleteTagset(object sender, TagsetUpdateEventArgs args)
         {
-            TagsetIndex.GetInstance().DeleteOuterIndexEntry(args.Name);
+            TagsetIndex.GetInstance().DeleteIndexEntry(args.Name);
         }
 
         private void _tagset_SetProjectTagset(object sender, TagsetUpdateEventArgs args)
@@ -52,8 +53,8 @@ namespace Viewer.Framework.Presenters
                 File.WriteAllText(ProjectInfo.TagsetPath, args.Name);
             }
             _tagset.DisplayProjectTagsetName(_service.ProjectTagset);
-            _main.TagsetColors = TagsetIndex.ColorIndex[args.Name];
-            _main.DisplayTagset(TagsetIndex.Index[args.Name]);
+            _main.TagsetColors = TagsetIndex.GetInstance().IndexCollection[args.Name];
+            _main.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[args.Name].Keys.ToList());
             _main.DisplayTagsetColors(_main.TagsetColors);
 
         }
@@ -65,13 +66,14 @@ namespace Viewer.Framework.Presenters
 
         private void _tagset_LoadExistingTagset(object sender, TagsetUpdateEventArgs args)
         {
-            _tagset.DisplayTagset(TagsetIndex.Index[args.Name]);
+            _tagset.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[args.Name].Keys.ToList());
         }
 
         private void _tagset_AddNewTagset(object sender, TagsetUpdateEventArgs e)
         {
-            _service.UpdateTagsetIndex(e.Name);
-            _tagset.DisplayTagsetNames(TagsetIndex.Index.Keys.ToList());
+            //_service.UpdateTagsetIndex(e.Name);
+            TagsetIndex.GetInstance().AddIndexEntry(e.Name, null);
+            _tagset.DisplayTagsetNames(TagsetIndex.GetInstance().IndexCollection.Keys.ToList());
         }
 
     }

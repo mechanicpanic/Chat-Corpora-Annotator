@@ -28,59 +28,31 @@ namespace IndexEngine.Indexes
             }
             else
             {
-                ReadIndexFromDisk(ToolInfo.TagsetIndexPath, ToolInfo.TagsetColorIndexPath);
+                ReadIndexFromDisk();
             }
         }
-        public static BTreeDictionary<string, List<string>> Index { get; private set; }
-
-        public static BTreeDictionary<string, Dictionary<string, Color>> ColorIndex { get; set; }
-
         public IDictionary<string, Dictionary<string, Color>> IndexCollection { get; private set; } = new BTreeDictionary<string, Dictionary<string, Color>>();
 
         public int ItemCount => throw new NotImplementedException();
 
-        public static void DeleteIndexEntry(string name) { Index.Remove(name); ColorIndex.Remove(name); }
-
-        public static void UpdateIndexEntry(string name, string tag, int type)
+        private void AddDefaultTagset()
         {
-            if (type == 1)
+            var list = new List<string> { "JobSearch", "CodeHelp", "FCCBug", "SoftwareSupport", "OSSelection", "Meeting" };
+            AddIndexEntry("default", null);
+            foreach(var tag in list)
             {
-                Index[name].Add(tag);
-                ColorIndex[name].Add(tag, ColorGenerator.GenerateHSVColors(0)[0]);
-            }
-            if (type == 0)
-            {
-                Index[name].Remove(tag);
-                ColorIndex[name].Remove(tag);
-            }
-
-        }
-
-
-        private static void AddDefaultTagset()
-        {
-            Index = new BTreeDictionary<string, List<string>>();
-            Index.Add("default", new List<string> { "JobSearch", "CodeHelp", "FCCBug", "SoftwareSupport", "OSSelection", "Meeting" });
-            ColorIndex = new BTreeDictionary<string, Dictionary<string, Color>>();
-            ColorIndex.Add("default", new Dictionary<string, Color>());
-            Color[] colors = ColorGenerator.GenerateHSLuvColors(6);
-
-
-
-            for (int i = 0; i < Index["default"].Count; i++)
-            {
-                ColorIndex["default"].Add(Index["default"][i], colors[i]);
+                AddInnerIndexEntry("default", tag, ColorGenerator.GenerateHSLuvColor());
             }
         }
 
         public bool CheckFiles()
         {
-            throw new NotImplementedException();
+            return (File.Exists(ToolInfo.TagsetColorIndexPath));
         }
 
         public bool CheckDirectory()
         {
-            throw new NotImplementedException();
+            return (Directory.Exists(ToolInfo.root));
         }
 
         public void ReadIndexFromDisk()
@@ -88,7 +60,7 @@ namespace IndexEngine.Indexes
             if (CheckFiles())
             {
                 var jsonString = File.ReadAllText(ToolInfo.TagsetColorIndexPath);
-                IndexCollection = JsonConvert.DeserializeObject<BTreeDictionary<string, >>(jsonString);
+                IndexCollection = JsonConvert.DeserializeObject<BTreeDictionary<string, Dictionary<string,Color>>>(jsonString);
             }
         }
 
@@ -178,7 +150,11 @@ namespace IndexEngine.Indexes
 
         public int GetInnerValueCount(string key, string inkey)
         {
-            throw new NotImplementedException();
+            if (IndexCollection.ContainsKey(key))
+            {
+                return IndexCollection[key].Count;
+            }
+            else { return -1; }
         }
 
         public void UnloadData()

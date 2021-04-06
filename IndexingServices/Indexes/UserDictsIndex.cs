@@ -1,5 +1,6 @@
 ﻿using CSharpTest.Net.Collections;
 using IndexEngine.Paths;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,16 @@ namespace IndexEngine.Indexes
 {
     public class UserDictsIndex : IIndex<string, List<string>>
     {
+        private static readonly Lazy<UserDictsIndex> lazy = new Lazy<UserDictsIndex>(() => new UserDictsIndex());
+
+        public static UserDictsIndex GetInstance()
+        {
+            return lazy.Value;
+        }
+
+        private UserDictsIndex() { }
+
+
         public IDictionary<string, List<string>> IndexCollection { get; private set; } = new Dictionary<string, List<string>>();
 
         public int ItemCount { get { return IndexCollection.Count; } }
@@ -37,28 +48,41 @@ namespace IndexEngine.Indexes
         {
             if (IndexCollection.ContainsKey(key))
             {
-
+                IndexCollection.Remove(key);
             }
         }
 
         public void FlushIndexToDisk()
         {
-            throw new NotImplementedException();
+            var jsonString = JsonConvert.SerializeObject(IndexCollection);
+            File.WriteAllText(jsonString,ToolInfo.UserDictsPath);
         }
 
         public int GetValueCount(string key)
         {
-            throw new NotImplementedException();
+            if (IndexCollection.ContainsKey(key))
+            {
+                return IndexCollection[key].Count;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public void ReadIndexFromDisk()
         {
-            throw new NotImplementedException();
+            if (CheckFiles()) {
+                var jsonString = File.ReadAllText(ToolInfo.UserDictsPath);
+
+             IndexCollection = JsonConvert.DeserializeObject<Dictionary<string,List<string>>>(jsonString);
+            }
+            
         }
 
         public void UnloadData()
         {
-            throw new NotImplementedException();
+            IndexCollection.Clear();
         }
 
         public void UpdateIndexEntry(string key, List<string> value)

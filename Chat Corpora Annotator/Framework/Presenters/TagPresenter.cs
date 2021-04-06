@@ -1,5 +1,6 @@
 ﻿using CSharpTest.Net.Collections;
 using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
@@ -169,7 +170,8 @@ namespace Viewer.Framework.Presenters
 
             if (_main.FileLoadState)
             {
-                SituationIndex.GetInstance().FlushIndexToDisk();                
+                SituationIndex.GetInstance().FlushIndexToDisk();
+                TagsetIndex.GetInstance().FlushIndexToDisk();
             }
 
         }
@@ -182,9 +184,9 @@ namespace Viewer.Framework.Presenters
             {
                 _service.ProjectTagset = File.ReadAllText(ProjectInfo.TagsetPath);
                 
-                _tagger.DisplayTagset(TagsetIndex.Index[_service.ProjectTagset]);
+                _tagger.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[_service.ProjectTagset].Keys.ToList());
                 _main.SetTagsetLabel(_service.ProjectTagset);
-                _tagger.DisplayTagsetColors(TagsetIndex.ColorIndex[_service.ProjectTagset]);
+                _tagger.DisplayTagsetColors(TagsetIndex.GetInstance().IndexCollection[_service.ProjectTagset]);
             }
 
 

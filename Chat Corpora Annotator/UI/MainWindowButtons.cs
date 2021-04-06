@@ -2,6 +2,7 @@
 using BrightIdeasSoftware;
 using CSharpTest.Net.Collections;
 using IndexEngine;
+using IndexEngine.Indexes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

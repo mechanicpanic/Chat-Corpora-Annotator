@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.Search;
 using System;
 using System.Collections.Generic;
@@ -205,7 +206,7 @@ namespace Viewer.Framework.Presenters.Parser
                 List<string> list = new List<string>();
                 if (dictname != "<missing STRING>")
                 {
-                    if (UserDictsContainer.UserDicts.TryGetValue(dictname, out list))
+                    if (UserDictsIndex.GetInstance().IndexCollection.TryGetValue(dictname, out list))
                     {
                         return Retrievers.HasWordOfList(list);
                     }

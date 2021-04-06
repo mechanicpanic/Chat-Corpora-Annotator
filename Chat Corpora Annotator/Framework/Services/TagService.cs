@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
@@ -57,10 +58,7 @@ namespace Viewer.Framework.Services
 
         public void EditTagset(string name, string tag, int op)
         {
-            if (TagsetIndex.Index.ContainsKey(name))
-            {
-                TagsetIndex.UpdateIndexEntry(name, tag, op);
-            }
+            
         }
     }
 }

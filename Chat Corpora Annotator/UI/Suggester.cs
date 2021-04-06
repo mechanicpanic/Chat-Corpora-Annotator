@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.Paths;
 using System;
 using System.Collections.Generic;
@@ -404,7 +405,7 @@ namespace Viewer.UI
 
                     clone.ContextMenuStrip = new ContextMenuStrip();
                     clone.MouseUp += operator_MouseUp;
-                    foreach (var kvp in UserDictsContainer.UserDicts)
+                    foreach (var kvp in UserDictsIndex.GetInstance().IndexCollection)
                     {
                         ToolStripMenuItem item = new ToolStripMenuItem(kvp.Key);
                         item.Click += MenuStripItem_Click;

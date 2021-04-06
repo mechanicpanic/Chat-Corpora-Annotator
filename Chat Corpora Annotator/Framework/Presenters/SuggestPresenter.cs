@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IndexEngine.Indexes;
+using System;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
@@ -34,19 +35,13 @@ namespace Viewer.Framework.Presenters
 
         private void _sugg_AddUserDict(object sender, UserDictsEventArgs args)
         {
-            if (!UserDictsContainer.UserDicts.ContainsKey(args.Name))
-            {
-                UserDictsContainer.UserDicts.Add(args.Name, args.Words);
-            }
-            else
-            {
-                //todo
-            }
+            UserDictsIndex.GetInstance().AddIndexEntry(args.Name, args.Words);
+
         }
 
         private void _sugg_DeleteUserDict(object sender, UserDictsEventArgs args)
         {
-            UserDictsContainer.UserDicts.Remove(args.Name);
+            UserDictsIndex.GetInstance().DeleteIndexEntry(args.Name);
         }
 
         private void _sugg_RunQuery(object sender, EventArgs e)

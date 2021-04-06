@@ -1,4 +1,5 @@
 ﻿using IndexEngine;
+using IndexEngine.Indexes;
 using IndexEngine.NLP;
 using IndexEngine.Paths;
 using System;
