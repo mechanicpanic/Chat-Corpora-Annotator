@@ -457,7 +457,6 @@
     <Compile Include="UI\MainWindowSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Framework\MyEventArgs\UserDictsContainer.cs" />
     <Compile Include="Framework\MyEventArgs\UserDictsEventArgs.cs" />
     <Compile Include="Framework\MyEventArgs\TagsetUpdateEventArgs.cs" />
     <Compile Include="UI\ChartForm.cs">

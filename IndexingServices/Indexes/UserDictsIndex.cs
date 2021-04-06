@@ -19,7 +19,12 @@ namespace IndexEngine.Indexes
             return lazy.Value;
         }
 
-        private UserDictsIndex() { }
+        private UserDictsIndex() 
+        
+        {
+
+
+        }
 
 
         public IDictionary<string, List<string>> IndexCollection { get; private set; } = new Dictionary<string, List<string>>();
@@ -55,7 +60,7 @@ namespace IndexEngine.Indexes
         public void FlushIndexToDisk()
         {
             var jsonString = JsonConvert.SerializeObject(IndexCollection);
-            File.WriteAllText(jsonString,ToolInfo.UserDictsPath);
+            File.WriteAllText(ToolInfo.UserDictsPath, jsonString);
         }
 
         public int GetValueCount(string key)
@@ -90,14 +95,17 @@ namespace IndexEngine.Indexes
             throw new NotImplementedException();
         }
 
-        public void ImportNewDictFromFile(string path) 
+        public string ImportNewDictFromFile(string path) 
         {
             if (File.Exists(path))
             {
                 var arr = File.ReadAllLines(path);
                 var value = arr.Skip(1);
                 AddIndexEntry(arr[0], value.ToList());
+                return arr[0];
             }
+            else
+            { return null; }
         }
     }
 }

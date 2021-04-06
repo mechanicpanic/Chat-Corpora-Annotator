@@ -29,7 +29,7 @@ namespace Viewer.UI
                 var button = control as Button;
                 button.Click += operator_Click;
                 button.Tag = new ButtonTag(boolPanel.Controls.GetChildIndex(button), button.Text);
-                Console.WriteLine(button.Text + " " + (button.Tag as ButtonTag).Index.ToString());
+               
 
             }
             foreach (var control in operatorPanel.Controls)
@@ -37,7 +37,7 @@ namespace Viewer.UI
                 var button = control as Button;
                 button.Click += operator_Click;
                 button.Tag = new ButtonTag(operatorPanel.Controls.GetChildIndex(button) + 9, button.Text);
-                Console.WriteLine(button.Text + " " + (button.Tag as ButtonTag).Index.ToString());
+                
 
             }
             foreach (var margin in queryBox.Margins)
@@ -279,23 +279,34 @@ namespace Viewer.UI
                 dictargs.Name = la.CurName;
                 dictargs.Words = la.CurList;
                 AddUserDict?.Invoke(this, dictargs);
-                foreach (var control in queryPanel.Controls)
-                {
-                    var button = control as Button;
-                    if (button.Text.Contains("haswordofdict"))
-                    {
-                        ToolStripMenuItem item = new ToolStripMenuItem(la.CurName);
-                        item.Name = la.CurName;
-                        item.Click += MenuStripItem_Click;
-                        button.ContextMenuStrip.Items.Add(item);
-                    }
-                }
-                var temp = new ListViewItem(la.CurName);
-                temp.SubItems.Add(String.Join(", ", la.CurList.ToArray()));
-                listView1.Items.Add(temp);
+                
+                DisplayUserDict(la.CurName, la.CurList);
 
             }
             la.Close();
+        }
+
+        public void DisplayUserDict(string key, List<string> value)
+        {
+            var temp = new ListViewItem(key);
+            temp.SubItems.Add(String.Join(", ", value.ToArray()));
+            listView1.Items.Add(temp);
+            AddListNameToOp(key);
+        }
+
+        private void AddListNameToOp(string name)
+        {
+            foreach (var control in queryPanel.Controls)
+            {
+                var button = control as Button;
+                if (button.Text.Contains("haswordofdict"))
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem(name);
+                    item.Name = name;
+                    item.Click += MenuStripItem_Click;
+                    button.ContextMenuStrip.Items.Add(item);
+                }
+            }
         }
 
         private void deleteListButton_Click(object sender, EventArgs e)
@@ -644,6 +655,25 @@ namespace Viewer.UI
         };
 
         private event EventHandler LastElementChanged;
+        public event OpenEventHandler ImportUserDict;
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            d.Filter = "Text files (*.txt)|*.txt";
+            
+            d.FileOk += D_FileOk;
+            d.ShowDialog();
+
+        }
+
+        private void D_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            OpenEventArgs args = new OpenEventArgs();
+            args.FilePath = (sender as OpenFileDialog).FileName;
+            ImportUserDict?.Invoke(this, args);
+            
+        }
     }
 
 

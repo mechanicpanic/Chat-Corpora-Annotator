@@ -172,6 +172,7 @@ namespace Viewer.Framework.Presenters
             {
                 SituationIndex.GetInstance().FlushIndexToDisk();
                 TagsetIndex.GetInstance().FlushIndexToDisk();
+                UserDictsIndex.GetInstance().FlushIndexToDisk();
             }
 
         }
@@ -183,7 +184,7 @@ namespace Viewer.Framework.Presenters
             if (ProjectInfo.TagsetSet)
             {
                
-                
+               
                 _tagger.DisplayTagset(TagsetIndex.GetInstance().IndexCollection[ProjectInfo.Tagset].Keys.ToList());
                 _main.SetTagsetLabel(ProjectInfo.Tagset);
                 _tagger.DisplayTagsetColors(TagsetIndex.GetInstance().IndexCollection[ProjectInfo.Tagset]);

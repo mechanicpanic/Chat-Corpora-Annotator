@@ -1,5 +1,7 @@
 ﻿using IndexEngine.Indexes;
+using IndexEngine.Paths;
 using System;
+using System.IO;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
 
@@ -21,6 +23,27 @@ namespace Viewer.Framework.Presenters
             _sugg.DeleteUserDict += _sugg_DeleteUserDict;
             _sugg.AddUserDict += _sugg_AddUserDict;
             _sugg.ShowMessageInMainWindow += _sugg_ShowMessageInMainWindow;
+            _sugg.ImportUserDict += _sugg_ImportUserDict;
+
+            if (File.Exists(ToolInfo.UserDictsPath))
+            {
+                UserDictsIndex.GetInstance().ReadIndexFromDisk();
+                foreach(var kvp in UserDictsIndex.GetInstance().IndexCollection)
+                {
+                    _sugg.DisplayUserDict(kvp.Key, kvp.Value);
+                }
+            }
+            
+
+        }
+
+        private void _sugg_ImportUserDict(object sender, OpenEventArgs args)
+        {
+            var res = UserDictsIndex.GetInstance().ImportNewDictFromFile(args.FilePath);
+            if (res != null)
+            {
+                _sugg.DisplayUserDict(res, UserDictsIndex.GetInstance().IndexCollection[res]);
+            }
 
         }
 

@@ -10,11 +10,9 @@ namespace IndexEngine.Paths
 
         public static string sutimeRules { get; private set; }
         public static string root { get; private set; }
-
-        public static string TagsetIndexPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsets.txt";
         public static string TagsetColorIndexPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\tagsetscolors.txt";
 
-        public static string UserDictsPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\userdicts.txt";
+        public static string UserDictsPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\CCA\user_dicts.txt";
 
         public static void SetModelPaths()
         {
@@ -25,6 +23,7 @@ namespace IndexEngine.Paths
             sutimeRules = root + @"\sutime\defs.sutime.txt,"
                               + root + @"\sutime\english.holidays.sutime.txt,"
                               + root + @"\sutime\english.sutime.txt";
+            Console.WriteLine(UserDictsPath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0);
         }
 
         static ToolInfo()

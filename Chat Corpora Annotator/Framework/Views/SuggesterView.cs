@@ -11,6 +11,8 @@ namespace Viewer.Framework.Views
         void DisplaySituation();
 
         event EventHandler RunQuery;
+        event OpenEventHandler ImportUserDict;
+        void DisplayUserDict(string key, List<string> value);
         string QueryString { get; set; }
         List<DynamicMessage> CurrentSituation { get; set; }
         List<List<List<int>>> QueryResult { get; set; }

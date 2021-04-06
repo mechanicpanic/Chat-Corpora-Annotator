@@ -33,7 +33,7 @@ namespace IndexEngine.Indexes
         }
         public IDictionary<string, Dictionary<string, Color>> IndexCollection { get; private set; } = new BTreeDictionary<string, Dictionary<string, Color>>();
 
-        public int ItemCount => throw new NotImplementedException();
+        public int ItemCount { get { return IndexCollection.Count; } }
 
         private void AddDefaultTagset()
         {
