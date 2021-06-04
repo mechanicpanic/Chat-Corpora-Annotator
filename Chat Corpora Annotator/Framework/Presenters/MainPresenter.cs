@@ -42,8 +42,8 @@ namespace Viewer.Framework.Presenters
             _main.FindClick += _view_FindClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
-            _main.NGramClick += _main_NGramClick;
-            _main.KeywordClick += _main_KeywordClick;
+            //_main.NGramClick += _main_NGramClick;
+            //_main.KeywordClick += _main_KeywordClick;
             _main.LoadStatistics += _main_LoadStatistics;
             _main.ExtractInfoClick += _main_ExtractInfoClick;
             _main.BuildIndexClick += _main_BuildIndexClick;
@@ -53,6 +53,8 @@ namespace Viewer.Framework.Presenters
 
 
         }
+
+
 
         private void _main_LoadMore(object sender, EventArgs e)
         {
@@ -104,24 +106,24 @@ namespace Viewer.Framework.Presenters
             _main.DisplayStatistics(1, _corpus.AllFields);
         }
 
-        private void _main_KeywordClick(object sender, EventArgs e)
-        {
-            IKeywordView _keyword = _main.CreateKeywordView();
-            IKeywordService keywordService = new KeywordService();
-            KeywordPresenter pres = new KeywordPresenter(_main, keywordService, _keyword);
-            _keyword.ShowView();
-            _main.ShowKeywordView(_keyword);
-        }
+        //private void _main_KeywordClick(object sender, EventArgs e)
+        //{
+        //    IKeywordView _keyword = _main.CreateKeywordView();
+        //    IKeywordService keywordService = new KeywordService();
+        //    KeywordPresenter pres = new KeywordPresenter(_main, keywordService, _keyword);
+        //    _keyword.ShowView();
+        //    _main.ShowKeywordView(_keyword);
+        //}
 
-        private void _main_NGramClick(object sender, NgramEventArgs e)
-        {
-
-
-            var result = _ngrammer.GetReadableResultsForTerm(e.Term);
-            _main.DisplayNGrams(result);
+        //private void _main_NGramClick(object sender, NgramEventArgs e)
+        //{
 
 
-        }
+        //    var result = _ngrammer.GetReadableResultsForTerm(e.Term);
+        //    _main.DisplayNGrams(result);
+
+
+        //}
         private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
         {
             _concordancer.ConQuery = LuceneService.Parser.Parse(e.Term);
@@ -176,33 +178,13 @@ namespace Viewer.Framework.Presenters
             {
                 if (_service.TaggedIds.Contains(i))
                 {
-                    InsertTagsInDynamicMessage(i, count);
+                    MessageContainer.InsertTagsInDynamicMessage(i, count);
                 }
             }
             _tagger.CurIndex += count;
         }
 
-        private void InsertTagsInDynamicMessage(int id, int offset)
-        {
-            //var arr = _service.SituationContainer[id].Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
 
-
-
-            if (id <= MessageContainer.Messages.Count + offset)
-            {
-                foreach (var str in SituationIndex.GetInstance().InvertedIndex[id])
-                {
-                    if (!MessageContainer.Messages[id].Situations.ContainsKey(str.Key))
-                    {
-                        MessageContainer.Messages[id].Situations.Add(str.Key, str.Value);
-                        //SituationIndex.RetrieveDictFromMessageContainer(MessageContainer.Messages[id]);
-
-                    }
-                }
-
-
-            }
-        }
 
 
 

@@ -21,8 +21,8 @@ namespace Viewer.Framework.Views
         void DisplaySearchResults();
         void DisplayStatistics(int type, Dictionary<string, double> args);
 
-        IKeywordView CreateKeywordView();
-        void ShowKeywordView(IKeywordView key);
+        //IKeywordView CreateKeywordView();
+        //void ShowKeywordView(IKeywordView key);
 
         void ShowSorryMessage();
         void ShowExtractedMessage();
@@ -41,13 +41,16 @@ namespace Viewer.Framework.Views
         event EventHandler LoadMore;
 
         event ConcordanceEventHandler ConcordanceClick;
-        event NgramEventHandler NGramClick;
+        //event NgramEventHandler NGramClick;
         event EventHandler BuildIndexClick;
-        event EventHandler KeywordClick;
+        //event EventHandler KeywordClick;
         event EventHandler LoadStatistics;
 
         event EventHandler ExtractInfoClick;
+
+        
         //void VisualizeHist(PointPairList list, string name);
 
     }
+
 }

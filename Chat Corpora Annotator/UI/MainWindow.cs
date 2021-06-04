@@ -85,7 +85,7 @@ namespace Viewer
 
         public event TaggerEventHandler EditSituation;
         public event TaggerEventHandler MergeSituations;
-        public event EventHandler CrossMergeSituations;
+        public event SituationArrayEventHandler CrossMergeSituations;
 
         public event EventHandler SetTagset;
         public event EventHandler DisplayColors;
@@ -548,8 +548,41 @@ namespace Viewer
             BuildIndexClick?.Invoke(this, null);
         }
 
+        private void crossMerge_Click(object sender, EventArgs e)
+        {
+            if(fastSituationView.SelectedItems.Count == 2)
+            {
+                string[] a = fastSituationView.SelectedItems[0].Text.Split();
+                string[] b = fastSituationView.SelectedItems[1].Text.Split();
 
+                if (a[0] != b[0]) { 
+               DialogResult res = MessageBox.Show("Cross-merge situation " + a[0] + " " + a[1] + " with " + b[0] + b[1] + "?", "a", MessageBoxButtons.YesNo);
+                    if (res == DialogResult.Yes)
+                    {
+                        SituationArrayEventArgs sitargs = new SituationArrayEventArgs();
+                        TaggerEventArgs sit = new TaggerEventArgs();
+                        sit.Tag = a[0];
+                        sit.Id = Int32.Parse(a[1]);
 
+                        TaggerEventArgs sit2 = new TaggerEventArgs();
+                        sit2.Tag = b[0];
+                        sit2.Id = Int32.Parse(b[1]);
+
+                        sitargs.args.Add(sit);
+                        sitargs.args.Add(sit2);
+                        CrossMergeSituations?.Invoke(this, sitargs);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Cannot merge situations of the same type");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Can merge two situations only");
+            }
+        }
     }
     internal static class SafeNativeMethods
     {

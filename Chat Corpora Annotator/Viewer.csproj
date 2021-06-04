@@ -526,12 +526,6 @@
     <Compile Include="UI\Keyworder.Designer.cs">
       <DependentUpon>Keyworder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ListAdder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ListAdder.Designer.cs">
-      <DependentUpon>ListAdder.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -545,6 +539,12 @@
     </Compile>
     <Compile Include="UI\HeatmapForm.Designer.cs">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SituationMerge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SituationMerge.Designer.cs">
+      <DependentUpon>SituationMerge.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Suggester.cs">
       <SubType>Form</SubType>
@@ -592,9 +592,6 @@
     <EmbeddedResource Include="UI\Keyworder.resx">
       <DependentUpon>Keyworder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ListAdder.resx">
-      <DependentUpon>ListAdder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -610,6 +607,9 @@
     </Compile>
     <EmbeddedResource Include="UI\HeatmapForm.resx">
       <DependentUpon>HeatmapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SituationMerge.resx">
+      <DependentUpon>SituationMerge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Suggester.resx">
       <DependentUpon>Suggester.cs</DependentUpon>

@@ -42,8 +42,8 @@ namespace Viewer
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.mergeButton = new System.Windows.Forms.Button();
+            this.crossMergeButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.removeTagButton = new System.Windows.Forms.Button();
@@ -389,8 +389,8 @@ namespace Viewer
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.button3, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button5, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.mergeButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.crossMergeButton, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.button4, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 386);
@@ -419,40 +419,40 @@ namespace Viewer
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // mergeButton
             // 
-            this.button5.BackColor = System.Drawing.Color.Lavender;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Enabled = false;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(2, 37);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 31);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Merge";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.mergeButton.BackColor = System.Drawing.Color.Lavender;
+            this.mergeButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mergeButton.Enabled = false;
+            this.mergeButton.FlatAppearance.BorderSize = 0;
+            this.mergeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.mergeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mergeButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mergeButton.Location = new System.Drawing.Point(2, 37);
+            this.mergeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.mergeButton.Name = "mergeButton";
+            this.mergeButton.Size = new System.Drawing.Size(102, 31);
+            this.mergeButton.TabIndex = 20;
+            this.mergeButton.Text = "Merge";
+            this.mergeButton.UseVisualStyleBackColor = false;
+            this.mergeButton.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button2
+            // crossMergeButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Lavender;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Enabled = false;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(108, 37);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 31);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Cross-merge";
-            this.button2.UseVisualStyleBackColor = false;
+            this.crossMergeButton.BackColor = System.Drawing.Color.Lavender;
+            this.crossMergeButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crossMergeButton.FlatAppearance.BorderSize = 0;
+            this.crossMergeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.crossMergeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.crossMergeButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.crossMergeButton.Location = new System.Drawing.Point(108, 37);
+            this.crossMergeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.crossMergeButton.Name = "crossMergeButton";
+            this.crossMergeButton.Size = new System.Drawing.Size(103, 31);
+            this.crossMergeButton.TabIndex = 19;
+            this.crossMergeButton.Text = "Cross-merge";
+            this.crossMergeButton.UseVisualStyleBackColor = false;
+            this.crossMergeButton.Click += new System.EventHandler(this.crossMerge_Click);
             // 
             // button4
             // 
@@ -529,7 +529,7 @@ namespace Viewer
             this.Statistics.Margin = new System.Windows.Forms.Padding(2);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(2);
-            this.Statistics.Size = new System.Drawing.Size(1093, 797);
+            this.Statistics.Size = new System.Drawing.Size(1093, 775);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
@@ -540,7 +540,7 @@ namespace Viewer
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1089, 793);
+            this.panel2.Size = new System.Drawing.Size(1089, 771);
             this.panel2.TabIndex = 4;
             // 
             // panel4
@@ -550,7 +550,7 @@ namespace Viewer
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1089, 793);
+            this.panel4.Size = new System.Drawing.Size(1089, 771);
             this.panel4.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -568,7 +568,7 @@ namespace Viewer
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 674F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1089, 793);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1089, 771);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // button1
@@ -580,7 +580,7 @@ namespace Viewer
             this.button1.Location = new System.Drawing.Point(546, 676);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(541, 115);
+            this.button1.Size = new System.Drawing.Size(541, 93);
             this.button1.TabIndex = 4;
             this.button1.Text = "Calculate statistics";
             this.button1.UseVisualStyleBackColor = false;
@@ -594,7 +594,7 @@ namespace Viewer
             this.statisticsButton.Location = new System.Drawing.Point(2, 676);
             this.statisticsButton.Margin = new System.Windows.Forms.Padding(2);
             this.statisticsButton.Name = "statisticsButton";
-            this.statisticsButton.Size = new System.Drawing.Size(540, 115);
+            this.statisticsButton.Size = new System.Drawing.Size(540, 93);
             this.statisticsButton.TabIndex = 3;
             this.statisticsButton.Text = "Calculate statistics";
             this.statisticsButton.UseVisualStyleBackColor = false;
@@ -657,7 +657,7 @@ namespace Viewer
             this.richTextBox1.Location = new System.Drawing.Point(2, 2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1089, 793);
+            this.richTextBox1.Size = new System.Drawing.Size(1089, 771);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -668,7 +668,7 @@ namespace Viewer
             this.Concordance.Margin = new System.Windows.Forms.Padding(2);
             this.Concordance.Name = "Concordance";
             this.Concordance.Padding = new System.Windows.Forms.Padding(2);
-            this.Concordance.Size = new System.Drawing.Size(1093, 797);
+            this.Concordance.Size = new System.Drawing.Size(1093, 775);
             this.Concordance.TabIndex = 4;
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
@@ -680,7 +680,7 @@ namespace Viewer
             this.concordancePanel.Location = new System.Drawing.Point(2, 2);
             this.concordancePanel.Margin = new System.Windows.Forms.Padding(2);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1089, 793);
+            this.concordancePanel.Size = new System.Drawing.Size(1089, 771);
             this.concordancePanel.TabIndex = 3;
             // 
             // splitContainer4
@@ -699,7 +699,7 @@ namespace Viewer
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.concordanceView);
-            this.splitContainer4.Size = new System.Drawing.Size(1089, 793);
+            this.splitContainer4.Size = new System.Drawing.Size(1089, 771);
             this.splitContainer4.SplitterDistance = 362;
             this.splitContainer4.TabIndex = 3;
             // 
@@ -778,7 +778,7 @@ namespace Viewer
             this.concordanceView.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.concordanceView.Location = new System.Drawing.Point(0, 0);
             this.concordanceView.Name = "concordanceView";
-            this.concordanceView.Size = new System.Drawing.Size(723, 793);
+            this.concordanceView.Size = new System.Drawing.Size(723, 771);
             this.concordanceView.Styler = null;
             this.concordanceView.TabIndex = 1;
             // 
@@ -788,7 +788,7 @@ namespace Viewer
             this.ngramPage.Location = new System.Drawing.Point(4, 27);
             this.ngramPage.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPage.Name = "ngramPage";
-            this.ngramPage.Size = new System.Drawing.Size(1093, 797);
+            this.ngramPage.Size = new System.Drawing.Size(1093, 775);
             this.ngramPage.TabIndex = 5;
             this.ngramPage.Text = "N-gram Search";
             this.ngramPage.UseVisualStyleBackColor = true;
@@ -800,7 +800,7 @@ namespace Viewer
             this.ngramPanel.Location = new System.Drawing.Point(0, 0);
             this.ngramPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(1093, 797);
+            this.ngramPanel.Size = new System.Drawing.Size(1093, 775);
             this.ngramPanel.TabIndex = 4;
             // 
             // splitContainer1
@@ -819,7 +819,7 @@ namespace Viewer
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ngramTabs);
-            this.splitContainer1.Size = new System.Drawing.Size(1093, 797);
+            this.splitContainer1.Size = new System.Drawing.Size(1093, 775);
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -885,7 +885,7 @@ namespace Viewer
             this.ngramTabs.Name = "ngramTabs";
             this.ngramTabs.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ngramTabs.SelectedIndex = 0;
-            this.ngramTabs.Size = new System.Drawing.Size(726, 797);
+            this.ngramTabs.Size = new System.Drawing.Size(726, 775);
             this.ngramTabs.TabIndex = 14;
             this.ngramTabs.Visible = false;
             // 
@@ -896,7 +896,7 @@ namespace Viewer
             this.bi.Margin = new System.Windows.Forms.Padding(4);
             this.bi.Name = "bi";
             this.bi.Padding = new System.Windows.Forms.Padding(4);
-            this.bi.Size = new System.Drawing.Size(718, 769);
+            this.bi.Size = new System.Drawing.Size(718, 747);
             this.bi.TabIndex = 0;
             this.bi.Text = "Bigrams";
             this.bi.UseVisualStyleBackColor = true;
@@ -917,7 +917,7 @@ namespace Viewer
             this.bigramView.Margin = new System.Windows.Forms.Padding(4);
             this.bigramView.Name = "bigramView";
             this.bigramView.ShowGroups = false;
-            this.bigramView.Size = new System.Drawing.Size(710, 761);
+            this.bigramView.Size = new System.Drawing.Size(710, 739);
             this.bigramView.TabIndex = 0;
             this.bigramView.UseCompatibleStateImageBehavior = false;
             this.bigramView.View = System.Windows.Forms.View.Details;
@@ -1077,7 +1077,7 @@ namespace Viewer
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1093, 797);
+            this.tabPage2.Size = new System.Drawing.Size(1093, 775);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Keyword Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1089,7 +1089,7 @@ namespace Viewer
             this.keywordPanel.Location = new System.Drawing.Point(0, 0);
             this.keywordPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keywordPanel.Name = "keywordPanel";
-            this.keywordPanel.Size = new System.Drawing.Size(1093, 797);
+            this.keywordPanel.Size = new System.Drawing.Size(1093, 775);
             this.keywordPanel.TabIndex = 1;
             // 
             // keywordSplitContainer
@@ -1106,7 +1106,7 @@ namespace Viewer
             // keywordSplitContainer.Panel2
             // 
             this.keywordSplitContainer.Panel2.Controls.Add(this.keywordTabs);
-            this.keywordSplitContainer.Size = new System.Drawing.Size(1093, 797);
+            this.keywordSplitContainer.Size = new System.Drawing.Size(1093, 775);
             this.keywordSplitContainer.SplitterDistance = 363;
             this.keywordSplitContainer.TabIndex = 0;
             // 
@@ -1200,7 +1200,7 @@ namespace Viewer
             this.keywordTabs.Location = new System.Drawing.Point(0, 0);
             this.keywordTabs.Name = "keywordTabs";
             this.keywordTabs.SelectedIndex = 0;
-            this.keywordTabs.Size = new System.Drawing.Size(726, 797);
+            this.keywordTabs.Size = new System.Drawing.Size(726, 775);
             this.keywordTabs.TabIndex = 14;
             // 
             // tabPage3
@@ -1209,7 +1209,7 @@ namespace Viewer
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(718, 769);
+            this.tabPage3.Size = new System.Drawing.Size(718, 747);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Keywords";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1222,7 +1222,7 @@ namespace Viewer
             this.fastObjectListView5.Location = new System.Drawing.Point(3, 3);
             this.fastObjectListView5.Name = "fastObjectListView5";
             this.fastObjectListView5.ShowGroups = false;
-            this.fastObjectListView5.Size = new System.Drawing.Size(712, 763);
+            this.fastObjectListView5.Size = new System.Drawing.Size(712, 741);
             this.fastObjectListView5.TabIndex = 0;
             this.fastObjectListView5.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView5.View = System.Windows.Forms.View.Details;
@@ -1266,7 +1266,7 @@ namespace Viewer
             this.searchPanel.Location = new System.Drawing.Point(0, 0);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(2);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(225, 504);
+            this.searchPanel.Size = new System.Drawing.Size(225, 503);
             this.searchPanel.TabIndex = 16;
             // 
             // tableLayoutPanel4
@@ -1788,7 +1788,7 @@ namespace Viewer
             // 
             this.splitContainerLeft.Panel2.Controls.Add(this.tagsetView);
             this.splitContainerLeft.Size = new System.Drawing.Size(225, 806);
-            this.splitContainerLeft.SplitterDistance = 504;
+            this.splitContainerLeft.SplitterDistance = 503;
             this.splitContainerLeft.TabIndex = 29;
             // 
             // tagsetView
@@ -2010,8 +2010,8 @@ namespace Viewer
         private System.Windows.Forms.ListView dateView;
         private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button mergeButton;
+        private System.Windows.Forms.Button crossMergeButton;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.SplitContainer splitContainer2;

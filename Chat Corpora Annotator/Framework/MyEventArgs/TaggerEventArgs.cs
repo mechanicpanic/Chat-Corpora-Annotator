@@ -16,4 +16,10 @@ namespace Viewer.Framework.MyEventArgs
         public Dictionary<string, object> AdditionalInfo;
     }
     public delegate void TaggerEventHandler(object sender, TaggerEventArgs args);
+
+    public class SituationArrayEventArgs : EventArgs
+    {
+        public List<TaggerEventArgs> args = new List<TaggerEventArgs>();
+    }
+    public delegate void SituationArrayEventHandler(object sender, SituationArrayEventArgs args);
 }

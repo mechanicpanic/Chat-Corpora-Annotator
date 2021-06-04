@@ -36,13 +36,26 @@ namespace Viewer.Framework.Presenters
             _tagger.DeleteSituation += _tagger_DeleteSituation;
             _tagger.EditSituation += _tagger_EditSituation;
             _tagger.MergeSituations += _tagger_MergeSituations;
+            _tagger.CrossMergeSituations += _tagger_CrossMergeSituations;
             _tagger.LoadTagset += _tagger_LoadTagset;
             _tagger.SaveTagged += _tagger_SaveTagged;
             _tagger.LoadTagged += LoadTagged;
-            //_main.TagClick += _main_TagClick;
-
-
         }
+
+        private void _tagger_CrossMergeSituations(object sender, SituationArrayEventArgs args)
+        {
+            SituationIndex.GetInstance().CrossMergeItems(args.args[0].Tag, args.args[0].Id, args.args[1].Tag, args.args[0].Id);
+            foreach (var id in SituationIndex.GetInstance().IndexCollection[args.args[0].Tag][args.args[0].Id]) 
+            {
+                MessageContainer.InsertTagsInDynamicMessage(id, 0);
+            }
+            foreach (var id in SituationIndex.GetInstance().IndexCollection[args.args[1].Tag][args.args[1].Id])
+            {
+                MessageContainer.InsertTagsInDynamicMessage(id, 0);
+            }
+        }
+
+
 
         private void _tagger_RemoveTag(object sender, TaggerEventArgs args)
         {
@@ -71,8 +84,6 @@ namespace Viewer.Framework.Presenters
         private void _tagger_DeleteSituation(object sender, TaggerEventArgs args)
         {
             DeleteOrEditTag(args, true);
-
-
         }
 
         private void DeleteOrEditTag(TaggerEventArgs args, bool type)
@@ -149,17 +160,14 @@ namespace Viewer.Framework.Presenters
             {
                 foreach (var sit in kvp.Value)
                 {
-                    
-                    
+                                       
                         _tagger.AddSituationIndexItem(kvp.Key + " " +sit.Key.ToString());
                     
                 }
             }
-
                     _service.TaggedIds = SituationIndex.GetInstance().InvertedIndex.Keys.ToList();
                     _service.TaggedIds.Sort();
                     _tagger.UpdateSituationCount(SituationIndex.GetInstance().ItemCount);
-
         }
 
 
@@ -199,7 +207,7 @@ namespace Viewer.Framework.Presenters
         private void _tagger_AddTag(object sender, TaggerEventArgs e)
         {
 
-                SituationIndex.GetInstance().AddInnerIndexEntry( e.Tag, e.Id, e.messages);
+                SituationIndex.GetInstance().AddInnerIndexEntry(e.Tag, e.Id, e.messages);
 
                 foreach (var id in e.messages)
                 {

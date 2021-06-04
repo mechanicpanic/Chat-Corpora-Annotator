@@ -22,6 +22,7 @@ namespace IndexEngine.Indexes
 
         public IDictionary<int, Dictionary<string, int>> InvertedIndex { get; private set; } = new Dictionary<int, Dictionary<string, int>>();
 
+        
         public int ItemCount
         {
             get
@@ -35,7 +36,7 @@ namespace IndexEngine.Indexes
             }
         }
 
-        public  void AddIndexEntry(string key, Dictionary<int, List<int>> value)
+        public void AddIndexEntry(string key, Dictionary<int, List<int>> value)
         {
             if (!IndexCollection.ContainsKey(key))
             {
@@ -50,17 +51,8 @@ namespace IndexEngine.Indexes
             }
             foreach(var kvp in value)
             {
-                foreach(var id in kvp.Value)
-                {
-                    if (!InvertedIndex.ContainsKey(id)) {
-                        InvertedIndex.Add(id, new Dictionary<string, int>());
-                        InvertedIndex[id].Add(key, kvp.Key);
-                        }
-                    else
-                    {
-                        InvertedIndex[id].Add(key, kvp.Key);
-                    }
-                }
+
+                AddInvertedIndexEntry(key, kvp.Key, kvp.Value);
             }
         }
         public void AddInnerIndexEntry(string key, int sid, List<int> messages)
@@ -74,7 +66,11 @@ namespace IndexEngine.Indexes
                 IndexCollection.Add(key, new Dictionary<int, List<int>>());
                 IndexCollection[key].Add(sid, messages);
             }
+            AddInvertedIndexEntry(key, sid, messages);
+        }
 
+        private void AddInvertedIndexEntry(string key, int sid, List<int> messages)
+        {
             foreach (var id in messages)
             {
                 if (!InvertedIndex.ContainsKey(id))
@@ -89,8 +85,15 @@ namespace IndexEngine.Indexes
             }
         }
 
+        public void CrossMergeItems(string key1, int id1, string key2, int id2)
+        {
 
-        public  void DeleteIndexEntry(string key)
+            AddInvertedIndexEntry(key2, id2, IndexCollection[key1][id1]);
+            AddInvertedIndexEntry(key1, id1, IndexCollection[key2][id2]);
+            
+        }
+
+        public void DeleteIndexEntry(string key)
         {
             IndexCollection.Remove(key);
             foreach(var kvp in InvertedIndex)
@@ -103,7 +106,7 @@ namespace IndexEngine.Indexes
 
         }
 
-        public  void DeleteInnerIndexEntry(string key, int sid)
+        public void DeleteInnerIndexEntry(string key, int sid)
         {
             IndexCollection[key].Remove(sid);
             foreach(var kvp in InvertedIndex)
@@ -118,7 +121,7 @@ namespace IndexEngine.Indexes
         }
 
 
-        public  void FlushIndexToDisk()
+        public void FlushIndexToDisk()
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(IndexCollection);
             File.WriteAllText(ProjectInfo.SituationsPath, json);
@@ -213,7 +216,7 @@ namespace IndexEngine.Indexes
             }
             else
             {
-                return -1;
+                return 0;
             }
         }
 
