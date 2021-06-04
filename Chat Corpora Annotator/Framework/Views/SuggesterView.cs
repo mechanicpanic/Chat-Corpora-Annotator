@@ -11,8 +11,13 @@ namespace Viewer.Framework.Views
         void DisplaySituation();
 
         event EventHandler RunQuery;
-        event OpenEventHandler ImportUserDict;
+        //event OpenEventHandler ImportUserDict;
+
+        event EventHandler ShowDictEditor;
         void DisplayUserDict(string key, List<string> value);
+        void UpdateUserDict(string key, List<string> value);
+
+        void DeleteUserDictFromPreview(string key);
         string QueryString { get; set; }
         List<DynamicMessage> CurrentSituation { get; set; }
         List<List<List<int>>> QueryResult { get; set; }
@@ -20,9 +25,7 @@ namespace Viewer.Framework.Views
         int GroupIndex { get; set; }
         //Dictionary<string, List<string>> UserDicts { get; set; }
         void SetCounts();
-        event UserDictsEventHandler AddUserDict;
 
-        event UserDictsEventHandler DeleteUserDict;
         event FindEventHandler ShowMessageInMainWindow;
 
     }

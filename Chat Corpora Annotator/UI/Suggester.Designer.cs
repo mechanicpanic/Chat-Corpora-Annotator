@@ -38,8 +38,6 @@
             this.listName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContents = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.listButton = new System.Windows.Forms.Button();
-            this.deleteListButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.modeButton = new System.Windows.Forms.Button();
             this.operatorPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -76,7 +74,7 @@
             this.splitContainerView = new System.Windows.Forms.SplitContainer();
             this.bottomButtonPanel = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-            this.importButton = new System.Windows.Forms.Button();
+            this.listButton = new System.Windows.Forms.Button();
             this.sidePanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -180,13 +178,9 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Controls.Add(this.importButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.listButton, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.deleteListButton, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 207);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -194,38 +188,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 45);
             this.tableLayoutPanel2.TabIndex = 31;
-            // 
-            // listButton
-            // 
-            this.listButton.BackColor = System.Drawing.Color.Lavender;
-            this.listButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.listButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.listButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listButton.Location = new System.Drawing.Point(2, 2);
-            this.listButton.Margin = new System.Windows.Forms.Padding(2);
-            this.listButton.Name = "listButton";
-            this.listButton.Size = new System.Drawing.Size(140, 41);
-            this.listButton.TabIndex = 8;
-            this.listButton.Text = "Add dictionary";
-            this.listButton.UseVisualStyleBackColor = false;
-            this.listButton.Click += new System.EventHandler(this.listButton_Click);
-            // 
-            // deleteListButton
-            // 
-            this.deleteListButton.BackColor = System.Drawing.Color.Lavender;
-            this.deleteListButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deleteListButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.deleteListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteListButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteListButton.Location = new System.Drawing.Point(290, 2);
-            this.deleteListButton.Margin = new System.Windows.Forms.Padding(2);
-            this.deleteListButton.Name = "deleteListButton";
-            this.deleteListButton.Size = new System.Drawing.Size(141, 41);
-            this.deleteListButton.TabIndex = 9;
-            this.deleteListButton.Text = "Delete dictionary";
-            this.deleteListButton.UseVisualStyleBackColor = false;
-            this.deleteListButton.Click += new System.EventHandler(this.deleteListButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -806,21 +768,21 @@
             this.splitContainerMain.SplitterDistance = 433;
             this.splitContainerMain.TabIndex = 26;
             // 
-            // importButton
+            // listButton
             // 
-            this.importButton.BackColor = System.Drawing.Color.Lavender;
-            this.importButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.importButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.importButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.importButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.importButton.Location = new System.Drawing.Point(146, 2);
-            this.importButton.Margin = new System.Windows.Forms.Padding(2);
-            this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(140, 41);
-            this.importButton.TabIndex = 10;
-            this.importButton.Text = "Import dictionary";
-            this.importButton.UseVisualStyleBackColor = false;
-            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            this.listButton.BackColor = System.Drawing.Color.Lavender;
+            this.listButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.listButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listButton.Location = new System.Drawing.Point(2, 2);
+            this.listButton.Margin = new System.Windows.Forms.Padding(2);
+            this.listButton.Name = "listButton";
+            this.listButton.Size = new System.Drawing.Size(429, 41);
+            this.listButton.TabIndex = 8;
+            this.listButton.Text = "Open dictionary editor";
+            this.listButton.UseVisualStyleBackColor = false;
+            this.listButton.Click += new System.EventHandler(this.listButton_Click);
             // 
             // Suggester
             // 
@@ -891,8 +853,6 @@
         private System.Windows.Forms.ColumnHeader listName;
         private System.Windows.Forms.ColumnHeader listContents;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button listButton;
-        private System.Windows.Forms.Button deleteListButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button modeButton;
         private System.Windows.Forms.TableLayoutPanel operatorPanel;
@@ -908,6 +868,6 @@
         private System.Windows.Forms.TableLayoutPanel bottomButtonPanel;
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.ToolStripStatusLabel counterLabel;
-        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button listButton;
     }
 }

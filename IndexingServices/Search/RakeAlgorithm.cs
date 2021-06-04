@@ -23,9 +23,8 @@ namespace IndexEngine
         }
 
 
-        public Dictionary<string, double> Run(string text)
+        public Dictionary<string, double> Run(List<string> sentenceList)
         {
-            var sentenceList = SplitSentences(text);
 
             var phraseList = GenerateCandidateKeywords(sentenceList, _stopWordsPattern,
                 _minCharLength, _maxWordsLength);

@@ -7,6 +7,7 @@ namespace Viewer.Framework.MyEventArgs
     {
         public string Name { get; set; }
         public List<string> Words { get; set; }
+        public string Word { get; set; }
 
     }
     public delegate void UserDictsEventHandler(object sender, UserDictsEventArgs args);

@@ -147,12 +147,12 @@ namespace Viewer
             this.saveButton = new System.Windows.Forms.ToolStripSplitButton();
             this.writeToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.suggesterButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.tagsetEditorButton = new System.Windows.Forms.ToolStripSplitButton();
             this.editSituationButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSituationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tagsetEditorButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.suggesterButton = new System.Windows.Forms.ToolStripSplitButton();
             this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
             this.tagsetView = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -273,7 +273,7 @@ namespace Viewer
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainerRight);
             this.splitContainer2.Size = new System.Drawing.Size(1089, 719);
-            this.splitContainer2.SplitterDistance = 875;
+            this.splitContainer2.SplitterDistance = 870;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 14;
             // 
@@ -293,7 +293,7 @@ namespace Viewer
             this.chatTable.Name = "chatTable";
             this.chatTable.RowHeight = 52;
             this.chatTable.ShowGroups = false;
-            this.chatTable.Size = new System.Drawing.Size(875, 719);
+            this.chatTable.Size = new System.Drawing.Size(870, 719);
             this.chatTable.TabIndex = 9;
             this.chatTable.TintSortColumn = true;
             this.chatTable.UseCellFormatEvents = true;
@@ -325,7 +325,7 @@ namespace Viewer
             this.splitContainerRight.Panel2.Controls.Add(this.tableLayoutPanel3);
             this.splitContainerRight.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainerRight.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainerRight.Size = new System.Drawing.Size(208, 719);
+            this.splitContainerRight.Size = new System.Drawing.Size(213, 719);
             this.splitContainerRight.SplitterDistance = 253;
             this.splitContainerRight.SplitterWidth = 10;
             this.splitContainerRight.TabIndex = 19;
@@ -345,7 +345,7 @@ namespace Viewer
             this.dateView.Margin = new System.Windows.Forms.Padding(2);
             this.dateView.Name = "dateView";
             this.dateView.ShowItemToolTips = true;
-            this.dateView.Size = new System.Drawing.Size(208, 253);
+            this.dateView.Size = new System.Drawing.Size(213, 253);
             this.dateView.TabIndex = 18;
             this.dateView.UseCompatibleStateImageBehavior = false;
             this.dateView.View = System.Windows.Forms.View.Details;
@@ -370,7 +370,7 @@ namespace Viewer
             this.fastSituationView.Location = new System.Drawing.Point(0, 0);
             this.fastSituationView.Name = "fastSituationView";
             this.fastSituationView.ShowGroups = false;
-            this.fastSituationView.Size = new System.Drawing.Size(208, 386);
+            this.fastSituationView.Size = new System.Drawing.Size(213, 386);
             this.fastSituationView.TabIndex = 0;
             this.fastSituationView.UseCompatibleStateImageBehavior = false;
             this.fastSituationView.UseHotItem = true;
@@ -399,7 +399,7 @@ namespace Viewer
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(208, 70);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(213, 70);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // button3
@@ -410,10 +410,10 @@ namespace Viewer
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(106, 2);
+            this.button3.Location = new System.Drawing.Point(108, 2);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 31);
+            this.button3.Size = new System.Drawing.Size(103, 31);
             this.button3.TabIndex = 21;
             this.button3.Text = "Edit tag";
             this.button3.UseVisualStyleBackColor = false;
@@ -431,7 +431,7 @@ namespace Viewer
             this.button5.Location = new System.Drawing.Point(2, 37);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 31);
+            this.button5.Size = new System.Drawing.Size(102, 31);
             this.button5.TabIndex = 20;
             this.button5.Text = "Merge";
             this.button5.UseVisualStyleBackColor = false;
@@ -446,10 +446,10 @@ namespace Viewer
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(106, 37);
+            this.button2.Location = new System.Drawing.Point(108, 37);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 31);
+            this.button2.Size = new System.Drawing.Size(103, 31);
             this.button2.TabIndex = 19;
             this.button2.Text = "Cross-merge";
             this.button2.UseVisualStyleBackColor = false;
@@ -465,7 +465,7 @@ namespace Viewer
             this.button4.Location = new System.Drawing.Point(2, 2);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 31);
+            this.button4.Size = new System.Drawing.Size(102, 31);
             this.button4.TabIndex = 18;
             this.button4.Text = "Delete";
             this.button4.UseVisualStyleBackColor = false;
@@ -529,7 +529,7 @@ namespace Viewer
             this.Statistics.Margin = new System.Windows.Forms.Padding(2);
             this.Statistics.Name = "Statistics";
             this.Statistics.Padding = new System.Windows.Forms.Padding(2);
-            this.Statistics.Size = new System.Drawing.Size(1079, 736);
+            this.Statistics.Size = new System.Drawing.Size(1093, 797);
             this.Statistics.TabIndex = 3;
             this.Statistics.Text = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
@@ -540,7 +540,7 @@ namespace Viewer
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1075, 732);
+            this.panel2.Size = new System.Drawing.Size(1089, 793);
             this.panel2.TabIndex = 4;
             // 
             // panel4
@@ -550,7 +550,7 @@ namespace Viewer
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1075, 732);
+            this.panel4.Size = new System.Drawing.Size(1089, 793);
             this.panel4.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -568,7 +568,7 @@ namespace Viewer
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 674F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1075, 732);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1089, 793);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // button1
@@ -577,10 +577,10 @@ namespace Viewer
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(539, 676);
+            this.button1.Location = new System.Drawing.Point(546, 676);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(534, 54);
+            this.button1.Size = new System.Drawing.Size(541, 115);
             this.button1.TabIndex = 4;
             this.button1.Text = "Calculate statistics";
             this.button1.UseVisualStyleBackColor = false;
@@ -594,7 +594,7 @@ namespace Viewer
             this.statisticsButton.Location = new System.Drawing.Point(2, 676);
             this.statisticsButton.Margin = new System.Windows.Forms.Padding(2);
             this.statisticsButton.Name = "statisticsButton";
-            this.statisticsButton.Size = new System.Drawing.Size(533, 54);
+            this.statisticsButton.Size = new System.Drawing.Size(540, 115);
             this.statisticsButton.TabIndex = 3;
             this.statisticsButton.Text = "Calculate statistics";
             this.statisticsButton.UseVisualStyleBackColor = false;
@@ -610,7 +610,7 @@ namespace Viewer
             this.statisticsListView.Location = new System.Drawing.Point(2, 2);
             this.statisticsListView.Margin = new System.Windows.Forms.Padding(2);
             this.statisticsListView.Name = "statisticsListView";
-            this.statisticsListView.Size = new System.Drawing.Size(533, 670);
+            this.statisticsListView.Size = new System.Drawing.Size(540, 670);
             this.statisticsListView.TabIndex = 2;
             this.statisticsListView.UseCompatibleStateImageBehavior = false;
             this.statisticsListView.View = System.Windows.Forms.View.Details;
@@ -632,10 +632,10 @@ namespace Viewer
             this.columnHeader6});
             this.corpusStatisticsView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.corpusStatisticsView.HideSelection = false;
-            this.corpusStatisticsView.Location = new System.Drawing.Point(539, 2);
+            this.corpusStatisticsView.Location = new System.Drawing.Point(546, 2);
             this.corpusStatisticsView.Margin = new System.Windows.Forms.Padding(2);
             this.corpusStatisticsView.Name = "corpusStatisticsView";
-            this.corpusStatisticsView.Size = new System.Drawing.Size(534, 670);
+            this.corpusStatisticsView.Size = new System.Drawing.Size(541, 670);
             this.corpusStatisticsView.TabIndex = 3;
             this.corpusStatisticsView.UseCompatibleStateImageBehavior = false;
             this.corpusStatisticsView.View = System.Windows.Forms.View.Details;
@@ -657,7 +657,7 @@ namespace Viewer
             this.richTextBox1.Location = new System.Drawing.Point(2, 2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1075, 732);
+            this.richTextBox1.Size = new System.Drawing.Size(1089, 793);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -668,7 +668,7 @@ namespace Viewer
             this.Concordance.Margin = new System.Windows.Forms.Padding(2);
             this.Concordance.Name = "Concordance";
             this.Concordance.Padding = new System.Windows.Forms.Padding(2);
-            this.Concordance.Size = new System.Drawing.Size(1079, 736);
+            this.Concordance.Size = new System.Drawing.Size(1093, 797);
             this.Concordance.TabIndex = 4;
             this.Concordance.Text = "Concordance";
             this.Concordance.UseVisualStyleBackColor = true;
@@ -680,7 +680,7 @@ namespace Viewer
             this.concordancePanel.Location = new System.Drawing.Point(2, 2);
             this.concordancePanel.Margin = new System.Windows.Forms.Padding(2);
             this.concordancePanel.Name = "concordancePanel";
-            this.concordancePanel.Size = new System.Drawing.Size(1075, 732);
+            this.concordancePanel.Size = new System.Drawing.Size(1089, 793);
             this.concordancePanel.TabIndex = 3;
             // 
             // splitContainer4
@@ -699,8 +699,8 @@ namespace Viewer
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.concordanceView);
-            this.splitContainer4.Size = new System.Drawing.Size(1075, 732);
-            this.splitContainer4.SplitterDistance = 358;
+            this.splitContainer4.Size = new System.Drawing.Size(1089, 793);
+            this.splitContainer4.SplitterDistance = 362;
             this.splitContainer4.TabIndex = 3;
             // 
             // concordancerButton
@@ -714,7 +714,7 @@ namespace Viewer
             this.concordancerButton.Location = new System.Drawing.Point(0, 46);
             this.concordancerButton.Margin = new System.Windows.Forms.Padding(2);
             this.concordancerButton.Name = "concordancerButton";
-            this.concordancerButton.Size = new System.Drawing.Size(358, 46);
+            this.concordancerButton.Size = new System.Drawing.Size(362, 46);
             this.concordancerButton.TabIndex = 9;
             this.concordancerButton.Text = "Show concordance";
             this.concordancerButton.UseVisualStyleBackColor = false;
@@ -757,7 +757,7 @@ namespace Viewer
             this.charSelectionBox.Location = new System.Drawing.Point(0, 23);
             this.charSelectionBox.Margin = new System.Windows.Forms.Padding(2);
             this.charSelectionBox.Name = "charSelectionBox";
-            this.charSelectionBox.Size = new System.Drawing.Size(358, 23);
+            this.charSelectionBox.Size = new System.Drawing.Size(362, 23);
             this.charSelectionBox.TabIndex = 10;
             // 
             // concordanceBox
@@ -769,7 +769,7 @@ namespace Viewer
             this.concordanceBox.Margin = new System.Windows.Forms.Padding(2);
             this.concordanceBox.MinimumSize = new System.Drawing.Size(76, 60);
             this.concordanceBox.Name = "concordanceBox";
-            this.concordanceBox.Size = new System.Drawing.Size(358, 23);
+            this.concordanceBox.Size = new System.Drawing.Size(362, 23);
             this.concordanceBox.TabIndex = 8;
             // 
             // concordanceView
@@ -778,7 +778,7 @@ namespace Viewer
             this.concordanceView.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.concordanceView.Location = new System.Drawing.Point(0, 0);
             this.concordanceView.Name = "concordanceView";
-            this.concordanceView.Size = new System.Drawing.Size(713, 732);
+            this.concordanceView.Size = new System.Drawing.Size(723, 793);
             this.concordanceView.Styler = null;
             this.concordanceView.TabIndex = 1;
             // 
@@ -788,7 +788,7 @@ namespace Viewer
             this.ngramPage.Location = new System.Drawing.Point(4, 27);
             this.ngramPage.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPage.Name = "ngramPage";
-            this.ngramPage.Size = new System.Drawing.Size(1079, 736);
+            this.ngramPage.Size = new System.Drawing.Size(1093, 797);
             this.ngramPage.TabIndex = 5;
             this.ngramPage.Text = "N-gram Search";
             this.ngramPage.UseVisualStyleBackColor = true;
@@ -800,7 +800,7 @@ namespace Viewer
             this.ngramPanel.Location = new System.Drawing.Point(0, 0);
             this.ngramPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ngramPanel.Name = "ngramPanel";
-            this.ngramPanel.Size = new System.Drawing.Size(1079, 736);
+            this.ngramPanel.Size = new System.Drawing.Size(1093, 797);
             this.ngramPanel.TabIndex = 4;
             // 
             // splitContainer1
@@ -819,8 +819,8 @@ namespace Viewer
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ngramTabs);
-            this.splitContainer1.Size = new System.Drawing.Size(1079, 736);
-            this.splitContainer1.SplitterDistance = 359;
+            this.splitContainer1.Size = new System.Drawing.Size(1093, 797);
+            this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
             // ngramIndexButton
@@ -834,7 +834,7 @@ namespace Viewer
             this.ngramIndexButton.Location = new System.Drawing.Point(0, 72);
             this.ngramIndexButton.Margin = new System.Windows.Forms.Padding(2);
             this.ngramIndexButton.Name = "ngramIndexButton";
-            this.ngramIndexButton.Size = new System.Drawing.Size(359, 42);
+            this.ngramIndexButton.Size = new System.Drawing.Size(363, 42);
             this.ngramIndexButton.TabIndex = 3;
             this.ngramIndexButton.Text = "Get index";
             this.ngramIndexButton.UseVisualStyleBackColor = false;
@@ -852,7 +852,7 @@ namespace Viewer
             this.ngramSearchButton.Location = new System.Drawing.Point(0, 23);
             this.ngramSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ngramSearchButton.Name = "ngramSearchButton";
-            this.ngramSearchButton.Size = new System.Drawing.Size(359, 49);
+            this.ngramSearchButton.Size = new System.Drawing.Size(363, 49);
             this.ngramSearchButton.TabIndex = 16;
             this.ngramSearchButton.Text = "Search for n-grams";
             this.ngramSearchButton.UseVisualStyleBackColor = false;
@@ -868,7 +868,7 @@ namespace Viewer
             this.ngramSearchBox.MaximumSize = new System.Drawing.Size(400, 200);
             this.ngramSearchBox.MinimumSize = new System.Drawing.Size(100, 60);
             this.ngramSearchBox.Name = "ngramSearchBox";
-            this.ngramSearchBox.Size = new System.Drawing.Size(359, 23);
+            this.ngramSearchBox.Size = new System.Drawing.Size(363, 23);
             this.ngramSearchBox.TabIndex = 15;
             this.ngramSearchBox.Visible = false;
             // 
@@ -885,7 +885,7 @@ namespace Viewer
             this.ngramTabs.Name = "ngramTabs";
             this.ngramTabs.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ngramTabs.SelectedIndex = 0;
-            this.ngramTabs.Size = new System.Drawing.Size(716, 736);
+            this.ngramTabs.Size = new System.Drawing.Size(726, 797);
             this.ngramTabs.TabIndex = 14;
             this.ngramTabs.Visible = false;
             // 
@@ -896,7 +896,7 @@ namespace Viewer
             this.bi.Margin = new System.Windows.Forms.Padding(4);
             this.bi.Name = "bi";
             this.bi.Padding = new System.Windows.Forms.Padding(4);
-            this.bi.Size = new System.Drawing.Size(708, 708);
+            this.bi.Size = new System.Drawing.Size(718, 769);
             this.bi.TabIndex = 0;
             this.bi.Text = "Bigrams";
             this.bi.UseVisualStyleBackColor = true;
@@ -917,7 +917,7 @@ namespace Viewer
             this.bigramView.Margin = new System.Windows.Forms.Padding(4);
             this.bigramView.Name = "bigramView";
             this.bigramView.ShowGroups = false;
-            this.bigramView.Size = new System.Drawing.Size(700, 700);
+            this.bigramView.Size = new System.Drawing.Size(710, 761);
             this.bigramView.TabIndex = 0;
             this.bigramView.UseCompatibleStateImageBehavior = false;
             this.bigramView.View = System.Windows.Forms.View.Details;
@@ -942,7 +942,7 @@ namespace Viewer
             this.trigramPage.Margin = new System.Windows.Forms.Padding(4);
             this.trigramPage.Name = "trigramPage";
             this.trigramPage.Padding = new System.Windows.Forms.Padding(4);
-            this.trigramPage.Size = new System.Drawing.Size(708, 708);
+            this.trigramPage.Size = new System.Drawing.Size(718, 747);
             this.trigramPage.TabIndex = 1;
             this.trigramPage.Text = "Trigrams";
             this.trigramPage.UseVisualStyleBackColor = true;
@@ -963,7 +963,7 @@ namespace Viewer
             this.trigramView.Margin = new System.Windows.Forms.Padding(4);
             this.trigramView.Name = "trigramView";
             this.trigramView.ShowGroups = false;
-            this.trigramView.Size = new System.Drawing.Size(700, 700);
+            this.trigramView.Size = new System.Drawing.Size(710, 739);
             this.trigramView.TabIndex = 1;
             this.trigramView.UseCompatibleStateImageBehavior = false;
             this.trigramView.View = System.Windows.Forms.View.Details;
@@ -987,7 +987,7 @@ namespace Viewer
             this.four.Location = new System.Drawing.Point(4, 24);
             this.four.Margin = new System.Windows.Forms.Padding(4);
             this.four.Name = "four";
-            this.four.Size = new System.Drawing.Size(708, 708);
+            this.four.Size = new System.Drawing.Size(718, 747);
             this.four.TabIndex = 2;
             this.four.Text = "4-grams";
             this.four.UseVisualStyleBackColor = true;
@@ -1008,7 +1008,7 @@ namespace Viewer
             this.fourgramView.Margin = new System.Windows.Forms.Padding(4);
             this.fourgramView.Name = "fourgramView";
             this.fourgramView.ShowGroups = false;
-            this.fourgramView.Size = new System.Drawing.Size(708, 708);
+            this.fourgramView.Size = new System.Drawing.Size(718, 747);
             this.fourgramView.TabIndex = 1;
             this.fourgramView.UseCompatibleStateImageBehavior = false;
             this.fourgramView.View = System.Windows.Forms.View.Details;
@@ -1032,7 +1032,7 @@ namespace Viewer
             this.five.Location = new System.Drawing.Point(4, 24);
             this.five.Margin = new System.Windows.Forms.Padding(4);
             this.five.Name = "five";
-            this.five.Size = new System.Drawing.Size(708, 708);
+            this.five.Size = new System.Drawing.Size(718, 747);
             this.five.TabIndex = 3;
             this.five.Text = "5-grams";
             this.five.UseVisualStyleBackColor = true;
@@ -1053,7 +1053,7 @@ namespace Viewer
             this.fivegramView.Margin = new System.Windows.Forms.Padding(4);
             this.fivegramView.Name = "fivegramView";
             this.fivegramView.ShowGroups = false;
-            this.fivegramView.Size = new System.Drawing.Size(708, 708);
+            this.fivegramView.Size = new System.Drawing.Size(718, 747);
             this.fivegramView.TabIndex = 1;
             this.fivegramView.UseCompatibleStateImageBehavior = false;
             this.fivegramView.View = System.Windows.Forms.View.Details;
@@ -1077,7 +1077,7 @@ namespace Viewer
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1079, 736);
+            this.tabPage2.Size = new System.Drawing.Size(1093, 797);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Keyword Analysis";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1089,7 +1089,7 @@ namespace Viewer
             this.keywordPanel.Location = new System.Drawing.Point(0, 0);
             this.keywordPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keywordPanel.Name = "keywordPanel";
-            this.keywordPanel.Size = new System.Drawing.Size(1079, 736);
+            this.keywordPanel.Size = new System.Drawing.Size(1093, 797);
             this.keywordPanel.TabIndex = 1;
             // 
             // keywordSplitContainer
@@ -1106,8 +1106,8 @@ namespace Viewer
             // keywordSplitContainer.Panel2
             // 
             this.keywordSplitContainer.Panel2.Controls.Add(this.keywordTabs);
-            this.keywordSplitContainer.Size = new System.Drawing.Size(1079, 736);
-            this.keywordSplitContainer.SplitterDistance = 359;
+            this.keywordSplitContainer.Size = new System.Drawing.Size(1093, 797);
+            this.keywordSplitContainer.SplitterDistance = 363;
             this.keywordSplitContainer.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -1125,7 +1125,7 @@ namespace Viewer
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(359, 91);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(363, 91);
             this.tableLayoutPanel5.TabIndex = 9;
             // 
             // button6
@@ -1139,7 +1139,7 @@ namespace Viewer
             this.button6.Location = new System.Drawing.Point(3, 2);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(173, 41);
+            this.button6.Size = new System.Drawing.Size(175, 41);
             this.button6.TabIndex = 5;
             this.button6.Text = "Extract keywords";
             this.button6.UseVisualStyleBackColor = false;
@@ -1159,7 +1159,7 @@ namespace Viewer
             this.comboBox1.Location = new System.Drawing.Point(3, 47);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(173, 23);
+            this.comboBox1.Size = new System.Drawing.Size(175, 23);
             this.comboBox1.TabIndex = 7;
             this.comboBox1.Text = "Phrase length (def 2)";
             // 
@@ -1171,10 +1171,10 @@ namespace Viewer
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button8.Location = new System.Drawing.Point(182, 2);
+            this.button8.Location = new System.Drawing.Point(184, 2);
             this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(174, 41);
+            this.button8.Size = new System.Drawing.Size(176, 41);
             this.button8.TabIndex = 8;
             this.button8.Text = "Extract noun phrases";
             this.button8.UseVisualStyleBackColor = false;
@@ -1185,9 +1185,9 @@ namespace Viewer
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(182, 45);
+            this.label3.Location = new System.Drawing.Point(184, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 46);
+            this.label3.Size = new System.Drawing.Size(176, 46);
             this.label3.TabIndex = 9;
             this.label3.Text = "(Requires CoreNLP)";
             // 
@@ -1200,7 +1200,7 @@ namespace Viewer
             this.keywordTabs.Location = new System.Drawing.Point(0, 0);
             this.keywordTabs.Name = "keywordTabs";
             this.keywordTabs.SelectedIndex = 0;
-            this.keywordTabs.Size = new System.Drawing.Size(716, 736);
+            this.keywordTabs.Size = new System.Drawing.Size(726, 797);
             this.keywordTabs.TabIndex = 14;
             // 
             // tabPage3
@@ -1209,7 +1209,7 @@ namespace Viewer
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(708, 708);
+            this.tabPage3.Size = new System.Drawing.Size(718, 769);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Keywords";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1222,7 +1222,7 @@ namespace Viewer
             this.fastObjectListView5.Location = new System.Drawing.Point(3, 3);
             this.fastObjectListView5.Name = "fastObjectListView5";
             this.fastObjectListView5.ShowGroups = false;
-            this.fastObjectListView5.Size = new System.Drawing.Size(702, 702);
+            this.fastObjectListView5.Size = new System.Drawing.Size(712, 763);
             this.fastObjectListView5.TabIndex = 0;
             this.fastObjectListView5.UseCompatibleStateImageBehavior = false;
             this.fastObjectListView5.View = System.Windows.Forms.View.Details;
@@ -1234,7 +1234,7 @@ namespace Viewer
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(708, 708);
+            this.tabPage4.Size = new System.Drawing.Size(718, 747);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Noun Phrases";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1244,7 +1244,7 @@ namespace Viewer
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(702, 702);
+            this.richTextBox2.Size = new System.Drawing.Size(712, 741);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
@@ -1629,16 +1629,16 @@ namespace Viewer
             // bottomStrip
             // 
             this.bottomStrip.BackColor = System.Drawing.Color.Lavender;
-            this.bottomStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bottomStrip.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bottomStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.messageLabel,
             this.tagsetLabel,
             this.newSituationLabel,
             this.filterButton,
             this.saveButton,
-            this.suggesterButton,
+            this.editSituationButton,
             this.tagsetEditorButton,
-            this.editSituationButton});
+            this.suggesterButton});
             this.bottomStrip.Location = new System.Drawing.Point(0, 828);
             this.bottomStrip.Name = "bottomStrip";
             this.bottomStrip.Size = new System.Drawing.Size(1330, 22);
@@ -1648,19 +1648,19 @@ namespace Viewer
             // messageLabel
             // 
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(66, 17);
+            this.messageLabel.Size = new System.Drawing.Size(77, 17);
             this.messageLabel.Text = "Not loaded";
             // 
             // tagsetLabel
             // 
             this.tagsetLabel.Name = "tagsetLabel";
-            this.tagsetLabel.Size = new System.Drawing.Size(58, 17);
+            this.tagsetLabel.Size = new System.Drawing.Size(70, 17);
             this.tagsetLabel.Text = "No tagset";
             // 
             // newSituationLabel
             // 
             this.newSituationLabel.Name = "newSituationLabel";
-            this.newSituationLabel.Size = new System.Drawing.Size(67, 17);
+            this.newSituationLabel.Size = new System.Drawing.Size(91, 17);
             this.newSituationLabel.Text = "0 situations";
             // 
             // filterButton
@@ -1672,20 +1672,20 @@ namespace Viewer
             this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
             this.filterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(94, 20);
+            this.filterButton.Size = new System.Drawing.Size(135, 20);
             this.filterButton.Text = "Filter by tag...";
             this.filterButton.Visible = false;
             // 
             // chooseTagToolStripMenuItem
             // 
             this.chooseTagToolStripMenuItem.Name = "chooseTagToolStripMenuItem";
-            this.chooseTagToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.chooseTagToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.chooseTagToolStripMenuItem.Text = "Choose tag...";
             // 
             // taggedOnlyToolStripMenuItem
             // 
             this.taggedOnlyToolStripMenuItem.Name = "taggedOnlyToolStripMenuItem";
-            this.taggedOnlyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.taggedOnlyToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.taggedOnlyToolStripMenuItem.Text = "Tagged only";
             // 
             // saveButton
@@ -1697,46 +1697,23 @@ namespace Viewer
             this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
             this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(56, 20);
+            this.saveButton.Size = new System.Drawing.Size(72, 20);
             this.saveButton.Text = "Save...";
             this.saveButton.Visible = false;
             // 
             // writeToDiskToolStripMenuItem
             // 
             this.writeToDiskToolStripMenuItem.Name = "writeToDiskToolStripMenuItem";
-            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.writeToDiskToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.writeToDiskToolStripMenuItem.Text = "Write to disk";
             this.writeToDiskToolStripMenuItem.Click += new System.EventHandler(this.writeToDiskToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.saveToolStripMenuItem.Text = "Save ";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // suggesterButton
-            // 
-            this.suggesterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.suggesterButton.Image = ((System.Drawing.Image)(resources.GetObject("suggesterButton.Image")));
-            this.suggesterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.suggesterButton.Name = "suggesterButton";
-            this.suggesterButton.Size = new System.Drawing.Size(75, 20);
-            this.suggesterButton.Text = "Suggester";
-            this.suggesterButton.Visible = false;
-            this.suggesterButton.Click += new System.EventHandler(this.suggester_Click);
-            // 
-            // tagsetEditorButton
-            // 
-            this.tagsetEditorButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tagsetEditorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tagsetEditorButton.Image = ((System.Drawing.Image)(resources.GetObject("tagsetEditorButton.Image")));
-            this.tagsetEditorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tagsetEditorButton.Name = "tagsetEditorButton";
-            this.tagsetEditorButton.Size = new System.Drawing.Size(90, 20);
-            this.tagsetEditorButton.Text = "Tagset Editor";
-            this.tagsetEditorButton.Visible = false;
-            this.tagsetEditorButton.ButtonClick += new System.EventHandler(this.tagsetEditorButton_ButtonClick);
             // 
             // editSituationButton
             // 
@@ -1748,27 +1725,53 @@ namespace Viewer
             this.editSituationButton.Image = ((System.Drawing.Image)(resources.GetObject("editSituationButton.Image")));
             this.editSituationButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editSituationButton.Name = "editSituationButton";
-            this.editSituationButton.Size = new System.Drawing.Size(90, 20);
+            this.editSituationButton.ShowDropDownArrow = false;
+            this.editSituationButton.Size = new System.Drawing.Size(109, 20);
             this.editSituationButton.Text = "Edit Situation";
             this.editSituationButton.Visible = false;
             // 
             // mergeToolStripMenuItem
             // 
             this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
-            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.mergeToolStripMenuItem.Text = "Merge...";
             // 
             // deleteSituationToolStripMenuItem
             // 
             this.deleteSituationToolStripMenuItem.Name = "deleteSituationToolStripMenuItem";
-            this.deleteSituationToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteSituationToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.deleteSituationToolStripMenuItem.Text = "Delete situation";
             // 
             // changeTagToolStripMenuItem
             // 
             this.changeTagToolStripMenuItem.Name = "changeTagToolStripMenuItem";
-            this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.changeTagToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.changeTagToolStripMenuItem.Text = "Change tag";
+            // 
+            // tagsetEditorButton
+            // 
+            this.tagsetEditorButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tagsetEditorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tagsetEditorButton.DropDownButtonWidth = 0;
+            this.tagsetEditorButton.Image = ((System.Drawing.Image)(resources.GetObject("tagsetEditorButton.Image")));
+            this.tagsetEditorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tagsetEditorButton.Name = "tagsetEditorButton";
+            this.tagsetEditorButton.Size = new System.Drawing.Size(103, 20);
+            this.tagsetEditorButton.Text = "Tagset Editor";
+            this.tagsetEditorButton.Visible = false;
+            this.tagsetEditorButton.ButtonClick += new System.EventHandler(this.tagsetEditorButton_ButtonClick);
+            // 
+            // suggesterButton
+            // 
+            this.suggesterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.suggesterButton.DropDownButtonWidth = 0;
+            this.suggesterButton.Image = ((System.Drawing.Image)(resources.GetObject("suggesterButton.Image")));
+            this.suggesterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.suggesterButton.Name = "suggesterButton";
+            this.suggesterButton.Size = new System.Drawing.Size(75, 20);
+            this.suggesterButton.Text = "Suggester";
+            this.suggesterButton.Visible = false;
+            this.suggesterButton.Click += new System.EventHandler(this.suggester_Click);
             // 
             // splitContainerLeft
             // 
@@ -1836,8 +1839,8 @@ namespace Viewer
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1330, 850);
             this.Controls.Add(this.splitContainerMain);
-            this.Controls.Add(this.topMenuStrip);
             this.Controls.Add(this.bottomStrip);
+            this.Controls.Add(this.topMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);

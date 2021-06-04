@@ -40,6 +40,8 @@ namespace Viewer
             TagService service = new TagService();
             TagsetEditor editor = new TagsetEditor();
             TagFileWriter writer = new TagFileWriter();
+            DictEditor dictEditor = new DictEditor();
+            DictEditorPresenter de = new DictEditorPresenter(dictEditor, suggester);
             TagPresenter tagPresenter = new TagPresenter(main, main, service, editor, writer);
             TagsetPresenter tagsetPresenter = new TagsetPresenter(editor, service, main);
             SuggestPresenter suggestPresenter = new SuggestPresenter(suggester, main, main);

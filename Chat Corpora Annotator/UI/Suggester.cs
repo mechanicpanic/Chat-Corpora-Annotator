@@ -18,6 +18,22 @@ namespace Viewer.UI
     {
         private bool IsLockedMode = false;
         private string lastOperator;
+        private List<int> Hits;
+
+        public event EventHandler ShowDictEditor;
+        public event EventHandler RunQuery;
+        public event UserDictsEventHandler AddUserDict;
+        public event UserDictsEventHandler DeleteUserDict;
+        public event FindEventHandler ShowMessageInMainWindow;
+
+        public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
+        public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
+        public string QueryString { get; set; }
+        public int DisplayIndex { get; set; } = 0;
+        public int GroupIndex { get; set; } = 0;
+
+
+
         public Suggester()
         {
             InitializeComponent();
@@ -44,6 +60,7 @@ namespace Viewer.UI
                 margin.Width = 0;
             this.LastElementChanged += Suggester_LastElementChanged;
         }
+
 
         private void Suggester_LastElementChanged(object sender, EventArgs e)
         {
@@ -93,18 +110,6 @@ namespace Viewer.UI
             }
         }
 
-        public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
-        public string QueryString { get; set; }
-        public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
-        public int DisplayIndex { get; set; } = 0;
-        public int GroupIndex { get; set; } = 0;
-        public event EventHandler RunQuery;
-        public event UserDictsEventHandler AddUserDict;
-        public event UserDictsEventHandler DeleteUserDict;
-        public event FindEventHandler ShowMessageInMainWindow;
-
-        private List<int> Hits;
-
         private void FastObjectListView1_FormatRow(object sender, FormatRowEventArgs e)
         {
             DynamicMessage dyn = (DynamicMessage)e.Item.RowObject;
@@ -148,11 +153,6 @@ namespace Viewer.UI
 
                     temp.AddRange(list);
                 }
-                //temp.Add();
-                //temp.Add(temp.Min() - 2);
-                //temp.Add(temp.Max() + 1);
-                //temp.Add(temp.Max() + 2);
-                ////bleh
                 temp.Sort();
                 Hits = temp;
                 CurrentSituation.Add(LuceneService.RetrieveMessageById(temp.Min() - 2));
@@ -266,29 +266,32 @@ namespace Viewer.UI
 
         private void listButton_Click(object sender, EventArgs e)
         {
-            ListAdder la = new ListAdder();
-            la.SaveList += new EventHandler(SaveListHandler);
-            la.Show();
+            //ListAdder la = new ListAdder();
+            //la.SaveList += new EventHandler(SaveListHandler);
+            //la.Show();
+            ShowDictEditor?.Invoke(this, null);
+            
         }
-        private void SaveListHandler(object sender, EventArgs e)
-        {
-            ListAdder la = sender as ListAdder;
-            if (la != null)
-            {
-                UserDictsEventArgs dictargs = new UserDictsEventArgs();
-                dictargs.Name = la.CurName;
-                dictargs.Words = la.CurList;
-                AddUserDict?.Invoke(this, dictargs);
+        //private void SaveListHandler(object sender, EventArgs e)
+        //{
+        //    ListAdder la = sender as ListAdder;
+        //    if (la != null)
+        //    {
+        //        UserDictsEventArgs dictargs = new UserDictsEventArgs();
+        //        dictargs.Name = la.CurName;
+        //        dictargs.Words = la.CurList;
+        //        AddUserDict?.Invoke(this, dictargs);
                 
-                DisplayUserDict(la.CurName, la.CurList);
+        //        DisplayUserDict(la.CurName, la.CurList);
 
-            }
-            la.Close();
-        }
+        //    }
+        //    la.Close();
+        //}
 
         public void DisplayUserDict(string key, List<string> value)
         {
             var temp = new ListViewItem(key);
+            temp.Name = key;
             temp.SubItems.Add(String.Join(", ", value.ToArray()));
             listView1.Items.Add(temp);
             AddListNameToOp(key);
@@ -309,35 +312,25 @@ namespace Viewer.UI
             }
         }
 
-        private void deleteListButton_Click(object sender, EventArgs e)
+        public void DeleteUserDictFromPreview(string key)
         {
-            if (listView1.SelectedItems.Count != 0)
-            {
-                foreach (ListViewItem item in listView1.SelectedItems)
-                {
-                    //UserDicts.Remove(item.Text);
-                    UserDictsEventArgs dictargs = new UserDictsEventArgs();
-                    dictargs.Name = item.Text;
-                    DeleteUserDict?.Invoke(this, dictargs);
-
+            var search = listView1.Items.Find(key, false);
                     foreach (var control in queryPanel.Controls)
                     {
                         if ((control as Button).Text.Contains("haswordofdict"))
                         {
 
-                            (control as Button).ContextMenuStrip.Items.RemoveByKey(item.Text);
+                            (control as Button).ContextMenuStrip.Items.RemoveByKey(search[0].Text);
                         }
 
                     }
-                    listView1.Items.Remove(item);
-                }
-            }
+                    listView1.Items.Remove(search[0]);         
         }
 
         private void operator_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            if (b.Text == ",")
+            if (b.Text == ";")
             {
                 queryBox.Text = queryBox.Text + ";";
             }
@@ -673,6 +666,12 @@ namespace Viewer.UI
             args.FilePath = (sender as OpenFileDialog).FileName;
             ImportUserDict?.Invoke(this, args);
             
+        }
+
+        public void UpdateUserDict(string key, List<string> value)
+        {
+            DeleteUserDictFromPreview(key);
+            DisplayUserDict(key, value);
         }
     }
 

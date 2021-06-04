@@ -25,7 +25,7 @@ namespace Viewer.Framework.Services
         {
             Rake generator = new Rake(ToolInfo.root + "\\SMARTstopset.txt", 3, length, 3);
 
-            return generator.Run(this.BuildBigString(this.GetList()));
+            return generator.Run(this.GetList());
         }
 
         private string BuildBigString(List<string> list)

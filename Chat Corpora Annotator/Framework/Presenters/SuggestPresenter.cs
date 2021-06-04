@@ -20,52 +20,25 @@ namespace Viewer.Framework.Presenters
 
             _tagger.ShowSuggester += _tagger_ShowSuggester;
             _sugg.RunQuery += _sugg_RunQuery;
-            _sugg.DeleteUserDict += _sugg_DeleteUserDict;
-            _sugg.AddUserDict += _sugg_AddUserDict;
             _sugg.ShowMessageInMainWindow += _sugg_ShowMessageInMainWindow;
-            _sugg.ImportUserDict += _sugg_ImportUserDict;
 
-            if (File.Exists(ToolInfo.UserDictsPath))
-            {
-                UserDictsIndex.GetInstance().ReadIndexFromDisk();
-                foreach(var kvp in UserDictsIndex.GetInstance().IndexCollection)
-                {
-                    _sugg.DisplayUserDict(kvp.Key, kvp.Value);
-                }
-            }
+
+
             
 
         }
 
-        private void _sugg_ImportUserDict(object sender, OpenEventArgs args)
-        {
-            var res = UserDictsIndex.GetInstance().ImportNewDictFromFile(args.FilePath);
-            if (res != null)
-            {
-                _sugg.DisplayUserDict(res, UserDictsIndex.GetInstance().IndexCollection[res]);
-            }
 
-        }
+
 
         private void _sugg_ShowMessageInMainWindow(object sender, FindEventArgs args)
         {
             bool flag = false;
-            //tagTable.EnsureVisible(tagTable.GetItemCount() - 1);
-
             _main.EnsureMessageIsVisible(args.id);
 
         }
 
-        private void _sugg_AddUserDict(object sender, UserDictsEventArgs args)
-        {
-            UserDictsIndex.GetInstance().AddIndexEntry(args.Name, args.Words);
 
-        }
-
-        private void _sugg_DeleteUserDict(object sender, UserDictsEventArgs args)
-        {
-            UserDictsIndex.GetInstance().DeleteIndexEntry(args.Name);
-        }
 
         private void _sugg_RunQuery(object sender, EventArgs e)
         {
