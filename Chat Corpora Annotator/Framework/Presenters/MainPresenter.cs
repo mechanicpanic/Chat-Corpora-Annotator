@@ -42,7 +42,7 @@ namespace Viewer.Framework.Presenters
             _main.FindClick += _view_FindClick;
             _main.OpenIndexedCorpus += _view_OpenIndexedCorpus;
             _main.ConcordanceClick += _main_ConcordanceClick;
-            //_main.NGramClick += _main_NGramClick;
+            _main.NGramClick += _main_NGramClick;
             //_main.KeywordClick += _main_KeywordClick;
             _main.LoadStatistics += _main_LoadStatistics;
             _main.ExtractInfoClick += _main_ExtractInfoClick;
@@ -115,16 +115,16 @@ namespace Viewer.Framework.Presenters
         //    _main.ShowKeywordView(_keyword);
         //}
 
-        //private void _main_NGramClick(object sender, NgramEventArgs e)
-        //{
+        private void _main_NGramClick(object sender, NgramEventArgs e)
+        {
 
 
-        //    var result = _ngrammer.GetReadableResultsForTerm(e.Term);
-        //    _main.DisplayNGrams(result);
+            var result = _ngrammer.GetReadableResultsForTerm(e.Term);
+            _main.DisplayNGrams(result);
 
 
-        //}
-        private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
+            }
+            private void _main_ConcordanceClick(object sender, ConcordanceEventArgs e)
         {
             _concordancer.ConQuery = LuceneService.Parser.Parse(e.Term);
             _concordancer.FindConcordance(e.Term, ProjectInfo.TextFieldKey, e.Chars);

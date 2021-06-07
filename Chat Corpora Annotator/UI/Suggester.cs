@@ -17,17 +17,24 @@ namespace Viewer.UI
     public partial class Suggester : Form, ISuggesterView
     {
         private bool IsLockedMode = false;
+        private bool ImportOpen = false;
         private string lastOperator;
+        private int queryCount = 0;
         private List<int> Hits;
+
+
+        private event EventHandler LastElementChanged;
+
+        public event OpenEventHandler ImportQueryFile;
+
 
         public event EventHandler ShowDictEditor;
         public event EventHandler RunQuery;
-        public event UserDictsEventHandler AddUserDict;
-        public event UserDictsEventHandler DeleteUserDict;
         public event FindEventHandler ShowMessageInMainWindow;
 
         public List<DynamicMessage> CurrentSituation { get; set; } = new List<DynamicMessage>();
         public List<List<List<int>>> QueryResult { get; set; } = new List<List<List<int>>>();
+        public List<string> ImportedQueries { get; set; } = new List<string>();
         public string QueryString { get; set; }
         public int DisplayIndex { get; set; } = 0;
         public int GroupIndex { get; set; } = 0;
@@ -647,31 +654,72 @@ namespace Viewer.UI
 
         };
 
-        private event EventHandler LastElementChanged;
-        public event OpenEventHandler ImportUserDict;
-
-        private void importButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog d = new OpenFileDialog();
-            d.Filter = "Text files (*.txt)|*.txt";
-            
-            d.FileOk += D_FileOk;
-            d.ShowDialog();
-
-        }
-
-        private void D_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            OpenEventArgs args = new OpenEventArgs();
-            args.FilePath = (sender as OpenFileDialog).FileName;
-            ImportUserDict?.Invoke(this, args);
-            
-        }
 
         public void UpdateUserDict(string key, List<string> value)
         {
             DeleteUserDictFromPreview(key);
             DisplayUserDict(key, value);
+        }
+
+        private void importButton_Click_1(object sender, EventArgs e)
+        {
+            if (!ImportOpen)
+            {
+                OpenFileDialog f = new OpenFileDialog();
+                DialogResult res = f.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    OpenEventArgs args = new OpenEventArgs();
+                    args.FilePath = f.FileName;
+                    ImportQueryFile?.Invoke(this, args);
+                    importPanel.Visible = true;
+                    ImportOpen = true;
+                    modeButton.Enabled = false;
+                    importButton.Text = "Close import";
+                    queryCount = 1;
+                    queryBox.Text = ImportedQueries[queryCount - 1];
+                    SetImportLabel(ImportedQueries.Count, queryCount);
+                }
+                
+                f.Dispose();
+            }
+            else
+            {
+                ImportedQueries.Clear();
+                queryCount = 0;
+                importButton.Text = "Import queries from file";
+                modeButton.Enabled = true;
+                importPanel.Visible = false;
+                ImportOpen = false;
+
+            }
+        }
+        public void SetImportLabel(int count, int num=1)
+        {
+            importLabel.Text = "Queries:" + num.ToString() +"/"+ count.ToString();
+        }
+
+        private void nextImportedQuery_Click(object sender, EventArgs e)
+        {
+            if (ImportedQueries.Count > 0 && queryCount < ImportedQueries.Count) 
+            {
+                queryCount++;
+                queryBox.Text = ImportedQueries[queryCount - 1];
+                
+                SetImportLabel(ImportedQueries.Count, queryCount);
+                
+                    }
+        }
+
+        private void previousImportedQuery_Click(object sender, EventArgs e)
+        {
+            if (ImportedQueries.Count > 0 && queryCount > 1)
+            {
+                queryCount--;
+                queryBox.Text = ImportedQueries[queryCount - 1];
+                SetImportLabel(ImportedQueries.Count, queryCount);
+
+            }
         }
     }
 

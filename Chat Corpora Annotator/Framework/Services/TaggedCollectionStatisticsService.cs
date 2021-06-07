@@ -74,15 +74,16 @@ namespace Viewer.Framework.Services
 
             foreach (var kvp in SituationIndex.GetInstance().IndexCollection)
             {
-                count += kvp.Value.Values.Count;
+                
                 foreach (var dict in kvp.Value)
                 {
+                    count += dict.Value.Count;
                     prev = dict.Value[0];
                     foreach (var index in dict.Value)
                     {
                         if (index - prev > 1)
                         {
-                            count++;
+                            
                             windows.Add(index - prev);
                         }
                         prev = index;

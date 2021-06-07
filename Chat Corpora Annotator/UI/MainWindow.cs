@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
-
+using Viewer.UI; //lmao i will redo
 namespace Viewer
 {
 
@@ -84,7 +84,7 @@ namespace Viewer
         public event EventHandler ShowSuggester;
 
         public event TaggerEventHandler EditSituation;
-        public event TaggerEventHandler MergeSituations;
+        public event SituationArrayEventHandler MergeSituations;
         public event SituationArrayEventHandler CrossMergeSituations;
 
         public event EventHandler SetTagset;
@@ -510,9 +510,44 @@ namespace Viewer
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not implemented yet");
+            List<string> list = new List<string>();
+            foreach(var item in fastSituationView.SelectedItems)
+            {
+                list.Add(item.ToString());
+            }
+            SituationMerge sm = new SituationMerge(list);
+            sm.FormClosed += Sm_FormClosed;
+            sm.OkButtonClicked += Sm_OkButtonClicked;
+            sm.Show();
+            
         }
 
+        private void Sm_OkButtonClicked(object sender, EventArgs e)
+        {
+            SituationMerge sm = sender as SituationMerge;
+            SituationArrayEventArgs sitargs = new SituationArrayEventArgs();
+            TaggerEventArgs args1 = new TaggerEventArgs();
+            TaggerEventArgs args2 = new TaggerEventArgs();
+            string[] a = sm.MergeFrom.Split();
+            string[] b = sm.MergeTo.Split();
+            args1.Tag = a[0];
+            args1.Id = Int32.Parse(a[1]);
+            args2.Tag = b[0];
+            args2.Id = Int32.Parse(b[1]);
+
+            
+            sitargs.args.Add(args1);
+            sitargs.args.Add(args2);
+
+            
+            MergeSituations?.Invoke(this, sitargs);
+            
+                }
+
+        private void Sm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {

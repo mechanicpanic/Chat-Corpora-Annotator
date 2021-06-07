@@ -71,9 +71,10 @@ namespace Viewer.Framework.Presenters
             }
         }
 
-        private void _tagger_MergeSituations(object sender, TaggerEventArgs args)
+        private void _tagger_MergeSituations(object sender, SituationArrayEventArgs args)
         {
-            throw new NotImplementedException();
+            DeleteOrEditTag(args.args[0], false);
+
         }
 
         private void _tagger_EditSituation(object sender, TaggerEventArgs e)
@@ -86,7 +87,7 @@ namespace Viewer.Framework.Presenters
             DeleteOrEditTag(args, true);
         }
 
-        private void DeleteOrEditTag(TaggerEventArgs args, bool type)
+        private void DeleteOrEditTag(TaggerEventArgs args, bool type, int index = -1)
         {
             
             foreach (var id in SituationIndex.GetInstance().IndexCollection[args.Tag][args.Id])
@@ -98,7 +99,7 @@ namespace Viewer.Framework.Presenters
             {
                 _tagger.UpdateSituationCount(SituationIndex.GetInstance().ItemCount);
             }
-            else
+            else if (index == -1)
             {
                 var tag = args.AdditionalInfo["Change"].ToString();
 
@@ -120,6 +121,10 @@ namespace Viewer.Framework.Presenters
                     }
                 }
                 _tagger.AddSituationIndexItem(tag + " " + count);
+
+            }
+            else
+            {
 
             }
 

@@ -30,16 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Suggester));
             this.sidePanel = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.suggLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupsLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.counterLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.modeButton = new System.Windows.Forms.Button();
+            this.importButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContents = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.modeButton = new System.Windows.Forms.Button();
+            this.listButton = new System.Windows.Forms.Button();
+            this.importPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.importLabel = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.suggLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupsLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.counterLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.operatorPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -74,11 +81,12 @@
             this.splitContainerView = new System.Windows.Forms.SplitContainer();
             this.bottomButtonPanel = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-            this.listButton = new System.Windows.Forms.Button();
             this.sidePanel.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.importPanel.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.operatorPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.boolPanel.SuspendLayout();
@@ -99,10 +107,11 @@
             // sidePanel
             // 
             this.sidePanel.BackColor = System.Drawing.Color.Lavender;
-            this.sidePanel.Controls.Add(this.statusStrip1);
-            this.sidePanel.Controls.Add(this.listView1);
             this.sidePanel.Controls.Add(this.tableLayoutPanel2);
+            this.sidePanel.Controls.Add(this.listView1);
+            this.sidePanel.Controls.Add(this.importPanel);
             this.sidePanel.Controls.Add(this.tableLayoutPanel1);
+            this.sidePanel.Controls.Add(this.statusStrip1);
             this.sidePanel.Controls.Add(this.operatorPanel);
             this.sidePanel.Controls.Add(this.label4);
             this.sidePanel.Controls.Add(this.label3);
@@ -113,6 +122,183 @@
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Size = new System.Drawing.Size(433, 673);
             this.sidePanel.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.modeButton, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.importButton, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 164);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(433, 86);
+            this.tableLayoutPanel1.TabIndex = 28;
+            // 
+            // modeButton
+            // 
+            this.modeButton.BackColor = System.Drawing.Color.Lavender;
+            this.modeButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modeButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.modeButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.modeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.modeButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modeButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.modeButton.Location = new System.Drawing.Point(3, 3);
+            this.modeButton.Name = "modeButton";
+            this.modeButton.Size = new System.Drawing.Size(427, 36);
+            this.modeButton.TabIndex = 22;
+            this.modeButton.Text = "Switch Mode";
+            this.modeButton.UseVisualStyleBackColor = false;
+            this.modeButton.Click += new System.EventHandler(this.switchMode_Click);
+            // 
+            // importButton
+            // 
+            this.importButton.BackColor = System.Drawing.Color.Lavender;
+            this.importButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.importButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.importButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.importButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.importButton.Location = new System.Drawing.Point(2, 44);
+            this.importButton.Margin = new System.Windows.Forms.Padding(2);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(429, 40);
+            this.importButton.TabIndex = 33;
+            this.importButton.Text = "Import queries from file";
+            this.importButton.UseVisualStyleBackColor = false;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click_1);
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listName,
+            this.listContents});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listView1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(0, 345);
+            this.listView1.Margin = new System.Windows.Forms.Padding(2);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(433, 185);
+            this.listView1.TabIndex = 29;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // listName
+            // 
+            this.listName.Text = "Name";
+            this.listName.Width = 74;
+            // 
+            // listContents
+            // 
+            this.listContents.Text = "Contents";
+            this.listContents.Width = 416;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.listButton, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 530);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 45);
+            this.tableLayoutPanel2.TabIndex = 31;
+            // 
+            // listButton
+            // 
+            this.listButton.BackColor = System.Drawing.Color.Lavender;
+            this.listButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.listButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listButton.Location = new System.Drawing.Point(2, 2);
+            this.listButton.Margin = new System.Windows.Forms.Padding(2);
+            this.listButton.Name = "listButton";
+            this.listButton.Size = new System.Drawing.Size(429, 41);
+            this.listButton.TabIndex = 8;
+            this.listButton.Text = "Open dictionary editor";
+            this.listButton.UseVisualStyleBackColor = false;
+            this.listButton.Click += new System.EventHandler(this.listButton_Click);
+            // 
+            // importPanel
+            // 
+            this.importPanel.ColumnCount = 1;
+            this.importPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.importPanel.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.importPanel.Controls.Add(this.importLabel, 0, 0);
+            this.importPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.importPanel.Location = new System.Drawing.Point(0, 250);
+            this.importPanel.Name = "importPanel";
+            this.importPanel.RowCount = 2;
+            this.importPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.importPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.importPanel.Size = new System.Drawing.Size(433, 95);
+            this.importPanel.TabIndex = 33;
+            this.importPanel.Visible = false;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.button22, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.button21, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 50);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(427, 42);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.Lavender;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button22.Location = new System.Drawing.Point(215, 2);
+            this.button22.Margin = new System.Windows.Forms.Padding(2);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(210, 38);
+            this.button22.TabIndex = 10;
+            this.button22.Text = "Next query >";
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Click += new System.EventHandler(this.nextImportedQuery_Click);
+            // 
+            // button21
+            // 
+            this.button21.BackColor = System.Drawing.Color.Lavender;
+            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button21.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button21.Location = new System.Drawing.Point(2, 2);
+            this.button21.Margin = new System.Windows.Forms.Padding(2);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(209, 38);
+            this.button21.TabIndex = 9;
+            this.button21.Text = "< Previous query";
+            this.button21.UseVisualStyleBackColor = false;
+            this.button21.Click += new System.EventHandler(this.previousImportedQuery_Click);
+            // 
+            // importLabel
+            // 
+            this.importLabel.AutoSize = true;
+            this.importLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.importLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.importLabel.Location = new System.Drawing.Point(3, 0);
+            this.importLabel.Name = "importLabel";
+            this.importLabel.Size = new System.Drawing.Size(427, 47);
+            this.importLabel.TabIndex = 1;
+            this.importLabel.Text = "aa";
+            this.importLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusStrip1
             // 
@@ -148,76 +334,6 @@
             this.counterLabel.Size = new System.Drawing.Size(208, 17);
             this.counterLabel.Spring = true;
             this.counterLabel.Text = "0/0";
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.listName,
-            this.listContents});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 252);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(433, 216);
-            this.listView1.TabIndex = 29;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // listName
-            // 
-            this.listName.Text = "Name";
-            this.listName.Width = 74;
-            // 
-            // listContents
-            // 
-            this.listContents.Text = "Contents";
-            this.listContents.Width = 416;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Controls.Add(this.listButton, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 207);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 45);
-            this.tableLayoutPanel2.TabIndex = 31;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.modeButton, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 164);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(433, 43);
-            this.tableLayoutPanel1.TabIndex = 28;
-            // 
-            // modeButton
-            // 
-            this.modeButton.BackColor = System.Drawing.Color.Lavender;
-            this.modeButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modeButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.modeButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.modeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.modeButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.modeButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.modeButton.Location = new System.Drawing.Point(3, 3);
-            this.modeButton.Name = "modeButton";
-            this.modeButton.Size = new System.Drawing.Size(427, 37);
-            this.modeButton.TabIndex = 22;
-            this.modeButton.Text = "Switch Mode";
-            this.modeButton.UseVisualStyleBackColor = false;
-            this.modeButton.Click += new System.EventHandler(this.switchMode_Click);
             // 
             // operatorPanel
             // 
@@ -768,22 +884,6 @@
             this.splitContainerMain.SplitterDistance = 433;
             this.splitContainerMain.TabIndex = 26;
             // 
-            // listButton
-            // 
-            this.listButton.BackColor = System.Drawing.Color.Lavender;
-            this.listButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.listButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.listButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listButton.Location = new System.Drawing.Point(2, 2);
-            this.listButton.Margin = new System.Windows.Forms.Padding(2);
-            this.listButton.Name = "listButton";
-            this.listButton.Size = new System.Drawing.Size(429, 41);
-            this.listButton.TabIndex = 8;
-            this.listButton.Text = "Open dictionary editor";
-            this.listButton.UseVisualStyleBackColor = false;
-            this.listButton.Click += new System.EventHandler(this.listButton_Click);
-            // 
             // Suggester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -798,10 +898,13 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Suggester_FormClosing);
             this.sidePanel.ResumeLayout(false);
             this.sidePanel.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.importPanel.ResumeLayout(false);
+            this.importPanel.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.operatorPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.boolPanel.ResumeLayout(false);
@@ -869,5 +972,11 @@
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.ToolStripStatusLabel counterLabel;
         private System.Windows.Forms.Button listButton;
+        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.TableLayoutPanel importPanel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Label importLabel;
     }
 }

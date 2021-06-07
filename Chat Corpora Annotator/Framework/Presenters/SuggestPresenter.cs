@@ -4,6 +4,8 @@ using System;
 using System.IO;
 using Viewer.Framework.MyEventArgs;
 using Viewer.Framework.Views;
+using System.Collections;
+using System.Linq;
 
 namespace Viewer.Framework.Presenters
 {
@@ -21,6 +23,7 @@ namespace Viewer.Framework.Presenters
             _tagger.ShowSuggester += _tagger_ShowSuggester;
             _sugg.RunQuery += _sugg_RunQuery;
             _sugg.ShowMessageInMainWindow += _sugg_ShowMessageInMainWindow;
+            _sugg.ImportQueryFile += _sugg_ImportQueryFile;
 
 
 
@@ -28,8 +31,11 @@ namespace Viewer.Framework.Presenters
 
         }
 
-
-
+        private void _sugg_ImportQueryFile(object sender, OpenEventArgs args)
+        {
+            _sugg.ImportedQueries = File.ReadAllLines(args.FilePath).ToList();
+            _sugg.SetImportLabel(_sugg.ImportedQueries.Count);
+        }
 
         private void _sugg_ShowMessageInMainWindow(object sender, FindEventArgs args)
         {

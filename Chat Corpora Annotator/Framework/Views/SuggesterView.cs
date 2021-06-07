@@ -11,6 +11,7 @@ namespace Viewer.Framework.Views
         void DisplaySituation();
 
         event EventHandler RunQuery;
+        event OpenEventHandler ImportQueryFile;
         //event OpenEventHandler ImportUserDict;
 
         event EventHandler ShowDictEditor;
@@ -21,10 +22,13 @@ namespace Viewer.Framework.Views
         string QueryString { get; set; }
         List<DynamicMessage> CurrentSituation { get; set; }
         List<List<List<int>>> QueryResult { get; set; }
+
+        List<string> ImportedQueries { get; set; }
         int DisplayIndex { get; set; }
         int GroupIndex { get; set; }
         //Dictionary<string, List<string>> UserDicts { get; set; }
         void SetCounts();
+        void SetImportLabel(int count,int num=1);
 
         event FindEventHandler ShowMessageInMainWindow;
 

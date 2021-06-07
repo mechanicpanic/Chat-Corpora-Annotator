@@ -15,7 +15,7 @@ namespace Viewer.Framework.Views
 
         event TaggerEventHandler DeleteSituation;
         event TaggerEventHandler EditSituation;
-        event TaggerEventHandler MergeSituations;
+        event SituationArrayEventHandler MergeSituations;
         
         event SituationArrayEventHandler CrossMergeSituations;
 

@@ -29,8 +29,7 @@ namespace Viewer.UI
         public void CloseView()
         {
             this.Hide();
-            
-            
+                       
         }
 
         public void LoadDict(List<string> dict)
@@ -65,6 +64,11 @@ namespace Viewer.UI
         private void DictEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             EditorClosing?.Invoke(this, null);
+            if(e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+            CloseView();
         }
 
         private void importFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,6 +101,7 @@ namespace Viewer.UI
                 UserDictsEventArgs args = new UserDictsEventArgs();
                 args.Name = dictList.SelectedObjects[0].ToString();
                 DeleteDict?.Invoke(this, args);
+                dictList.RemoveObject(dictList.SelectedObjects[0]);
             }
         }
 

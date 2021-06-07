@@ -41,7 +41,7 @@ namespace Viewer.Framework.Views
         event EventHandler LoadMore;
 
         event ConcordanceEventHandler ConcordanceClick;
-        //event NgramEventHandler NGramClick;
+        event NgramEventHandler NGramClick;
         event EventHandler BuildIndexClick;
         //event EventHandler KeywordClick;
         event EventHandler LoadStatistics;

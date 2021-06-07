@@ -52,7 +52,6 @@ namespace Viewer
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.statisticsButton = new System.Windows.Forms.Button();
             this.statisticsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -558,7 +557,6 @@ namespace Viewer
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.button1, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.statisticsButton, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.statisticsListView, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.corpusStatisticsView, 1, 0);
@@ -566,35 +564,22 @@ namespace Viewer
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 674F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 700F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1089, 771);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Lavender;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(546, 676);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(541, 93);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Calculate statistics";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // statisticsButton
             // 
             this.statisticsButton.BackColor = System.Drawing.Color.Lavender;
+            this.tableLayoutPanel2.SetColumnSpan(this.statisticsButton, 2);
             this.statisticsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statisticsButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateBlue;
             this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statisticsButton.Location = new System.Drawing.Point(2, 676);
             this.statisticsButton.Margin = new System.Windows.Forms.Padding(2);
             this.statisticsButton.Name = "statisticsButton";
-            this.statisticsButton.Size = new System.Drawing.Size(540, 93);
+            this.statisticsButton.Size = new System.Drawing.Size(1082, 93);
             this.statisticsButton.TabIndex = 3;
             this.statisticsButton.Text = "Calculate statistics";
             this.statisticsButton.UseVisualStyleBackColor = false;
@@ -1996,7 +1981,6 @@ namespace Viewer
         private System.Windows.Forms.ListView tagsetView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button statisticsButton;
         private System.Windows.Forms.ListView statisticsListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
