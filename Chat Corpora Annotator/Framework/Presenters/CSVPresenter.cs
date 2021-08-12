@@ -52,7 +52,7 @@ namespace Viewer.Framework.Presenters
         private void _delim_DelimiterSelected(object sender, EventArgs e)
         {
             _csv.AllFields = _reader.GetFields(this._filepath, _delim.ReturnDelimiter());
-            ProjectInfo.UnloadData();
+            //ProjectInfo.UnloadData();
             _delim.CloseView();
             LaunchWizard();
 
@@ -99,7 +99,7 @@ namespace Viewer.Framework.Presenters
 
         private void _csv_MetadataAdded(object sender, EventArgs e)
         {
-            ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.TextFieldKey);
+            ProjectInfo.CreateNewProject(this._path, _csv.DateFieldKey, _csv.SenderFieldKey, _csv.TextFieldKey, _csv.SelectedFields);
             LuceneService.OpenNewIndex();
             _reader.GetLineCount(this._filepath, _csv.Header); //i have no fucking clue what this does
             var result = IndexHelper.PopulateIndex(this._filepath, _csv.AllFields, _csv.Header);

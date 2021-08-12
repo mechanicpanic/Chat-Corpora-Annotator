@@ -38,12 +38,12 @@ namespace IndexEngine.Paths
             }
         }
 
-        public static void CreateNewProject(string path, string date, string sender, string text)
+        public static void CreateNewProject(string path, string date, string sender, string text, List<string> fields)
         {
             UnloadData();
             SetPaths(path);
             SetKeys(date, sender, text);
-
+            SetSelectedFields(fields);
 
         }
 
@@ -52,7 +52,7 @@ namespace IndexEngine.Paths
             Data.MessagesPerDay.Clear();
             Data.UserColors.Clear();
             Data.UserKeys.Clear();
-            Data.SelectedFields.Clear();
+            Data.SelectedFields = new List<string>();
             Data.LineCount = 0;
             IndexHelper.UnloadData();
 
@@ -63,6 +63,11 @@ namespace IndexEngine.Paths
                     prop.SetValue(prop,"");
                 }
             }
+        }
+
+        private static void SetSelectedFields(List<string> fields)
+        {
+            Data.SelectedFields = fields;
         }
         private static void SetPaths(string path)
         {

@@ -136,7 +136,7 @@ namespace Viewer.Framework.Presenters
         private void _view_OpenIndexedCorpus(object sender, OpenEventArgs e)
         {
             //ProjectInfo.CurrentIndexPath = _main.CurrentIndexPath;
-            ProjectInfo.UnloadData();
+            //ProjectInfo.UnloadData();
 
             _service.UnloadData();
             SituationIndex.GetInstance().UnloadData();
