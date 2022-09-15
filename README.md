@@ -1,4 +1,6 @@
 # Chat-Corpora-Annotator
+
+## The project has since been moved to https://github.com/yakovypg/Chat-Corpora-Annotator
 This is my frist try at implementing a chat dataset viewer and corpus (tagged dataset) creator in a standalone project. This has been mostly done for my 2020 undergrad thesis at SPbU. After that, we have cooperated with Evgeniy Slobodkin to include his ANTLR4 parser for the Matcher query language into the project. The theoretical work has been done under the guidance of George Chernishev.
 
 <p align="center">
